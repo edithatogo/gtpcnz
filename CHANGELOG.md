@@ -150,3 +150,10 @@ Important caveat: these are demonstrative models only. They are not empirical es
 - Added dedicated Substack conceptual diagrams, figure placement guide and alt text.
 - Added source bank, glossary, voice guide and publication QA checklist.
 - Preserved caveat that the model is source-informed and demonstrative, not fully calibrated.
+
+
+## v1.3.1 — Uncapped FFS entitlement clarification
+
+- Clarified that the proposal removes global caps on eligible primary medical activity.
+- Added ACC-style FFS medical stream language and controls.
+- Added G19, brief 13, post 15, MCDA update, OIA addendum and revised model outputs.

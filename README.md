@@ -94,3 +94,8 @@ The v1.2.1 audit run passes the model test suite and local-link audit.
 This repo is a working policy and research package, not a final endorsed RACMA/RACGP/RNZCGP/ACRRM/GPNZ position.
 
 The modelling is demonstrative and source-informed. It can support stakeholder discussion, Substack publication, RACMA scoping, policy brief development and a New Zealand Medical Journal Viewpoint/protocol pathway. It should not be used to claim precise forecast effects without future empirical calibration and validation.
+
+
+## Current release: v1.3.1
+
+This release clarifies that the preferred architecture is **capitation + uncapped primary medical fee-for-service + place-based population accountability**. The cap is removed at the global eligible-activity level, while item prices, service definitions, clinical eligibility, provider scope, audit, co-payment protections and place-based obligations remain as safeguards.
