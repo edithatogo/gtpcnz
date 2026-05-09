@@ -1,6 +1,6 @@
 # Primary Care Funding Architecture: Australia and Aotearoa New Zealand
 
-Version: **v1.2.1**
+Version: **v1.4.0**
 
 This repository contains a research-to-policy programme on primary care funding architecture, with a focus on Aotearoa New Zealand and Australia.
 
@@ -33,7 +33,7 @@ docs/concepts/          Core thesis, causal logic and architecture options
 docs/modelling/         Game maps, demonstrative models, uncertainty analysis and source-informed parameterised model outputs
 docs/mcda/              Game-informed Multi-Criteria Decision Analysis framework and workshop tools
 docs/policy-briefs/     Policy briefs and index
-docs/substack-ready/    12 Substack-ready posts, figures, source bank, glossary and publication QA
+docs/substack-ready/    Expanded Substack-ready posts, figures, source bank, glossary and publication QA
 docs/nzmj/              New Zealand Medical Journal Viewpoint and article/protocol material
 docs/review/            Rapid scoping review protocol and extraction/screening material
 docs/oia/               Official Information Act request drafts and trackers
@@ -44,19 +44,36 @@ outputs/                Generated public-facing reports, workbooks, plots and st
 
 ## Current release
 
-This is **v1.2.1**, the contract-compliance audit and housekeeping release.
+This is **v1.4.0**, the source-read catalogue, email-trail incorporation and expanded Substack/modelling explanation release.
 
-It verifies and patches the v1.2.0 package against the accumulated requirements:
+It incorporates the document classes and policy insights raised in the RACMA email trail, including separate Vote Health appropriations, the current primary care reform pathway, Primary Health Organisation transparency and pass-through issues, urgent and after-hours care, Accident Compensation Corporation payment architecture, Population-Based Funding Formula transparency debates, and the distinction between an uncapped eligible medical fee-for-service stream and an uncontrolled market model.
+
+The release adds a source-read catalogue, an incorporation report, a revised hybrid thesis, a current-reform comparator, a game-map update, new explanatory microeconomic diagrams, and an expanded 18-post Substack series covering the individual games, hybrid game, composite modelling, Multi-Criteria Decision Analysis and recommendations.
+
+Earlier v1.2.1 contract-compliance checks remain in the package and verify that:
 
 - background and theory are laid out;
 - the broader New Zealand policy game is mapped;
 - each game has demonstrative modelling;
 - uncertainty, hybrid synthesis, source-informed parameterised modelling and MCDA layers are present;
 - policy briefs, reports, New Zealand Medical Journal material and validation plans are present;
-- the Substack series has 12 human-readable, hyperlinked posts with figures, glossary and source bank;
+- the Substack series has expanded human-readable, hyperlinked posts with figures, glossary and source bank;
 - local Markdown links and figure references pass automated checks;
 - README, Conductor track index and versioning metadata are updated;
 - the package now includes git history in the v1.2.1 zip.
+
+
+Key v1.4.0 outputs:
+
+- `docs/source-notes/source-read-catalogue-v1.4.0.csv`
+- `docs/source-notes/source-read-catalogue-v1.4.0.md`
+- `docs/analysis/document-incorporation-report-v1.4.0.md`
+- `docs/concepts/revised-hybrid-thesis-v1.4.0.md`
+- `docs/concepts/current-reform-comparator-v1.4.0.md`
+- `docs/modelling/game-map-update-v1.4.0.md`
+- `docs/substack-ready/complete-substack-series-v1.4.0.md`
+- `docs/substack-ready/posts-v1.4.0/`
+- `docs/substack-ready/figures/fig-08-*` through `fig-14-*`
 
 Key v1.2.1 audit outputs:
 
@@ -68,16 +85,17 @@ Key v1.2.1 audit outputs:
 
 ## Substack-ready publication layer
 
-The publication-ready draft series is in:
+The expanded v1.4.0 publication-ready draft series is in:
 
 ```text
-docs/substack-ready/posts/
+docs/substack-ready/posts-v1.4.0/
 docs/substack-ready/figures/
-docs/substack-ready/complete-substack-series-v1.2.0.md
-docs/substack-ready/figure-placement-and-alt-text-v1.2.0.md
-docs/substack-ready/plain-english-glossary-v1.2.0.md
-docs/substack-ready/source-bank-v1.2.0.md
+docs/substack-ready/complete-substack-series-v1.4.0.md
+docs/substack-ready/figure-placement-and-alt-text-v1.4.0.md
+docs/substack-ready/substack-post-qa-checklist-v1.4.0.csv
 ```
+
+Earlier v1.2.x drafts and source-bank/glossary material remain available for comparison.
 
 The posts are **Substack-ready drafts**, not final Dylan-signed-off copy. They still need final judgement on political sharpness, voice, Te Tiriti/Māori and Pacific nuance, and stakeholder risk.
 
@@ -87,7 +105,7 @@ The posts are **Substack-ready drafts**, not final Dylan-signed-off copy. They s
 pytest -q
 ```
 
-The v1.2.1 audit run passes the model test suite and local-link audit.
+The v1.4.0 release passes the model test suite; earlier v1.2.1 local-link audit remains in the package, with v1.4.0 source and Substack files added subsequently.
 
 ## Status and caveat
 

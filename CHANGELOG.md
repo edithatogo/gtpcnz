@@ -157,3 +157,15 @@ Important caveat: these are demonstrative models only. They are not empirical es
 - Clarified that the proposal removes global caps on eligible primary medical activity.
 - Added ACC-style FFS medical stream language and controls.
 - Added G19, brief 13, post 15, MCDA update, OIA addendum and revised model outputs.
+
+## v1.4.0 — Source-read catalogue, email-trail incorporation and expanded Substack series
+
+- Added a source-read catalogue separating public/read documents, withheld advice, internal/private documents and unverified email intelligence.
+- Incorporated RACMA email-trail insights into the background, analysis and discussion.
+- Revised the central thesis to distinguish separate appropriations/current reform from the continuing strategic allocation game.
+- Added current-reform comparator material covering capitation reweighting, access target, National Primary Care Dataset, digital access, urgent/after-hours care and PHO accountability.
+- Added revised game-map material, including place-based accountability/cherry-picking, current reform sufficiency, formula-fixation, urgent-care policy and uncapped entitlement/fiscal-governance games.
+- Expanded the Substack publication layer into an 18-post series covering individual games, the hybrid game, composite modelling, MCDA and recommendations.
+- Added explanatory microeconomic and conceptual diagrams for marginal supply, fixed-envelope rationing, co-payment/equity, place accountability, model stack and hybrid architecture.
+- Preserved the caveat that the model remains demonstrative/source-informed rather than fully empirically calibrated or predictive.
+
