@@ -1,0 +1,7 @@
+parameter,starting_prior,synthetic_truth,fitted_estimate
+marginal_supply_response,0.3,0.42,0.66
+unmet_need_to_ed_rate,0.25,0.33,0.31
+copayment_elasticity,0.2,0.26,0.06999999999999999
+ambulance_deflection_rate,0.2,0.28,0.38
+acc_stabilisation_effect,0.12,0.18,0.12
+scope_supply_multiplier,0.2,0.31,0.2

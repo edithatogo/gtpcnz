@@ -1,6 +1,6 @@
 # Primary Care Funding Architecture: Australia and Aotearoa New Zealand
 
-Version: **v1.4.0**
+Version: **v1.5.0**
 
 This repository contains a research-to-policy programme on primary care funding architecture, with a focus on Aotearoa New Zealand and Australia.
 
@@ -117,3 +117,30 @@ The modelling is demonstrative and source-informed. It can support stakeholder d
 ## Current release: v1.3.1
 
 This release clarifies that the preferred architecture is **capitation + uncapped primary medical fee-for-service + place-based population accountability**. The cap is removed at the global eligible-activity level, while item prices, service definitions, clinical eligibility, provider scope, audit, co-payment protections and place-based obligations remain as safeguards.
+
+
+## Current release: v1.5.0
+
+This release adds three major items:
+
+1. **Comprehensive Substack hyperlinking and expansion.** The Substack series now has 18 expanded posts in `docs/substack-ready/posts-v1.5.0/`, each with figure placement and a larger public source list. The QA checklist shows all posts exceed 1,200 words and include at least 10 external links.
+2. **Twice-weekly publication plan.** The publication calendar starts Tuesday 12 May 2026 and runs on Tuesdays and Fridays for nine weeks.
+3. **Calibrated-model starter.** The repo now contains a working calibration starter in `models/primarycare_model/calibration_v150.py`. It uses synthetic data to exercise the pipeline and produces observed-versus-predicted plots, parameter recovery outputs and a calibration build plan. This is not an empirically calibrated predictive model yet.
+
+Key v1.5.0 artefacts:
+
+- `docs/substack-ready/posts-v1.5.0/`
+- `docs/substack-ready/complete-substack-series-v1.5.0.md`
+- `docs/substack-ready/publication-calendar-twice-weekly-v1.5.0.md`
+- `docs/substack-ready/substack-post-qa-checklist-v1.5.0.csv`
+- `docs/substack-ready/figures/fig-15-*` through `fig-25-*`
+- `models/primarycare_model/calibration_v150.py`
+- `docs/calibration/calibration-starter-report-v1.5.0.md`
+- `outputs/calibration-parameter-estimates-v1.5.0.csv`
+- `outputs/calibration-observed-vs-predicted-primary-v1.5.0.png`
+- `outputs/calibration-observed-vs-predicted-ed-v1.5.0.png`
+- `outputs/calibration-observed-vs-predicted-cost-v1.5.0.png`
+
+### Voice note
+
+A public web search did not confidently identify Dylan's Substack publication URL. The v1.5.0 posts are therefore drafted against the voice evident in the email trail and project instructions, and still need final author sign-off.

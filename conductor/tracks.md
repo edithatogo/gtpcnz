@@ -29,3 +29,12 @@
 4. Start the rapid scoping review using the protocol and screening templates.
 5. Decide whether the first academic output is a New Zealand Medical Journal Viewpoint or a methods/protocol article.
 6. Defer fully calibrated predictive modelling until data access and stakeholder validation justify it.
+
+
+## 020-substack-hyperlink-cadence-v1.5.0
+
+Purpose: Expand the Substack series, increase hyperlink density, add explanatory microeconomic diagrams, and create a twice-weekly publication calendar.
+
+## 021-calibrated-model-starter-v1.5.0
+
+Purpose: Begin the fully calibrated model pathway with a runnable synthetic-data calibration pipeline, data schema, target estimands, plots and validation caveats.
