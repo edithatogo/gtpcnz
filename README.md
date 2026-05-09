@@ -144,3 +144,17 @@ Key v1.5.0 artefacts:
 ### Voice note
 
 A public web search did not confidently identify Dylan's Substack publication URL. The v1.5.0 posts are therefore drafted against the voice evident in the email trail and project instructions, and still need final author sign-off.
+
+
+## v1.5.1 short-form Substack update
+
+The Substack series now has a short-form public version plus optional appendices. Public posts are generally 850-1,050 words, retain figures and key source links, and preserve the longer v1.5.0 material as deep-dive appendices and backup drafts.
+
+Key files:
+
+- `docs/substack-ready/posts-v1.5.1-public/`
+- `docs/substack-ready/appendices-v1.5.1/`
+- `docs/substack-ready/complete-substack-series-v1.5.1.md`
+- `docs/substack-ready/complete-substack-appendices-v1.5.1.md`
+- `docs/substack-ready/short-form-publication-strategy-v1.5.1.md`
+

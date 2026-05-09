@@ -169,3 +169,11 @@ Important caveat: these are demonstrative models only. They are not empirical es
 - Added explanatory microeconomic and conceptual diagrams for marginal supply, fixed-envelope rationing, co-payment/equity, place accountability, model stack and hybrid architecture.
 - Preserved the caveat that the model remains demonstrative/source-informed rather than fully empirically calibrated or predictive.
 
+
+
+## v1.5.1 - Short-form Substack public series
+
+- Split the v1.5.0 long Substack drafts into shorter public posts and optional deep-dive appendices.
+- Preserved all long drafts as backup material.
+- Added a short-form publication strategy for twice-weekly rollout.
+- Added QA checklist and local link audit for the short posts and appendices.
