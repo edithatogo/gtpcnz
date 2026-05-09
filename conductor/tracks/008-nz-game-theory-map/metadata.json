@@ -1,0 +1,18 @@
+{
+  "id": "008-nz-game-theory-map",
+  "title": "NZ policy game-theory map",
+  "status": "active",
+  "version": "0.4.0",
+  "created": "2026-05-07",
+  "owner": "Dylan A Mordaunt",
+  "outputs": [
+    "docs/concepts/nz-policy-game-atlas-v0.4.0.md",
+    "docs/modelling/nz-game-theory-formalisation-v0.4.0.md",
+    "docs/policy-briefs/brief-06-nz-game-theory-map-v0.4.0.md",
+    "docs/nzmj/game-theory-methods-annex-v0.4.0.md",
+    "docs/substack/post-09-the-nz-primary-care-funding-game-v0.4.0.md",
+    "models/primarycare_model/nz_game_map.py",
+    "outputs/nz-policy-game-map-v0.4.0.docx",
+    "outputs/nz-policy-game-map-v0.4.0.pdf"
+  ]
+}

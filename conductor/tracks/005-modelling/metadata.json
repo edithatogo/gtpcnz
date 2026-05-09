@@ -1,0 +1,17 @@
+{
+  "id": "005",
+  "slug": "005-modelling",
+  "title": "Empirical and game-theoretic modelling",
+  "status": "planned",
+  "version": "0.1.0",
+  "created": "2026-05-07",
+  "owner": "Dylan A Mordaunt",
+  "outputs": [
+    "Model overview",
+    "System dynamics spec",
+    "ABM spec",
+    "Game-theoretic spec",
+    "Scenario library",
+    "Validation plan"
+  ]
+}

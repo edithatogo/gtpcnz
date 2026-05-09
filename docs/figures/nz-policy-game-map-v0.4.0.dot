@@ -1,0 +1,34 @@
+digraph G {
+  graph [rankdir=LR, splines=true, bgcolor="white", pad="0.25", nodesep="0.55", ranksep="0.75"];
+  node [shape=box, style="rounded,filled", fillcolor="#F7F7F7", color="#444444", fontname="Helvetica", fontsize=10];
+  edge [color="#555555", fontname="Helvetica", fontsize=9];
+
+  Govt [label="Government / Ministers\nobjective: visible access, fiscal control, political risk"];
+  Treasury [label="Treasury / fiscal monitor\nobjective: value, exposure, whole-of-Crown cost"];
+  HNZ [label="Health NZ\ncommissioner + hospital operator\nobjective: targets, deficits, delivery"];
+  Hospitals [label="Hospitals / ED / specialist services\nvisible pressure, direct operation"];
+  Primary [label="Primary & urgent care providers\nGPs, NPs, pharmacists, allied health, Maori/Pacific, telehealth"];
+  PHO [label="PHOs / locality intermediaries\ncoordination value or transaction friction"];
+  Ambulance [label="Ambulance / paramedics\nconveyance, treat-and-refer, alternative pathways"];
+  Patients [label="Patients / whanau\nneed, price sensitivity, trust, wait, distance"];
+  Data [label="Targets + data\nwhat is measured becomes salient"];
+
+  Govt -> HNZ [label="funding direction + targets"];
+  Treasury -> Govt [label="fiscal advice"];
+  HNZ -> Hospitals [label="direct operation / rescue pressure"];
+  HNZ -> PHO [label="contracts / programme funding"];
+  PHO -> Primary [label="capitation + programmes"];
+  HNZ -> Primary [label="possible direct benefits schedule", style=dashed];
+  HNZ -> Ambulance [label="commissioning with ACC"];
+  Patients -> Primary [label="early care if price/wait acceptable"];
+  Patients -> Ambulance [label="urgent need / access failure"];
+  Patients -> Hospitals [label="ED default if upstream constrained"];
+  Primary -> Patients [label="access, co-pay, continuity"];
+  Ambulance -> Hospitals [label="conveyance / ramping"];
+  Ambulance -> Primary [label="treat-and-refer / follow-up", style=dashed];
+  Primary -> Hospitals [label="reduced avoidable demand if supply expands", style=dashed];
+  Hospitals -> Govt [label="visible crisis / political penalty"];
+  Data -> Govt [label="salience of measured domains"];
+  Data -> HNZ [label="performance management"];
+  HNZ -> Data [label="dataset / KPI design"];
+}

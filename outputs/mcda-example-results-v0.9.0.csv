@@ -1,0 +1,11 @@
+option_id,option,mapped_scenario,weighted_total_before_penalty,risk_penalty,risk_adjusted_score,raw_weighted_direction_minus2_to_plus2,contribution_C1,contribution_C2,contribution_C3,contribution_C4,contribution_C5,contribution_C6,contribution_C7,contribution_C8,contribution_C9,contribution_C10,weight_set_id,weight_set,rank
+O5,Full upstream access architecture,S3,70.77,10.35,60.42,1.299,11.1,10.35,9.667,6.375,6.429,5.81,6.096,6.619,2.381,5.943,W0,Balanced policy,1
+O3,Primary Care Benefits Schedule,S2,59.37,10.1,49.27,0.575,10.05,9.05,7.4,4.993,5.429,4.643,5.4,5.286,2.321,4.8,W0,Balanced policy,2
+O4,Benefits schedule plus scope-enabled eligibility,S2+scope,60.58,12.3,48.28,0.67,10.783,9.267,7.583,5.571,5.2,4.44,5.957,5.0,2.167,4.61,W0,Balanced policy,3
+O2,Capitation reweighting plus access target,S1+target,54.5,6.5,48.0,0.253,6.667,6.9,8.167,4.543,5.9,5.429,4.286,5.226,2.714,4.667,W0,Balanced policy,4
+O1,Capitation reweighting only,S1,52.89,5.2,47.69,0.158,6.4,6.167,8.267,4.564,6.114,5.476,4.146,5.071,2.631,4.057,W0,Balanced policy,5
+O7,ACC/ambulance alternatives strengthened only,partial,55.78,8.2,47.58,0.387,7.667,8.183,7.217,4.929,5.714,5.024,4.5,5.476,2.577,4.495,W0,Balanced policy,6
+O8,PHO reform/direct claims only,partial,53.72,12.25,41.47,0.262,7.4,7.0,6.667,4.479,6.0,4.762,6.214,5.119,1.952,4.124,W0,Balanced policy,7
+O9,Hospital investment priority only,hospital,48.04,8.0,40.04,-0.103,4.533,5.667,6.233,3.9,4.229,5.929,4.982,5.595,2.917,4.057,W0,Balanced policy,8
+O0,Status quo tight control,S0,40.9,7.5,33.4,-0.466,3.267,3.467,4.8,3.086,6.4,5.655,3.171,4.905,2.964,3.19,W0,Balanced policy,9
+O6,Loose demand-driven benefits with weak controls,S4,47.33,22.75,24.58,-0.147,9.7,8.133,5.333,4.671,2.929,2.095,5.464,3.048,1.857,4.095,W0,Balanced policy,10

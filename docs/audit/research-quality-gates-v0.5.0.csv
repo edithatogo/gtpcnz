@@ -1,0 +1,11 @@
+Gate_ID,Gate,Criterion,Status,Evidence,Next_Action
+QG01,Conceptual completeness,"Every major sector in the NZ game has an actor, strategy, payoff and failure mode.",Pass,Game atlas and mapping matrix,Refine after stakeholder challenge.
+QG02,Claim traceability,Every material claim has a claim ID and source/theory/testing path.,Pass,Claim-to-source ledger v0.5.0,Link to Zotero/BibTeX library.
+QG03,Source quality,"Key public facts rely on official, peer-reviewed or high-quality sources.",Pass with caveats,Source registry v0.5.0,Add bibliographic references for theory claims.
+QG04,Evidence review readiness,"Review questions, search strings, eligibility and extraction fields exist.",Pass,Review protocol and PRISMA-ScR crosswalk,Run searches and start screening.
+QG05,Simulation readiness,"Game model, SD model and ABM have structural specs, parameters and standards crosswalk.",Pass at specification stage,Parameter inventory; STRESS crosswalk; ODD template,Build synthetic prototype and calibration plan.
+QG06,Empirical validation,Claims tested against real data.,Not yet passed,No linked data analysis complete,"Data requests, OIA, calibration dataset."
+QG07,Stakeholder validation,"Mechanisms challenged by providers, funders, PHOs, ambulance, Māori/Pacific providers and consumers.",Not yet passed,Plan and interview guides only,"Ethics/governance decision, then interviews/workshop."
+QG08,Equity and Te Tiriti review,Policy architecture independently assessed for equity and Te Tiriti risks.,Not yet passed,Equity claims identified but not reviewed,Convene Māori/Pacific review and co-design input.
+QG09,Fiscal robustness,Demand-driven benefits tested for low-value activity and cost blowout risk.,Not yet passed,Sensitivity register only,Scenario modelling and economic analysis plan.
+QG10,Policy readiness,"Policy options include feasible implementation, safeguards and monitoring.",Partial,Briefs exist but not final,Revise after empirical/stakeholder findings.

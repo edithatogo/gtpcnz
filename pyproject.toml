@@ -1,0 +1,12 @@
+[project]
+name = "primarycare-funding-architecture"
+version = "0.7.0"
+description = "Scaffold for primary care funding architecture modelling"
+requires-python = ">=3.11"
+dependencies = ["numpy", "pandas", "networkx"]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.pytest.ini_options]
+pythonpath = ["models"]

@@ -1,0 +1,11 @@
+criterion_id,criterion,description,default_weight,related_games
+C1,Access and supply generation,"Whether the option increases safe upstream primary, urgent and ambulance capacity.",14,"G3, G4, G8"
+C2,Hospital deflection,"Whether the option reduces avoidable ED, ambulance conveyance and hospital admission flow.",14,"G1, G2, G7"
+C3,Equity and Te Tiriti legitimacy,"Whether access expands without worsening inequity, trust, Maori/Pacific provider legitimacy or co-payment barriers.",14,"G10, G12"
+C4,Rural and in-person resilience,Whether the option protects local in-person capacity rather than substituting telehealth only.,9,"G7, G8, G9"
+C5,Fiscal sustainability,"Whether the model is affordable, controllable and transparent to central fiscal decision-makers.",12,"G1, G2, G6, G10"
+C6,Gaming and low-value activity risk,"Whether it avoids avoidable churn, opportunistic claiming and provider-induced demand.",10,"G3, G5, G10, G13"
+C7,Administrative simplicity and market entry,Whether it lowers transaction costs and barriers to market entry or expansion.,9,"G5, G8, G14"
+C8,Governance and clinical safety,"Whether scope, prescribing, referral, audit, clinical governance and accountability controls are strong.",10,"G8, G11, G14"
+C9,Political feasibility,Whether the option can survive institutional contestation and be framed coherently.,5,"G5, G12, G13"
+C10,Data and accountability readiness,"Whether outcomes, contacts and downstream flows can be measured and reported at top-tier level.",8,"G11, G14"

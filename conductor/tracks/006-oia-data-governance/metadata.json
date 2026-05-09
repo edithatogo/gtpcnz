@@ -1,0 +1,14 @@
+{
+  "id": "006",
+  "slug": "006-oia-data-governance",
+  "title": "OIA and data governance",
+  "status": "planned",
+  "version": "0.1.0",
+  "created": "2026-05-07",
+  "owner": "Dylan A Mordaunt",
+  "outputs": [
+    "OIA capitation request",
+    "OIA PHO advice request",
+    "OIA log"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "track_id": "009-research-audit",
+  "title": "Research audit and traceability pack",
+  "version": "0.4.1",
+  "status": "active",
+  "created": "2026-05-07",
+  "owner": "Dylan A Mordaunt",
+  "purpose": "Document provenance, evidence status, assumptions, decision history, falsification tests and reproducibility requirements for the New Zealand game-theory mapping work."
+}

@@ -1,0 +1,113 @@
+game_id,game_name,outcome_metric,parameter,correlation,abs_correlation,direction,rank_within_game
+G1,Hospital-salience budget game,hospital_pressure,marginal_contact_benefit,-0.958,0.958,negative,1.0
+G1,Hospital-salience budget game,hospital_pressure,primary_kpi_salience,-0.9438,0.9438,negative,2.0
+G1,Hospital-salience budget game,hospital_pressure,direct_claiming,-0.936,0.936,negative,3.0
+G1,Hospital-salience budget game,hospital_pressure,ambulance_kpi_salience,-0.9146,0.9146,negative,4.0
+G1,Hospital-salience budget game,hospital_pressure,scope_flexibility,-0.9084,0.9084,negative,5.0
+G1,Hospital-salience budget game,hospital_pressure,pho_transaction_cost,0.8944,0.8944,positive,6.0
+G1,Hospital-salience budget game,hospital_pressure,ambulance_alternative_funding,-0.8842,0.8842,negative,7.0
+G1,Hospital-salience budget game,hospital_pressure,hospital_political_penalty,0.8255,0.8255,positive,8.0
+G10,Co-payment calibration game,hospital_pressure,data_observability,-0.8562,0.8562,negative,1.0
+G10,Co-payment calibration game,hospital_pressure,narrative_coherence,-0.853,0.853,negative,2.0
+G10,Co-payment calibration game,hospital_pressure,primary_kpi_salience,-0.8146,0.8146,negative,3.0
+G10,Co-payment calibration game,hospital_pressure,local_inperson_loading,-0.8111,0.8111,negative,4.0
+G10,Co-payment calibration game,hospital_pressure,copayment_level,0.8023,0.8023,positive,5.0
+G10,Co-payment calibration game,hospital_pressure,ambulance_alternative_funding,-0.7937,0.7937,negative,6.0
+G10,Co-payment calibration game,hospital_pressure,copayment_protections,-0.7888,0.7888,negative,7.0
+G10,Co-payment calibration game,hospital_pressure,marginal_contact_benefit,-0.7847,0.7847,negative,8.0
+G11,KPI salience game,hospital_pressure,primary_kpi_salience,-0.963,0.963,negative,1.0
+G11,KPI salience game,hospital_pressure,marginal_contact_benefit,-0.9343,0.9343,negative,2.0
+G11,KPI salience game,hospital_pressure,ambulance_kpi_salience,-0.9321,0.9321,negative,3.0
+G11,KPI salience game,hospital_pressure,direct_claiming,-0.9126,0.9126,negative,4.0
+G11,KPI salience game,hospital_pressure,ambulance_alternative_funding,-0.9016,0.9016,negative,5.0
+G11,KPI salience game,hospital_pressure,scope_flexibility,-0.8863,0.8863,negative,6.0
+G11,KPI salience game,hospital_pressure,pho_transaction_cost,0.8685,0.8685,positive,7.0
+G11,KPI salience game,hospital_pressure,data_observability,-0.7949,0.7949,negative,8.0
+G12,Equity and trust game,hospital_pressure,narrative_coherence,-0.8764,0.8764,negative,1.0
+G12,Equity and trust game,hospital_pressure,data_observability,-0.8748,0.8748,negative,2.0
+G12,Equity and trust game,hospital_pressure,local_inperson_loading,-0.8483,0.8483,negative,3.0
+G12,Equity and trust game,hospital_pressure,primary_kpi_salience,-0.8222,0.8222,negative,4.0
+G12,Equity and trust game,hospital_pressure,ambulance_alternative_funding,-0.8102,0.8102,negative,5.0
+G12,Equity and trust game,hospital_pressure,marginal_contact_benefit,-0.7971,0.7971,negative,6.0
+G12,Equity and trust game,hospital_pressure,stakeholder_alignment,-0.7874,0.7874,negative,7.0
+G12,Equity and trust game,hospital_pressure,budget_tightness,0.7797,0.7797,positive,8.0
+G13,Political economy game,hospital_pressure,stakeholder_alignment,-0.9261,0.9261,negative,1.0
+G13,Political economy game,hospital_pressure,narrative_coherence,-0.884,0.884,negative,2.0
+G13,Political economy game,hospital_pressure,local_inperson_loading,-0.8705,0.8705,negative,3.0
+G13,Political economy game,hospital_pressure,copayment_protections,-0.8694,0.8694,negative,4.0
+G13,Political economy game,hospital_pressure,telehealth_integration,-0.8657,0.8657,negative,5.0
+G13,Political economy game,hospital_pressure,gaming_controls,-0.8601,0.8601,negative,6.0
+G13,Political economy game,hospital_pressure,equity_program_strength,-0.8422,0.8422,negative,7.0
+G13,Political economy game,hospital_pressure,safety_governance,-0.792,0.792,negative,8.0
+G14,Data observability game,hospital_pressure,data_observability,-0.962,0.962,negative,1.0
+G14,Data observability game,hospital_pressure,primary_kpi_salience,-0.8781,0.8781,negative,2.0
+G14,Data observability game,hospital_pressure,narrative_coherence,-0.857,0.857,negative,3.0
+G14,Data observability game,hospital_pressure,ambulance_alternative_funding,-0.8499,0.8499,negative,4.0
+G14,Data observability game,hospital_pressure,ambulance_kpi_salience,-0.8248,0.8248,negative,5.0
+G14,Data observability game,hospital_pressure,local_inperson_loading,-0.8092,0.8092,negative,6.0
+G14,Data observability game,hospital_pressure,marginal_contact_benefit,-0.7788,0.7788,negative,7.0
+G14,Data observability game,hospital_pressure,direct_claiming,-0.7688,0.7688,negative,8.0
+G2,Health NZ internal allocation game,hospital_pressure,marginal_contact_benefit,-0.9572,0.9572,negative,1.0
+G2,Health NZ internal allocation game,hospital_pressure,primary_kpi_salience,-0.9486,0.9486,negative,2.0
+G2,Health NZ internal allocation game,hospital_pressure,direct_claiming,-0.9344,0.9344,negative,3.0
+G2,Health NZ internal allocation game,hospital_pressure,ambulance_kpi_salience,-0.928,0.928,negative,4.0
+G2,Health NZ internal allocation game,hospital_pressure,ambulance_alternative_funding,-0.9183,0.9183,negative,5.0
+G2,Health NZ internal allocation game,hospital_pressure,scope_flexibility,-0.9104,0.9104,negative,6.0
+G2,Health NZ internal allocation game,hospital_pressure,pho_transaction_cost,0.8925,0.8925,positive,7.0
+G2,Health NZ internal allocation game,hospital_pressure,hospital_political_penalty,0.7803,0.7803,positive,8.0
+G3,Capitation marginal-supply game,hospital_pressure,marginal_contact_benefit,-0.9896,0.9896,negative,1.0
+G3,Capitation marginal-supply game,hospital_pressure,direct_claiming,-0.9773,0.9773,negative,2.0
+G3,Capitation marginal-supply game,hospital_pressure,pho_transaction_cost,0.933,0.933,positive,3.0
+G3,Capitation marginal-supply game,hospital_pressure,scope_flexibility,-0.9156,0.9156,negative,4.0
+G3,Capitation marginal-supply game,hospital_pressure,primary_kpi_salience,-0.8745,0.8745,negative,5.0
+G3,Capitation marginal-supply game,hospital_pressure,ambulance_kpi_salience,-0.8621,0.8621,negative,6.0
+G3,Capitation marginal-supply game,hospital_pressure,ambulance_alternative_funding,-0.8526,0.8526,negative,7.0
+G3,Capitation marginal-supply game,hospital_pressure,hospital_political_penalty,0.7236,0.7236,positive,8.0
+G4,Consumer access pathway game,hospital_pressure,data_observability,-0.8714,0.8714,negative,1.0
+G4,Consumer access pathway game,hospital_pressure,narrative_coherence,-0.8663,0.8663,negative,2.0
+G4,Consumer access pathway game,hospital_pressure,primary_kpi_salience,-0.8423,0.8423,negative,3.0
+G4,Consumer access pathway game,hospital_pressure,ambulance_alternative_funding,-0.8387,0.8387,negative,4.0
+G4,Consumer access pathway game,hospital_pressure,local_inperson_loading,-0.8347,0.8347,negative,5.0
+G4,Consumer access pathway game,hospital_pressure,direct_claiming,-0.8043,0.8043,negative,6.0
+G4,Consumer access pathway game,hospital_pressure,marginal_contact_benefit,-0.802,0.802,negative,7.0
+G4,Consumer access pathway game,hospital_pressure,ambulance_kpi_salience,-0.7785,0.7785,negative,8.0
+G5,PHO intermediation game,hospital_pressure,direct_claiming,-0.9935,0.9935,negative,1.0
+G5,PHO intermediation game,hospital_pressure,marginal_contact_benefit,-0.9727,0.9727,negative,2.0
+G5,PHO intermediation game,hospital_pressure,pho_transaction_cost,0.9409,0.9409,positive,3.0
+G5,PHO intermediation game,hospital_pressure,scope_flexibility,-0.9093,0.9093,negative,4.0
+G5,PHO intermediation game,hospital_pressure,primary_kpi_salience,-0.8767,0.8767,negative,5.0
+G5,PHO intermediation game,hospital_pressure,ambulance_kpi_salience,-0.8609,0.8609,negative,6.0
+G5,PHO intermediation game,hospital_pressure,ambulance_alternative_funding,-0.845,0.845,negative,7.0
+G5,PHO intermediation game,hospital_pressure,hospital_political_penalty,0.7275,0.7275,positive,8.0
+G6,ACC/Health NZ cross-funder game,hospital_pressure,marginal_contact_benefit,-0.9467,0.9467,negative,1.0
+G6,ACC/Health NZ cross-funder game,hospital_pressure,direct_claiming,-0.9321,0.9321,negative,2.0
+G6,ACC/Health NZ cross-funder game,hospital_pressure,primary_kpi_salience,-0.913,0.913,negative,3.0
+G6,ACC/Health NZ cross-funder game,hospital_pressure,ambulance_alternative_funding,-0.9002,0.9002,negative,4.0
+G6,ACC/Health NZ cross-funder game,hospital_pressure,scope_flexibility,-0.8903,0.8903,negative,5.0
+G6,ACC/Health NZ cross-funder game,hospital_pressure,ambulance_kpi_salience,-0.8902,0.8902,negative,6.0
+G6,ACC/Health NZ cross-funder game,hospital_pressure,pho_transaction_cost,0.8839,0.8839,positive,7.0
+G6,ACC/Health NZ cross-funder game,hospital_pressure,data_observability,-0.7644,0.7644,negative,8.0
+G7,Ambulance conveyance game,hospital_pressure,ambulance_alternative_funding,-0.9222,0.9222,negative,1.0
+G7,Ambulance conveyance game,hospital_pressure,data_observability,-0.8615,0.8615,negative,2.0
+G7,Ambulance conveyance game,hospital_pressure,narrative_coherence,-0.8268,0.8268,negative,3.0
+G7,Ambulance conveyance game,hospital_pressure,primary_kpi_salience,-0.8233,0.8233,negative,4.0
+G7,Ambulance conveyance game,hospital_pressure,ambulance_kpi_salience,-0.8229,0.8229,negative,5.0
+G7,Ambulance conveyance game,hospital_pressure,local_inperson_loading,-0.8035,0.8035,negative,6.0
+G7,Ambulance conveyance game,hospital_pressure,telehealth_integration,-0.7646,0.7646,negative,7.0
+G7,Ambulance conveyance game,hospital_pressure,stakeholder_alignment,-0.733,0.733,negative,8.0
+G8,Scope-of-practice supply game,hospital_pressure,primary_kpi_salience,-0.8781,0.8781,negative,1.0
+G8,Scope-of-practice supply game,hospital_pressure,ambulance_alternative_funding,-0.8691,0.8691,negative,2.0
+G8,Scope-of-practice supply game,hospital_pressure,marginal_contact_benefit,-0.863,0.863,negative,3.0
+G8,Scope-of-practice supply game,hospital_pressure,ambulance_kpi_salience,-0.8554,0.8554,negative,4.0
+G8,Scope-of-practice supply game,hospital_pressure,scope_flexibility,-0.8537,0.8537,negative,5.0
+G8,Scope-of-practice supply game,hospital_pressure,direct_claiming,-0.8513,0.8513,negative,6.0
+G8,Scope-of-practice supply game,hospital_pressure,data_observability,-0.8162,0.8162,negative,7.0
+G8,Scope-of-practice supply game,hospital_pressure,pho_transaction_cost,0.7946,0.7946,positive,8.0
+G9,Telehealth/local-supply game,hospital_pressure,data_observability,-0.9114,0.9114,negative,1.0
+G9,Telehealth/local-supply game,hospital_pressure,local_inperson_loading,-0.9069,0.9069,negative,2.0
+G9,Telehealth/local-supply game,hospital_pressure,narrative_coherence,-0.9031,0.9031,negative,3.0
+G9,Telehealth/local-supply game,hospital_pressure,telehealth_integration,-0.8836,0.8836,negative,4.0
+G9,Telehealth/local-supply game,hospital_pressure,stakeholder_alignment,-0.8087,0.8087,negative,5.0
+G9,Telehealth/local-supply game,hospital_pressure,copayment_protections,-0.8031,0.8031,negative,6.0
+G9,Telehealth/local-supply game,hospital_pressure,ambulance_alternative_funding,-0.7979,0.7979,negative,7.0
+G9,Telehealth/local-supply game,hospital_pressure,primary_kpi_salience,-0.7976,0.7976,negative,8.0

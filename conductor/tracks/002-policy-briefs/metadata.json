@@ -1,0 +1,17 @@
+{
+  "id": "002",
+  "slug": "002-policy-briefs",
+  "title": "Policy brief suite",
+  "status": "planned",
+  "version": "0.1.0",
+  "created": "2026-05-07",
+  "owner": "Dylan A Mordaunt",
+  "outputs": [
+    "Brief index",
+    "NZ benefits schedule brief",
+    "PHO brief",
+    "ambulance brief",
+    "Australia brief",
+    "KPI brief"
+  ]
+}

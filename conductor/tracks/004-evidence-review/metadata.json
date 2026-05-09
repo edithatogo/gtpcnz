@@ -1,0 +1,14 @@
+{
+  "id": "004",
+  "slug": "004-evidence-review",
+  "title": "Evidence review",
+  "status": "planned",
+  "version": "0.1.0",
+  "created": "2026-05-07",
+  "owner": "Dylan A Mordaunt",
+  "outputs": [
+    "Protocol",
+    "Search strategy",
+    "Extraction matrix"
+  ]
+}

@@ -1,0 +1,13 @@
+post,file,title,word_count,sentence_count,avg_words_per_sentence,external_links,unique_external_links,figure_count,broken_figure_refs,acronym_flags,readability_pass,hyperlink_pass,figure_pass
+1,docs/substack-ready/posts/post-01-why-funding-architecture-matters-v1.2.0.md,Why primary care funding is not just about more money,1304,84,15.5,8,5,1,,,True,True,True
+2,docs/substack-ready/posts/post-02-funding-models-101-v1.2.0.md,"Fee-for-service, capitation and blended funding: a plain-English guide",1054,77,13.7,7,5,1,,OECD,True,True,True
+3,docs/substack-ready/posts/post-03-capitation-and-supply-v1.2.0.md,Why capitation can be fair and still constrain supply,1046,78,13.4,7,5,1,,,True,True,True
+4,docs/substack-ready/posts/post-04-blended-funding-not-a-blank-cheque-v1.2.0.md,Why blended funding is not a blank cheque,902,71,12.7,5,5,1,,OECD,True,True,True
+5,docs/substack-ready/posts/post-05-primary-care-benefits-schedule-v1.2.0.md,The case for a National Primary Care Benefits Schedule,1104,78,14.2,8,6,1,,ACC,True,True,True
+6,docs/substack-ready/posts/post-06-who-can-generate-supply-v1.2.0.md,Who should be allowed to generate primary care supply?,1006,63,16.0,5,5,1,,ACC,True,True,True
+7,docs/substack-ready/posts/post-07-phos-function-or-friction-v1.2.0.md,Primary Health Organisations: useful function or payment friction?,981,72,13.6,7,5,1,,PHO,True,True,True
+8,docs/substack-ready/posts/post-08-ambulance-and-acc-v1.2.0.md,Ambulance and Accident Compensation Corporation: the hidden upstream system,1030,66,15.6,7,5,1,,ACC; NZ,True,True,True
+9,docs/substack-ready/posts/post-09-why-hospitals-win-v1.2.0.md,Why hospitals win the funding game,970,77,12.6,6,5,1,,,True,True,True
+10,docs/substack-ready/posts/post-10-copayments-demand-or-equity-v1.2.0.md,Co-payments: demand signal or equity failure?,959,71,13.5,6,5,1,,,True,True,True
+11,docs/substack-ready/posts/post-11-game-informed-mcda-v1.2.0.md,How decision-makers can use the game map without pretending it is a crystal ball,1014,81,12.5,6,6,1,,PHO,True,True,True
+12,docs/substack-ready/posts/post-12-what-we-need-to-test-next-v1.2.0.md,What we need to test next,1102,78,14.1,8,7,1,,ACC; PHO,True,True,True

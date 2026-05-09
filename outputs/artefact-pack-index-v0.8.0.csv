@@ -1,0 +1,139 @@
+category,artefact,versioned,role
+audit,docs/audit/audit-index-v0.4.1.md,True,source document
+audit,docs/audit/audit-index-v0.5.0.md,True,source document
+audit,docs/audit/decision-log-v0.4.1.md,True,source document
+audit,docs/audit/falsification-and-sensitivity-register-v0.4.1.md,True,source document
+audit,docs/audit/reproducibility-checklist-v0.4.1.md,True,source document
+audit,docs/audit/research-audit-dossier-v0.5.0.md,True,source document
+audit,docs/audit/research-audit-dossier-v0.7.0.md,True,source document
+audit,docs/audit/research-audit-pack-v0.4.1.md,True,source document
+audit,docs/audit/research-quality-gates-v0.5.0.md,True,source document
+audit,docs/audit/source-quality-and-search-log-v0.4.1.md,True,source document
+audit,docs/audit/stakeholder-validation-plan-v0.4.1.md,True,source document
+concepts,docs/concepts/causal-logic-model-v0.2.0.md,True,source document
+concepts,docs/concepts/core-thesis-v0.1.0.md,True,source document
+concepts,docs/concepts/game-theory-map-v0.1.0.md,True,source document
+concepts,docs/concepts/nz-policy-game-atlas-v0.4.0.md,True,source document
+concepts,docs/concepts/nz-policy-game-summary-v0.4.0.md,True,source document
+concepts,docs/concepts/policy-architecture-options-v0.1.0.md,True,source document
+modelling,docs/modelling/agent-based-model-spec-v0.1.0.md,True,source document
+modelling,docs/modelling/calibration-data-register-v0.1.0.md,True,source document
+modelling,docs/modelling/calibration-protocol-v0.7.0.md,True,source document
+modelling,docs/modelling/demonstrative-model-cards-v0.6.0.md,True,source document
+modelling,docs/modelling/demonstrative-modelling-report-v0.6.0.md,True,source document
+modelling,docs/modelling/formal-game-theory-model-nz-v0.4.0.md,True,source document
+modelling,docs/modelling/game-theoretic-model-spec-v0.1.0.md,True,source document
+modelling,docs/modelling/game-theory-payoff-model-v0.2.0.md,True,source document
+modelling,docs/modelling/minimum-viable-simulation-plan-v0.5.0.md,True,source document
+modelling,docs/modelling/nz-broader-policy-game-map-v0.4.0.md,True,source document
+modelling,docs/modelling/nz-game-theory-formalisation-v0.4.0.md,True,source document
+modelling,docs/modelling/nz-policy-game-map-v0.4.0.md,True,source document
+modelling,docs/modelling/odd-protocol-template-v0.5.0.md,True,source document
+modelling,docs/modelling/overview-v0.1.0.md,True,source document
+modelling,docs/modelling/scenario-library-v0.1.0.md,True,source document
+modelling,docs/modelling/system-dynamics-spec-v0.1.0.md,True,source document
+modelling,docs/modelling/uncertainty-analysis-report-v0.7.0.md,True,source document
+modelling,docs/modelling/validation-plan-v0.1.0.md,True,source document
+nzmj,docs/nzmj/article-skeleton-v0.1.0.md,True,source document
+nzmj,docs/nzmj/cover-letter-template-v0.1.0.md,True,source document
+nzmj,docs/nzmj/game-theory-methods-annex-v0.4.0.md,True,source document
+nzmj,docs/nzmj/game-theory-methods-section-v0.4.0.md,True,source document
+nzmj,docs/nzmj/original-article-outline-v0.1.0.md,True,source document
+nzmj,docs/nzmj/original-article-protocol-v0.3.0.md,True,source document
+nzmj,docs/nzmj/viewpoint-draft-v0.3.0.md,True,source document
+oia,docs/oia/oia-request-addendum-v0.2.0.md,True,source document
+oia,docs/oia/oia-request-capitation-formula-v0.1.0.md,True,source document
+oia,docs/oia/oia-request-pho-advice-h2025067082-v0.1.0.md,True,source document
+policy-briefs,docs/policy-briefs/brief-01-nz-primary-care-benefits-schedule-v0.1.0.md,True,source document
+policy-briefs,docs/policy-briefs/brief-01-nz-primary-care-benefits-schedule-v0.3.0.md,True,source document
+policy-briefs,docs/policy-briefs/brief-02-pho-functions-vs-intermediation-v0.1.0.md,True,source document
+policy-briefs,docs/policy-briefs/brief-02-pho-functions-vs-intermediation-v0.2.0.md,True,source document
+policy-briefs,docs/policy-briefs/brief-03-ambulance-primary-care-and-hospital-avoidance-v0.1.0.md,True,source document
+policy-briefs,docs/policy-briefs/brief-03-ambulance-primary-care-and-hospital-avoidance-v0.2.0.md,True,source document
+policy-briefs,docs/policy-briefs/brief-04-australia-commonwealth-state-game-v0.1.0.md,True,source document
+policy-briefs,docs/policy-briefs/brief-04-australia-commonwealth-state-game-v0.2.0.md,True,source document
+policy-briefs,docs/policy-briefs/brief-05-kpis-and-accountability-v0.1.0.md,True,source document
+policy-briefs,docs/policy-briefs/brief-05-kpis-and-accountability-v0.2.0.md,True,source document
+policy-briefs,docs/policy-briefs/brief-06-nz-game-theory-map-v0.4.0.md,True,source document
+policy-briefs,docs/policy-briefs/brief-07-calibration-and-empirical-tests-v0.7.0.md,True,source document
+policy-briefs,docs/policy-briefs/brief-index-v0.1.0.md,True,source document
+policy-briefs,docs/policy-briefs/brief-index-v0.3.0.md,True,source document
+qualitative,docs/qualitative/stakeholder-validation-pack-v0.5.0.md,True,source document
+docs,docs/repo-index-v0.3.0.md,True,source document
+docs,docs/repo-index-v0.4.0.md,True,source document
+docs,docs/repo-index-v0.4.1.md,True,source document
+docs,docs/repo-index-v0.5.0.md,True,source document
+docs,docs/repo-index-v0.7.0.md,True,source document
+review,docs/review/eligibility-criteria-v0.5.0.md,True,source document
+review,docs/review/rapid-scoping-review-protocol-v0.1.0.md,True,source document
+review,docs/review/rapid-scoping-review-protocol-v0.2.0.md,True,source document
+review,docs/review/screening-codebook-v0.5.0.md,True,source document
+review,docs/review/search-strategy-v0.1.0.md,True,source document
+review,docs/review/search-strings-v0.5.0.md,True,source document
+docs,docs/source-notes-v0.1.0.md,True,source document
+docs,docs/source-notes-v0.3.0.md,True,source document
+docs,docs/source-notes-v0.4.0.md,True,source document
+docs,docs/source-notes-v0.4.1.md,True,source document
+docs,docs/source-notes-v0.5.0.md,True,source document
+substack,docs/substack/post-01-why-funding-architecture-matters-v0.1.0.md,True,source document
+substack,docs/substack/post-02-capitation-and-ffs-101-v0.1.0.md,True,source document
+substack,docs/substack/post-03-primary-care-benefits-schedule-v0.1.0.md,True,source document
+substack,docs/substack/post-04-hospitals-win-the-game-v0.1.0.md,True,source document
+substack,docs/substack/post-05-copayments-demand-signal-or-equity-failure-v0.3.0.md,True,source document
+substack,docs/substack/post-06-who-can-generate-primary-care-supply-v0.3.0.md,True,source document
+substack,docs/substack/post-07-phos-function-or-friction-v0.3.0.md,True,source document
+substack,docs/substack/post-08-ambulance-is-access-infrastructure-v0.3.0.md,True,source document
+substack,docs/substack/post-09-acc-hidden-supply-signal-v0.4.0.md,True,source document
+substack,docs/substack/post-09-the-nz-primary-care-funding-game-v0.4.0.md,True,source document
+substack,docs/substack/series-plan-v0.1.0.md,True,source document
+substack,docs/substack/series-plan-v0.3.0.md,True,source document
+audit,docs/audit/artefact-manifest-v0.4.1.csv,True,data/audit table
+audit,docs/audit/claim-to-source-ledger-v0.5.0.csv,True,data/audit table
+audit,docs/audit/claims-assumptions-register-v0.4.1.csv,True,data/audit table
+audit,docs/audit/demonstrative-model-audit-matrix-v0.6.0.csv,True,data/audit table
+audit,docs/audit/evidence-priority-register-v0.7.0.csv,True,data/audit table
+audit,docs/audit/game-map-traceability-matrix-v0.4.1.csv,True,data/audit table
+audit,docs/audit/research-quality-gates-v0.5.0.csv,True,data/audit table
+audit,docs/audit/source-registry-v0.5.0.csv,True,data/audit table
+audit,docs/audit/validation-backlog-v0.7.0.csv,True,data/audit table
+modelling,docs/modelling/demonstrative-model-results-v0.6.0.csv,True,data/audit table
+modelling,docs/modelling/demonstrative-model-scenario-inputs-v0.6.0.csv,True,data/audit table
+modelling,docs/modelling/demonstrative-model-sensitivity-v0.6.0.csv,True,data/audit table
+modelling,docs/modelling/demonstrative-model-summary-v0.6.0.csv,True,data/audit table
+modelling,docs/modelling/game-mapping-matrix-v0.4.0.csv,True,data/audit table
+modelling,docs/modelling/hybrid-model-results-v0.8.0.csv,True,data/audit table
+modelling,docs/modelling/hybrid-uncertainty-draws-v0.8.0.csv,True,data/audit table
+modelling,docs/modelling/hybrid-uncertainty-summary-v0.8.0.csv,True,data/audit table
+modelling,docs/modelling/model-parameter-inventory-v0.5.0.csv,True,data/audit table
+modelling,docs/modelling/monte-carlo-draw-sample-v0.7.0.csv,True,data/audit table
+modelling,docs/modelling/monte-carlo-scenario-summary-v0.7.0.csv,True,data/audit table
+modelling,docs/modelling/parameter-prior-register-v0.7.0.csv,True,data/audit table
+modelling,docs/modelling/scenario-probability-comparisons-v0.7.0.csv,True,data/audit table
+modelling,docs/modelling/sensitivity-driver-ranking-hospital-pressure-by-scenario-v0.7.0.csv,True,data/audit table
+modelling,docs/modelling/sensitivity-driver-ranking-hospital-pressure-v0.7.0.csv,True,data/audit table
+modelling,docs/modelling/sensitivity-driver-ranking-welfare-by-scenario-v0.7.0.csv,True,data/audit table
+modelling,docs/modelling/sensitivity-driver-ranking-welfare-v0.7.0.csv,True,data/audit table
+modelling,docs/modelling/stress-crosswalk-v0.5.0.csv,True,data/audit table
+oia,docs/oia/data-request-dashboard-v0.5.0.csv,True,data/audit table
+oia,docs/oia/oia-log-v0.1.0.csv,True,data/audit table
+qualitative,docs/qualitative/stakeholder-sampling-frame-v0.5.0.csv,True,data/audit table
+review,docs/review/extraction-matrix-template-v0.1.0.csv,True,data/audit table
+review,docs/review/prisma-scr-crosswalk-v0.5.0.csv,True,data/audit table
+review,docs/review/title-abstract-screening-form-v0.5.0.csv,True,data/audit table
+figures,docs/figures/hybrid-components-by-scenario-v0.8.0.png,True,figure
+figures,docs/figures/hybrid-deflection-risk-scatter-v0.8.0.png,True,figure
+figures,docs/figures/hybrid-model-synthesis-v0.8.0.dot,True,figure
+figures,docs/figures/hybrid-model-synthesis-v0.8.0.png,True,figure
+figures,docs/figures/hybrid-model-synthesis-v0.8.0.svg,True,figure
+figures,docs/figures/hybrid-uncertainty-viability-v0.8.0.png,True,figure
+figures,docs/figures/hybrid-viability-by-scenario-v0.8.0.png,True,figure
+model-code,models/primarycare_model/__init__.py,False,executable model code
+model-code,models/primarycare_model/abm_stub.py,False,executable model code
+model-code,models/primarycare_model/audit.py,False,executable model code
+model-code,models/primarycare_model/demonstrative_games.py,False,executable model code
+model-code,models/primarycare_model/game.py,False,executable model code
+model-code,models/primarycare_model/hybrid_model.py,False,executable model code
+model-code,models/primarycare_model/nz_game.py,False,executable model code
+model-code,models/primarycare_model/nz_game_map.py,False,executable model code
+model-code,models/primarycare_model/sd_stub.py,False,executable model code
+model-code,models/primarycare_model/uncertainty.py,False,executable model code

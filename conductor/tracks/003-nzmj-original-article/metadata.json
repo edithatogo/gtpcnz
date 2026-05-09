@@ -1,0 +1,14 @@
+{
+  "id": "003",
+  "slug": "003-nzmj-original-article",
+  "title": "NZMJ original article or viewpoint fallback",
+  "status": "planned",
+  "version": "0.1.0",
+  "created": "2026-05-07",
+  "owner": "Dylan A Mordaunt",
+  "outputs": [
+    "Article outline",
+    "Manuscript skeleton",
+    "Cover letter"
+  ]
+}

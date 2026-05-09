@@ -1,0 +1,5 @@
+scenario_id,scenario_name,p_welfare_gt_s0,p_hospital_pressure_lt_s0,p_access_gt_s0,p_gaming_risk_lt_s0,comparison_status
+S1,Capitation reweighting only,1.0,0.998,0.989,0.832,demonstrative uncertainty only; not empirical probability
+S2,Primary Care Benefits Schedule,1.0,1.0,1.0,0.792,demonstrative uncertainty only; not empirical probability
+S3,Full upstream access architecture,1.0,1.0,1.0,0.999,demonstrative uncertainty only; not empirical probability
+S4,"Loose benefits, weak controls",1.0,1.0,1.0,0.0,demonstrative uncertainty only; not empirical probability

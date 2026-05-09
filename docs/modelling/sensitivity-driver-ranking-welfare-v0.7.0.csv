@@ -1,0 +1,113 @@
+game_id,game_name,outcome_metric,parameter,correlation,abs_correlation,direction,rank_within_game
+G1,Hospital-salience budget game,system_welfare,primary_kpi_salience,0.9255,0.9255,positive,1.0
+G1,Hospital-salience budget game,system_welfare,data_observability,0.8931,0.8931,positive,2.0
+G1,Hospital-salience budget game,system_welfare,ambulance_alternative_funding,0.8778,0.8778,positive,3.0
+G1,Hospital-salience budget game,system_welfare,ambulance_kpi_salience,0.8658,0.8658,positive,4.0
+G1,Hospital-salience budget game,system_welfare,marginal_contact_benefit,0.8543,0.8543,positive,5.0
+G1,Hospital-salience budget game,system_welfare,direct_claiming,0.8418,0.8418,positive,6.0
+G1,Hospital-salience budget game,system_welfare,narrative_coherence,0.8385,0.8385,positive,7.0
+G1,Hospital-salience budget game,system_welfare,scope_flexibility,0.787,0.787,positive,8.0
+G10,Co-payment calibration game,system_welfare,copayment_protections,0.9252,0.9252,positive,1.0
+G10,Co-payment calibration game,system_welfare,narrative_coherence,0.9102,0.9102,positive,2.0
+G10,Co-payment calibration game,system_welfare,local_inperson_loading,0.901,0.901,positive,3.0
+G10,Co-payment calibration game,system_welfare,data_observability,0.8652,0.8652,positive,4.0
+G10,Co-payment calibration game,system_welfare,copayment_level,-0.8555,0.8555,negative,5.0
+G10,Co-payment calibration game,system_welfare,stakeholder_alignment,0.8548,0.8548,positive,6.0
+G10,Co-payment calibration game,system_welfare,telehealth_integration,0.8423,0.8423,positive,7.0
+G10,Co-payment calibration game,system_welfare,budget_tightness,-0.8038,0.8038,negative,8.0
+G11,KPI salience game,system_welfare,primary_kpi_salience,0.9334,0.9334,positive,1.0
+G11,KPI salience game,system_welfare,ambulance_alternative_funding,0.8845,0.8845,positive,2.0
+G11,KPI salience game,system_welfare,ambulance_kpi_salience,0.8823,0.8823,positive,3.0
+G11,KPI salience game,system_welfare,data_observability,0.8821,0.8821,positive,4.0
+G11,KPI salience game,system_welfare,marginal_contact_benefit,0.8555,0.8555,positive,5.0
+G11,KPI salience game,system_welfare,direct_claiming,0.8404,0.8404,positive,6.0
+G11,KPI salience game,system_welfare,narrative_coherence,0.8297,0.8297,positive,7.0
+G11,KPI salience game,system_welfare,scope_flexibility,0.7945,0.7945,positive,8.0
+G12,Equity and trust game,system_welfare,narrative_coherence,0.92,0.92,positive,1.0
+G12,Equity and trust game,system_welfare,local_inperson_loading,0.9098,0.9098,positive,2.0
+G12,Equity and trust game,system_welfare,data_observability,0.9075,0.9075,positive,3.0
+G12,Equity and trust game,system_welfare,stakeholder_alignment,0.8687,0.8687,positive,4.0
+G12,Equity and trust game,system_welfare,copayment_protections,0.8578,0.8578,positive,5.0
+G12,Equity and trust game,system_welfare,telehealth_integration,0.8417,0.8417,positive,6.0
+G12,Equity and trust game,system_welfare,budget_tightness,-0.8074,0.8074,negative,7.0
+G12,Equity and trust game,system_welfare,copayment_level,-0.7636,0.7636,negative,8.0
+G13,Political economy game,system_welfare,stakeholder_alignment,0.9356,0.9356,positive,1.0
+G13,Political economy game,system_welfare,narrative_coherence,0.9354,0.9354,positive,2.0
+G13,Political economy game,system_welfare,local_inperson_loading,0.9212,0.9212,positive,3.0
+G13,Political economy game,system_welfare,copayment_protections,0.9047,0.9047,positive,4.0
+G13,Political economy game,system_welfare,telehealth_integration,0.892,0.892,positive,5.0
+G13,Political economy game,system_welfare,data_observability,0.8447,0.8447,positive,6.0
+G13,Political economy game,system_welfare,gaming_controls,0.8439,0.8439,positive,7.0
+G13,Political economy game,system_welfare,equity_program_strength,0.8304,0.8304,positive,8.0
+G14,Data observability game,system_welfare,data_observability,0.9564,0.9564,positive,1.0
+G14,Data observability game,system_welfare,narrative_coherence,0.8824,0.8824,positive,2.0
+G14,Data observability game,system_welfare,primary_kpi_salience,0.8671,0.8671,positive,3.0
+G14,Data observability game,system_welfare,ambulance_alternative_funding,0.8438,0.8438,positive,4.0
+G14,Data observability game,system_welfare,local_inperson_loading,0.8395,0.8395,positive,5.0
+G14,Data observability game,system_welfare,ambulance_kpi_salience,0.8084,0.8084,positive,6.0
+G14,Data observability game,system_welfare,telehealth_integration,0.7775,0.7775,positive,7.0
+G14,Data observability game,system_welfare,marginal_contact_benefit,0.7742,0.7742,positive,8.0
+G2,Health NZ internal allocation game,system_welfare,primary_kpi_salience,0.9263,0.9263,positive,1.0
+G2,Health NZ internal allocation game,system_welfare,ambulance_alternative_funding,0.8912,0.8912,positive,2.0
+G2,Health NZ internal allocation game,system_welfare,marginal_contact_benefit,0.8896,0.8896,positive,3.0
+G2,Health NZ internal allocation game,system_welfare,ambulance_kpi_salience,0.881,0.881,positive,4.0
+G2,Health NZ internal allocation game,system_welfare,direct_claiming,0.8806,0.8806,positive,5.0
+G2,Health NZ internal allocation game,system_welfare,data_observability,0.8781,0.8781,positive,6.0
+G2,Health NZ internal allocation game,system_welfare,scope_flexibility,0.8224,0.8224,positive,7.0
+G2,Health NZ internal allocation game,system_welfare,pho_transaction_cost,-0.8214,0.8214,negative,8.0
+G3,Capitation marginal-supply game,system_welfare,marginal_contact_benefit,0.9427,0.9427,positive,1.0
+G3,Capitation marginal-supply game,system_welfare,direct_claiming,0.94,0.94,positive,2.0
+G3,Capitation marginal-supply game,system_welfare,primary_kpi_salience,0.8895,0.8895,positive,3.0
+G3,Capitation marginal-supply game,system_welfare,pho_transaction_cost,-0.8844,0.8844,negative,4.0
+G3,Capitation marginal-supply game,system_welfare,ambulance_alternative_funding,0.8597,0.8597,positive,5.0
+G3,Capitation marginal-supply game,system_welfare,scope_flexibility,0.8518,0.8518,positive,6.0
+G3,Capitation marginal-supply game,system_welfare,ambulance_kpi_salience,0.8433,0.8433,positive,7.0
+G3,Capitation marginal-supply game,system_welfare,data_observability,0.7786,0.7786,positive,8.0
+G4,Consumer access pathway game,system_welfare,narrative_coherence,0.902,0.902,positive,1.0
+G4,Consumer access pathway game,system_welfare,data_observability,0.8903,0.8903,positive,2.0
+G4,Consumer access pathway game,system_welfare,local_inperson_loading,0.8812,0.8812,positive,3.0
+G4,Consumer access pathway game,system_welfare,copayment_protections,0.8286,0.8286,positive,4.0
+G4,Consumer access pathway game,system_welfare,telehealth_integration,0.8171,0.8171,positive,5.0
+G4,Consumer access pathway game,system_welfare,copayment_level,-0.8094,0.8094,negative,6.0
+G4,Consumer access pathway game,system_welfare,ambulance_alternative_funding,0.806,0.806,positive,7.0
+G4,Consumer access pathway game,system_welfare,primary_kpi_salience,0.8045,0.8045,positive,8.0
+G5,PHO intermediation game,system_welfare,direct_claiming,0.9616,0.9616,positive,1.0
+G5,PHO intermediation game,system_welfare,marginal_contact_benefit,0.946,0.946,positive,2.0
+G5,PHO intermediation game,system_welfare,pho_transaction_cost,-0.9078,0.9078,negative,3.0
+G5,PHO intermediation game,system_welfare,primary_kpi_salience,0.8958,0.8958,positive,4.0
+G5,PHO intermediation game,system_welfare,scope_flexibility,0.8707,0.8707,positive,5.0
+G5,PHO intermediation game,system_welfare,ambulance_alternative_funding,0.8682,0.8682,positive,6.0
+G5,PHO intermediation game,system_welfare,ambulance_kpi_salience,0.8621,0.8621,positive,7.0
+G5,PHO intermediation game,system_welfare,data_observability,0.7807,0.7807,positive,8.0
+G6,ACC/Health NZ cross-funder game,system_welfare,primary_kpi_salience,0.9011,0.9011,positive,1.0
+G6,ACC/Health NZ cross-funder game,system_welfare,data_observability,0.8808,0.8808,positive,2.0
+G6,ACC/Health NZ cross-funder game,system_welfare,marginal_contact_benefit,0.8791,0.8791,positive,3.0
+G6,ACC/Health NZ cross-funder game,system_welfare,ambulance_alternative_funding,0.8735,0.8735,positive,4.0
+G6,ACC/Health NZ cross-funder game,system_welfare,direct_claiming,0.8734,0.8734,positive,5.0
+G6,ACC/Health NZ cross-funder game,system_welfare,ambulance_kpi_salience,0.848,0.848,positive,6.0
+G6,ACC/Health NZ cross-funder game,system_welfare,pho_transaction_cost,-0.8123,0.8123,negative,7.0
+G6,ACC/Health NZ cross-funder game,system_welfare,narrative_coherence,0.81,0.81,positive,8.0
+G7,Ambulance conveyance game,system_welfare,data_observability,0.911,0.911,positive,1.0
+G7,Ambulance conveyance game,system_welfare,narrative_coherence,0.8861,0.8861,positive,2.0
+G7,Ambulance conveyance game,system_welfare,local_inperson_loading,0.8759,0.8759,positive,3.0
+G7,Ambulance conveyance game,system_welfare,ambulance_alternative_funding,0.8584,0.8584,positive,4.0
+G7,Ambulance conveyance game,system_welfare,telehealth_integration,0.8304,0.8304,positive,5.0
+G7,Ambulance conveyance game,system_welfare,stakeholder_alignment,0.8092,0.8092,positive,6.0
+G7,Ambulance conveyance game,system_welfare,primary_kpi_salience,0.8058,0.8058,positive,7.0
+G7,Ambulance conveyance game,system_welfare,copayment_protections,0.8023,0.8023,positive,8.0
+G8,Scope-of-practice supply game,system_welfare,narrative_coherence,0.8931,0.8931,positive,1.0
+G8,Scope-of-practice supply game,system_welfare,data_observability,0.8817,0.8817,positive,2.0
+G8,Scope-of-practice supply game,system_welfare,local_inperson_loading,0.8705,0.8705,positive,3.0
+G8,Scope-of-practice supply game,system_welfare,telehealth_integration,0.8079,0.8079,positive,4.0
+G8,Scope-of-practice supply game,system_welfare,ambulance_alternative_funding,0.7985,0.7985,positive,5.0
+G8,Scope-of-practice supply game,system_welfare,stakeholder_alignment,0.7979,0.7979,positive,6.0
+G8,Scope-of-practice supply game,system_welfare,primary_kpi_salience,0.7959,0.7959,positive,7.0
+G8,Scope-of-practice supply game,system_welfare,copayment_protections,0.7953,0.7953,positive,8.0
+G9,Telehealth/local-supply game,system_welfare,local_inperson_loading,0.9409,0.9409,positive,1.0
+G9,Telehealth/local-supply game,system_welfare,telehealth_integration,0.9238,0.9238,positive,2.0
+G9,Telehealth/local-supply game,system_welfare,narrative_coherence,0.9226,0.9226,positive,3.0
+G9,Telehealth/local-supply game,system_welfare,data_observability,0.9059,0.9059,positive,4.0
+G9,Telehealth/local-supply game,system_welfare,stakeholder_alignment,0.8543,0.8543,positive,5.0
+G9,Telehealth/local-supply game,system_welfare,copayment_protections,0.8498,0.8498,positive,6.0
+G9,Telehealth/local-supply game,system_welfare,budget_tightness,-0.7999,0.7999,negative,7.0
+G9,Telehealth/local-supply game,system_welfare,copayment_level,-0.7672,0.7672,negative,8.0

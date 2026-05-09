@@ -1,0 +1,15 @@
+game_id,game_name,current_equilibrium,better_equilibrium,harm_if_unresolved,hospital_growth_driver,equity_relevance,reform_tractability,reform_risk,confidence,rationale,priority_score_0_to_100
+G1,Hospital-salience budget game,hospital-rescue equilibrium,upstream-salience equilibrium,5,5,4,3,3,4.0,"Hospital pressure is visible, urgent and fundable; upstream failure is dispersed.",80.2
+G2,Health NZ internal allocation game,hospital-operations dominance,balanced internal accountability,4,5,3,3,3,3.0,Hospital operational risk may dominate internal allocation attention.,68.0
+G3,Capitation marginal-supply game,marginal-rationing equilibrium,marginal-expansion equilibrium,5,4,4,4,3,4.0,Weak marginal contact payment can constrain additional clinically necessary work.,78.4
+G4,Consumer access pathway game,delay/pay/ED substitution,early-access equilibrium,4,4,5,3,3,3.0,"Consumers route around delays via co-payment, telehealth, ambulance or ED.",71.2
+G5,PHO intermediation game,intermediated-gatekeeping equilibrium,optional value-adding support,4,3,3,3,4,2.5,"PHO functions may add value, but payment intermediation may add friction.",54.7
+G6,ACC/Health NZ cross-funder game,cross-subsidy opacity,whole-system funding visibility,4,4,3,3,3,2.5,ACC activity funding may stabilise supply; isolating it may shift pressure elsewhere.,61.9
+G7,Ambulance conveyance game,ED-conveyance default,safe alternative-disposition equilibrium,4,5,4,4,3,3.5,"Ambulance alternatives need funding, governance and follow-up.",76.3
+G8,Scope-of-practice supply game,professional-bottleneck equilibrium,scope-enabled supply equilibrium,5,4,4,4,4,3.0,Funding eligibility may be narrower than safe clinical scope.,73.4
+G9,Telehealth/local-supply game,telehealth-substitution/fragmentation,integrated hybrid-access equilibrium,3,3,4,3,3,3.0,Telehealth extends access but may erode local supply if poorly integrated.,56.8
+G10,Co-payment calibration game,price-rationing equity failure,calibrated co-payment equilibrium,4,4,5,3,4,3.0,Co-payment can signal demand or deter necessary care.,68.8
+G11,KPI salience game,hospital-target dominance,upstream target salience,5,5,4,4,2,4.0,Top-tier KPIs determine what becomes managed.,85.6
+G12,Equity and trust game,transactional-access without trust,benefits plus equity-function equilibrium,5,3,5,3,4,3.0,Access benefits do not replace relational and kaupapa Maori/Pacific/locality functions.,69.6
+G13,Political economy game,institutional-defence equilibrium,access-architecture coalition,3,3,3,2,5,3.0,Reform framing determines coalition formation and resistance.,45.0
+G14,Data observability game,hidden-unmet-need equilibrium,observable upstream-flow equilibrium,5,5,4,4,2,4.0,Unobserved upstream need remains less fundable than visible hospital pressure.,85.6

@@ -1,0 +1,21 @@
+digraph G {
+  graph [rankdir=TB, fontsize=12, fontname="Arial", labelloc="t", label="Repeated hospital-rescue equilibrium"];
+  node [shape=box, style="rounded,filled", fillcolor="#f7f8fa", color="#374151", fontname="Arial", fontsize=10];
+  edge [color="#374151", arrowsize=0.8, fontname="Arial", fontsize=9];
+
+  Tight [label="Tight management of primary care / ambulance activity\nfixed budgets, capitation, contracts, limited marginal benefit"];
+  Constraint [label="Lower-cost access constrained\nclosed books, waits, co-pay pressure, limited local supply"];
+  Unmet [label="Unmet or delayed need"];
+  ED [label="ED, acute admissions, ambulance conveyance and delayed discharge pressure"];
+  Salience [label="Visible hospital crisis\npolitical and operational salience"];
+  HospitalFunding [label="Hospital rescue funding / management focus"];
+  Residual [label="Upstream reform remains residual or tightly controlled"];
+
+  Tight -> Constraint;
+  Constraint -> Unmet;
+  Unmet -> ED;
+  ED -> Salience;
+  Salience -> HospitalFunding;
+  HospitalFunding -> Residual;
+  Residual -> Tight [label="repeated game"];
+}

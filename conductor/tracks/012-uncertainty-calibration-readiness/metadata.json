@@ -1,0 +1,9 @@
+{
+  "id": "012-uncertainty-calibration-readiness",
+  "version": "0.7.0",
+  "status": "implemented",
+  "title": "Uncertainty analysis and calibration readiness",
+  "created": "2026-05-07",
+  "owner": "Dylan A Mordaunt",
+  "purpose": "Stress-test demonstrative NZ game models, identify key sensitivity drivers, and define the empirical calibration pathway."
+}

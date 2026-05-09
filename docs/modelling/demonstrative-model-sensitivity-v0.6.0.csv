@@ -1,0 +1,29 @@
+game_id,game_name,lever,direction,base_value,new_value,base_welfare,new_welfare,delta_welfare,base_hospital_pressure,new_hospital_pressure,delta_hospital_pressure,interpretation
+G1,Hospital-salience budget game,primary_kpi_salience,low,0.55,0.35,56.31,54.48,-1.83,46.3,49.63,3.32,Low lever setting tests fragility of the mechanism.
+G1,Hospital-salience budget game,primary_kpi_salience,high,0.55,0.75,56.31,58.14,1.83,46.3,42.98,-3.32,Positive welfare delta and negative pressure delta support the proposed lever direction.
+G2,Health NZ internal allocation game,primary_kpi_salience,low,0.55,0.35,54.2,53.09,-1.11,46.4,48.53,2.13,Low lever setting tests fragility of the mechanism.
+G2,Health NZ internal allocation game,primary_kpi_salience,high,0.55,0.75,54.2,55.31,1.11,46.4,44.27,-2.13,Positive welfare delta and negative pressure delta support the proposed lever direction.
+G3,Capitation marginal-supply game,marginal_contact_benefit,low,0.7,0.5,71.08,63.29,-7.78,35.86,48.41,12.55,Low lever setting tests fragility of the mechanism.
+G3,Capitation marginal-supply game,marginal_contact_benefit,high,0.7,0.9,71.08,74.08,3.0,35.86,30.01,-5.85,Positive welfare delta and negative pressure delta support the proposed lever direction.
+G4,Consumer access pathway game,copayment_protections,low,0.6,0.4,60.61,58.75,-1.85,56.31,59.2,2.89,Low lever setting tests fragility of the mechanism.
+G4,Consumer access pathway game,copayment_protections,high,0.6,0.8,60.61,62.39,1.79,56.31,53.53,-2.78,Positive welfare delta and negative pressure delta support the proposed lever direction.
+G5,PHO intermediation game,direct_claiming,low,0.8,0.6,60.71,56.73,-3.98,41.29,48.83,7.54,Low lever setting tests fragility of the mechanism.
+G5,PHO intermediation game,direct_claiming,high,0.8,1.0,60.71,64.7,3.98,41.29,33.75,-7.54,Positive welfare delta and negative pressure delta support the proposed lever direction.
+G6,ACC/Health NZ cross-funder game,acc_constraint,low,0.1,0.0,55.7,57.23,1.53,56.26,53.5,-2.77,Low lever setting tests fragility of the mechanism.
+G6,ACC/Health NZ cross-funder game,acc_constraint,high,0.1,0.3,55.7,52.64,-3.06,56.26,61.79,5.53,Positive welfare delta and negative pressure delta support the proposed lever direction.
+G7,Ambulance conveyance game,ambulance_alternative_funding,low,0.5,0.3,52.14,48.38,-3.76,74.77,82.86,8.09,Low lever setting tests fragility of the mechanism.
+G7,Ambulance conveyance game,ambulance_alternative_funding,high,0.5,0.7,52.14,55.9,3.76,74.77,66.68,-8.09,Positive welfare delta and negative pressure delta support the proposed lever direction.
+G8,Scope-of-practice supply game,scope_flexibility,low,0.6,0.4,61.34,56.64,-4.7,58.75,67.3,8.55,Low lever setting tests fragility of the mechanism.
+G8,Scope-of-practice supply game,scope_flexibility,high,0.6,0.8,61.34,65.59,4.25,58.75,50.2,-8.55,Positive welfare delta and negative pressure delta support the proposed lever direction.
+G9,Telehealth/local-supply game,telehealth_integration,low,0.55,0.35,59.35,55.43,-3.92,56.31,60.62,4.31,Low lever setting tests fragility of the mechanism.
+G9,Telehealth/local-supply game,telehealth_integration,high,0.55,0.75,59.35,63.27,3.92,56.31,52.0,-4.31,Positive welfare delta and negative pressure delta support the proposed lever direction.
+G10,Co-payment calibration game,copayment_protections,low,0.6,0.4,65.43,62.79,-2.64,43.63,47.09,3.46,Low lever setting tests fragility of the mechanism.
+G10,Co-payment calibration game,copayment_protections,high,0.6,0.8,65.43,68.07,2.64,43.63,40.18,-3.46,Positive welfare delta and negative pressure delta support the proposed lever direction.
+G11,KPI salience game,gaming_controls,low,0.7,0.5,62.83,61.31,-1.52,51.34,52.52,1.19,Low lever setting tests fragility of the mechanism.
+G11,KPI salience game,gaming_controls,high,0.7,0.9,62.83,64.35,1.52,51.34,50.15,-1.19,Positive welfare delta and negative pressure delta support the proposed lever direction.
+G12,Equity and trust game,equity_program_strength,low,0.7,0.5,64.7,60.77,-3.94,43.95,47.77,3.82,Low lever setting tests fragility of the mechanism.
+G12,Equity and trust game,equity_program_strength,high,0.7,0.9,64.7,67.7,3.0,43.95,41.11,-2.84,Positive welfare delta and negative pressure delta support the proposed lever direction.
+G13,Political economy game,narrative_coherence,low,0.6,0.4,60.78,57.91,-2.86,60.32,65.24,4.92,Low lever setting tests fragility of the mechanism.
+G13,Political economy game,narrative_coherence,high,0.6,0.8,60.78,63.65,2.87,60.32,55.4,-4.92,Positive welfare delta and negative pressure delta support the proposed lever direction.
+G14,Data observability game,data_observability,low,0.6,0.4,58.53,52.17,-6.36,57.94,69.16,11.22,Low lever setting tests fragility of the mechanism.
+G14,Data observability game,data_observability,high,0.6,0.8,58.53,64.9,6.36,57.94,46.72,-11.22,Positive welfare delta and negative pressure delta support the proposed lever direction.
