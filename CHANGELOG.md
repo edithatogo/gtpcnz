@@ -1,3 +1,19 @@
+# v1.6.0 — Publication control and risk management
+
+- Added landing/index post explaining what the series is and is not.
+- Added common objections and response brief.
+- Added Māori/Pacific/equity review brief.
+- Added phrase guide and avoid-list.
+- Added stakeholder email template.
+- Added OIA launch pack.
+- Added one-page visual summary with Mermaid architecture diagram.
+- Added twice-weekly publication calendar with pause after first six posts.
+- Added first-six-posts reassessment checklist.
+- Added author final-pass checklist.
+- Added “What would change my mind?” sections to all public posts.
+- Generated v1.6.0 complete series, appendix compendium, QA checklist and local link audit.
+
+
 # Changelog
 
 ## v1.2.1

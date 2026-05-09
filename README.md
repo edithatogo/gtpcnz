@@ -1,3 +1,22 @@
+# Primary care funding architecture project
+
+**Current release: v1.6.0 — publication control and risk management.**
+
+This repository contains a policy-research package on New Zealand and Australia primary care funding architecture. The current release focuses on controlled Substack publication, objection handling, equity review, stakeholder engagement, OIA launch planning and a pause/reassessment workflow. The modelling remains demonstrative/source-informed rather than fully empirically calibrated.
+
+## Current front-door files
+
+- `docs/substack-ready/post-00-series-landing-page-v1.6.0.md`
+- `docs/substack-ready/complete-substack-series-v1.6.0.md`
+- `docs/substack-ready/common-objections-and-responses-v1.6.0.md`
+- `docs/substack-ready/equity-review-brief-v1.6.0.md`
+- `docs/substack-ready/publication-calendar-twice-weekly-with-pause-v1.6.0.md`
+- `docs/substack-ready/one-page-visual-summary-v1.6.0.md`
+- `docs/substack-ready/oia-launch-pack-v1.6.0.md`
+
+
+---
+
 # Primary Care Funding Architecture: Australia and Aotearoa New Zealand
 
 Version: **v1.5.0**
