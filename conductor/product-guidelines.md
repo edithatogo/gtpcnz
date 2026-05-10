@@ -2,9 +2,9 @@
 
 ---
 title: "Writing and Policy Guidelines"
-version: "0.1.0"
+version: "1.7.1"
 status: "draft"
-last_updated: "2026-05-07"
+last_updated: "2026-05-10"
 owner: "Dylan A Mordaunt"
 ---
 
@@ -51,8 +51,24 @@ Every policy proposal must explicitly address:
 
 ## Publication sequence
 
-1. Public-education Substack posts.
-2. Internal RACMA scope discussion.
-3. Policy briefs for targeted stakeholders.
-4. NZMJ Viewpoint or Article.
-5. Full modelling paper once simulations mature.
+1. Landing/index post.
+2. Public-education Substack posts 1–6.
+3. Pause and reassess reactions, misunderstandings and equity risks.
+4. Submit OIA/data requests and run stakeholder validation.
+5. Finalise remaining posts only after the first-six-post gate.
+6. Policy briefs and NZMJ Viewpoint/protocol material as follow-on outputs.
+
+## RACMA handling
+
+Do not proactively seek RACMA sponsorship or endorsement. Keep RACMA as a passive pathway only: if they come back interested, provide the decision-maker summary and model card.
+
+## Model communication
+
+Always distinguish:
+
+- conceptual diagrams;
+- source-informed model-generated indices;
+- synthetic calibration outputs;
+- future real-data calibrated predictions.
+
+Never present scaffold results as observed New Zealand outcomes.

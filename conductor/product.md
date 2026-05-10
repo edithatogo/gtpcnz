@@ -2,9 +2,9 @@
 
 ---
 title: "Primary Care Funding Architecture Programme"
-version: "0.1.0"
+version: "1.7.1"
 status: "draft"
-last_updated: "2026-05-07"
+last_updated: "2026-05-10"
 owner: "Dylan A Mordaunt"
 ---
 
@@ -27,12 +27,14 @@ The work will combine:
 
 ## Core users
 
-1. RACMA policy colleagues and possible RACMA policy committee readers.
-2. NZ and Australian primary care organisations.
+1. Public Substack readers seeking a plain-English explanation of the funding architecture problem.
+2. NZ and Australian primary care, urgent care, ambulance, rural and equity stakeholders.
 3. Treasury, Ministry of Health, Health NZ, ACC and Australian Commonwealth/state health policy officials.
 4. General practice, rural health, ambulance and community-health leaders.
-5. Public readers of Substack who need a plain-English explanation of the funding game.
+5. Māori, Pacific, rural, disability and consumer reviewers.
 6. NZMJ readers: clinicians, health service managers, policymakers and researchers.
+
+**RACMA status:** RACMA is not an active engagement pathway in v1.7.1. If RACMA comes back interested, provide a short decision-maker summary and model card rather than asking RACMA to sponsor the work.
 
 ## Primary problem
 

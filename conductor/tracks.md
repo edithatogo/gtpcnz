@@ -23,12 +23,12 @@
 
 ## Current priority
 
-1. Dylan final voice/risk edit of the 12 Substack-ready posts.
-2. Submit or adapt the OIA/data requests.
-3. Run stakeholder validation using the MCDA workshop pack.
-4. Start the rapid scoping review using the protocol and screening templates.
-5. Decide whether the first academic output is a New Zealand Medical Journal Viewpoint or a methods/protocol article.
-6. Defer fully calibrated predictive modelling until data access and stakeholder validation justify it.
+1. Publish the landing page and first six short-form Substack posts only.
+2. Submit OIA/data requests and start stakeholder validation.
+3. Complete Māori/Pacific/equity review before the recommendation-heavy posts.
+4. Use the model card, parameter tiering and identifiability map when explaining the model.
+5. Keep RACMA out of active outreach unless they come back interested.
+6. Freeze model expansion until feedback, OIA responses or data access change the evidence base.
 
 
 ## 020-substack-hyperlink-cadence-v1.5.0
@@ -42,3 +42,8 @@ Purpose: Begin the fully calibrated model pathway with a runnable synthetic-data
 ## 022-full-parameterised-model-v1.7.0
 
 Purpose: Continue the fully parameterised model build with an expanded parameter register, data-input contract, scenario matrix, dynamic monthly simulation, sensitivity analysis and plots. This is a full parameterisation scaffold, not a real-data calibrated predictive model.
+
+
+## 023-model-hardening-launch-simplification
+
+Purpose: Harden the full parameterised scaffold, simplify launch, add red-team/devil's advocate reviews, exclude RACMA from active outreach, and create first-six-post publication-ready artefacts.

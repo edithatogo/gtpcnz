@@ -1,0 +1,10 @@
+figure,short_caption,required_caution
+outputs/full-parameterised-scenario-viability-pressure-v1.7.0.png,Scenario viability and hospital pressure,Model-generated indices from the source-informed scaffold; not observed NZ outcomes.
+outputs/full-parameterised-hospital-pressure-trajectories-v1.7.0.png,Hospital pressure trajectories,Dynamic scaffold outputs over 60 months; interpret as relative scenario logic only.
+outputs/full-parameterised-access-vs-fiscal-risk-v1.7.0.png,Access versus fiscal risk,Compares modelled trade-offs; does not estimate real budget impact.
+outputs/full-parameterised-top-sensitivity-drivers-v1.7.0.png,Top sensitivity drivers,Ranks scaffold sensitivity drivers; prioritises validation but does not prove causation.
+outputs/full-parameterised-parameter-domain-coverage-v1.7.0.png,Parameter domain coverage,"Describes model structure, not evidence strength."
+outputs/fig-15-marginal-revenue-cost-v1.5.0.png,Marginal revenue versus marginal cost,Microeconomic explainer; not empirical NZ data.
+outputs/fig-16-uncapped-scheduled-benefit-supply-v1.5.0.png,Uncapped scheduled benefit and supply response,Conceptual diagram; assumes rules-based scheduled benefits.
+outputs/fig-21-nineteen-game-map-v1.5.0.png,Nineteen-game map,Conceptual map of hypothesised policy games.
+outputs/fig-22-composite-model-stack-v1.5.0.png,Composite model stack,Workflow diagram showing how the pieces fit together.
