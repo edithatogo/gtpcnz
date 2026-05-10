@@ -72,6 +72,8 @@ And transparent data so we can see whether the system is actually improving acce
 
 ![fig-02-funding-models-101-v1.2.0](../figures/fig-02-funding-models-101-v1.2.0.png)
 
+*Figure: conceptual explainer for this post. It is not an observed outcome chart or calibrated prediction.*
+
 
 ### The useful way to think about all three
 

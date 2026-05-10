@@ -150,6 +150,8 @@ And transparent data so we can see whether the system is actually improving acce
 
 ![fig-02-funding-models-101-v1.2.0](../figures/fig-02-funding-models-101-v1.2.0.png)
 
+*Figure: conceptual explainer for this post. It is not an observed outcome chart or calibrated prediction.*
+
 
 ### The useful way to think about all three
 
@@ -501,6 +503,8 @@ In other words, the current reform pathway may be the foundation. The hybrid mod
 The diagram below compares the current reform pathway with the hybrid architecture I am suggesting. It is not a statistical forecast. It is a structured way of thinking about where each architecture is strong and weak.
 
 ![fig-14-current-reform-vs-uncapped-hybrid-v1.4.0](../figures/fig-14-current-reform-vs-uncapped-hybrid-v1.4.0.png)
+
+*Figure: conceptual explainer for this post. It is not an observed outcome chart or calibrated prediction.*
 
 The current reform is strongest on allocation fairness, data, targets and some urgent-care access. The hybrid model is stronger where the current pathway may remain weaker: marginal supply, provider-scope flexibility, whole-population accountability and uncapped eligible activity.
 

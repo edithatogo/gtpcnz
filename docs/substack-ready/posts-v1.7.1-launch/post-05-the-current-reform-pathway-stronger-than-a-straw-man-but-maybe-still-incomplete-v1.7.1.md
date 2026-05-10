@@ -90,6 +90,8 @@ The diagram below compares the current reform pathway with the hybrid architectu
 
 ![fig-14-current-reform-vs-uncapped-hybrid-v1.4.0](../figures/fig-14-current-reform-vs-uncapped-hybrid-v1.4.0.png)
 
+*Figure: conceptual explainer for this post. It is not an observed outcome chart or calibrated prediction.*
+
 The current reform is strongest on allocation fairness, data, targets and some urgent-care access. The hybrid model is stronger where the current pathway may remain weaker: marginal supply, provider-scope flexibility, whole-population accountability and uncapped eligible activity.
 
 So the critique is not “the Government has done nothing”.
