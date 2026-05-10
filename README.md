@@ -1,8 +1,19 @@
 # Primary care funding architecture project
 
-**Current release: v1.6.0 — publication control and risk management.**
+**Current release: v1.7.0 — full parameterised model scaffold.**
 
-This repository contains a policy-research package on New Zealand and Australia primary care funding architecture. The current release focuses on controlled Substack publication, objection handling, equity review, stakeholder engagement, OIA launch planning and a pause/reassessment workflow. The modelling remains demonstrative/source-informed rather than fully empirically calibrated.
+This repository contains a policy-research package on New Zealand and Australia primary care funding architecture. The current release continues the calibrated-model pathway. It adds a full parameterisation scaffold with explicit parameters, bounds, scenario values, data-input contracts, monthly dynamics, sensitivity analysis and plots. The model is still not empirically calibrated or predictive until real data replace the priors and validation is completed.
+
+
+## v1.7.0 modelling front-door files
+
+- `docs/calibration/full-parameterised-model-build-report-v1.7.0.md`
+- `docs/calibration/parameterisation-data-contract-v1.7.0.md`
+- `docs/calibration/real-data-update-pathway-v1.7.0.md`
+- `outputs/full-parameterised-dashboard-table-v1.7.0.csv`
+- `outputs/full-parameter-register-v1.7.0.csv`
+- `outputs/full-parameterised-summary-results-v1.7.0.csv`
+- `outputs/figures/full-parameterised-scenario-viability-pressure-v1.7.0.png`
 
 ## Current front-door files
 

@@ -1,0 +1,11 @@
+rank_by_hybrid_viability,scenario_id,scenario_name,hybrid_viability_score,access_score,supply_generation_score,hospital_pressure_score,fiscal_risk_score,gaming_risk_score,mean_last12_primary_contacts_per_1000,mean_last12_ed_events_per_100k,mean_last12_public_cost_index
+1,F4,Full hybrid upstream architecture,77.26,52.75,55.66,61.61,37.94,27.3,42.7,58.0,2.46
+2,F3,Uncapped medical FFS + place accountability,62.51,38.62,40.1,74.36,44.45,30.76,29.03,66.07,2.72
+3,F2,Uncapped scheduled medical FFS,56.4,36.44,40.38,75.86,49.23,39.1,27.08,71.9,2.91
+4,F9,Place-based commissioning only,54.26,22.11,14.33,79.07,27.09,30.35,11.89,77.9,3.09
+5,F8,Scope-enabled supply only,52.96,25.94,21.29,78.25,30.18,36.22,15.82,79.53,3.14
+6,F7,Ambulance and urgent alternatives only,52.74,26.87,14.33,72.31,26.57,35.75,14.92,74.96,2.95
+7,F0,Current reform pathway,52.24,23.56,15.43,78.07,27.85,34.04,13.04,79.71,3.15
+8,F1,Capitation reweighting only,50.37,22.0,14.11,79.91,27.47,35.45,11.77,81.77,3.22
+9,F6,ACC activity constraint shock,50.11,21.86,13.87,80.21,26.67,35.35,11.23,82.26,3.23
+10,F5,Uncapped weak-control model,46.11,33.47,37.25,77.18,65.29,70.64,24.06,75.19,3.03

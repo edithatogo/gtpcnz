@@ -1,0 +1,16 @@
+{
+  "track_id": "022",
+  "title": "Full parameterised model v1.7.0",
+  "status": "complete_for_scaffold_phase",
+  "version": "1.7.0",
+  "calibration_status": "not_empirically_calibrated",
+  "outputs": [
+    "models/primarycare_model/full_parameterised_model_v170.py",
+    "docs/calibration/full-parameterised-model-build-report-v1.7.0.md",
+    "outputs/full-parameter-register-v1.7.0.csv",
+    "outputs/data-input-contract-v1.7.0.csv",
+    "outputs/full-parameterised-summary-results-v1.7.0.csv",
+    "outputs/full-parameterised-monthly-results-v1.7.0.csv",
+    "outputs/full-parameterised-sensitivity-v1.7.0.csv"
+  ]
+}

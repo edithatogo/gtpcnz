@@ -38,3 +38,7 @@ Purpose: Expand the Substack series, increase hyperlink density, add explanatory
 ## 021-calibrated-model-starter-v1.5.0
 
 Purpose: Begin the fully calibrated model pathway with a runnable synthetic-data calibration pipeline, data schema, target estimands, plots and validation caveats.
+
+## 022-full-parameterised-model-v1.7.0
+
+Purpose: Continue the fully parameterised model build with an expanded parameter register, data-input contract, scenario matrix, dynamic monthly simulation, sensitivity analysis and plots. This is a full parameterisation scaffold, not a real-data calibrated predictive model.
