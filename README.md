@@ -1,6 +1,6 @@
 # Primary care funding architecture project
 
-**Current release: v1.7.2 — model hardening and launch simplification.**
+**Current release: v1.7.2 — red-team incorporation and launch hardening.**
 
 This repository contains a policy-research and public-translation package on primary care funding architecture in Aotearoa New Zealand and Australia.
 
@@ -23,7 +23,7 @@ Use only the front-door materials first:
 1. `docs/substack-ready/post-00-series-landing-page-v1.6.0.md`
 2. `docs/substack-ready/posts-v1.7.2-launch/`
 3. `docs/launch/decision-maker-summary-v1.7.2.md`
-4. `docs/substack-ready/common-objections-and-responses-v1.6.0.md`
+4. `docs/substack-ready/common-objections-and-responses-v1.7.2.md`
 5. `docs/calibration/model-card-v1.7.2.md`
 
 The first six posts are the only public posts prepared for immediate launch-level review. The back half of the series should be revised after feedback.
@@ -56,5 +56,3 @@ pytest -q
 This is a structured, source-informed, falsifiable policy hypothesis and launch package. It is not an endorsed policy position and not a real-data calibrated forecasting model.
 
 
-## Red-team incorporation release — v1.7.2
-This release incorporates the v1.7.1 red-team and devil's advocate reviews into the actual launch artefacts: the risk-controlled thesis, model card, decision-maker summary, first-six Substack posts, launch gates and action register. RACMA remains excluded from active outreach.
