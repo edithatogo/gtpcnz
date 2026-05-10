@@ -1,0 +1,16 @@
+id,risk_or_counterargument,v1_7_2_response,status
+RT01,Overclaiming predictive effect,"Every launch-facing model mention now states that outputs are scaffold/model-generated indices, not observed outcomes or calibrated predictions.",Embedded in v1.7.2
+RT02,Uncapped misread as uncontrolled,"Every launch-facing statement of uncapping is paired with scheduled prices, item rules, scope, audit, clinical governance, co-payment protections and place accountability.",Embedded in v1.7.2
+RT03,Equity critique,Equity protections and a Māori/Pacific/equity review gate are treated as preconditions before recommendation-heavy posts.,Gate retained: review still required before recommendation-heavy posts
+RT04,RACMA distraction,"RACMA remains excluded from active outreach; the pathway is public Substack, stakeholder validation, OIA/data requests and optional later engagement if RACMA approaches.",Embedded in v1.7.2
+RT05,Too many assumptions,"The 70 parameters are framed as a tiered scaffold with a small core load-bearing set, not 70 equally important claims.",Embedded in v1.7.2
+RT06,PHO critique too broad,"PHO critique is narrowed to function versus intermediation, pass-through opacity, non-capitated funding and entry/transaction cost.",Embedded in v1.7.2
+RT07,Current reform straw man,"Current reform is now the explicit comparator; the claim is “necessary but possibly insufficient,” not “nothing is happening.”",Embedded in v1.7.2
+RT08,Unverified email intelligence,Email-trail material is labelled as stakeholder intelligence or OIA target unless independently sourced.,Embedded: unverified items remain OIA/stakeholder targets
+DA01,Capitation reweighting plus targets may be enough,"Posts and summaries now define what evidence would change the argument, including a successful current reform pathway.",Embedded in v1.7.2
+DA02,Place-based commissioning may be more important than benefits,"The proposed architecture now treats place-based accountability as core, not optional.",Embedded in v1.7.2
+DA03,Rural access may require public/salaried/infrastructure levers,"Decision-maker materials now state that scheduled FFS is not a full rural workforce policy and may need infrastructure, capital, housing and salaried models.",Embedded in v1.7.2
+DA04,Co-payments can worsen equity,"Co-payment protections are a gating requirement and a core parameter, not a downstream add-on.",Embedded in v1.7.2
+DA05,Scope expansion may fragment care,"Scope-enabled supply is conditioned on shared records, clinical governance, accountability and continuity.",Embedded in v1.7.2
+DA06,Hospital growth has multiple causes,"The thesis is framed as upstream access being one plausible driver, not the sole cause of hospital growth.",Embedded in v1.7.2
+DA07,ACC transferability is limited,"ACC is framed only as a rules-based treatment-payment analogy, not a model to copy wholesale.",Embedded in v1.7.2

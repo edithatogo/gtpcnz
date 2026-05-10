@@ -2,7 +2,7 @@
 
 ---
 title: "Writing and Policy Guidelines"
-version: "1.7.1"
+version: "1.7.2"
 status: "draft"
 last_updated: "2026-05-10"
 owner: "Dylan A Mordaunt"
@@ -72,3 +72,16 @@ Always distinguish:
 - future real-data calibrated predictions.
 
 Never present scaffold results as observed New Zealand outcomes.
+
+## v1.7.2 wording gates
+Avoid using 'uncapped funding' without immediate qualifiers. Avoid implying RACMA sponsorship. Avoid treating current reforms as a straw man. Keep PHO critique to function versus intermediation/pass-through/transparency.
+
+
+## Red-team incorporation rules v1.7.2
+
+- Treat current reforms as the comparator, not a straw man.
+- State the strongest counter-hypothesis before making strong recommendations.
+- Never use “uncapped” without controls: scheduled, rules-based, audited, clinically governed and place-accountable.
+- Say Accident Compensation Corporation is an analogy for rules-based treatment payment, not a model to copy wholesale.
+- State that hospital growth has multiple causes; upstream access is one plausible mechanism.
+- Do not let the model carry claims that belong in stakeholder validation, OIA responses or real-data calibration.

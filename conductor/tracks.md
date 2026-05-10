@@ -26,7 +26,7 @@
 1. Publish the landing page and first six short-form Substack posts only.
 2. Submit OIA/data requests and start stakeholder validation.
 3. Complete Māori/Pacific/equity review before the recommendation-heavy posts.
-4. Use the model card, parameter tiering and identifiability map when explaining the model.
+4. Use the v1.7.2 model card, claim-boundary note, parameter tiering and identifiability map when explaining the model.
 5. Keep RACMA out of active outreach unless they come back interested.
 6. Freeze model expansion until feedback, OIA responses or data access change the evidence base.
 
@@ -47,3 +47,5 @@ Purpose: Continue the fully parameterised model build with an expanded parameter
 ## 023-model-hardening-launch-simplification
 
 Purpose: Harden the full parameterised scaffold, simplify launch, add red-team/devil's advocate reviews, exclude RACMA from active outreach, and create first-six-post publication-ready artefacts.
+
+- `024-red-team-incorporation-v1.7.2/` — closes the loop from red-team/devil's advocate review to updated thesis, launch posts, model card and risk register.
