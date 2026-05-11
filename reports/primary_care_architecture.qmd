@@ -1,5 +1,5 @@
 ---
-title: "Primary Care Pulse: The Funding Architecture Report"
+title: "GTPCNZ: The Funding Architecture Report"
 subtitle: "Understanding how we pay for doctors and why it matters for everyone"
 author: "Dylan A Mordaunt"
 date: "2026-05-11"

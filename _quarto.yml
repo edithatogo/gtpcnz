@@ -8,8 +8,8 @@ project:
     - README.md
 
 website:
-  title: "Primary Care Pulse"
-  site-url: "https://edithatogo.github.io/primary-care-pulse/"
+  title: "GTPCNZ"
+  site-url: "https://edithatogo.github.io/gtpcnz/"
   navbar:
     left:
       - text: "Home"
@@ -21,7 +21,7 @@ website:
       - text: "Repository Guide"
         href: README.md
   page-footer:
-    left: "Primary Care Pulse"
+    left: "GTPCNZ"
     right: "Generated with Quarto"
 
 format:

@@ -1,8 +1,8 @@
-# Primary care funding architecture project
+# GTPCNZ
 
 **Current release: v1.7.2 — red-team incorporation and launch hardening.**
 
-This repository contains a policy-research and public-translation package on primary care funding architecture in Aotearoa New Zealand and Australia.
+GTPCNZ contains a policy-research and public-translation package on primary care funding architecture in Aotearoa New Zealand and Australia.
 
 The current release incorporates the red-team and devil's advocate critiques into the live launch materials. It updates the public thesis, model card, decision-maker summary, first-six Substack posts, claim-boundary rules, common objections, Conductor guidance and action register.
 
@@ -48,9 +48,19 @@ RACMA is excluded from proactive outreach in this release. If RACMA comes back i
 ## Interactive Tools (v1.7.2+)
 
 - **Quarto Report:** `reports/primary_care_architecture.qmd` — SOTA reproducible policy report.
-- **Streamlit App:** `models/primarycare_model/app.py` — "Primary Care Pulse" interactive dashboard.
+- **Streamlit App:** `models/primarycare_model/app.py` — "GTPCNZ" interactive dashboard.
 
 See `docs/REPORTS-AND-DASHBOARD.md` for instructions on how to run these tools.
+
+## Website
+
+This repository is configured as a Quarto website for GitHub Pages.
+
+```bash
+quarto render --to html
+```
+
+The GitHub Pages workflow publishes the generated `_site` artifact from GitHub Actions.
 
 ## Testing
 
@@ -61,5 +71,4 @@ pytest -q
 ## Caveat
 
 This is a structured, source-informed, falsifiable policy hypothesis and launch package. It is not an endorsed policy position and not a real-data calibrated forecasting model.
-
 

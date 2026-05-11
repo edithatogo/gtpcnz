@@ -1,4 +1,4 @@
-# Interactive Reporting & Visualization Suite
+# GTPCNZ Interactive Reporting & Visualization Suite
 
 This project includes a state-of-the-art (SOTA) reporting layer and an interactive dashboard to make the primary care funding model accessible to both policy experts and citizens (calibrated for a 14-year-old audience).
 
@@ -19,7 +19,7 @@ quarto render reports/primary_care_architecture.qmd
 
 ## 2. Streamlit Dashboard: `models/primarycare_model/app.py`
 
-**"Primary Care Pulse"** is an interactive tool allowing users to simulate the impact of different funding rules.
+**"GTPCNZ"** is an interactive tool allowing users to simulate the impact of different funding rules.
 
 ### How to Run
 Ensure you have the dependencies installed:

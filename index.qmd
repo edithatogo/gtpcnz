@@ -1,9 +1,9 @@
 ---
-title: "Primary Care Pulse"
+title: "GTPCNZ"
 subtitle: "Interactive reporting for the primary care funding architecture model"
 ---
 
-Primary Care Pulse is a public-facing reporting layer for the primary care funding architecture model. It translates the model scaffold into a readable website, reproducible Quarto report, and local Streamlit dashboard.
+GTPCNZ is a public-facing reporting layer for the primary care funding architecture model. It translates the model scaffold into a readable website, reproducible Quarto report, and local Streamlit dashboard.
 
 ## Start Here
 

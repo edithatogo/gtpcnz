@@ -6,13 +6,13 @@ import os
 
 # Set page config
 st.set_page_config(
-    page_title="Primary Care Pulse",
+    page_title="GTPCNZ",
     page_icon="🩺",
     layout="wide"
 )
 
 # Title and Introduction
-st.title("🩺 Primary Care Pulse: The Funding Dashboard")
+st.title("🩺 GTPCNZ: The Funding Dashboard")
 st.markdown("""
 ### How should we pay our neighborhood doctors?
 Welcome to the interactive funding simulator! This dashboard helps you explore different ways to pay for healthcare. 
