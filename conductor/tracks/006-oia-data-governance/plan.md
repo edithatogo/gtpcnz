@@ -11,7 +11,7 @@ owner: "Dylan A Mordaunt"
 
 - [x] Task 1.1: Define audience and purpose in `oia-strategy-v0.1.0.md`.
 - [x] Task 1.2: Identify evidence gaps linking to Tier 1 parameters (Capitation, NPCD, ACC, Ambulance).
-- [x] Task 1.3: Search existing public OIA databases (e.g., FYI.org.nz) for previously released data.
+- [x] Task 1.3: Search existing public OIA databases (e.g., FYI.org.nz) for previously released data. (Found general primary care data, but no granular capitation weights or ACC FFS data).
 - [x] Task 1.4: Draft formal OIA requests for MOH, ACC, and St John.
 - [x] Task 1.5: Set up OIA request tracker.
 - [x] Task 1.6: Integrate OIA tracker visualization into the Streamlit dashboard.
