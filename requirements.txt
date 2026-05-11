@@ -4,5 +4,7 @@ networkx
 streamlit
 matplotlib
 plotly
+jupyter
+pyyaml
 pytest
 pytest-mock

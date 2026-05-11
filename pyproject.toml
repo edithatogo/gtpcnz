@@ -9,7 +9,9 @@ dependencies = [
     "networkx",
     "streamlit",
     "matplotlib",
-    "plotly"
+    "plotly",
+    "jupyter",
+    "pyyaml"
 ]
 
 [project.optional-dependencies]
