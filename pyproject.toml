@@ -3,10 +3,17 @@ name = "primarycare-funding-architecture"
 version = "1.7.0"
 description = "Scaffold for primary care funding architecture modelling"
 requires-python = ">=3.11"
-dependencies = ["numpy", "pandas", "networkx"]
+dependencies = [
+    "numpy",
+    "pandas",
+    "networkx",
+    "streamlit",
+    "matplotlib",
+    "plotly"
+]
 
 [project.optional-dependencies]
-dev = ["pytest"]
+dev = ["pytest", "pytest-mock"]
 
 [tool.pytest.ini_options]
 pythonpath = ["models"]

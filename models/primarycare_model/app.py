@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 # Set page config
 st.set_page_config(
@@ -47,48 +48,81 @@ equity_focus = st.sidebar.select_slider(
 )
 
 # Main Dashboard View
-col1, col2 = st.columns(2)
+tab1, tab2 = st.tabs(["📊 Funding Simulator", "📁 Evidence & OIA Tracker"])
 
-# Load existing results for comparison
-df = pd.read_csv("../../outputs/full-parameterised-summary-results-v1.7.0.csv")
+with tab1:
+    col1, col2 = st.columns(2)
 
-with col1:
-    st.subheader("📈 Model Comparison")
-    st.write("Here is how your choices compare to our simulated models.")
-    
-    # Simple reactive calculation (demonstrative)
-    user_score = (benefit_level * 0.4) + (capitation_weight * 0.3) + (10 if equity_focus == "High" else 5)
-    
-    # Plotting
-    fig, ax = plt.subplots()
-    ax.barh(df["scenario_name"], df["hybrid_viability_score"], color='lightgrey', alpha=0.5, label="Simulated Models")
-    ax.barh("YOUR MODEL", user_score, color='green', label="Your Settings")
-    ax.set_xlabel("Overall System Score")
-    ax.set_title("How Viable is Your Funding Model?")
-    ax.legend()
-    st.pyplot(fig)
+    # Load existing results for comparison
+    # Use robust path resolution
+    base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    results_path = os.path.join(base_dir, "outputs", "full-parameterised-summary-results-v1.7.0.csv")
 
-with col2:
-    st.subheader("🏥 Hospital Pressure vs. 🏥 Doctor Supply")
+    if not os.path.exists(results_path):
+        st.error(f"Could not find results file at {results_path}")
+        df = pd.DataFrame(columns=["scenario_name", "hybrid_viability_score", "supply_generation_score", "hospital_pressure_score"])
+    else:
+        df = pd.read_csv(results_path)
+
+    with col1:
+        st.subheader("📈 Model Comparison")
+        st.write("Here is how your choices compare to our simulated models.")
+        
+        # Simple reactive calculation (demonstrative)
+        user_score = (benefit_level * 0.4) + (capitation_weight * 0.3) + (10 if equity_focus == "High" else 5)
+        
+        # Plotting
+        fig, ax = plt.subplots()
+        ax.barh(df["scenario_name"], df["hybrid_viability_score"], color='lightgrey', alpha=0.5, label="Simulated Models")
+        ax.barh("YOUR MODEL", user_score, color='green', label="Your Settings")
+        ax.set_xlabel("Overall System Score")
+        ax.set_title("How Viable is Your Funding Model?")
+        ax.legend()
+        st.pyplot(fig)
+
+    with col2:
+        st.subheader("🏥 Hospital Pressure vs. 🏥 Doctor Supply")
+        st.markdown("""
+        In a good system:
+        1. **Doctor Supply** should be **HIGH** (lots of appointments).
+        2. **Hospital Pressure** should be **LOW** (ER isn't crowded).
+        """)
+        
+        # Scatter plot
+        fig2, ax2 = plt.subplots()
+        ax2.scatter(df["supply_generation_score"], df["hospital_pressure_score"], color='blue', alpha=0.6)
+        
+        # Your point (demonstrative)
+        your_supply = benefit_level * 0.8
+        your_pressure = 100 - (benefit_level * 0.5 + capitation_weight * 0.2)
+        ax2.scatter(your_supply, your_pressure, color='red', s=100, label="Your Settings")
+        
+        ax2.set_xlabel("Doctor Supply (Appointments)")
+        ax2.set_ylabel("Hospital Pressure (ER Crowding)")
+        ax2.legend()
+        st.pyplot(fig2)
+
+with tab2:
+    st.subheader("🔍 Official Information Act (OIA) Tracker")
     st.markdown("""
-    In a good system:
-    1. **Doctor Supply** should be **HIGH** (lots of appointments).
-    2. **Hospital Pressure** should be **LOW** (ER isn't crowded).
+    To move this model from a "demonstrative simulation" to a real-world predictive tool, we need accurate administrative data. 
+    Below is the status of our public information requests.
     """)
     
-    # Scatter plot
-    fig2, ax2 = plt.subplots()
-    ax2.scatter(df["supply_generation_score"], df["hospital_pressure_score"], color='blue', alpha=0.6)
+    tracker_path = os.path.join(base_dir, "docs", "audit", "oia-request-tracker.csv")
+    if os.path.exists(tracker_path):
+        oia_df = pd.read_csv(tracker_path)
+        
+        # Style the dataframe based on status
+        def color_status(val):
+            color = 'orange' if val == 'Pending' else 'green' if val == 'Complete' else 'red' if val == 'Rejected' else 'white'
+            return f'color: {color}'
+        
+        st.dataframe(oia_df.style.map(color_status, subset=['status']), use_container_width=True)
+    else:
+        st.warning("OIA Tracker database not found.")
     
-    # Your point (demonstrative)
-    your_supply = benefit_level * 0.8
-    your_pressure = 100 - (benefit_level * 0.5 + capitation_weight * 0.2)
-    ax2.scatter(your_supply, your_pressure, color='red', s=100, label="Your Settings")
-    
-    ax2.set_xlabel("Doctor Supply (Appointments)")
-    ax2.set_ylabel("Hospital Pressure (ER Crowding)")
-    ax2.legend()
-    st.pyplot(fig2)
+    st.info("No relevant existing OIA responses were found on FYI.org.nz. We are proceeding with drafting original requests.")
 
 # Educational Section
 with st.expander("📚 Learn the 'Big Words'"):

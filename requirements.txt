@@ -1,0 +1,8 @@
+numpy
+pandas
+networkx
+streamlit
+matplotlib
+plotly
+pytest
+pytest-mock
