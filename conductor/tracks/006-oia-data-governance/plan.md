@@ -16,12 +16,12 @@ owner: "Dylan A Mordaunt"
 - [x] Task 1.5: Set up OIA request tracker.
 - [x] Task 1.6: Integrate OIA tracker visualization into the Streamlit dashboard.
 
-## Phase 2: Evidence population & Filing
+## Phase 2: Evidence population & Filing (Complete)
 
-- [ ] Task 2.1: Finalize OIA text based on preliminary legal/policy review.
-- [ ] Task 2.2: Submit OIAs to respective agencies.
-- [ ] Task 2.3: Update tracker status to 'Sent'.
-- [ ] Task 2.4: Prepare data ingestion scripts for anticipated responses.
+- [x] Task 2.1: Finalize OIA text based on preliminary legal/policy review.
+- [x] Task 2.2: Submit OIAs to respective agencies.
+- [x] Task 2.3: Update tracker status to 'Sent'.
+- [x] Task 2.4: Prepare data ingestion scripts for anticipated responses (`scripts/ingest_oia_data.py`).
 
 ## Phase 3: Review and release
 
