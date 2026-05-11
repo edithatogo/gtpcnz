@@ -25,13 +25,12 @@ Establish the evaluation criteria based on existing parameters and Te Tiriti pri
 ## Phase 2: Review Execution
 
 Conduct the structural review against the proposed funding model.
+## Phase 2: Review Execution (Complete)
 
-### Tasks
-
-- [ ] Task 2.1: Analyze the risk of "cream-skimming" under an uncapped FFS model and draft mitigations (e.g., place-based accountability rules).
-- [ ] Task 2.2: Analyze the impact of co-payments on high-need groups and specify required protections within the architecture.
-- [ ] Task 2.3: Evaluate the sufficiency of current rural loading vs. a scheduled rural benefit rate.
-- [ ] Task 2.4: Draft `docs/audit/equity-review-summary-v1.7.2.md` documenting findings and required architectural constraints.
+- [x] Task 2.1: Analyze the risk of "cream-skimming" under an uncapped FFS model and draft mitigations (e.g., place-based accountability rules).
+- [x] Task 2.2: Analyze the impact of co-payments on high-need groups and specify required protections within the architecture.
+- [x] Task 2.3: Evaluate the sufficiency of current rural loading vs. a scheduled rural benefit rate.
+- [x] Task 2.4: Draft `docs/audit/equity-review-summary-v1.7.2.md` documenting findings and required architectural constraints.
 
 ### Verification
 
