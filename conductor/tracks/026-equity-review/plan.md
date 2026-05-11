@@ -15,12 +15,12 @@ Establish the evaluation criteria based on existing parameters and Te Tiriti pri
 
 ### Tasks
 
-- [ ] Task 1.1: Create `docs/audit/equity-review-matrix-v1.7.2.csv` with core evaluation domains.
-- [ ] Task 1.2: Map existing equity parameters (D05, D06, D07, F07, G10, G11) to the matrix domains.
+- [x] Task 1.1: Create `docs/audit/equity-review-matrix-v1.7.2.csv` with core evaluation domains.
+- [x] Task 1.2: Map existing equity parameters (D05, D06, D07, F07, G10, G11) to the matrix domains.
 
 ### Verification
 
-- [ ] Matrix is populated with baseline parameters and domains.
+- [x] Matrix is populated with baseline parameters and domains.
 
 ## Phase 2: Review Execution
 
