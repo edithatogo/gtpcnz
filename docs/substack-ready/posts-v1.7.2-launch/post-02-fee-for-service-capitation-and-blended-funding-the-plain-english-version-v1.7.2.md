@@ -1,6 +1,6 @@
 # Fee-for-service, capitation and blended funding: the plain-English version
 
-**Source-confidence label:** public-document supported policy hypothesis, economic theory and model assumption; not calibrated prediction.
+**Subtitle:** A plain-English guide to what each payment model rewards, suppresses, and misses.
 
 Before talking about reform, it helps to understand the three basic ways we pay for primary care.
 
@@ -32,7 +32,7 @@ This is why most sensible systems use a blend.
 
 A blended model uses capitation for baseline responsibility, fee-for-service for eligible activity, and targeted funding for priority programmes. The trick is not choosing one model as if it were perfect. None of them is perfect.
 
-The trick is matching the payment signal to the type of care.
+> The trick is matching the payment signal to the type of care.
 
 For example:
 
@@ -70,13 +70,11 @@ Place-based commissioning for people and communities who might otherwise be left
 
 And transparent data so we can see whether the system is actually improving access, rather than just shifting patients around.
 
-![fig-02-funding-models-101-v1.2.0](../figures/fig-02-funding-models-101-v1.2.0.png)
+![Simple comparison diagram showing fee-for-service, capitation and blended funding as different ways of paying for care, each with different incentives.](../figures/pcf-v172-02-funding-models.png)
 
-*Figure: conceptual explainer for this post. It is not an observed outcome chart or calibrated prediction.*
+*Figure 2. Funding models in plain English. The point is not that one model is good and the others are bad; each model rewards a different behaviour.*
 
-**Red-team check:** This is not a claim that fee-for-service is good and capitation is bad. Each model solves one problem and creates another. The practical question is the blend.
-
-
+A useful caution: This is not a claim that fee-for-service is good and capitation is bad. Each model solves one problem and creates another. The practical question is the blend.
 
 ### The useful way to think about all three
 
@@ -96,7 +94,7 @@ I would be less convinced if one payment model consistently delivered access, eq
 
 **Deep dive (optional, not required reading):** I’ve kept the fuller explanation, game table, modelling notes and full source list in the [appendix for this post](../appendices-v1.7.2/appendix-02-fee-for-service-capitation-and-blended-funding-the-plain-english-version-v1.7.2.md).
 
-**Note:** This series is exploratory policy analysis. It is not a party-political argument, not a RACMA-sponsored position, not a claim that any single funding model is perfect, and not a calibrated prediction of savings. The central question is whether New Zealand's current funding architecture lets lower-cost upstream care expand safely before need becomes hospital demand.
+**Note:** This series is exploratory policy analysis. It is not a party-political argument, not a position sponsored by an external body, not a claim that any single funding model is perfect, and not a calibrated prediction of savings. The central question is whether New Zealand's current funding architecture lets lower-cost upstream care expand safely before need becomes hospital demand.
 
 ## Useful links
 

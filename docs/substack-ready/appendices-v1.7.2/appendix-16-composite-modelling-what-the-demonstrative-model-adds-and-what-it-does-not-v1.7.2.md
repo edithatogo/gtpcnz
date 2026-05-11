@@ -1,12 +1,13 @@
 # Deep dive appendix for Post 16: Composite modelling: what the demonstrative model adds, and what it does not
 
-This appendix preserves the longer explanatory material, model notes, game tables and source lists that sit behind the shorter public Substack post. It is intended as optional background, not the main public post.
+**Subtitle:** A technical appendix on what the model demonstrates, where it is illustrative, and what calibration would require.
 
-## Additional material cut from the public post
+This appendix is supporting material for the public post. It carries the longer explanation, sources and assumptions for readers who want the detail.
 
+## Additional context
 The composite model is a way of seeing those interactions at once.
 
-It does not replace judgement. It gives judgement a better map.
+> It does not replace judgement. It gives judgement a better map.
 
 ### What would make it stronger
 
@@ -76,6 +77,16 @@ The most important empirical tests are:
 4. whether Primary Health Organisation payment arrangements create material pass-through, transparency or entry barriers;
 5. whether scope-enabled providers can expand supply safely and equitably.
 
+## Formula note
+
+The demonstrative model can be summarised as a composite pressure index:
+
+$
+P = \alpha A + \beta H + \gamma F - \delta S
+$
+
+where access friction (A), hospital salience (H), fiscal constraint (F), and upstream supply (S) are weighted components rather than calibrated causal estimates.
+
 ## Read this alongside
 
 This post connects to [STRESS reporting guideline for empirical simulation studies](https://www.equator-network.org/reporting-guidelines/strengthening-the-reporting-of-empirical-simulation-studies-introducing-the-stress-guidelines/) [ODD protocol for agent-based models](https://www.usgs.gov/publications/odd-protocol-describing-agent-based-and-other-simulation-models-a-second-update) [ISPOR-SMDM modelling good research practices](https://www.ispor.org/heor-resources/good-practices/article/modeling-good-research-practices---overview) [PRISMA extension for Scoping Reviews](https://www.prisma-statement.org/scoping).
@@ -97,4 +108,4 @@ This post connects to [STRESS reporting guideline for empirical simulation studi
 
 ---
 
-**Use of this appendix:** This appendix is supporting material, not required reading. The public post should carry the main argument; this file is for readers who want the sources, modelling notes, tables or assumptions.
+**Appendix note:** Supporting material for readers who want the longer explanation, sources and assumptions.

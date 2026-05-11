@@ -1,11 +1,11 @@
 # Deep dive appendix for Post 08: The capitation marginal-supply game and the consumer access game
 
-This appendix preserves the longer explanatory material, model notes, game tables and source lists that sit behind the shorter public Substack post. It is intended as optional background, not the main public post.
+**Subtitle:** A technical appendix on capped payment, marginal revenue, and the patient routes created by constrained supply.
 
-## Additional material cut from the public post
+This appendix is supporting material for the public post. It carries the longer explanation, sources and assumptions for readers who want the detail.
 
+## Additional context
 So the question is not only whether the target is met. The question is whether patients with the greatest need are genuinely getting better care.
-
 
 ### Why capitation can still be part of the answer
 
@@ -15,7 +15,7 @@ Capitation helps pay for the work that does not fit neatly into a single visit: 
 
 The problem is when capitation is asked to do everything. It is not designed to pay for every extra piece of activity that a patient may need. If it becomes the dominant mechanism, it can quietly shift the system toward rationing.
 
-So the better question is not capitation or fee-for-service. It is: what job should each payment stream do?
+> So the better question is not capitation or fee-for-service. It is: what job should each payment stream do?
 
 ## The plain-English version
 The key idea in this post is **capitation and consumer choices**. The short version is that funding rules are not just accounting rules. They are behaviour rules. They tell patients where to go, providers what work is viable, intermediaries what power they hold, and hospitals what pressure they must absorb.
@@ -79,6 +79,16 @@ The most important empirical tests are:
 4. whether Primary Health Organisation payment arrangements create material pass-through, transparency or entry barriers;
 5. whether scope-enabled providers can expand supply safely and equitably.
 
+## Formula note
+
+A simple marginal-supply condition is:
+
+$
+\Delta R_i \geq \Delta C_i
+$
+
+where an additional contact is viable only when the marginal revenue for contact type i at least covers its marginal cost.
+
 ## Read this alongside
 
 This post connects to [Ministry of Health: capitation reweighting](https://www.health.govt.nz/strategies-initiatives/programmes-and-initiatives/primary-and-community-health-care/capitation-reweighting) [Ministry of Health: primary care health target](https://www.health.govt.nz/strategies-initiatives/programmes-and-initiatives/primary-and-community-health-care/primary-care-health-target) [Health New Zealand: National Primary Care Dataset and new primary care health target](https://www.healthnz.govt.nz/about-us/what-we-do/planning-and-performance/primary-care-tactical-action-plan/national-primary-care-dataset-and-new-primary-care-health-target) [Ministry of Health: New Zealand Health Survey annual update](https://www.health.govt.nz/publications/annual-update-of-key-results-202324-new-zealand-health-survey).
@@ -100,4 +110,4 @@ This post connects to [Ministry of Health: capitation reweighting](https://www.h
 
 ---
 
-**Use of this appendix:** This appendix is supporting material, not required reading. The public post should carry the main argument; this file is for readers who want the sources, modelling notes, tables or assumptions.
+**Appendix note:** Supporting material for readers who want the longer explanation, sources and assumptions.

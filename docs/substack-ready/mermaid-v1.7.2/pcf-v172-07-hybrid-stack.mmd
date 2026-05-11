@@ -1,0 +1,16 @@
+---
+title: Hybrid primary-care funding stack
+---
+flowchart TB
+  classDef layer fill:#E8F3FF,stroke:#1E5A8A,stroke-width:2px,color:#102A43;
+  classDef accountability fill:#F3E8FF,stroke:#6E3AA8,stroke-width:2px,color:#2E174B;
+  classDef outcome fill:#E9F8EF,stroke:#1F7A4D,stroke-width:2px,color:#123524;
+
+  A[Population capitation]:::layer --> D[Primary care access architecture]:::outcome
+  B[Scheduled eligible activity payments]:::layer --> D
+  C[Urgent care and ambulance alternatives]:::layer --> D
+  E[Provider-scope flexibility]:::layer --> D
+  F[Place-based accountability]:::accountability --> D
+  G[Data, audit and public KPIs]:::accountability --> D
+  H[Equity protections]:::accountability --> D
+  D --> I[Earlier care, less displaced demand, clearer accountability]:::outcome

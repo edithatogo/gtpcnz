@@ -1,15 +1,15 @@
 # Deep dive appendix for Post 18: Recommendations: a primary care system that can grow before hospitals have to
 
-This appendix preserves the longer explanatory material, model notes, game tables and source lists that sit behind the shorter public Substack post. It is intended as optional background, not the main public post.
+**Subtitle:** A technical appendix translating the model and games into a staged policy architecture.
 
-## Additional material cut from the public post
+This appendix is supporting material for the public post. It carries the longer explanation, sources and assumptions for readers who want the detail.
 
+## Additional context
 The question would not be whether the trial is perfect. The question would be whether it shifts the game. Does supply increase? Do patients get earlier care? Does rural in-person access hold up? Does hospital pressure ease? Do high-need groups benefit? Does gaming emerge?
 
 That is the evidence we need. Not another abstract fight about whether capitation or fee-for-service is morally superior.
 
-The system needs a hybrid model because the problem is hybrid.
-
+> The system needs a hybrid model because the problem is hybrid.
 
 ### The recommendation in one sentence
 
@@ -109,4 +109,4 @@ This post connects to [Ministry of Health: capitation reweighting](https://www.h
 
 ---
 
-**Use of this appendix:** This appendix is supporting material, not required reading. The public post should carry the main argument; this file is for readers who want the sources, modelling notes, tables or assumptions.
+**Appendix note:** Supporting material for readers who want the longer explanation, sources and assumptions.

@@ -1,13 +1,11 @@
 # Deep dive appendix for Post 06: What I mean by uncapping primary care funding
 
-This appendix preserves the longer explanatory material, model notes, game tables and source lists that sit behind the shorter public Substack post. It is intended as optional background, not the main public post.
+This appendix is supporting material for the public post. It carries the longer explanation, sources and assumptions for readers who want the detail.
 
-## Additional material cut from the public post
-
+## Additional context
 The primary care equivalent would need to be carefully designed. It should not pay for low-value churn. It should not reward fragmenting care. It should not allow easy urban activity to drain attention from complex rural need.
 
 But those are arguments for better rules, not for keeping a hard cap that suppresses useful care.
-
 
 ### The political misunderstanding
 
@@ -100,4 +98,4 @@ This post connects to [Ministry of Health: capitation reweighting](https://www.h
 
 ---
 
-**Use of this appendix:** This appendix is supporting material, not required reading. The public post should carry the main argument; this file is for readers who want the sources, modelling notes, tables or assumptions.
+**Appendix note:** Supporting material for readers who want the longer explanation, sources and assumptions.

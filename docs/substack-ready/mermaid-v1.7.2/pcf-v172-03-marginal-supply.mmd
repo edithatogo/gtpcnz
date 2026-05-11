@@ -1,0 +1,16 @@
+---
+title: Marginal supply decision
+---
+flowchart LR
+  classDef input fill:#E8F3FF,stroke:#1E5A8A,stroke-width:2px,color:#102A43;
+  classDef decision fill:#FFF2D8,stroke:#A86400,stroke-width:2px,color:#3B2600;
+  classDef yes fill:#E9F8EF,stroke:#1F7A4D,stroke-width:2px,color:#123524;
+  classDef no fill:#FDE8E8,stroke:#B42318,stroke-width:2px,color:#3D0B0B;
+
+  A[Next clinically necessary contact]:::input --> B{Does marginal revenue cover marginal cost?}:::decision
+  B -->|Yes| C[Appointment is viable]:::yes
+  C --> D[More upstream supply]:::yes
+  D --> E[Less delayed / displaced care]:::yes
+  B -->|No| F[Practice must absorb loss or ration]:::no
+  F --> G[Longer wait, closed books, higher fee, shorter consult]:::no
+  G --> H[Need moves elsewhere]:::no

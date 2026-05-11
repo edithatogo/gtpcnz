@@ -1,0 +1,138 @@
+[
+  {
+    "sequence": 3,
+    "postNumber": "02",
+    "id": "primary-care-funding-architecture-02",
+    "title": "Fee-for-service, capitation and blended funding: the plain-English version",
+    "png": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/mermaid-preview-v1.7.2/pcf-v172-02-mermaid-preview.png",
+    "source": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/mermaid-preview-v1.7.2-src/pcf-v172-02-mermaid-preview.mmd"
+  },
+  {
+    "sequence": 4,
+    "postNumber": "03",
+    "id": "primary-care-funding-architecture-03",
+    "title": "Marginal supply: the tiny economic idea that decides whether appointments exist",
+    "png": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/mermaid-preview-v1.7.2/pcf-v172-03-mermaid-preview.png",
+    "source": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/mermaid-preview-v1.7.2-src/pcf-v172-03-mermaid-preview.mmd"
+  },
+  {
+    "sequence": 5,
+    "postNumber": "04",
+    "id": "primary-care-funding-architecture-04",
+    "title": "Why formulas do not solve games",
+    "png": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/mermaid-preview-v1.7.2/pcf-v172-04-mermaid-preview.png",
+    "source": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/mermaid-preview-v1.7.2-src/pcf-v172-04-mermaid-preview.mmd"
+  },
+  {
+    "sequence": 6,
+    "postNumber": "05",
+    "id": "primary-care-funding-architecture-05",
+    "title": "The current reform pathway: stronger than a straw man, but maybe still incomplete",
+    "png": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/mermaid-preview-v1.7.2/pcf-v172-05-mermaid-preview.png",
+    "source": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/mermaid-preview-v1.7.2-src/pcf-v172-05-mermaid-preview.mmd"
+  },
+  {
+    "sequence": 7,
+    "postNumber": "06",
+    "id": "primary-care-funding-architecture-06",
+    "title": "What I mean by uncapping primary care funding",
+    "png": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/mermaid-preview-v1.7.2/pcf-v172-06-mermaid-preview.png",
+    "source": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/mermaid-preview-v1.7.2-src/pcf-v172-06-mermaid-preview.mmd"
+  },
+  {
+    "sequence": 8,
+    "postNumber": "07",
+    "id": "primary-care-funding-architecture-07",
+    "title": "The hospital salience game and the Health New Zealand allocation game",
+    "png": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/mermaid-preview-v1.7.2/pcf-v172-07-mermaid-preview.png",
+    "source": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/mermaid-preview-v1.7.2-src/pcf-v172-07-mermaid-preview.mmd"
+  },
+  {
+    "sequence": 9,
+    "postNumber": "08",
+    "id": "primary-care-funding-architecture-08",
+    "title": "The capitation marginal-supply game and the consumer access game",
+    "png": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/mermaid-preview-v1.7.2/pcf-v172-08-mermaid-preview.png",
+    "source": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/mermaid-preview-v1.7.2-src/pcf-v172-08-mermaid-preview.mmd"
+  },
+  {
+    "sequence": 10,
+    "postNumber": "09",
+    "id": "primary-care-funding-architecture-09",
+    "title": "Primary Health Organisations: useful functions, payment friction and cherry-picking",
+    "png": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/mermaid-preview-v1.7.2/pcf-v172-09-mermaid-preview.png",
+    "source": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/mermaid-preview-v1.7.2-src/pcf-v172-09-mermaid-preview.mmd"
+  },
+  {
+    "sequence": 11,
+    "postNumber": "10",
+    "id": "primary-care-funding-architecture-10",
+    "title": "Accident Compensation Corporation, ambulance and urgent care: the hidden upstream system",
+    "png": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/mermaid-preview-v1.7.2/pcf-v172-10-mermaid-preview.png",
+    "source": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/mermaid-preview-v1.7.2-src/pcf-v172-10-mermaid-preview.mmd"
+  },
+  {
+    "sequence": 12,
+    "postNumber": "11",
+    "id": "primary-care-funding-architecture-11",
+    "title": "Who should be allowed to generate primary care supply?",
+    "png": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/mermaid-preview-v1.7.2/pcf-v172-11-mermaid-preview.png",
+    "source": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/mermaid-preview-v1.7.2-src/pcf-v172-11-mermaid-preview.mmd"
+  },
+  {
+    "sequence": 13,
+    "postNumber": "12",
+    "id": "primary-care-funding-architecture-12",
+    "title": "Telehealth is an extender, not a replacement for local supply",
+    "png": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/mermaid-preview-v1.7.2/pcf-v172-12-mermaid-preview.png",
+    "source": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/mermaid-preview-v1.7.2-src/pcf-v172-12-mermaid-preview.mmd"
+  },
+  {
+    "sequence": 14,
+    "postNumber": "13",
+    "id": "primary-care-funding-architecture-13",
+    "title": "Co-payments: demand signal or equity failure?",
+    "png": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/mermaid-preview-v1.7.2/pcf-v172-13-mermaid-preview.png",
+    "source": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/mermaid-preview-v1.7.2-src/pcf-v172-13-mermaid-preview.mmd"
+  },
+  {
+    "sequence": 15,
+    "postNumber": "14",
+    "id": "primary-care-funding-architecture-14",
+    "title": "The 19 games: a map of the New Zealand primary care funding problem",
+    "png": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/mermaid-preview-v1.7.2/pcf-v172-14-mermaid-preview.png",
+    "source": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/mermaid-preview-v1.7.2-src/pcf-v172-14-mermaid-preview.mmd"
+  },
+  {
+    "sequence": 16,
+    "postNumber": "15",
+    "id": "primary-care-funding-architecture-15",
+    "title": "The hybrid game: why no single lever is enough",
+    "png": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/mermaid-preview-v1.7.2/pcf-v172-15-mermaid-preview.png",
+    "source": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/mermaid-preview-v1.7.2-src/pcf-v172-15-mermaid-preview.mmd"
+  },
+  {
+    "sequence": 17,
+    "postNumber": "16",
+    "id": "primary-care-funding-architecture-16",
+    "title": "Composite modelling: what the demonstrative model adds, and what it does not",
+    "png": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/mermaid-preview-v1.7.2/pcf-v172-16-mermaid-preview.png",
+    "source": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/mermaid-preview-v1.7.2-src/pcf-v172-16-mermaid-preview.mmd"
+  },
+  {
+    "sequence": 18,
+    "postNumber": "17",
+    "id": "primary-care-funding-architecture-17",
+    "title": "Game-informed Multi-Criteria Decision Analysis: making disagreement useful",
+    "png": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/mermaid-preview-v1.7.2/pcf-v172-17-mermaid-preview.png",
+    "source": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/mermaid-preview-v1.7.2-src/pcf-v172-17-mermaid-preview.mmd"
+  },
+  {
+    "sequence": 19,
+    "postNumber": "18",
+    "id": "primary-care-funding-architecture-18",
+    "title": "Recommendations: a primary care system that can grow before hospitals have to",
+    "png": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/mermaid-preview-v1.7.2/pcf-v172-18-mermaid-preview.png",
+    "source": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/mermaid-preview-v1.7.2-src/pcf-v172-18-mermaid-preview.mmd"
+  }
+]

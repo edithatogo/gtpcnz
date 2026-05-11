@@ -1,9 +1,8 @@
 # Deep dive appendix for Post 04: Why formulas do not solve games
 
-This appendix preserves the longer explanatory material, model notes, game tables and source lists that sit behind the shorter public Substack post. It is intended as optional background, not the main public post.
+This appendix is supporting material for the public post. It carries the longer explanation, sources and assumptions for readers who want the detail.
 
-## Additional material cut from the public post
-
+## Additional context
 That does not mean formulas are useless. They are essential. A bad formula can absolutely worsen inequity. But a better formula cannot by itself make the next appointment happen if the model still underpays marginal activity.
 
 This is where the game-theory lens helps. The formula is one rule of the game. But it is not the whole game. The whole game includes patient behaviour, provider behaviour, hospital pressure, political salience, data visibility, co-payments, workforce, urgent care, ambulance and the way money can or cannot move across the system.
@@ -91,4 +90,4 @@ This post connects to [Ministry of Health: capitation reweighting](https://www.h
 
 ---
 
-**Use of this appendix:** This appendix is supporting material, not required reading. The public post should carry the main argument; this file is for readers who want the sources, modelling notes, tables or assumptions.
+**Appendix note:** Supporting material for readers who want the longer explanation, sources and assumptions.

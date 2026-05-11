@@ -1,9 +1,8 @@
 # Deep dive appendix for Post 05: The current reform pathway: stronger than a straw man, but maybe still incomplete
 
-This appendix preserves the longer explanatory material, model notes, game tables and source lists that sit behind the shorter public Substack post. It is intended as optional background, not the main public post.
+This appendix is supporting material for the public post. It carries the longer explanation, sources and assumptions for readers who want the detail.
 
-## Additional material cut from the public post
-
+## Additional context
 The question is not: “Is New Zealand doing nothing?” It is clearly doing something.
 
 The question is: “Does the package change the game enough?”
@@ -97,4 +96,4 @@ This post connects to [Ministry of Health: capitation reweighting](https://www.h
 
 ---
 
-**Use of this appendix:** This appendix is supporting material, not required reading. The public post should carry the main argument; this file is for readers who want the sources, modelling notes, tables or assumptions.
+**Appendix note:** Supporting material for readers who want the longer explanation, sources and assumptions.

@@ -45,6 +45,13 @@ Key model-hardening files:
 
 RACMA is excluded from proactive outreach in this release. If RACMA comes back interested, provide the decision-maker summary and model card, not the full repository.
 
+## Interactive Tools (v1.7.2+)
+
+- **Quarto Report:** `reports/primary_care_architecture.qmd` — SOTA reproducible policy report.
+- **Streamlit App:** `models/primarycare_model/app.py` — "Primary Care Pulse" interactive dashboard.
+
+See `docs/REPORTS-AND-DASHBOARD.md` for instructions on how to run these tools.
+
 ## Testing
 
 ```bash

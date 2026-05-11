@@ -1,6 +1,6 @@
 # The current reform pathway: stronger than a straw man, but maybe still incomplete
 
-**Source-confidence label:** public-document supported policy hypothesis, economic theory and model assumption; not calibrated prediction.
+**Subtitle:** A serious comparator: what current reform may fix, and what it may still leave unresolved.
 
 One criticism of my early framing was fair: New Zealand is not doing nothing.
 
@@ -88,12 +88,11 @@ In other words, the current reform pathway may be the foundation. The hybrid mod
 
 The diagram below compares the current reform pathway with the hybrid architecture I am suggesting. It is not a statistical forecast. It is a structured way of thinking about where each architecture is strong and weak.
 
-![fig-14-current-reform-vs-uncapped-hybrid-v1.4.0](../figures/fig-14-current-reform-vs-uncapped-hybrid-v1.4.0.png)
+![Side-by-side comparison of the current reform pathway and an uncapped scheduled-benefit hybrid architecture across access, accountability and supply.](../figures/pcf-v172-05-current-vs-hybrid.png)
 
-*Figure: conceptual explainer for this post. It is not an observed outcome chart or calibrated prediction.*
+*Figure 6. Current reform versus the proposed hybrid. Use this as a comparator map, not as a forecast.*
 
-**Red-team check:** The current reform pathway is the serious comparator. It may work better than sceptics expect. The test is whether it changes access, closed books, co-payment barriers and upstream-to-hospital flow.
-
+A useful caution: The current reform pathway is the serious comparator. It may work better than sceptics expect. The test is whether it changes access, closed books, co-payment barriers and upstream-to-hospital flow.
 
 The current reform is strongest on allocation fairness, data, targets and some urgent-care access. The hybrid model is stronger where the current pathway may remain weaker: marginal supply, provider-scope flexibility, whole-population accountability and uncapped eligible activity.
 
@@ -104,7 +103,6 @@ The critique is:
 > The Government has started to change the system. But it may still be managing upstream activity too tightly, while hospital demand remains the pressure valve.
 
 That is the game we need to test.
-
 
 ### Why this matters for criticism
 
@@ -118,7 +116,7 @@ I would be less convinced if the current reform pathway proves it can expand saf
 
 **Deep dive (optional, not required reading):** I’ve kept the fuller explanation, game table, modelling notes and full source list in the [appendix for this post](../appendices-v1.7.2/appendix-05-the-current-reform-pathway-stronger-than-a-straw-man-but-maybe-still-incomplete-v1.7.2.md).
 
-**Note:** This series is exploratory policy analysis. It is not a party-political argument, not a RACMA-sponsored position, not a claim that any single funding model is perfect, and not a calibrated prediction of savings. The central question is whether New Zealand's current funding architecture lets lower-cost upstream care expand safely before need becomes hospital demand.
+**Note:** This series is exploratory policy analysis. It is not a party-political argument, not a position sponsored by an external body, not a claim that any single funding model is perfect, and not a calibrated prediction of savings. The central question is whether New Zealand's current funding architecture lets lower-cost upstream care expand safely before need becomes hospital demand.
 
 ## Useful links
 

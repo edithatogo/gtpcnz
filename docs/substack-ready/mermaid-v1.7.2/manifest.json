@@ -1,0 +1,44 @@
+[
+  {
+    "id": "pcf-v172-01-upstream-pressure-map",
+    "source": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/mermaid-v1.7.2/pcf-v172-01-upstream-pressure-map.mmd",
+    "png": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/pcf-v172-01-upstream-pressure-map.png",
+    "svg": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/pcf-v172-01-upstream-pressure-map.svg"
+  },
+  {
+    "id": "pcf-v172-02-funding-models",
+    "source": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/mermaid-v1.7.2/pcf-v172-02-funding-models.mmd",
+    "png": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/pcf-v172-02-funding-models.png",
+    "svg": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/pcf-v172-02-funding-models.svg"
+  },
+  {
+    "id": "pcf-v172-03-marginal-supply",
+    "source": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/mermaid-v1.7.2/pcf-v172-03-marginal-supply.mmd",
+    "png": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/pcf-v172-03-marginal-supply.png",
+    "svg": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/pcf-v172-03-marginal-supply.svg"
+  },
+  {
+    "id": "pcf-v172-04-fixed-envelope",
+    "source": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/mermaid-v1.7.2/pcf-v172-04-fixed-envelope.mmd",
+    "png": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/pcf-v172-04-fixed-envelope.png",
+    "svg": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/pcf-v172-04-fixed-envelope.svg"
+  },
+  {
+    "id": "pcf-v172-05-current-vs-hybrid",
+    "source": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/mermaid-v1.7.2/pcf-v172-05-current-vs-hybrid.mmd",
+    "png": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/pcf-v172-05-current-vs-hybrid.png",
+    "svg": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/pcf-v172-05-current-vs-hybrid.svg"
+  },
+  {
+    "id": "pcf-v172-06-uncapped-controlled",
+    "source": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/mermaid-v1.7.2/pcf-v172-06-uncapped-controlled.mmd",
+    "png": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/pcf-v172-06-uncapped-controlled.png",
+    "svg": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/pcf-v172-06-uncapped-controlled.svg"
+  },
+  {
+    "id": "pcf-v172-07-hybrid-stack",
+    "source": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/mermaid-v1.7.2/pcf-v172-07-hybrid-stack.mmd",
+    "png": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/pcf-v172-07-hybrid-stack.png",
+    "svg": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/pcf-v172-07-hybrid-stack.svg"
+  }
+]

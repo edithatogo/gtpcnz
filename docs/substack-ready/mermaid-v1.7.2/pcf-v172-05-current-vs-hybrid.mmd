@@ -1,0 +1,24 @@
+---
+title: Current reform compared with hybrid architecture
+---
+flowchart LR
+  classDef current fill:#E8F3FF,stroke:#1E5A8A,stroke-width:2px,color:#102A43;
+  classDef gap fill:#FFF2D8,stroke:#A86400,stroke-width:2px,color:#3B2600;
+  classDef hybrid fill:#E9F8EF,stroke:#1F7A4D,stroke-width:2px,color:#123524;
+  classDef control fill:#F3E8FF,stroke:#6E3AA8,stroke-width:2px,color:#2E174B;
+
+  A[Current reform pathway]:::current --> A1[Capitation reweighting]:::current
+  A --> A2[Access target and dataset]:::current
+  A --> A3[Urgent and digital access]:::current
+  A1 --> B[May improve fairness and visibility]:::current
+  A2 --> B
+  A3 --> B
+  B --> C[Remaining test: does supply grow enough?]:::gap
+  D[Hybrid architecture]:::hybrid --> D1[Capitation for continuity]:::hybrid
+  D --> D2[Scheduled activity payments for eligible work]:::hybrid
+  D --> D3[Place accountability and equity protection]:::control
+  D --> D4[Audit and data feedback]:::control
+  D1 --> E[Continuity plus marginal supply]:::hybrid
+  D2 --> E
+  D3 --> E
+  D4 --> E

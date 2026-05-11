@@ -1,0 +1,15 @@
+---
+title: Fixed-envelope formula problem
+---
+flowchart TB
+  classDef formula fill:#E8F3FF,stroke:#1E5A8A,stroke-width:2px,color:#102A43;
+  classDef cap fill:#FFF2D8,stroke:#A86400,stroke-width:2px,color:#3B2600;
+  classDef effect fill:#FDE8E8,stroke:#B42318,stroke-width:2px,color:#3D0B0B;
+  classDef fix fill:#E9F8EF,stroke:#1F7A4D,stroke-width:2px,color:#123524;
+
+  A[Better allocation formula]:::formula --> B[Fairer distribution inside the pool]:::formula
+  B --> C{Is the total envelope fixed?}:::cap
+  C -->|Yes| D[Need is reprioritised, not fully met]:::effect
+  D --> E[Rationing shifts location]:::effect
+  C -->|No, eligible work can grow| F[Supply can respond to need]:::fix
+  F --> G[Rules and audit control low-value growth]:::fix

@@ -15,16 +15,16 @@ Establish a Quarto environment for automated policy reporting.
 
 ### Tasks
 
-- [ ] Task 1.1: Initialize `reports/primary_care_architecture.qmd` with SOTA YAML header.
-- [ ] Task 1.2: Port the v1.7.2 thesis into Quarto, simplifying language for a 14-year-old audience.
-- [ ] Task 1.3: Embed Python code blocks to dynamically pull data from `models/primarycare_model/`.
-- [ ] Task 1.4: Generate high-fidelity Plotly/Matplotlib visualizations within the report.
-- [ ] Task 1.5: **Automated Review:** Run `conductor-review` (or equivalent validation), apply fixes, and confirm build.
+- [x] Task 1.1: Initialize `reports/primary_care_architecture.qmd` with SOTA YAML header.
+- [x] Task 1.2: Port the v1.7.2 thesis into Quarto, simplifying language for a 14-year-old audience.
+- [x] Task 1.3: Embed Python code blocks to dynamically pull data from `models/primarycare_model/`.
+- [x] Task 1.4: Generate high-fidelity Plotly/Matplotlib visualizations within the report.
+- [x] Task 1.5: **Automated Review:** Run `conductor-review` (or equivalent validation), apply fixes, and confirm build.
 
 ### Verification
 
-- [ ] Quarto report renders to HTML/PDF without errors.
-- [ ] Language check confirms accessibility for 14-year-olds.
+- [x] Quarto report renders to HTML/PDF without errors.
+- [x] Language check confirms accessibility for 14-year-olds.
 
 ## Phase 2: Streamlit "Primary Care Pulse" Dashboard
 
@@ -32,16 +32,16 @@ Build the interactive visualization tool.
 
 ### Tasks
 
-- [ ] Task 2.1: Create `models/primarycare_model/app.py` for the Streamlit dashboard.
-- [ ] Task 2.2: Implement sidebar controls for architecture parameters (Benefit levels, equity weights).
-- [ ] Task 2.3: Build the main dashboard view with real-time reactive charts.
-- [ ] Task 2.4: Add "Educational Tooltips" that explain complex terms (e.g., "Capitation") in simple language.
-- [ ] Task 2.5: **Automated Review:** Run `conductor-review`, apply fixes, and verify dashboard responsiveness.
+- [x] Task 2.1: Create `models/primarycare_model/app.py` for the Streamlit dashboard.
+- [x] Task 2.2: Implement sidebar controls for architecture parameters (Benefit levels, equity weights).
+- [x] Task 2.3: Build the main dashboard view with real-time reactive charts.
+- [x] Task 2.4: Add "Educational Tooltips" that explain complex terms (e.g., "Capitation") in simple language.
+- [x] Task 2.5: **Automated Review:** Run `conductor-review`, apply fixes, and verify dashboard responsiveness.
 
 ### Verification
 
-- [ ] Streamlit app launches and updates visuals reactively to slider changes.
-- [ ] Tooltips and descriptions are present and simplified.
+- [x] Streamlit app launches and updates visuals reactively to slider changes.
+- [x] Tooltips and descriptions are present and simplified.
 
 ## Phase 3: Documentation & Integration
 
@@ -49,14 +49,14 @@ Finalize the repository for public/stakeholder review.
 
 ### Tasks
 
-- [ ] Task 3.1: Create `docs/REPORTS-AND-DASHBOARD.md` documenting usage and technical design.
-- [ ] Task 3.2: Update project `README.md` and `conductor/tech-stack.md` with new dependencies.
-- [ ] Task 3.3: **Automated Review:** Final verification of repository integrity and conventional commits.
+- [x] Task 3.1: Create `docs/REPORTS-AND-DASHBOARD.md` documenting usage and technical design.
+- [x] Task 3.2: Update project `README.md` and `conductor/tech-stack.md` with new dependencies.
+- [x] Task 3.3: **Automated Review:** Final verification of repository integrity and conventional commits.
 
 ### Verification
 
-- [ ] All acceptance criteria in `spec.md` are met.
-- [ ] Tests passing across the `models/` suite.
+- [x] All acceptance criteria in `spec.md` are met.
+- [x] Tests passing across the `models/` suite.
 
 ---
 

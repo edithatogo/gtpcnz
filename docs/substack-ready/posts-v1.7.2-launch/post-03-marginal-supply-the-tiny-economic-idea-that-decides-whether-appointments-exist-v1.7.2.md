@@ -1,6 +1,6 @@
 # Marginal supply: the tiny economic idea that decides whether appointments exist
 
-**Source-confidence label:** public-document supported policy hypothesis, economic theory and model assumption; not calibrated prediction.
+**Subtitle:** Why the economics of the next appointment matters more than the average payment.
 
 A lot of this debate turns on one small economic idea: marginal supply.
 
@@ -10,12 +10,11 @@ The next appointment. The next prescription review. The next same-day urgent slo
 
 The question is simple:
 
-![Figure for Marginal supply: the tiny economic idea that decides whether appointments exist](../figures/fig-15-marginal-revenue-cost-v1.5.0.png)
+![Marginal revenue and marginal cost diagram showing that providers add appointments only while the next clinically necessary contact is financially viable.](../figures/pcf-v172-03-marginal-supply.png)
 
-*Figure: conceptual explainer for this post. It is not an observed outcome chart or calibrated prediction.*
+*Figure 3. Marginal supply. The useful question is whether the next appointment is viable, not only whether the average contract looks adequate.**
 
-**Red-team check:** Marginal supply is not the whole story. Rural infrastructure, workforce, housing, clinical governance and co-payment protections also matter. The next appointment still needs a viable funding signal.
-
+A useful caution: Marginal supply is not the whole story. Rural infrastructure, workforce, housing, clinical governance and co-payment protections also matter. The next appointment still needs a viable funding signal.
 
 > Is the next clinically useful contact financially viable for the provider to deliver?
 
@@ -33,7 +32,9 @@ The diagram below is deliberately simple. It shows marginal cost rising as a pra
 
 Under weak marginal revenue, supply stops early. Under scheduled fee-for-service, more contacts become viable.
 
-![fig-08-marginal-supply-capitation-vs-ffs-v1.4.0](../figures/fig-08-marginal-supply-capitation-vs-ffs-v1.4.0.png)
+![Comparison diagram showing how capped capitation and scheduled fee-for-service create different marginal incentives for extra primary care contacts.](../figures/pcf-v172-03-marginal-supply.png)
+
+*Figure 4. Capitation and scheduled fee-for-service at the margin. This uses the same simplified decision map to keep the marginal-supply point visually consistent.
 
 This is not an argument that fee-for-service is always good. It is an argument that every system needs some way to pay for the next clinically necessary contact.
 
@@ -79,7 +80,6 @@ If the next clinically useful contact is unfunded, that contact will eventually 
 
 And if enough contacts disappear upstream, they reappear downstream as ambulance calls, urgent care demand and hospital pressure.
 
-
 ### Why this matters for rural areas
 
 Marginal supply is especially important in rural areas. A city practice may be able to absorb a bit more work by using a larger team, extending hours or shifting some care to telehealth. A rural service may have fewer staff, fewer rooms, longer travel times, fewer locums and less backup.
@@ -94,7 +94,7 @@ I would be less convinced if practices could reliably increase timely appointmen
 
 **Deep dive (optional, not required reading):** I’ve kept the fuller explanation, game table, modelling notes and full source list in the [appendix for this post](../appendices-v1.7.2/appendix-03-marginal-supply-the-tiny-economic-idea-that-decides-whether-appointments-exist-v1.7.2.md).
 
-**Note:** This series is exploratory policy analysis. It is not a party-political argument, not a RACMA-sponsored position, not a claim that any single funding model is perfect, and not a calibrated prediction of savings. The central question is whether New Zealand's current funding architecture lets lower-cost upstream care expand safely before need becomes hospital demand.
+**Note:** This series is exploratory policy analysis. It is not a party-political argument, not a position sponsored by an external body, not a claim that any single funding model is perfect, and not a calibrated prediction of savings. The central question is whether New Zealand's current funding architecture lets lower-cost upstream care expand safely before need becomes hospital demand.
 
 ## Useful links
 

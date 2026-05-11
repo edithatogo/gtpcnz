@@ -1,9 +1,8 @@
 # Deep dive appendix for Post 02: Fee-for-service, capitation and blended funding: the plain-English version
 
-This appendix preserves the longer explanatory material, model notes, game tables and source lists that sit behind the shorter public Substack post. It is intended as optional background, not the main public post.
+This appendix is supporting material for the public post. It carries the longer explanation, sources and assumptions for readers who want the detail.
 
-## Additional material cut from the public post
-
+## Additional context
 Capitation is good at saying: “This provider or network has a responsibility for this population.” That is important. It supports enrolment, continuity, proactive care and planning. But capitation is weak when the immediate problem is that the next patient needs to be seen and there is no funded slot for them.
 
 Fee-for-service is good at saying: “If an eligible service is delivered, a payment follows.” That is useful for access. But fee-for-service can become wasteful if the system pays for any activity without asking whether it was needed, safe, coordinated or equitable.
@@ -95,4 +94,4 @@ This post connects to [Ministry of Health: capitation reweighting](https://www.h
 
 ---
 
-**Use of this appendix:** This appendix is supporting material, not required reading. The public post should carry the main argument; this file is for readers who want the sources, modelling notes, tables or assumptions.
+**Appendix note:** Supporting material for readers who want the longer explanation, sources and assumptions.

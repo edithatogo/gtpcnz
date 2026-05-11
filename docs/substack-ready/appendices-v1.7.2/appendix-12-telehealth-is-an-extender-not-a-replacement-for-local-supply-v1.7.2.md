@@ -1,16 +1,17 @@
 # Deep dive appendix for Post 12: Telehealth is an extender, not a replacement for local supply
 
-This appendix preserves the longer explanatory material, model notes, game tables and source lists that sit behind the shorter public Substack post. It is intended as optional background, not the main public post.
+**Subtitle:** A technical appendix on digital access, local resilience, and the risk of substituting away from in-person supply.
 
-## Additional material cut from the public post
+This appendix is supporting material for the public post. It carries the longer explanation, sources and assumptions for readers who want the detail.
 
+## Additional context
 The answer will differ by service, place and patient group. That is why telehealth needs to be integrated with local care rather than treated as a universal substitute.
 
 ### What a good model would do
 
 A good model would fund digital care where it adds value, require information to flow back to the usual care team, protect local in-person capacity, and make sure rural patients are not offered only a screen when they need hands-on care.
 
-Telehealth should make the system bigger and more flexible. It should not become the polite way of saying local care has disappeared.
+> Telehealth should make the system bigger and more flexible. It should not become the polite way of saying local care has disappeared.
 
 ## The plain-English version
 The key idea in this post is **telehealth and local care**. The short version is that funding rules are not just accounting rules. They are behaviour rules. They tell patients where to go, providers what work is viable, intermediaries what power they hold, and hospitals what pressure they must absorb.
@@ -95,4 +96,4 @@ This post connects to [Ministry of Health: primary care health target](https://w
 
 ---
 
-**Use of this appendix:** This appendix is supporting material, not required reading. The public post should carry the main argument; this file is for readers who want the sources, modelling notes, tables or assumptions.
+**Appendix note:** Supporting material for readers who want the longer explanation, sources and assumptions.

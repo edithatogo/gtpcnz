@@ -1,12 +1,13 @@
 # Deep dive appendix for Post 11: Who should be allowed to generate primary care supply?
 
-This appendix preserves the longer explanatory material, model notes, game tables and source lists that sit behind the shorter public Substack post. It is intended as optional background, not the main public post.
+**Subtitle:** A technical appendix on provider scope, claim eligibility, clinical governance, and safe supply expansion.
 
-## Additional material cut from the public post
+This appendix is supporting material for the public post. It carries the longer explanation, sources and assumptions for readers who want the detail.
 
+## Additional context
 ### The claim should follow the contact type
 
-In a scope-enabled model, the first question is not “which profession should be protected?” The first question is “what is the contact, and what level of competence and governance does it require?”
+> In a scope-enabled model, the first question is not “which profession should be protected?” The first question is “what is the contact, and what level of competence and governance does it require?”
 
 A medication review, a wound check, a musculoskeletal assessment, a mental health brief intervention, an immunisation, a frailty review and an urgent respiratory assessment are not the same kind of work. Some require a doctor. Some may be safely delivered by another professional. Some require a team. Some require escalation.
 
@@ -97,4 +98,4 @@ This post connects to [Accident Compensation Corporation: paying patient treatme
 
 ---
 
-**Use of this appendix:** This appendix is supporting material, not required reading. The public post should carry the main argument; this file is for readers who want the sources, modelling notes, tables or assumptions.
+**Appendix note:** Supporting material for readers who want the longer explanation, sources and assumptions.

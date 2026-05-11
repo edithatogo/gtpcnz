@@ -1,17 +1,17 @@
 # Deep dive appendix for Post 13: Co-payments: demand signal or equity failure?
 
-This appendix preserves the longer explanatory material, model notes, game tables and source lists that sit behind the shorter public Substack post. It is intended as optional background, not the main public post.
+**Subtitle:** A technical appendix on price signals, unmet need, equity protection, and demand-side gaming.
 
-## Additional material cut from the public post
+This appendix is supporting material for the public post. It carries the longer explanation, sources and assumptions for readers who want the detail.
 
+## Additional context
 The point is not to remove every price signal. The point is to prevent price from becoming the reason people with the greatest need delay care.
 
 If co-payments are used carefully, they can help manage demand. If they are used bluntly, they become a quiet form of rationing.
 
-
 ### A practical way to test it
 
-The practical test is simple: after the policy change, do the people with the highest need use more appropriate primary care, or do they still delay care? If higher-income patients gain convenience while lower-income patients still face cost barriers, the model has failed. If fees are calibrated and protections work, the model should increase useful care without making access depend on income.
+> The practical test is simple: after the policy change, do the people with the highest need use more appropriate primary care, or do they still delay care? If higher-income patients gain convenience while lower-income patients still face cost barriers, the model has failed. If fees are calibrated and protections work, the model should increase useful care without making access depend on income.
 
 ## The plain-English version
 The key idea in this post is **co-payments and equity**. The short version is that funding rules are not just accounting rules. They are behaviour rules. They tell patients where to go, providers what work is viable, intermediaries what power they hold, and hospitals what pressure they must absorb.
@@ -75,6 +75,16 @@ The most important empirical tests are:
 4. whether Primary Health Organisation payment arrangements create material pass-through, transparency or entry barriers;
 5. whether scope-enabled providers can expand supply safely and equitably.
 
+## Formula note
+
+Unmet need can be represented as a threshold condition:
+
+$
+U_i = 1\{C_i + T_i + W_i > B_i\}
+$
+
+where co-payment cost (C), travel/time cost (T), and waiting burden (W) exceed the patient's practical access budget (B).
+
 ## Read this alongside
 
 This post connects to [Ministry of Health: New Zealand Health Survey annual update](https://www.health.govt.nz/publications/annual-update-of-key-results-202324-new-zealand-health-survey) [Ministry of Health: capitation reweighting](https://www.health.govt.nz/strategies-initiatives/programmes-and-initiatives/primary-and-community-health-care/capitation-reweighting) [Accident Compensation Corporation: paying patient treatment](https://www.acc.co.nz/for-providers/invoicing-us/paying-patient-treatment) [Ministry of Business, Innovation and Employment: ACC regulated payments for treatment](https://www.mbie.govt.nz/business-and-employment/employment-and-skills/employment-legislation-reviews/increasing-regulated-acc-payments-for-treatment/proposed-updates-to-acc-regulated-payments-for-treatment/options-for-payment-increases-and-how-they-were-assessed).
@@ -96,4 +106,4 @@ This post connects to [Ministry of Health: New Zealand Health Survey annual upda
 
 ---
 
-**Use of this appendix:** This appendix is supporting material, not required reading. The public post should carry the main argument; this file is for readers who want the sources, modelling notes, tables or assumptions.
+**Appendix note:** Supporting material for readers who want the longer explanation, sources and assumptions.

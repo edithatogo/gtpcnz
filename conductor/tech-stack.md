@@ -46,4 +46,10 @@ Candidate later additions:
 ## Document production
 
 - Markdown first.
+- Quarto for dynamic, reproducible policy reports (.qmd).
 - Convert later to DOCX/PDF only at submission or release stage.
+
+## Visualization
+
+- Streamlit for interactive stakeholder dashboards.
+- Plotly and Matplotlib for dynamic charting.

@@ -1,9 +1,8 @@
 # Deep dive appendix for Post 03: Marginal supply: the tiny economic idea that decides whether appointments exist
 
-This appendix preserves the longer explanatory material, model notes, game tables and source lists that sit behind the shorter public Substack post. It is intended as optional background, not the main public post.
+This appendix is supporting material for the public post. It carries the longer explanation, sources and assumptions for readers who want the detail.
 
-## Additional material cut from the public post
-
+## Additional context
 This is why telehealth should be treated as an extender, not a replacement. It can help with simple problems, follow-up and convenience. But it cannot examine every abdomen, dress every wound, assess every frail patient safely, or replace the local knowledge of a team that knows the community.
 
 The funding model has to make the local in-person contact viable when it is needed. Otherwise the system will look efficient on paper while local capacity quietly disappears.
@@ -91,4 +90,4 @@ This post connects to [Ministry of Health: capitation reweighting](https://www.h
 
 ---
 
-**Use of this appendix:** This appendix is supporting material, not required reading. The public post should carry the main argument; this file is for readers who want the sources, modelling notes, tables or assumptions.
+**Appendix note:** Supporting material for readers who want the longer explanation, sources and assumptions.

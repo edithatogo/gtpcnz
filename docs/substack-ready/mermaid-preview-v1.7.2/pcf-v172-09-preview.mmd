@@ -1,0 +1,12 @@
+flowchart LR
+  classDef title fill:#16324F,stroke:#16324F,stroke-width:0px,color:#FFFFFF,font-size:28px;
+  classDef step1 fill:#E8F3FF,stroke:#1E5A8A,stroke-width:3px,color:#102A43,font-size:24px;
+  classDef step2 fill:#FFF2D8,stroke:#A86400,stroke-width:3px,color:#3B2600,font-size:24px;
+  classDef step3 fill:#E9F8EF,stroke:#1F7A4D,stroke-width:3px,color:#123524,font-size:24px;
+  classDef footer fill:#F5F7FA,stroke:#CBD5E1,stroke-width:2px,color:#334155,font-size:18px;
+
+  T["Primary Health Organisations: useful functions, payment friction..."]:::title
+  A["PHO functions"]:::step1 --> B["Payment friction"]:::step2 --> C["Place accountability"]:::step3
+  F["Post 09 · Primary Care Funding Architecture"]:::footer
+  T --- A
+  C --- F

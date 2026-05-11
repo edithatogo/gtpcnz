@@ -1,6 +1,6 @@
 # Why formulas do not solve games
 
-**Source-confidence label:** public-document supported policy hypothesis, economic theory and model assumption; not calibrated prediction.
+**Subtitle:** Why allocation formulas matter, but incentives and behaviour decide what happens next.
 
 Funding formulas look technical. They feel objective. They use numbers, weights, datasets, regression models and official language.
 
@@ -10,12 +10,11 @@ New Zealand has seen this before with the Population-Based Funding Formula, whic
 
 That should not surprise anyone.
 
-![Figure for Why formulas do not solve games](../figures/fig-09-fixed-envelope-rationing-v1.4.0.png)
+![Conceptual diagram showing a fixed funding envelope producing rationing pressure even when the allocation formula is technically improved.](../figures/pcf-v172-04-fixed-envelope.png)
 
-*Figure: conceptual explainer for this post. It is not an observed outcome chart or calibrated prediction.*
+*Figure 5. Fixed-envelope rationing. A better formula can improve fairness inside the cap, but it does not by itself create the next appointment.*
 
-**Red-team check:** Formula reweighting is necessary. The argument is not that formulas do not matter. It is that formulas alone cannot settle questions of supply, accountability, gaming and unmet need.
-
+A useful caution: Formula reweighting is necessary. The argument is not that formulas do not matter. It is that formulas alone cannot settle questions of supply, accountability, gaming and unmet need.
 
 A funding formula is a way of deciding shares. Once shares are at stake, everyone has a reason to argue that the formula misses something important.
 
@@ -98,7 +97,6 @@ A better formula may distribute scarcity more fairly.
 
 It may not remove the scarcity.
 
-
 ### The trap in formula politics
 
 Formula fights are seductive because they look technical. Everyone can point to a variable. Age. Deprivation. Rurality. Ethnicity. Multimorbidity. Workforce cost. Practice size. Travel time.
@@ -113,7 +111,7 @@ I would be less convinced if capitation reweighting alone materially improved ac
 
 **Deep dive (optional, not required reading):** I’ve kept the fuller explanation, game table, modelling notes and full source list in the [appendix for this post](../appendices-v1.7.2/appendix-04-why-formulas-do-not-solve-games-v1.7.2.md).
 
-**Note:** This series is exploratory policy analysis. It is not a party-political argument, not a RACMA-sponsored position, not a claim that any single funding model is perfect, and not a calibrated prediction of savings. The central question is whether New Zealand's current funding architecture lets lower-cost upstream care expand safely before need becomes hospital demand.
+**Note:** This series is exploratory policy analysis. It is not a party-political argument, not a position sponsored by an external body, not a claim that any single funding model is perfect, and not a calibrated prediction of savings. The central question is whether New Zealand's current funding architecture lets lower-cost upstream care expand safely before need becomes hospital demand.
 
 ## Useful links
 

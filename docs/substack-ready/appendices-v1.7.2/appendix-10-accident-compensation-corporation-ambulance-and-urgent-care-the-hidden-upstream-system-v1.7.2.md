@@ -1,12 +1,13 @@
 # Deep dive appendix for Post 10: Accident Compensation Corporation, ambulance and urgent care: the hidden upstream system
 
-This appendix preserves the longer explanatory material, model notes, game tables and source lists that sit behind the shorter public Substack post. It is intended as optional background, not the main public post.
+**Subtitle:** A technical appendix on cross-funder incentives, urgent alternatives, and emergency-department avoidance.
 
-## Additional material cut from the public post
+This appendix is supporting material for the public post. It carries the longer explanation, sources and assumptions for readers who want the detail.
 
+## Additional context
 That is why urgent and after-hours care should not sit outside primary care funding analysis. It is the bridge between routine general practice and hospital emergency care.
 
-A good urgent-care model needs the same things as the broader model: clear eligibility, a sustainable payment stream, co-payment protections, rural design, provider-scope flexibility, escalation pathways, data visibility and accountability.
+> A good urgent-care model needs the same things as the broader model: clear eligibility, a sustainable payment stream, co-payment protections, rural design, provider-scope flexibility, escalation pathways, data visibility and accountability.
 
 If urgent care is funded as a separate political promise but not connected to primary care, ambulance and hospital incentives, it may improve access in some places while creating new gaps elsewhere.
 
@@ -93,4 +94,4 @@ This post connects to [Accident Compensation Corporation: paying patient treatme
 
 ---
 
-**Use of this appendix:** This appendix is supporting material, not required reading. The public post should carry the main argument; this file is for readers who want the sources, modelling notes, tables or assumptions.
+**Appendix note:** Supporting material for readers who want the longer explanation, sources and assumptions.

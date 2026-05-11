@@ -1,16 +1,17 @@
 # Deep dive appendix for Post 09: Primary Health Organisations: useful functions, payment friction and cherry-picking
 
-This appendix preserves the longer explanatory material, model notes, game tables and source lists that sit behind the shorter public Substack post. It is intended as optional background, not the main public post.
+**Subtitle:** A technical appendix on PHO value, pass-through friction, place accountability, and cherry-picking risk.
 
-## Additional material cut from the public post
+This appendix is supporting material for the public post. It carries the longer explanation, sources and assumptions for readers who want the detail.
 
+## Additional context
 Primary Health Organisations are easy to argue about because they mean different things to different people. To some, they are population-health infrastructure. To others, they are bureaucracy. To some practices, they provide support. To others, they are a payment gateway.
 
 Those functions should be separated.
 
 A locality or Primary Health Organisation may add value by supporting equity work, outreach, data quality, quality improvement, community relationships and integration. But that does not automatically mean it should control every funding pathway or become the gate through which new models must pass.
 
-The policy question is not whether Primary Health Organisations are good or bad. It is which functions are worth keeping, which should be strengthened, which should be optional, and which create friction or opacity.
+> The policy question is not whether Primary Health Organisations are good or bad. It is which functions are worth keeping, which should be strengthened, which should be optional, and which create friction or opacity.
 
 ## The plain-English version
 The key idea in this post is **Primary Health Organisation function versus friction**. The short version is that funding rules are not just accounting rules. They are behaviour rules. They tell patients where to go, providers what work is viable, intermediaries what power they hold, and hospitals what pressure they must absorb.
@@ -95,4 +96,4 @@ This post connects to [Ministry of Health: PHO finances briefing](https://www.he
 
 ---
 
-**Use of this appendix:** This appendix is supporting material, not required reading. The public post should carry the main argument; this file is for readers who want the sources, modelling notes, tables or assumptions.
+**Appendix note:** Supporting material for readers who want the longer explanation, sources and assumptions.

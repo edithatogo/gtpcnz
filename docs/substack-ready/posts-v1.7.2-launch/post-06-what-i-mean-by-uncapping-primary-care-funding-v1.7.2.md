@@ -1,6 +1,6 @@
 # What I mean by uncapping primary care funding
 
-**Source-confidence label:** public-document supported policy hypothesis, economic theory and model assumption; not calibrated prediction.
+**Subtitle:** What uncapped means here: scheduled, rules-based, audited primary care, not uncontrolled activity.
 
 When I say primary care funding should be “uncapped”, I need to be precise.
 
@@ -10,12 +10,11 @@ I do not mean abolishing capitation.
 
 I do not mean removing clinical governance.
 
-![Figure for What I mean by uncapping primary care funding](../figures/fig-16-uncapped-scheduled-benefit-supply-v1.5.0.png)
+![Diagram showing an uncapped scheduled primary care benefit with eligibility rules, clinical governance, audit, equity protections and provider accountability.](../figures/pcf-v172-06-uncapped-controlled.png)
 
-*Figure: conceptual explainer for this post. It is not an observed outcome chart or calibrated prediction.*
+*Figure 7. Uncapped does not mean uncontrolled. The proposal is uncapped volume only inside rules, audit and clinical governance.*
 
-**Red-team check:** The weak-control version of uncapped fee-for-service is explicitly not the proposal. The proposal is scheduled, rules-based, audited, clinically governed, equity-protected and place-accountable.
-
+A useful caution: The weak-control version of uncapped fee-for-service is explicitly not the proposal. The proposal is scheduled, rules-based, audited, clinically governed, equity-protected and place-accountable.
 
 I do not mean ignoring equity.
 
@@ -72,7 +71,9 @@ The controls should be smarter:
 
 This is what I mean by “uncapped does not mean uncontrolled”.
 
-![fig-13-hybrid-architecture-v1.4.0](../figures/fig-13-hybrid-architecture-v1.4.0.png)
+![Hybrid architecture diagram linking capitation, scheduled activity payments, urgent care, ambulance alternatives, data, audit and place-based accountability.](../figures/pcf-v172-07-hybrid-stack.png)
+
+*Figure 8. Hybrid architecture. The design uses multiple controls because no single lever solves access, equity, fiscal and gaming risk at once.*
 
 Why does this matter?
 
@@ -102,7 +103,6 @@ That is not neoliberal. It is not a blank cheque. It is not an anti-public model
 
 It is a way of paying for the care we want to happen before the hospital becomes the only place left to go.
 
-
 ### What would still be controlled?
 
 This is the part people often miss. If eligible activity is uncapped, almost everything else still needs rules.
@@ -119,7 +119,7 @@ I would be less convinced if an uncapped scheduled stream could not be governed 
 
 **Deep dive (optional, not required reading):** I’ve kept the fuller explanation, game table, modelling notes and full source list in the [appendix for this post](../appendices-v1.7.2/appendix-06-what-i-mean-by-uncapping-primary-care-funding-v1.7.2.md).
 
-**Note:** This series is exploratory policy analysis. It is not a party-political argument, not a RACMA-sponsored position, not a claim that any single funding model is perfect, and not a calibrated prediction of savings. The central question is whether New Zealand's current funding architecture lets lower-cost upstream care expand safely before need becomes hospital demand.
+**Note:** This series is exploratory policy analysis. It is not a party-political argument, not a position sponsored by an external body, not a claim that any single funding model is perfect, and not a calibrated prediction of savings. The central question is whether New Zealand's current funding architecture lets lower-cost upstream care expand safely before need becomes hospital demand.
 
 ## Useful links
 

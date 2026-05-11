@@ -1,9 +1,10 @@
 # Deep dive appendix for Post 07: The hospital salience game and the Health New Zealand allocation game
 
-This appendix preserves the longer explanatory material, model notes, game tables and source lists that sit behind the shorter public Substack post. It is intended as optional background, not the main public post.
+**Subtitle:** A technical appendix on visibility, allocation pressure, and why separate appropriations do not remove the game.
 
-## Additional material cut from the public post
+This appendix is supporting material for the public post. It carries the longer explanation, sources and assumptions for readers who want the detail.
 
+## Additional context
 ### Separate appropriations help, but they do not end the game
 
 It is important to be fair here. New Zealand does have more formal budget separation than the old District Health Board model. There are separate appropriations for hospital and specialist services, and for primary, community, public and population health services.
@@ -12,7 +13,7 @@ That matters. It means the problem is not as simple as “hospitals can just tak
 
 But separate appropriations do not remove the political economy. Hospitals still generate urgent pressure. Ministers still face acute-service risk. Health New Zealand still has to manage deficits, workforce problems, waiting times, emergency departments and public concern.
 
-So the game has changed shape, but it has not disappeared. The question is whether the upstream part of the system has enough activity-sensitive funding and accountability to grow before the hospital pressure becomes unavoidable.
+> So the game has changed shape, but it has not disappeared. The question is whether the upstream part of the system has enough activity-sensitive funding and accountability to grow before the hospital pressure becomes unavoidable.
 
 ## The plain-English version
 The key idea in this post is **hospital salience and internal allocation**. The short version is that funding rules are not just accounting rules. They are behaviour rules. They tell patients where to go, providers what work is viable, intermediaries what power they hold, and hospitals what pressure they must absorb.
@@ -76,6 +77,16 @@ The most important empirical tests are:
 4. whether Primary Health Organisation payment arrangements create material pass-through, transparency or entry barriers;
 5. whether scope-enabled providers can expand supply safely and equitably.
 
+## Formula note
+
+Hospital pressure can be read as a visible-demand function:
+
+$
+H_t = f(E_t, A_t, U_t, P_t)
+$
+
+where emergency demand (E), ambulance conveyance (A), urgent-care substitution (U), and primary-care access (P) jointly determine pressure on hospital services.
+
 ## Read this alongside
 
 This post connects to [Ministry of Health: Health Crown entities and Health New Zealand roles](https://www.health.govt.nz/about-us/new-zealands-health-system/health-system-roles-and-organisations/health-crown-entities) [Treasury: Vote Health 2025/26 Estimates](https://www.treasury.govt.nz/publications/estimates/vote-health-health-sector-estimates-appropriations-2025-26) [Cabinet material: Primary Health Care Funding Improvements](https://www.health.govt.nz/information-releases/cabinet-material-primary-health-care-funding-improvements-and-update-on-primary-health-care) [Health New Zealand: National Primary Care Dataset and new primary care health target](https://www.healthnz.govt.nz/about-us/what-we-do/planning-and-performance/primary-care-tactical-action-plan/national-primary-care-dataset-and-new-primary-care-health-target).
@@ -97,4 +108,4 @@ This post connects to [Ministry of Health: Health Crown entities and Health New 
 
 ---
 
-**Use of this appendix:** This appendix is supporting material, not required reading. The public post should carry the main argument; this file is for readers who want the sources, modelling notes, tables or assumptions.
+**Appendix note:** Supporting material for readers who want the longer explanation, sources and assumptions.

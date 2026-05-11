@@ -1,13 +1,13 @@
 # Deep dive appendix for Post 17: Game-informed Multi-Criteria Decision Analysis: making disagreement useful
 
-This appendix preserves the longer explanatory material, model notes, game tables and source lists that sit behind the shorter public Substack post. It is intended as optional background, not the main public post.
+**Subtitle:** A technical appendix on turning policy disagreement into explicit criteria, weights, scores, and trade-offs.
 
-## Additional material cut from the public post
+This appendix is supporting material for the public post. It carries the longer explanation, sources and assumptions for readers who want the detail.
 
+## Additional context
 Then I would ask them to score policy options against access, equity, rural resilience, fiscal sustainability, gaming risk, administrative simplicity, clinical governance, data readiness and political feasibility.
 
-That would tell us not only which option wins, but why people disagree.
-
+> That would tell us not only which option wins, but why people disagree.
 
 ### What a good workshop would produce
 
@@ -77,6 +77,16 @@ The most important empirical tests are:
 4. whether Primary Health Organisation payment arrangements create material pass-through, transparency or entry barriers;
 5. whether scope-enabled providers can expand supply safely and equitably.
 
+## Formula note
+
+A basic MCDA score can be expressed as:
+
+$
+Score(o) = \sum_{c=1}^{n} w_c s_{oc} - r_o
+$
+
+where option o receives weighted criterion scores s, criterion weights w, and an explicit risk penalty r.
+
 ## Read this alongside
 
 This post connects to [ISPOR: MCDA for healthcare decision-making](https://www.ispor.org/heor-resources/good-practices/article/multiple-criteria-decision-analysis-for-health-care-decision-making---an-introduction) [ISPOR-SMDM modelling good research practices](https://www.ispor.org/heor-resources/good-practices/article/modeling-good-research-practices---overview) [PRISMA extension for Scoping Reviews](https://www.prisma-statement.org/scoping) [Ministry of Health: primary care health target](https://www.health.govt.nz/strategies-initiatives/programmes-and-initiatives/primary-and-community-health-care/primary-care-health-target).
@@ -98,4 +108,4 @@ This post connects to [ISPOR: MCDA for healthcare decision-making](https://www.i
 
 ---
 
-**Use of this appendix:** This appendix is supporting material, not required reading. The public post should carry the main argument; this file is for readers who want the sources, modelling notes, tables or assumptions.
+**Appendix note:** Supporting material for readers who want the longer explanation, sources and assumptions.

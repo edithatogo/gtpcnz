@@ -1,15 +1,15 @@
 # Deep dive appendix for Post 14: The 19 games: a map of the New Zealand primary care funding problem
 
-This appendix preserves the longer explanatory material, model notes, game tables and source lists that sit behind the shorter public Substack post. It is intended as optional background, not the main public post.
+**Subtitle:** A technical appendix mapping the component games behind primary-care access, funding, and hospital pressure.
 
-## Additional material cut from the public post
+This appendix is supporting material for the public post. It carries the longer explanation, sources and assumptions for readers who want the detail.
 
+## Additional context
 The danger is pretending there is only one game. If we think the whole problem is the capitation formula, we will keep refining the formula while access problems shift elsewhere. If we think the whole problem is workforce, we will miss the payment rules that make extra work unviable. If we think the whole problem is hospitals, we will miss the upstream access failures that feed them.
 
-The game map is a diagnostic tool. It helps decision-makers ask which strategic trap they are trying to fix, which trap might worsen, and which safeguards are needed.
+> The game map is a diagnostic tool. It helps decision-makers ask which strategic trap they are trying to fix, which trap might worsen, and which safeguards are needed.
 
 That is the kind of thinking a funding reform needs before it becomes another narrow programme.
-
 
 ### The map also protects against overclaiming
 
@@ -98,4 +98,4 @@ This post connects to [Ministry of Health: capitation reweighting](https://www.h
 
 ---
 
-**Use of this appendix:** This appendix is supporting material, not required reading. The public post should carry the main argument; this file is for readers who want the sources, modelling notes, tables or assumptions.
+**Appendix note:** Supporting material for readers who want the longer explanation, sources and assumptions.

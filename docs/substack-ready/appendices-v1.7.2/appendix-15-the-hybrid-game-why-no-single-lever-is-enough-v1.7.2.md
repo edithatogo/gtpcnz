@@ -1,12 +1,13 @@
 # Deep dive appendix for Post 15: The hybrid game: why no single lever is enough
 
-This appendix preserves the longer explanatory material, model notes, game tables and source lists that sit behind the shorter public Substack post. It is intended as optional background, not the main public post.
+**Subtitle:** A technical appendix on why the answer is an architecture, not a single payment lever.
 
-## Additional material cut from the public post
+This appendix is supporting material for the public post. It carries the longer explanation, sources and assumptions for readers who want the detail.
 
+## Additional context
 The most likely failure mode is partial implementation. Government might add an access target without marginal funding. Or add fee-for-service without place accountability. Or add digital care without protecting local in-person supply. Or require urgent care without funding the workforce and follow-up pathways.
 
-Each partial reform can look reasonable on its own. The danger is that each one leaves another game untouched. That is why the hybrid model needs to be judged as a package. The pieces are not interchangeable decorations. They are safeguards against predictable failure.
+> Each partial reform can look reasonable on its own. The danger is that each one leaves another game untouched. That is why the hybrid model needs to be judged as a package. The pieces are not interchangeable decorations. They are safeguards against predictable failure.
 
 ## The plain-English version
 The key idea in this post is **hybrid game**. The short version is that funding rules are not just accounting rules. They are behaviour rules. They tell patients where to go, providers what work is viable, intermediaries what power they hold, and hospitals what pressure they must absorb.
@@ -91,4 +92,4 @@ This post connects to [Ministry of Health: capitation reweighting](https://www.h
 
 ---
 
-**Use of this appendix:** This appendix is supporting material, not required reading. The public post should carry the main argument; this file is for readers who want the sources, modelling notes, tables or assumptions.
+**Appendix note:** Supporting material for readers who want the longer explanation, sources and assumptions.

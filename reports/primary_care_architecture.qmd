@@ -1,0 +1,81 @@
+---
+title: "Primary Care Pulse: The Funding Architecture Report"
+subtitle: "Understanding how we pay for doctors and why it matters for everyone"
+author: "Dylan A Mordaunt"
+date: "2026-05-11"
+version: "1.7.2"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    theme: cosmo
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
+execute:
+  echo: false
+  warning: false
+---
+
+# Executive Summary
+
+Imagine you are playing a video game where you have to keep a city healthy. If you only pay the doctors when they work in the big, expensive hospitals, but don't pay them enough to work in the small neighborhood clinics, what happens? People get sick in their neighborhoods and then rush to the hospital all at once. The hospital gets crowded, and everyone has to wait a long time.
+
+This report explains a new way to fund (pay for) primary care—the doctors and nurses in your neighborhood. We want to make sure they are paid fairly for every person they help, so that they can stop health problems before they become big enough to need a hospital visit.
+
+# 1. The Big Idea: "Uncapped but Controlled"
+
+Right now, funding for doctors can be like a "fixed envelope" of money. Once that envelope is empty, it's hard for doctors to help more people without losing money themselves. 
+
+Our proposal is different: **"Uncapped at the activity-envelope level, but controlled at the item level."**
+
+### What does this mean?
+- **Uncapped:** There is no fixed limit on how many people a doctor can help. If someone is sick, the doctor should be able to help them and be paid for that work.
+- **Controlled:** Just because there is no limit doesn't mean there are no rules. We use strict rules (like a rulebook in a game) to make sure the right care is given to the right people by the right providers.
+
+# 3. What is "Capitation"?
+
+In healthcare, **Capitation** is like a subscription service for your doctor. 
+
+Imagine you pay a monthly fee to a music streaming app. You can listen to as many songs as you want, and the app gets the same amount of money whether you listen to 1 song or 1,000 songs. 
+
+- **The Good Side:** The doctor has a steady income and knows they are responsible for your health all year round.
+- **The Bad Side:** If 1,000 people all want an appointment at the same time, the doctor might not have enough money (or staff) to see everyone, because the "subscription fee" doesn't increase when the work increases.
+
+# 4. Results: Why the "Full Hybrid" Model Wins
+
+We tested 10 different ways to pay for healthcare. Here is how they compare in our simulation.
+
+```{python}
+#| label: result-summary
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the summary results
+df = pd.read_csv("../outputs/full-parameterised-summary-results-v1.7.0.csv")
+
+# Sort by rank
+df_sorted = df.sort_values("rank_by_hybrid_viability")
+
+# Create a simple bar chart of Hybrid Viability
+plt.figure(figsize=(10, 6))
+plt.barh(df_sorted["scenario_name"], df_sorted["hybrid_viability_score"], color='skyblue')
+plt.xlabel("Viability Score (Higher is Better)")
+plt.title("Comparison of Healthcare Funding Models")
+plt.gca().invert_yaxis()
+plt.tight_layout()
+plt.show()
+```
+
+### Key Findings:
+- **Full Hybrid Upstream Architecture (Winner):** This model combines the "subscription" (Capitation) with a "pay-per-visit" (FFS) system. It makes it easier for you to see a doctor and reduces the pressure on big hospitals.
+- **Current Reform Pathway:** While it makes some improvements, it doesn't do as much to help doctors offer more appointments when demand is high.
+
+# 5. Conclusion
+
+By changing the rules of the "funding game," we can make sure that your neighborhood doctor is there when you need them. This doesn't just help you; it helps the whole country by keeping our big hospitals free for real emergencies.
+
+---
+**Technical Note:** This report was automatically generated using Quarto. The data comes from the `full-parameterised-summary-results-v1.7.0.csv` file in the project outputs.
