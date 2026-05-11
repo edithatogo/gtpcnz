@@ -1,0 +1,30 @@
+---
+title: "Primary Care Pulse"
+subtitle: "Interactive reporting for the primary care funding architecture model"
+---
+
+Primary Care Pulse is a public-facing reporting layer for the primary care funding architecture model. It translates the model scaffold into a readable website, reproducible Quarto report, and local Streamlit dashboard.
+
+## Start Here
+
+- [Read the funding architecture report](reports/primary_care_architecture.qmd)
+- [Run the Streamlit dashboard](docs/REPORTS-AND-DASHBOARD.md)
+- [Review the repository guide](README.md)
+
+## Current Status
+
+This is a source-informed, parameterised policy model scaffold. It is not a real-data calibrated forecasting model and should not be used to claim precise fiscal savings, hospital-demand reductions, or workforce effects.
+
+## Local Commands
+
+Render the website:
+
+```bash
+quarto render
+```
+
+Run the dashboard:
+
+```bash
+streamlit run models/primarycare_model/app.py
+```

@@ -1,0 +1,36 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - index.qmd
+    - reports/primary_care_architecture.qmd
+    - docs/REPORTS-AND-DASHBOARD.md
+    - README.md
+
+website:
+  title: "Primary Care Pulse"
+  site-url: "https://edithatogo.github.io/primary-care-pulse/"
+  navbar:
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Funding Architecture Report"
+        href: reports/primary_care_architecture.qmd
+      - text: "Dashboard"
+        href: docs/REPORTS-AND-DASHBOARD.md
+      - text: "Repository Guide"
+        href: README.md
+  page-footer:
+    left: "Primary Care Pulse"
+    right: "Generated with Quarto"
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-fold: true
+    page-layout: full
+
+execute:
+  echo: false
+  warning: false
