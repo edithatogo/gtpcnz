@@ -2088,6 +2088,16 @@ Then test five things:
 - Primary Health Organisation transaction costs;
 - scope-enabled provider safety and productivity.
 
+## Fair Counterargument: The Equity Risk
+
+A strong counterargument against an uncapped fee-for-service model is that it risks worsening health inequities for Māori, Pacific peoples, and rural communities. Without strict controls, providers might "cream-skim" by setting up in affluent areas, prioritizing quick/simple cases over complex multimorbidity, or charging high co-payments that exclude low-income patients. 
+
+This risk is entirely real. That is why the "controlled" part of the architecture is non-negotiable. An uncapped stream cannot be introduced without:
+1. **Mandatory Co-payment Protection:** Zero-fee or highly subsidized tiers for high-need populations as a condition of accessing the scheduled funding stream.
+2. **Place-Based Accountability:** Requiring providers to take responsibility for geographic or demographic populations, preventing cherry-picking.
+3. **Targeted Rural Loading:** Higher scheduled benefit rates for rural areas to overcome the volume disadvantage.
+4. **Te Tiriti Governance:** Ensuring data sovereignty and active protection of Māori health outcomes in how new claims data is governed and utilized.
+
 ## The final line
 
 The issue is not whether New Zealand has started reform. It has.

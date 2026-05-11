@@ -36,20 +36,20 @@ Conduct the structural review against the proposed funding model.
 
 - [ ] Summary report clearly articulates risks and mandatory funding rules to protect equity.
 
-## Phase 3: Integration and Release
+## Phase 3: Integration and Release (Complete)
 
 Ensure findings are incorporated into the launch materials.
 
 ### Tasks
 
-- [ ] Task 3.1: Update Substack recommendation post drafts to explicitly address equity concerns using "Fair Counterargument" phrasing.
-- [ ] Task 3.2: Review and update any relevant parameters in `docs/calibration/parameter-tiering-v1.7.2.csv` based on findings.
-- [ ] Task 3.3: Final commit and mark track complete.
+- [x] Task 3.1: Update Substack recommendation post drafts to explicitly address equity concerns using "Fair Counterargument" phrasing.
+- [x] Task 3.2: Review and update any relevant parameters in `docs/calibration/parameter-tiering-v1.7.2.csv` based on findings.
+- [x] Task 3.3: Final commit and mark track complete.
 
 ### Verification
 
-- [ ] Launch materials reflect the equity review findings.
-- [ ] All acceptance criteria in `spec.md` met.
+- [x] Launch materials reflect the equity review findings.
+- [x] All acceptance criteria in `spec.md` met.
 
 ---
 
