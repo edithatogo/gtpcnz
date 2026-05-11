@@ -15,3 +15,4 @@
 
 ## Active Tracks
 - [Interactive Reporting and Visualization Suite](./tracks/interactive-reporting_20260511/)
+- [Māori, Pacific, and Equity Review](./tracks/026-equity-review/)

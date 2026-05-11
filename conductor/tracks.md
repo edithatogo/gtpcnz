@@ -21,6 +21,7 @@
 | 017 | Substack-ready publication layer | Complete | Humanized, hyperlinked 12-post series, figure pack, source bank, glossary and publication-readiness QA |
 | 018 | Contract-compliance audit | Complete in v1.2.1 | Acceptance criteria matrix, compliance audit, remediation log, local-link audit and updated repo metadata |
 | [ ] | interactive-reporting_20260511 | Interactive Reporting and Visualization Suite | 2026-05-11 | 2026-05-11 |
+| [ ] | 026-equity-review | Māori, Pacific, and Equity Review | 2026-05-12 | 2026-05-12 |
 
 ## Current priority
 
