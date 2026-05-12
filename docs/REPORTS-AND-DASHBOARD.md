@@ -8,6 +8,8 @@ GTPCNZ includes a Quarto public report and a Streamlit dashboard.
 
 - `docs/calibration/model-card-v1.7.2.md`
 - `docs/launch/claim-boundaries-v1.7.2.md`
+- `docs/public-site/streamlit-dashboard-contract-v1.8.1.md`
+- `docs/public-site/streamlit-dashboard-audit-v1.8.1.md`
 - `docs/public-site/evidence-tracker-public-v1.8.1.md`
 - `docs/public-site/calibration-readiness-page-v1.8.1.md`
 

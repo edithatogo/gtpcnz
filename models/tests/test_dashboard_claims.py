@@ -63,5 +63,19 @@ def test_quarto_renders_model_card_and_claim_boundaries():
     text = Path("_quarto.yml").read_text(encoding="utf-8")
     assert "docs/calibration/model-card-v1.7.2.md" in text
     assert "docs/launch/claim-boundaries-v1.7.2.md" in text
+    assert "docs/public-site/streamlit-dashboard-contract-v1.8.1.md" in text
+    assert "docs/public-site/streamlit-dashboard-audit-v1.8.1.md" in text
     assert "docs/public-site/evidence-tracker-public-v1.8.1.md" in text
     assert "docs/public-site/calibration-readiness-page-v1.8.1.md" in text
+
+
+def test_streamlit_dashboard_contract_and_audit_are_explicit():
+    contract = Path("docs/public-site/streamlit-dashboard-contract-v1.8.1.md").read_text(encoding="utf-8")
+    audit = Path("docs/public-site/streamlit-dashboard-audit-v1.8.1.md").read_text(encoding="utf-8")
+
+    assert "content and presentation contract" in contract
+    assert "Required current-state information" in contract
+    assert "Required visual and tabular material" in contract
+    assert "Status: pass" in audit
+    assert "Evidence matrix" in audit
+    assert "Static architecture diagram exists" in audit
