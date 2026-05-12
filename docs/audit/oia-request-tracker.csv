@@ -1,0 +1,4 @@
+request_id,target_agency,date_sent,status,statutory_deadline,response_date,outcome,quality_score,notes
+OIA-2026-001,Ministry of Health,2026-05-11,Sent,2026-06-08,,,0,Capitation formula reweighting logic
+OIA-2026-002,ACC,2026-05-11,Sent,2026-06-08,,,0,FFS payments by provider scope
+OIA-2026-003,St John,2026-05-11,Sent,2026-06-08,,,0,Ambulance disposition and non-conveyance rates

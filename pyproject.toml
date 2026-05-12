@@ -1,0 +1,21 @@
+[project]
+name = "gtpcnz"
+version = "1.7.2"
+description = "Quarto and Streamlit scaffold for primary care funding architecture modelling"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy",
+    "pandas",
+    "networkx",
+    "streamlit",
+    "matplotlib",
+    "plotly",
+    "jupyter",
+    "pyyaml"
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-mock"]
+
+[tool.pytest.ini_options]
+pythonpath = ["models"]

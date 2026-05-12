@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite it as below."
+title: "GTPCNZ: Primary Care Funding Architecture in Australia and Aotearoa New Zealand"
+version: "1.7.2"
+date-released: "2026-05-12"
+url: "https://github.com/edithatogo/gtpcnz"
+repository-code: "https://github.com/edithatogo/gtpcnz"
+authors:
+  - family-names: "Mordaunt"
+    given-names: "Dylan A"

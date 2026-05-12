@@ -1,0 +1,23 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+.env
+.streamlit/secrets.toml
+.serena/
+.DS_Store
+*.sqlite
+*.db
+/data/raw/
+/data/secure/
+/models/output/
+
+/qa/
+
+# Quarto render output; keep the source .qmd tracked.
+/.quarto/
+/_site/
+/reports/primary_care_architecture.html
+/reports/primary_care_architecture_files/
+/reports/primary_care_architecture.tex
+**/*.quarto_ipynb
