@@ -9,7 +9,11 @@ FULL_CAVEAT = (
 
 
 def test_dashboard_uses_explainer_and_not_forecast_language():
-    text = Path("models/primarycare_model/app.py").read_text(encoding="utf-8")
+    text = (
+        Path("models/primarycare_model/app.py").read_text(encoding="utf-8")
+        + "\n"
+        + Path("models/primarycare_model/scenario_service.py").read_text(encoding="utf-8")
+    )
     assert "Funding Architecture Explainer" in text
     assert "not a real-data calibrated forecast" in text
     assert "toy" in text.lower()
@@ -19,6 +23,16 @@ def test_dashboard_uses_explainer_and_not_forecast_language():
     assert "Interpretation rules" in text
     assert "What the reference scenarios mean" in text
     assert "What the toy sliders are for" in text
+    assert "Toy parameter dictionary" in text
+    assert "0 means absent/weak; 100 means strong/reliably implemented" in text
+    assert "qualitative teaching levers, not estimated structural parameters" in text
+    assert "Payment for extra primary care activity" in text
+    assert "Stable population-based base funding" in text
+    assert "Whole-population local accountability" in text
+    assert "Claim rules and audit strength" in text
+    assert "Equity and co-payment protection" in text
+    assert "Flexible workforce scope" in text
+    assert "Local in-person care capacity" in text
     assert "What would need to happen next" in text
     assert "Do not convert index differences into dollars saved" in text
     assert "Current state of the policy problem and the project" in text
@@ -89,3 +103,4 @@ def test_streamlit_dashboard_contract_and_audit_are_explicit():
     assert "selected scenario radar/profile chart" in contract
     assert "Dynamic scenario score heatmap exists" in audit
     assert "Dynamic selected scenario radar/profile chart exists" in audit
+    assert "Toy parameter dictionary exists" in audit

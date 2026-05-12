@@ -7,6 +7,7 @@ import streamlit as st
 
 from models.primarycare_model.scenario_service import (
     CLAIM_BOUNDARY_TEXT,
+    TOY_LEVER_DEFINITIONS,
     ToySettings,
     build_calibration_readiness_table,
     load_first_existing,
@@ -101,14 +102,14 @@ def render_toy_explainer_context() -> None:
         """
         ### What the toy sliders are for
 
-        The sliders deliberately compress the problem into a few visible levers.
-        They help explain the mechanism:
+        The sliders deliberately compress the problem into a few visible health-system levers.
+        They are not parameters estimated from New Zealand data. They are teaching
+        controls that let a reader see the direction of the argument.
 
-        - activity-sensitive payment can strengthen marginal supply;
-        - capitation supports continuity and population responsibility;
-        - place accountability, audit, item rules and equity protections control
-          cherry-picking and low-value activity;
-        - local in-person support matters where telehealth cannot substitute.
+        Each slider is scaled from **0 to 100**:
+
+        - **0** means the lever is absent or very weak in the toy explanation.
+        - **100** means the lever is strong and reliably implemented.
 
         The toy output is a teaching artefact. It should never be quoted as an
         estimated effect size.
@@ -200,6 +201,26 @@ def build_figure_inventory_table() -> pd.DataFrame:
             ("Dynamic bar chart", "Project readiness", "Current state tab", "Shows maturity of explanation, evidence, validation and calibration work."),
         ],
         columns=["Type", "Figure or table", "Location", "Purpose"],
+    )
+
+
+def build_toy_parameter_dictionary() -> pd.DataFrame:
+    return pd.DataFrame(
+        [
+            (
+                definition.public_label,
+                definition.health_economics_meaning,
+                definition.high_value_meaning,
+                definition.toy_output_effect,
+            )
+            for definition in TOY_LEVER_DEFINITIONS
+        ],
+        columns=[
+            "Toy lever",
+            "Health-economics meaning",
+            "What a high value means",
+            "How it affects the toy output",
+        ],
     )
 
 
@@ -459,6 +480,14 @@ def render_toy_chart(scores: dict[str, float]) -> None:
     st.plotly_chart(fig, width="stretch")
 
 
+def render_toy_parameter_dictionary() -> None:
+    st.markdown("### Toy parameter dictionary")
+    st.dataframe(build_toy_parameter_dictionary(), hide_index=True, width="stretch")
+    st.caption(
+        "These are qualitative teaching levers, not estimated structural parameters. Their purpose is to make the causal logic inspectable."
+    )
+
+
 def render_model_status() -> None:
     st.subheader("Model status")
     st.markdown(
@@ -507,56 +536,59 @@ def render_app() -> None:
     df = cached_scenario_results(str(RESULTS_PATH))
 
     st.sidebar.header("Toy explainer levers")
-    st.sidebar.caption("These sliders are educational. They do not rerun the full scaffold.")
+    st.sidebar.caption(
+        "0 means absent/weak; 100 means strong/reliably implemented. These are educational levers, not estimated parameters."
+    )
+    slider_definitions = {definition.field_name: definition for definition in TOY_LEVER_DEFINITIONS}
     toy_settings = ToySettings(
         scheduled_benefit_level=st.sidebar.slider(
-            "Scheduled fee-for-service / Pay-per-visit benefit level",
+            slider_definitions["scheduled_benefit_level"].public_label,
             0,
             100,
             55,
-            help="Toy lever for the marginal payment signal for eligible primary medical activity.",
+            help=slider_definitions["scheduled_benefit_level"].slider_help,
         ),
         capitation_support=st.sidebar.slider(
-            "Capitation / Subscription population-responsibility support",
+            slider_definitions["capitation_support"].public_label,
             0,
             100,
             70,
-            help="Toy lever for baseline enrolled-population support.",
+            help=slider_definitions["capitation_support"].slider_help,
         ),
         place_accountability=st.sidebar.slider(
-            "Place-based accountability",
+            slider_definitions["place_accountability"].public_label,
             0,
             100,
             65,
-            help="Toy lever for protection against cherry-picking and gaps for hard-to-reach populations.",
+            help=slider_definitions["place_accountability"].slider_help,
         ),
         audit_strength=st.sidebar.slider(
-            "Item rules, documentation and audit",
+            slider_definitions["audit_strength"].public_label,
             0,
             100,
             75,
-            help="Toy lever for controlling gaming and low-value activity.",
+            help=slider_definitions["audit_strength"].slider_help,
         ),
         equity_protection=st.sidebar.slider(
-            "Co-payment and equity protections",
+            slider_definitions["equity_protection"].public_label,
             0,
             100,
             70,
-            help="Toy lever for protecting access for high-need groups.",
+            help=slider_definitions["equity_protection"].slider_help,
         ),
         scope_flexibility=st.sidebar.slider(
-            "Provider-scope flexibility",
+            slider_definitions["scope_flexibility"].public_label,
             0,
             100,
             60,
-            help="Toy lever for allowing appropriate providers to generate eligible primary care activity.",
+            help=slider_definitions["scope_flexibility"].slider_help,
         ),
         local_in_person_support=st.sidebar.slider(
-            "Local in-person / rural support",
+            slider_definitions["local_in_person_support"].public_label,
             0,
             100,
             60,
-            help="Toy lever for supporting care that cannot be replaced by telehealth alone.",
+            help=slider_definitions["local_in_person_support"].slider_help,
         ),
     )
     toy_scores = score_toy_settings(toy_settings)
@@ -610,6 +642,7 @@ def render_app() -> None:
     with tabs[3]:
         st.subheader("Toy explainer")
         render_toy_explainer_context()
+        render_toy_parameter_dictionary()
         st.markdown(
             """
             These sliders are deliberately simple. They are useful for teaching the

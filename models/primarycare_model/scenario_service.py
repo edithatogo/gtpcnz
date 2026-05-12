@@ -69,6 +69,9 @@ class ToySettings:
 
     These are not the 70-parameter model. They exist to help readers understand
     the direction of the policy logic.
+
+    The field names are internal implementation names. Public-facing labels and
+    definitions are stored in TOY_LEVER_DEFINITIONS below.
     """
 
     scheduled_benefit_level: int
@@ -78,6 +81,78 @@ class ToySettings:
     equity_protection: int
     scope_flexibility: int
     local_in_person_support: int
+
+
+@dataclass(frozen=True)
+class ToyLeverDefinition:
+    """Public definition for one educational toy lever."""
+
+    field_name: str
+    public_label: str
+    health_economics_meaning: str
+    high_value_meaning: str
+    toy_output_effect: str
+    slider_help: str
+
+
+TOY_LEVER_DEFINITIONS: tuple[ToyLeverDefinition, ...] = (
+    ToyLeverDefinition(
+        "scheduled_benefit_level",
+        "Payment for extra primary care activity",
+        "How strong the marginal payment signal is for each eligible primary medical activity.",
+        "A higher value means practices are less financially penalised for doing extra clinically necessary work.",
+        "Raises toy supply, but can raise gaming risk if not paired with audit and place accountability.",
+        "Strength of the marginal payment signal for each eligible primary medical activity.",
+    ),
+    ToyLeverDefinition(
+        "capitation_support",
+        "Stable population-based base funding",
+        "How strong the enrolled-population/capitation support is.",
+        "A higher value means more stable baseline funding for continuity and population responsibility.",
+        "Supports viability, governance and equity, but does not alone create strong marginal supply.",
+        "Strength of enrolled-population/capitation support for continuity and population responsibility.",
+    ),
+    ToyLeverDefinition(
+        "place_accountability",
+        "Whole-population local accountability",
+        "How strongly providers or commissioning bodies remain responsible for the whole local population.",
+        "A higher value means less room to cherry-pick easy activity and ignore hard-to-reach groups.",
+        "Improves governance and equity and reduces gaming risk.",
+        "Strength of responsibility for the whole local population, including hard-to-reach groups.",
+    ),
+    ToyLeverDefinition(
+        "audit_strength",
+        "Claim rules and audit strength",
+        "How clear and enforceable the item rules, documentation requirements and unusual-pattern checks are.",
+        "A higher value means activity-sensitive payment is more controlled.",
+        "Improves governance and reduces gaming risk.",
+        "Strength of item definitions, documentation rules and unusual-pattern checks.",
+    ),
+    ToyLeverDefinition(
+        "equity_protection",
+        "Equity and co-payment protection",
+        "How strongly the design prevents patient charges and access barriers from shifting cost to high-need groups.",
+        "A higher value means better protection for people who would otherwise ration care by price.",
+        "Improves toy equity and helps reduce hospital-pressure logic.",
+        "Strength of protections against patient charges and access barriers for high-need groups.",
+    ),
+    ToyLeverDefinition(
+        "scope_flexibility",
+        "Flexible workforce scope",
+        "How much appropriate care can be delivered by the right mix of GPs, nurses, nurse practitioners, pharmacists and other providers.",
+        "A higher value means the model assumes less bottlenecking on one workforce group.",
+        "Raises toy supply, but needs audit and governance to avoid low-value activity.",
+        "Ability for the right mix of providers to deliver eligible primary care activity.",
+    ),
+    ToyLeverDefinition(
+        "local_in_person_support",
+        "Local in-person care capacity",
+        "How much local face-to-face capacity remains available for care that cannot be safely substituted by digital access.",
+        "A higher value means rural, complex and hands-on care needs are less likely to be displaced.",
+        "Improves toy supply, equity and hospital-pressure logic.",
+        "Capacity for local face-to-face care that cannot be replaced by digital access.",
+    ),
+)
 
 
 def load_scenario_results(path: str | Path) -> pd.DataFrame:

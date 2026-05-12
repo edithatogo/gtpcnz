@@ -30,6 +30,9 @@ The Streamlit dashboard satisfies the v1.8.1 content and presentation contract a
 | Calibration-readiness table exists | `build_calibration_readiness_table()` and Calibration readiness tab | Pass |
 | Plain-English glossary exists | Glossary tab and `Learn the 'Big Words'` expander | Pass |
 | Toy sliders are not presented as forecast controls | Sidebar and toy-explainer text say they are educational and do not rerun the full scaffold | Pass |
+| Toy parameter dictionary exists | `render_toy_parameter_dictionary()` presents public labels, health-economics meanings, high-value meanings and toy-output effects | Pass |
+| Toy slider scale is defined | Sidebar says `0 means absent/weak; 100 means strong/reliably implemented` | Pass |
+| Toy labels are plain policy levers rather than unexplained internal names | `TOY_LEVER_DEFINITIONS` provides labels such as `Payment for extra primary care activity`, `Stable population-based base funding` and `Whole-population local accountability` | Pass |
 | Outputs are described as model-generated indices, not observed outcomes | Reference chart captions and glossary | Pass |
 | No deprecated Streamlit `use_container_width` usage in app | Regression test asserts absence | Pass |
 | Public Streamlit URL is documented | README, index, dashboard docs and deployment docs | Pass |

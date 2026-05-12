@@ -30,6 +30,7 @@ The dashboard must include these sections or tabs:
 - Current state: current New Zealand reform pathway, public project status, static table and static diagram.
 - Reference scenarios: precomputed model-generated indices and dynamic charts.
 - Toy explainer: educational sliders and dynamic toy-output chart.
+- Toy parameter dictionary: plain-English definitions for every slider, including what 0, 100 and a high value mean.
 - Evidence and OIA: public evidence tracker table.
 - Calibration readiness: table of data required before real calibration.
 - Glossary: plain-English definitions of core terms.
@@ -72,6 +73,9 @@ The dashboard must:
 - describe outputs as model-generated indices, not observed New Zealand outcomes;
 - state that F0/current reform is the comparator;
 - state that toy sliders do not rerun the full parameterised model;
+- state that toy sliders are qualitative teaching levers, not estimated structural parameters;
+- define the toy scale as 0 = absent/weak and 100 = strong/reliably implemented;
+- use public slider labels that explain the policy lever rather than exposing only internal implementation names;
 - state that index differences must not be converted into dollars saved, beds avoided, workforce numbers, ED reductions or implementation impacts.
 
 The dashboard must not:
