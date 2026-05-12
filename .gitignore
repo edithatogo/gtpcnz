@@ -4,6 +4,7 @@ __pycache__/
 .venv/
 .env
 .streamlit/secrets.toml
+.serena/
 .DS_Store
 *.sqlite
 *.db
