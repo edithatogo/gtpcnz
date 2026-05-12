@@ -1,0 +1,163 @@
+[
+  {
+    "objectID": "README.html",
+    "href": "README.html",
+    "title": "GTPCNZ",
+    "section": "",
+    "text": "GTPCNZ is a public policy-research and translation package on primary care funding architecture in Aotearoa New Zealand and Australia.\nWebsite: https://edithatogo.github.io/gtpcnz/\n\n\n\nA source-informed model scaffold for exploring primary care funding architecture.\nA Quarto website and reproducible report.\nA Streamlit dashboard for interactive scenario exploration.\nA public audit trail of assumptions, caveats, and launch materials.\n\n\n\n\n\nIt is not an endorsed policy position.\nIt is not a real-data calibrated forecasting model.\nIt should not be used to claim precise fiscal savings, hospital-demand reductions, or workforce effects.\n\n\n\n\nCapitation should be retained for continuity, enrolment, baseline viability, and population responsibility. Eligible primary medical activity should also have an uncapped, scheduled, rules-based fee-for-service stream, controlled through item rules, provider scope, clinical governance, documentation, audit, co-payment protections, and place-based accountability.\nShort version:\n\nUncapped does not mean uncontrolled.\n\n\n\n\n\nQuarto website: https://edithatogo.github.io/gtpcnz/\nQuarto source report: reports/primary_care_architecture.qmd\nStreamlit dashboard entrypoint: streamlit_app.py\nDashboard implementation: models/primarycare_model/app.py\nModel card: docs/calibration/model-card-v1.7.2.md\nClaim boundaries: docs/launch/claim-boundaries-v1.7.2.md\n\n\n\n\nInstall dependencies:\npip install -r requirements.txt\nRun tests:\npytest -q\nRender the Quarto website:\nquarto render --to html\nRun the Streamlit dashboard:\nstreamlit run streamlit_app.py\n\n\n\nGitHub Pages is deployed from .github/workflows/pages.yml.\nStreamlit Community Cloud can deploy this app with:\n\nRepository: edithatogo/gtpcnz\nBranch: main\nEntrypoint: streamlit_app.py\n\n\n\n\nSee LICENSE for the mixed code/content licensing terms and CITATION.cff for citation metadata."
+  },
+  {
+    "objectID": "README.html#what-this-is",
+    "href": "README.html#what-this-is",
+    "title": "GTPCNZ",
+    "section": "",
+    "text": "A source-informed model scaffold for exploring primary care funding architecture.\nA Quarto website and reproducible report.\nA Streamlit dashboard for interactive scenario exploration.\nA public audit trail of assumptions, caveats, and launch materials."
+  },
+  {
+    "objectID": "README.html#what-this-is-not",
+    "href": "README.html#what-this-is-not",
+    "title": "GTPCNZ",
+    "section": "",
+    "text": "It is not an endorsed policy position.\nIt is not a real-data calibrated forecasting model.\nIt should not be used to claim precise fiscal savings, hospital-demand reductions, or workforce effects."
+  },
+  {
+    "objectID": "README.html#current-thesis",
+    "href": "README.html#current-thesis",
+    "title": "GTPCNZ",
+    "section": "",
+    "text": "Capitation should be retained for continuity, enrolment, baseline viability, and population responsibility. Eligible primary medical activity should also have an uncapped, scheduled, rules-based fee-for-service stream, controlled through item rules, provider scope, clinical governance, documentation, audit, co-payment protections, and place-based accountability.\nShort version:\n\nUncapped does not mean uncontrolled."
+  },
+  {
+    "objectID": "README.html#public-surfaces",
+    "href": "README.html#public-surfaces",
+    "title": "GTPCNZ",
+    "section": "",
+    "text": "Quarto website: https://edithatogo.github.io/gtpcnz/\nQuarto source report: reports/primary_care_architecture.qmd\nStreamlit dashboard entrypoint: streamlit_app.py\nDashboard implementation: models/primarycare_model/app.py\nModel card: docs/calibration/model-card-v1.7.2.md\nClaim boundaries: docs/launch/claim-boundaries-v1.7.2.md"
+  },
+  {
+    "objectID": "README.html#run-locally",
+    "href": "README.html#run-locally",
+    "title": "GTPCNZ",
+    "section": "",
+    "text": "Install dependencies:\npip install -r requirements.txt\nRun tests:\npytest -q\nRender the Quarto website:\nquarto render --to html\nRun the Streamlit dashboard:\nstreamlit run streamlit_app.py"
+  },
+  {
+    "objectID": "README.html#deploy",
+    "href": "README.html#deploy",
+    "title": "GTPCNZ",
+    "section": "",
+    "text": "GitHub Pages is deployed from .github/workflows/pages.yml.\nStreamlit Community Cloud can deploy this app with:\n\nRepository: edithatogo/gtpcnz\nBranch: main\nEntrypoint: streamlit_app.py"
+  },
+  {
+    "objectID": "README.html#license-and-citation",
+    "href": "README.html#license-and-citation",
+    "title": "GTPCNZ",
+    "section": "",
+    "text": "See LICENSE for the mixed code/content licensing terms and CITATION.cff for citation metadata."
+  },
+  {
+    "objectID": "docs/REPORTS-AND-DASHBOARD.html",
+    "href": "docs/REPORTS-AND-DASHBOARD.html",
+    "title": "GTPCNZ Interactive Reporting & Visualization Suite",
+    "section": "",
+    "text": "This project includes a state-of-the-art (SOTA) reporting layer and an interactive dashboard to make the primary care funding model accessible to both policy experts and citizens (calibrated for a 14-year-old audience).\n\n\nThe Quarto report is a reproducible document that combines technical thesis writing with live Python data analysis.\n\n\nTo generate the HTML or PDF version, ensure you have Quarto installed and run:\nquarto render reports/primary_care_architecture.qmd\n\n\n\n\nNarrative first: Explains the “Game Theory” of healthcare using relatable metaphors (e.g., video games, subscription services).\nEmbedded Evidence: Pulls directly from outputs/full-parameterised-summary-results-v1.7.0.csv.\n\n\n\n\n\n“GTPCNZ” is an interactive tool allowing users to simulate the impact of different funding rules.\n\n\nEnsure you have the dependencies installed:\npip install -r requirements.txt\nThen launch the dashboard:\nstreamlit run streamlit_app.py\n\n\n\n\nInteractive Sliders: Adjust Capitation vs. FFS weights.\nEducational Tooltips: Instant definitions for complex healthcare terms.\nReal-time Plotting: Immediate feedback on how your settings impact “Doctor Supply” and “Hospital Pressure”.\nDeployment-ready Entry Point: streamlit_app.py is the Streamlit Community Cloud entrypoint.\n\n\n\n\n\n\nModularity: The dashboard leverages the existing project data structure.\nAccessibility: Content is simplified without losing technical rigor.\nTransparency: All visualisations are generated from traceable project outputs.\nAutomated Testing: models/tests/test_app.py uses Streamlit’s native AppTest API."
+  },
+  {
+    "objectID": "docs/REPORTS-AND-DASHBOARD.html#quarto-report-reportsprimary_care_architecture.qmd",
+    "href": "docs/REPORTS-AND-DASHBOARD.html#quarto-report-reportsprimary_care_architecture.qmd",
+    "title": "GTPCNZ Interactive Reporting & Visualization Suite",
+    "section": "",
+    "text": "The Quarto report is a reproducible document that combines technical thesis writing with live Python data analysis.\n\n\nTo generate the HTML or PDF version, ensure you have Quarto installed and run:\nquarto render reports/primary_care_architecture.qmd\n\n\n\n\nNarrative first: Explains the “Game Theory” of healthcare using relatable metaphors (e.g., video games, subscription services).\nEmbedded Evidence: Pulls directly from outputs/full-parameterised-summary-results-v1.7.0.csv."
+  },
+  {
+    "objectID": "docs/REPORTS-AND-DASHBOARD.html#streamlit-dashboard-streamlit_app.py",
+    "href": "docs/REPORTS-AND-DASHBOARD.html#streamlit-dashboard-streamlit_app.py",
+    "title": "GTPCNZ Interactive Reporting & Visualization Suite",
+    "section": "",
+    "text": "“GTPCNZ” is an interactive tool allowing users to simulate the impact of different funding rules.\n\n\nEnsure you have the dependencies installed:\npip install -r requirements.txt\nThen launch the dashboard:\nstreamlit run streamlit_app.py\n\n\n\n\nInteractive Sliders: Adjust Capitation vs. FFS weights.\nEducational Tooltips: Instant definitions for complex healthcare terms.\nReal-time Plotting: Immediate feedback on how your settings impact “Doctor Supply” and “Hospital Pressure”.\nDeployment-ready Entry Point: streamlit_app.py is the Streamlit Community Cloud entrypoint."
+  },
+  {
+    "objectID": "docs/REPORTS-AND-DASHBOARD.html#technical-standards-sota",
+    "href": "docs/REPORTS-AND-DASHBOARD.html#technical-standards-sota",
+    "title": "GTPCNZ Interactive Reporting & Visualization Suite",
+    "section": "",
+    "text": "Modularity: The dashboard leverages the existing project data structure.\nAccessibility: Content is simplified without losing technical rigor.\nTransparency: All visualisations are generated from traceable project outputs.\nAutomated Testing: models/tests/test_app.py uses Streamlit’s native AppTest API."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "GTPCNZ",
+    "section": "",
+    "text": "GTPCNZ is a public-facing reporting layer for the primary care funding architecture model. It translates the model scaffold into a readable website, reproducible Quarto report, and local Streamlit dashboard."
+  },
+  {
+    "objectID": "index.html#start-here",
+    "href": "index.html#start-here",
+    "title": "GTPCNZ",
+    "section": "Start Here",
+    "text": "Start Here\n\nRead the funding architecture report\nRun the Streamlit dashboard\nDeploy the Streamlit dashboard\nReview the repository guide"
+  },
+  {
+    "objectID": "index.html#current-status",
+    "href": "index.html#current-status",
+    "title": "GTPCNZ",
+    "section": "Current Status",
+    "text": "Current Status\nThis is a source-informed, parameterised policy model scaffold. It is not a real-data calibrated forecasting model and should not be used to claim precise fiscal savings, hospital-demand reductions, or workforce effects."
+  },
+  {
+    "objectID": "index.html#local-commands",
+    "href": "index.html#local-commands",
+    "title": "GTPCNZ",
+    "section": "Local Commands",
+    "text": "Local Commands\nRender the website:\nquarto render\nRun the dashboard:\nstreamlit run models/primarycare_model/app.py"
+  },
+  {
+    "objectID": "reports/primary_care_architecture.html",
+    "href": "reports/primary_care_architecture.html",
+    "title": "GTPCNZ: The Funding Architecture Report",
+    "section": "",
+    "text": "Executive Summary\nImagine you are playing a video game where you have to keep a city healthy. If you only pay the doctors when they work in the big, expensive hospitals, but don’t pay them enough to work in the small neighborhood clinics, what happens? People get sick in their neighborhoods and then rush to the hospital all at once. The hospital gets crowded, and everyone has to wait a long time.\nThis report explains a new way to fund (pay for) primary care—the doctors and nurses in your neighborhood. We want to make sure they are paid fairly for every person they help, so that they can stop health problems before they become big enough to need a hospital visit.\n\n\n1. The Big Idea: “Uncapped but Controlled”\nRight now, funding for doctors can be like a “fixed envelope” of money. Once that envelope is empty, it’s hard for doctors to help more people without losing money themselves.\nOur proposal is different: “Uncapped at the activity-envelope level, but controlled at the item level.”\n\nWhat does this mean?\n\nUncapped: There is no fixed limit on how many people a doctor can help. If someone is sick, the doctor should be able to help them and be paid for that work.\nControlled: Just because there is no limit doesn’t mean there are no rules. We use strict rules (like a rulebook in a game) to make sure the right care is given to the right people by the right providers.\n\n\n\n\n3. What is “Capitation”?\nIn healthcare, Capitation is like a subscription service for your doctor.\nImagine you pay a monthly fee to a music streaming app. You can listen to as many songs as you want, and the app gets the same amount of money whether you listen to 1 song or 1,000 songs.\n\nThe Good Side: The doctor has a steady income and knows they are responsible for your health all year round.\nThe Bad Side: If 1,000 people all want an appointment at the same time, the doctor might not have enough money (or staff) to see everyone, because the “subscription fee” doesn’t increase when the work increases.\n\n\n\n4. Results: Why the “Full Hybrid” Model Wins\nWe tested 10 different ways to pay for healthcare. Here is how they compare in our simulation.\n\n\n\n\n\n\n\n\n\n\nKey Findings:\n\nFull Hybrid Upstream Architecture (Winner): This model combines the “subscription” (Capitation) with a “pay-per-visit” (FFS) system. It makes it easier for you to see a doctor and reduces the pressure on big hospitals.\nCurrent Reform Pathway: While it makes some improvements, it doesn’t do as much to help doctors offer more appointments when demand is high.\n\n\n\n\n5. Conclusion\nBy changing the rules of the “funding game,” we can make sure that your neighborhood doctor is there when you need them. This doesn’t just help you; it helps the whole country by keeping our big hospitals free for real emergencies.\n\nTechnical Note: This report was automatically generated using Quarto. The data comes from the full-parameterised-summary-results-v1.7.0.csv file in the project outputs."
+  },
+  {
+    "objectID": "docs/STREAMLIT-DEPLOYMENT.html",
+    "href": "docs/STREAMLIT-DEPLOYMENT.html",
+    "title": "Streamlit Deployment",
+    "section": "",
+    "text": "GTPCNZ is prepared for Streamlit Community Cloud.\n\n\nUse:\nstreamlit_app.py\nThe root entrypoint imports and runs models.primarycare_model.app.render_app.\n\n\n\n\nrequirements.txt declares Python dependencies.\n.streamlit/config.toml stores public app configuration.\n.streamlit/secrets.toml.example documents that no secrets are required.\nmodels/tests/test_app.py uses streamlit.testing.v1.AppTest for headless dashboard checks.\n\n\n\n\npip install -r requirements.txt\npytest -q models/tests/test_app.py\nstreamlit run streamlit_app.py\n\n\n\n\nRepository: edithatogo/gtpcnz\nBranch: main\nMain file path: streamlit_app.py\nPython version: 3.11\n\n\n\n\nThe dashboard is a demonstrative simulator. It is not a real-data calibrated policy forecast."
+  },
+  {
+    "objectID": "docs/STREAMLIT-DEPLOYMENT.html#entrypoint",
+    "href": "docs/STREAMLIT-DEPLOYMENT.html#entrypoint",
+    "title": "Streamlit Deployment",
+    "section": "",
+    "text": "Use:\nstreamlit_app.py\nThe root entrypoint imports and runs models.primarycare_model.app.render_app."
+  },
+  {
+    "objectID": "docs/STREAMLIT-DEPLOYMENT.html#required-files",
+    "href": "docs/STREAMLIT-DEPLOYMENT.html#required-files",
+    "title": "Streamlit Deployment",
+    "section": "",
+    "text": "requirements.txt declares Python dependencies.\n.streamlit/config.toml stores public app configuration.\n.streamlit/secrets.toml.example documents that no secrets are required.\nmodels/tests/test_app.py uses streamlit.testing.v1.AppTest for headless dashboard checks."
+  },
+  {
+    "objectID": "docs/STREAMLIT-DEPLOYMENT.html#local-verification",
+    "href": "docs/STREAMLIT-DEPLOYMENT.html#local-verification",
+    "title": "Streamlit Deployment",
+    "section": "",
+    "text": "pip install -r requirements.txt\npytest -q models/tests/test_app.py\nstreamlit run streamlit_app.py"
+  },
+  {
+    "objectID": "docs/STREAMLIT-DEPLOYMENT.html#community-cloud-settings",
+    "href": "docs/STREAMLIT-DEPLOYMENT.html#community-cloud-settings",
+    "title": "Streamlit Deployment",
+    "section": "",
+    "text": "Repository: edithatogo/gtpcnz\nBranch: main\nMain file path: streamlit_app.py\nPython version: 3.11"
+  },
+  {
+    "objectID": "docs/STREAMLIT-DEPLOYMENT.html#caveat",
+    "href": "docs/STREAMLIT-DEPLOYMENT.html#caveat",
+    "title": "Streamlit Deployment",
+    "section": "",
+    "text": "The dashboard is a demonstrative simulator. It is not a real-data calibrated policy forecast."
+  }
+]
