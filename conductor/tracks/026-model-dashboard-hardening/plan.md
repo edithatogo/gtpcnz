@@ -2,7 +2,7 @@
 
 Status: Complete.
 
-Completion commit: `7b83877f33f8ce3dad0833f6651419e2052d24a7`
+Implementation commit: `7b83877f33f8ce3dad0833f6651419e2052d24a7`
 
 ## Completion evidence
 

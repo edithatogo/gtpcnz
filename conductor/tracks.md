@@ -1,8 +1,8 @@
 # Conductor tracks
 
-## Active implementation track
+## Completed implementation track
 
-- `026-model-dashboard-hardening` — harden model-service layer, Streamlit dashboard, Quarto public site, evidence tracker, calibration-readiness pages and tests.
+- `026-model-dashboard-hardening` — complete in v1.8.1. Hardened model-service layer, Streamlit dashboard, Quarto public site, evidence tracker, calibration-readiness pages and tests.
 
 ## Out of scope for this pack
 
