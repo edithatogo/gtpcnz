@@ -11,14 +11,14 @@ Website: https://edithatogo.github.io/gtpcnz/
 
 - A source-informed model scaffold for exploring primary care funding architecture.
 - A Quarto website and reproducible report.
-- A Streamlit dashboard for interactive scenario exploration.
+- A Streamlit dashboard for interactive explanation of scenario logic.
 - A public audit trail of assumptions, caveats, and launch materials.
 
 ## What This Is Not
 
 - It is not an endorsed policy position.
 - It is not a real-data calibrated forecasting model.
-- It should not be used to claim precise fiscal savings, hospital-demand reductions, or workforce effects.
+- It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
 
 ## Current Thesis
 
@@ -31,11 +31,14 @@ Short version:
 ## Public Surfaces
 
 - Quarto website: https://edithatogo.github.io/gtpcnz/
+- Interactive explainer (Streamlit): https://gtpcnz.streamlit.app/
 - Quarto source report: `reports/primary_care_architecture.qmd`
 - Streamlit dashboard entrypoint: `streamlit_app.py`
 - Dashboard implementation: `models/primarycare_model/app.py`
 - Model card: `docs/calibration/model-card-v1.7.2.md`
 - Claim boundaries: `docs/launch/claim-boundaries-v1.7.2.md`
+- Evidence tracker: `docs/public-site/evidence-tracker-public-v1.8.1.md`
+- Calibration readiness: `docs/public-site/calibration-readiness-page-v1.8.1.md`
 
 ## Run Locally
 

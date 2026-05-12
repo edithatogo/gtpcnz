@@ -55,7 +55,7 @@ def render_reference_viability(df: pd.DataFrame) -> None:
         title="Reference scenario comparison — model-generated index",
     )
     fig.update_layout(height=560, margin=dict(l=10, r=10, t=45, b=10))
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
     st.caption(
         "These are model-generated indices from the source-informed scaffold, not observed New Zealand outcomes."
     )
@@ -77,7 +77,7 @@ def render_reference_scatter(df: pd.DataFrame) -> None:
         title="Supply generation versus hospital pressure",
     )
     fig.update_layout(height=560, margin=dict(l=10, r=10, t=45, b=10))
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
     st.caption(
         "A lower hospital-pressure score is better. These indices compare policy logics under assumptions; they are not calibrated forecasts."
     )
@@ -104,7 +104,7 @@ def render_toy_chart(scores: dict[str, float]) -> None:
         labels={"score": "Score", "index": ""},
     )
     fig.update_layout(height=420, margin=dict(l=10, r=10, t=45, b=10))
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
 
 def render_model_status() -> None:
@@ -238,7 +238,7 @@ def render_app() -> None:
         if df.empty:
             st.error(f"Could not find model results at `{RESULTS_PATH.relative_to(ROOT)}`.")
         else:
-            st.dataframe(summarise_reference_results(df), hide_index=True, use_container_width=True)
+            st.dataframe(summarise_reference_results(df), hide_index=True, width="stretch")
             col1, col2 = st.columns(2)
             with col1:
                 render_reference_viability(df)
@@ -265,13 +265,13 @@ def render_app() -> None:
         if tracker.empty:
             st.info("Evidence/OIA tracker data is not available in this checkout.")
         else:
-            st.dataframe(tracker, use_container_width=True, hide_index=True)
+            st.dataframe(tracker, width="stretch", hide_index=True)
         st.caption("OIA responses and linked data are needed before treating the model as calibrated.")
 
     with tabs[4]:
         st.subheader("What would make this a real calibrated model?")
         readiness = build_calibration_readiness_table()
-        st.dataframe(readiness, use_container_width=True, hide_index=True)
+        st.dataframe(readiness, width="stretch", hide_index=True)
         st.markdown(
             """
             The next stage is not more sliders. It is replacing source-informed priors

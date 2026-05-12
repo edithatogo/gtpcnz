@@ -2,6 +2,10 @@
 
 GTPCNZ is prepared for Streamlit Community Cloud.
 
+Public app URL:
+
+<https://gtpcnz.streamlit.app/>
+
 ## Entrypoint
 
 Use:
@@ -36,4 +40,6 @@ streamlit run streamlit_app.py
 
 ## Caveat
 
-The dashboard is a demonstrative simulator. It is not a real-data calibrated policy forecast.
+The dashboard is an educational explainer. It is not a calibrated simulator or real-data calibrated policy forecast.
+
+> This is a source-informed parameterised scaffold and educational explainer. It is not a real-data calibrated forecast and should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.

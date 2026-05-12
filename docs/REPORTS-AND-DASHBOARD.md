@@ -13,6 +13,10 @@ GTPCNZ includes a Quarto public report and a Streamlit dashboard.
 
 ## Streamlit dashboard
 
+Public URL:
+
+<https://gtpcnz.streamlit.app/>
+
 Entrypoint:
 
 ```bash

@@ -31,7 +31,7 @@ Short version:
 ## Public surfaces
 
 - GitHub Pages: this site.
-- Streamlit: interactive explainer and scenario dashboard.
+- Streamlit: [interactive explainer and scenario dashboard](https://gtpcnz.streamlit.app/).
 - Repository: source code, outputs, model card, claim boundaries and tests.
 
 ## Local commands
