@@ -27,6 +27,113 @@ MODEL_CARD_PATH = ROOT / "docs" / "calibration" / "model-card-v1.7.2.md"
 CLAIM_BOUNDARIES_PATH = ROOT / "docs" / "launch" / "claim-boundaries-v1.7.2.md"
 
 
+def render_reader_guide() -> None:
+    st.markdown(
+        """
+        ### How to read this dashboard
+
+        This dashboard is a public explanation layer for the GTPCNZ model scaffold.
+        It is designed to help a reader understand the argument, the assumptions,
+        and the evidence still needed before any real-world claim could be made.
+
+        **The most important distinction:**
+
+        - **Reference scenarios** are precomputed, model-generated indices from the
+          source-informed scaffold.
+        - **Toy explainer sliders** are simplified teaching controls. They are not
+          the 70-parameter model and they do not estimate New Zealand outcomes.
+
+        Read the page in this order: start with the thesis, compare reference
+        scenarios, use the toy sliders to learn the mechanism, then check the
+        evidence and calibration-readiness tabs before drawing conclusions.
+        """
+    )
+
+
+def render_interpretation_rules() -> None:
+    st.markdown(
+        """
+        ### Interpretation rules
+
+        Use these outputs as **structured reasoning**, not as results from a
+        validated forecasting model.
+
+        - Higher viability, access, supply and governance indices mean the policy
+          logic performs better inside the scaffold assumptions.
+        - Lower hospital-pressure and gaming-risk indices are preferable.
+        - Differences between scenarios are more meaningful than any single score.
+        - A strong scenario still needs implementation design, equity review,
+          stakeholder validation and real-data calibration.
+        - Do not convert index differences into dollars saved, beds avoided,
+          workforce numbers, ED reductions or implementation impacts.
+        """
+    )
+
+
+def render_reference_scenario_explainer() -> None:
+    st.markdown(
+        """
+        ### What the reference scenarios mean
+
+        The reference scenarios are not predictions. They are named policy
+        architectures used to compare the current reform pathway with alternative
+        funding-rule combinations.
+
+        - **F0 current reform comparator:** capitation reweighting, access targets,
+          NPCD, digital access, urgent-care work and PHO accountability.
+        - **Allocation-only reform:** improves distribution but keeps a weak
+          marginal activity signal.
+        - **Uncapped activity without enough controls:** tests the gaming and
+          low-value-care risk.
+        - **Full hybrid upstream architecture:** combines capitation, scheduled
+          activity-sensitive payment, place accountability, controls, data and
+          equity protections.
+
+        Treat F0 as the comparator. The question is not whether New Zealand is
+        doing nothing; the question is whether the current pathway changes the
+        supply game enough.
+        """
+    )
+
+
+def render_toy_explainer_context() -> None:
+    st.markdown(
+        """
+        ### What the toy sliders are for
+
+        The sliders deliberately compress the problem into a few visible levers.
+        They help explain the mechanism:
+
+        - activity-sensitive payment can strengthen marginal supply;
+        - capitation supports continuity and population responsibility;
+        - place accountability, audit, item rules and equity protections control
+          cherry-picking and low-value activity;
+        - local in-person support matters where telehealth cannot substitute.
+
+        The toy output is a teaching artefact. It should never be quoted as an
+        estimated effect size.
+        """
+    )
+
+
+def render_next_steps_context() -> None:
+    st.markdown(
+        """
+        ### What would need to happen next
+
+        A real empirical model would require linked or consistently comparable
+        data on appointments, payments, co-payments, provider workforce, ambulance
+        pathways, emergency department presentations, admissions, geography and
+        equity strata.
+
+        The immediate next work is evidence collection and calibration readiness:
+        submit or update the OIA requests, verify public-source assumptions,
+        map available datasets, and test whether the load-bearing assumptions
+        survive stakeholder review.
+        """
+    )
+
+
 @st.cache_data(show_spinner=False)
 def cached_scenario_results(path: str) -> pd.DataFrame:
     return load_scenario_results(path)
@@ -150,6 +257,7 @@ def render_app() -> None:
         """
     )
     caveat_box()
+    render_reader_guide()
 
     df = cached_scenario_results(str(RESULTS_PATH))
 
@@ -232,9 +340,11 @@ def render_app() -> None:
             """
         )
         render_model_status()
+        render_interpretation_rules()
 
     with tabs[1]:
         st.subheader("Reference scenarios from the scaffold")
+        render_reference_scenario_explainer()
         if df.empty:
             st.error(f"Could not find model results at `{RESULTS_PATH.relative_to(ROOT)}`.")
         else:
@@ -247,6 +357,7 @@ def render_app() -> None:
 
     with tabs[2]:
         st.subheader("Toy explainer")
+        render_toy_explainer_context()
         st.markdown(
             """
             These sliders are deliberately simple. They are useful for teaching the
@@ -270,6 +381,7 @@ def render_app() -> None:
 
     with tabs[4]:
         st.subheader("What would make this a real calibrated model?")
+        render_next_steps_context()
         readiness = build_calibration_readiness_table()
         st.dataframe(readiness, width="stretch", hide_index=True)
         st.markdown(

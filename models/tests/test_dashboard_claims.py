@@ -15,6 +15,12 @@ def test_dashboard_uses_explainer_and_not_forecast_language():
     assert "toy" in text.lower()
     assert "not a calibrated prediction" in text.lower()
     assert "use_container_width" not in text
+    assert "How to read this dashboard" in text
+    assert "Interpretation rules" in text
+    assert "What the reference scenarios mean" in text
+    assert "What the toy sliders are for" in text
+    assert "What would need to happen next" in text
+    assert "Do not convert index differences into dollars saved" in text
 
 
 def test_public_report_has_claim_boundaries():
