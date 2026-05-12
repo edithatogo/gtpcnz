@@ -21,6 +21,12 @@ def test_dashboard_uses_explainer_and_not_forecast_language():
     assert "What the toy sliders are for" in text
     assert "What would need to happen next" in text
     assert "Do not convert index differences into dollars saved" in text
+    assert "Current state of the policy problem and the project" in text
+    assert "Current New Zealand reform pathway used as the comparator" in text
+    assert "How the public explainer fits together" in text
+    assert "Public project status" in text
+    assert "Where the project is mature versus still early" in text
+    assert "not an empirical performance result" in text
 
 
 def test_public_report_has_claim_boundaries():

@@ -134,6 +134,134 @@ def render_next_steps_context() -> None:
     )
 
 
+def build_current_reform_table() -> pd.DataFrame:
+    return pd.DataFrame(
+        [
+            (
+                "Capitation reweighting",
+                "Changing how baseline enrolled-population funding is allocated.",
+                "May improve fairness of distribution, but does not by itself create a strong payment signal for the next clinically necessary appointment.",
+            ),
+            (
+                "Primary care access target",
+                "A public target for getting people timely primary care access.",
+                "Useful as a signal, but targets need enough workforce, funding and data support to change behaviour.",
+            ),
+            (
+                "National Primary Care Dataset",
+                "A data programme intended to improve visibility of primary care activity and access.",
+                "Important for future calibration; not yet enough on its own to prove the model's assumptions.",
+            ),
+            (
+                "Digital access and telehealth",
+                "Online and remote access routes for some care needs.",
+                "Can help access, but cannot replace local in-person care for every patient, place or condition.",
+            ),
+            (
+                "Urgent and after-hours care work",
+                "Policy attention to alternatives before emergency department presentation.",
+                "Potentially important, but needs funding architecture and workforce support to shift demand safely.",
+            ),
+            (
+                "PHO accountability and commissioning",
+                "Use of organisations and contracts to manage enrolled-population responsibility.",
+                "Central to place accountability, but pass-through, transaction costs and incentives need verification.",
+            ),
+        ],
+        columns=["Current pathway component", "Plain-English meaning", "Why it matters for this model"],
+    )
+
+
+def build_public_status_table() -> pd.DataFrame:
+    return pd.DataFrame(
+        [
+            ("Model status", "Source-informed scaffold", "Ready for explanation; not ready for forecasting."),
+            ("Dashboard status", "Educational explainer", "Shows reference indices and toy mechanisms separately."),
+            ("Evidence status", "Tracker created", "OIA/data requests still need submission or update."),
+            ("Calibration status", "Readiness mapped", "Real linked data and validation tests still required."),
+            ("Claim status", "Bounded", "No precise fiscal, hospital-demand, workforce or implementation-impact claims."),
+            ("Deployment status", "Public GitHub Pages and Streamlit URLs", "Public surfaces are live and tested."),
+        ],
+        columns=["Area", "Current state", "What this means"],
+    )
+
+
+def render_current_state_diagram() -> None:
+    st.graphviz_chart(
+        """
+        digraph {
+          graph [rankdir=LR, bgcolor="transparent"];
+          node [shape=box, style="rounded,filled", fillcolor="#eef6f4", color="#2f6f67", fontname="Arial"];
+          edge [color="#4f6f6a"];
+
+          Reform [label="Current reform pathway\\n(capitation, access target, NPCD, urgent care)"];
+          Gap [label="Question tested here\\nDoes this change marginal supply enough?"];
+          Scaffold [label="GTPCNZ scaffold\\nsource-informed indices"];
+          Toy [label="Toy explainer\\nlearning sliders only"];
+          Evidence [label="Evidence and OIA tracker\\nwhat must be verified"];
+          Calibration [label="Calibration readiness\\nreal data needed before forecasts"];
+
+          Reform -> Gap -> Scaffold;
+          Scaffold -> Toy;
+          Scaffold -> Evidence -> Calibration;
+        }
+        """,
+        width="stretch",
+    )
+
+
+def render_readiness_chart(status_df: pd.DataFrame) -> None:
+    chart_df = pd.DataFrame(
+        [
+            ("Public explanation", 85),
+            ("Scenario comparison", 75),
+            ("Evidence inventory", 55),
+            ("Stakeholder validation", 25),
+            ("Real-data calibration", 10),
+        ],
+        columns=["Readiness area", "Illustrative readiness index"],
+    )
+    fig = px.bar(
+        chart_df,
+        x="Illustrative readiness index",
+        y="Readiness area",
+        orientation="h",
+        title="Where the project is mature versus still early",
+        labels={"Illustrative readiness index": "Readiness index (0-100)", "Readiness area": ""},
+        range_x=[0, 100],
+    )
+    fig.update_layout(height=360, margin=dict(l=10, r=10, t=45, b=10))
+    st.plotly_chart(fig, width="stretch")
+    st.caption(
+        "This readiness chart is a project-status visual, not an empirical performance result."
+    )
+
+
+def render_current_state() -> None:
+    st.subheader("Current state of the policy problem and the project")
+    st.markdown(
+        """
+        This section is the orientation page for a general reader. It separates
+        three things that are easy to confuse: what New Zealand is already doing,
+        what this project has built, and what evidence is still missing.
+        """
+    )
+
+    st.markdown("### Current New Zealand reform pathway used as the comparator")
+    st.dataframe(build_current_reform_table(), hide_index=True, width="stretch")
+    st.caption(
+        "The model treats the current reform pathway as the comparator. It does not assume no reform is happening."
+    )
+
+    st.markdown("### How the public explainer fits together")
+    render_current_state_diagram()
+
+    st.markdown("### Public project status")
+    status_df = build_public_status_table()
+    st.dataframe(status_df, hide_index=True, width="stretch")
+    render_readiness_chart(status_df)
+
+
 @st.cache_data(show_spinner=False)
 def cached_scenario_results(path: str) -> pd.DataFrame:
     return load_scenario_results(path)
@@ -318,6 +446,7 @@ def render_app() -> None:
 
     tab_names = [
         "Start here",
+        "Current state",
         "Reference scenarios",
         "Toy explainer",
         "Evidence & OIA",
@@ -343,6 +472,9 @@ def render_app() -> None:
         render_interpretation_rules()
 
     with tabs[1]:
+        render_current_state()
+
+    with tabs[2]:
         st.subheader("Reference scenarios from the scaffold")
         render_reference_scenario_explainer()
         if df.empty:
@@ -355,7 +487,7 @@ def render_app() -> None:
             with col2:
                 render_reference_scatter(df)
 
-    with tabs[2]:
+    with tabs[3]:
         st.subheader("Toy explainer")
         render_toy_explainer_context()
         st.markdown(
@@ -370,7 +502,7 @@ def render_app() -> None:
         metric_cols[2].metric("Toy hospital pressure", toy_scores["toy_hospital_pressure_score"])
         render_toy_chart(toy_scores)
 
-    with tabs[3]:
+    with tabs[4]:
         st.subheader("Evidence and Official Information Act tracker")
         tracker = cached_oia_tracker(tuple(str(p) for p in OIA_TRACKER_CANDIDATES))
         if tracker.empty:
@@ -379,7 +511,7 @@ def render_app() -> None:
             st.dataframe(tracker, width="stretch", hide_index=True)
         st.caption("OIA responses and linked data are needed before treating the model as calibrated.")
 
-    with tabs[4]:
+    with tabs[5]:
         st.subheader("What would make this a real calibrated model?")
         render_next_steps_context()
         readiness = build_calibration_readiness_table()
@@ -392,7 +524,7 @@ def render_app() -> None:
             """
         )
 
-    with tabs[5]:
+    with tabs[6]:
         st.subheader("Plain-English glossary")
         st.markdown(
             """
