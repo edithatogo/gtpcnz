@@ -3,6 +3,7 @@ __pycache__/
 .pytest_cache/
 .venv/
 .env
+.streamlit/secrets.toml
 .DS_Store
 *.sqlite
 *.db

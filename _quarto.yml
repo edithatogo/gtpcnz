@@ -5,6 +5,7 @@ project:
     - index.qmd
     - reports/primary_care_architecture.qmd
     - docs/REPORTS-AND-DASHBOARD.md
+    - docs/STREAMLIT-DEPLOYMENT.md
     - README.md
 
 website:
@@ -18,6 +19,8 @@ website:
         href: reports/primary_care_architecture.qmd
       - text: "Dashboard"
         href: docs/REPORTS-AND-DASHBOARD.md
+      - text: "Streamlit Deploy"
+        href: docs/STREAMLIT-DEPLOYMENT.md
       - text: "Repository Guide"
         href: README.md
   page-footer:

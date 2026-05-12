@@ -21,6 +21,8 @@ But primary care does not expand by magic. Someone has to pay for the next appoi
 
 That is why funding architecture matters.
 
+*(Wait, want to skip the reading and play with the numbers yourself? Try the **Primary Care Pulse interactive dashboard** [here] to see how these funding choices actually change the system).*
+
 When people hear “primary care funding”, they often think the debate is just about whether general practitioners should be paid more. That is too narrow. Of course money matters. But the deeper issue is how the money moves.
 
 A funding model is not just accounting. It is a set of rules. It tells providers what work is viable, what work is risky, what work is invisible, and what work is someone else’s problem.
@@ -574,6 +576,7 @@ I do not mean removing clinical governance.
 
 **Red-team check:** The weak-control version of uncapped fee-for-service is explicitly not the proposal. The proposal is scheduled, rules-based, audited, clinically governed, equity-protected and place-accountable.
 
+*(You can see exactly how these controls balance out in the **Primary Care Pulse interactive dashboard** [here]—try sliding the FFS and Capitation weights to see the impact on hospital pressure).*
 
 I do not mean ignoring equity.
 

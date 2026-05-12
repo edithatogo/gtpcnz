@@ -20,6 +20,8 @@ But primary care does not expand by magic. Someone has to pay for the next appoi
 
 That is why funding architecture matters.
 
+*(Wait, want to skip the reading and play with the numbers yourself? Try the **Primary Care Pulse interactive dashboard** [here] to see how these funding choices actually change the system).*
+
 When people hear “primary care funding”, they often think the debate is just about whether general practitioners should be paid more. That is too narrow. Of course money matters. But the deeper issue is how the money moves.
 
 A funding model is not just accounting. It is a set of rules. It tells providers what work is viable, what work is risky, what work is invisible, what work is someone else’s problem and what work citizens are “on their own” for.

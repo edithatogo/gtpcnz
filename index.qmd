@@ -9,6 +9,7 @@ GTPCNZ is a public-facing reporting layer for the primary care funding architect
 
 - [Read the funding architecture report](reports/primary_care_architecture.qmd)
 - [Run the Streamlit dashboard](docs/REPORTS-AND-DASHBOARD.md)
+- [Deploy the Streamlit dashboard](docs/STREAMLIT-DEPLOYMENT.md)
 - [Review the repository guide](README.md)
 
 ## Current Status

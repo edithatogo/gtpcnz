@@ -16,6 +16,8 @@ I do not mean removing clinical governance.
 
 A useful caution: The weak-control version of uncapped fee-for-service is explicitly not the proposal. The proposal is scheduled, rules-based, audited, clinically governed, equity-protected and place-accountable.
 
+*(You can see exactly how these controls balance out in the **Primary Care Pulse interactive dashboard** [here]—try sliding the FFS and Capitation weights to see the impact on hospital pressure).*
+
 I do not mean ignoring equity.
 
 I mean something narrower and more useful:

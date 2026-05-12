@@ -1,74 +1,78 @@
 # GTPCNZ
 
-**Current release: v1.7.2 — red-team incorporation and launch hardening.**
+[![CI](https://github.com/edithatogo/gtpcnz/actions/workflows/ci.yml/badge.svg)](https://github.com/edithatogo/gtpcnz/actions/workflows/ci.yml)
+[![Quarto Pages](https://github.com/edithatogo/gtpcnz/actions/workflows/pages.yml/badge.svg)](https://github.com/edithatogo/gtpcnz/actions/workflows/pages.yml)
 
-GTPCNZ contains a policy-research and public-translation package on primary care funding architecture in Aotearoa New Zealand and Australia.
+GTPCNZ is a public policy-research and translation package on primary care funding architecture in Aotearoa New Zealand and Australia.
 
-The current release incorporates the red-team and devil's advocate critiques into the live launch materials. It updates the public thesis, model card, decision-maker summary, first-six Substack posts, claim-boundary rules, common objections, Conductor guidance and action register.
+Website: https://edithatogo.github.io/gtpcnz/
 
-## Current policy thesis
+## What This Is
 
-Capitation should be retained for continuity, enrolment, baseline viability and population responsibility. Eligible primary medical activity should also have an uncapped, scheduled, rules-based fee-for-service stream, controlled through item rules, provider scope, clinical governance, documentation, audit, co-payment protections and place-based accountability.
+- A source-informed model scaffold for exploring primary care funding architecture.
+- A Quarto website and reproducible report.
+- A Streamlit dashboard for interactive scenario exploration.
+- A public audit trail of assumptions, caveats, and launch materials.
+
+## What This Is Not
+
+- It is not an endorsed policy position.
+- It is not a real-data calibrated forecasting model.
+- It should not be used to claim precise fiscal savings, hospital-demand reductions, or workforce effects.
+
+## Current Thesis
+
+Capitation should be retained for continuity, enrolment, baseline viability, and population responsibility. Eligible primary medical activity should also have an uncapped, scheduled, rules-based fee-for-service stream, controlled through item rules, provider scope, clinical governance, documentation, audit, co-payment protections, and place-based accountability.
 
 Short version:
 
 > Uncapped does not mean uncontrolled.
 
-## Current publication pathway
+## Public Surfaces
 
-Use v1.7.2 launch files. The red-team checks are now embedded in each first-six post.
+- Quarto website: https://edithatogo.github.io/gtpcnz/
+- Quarto source report: `reports/primary_care_architecture.qmd`
+- Streamlit dashboard entrypoint: `streamlit_app.py`
+- Dashboard implementation: `models/primarycare_model/app.py`
+- Model card: `docs/calibration/model-card-v1.7.2.md`
+- Claim boundaries: `docs/launch/claim-boundaries-v1.7.2.md`
 
-Use only the front-door materials first:
+## Run Locally
 
-1. `docs/substack-ready/post-00-series-landing-page-v1.6.0.md`
-2. `docs/substack-ready/posts-v1.7.2-launch/`
-3. `docs/launch/decision-maker-summary-v1.7.2.md`
-4. `docs/substack-ready/common-objections-and-responses-v1.7.2.md`
-5. `docs/calibration/model-card-v1.7.2.md`
-
-The first six posts are the only public posts prepared for immediate launch-level review. The back half of the series should be revised after feedback.
-
-## Current model status
-
-The model is a **full parameterised scaffold**, not an empirically calibrated predictive model. It should not be used to claim precise fiscal savings, hospital-demand reductions or workforce effects.
-
-Key model-hardening files:
-
-- `docs/calibration/parameter-tiering-v1.7.2.csv`
-- `docs/calibration/parameter-identifiability-map-v1.7.2.csv`
-- `docs/calibration/model-card-v1.7.2.md`
-- `docs/audit/red-team-review-v1.7.2.md`
-- `docs/audit/devils-advocate-review-v1.7.2.md`
-- `docs/audit/what-would-change-my-mind-v1.7.2.md`
-
-## RACMA status
-
-RACMA is excluded from proactive outreach in this release. If RACMA comes back interested, provide the decision-maker summary and model card, not the full repository.
-
-## Interactive Tools (v1.7.2+)
-
-- **Quarto Report:** `reports/primary_care_architecture.qmd` — SOTA reproducible policy report.
-- **Streamlit App:** `models/primarycare_model/app.py` — "GTPCNZ" interactive dashboard.
-
-See `docs/REPORTS-AND-DASHBOARD.md` for instructions on how to run these tools.
-
-## Website
-
-This repository is configured as a Quarto website for GitHub Pages.
+Install dependencies:
 
 ```bash
-quarto render --to html
+pip install -r requirements.txt
 ```
 
-The GitHub Pages workflow publishes the generated `_site` artifact from GitHub Actions.
-
-## Testing
+Run tests:
 
 ```bash
 pytest -q
 ```
 
-## Caveat
+Render the Quarto website:
 
-This is a structured, source-informed, falsifiable policy hypothesis and launch package. It is not an endorsed policy position and not a real-data calibrated forecasting model.
+```bash
+quarto render --to html
+```
 
+Run the Streamlit dashboard:
+
+```bash
+streamlit run streamlit_app.py
+```
+
+## Deploy
+
+GitHub Pages is deployed from `.github/workflows/pages.yml`.
+
+Streamlit Community Cloud can deploy this app with:
+
+- Repository: `edithatogo/gtpcnz`
+- Branch: `main`
+- Entrypoint: `streamlit_app.py`
+
+## License And Citation
+
+See `LICENSE` for the mixed code/content licensing terms and `CITATION.cff` for citation metadata.

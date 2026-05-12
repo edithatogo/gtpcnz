@@ -38,3 +38,6 @@ jobs:
 
       - name: Render Quarto website
         run: quarto render --to html
+
+      - name: Verify Streamlit entrypoint imports
+        run: python -m py_compile streamlit_app.py models/primarycare_model/app.py

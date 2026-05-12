@@ -35,6 +35,9 @@ jobs:
       - name: Render Quarto website
         run: quarto render --to html
 
+      - name: Verify site artifact
+        run: test -f _site/index.html
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

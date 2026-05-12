@@ -1,16 +1,25 @@
 from streamlit.testing.v1 import AppTest
-import pandas as pd
-import pytest
+
+
+APP_PATH = "models/primarycare_model/app.py"
+DEPLOYMENT_ENTRYPOINT = "streamlit_app.py"
 
 def test_app_smoke():
     """Basic smoke test to ensure the app can be initialized."""
-    at = AppTest.from_file("models/primarycare_model/app.py", default_timeout=30)
+    at = AppTest.from_file(APP_PATH, default_timeout=30)
+    at.run()
+    assert not at.exception
+
+
+def test_deployment_entrypoint_smoke():
+    """Community Cloud entrypoint should run without crashing."""
+    at = AppTest.from_file(DEPLOYMENT_ENTRYPOINT, default_timeout=30)
     at.run()
     assert not at.exception
 
 def test_app_sliders_exist():
     """Verify that the expected sliders are present in the sidebar."""
-    at = AppTest.from_file("models/primarycare_model/app.py", default_timeout=30)
+    at = AppTest.from_file(APP_PATH, default_timeout=30)
     at.run()
     
     # Check for sliders in sidebar
@@ -23,7 +32,7 @@ def test_app_sliders_exist():
 
 def test_app_reactive_logic():
     """Verify that changing a slider updates the internal state."""
-    at = AppTest.from_file("models/primarycare_model/app.py", default_timeout=30)
+    at = AppTest.from_file(APP_PATH, default_timeout=30)
     at.run()
     
     # Find the FFS slider and change its value
@@ -36,7 +45,7 @@ def test_app_reactive_logic():
 
 def test_app_expander_exists():
     """Verify the educational section is present."""
-    at = AppTest.from_file("models/primarycare_model/app.py", default_timeout=30)
+    at = AppTest.from_file(APP_PATH, default_timeout=30)
     at.run()
     assert len(at.expander) > 0
     assert "Learn the 'Big Words'" in at.expander[0].label

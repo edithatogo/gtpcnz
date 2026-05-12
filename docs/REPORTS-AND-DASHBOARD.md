@@ -17,7 +17,7 @@ quarto render reports/primary_care_architecture.qmd
 - **Narrative first:** Explains the "Game Theory" of healthcare using relatable metaphors (e.g., video games, subscription services).
 - **Embedded Evidence:** Pulls directly from `outputs/full-parameterised-summary-results-v1.7.0.csv`.
 
-## 2. Streamlit Dashboard: `models/primarycare_model/app.py`
+## 2. Streamlit Dashboard: `streamlit_app.py`
 
 **"GTPCNZ"** is an interactive tool allowing users to simulate the impact of different funding rules.
 
@@ -25,21 +25,23 @@ quarto render reports/primary_care_architecture.qmd
 Ensure you have the dependencies installed:
 
 ```bash
-pip install streamlit pandas matplotlib
+pip install -r requirements.txt
 ```
 
 Then launch the dashboard:
 
 ```bash
-streamlit run models/primarycare_model/app.py
+streamlit run streamlit_app.py
 ```
 
 ### Features
 - **Interactive Sliders:** Adjust Capitation vs. FFS weights.
 - **Educational Tooltips:** Instant definitions for complex healthcare terms.
 - **Real-time Plotting:** Immediate feedback on how your settings impact "Doctor Supply" and "Hospital Pressure".
+- **Deployment-ready Entry Point:** `streamlit_app.py` is the Streamlit Community Cloud entrypoint.
 
 ## Technical Standards (SOTA)
 - **Modularity:** The dashboard leverages the existing project data structure.
 - **Accessibility:** Content is simplified without losing technical rigor.
 - **Transparency:** All visualisations are generated from traceable project outputs.
+- **Automated Testing:** `models/tests/test_app.py` uses Streamlit's native `AppTest` API.
