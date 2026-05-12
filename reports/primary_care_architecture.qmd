@@ -1,9 +1,9 @@
 ---
-title: "GTPCNZ: The Funding Architecture Report"
-subtitle: "Understanding how we pay for doctors and why it matters for everyone"
+title: "GTPCNZ: Public Funding Architecture Report"
+subtitle: "Source-informed scaffold for primary care funding policy discussion"
 author: "Dylan A Mordaunt"
-date: "2026-05-11"
-version: "1.7.2"
+date: "2026-05-12"
+version: "1.8.1"
 format:
   html:
     toc: true
@@ -19,63 +19,180 @@ execute:
   warning: false
 ---
 
-# Executive Summary
+# Executive summary
 
-Imagine you are playing a video game where you have to keep a city healthy. If you only pay the doctors when they work in the big, expensive hospitals, but don't pay them enough to work in the small neighborhood clinics, what happens? People get sick in their neighborhoods and then rush to the hospital all at once. The hospital gets crowded, and everyone has to wait a long time.
+**Source-confidence label: policy judgement + model scaffold.**
 
-This report explains a new way to fund (pay for) primary care—the doctors and nurses in your neighborhood. We want to make sure they are paid fairly for every person they help, so that they can stop health problems before they become big enough to need a hospital visit.
+This report summarises a source-informed scaffold for thinking about primary care funding architecture in Aotearoa New Zealand.
 
-# 1. The Big Idea: "Uncapped but Controlled"
+> This is a source-informed parameterised scaffold and educational explainer. It is not a real-data calibrated forecast and should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
 
-Right now, funding for doctors can be like a "fixed envelope" of money. Once that envelope is empty, it's hard for doctors to help more people without losing money themselves. 
+The central question is simple:
 
-Our proposal is different: **"Uncapped at the activity-envelope level, but controlled at the item level."**
+> Do current funding rules allow lower-cost upstream care to expand safely before need becomes hospital demand?
 
-### What does this mean?
-- **Uncapped:** There is no fixed limit on how many people a doctor can help. If someone is sick, the doctor should be able to help them and be paid for that work.
-- **Controlled:** Just because there is no limit doesn't mean there are no rules. We use strict rules (like a rulebook in a game) to make sure the right care is given to the right people by the right providers.
+The proposed architecture is a hybrid:
 
-# 3. What is "Capitation"?
+1. **Capitation** for continuity, enrolment, baseline viability and population responsibility.
+2. **Uncapped scheduled fee-for-service** for eligible primary medical activity.
+3. **Place-based accountability** to protect comprehensive population responsibility and reduce cherry-picking.
+4. **Item rules, clinical governance, documentation, audit and data visibility** to reduce gaming and low-value activity.
+5. **Equity and co-payment protections** so price does not become the rationing mechanism.
 
-In healthcare, **Capitation** is like a subscription service for your doctor. 
+Short version:
 
-Imagine you pay a monthly fee to a music streaming app. You can listen to as many songs as you want, and the app gets the same amount of money whether you listen to 1 song or 1,000 songs. 
+> **Uncapped does not mean uncontrolled.** It means uncapped at the global activity-envelope level, but controlled at the item, scope, audit, clinical-governance and place-accountability level.
 
-- **The Good Side:** The doctor has a steady income and knows they are responsible for your health all year round.
-- **The Bad Side:** If 1,000 people all want an appointment at the same time, the doctor might not have enough money (or staff) to see everyone, because the "subscription fee" doesn't increase when the work increases.
+# 1. What this report is and is not
 
-# 4. Results: Why the "Full Hybrid" Model Wins
+**Source-confidence label: claim boundary.**
 
-We tested 10 different ways to pay for healthcare. Here is how they compare in our simulation.
+This report is a public explanation of a model scaffold. It can be used to compare policy logics, identify assumptions and guide stakeholder validation.
+
+It is not:
+
+- a government-endorsed policy position;
+- a business case;
+- a calibrated fiscal forecast;
+- a prediction that any scenario will reduce hospital demand by a precise amount;
+- a claim that fee-for-service alone is better than capitation.
+
+For the formal model boundary, see the model card and claim-boundary documents rendered on this site.
+
+# 2. The current reform pathway is the comparator
+
+**Source-confidence label: public document + policy interpretation.**
+
+A weak critique would pretend New Zealand is doing nothing. That is not the argument here.
+
+The current reform pathway includes capitation reweighting, a primary care access target, the National Primary Care Dataset, digital access work, urgent and after-hours care, Primary Health Organisation accountability work and separate appropriation structures.
+
+The real question is whether that pathway changes the supply game enough.
+
+A capitation formula can improve how funding is allocated across enrolled populations. It does not necessarily create a strong marginal payment signal for the next clinically necessary appointment, procedure or urgent episode. That is the gap this model explores.
+
+# 3. Why capitation can be fair and still constrain supply
+
+**Source-confidence label: economic theory + model assumption.**
+
+Capitation pays a fixed amount for an enrolled person or population. It can support continuity and population responsibility. It can also help with budget predictability.
+
+But when demand rises, the next appointment still takes clinician time, room time, nursing time, documentation, risk, follow-up and administration. If the marginal payment for that extra work is weak, the system may ration through waiting time, closed books, short consultations, co-payments or hospital overflow.
+
+This is not an argument against capitation. It is an argument against expecting capitation to solve every problem.
+
+# 4. What uncapped scheduled fee-for-service means
+
+**Source-confidence label: policy judgement + ACC analogy.**
+
+The proposal is not uncontrolled billing.
+
+A scheduled fee-for-service stream would mean that eligible primary medical activity can be paid when it is delivered, without a fixed global activity ceiling. The controls sit elsewhere:
+
+- item definitions;
+- provider eligibility and scope;
+- clinical necessity;
+- documentation rules;
+- audit and unusual-pattern detection;
+- co-payment protections;
+- place-based population accountability;
+- data reporting;
+- quality and safety governance.
+
+The Accident Compensation Corporation analogy is useful because it already uses rules-based treatment payments, provider eligibility, contracts and regulation. It is not a complete template for illness-based primary care.
+
+# 5. Why place-based accountability matters
+
+**Source-confidence label: red-team finding + policy judgement.**
+
+A fee-for-service stream can improve marginal supply, but it can also create cherry-picking. Providers may select easier, shorter or more profitable contacts unless the system also protects hard-to-reach populations, rural communities, complex patients and people with high unmet need.
+
+That is why place-based accountability is not optional. A national benefit schedule should sit alongside responsibility for whole populations.
+
+# 6. Scenario results from the scaffold
+
+**Source-confidence label: model scaffold.**
+
+The table below uses source-informed model-generated indices. These are not observed New Zealand outcomes.
 
 ```{python}
-#| label: result-summary
 import pandas as pd
+from pathlib import Path
+
+path = Path("../outputs/full-parameterised-summary-results-v1.7.0.csv")
+df = pd.read_csv(path)
+cols = [
+    "rank_by_hybrid_viability",
+    "scenario_id",
+    "scenario_name",
+    "hybrid_viability_score",
+    "supply_generation_score",
+    "hospital_pressure_score",
+    "gaming_risk_score",
+]
+df[cols].sort_values("rank_by_hybrid_viability")
+```
+
+```{python}
 import matplotlib.pyplot as plt
 
-# Load the summary results
-df = pd.read_csv("../outputs/full-parameterised-summary-results-v1.7.0.csv")
-
-# Sort by rank
 df_sorted = df.sort_values("rank_by_hybrid_viability")
-
-# Create a simple bar chart of Hybrid Viability
 plt.figure(figsize=(10, 6))
-plt.barh(df_sorted["scenario_name"], df_sorted["hybrid_viability_score"], color='skyblue')
-plt.xlabel("Viability Score (Higher is Better)")
-plt.title("Comparison of Healthcare Funding Models")
+plt.barh(df_sorted["scenario_name"], df_sorted["hybrid_viability_score"])
+plt.xlabel("Hybrid viability index")
+plt.title("Reference scenarios — model-generated indices")
 plt.gca().invert_yaxis()
 plt.tight_layout()
 plt.show()
 ```
 
-### Key Findings:
-- **Full Hybrid Upstream Architecture (Winner):** This model combines the "subscription" (Capitation) with a "pay-per-visit" (FFS) system. It makes it easier for you to see a doctor and reduces the pressure on big hospitals.
-- **Current Reform Pathway:** While it makes some improvements, it doesn't do as much to help doctors offer more appointments when demand is high.
+**Interpretation rule:** the chart compares relative scenario logic under assumptions. It does not predict real-world effect sizes.
 
-# 5. Conclusion
+# 7. What the scaffold suggests
 
-By changing the rules of the "funding game," we can make sure that your neighborhood doctor is there when you need them. This doesn't just help you; it helps the whole country by keeping our big hospitals free for real emergencies.
+**Source-confidence label: model scaffold + policy judgement.**
 
----
-**Technical Note:** This report was automatically generated using Quarto. The data comes from the `full-parameterised-summary-results-v1.7.0.csv` file in the project outputs.
+The scaffold suggests four patterns:
+
+1. Capitation reweighting improves allocation, but may not solve marginal supply.
+2. Uncapped scheduled fee-for-service improves the marginal supply signal.
+3. Uncapped activity without strong controls is high risk.
+4. The strongest scenario is the full hybrid: capitation, scheduled fee-for-service, place accountability, urgent/ambulance alternatives, scope-enabled supply, data, audit and key performance indicators.
+
+# 8. What would change my mind
+
+**Source-confidence label: falsification framework.**
+
+This argument would be weaker if evidence showed that:
+
+- capitation reweighting plus the access target materially improves appointment supply without an activity-sensitive stream;
+- unmet primary care access does not predict emergency department, ambulance or admission pressure;
+- scheduled fee-for-service mainly produces low-value activity rather than needed access;
+- PHO pass-through and intermediation are already transparent, rapid and low-friction;
+- co-payment protections cannot prevent inequity under an activity-sensitive stream;
+- place-based accountability cannot coexist with scheduled benefits.
+
+# 9. What needs to be tested next
+
+**Source-confidence label: research plan.**
+
+The next step is not to make the scaffold more complicated. It is to validate the load-bearing assumptions:
+
+- marginal supply response to scheduled benefits;
+- unmet primary care to emergency department and ambulance conversion;
+- co-payment and equity effects;
+- provider-scope expansion and safety;
+- PHO pass-through and transaction-cost effects;
+- ambulance alternative-disposition effects;
+- Accident Compensation Corporation activity-stabilisation effects;
+- rural in-person supply response.
+
+# 10. Conclusion
+
+**Source-confidence label: policy judgement.**
+
+The current reform pathway may be necessary. It may not be sufficient.
+
+The strongest policy question is not whether capitation or fee-for-service is morally superior. It is whether the funding architecture allows safe upstream care to expand before unmet need becomes hospital demand.
+
+> **Uncapped does not mean uncontrolled.** It means scheduled, rules-based, audited, clinically governed and place-accountable.

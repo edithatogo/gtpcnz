@@ -1,47 +1,37 @@
-# GTPCNZ Interactive Reporting & Visualization Suite
+# GTPCNZ reports and dashboard
 
-This project includes a state-of-the-art (SOTA) reporting layer and an interactive dashboard to make the primary care funding model accessible to both policy experts and citizens (calibrated for a 14-year-old audience).
+GTPCNZ includes a Quarto public report and a Streamlit dashboard.
 
-## 1. Quarto Report: `reports/primary_care_architecture.qmd`
+## Public report
 
-The Quarto report is a reproducible document that combines technical thesis writing with live Python data analysis.
+`reports/primary_care_architecture.qmd` is the public-facing explanation of the funding architecture model. It should be read alongside:
 
-### How to Render
-To generate the HTML or PDF version, ensure you have [Quarto](https://quarto.org/) installed and run:
+- `docs/calibration/model-card-v1.7.2.md`
+- `docs/launch/claim-boundaries-v1.7.2.md`
+- `docs/public-site/evidence-tracker-public-v1.8.1.md`
+- `docs/public-site/calibration-readiness-page-v1.8.1.md`
 
-```bash
-quarto render reports/primary_care_architecture.qmd
-```
+## Streamlit dashboard
 
-### Design Philosophy
-- **Narrative first:** Explains the "Game Theory" of healthcare using relatable metaphors (e.g., video games, subscription services).
-- **Embedded Evidence:** Pulls directly from `outputs/full-parameterised-summary-results-v1.7.0.csv`.
-
-## 2. Streamlit Dashboard: `streamlit_app.py`
-
-**"GTPCNZ"** is an interactive tool allowing users to simulate the impact of different funding rules.
-
-### How to Run
-Ensure you have the dependencies installed:
-
-```bash
-pip install -r requirements.txt
-```
-
-Then launch the dashboard:
+Entrypoint:
 
 ```bash
 streamlit run streamlit_app.py
 ```
 
-### Features
-- **Interactive Sliders:** Adjust Capitation vs. FFS weights.
-- **Educational Tooltips:** Instant definitions for complex healthcare terms.
-- **Real-time Plotting:** Immediate feedback on how your settings impact "Doctor Supply" and "Hospital Pressure".
-- **Deployment-ready Entry Point:** `streamlit_app.py` is the Streamlit Community Cloud entrypoint.
+The dashboard is an **interactive explainer**, not a calibrated simulator. It has two different types of output:
 
-## Technical Standards (SOTA)
-- **Modularity:** The dashboard leverages the existing project data structure.
-- **Accessibility:** Content is simplified without losing technical rigor.
-- **Transparency:** All visualisations are generated from traceable project outputs.
-- **Automated Testing:** `models/tests/test_app.py` uses Streamlit's native `AppTest` API.
+1. **Reference scenarios** loaded from `outputs/full-parameterised-summary-results-v1.7.0.csv`.
+2. **Toy explainer slider scores** generated from a simple educational formula.
+
+Do not describe the toy slider outputs as forecasts.
+
+## Public claim boundary
+
+Use this wording:
+
+> This is a source-informed parameterised scaffold and educational explainer. It is not a real-data calibrated forecast and should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
+
+## Key phrase
+
+> Uncapped does not mean uncontrolled; it means scheduled, rules-based, audited, clinically governed and place-accountable.

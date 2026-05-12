@@ -1,22 +1,40 @@
 ---
 title: "GTPCNZ"
-subtitle: "Interactive reporting for the primary care funding architecture model"
+subtitle: "Primary care funding architecture model and dashboard"
 ---
 
-GTPCNZ is a public-facing reporting layer for the primary care funding architecture model. It translates the model scaffold into a readable website, reproducible Quarto report, and local Streamlit dashboard.
+GTPCNZ is a public-facing reporting layer for a source-informed model scaffold about primary care funding architecture in Aotearoa New Zealand.
 
-## Start Here
+## Start here
 
-- [Read the funding architecture report](reports/primary_care_architecture.qmd)
-- [Run the Streamlit dashboard](docs/REPORTS-AND-DASHBOARD.md)
-- [Deploy the Streamlit dashboard](docs/STREAMLIT-DEPLOYMENT.md)
-- [Review the repository guide](README.md)
+1. [Read the public report](reports/primary_care_architecture.qmd)
+2. [Open the dashboard guide](docs/REPORTS-AND-DASHBOARD.md)
+3. [Read the model card](docs/calibration/model-card-v1.7.2.md)
+4. [Read the claim boundaries](docs/launch/claim-boundaries-v1.7.2.md)
+5. [Review the evidence tracker](docs/public-site/evidence-tracker-public-v1.8.1.md)
+6. [Review calibration readiness](docs/public-site/calibration-readiness-page-v1.8.1.md)
 
-## Current Status
+## Current status
 
-This is a source-informed, parameterised policy model scaffold. It is not a real-data calibrated forecasting model and should not be used to claim precise fiscal savings, hospital-demand reductions, or workforce effects.
+This is a **source-informed, parameterised policy model scaffold**.
 
-## Local Commands
+> This is a source-informed parameterised scaffold and educational explainer. It is not a real-data calibrated forecast and should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
+
+## Current thesis
+
+Capitation should be retained for continuity, enrolment, baseline viability and population responsibility. Eligible primary medical activity should also have an uncapped, scheduled, rules-based fee-for-service stream, controlled through item rules, provider scope, clinical governance, documentation, audit, co-payment protections and place-based accountability.
+
+Short version:
+
+> Uncapped does not mean uncontrolled.
+
+## Public surfaces
+
+- GitHub Pages: this site.
+- Streamlit: interactive explainer and scenario dashboard.
+- Repository: source code, outputs, model card, claim boundaries and tests.
+
+## Local commands
 
 Render the website:
 
@@ -27,5 +45,5 @@ quarto render
 Run the dashboard:
 
 ```bash
-streamlit run models/primarycare_model/app.py
+streamlit run streamlit_app.py
 ```

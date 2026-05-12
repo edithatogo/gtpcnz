@@ -6,6 +6,11 @@ project:
     - reports/primary_care_architecture.qmd
     - docs/REPORTS-AND-DASHBOARD.md
     - docs/STREAMLIT-DEPLOYMENT.md
+    - docs/public-site/model-dashboard-hardening-spec-v1.8.1.md
+    - docs/public-site/evidence-tracker-public-v1.8.1.md
+    - docs/public-site/calibration-readiness-page-v1.8.1.md
+    - docs/calibration/model-card-v1.7.2.md
+    - docs/launch/claim-boundaries-v1.7.2.md
     - README.md
 
 website:
@@ -15,17 +20,23 @@ website:
     left:
       - text: "Home"
         href: index.qmd
-      - text: "Funding Architecture Report"
+      - text: "Public report"
         href: reports/primary_care_architecture.qmd
       - text: "Dashboard"
         href: docs/REPORTS-AND-DASHBOARD.md
-      - text: "Streamlit Deploy"
-        href: docs/STREAMLIT-DEPLOYMENT.md
-      - text: "Repository Guide"
+      - text: "Model card"
+        href: docs/calibration/model-card-v1.7.2.md
+      - text: "Claim boundaries"
+        href: docs/launch/claim-boundaries-v1.7.2.md
+      - text: "Evidence tracker"
+        href: docs/public-site/evidence-tracker-public-v1.8.1.md
+      - text: "Calibration readiness"
+        href: docs/public-site/calibration-readiness-page-v1.8.1.md
+      - text: "Repository guide"
         href: README.md
   page-footer:
     left: "GTPCNZ"
-    right: "Generated with Quarto"
+    right: "Source-informed scaffold; not a real-data calibrated forecast"
 
 format:
   html:
