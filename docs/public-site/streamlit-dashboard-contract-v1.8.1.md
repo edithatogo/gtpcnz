@@ -59,6 +59,8 @@ The dashboard must include both static and dynamic explanatory material:
 - Dynamic figures:
   - reference scenario viability chart;
   - reference scenario supply-generation versus hospital-pressure scatter plot;
+  - scenario score heatmap;
+  - selected scenario radar/profile chart;
   - toy explainer output chart;
   - project readiness chart.
 
@@ -90,4 +92,3 @@ The dashboard must be deployable from Streamlit Community Cloud using:
 The public URL is:
 
 <https://gtpcnz.streamlit.app/>
-

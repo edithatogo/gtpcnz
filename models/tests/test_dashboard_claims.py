@@ -27,6 +27,12 @@ def test_dashboard_uses_explainer_and_not_forecast_language():
     assert "Public project status" in text
     assert "Where the project is mature versus still early" in text
     assert "not an empirical performance result" in text
+    assert "Figure and table inventory" in text
+    assert "render_reference_heatmap" in text
+    assert "px.imshow" in text
+    assert "render_scenario_profile_radar" in text
+    assert "go.Scatterpolar" in text
+    assert "Selected scenario profile" in text
 
 
 def test_public_report_has_claim_boundaries():
@@ -79,3 +85,7 @@ def test_streamlit_dashboard_contract_and_audit_are_explicit():
     assert "Status: pass" in audit
     assert "Evidence matrix" in audit
     assert "Static architecture diagram exists" in audit
+    assert "scenario score heatmap" in contract
+    assert "selected scenario radar/profile chart" in contract
+    assert "Dynamic scenario score heatmap exists" in audit
+    assert "Dynamic selected scenario radar/profile chart exists" in audit

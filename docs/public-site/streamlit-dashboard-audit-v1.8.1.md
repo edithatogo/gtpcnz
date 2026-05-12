@@ -21,8 +21,11 @@ The Streamlit dashboard satisfies the v1.8.1 content and presentation contract a
 | Static architecture diagram exists | `render_current_state_diagram()` uses `st.graphviz_chart()` | Pass |
 | Dynamic reference-scenario viability chart exists | `render_reference_viability()` uses Plotly | Pass |
 | Dynamic supply-generation versus hospital-pressure chart exists | `render_reference_scatter()` uses Plotly | Pass |
+| Dynamic scenario score heatmap exists | `render_reference_heatmap()` uses Plotly `px.imshow()` | Pass |
+| Dynamic selected scenario radar/profile chart exists | `render_scenario_profile_radar()` uses Plotly `go.Scatterpolar()` | Pass |
 | Dynamic toy explainer chart exists | `render_toy_chart()` uses Plotly | Pass |
 | Dynamic project readiness chart exists | `render_readiness_chart()` uses Plotly | Pass |
+| Static/dynamic figure inventory exists | `render_figure_inventory()` lists static tables, static diagram and dynamic figures | Pass |
 | Evidence/OIA table exists | `cached_oia_tracker()` and Evidence & OIA tab | Pass |
 | Calibration-readiness table exists | `build_calibration_readiness_table()` and Calibration readiness tab | Pass |
 | Plain-English glossary exists | Glossary tab and `Learn the 'Big Words'` expander | Pass |
@@ -45,4 +48,3 @@ Remote validation after push:
 - Publish Quarto site: success.
 - GitHub Pages: HTTP 200.
 - Streamlit app URL: HTTP 200.
-

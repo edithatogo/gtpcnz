@@ -186,6 +186,23 @@ def build_public_status_table() -> pd.DataFrame:
     )
 
 
+def build_figure_inventory_table() -> pd.DataFrame:
+    return pd.DataFrame(
+        [
+            ("Static table", "Current reform pathway", "Current state tab", "Explains the real comparator in plain English."),
+            ("Static table", "Public project status", "Current state tab", "Shows what is mature and what is still early."),
+            ("Static diagram", "Public explainer architecture", "Current state tab", "Shows how reform, model scaffold, toy explainer, evidence and calibration fit together."),
+            ("Dynamic bar chart", "Reference scenario viability", "Reference scenarios tab", "Compares model-generated viability indices."),
+            ("Dynamic scatter plot", "Supply generation versus hospital pressure", "Reference scenarios tab", "Shows the trade-off between access/supply and hospital-pressure index."),
+            ("Dynamic heatmap", "Scenario score matrix", "Reference scenarios tab", "Shows multiple indices across scenarios at once."),
+            ("Dynamic radar chart", "Selected scenario profile", "Reference scenarios tab", "Shows one selected scenario across several dimensions."),
+            ("Dynamic bar chart", "Toy explainer output", "Toy explainer tab", "Shows simplified teaching outputs from toy slider settings."),
+            ("Dynamic bar chart", "Project readiness", "Current state tab", "Shows maturity of explanation, evidence, validation and calibration work."),
+        ],
+        columns=["Type", "Figure or table", "Location", "Purpose"],
+    )
+
+
 def render_current_state_diagram() -> None:
     st.graphviz_chart(
         """
@@ -237,6 +254,14 @@ def render_readiness_chart(status_df: pd.DataFrame) -> None:
     )
 
 
+def render_figure_inventory() -> None:
+    st.markdown("### Figure and table inventory")
+    st.dataframe(build_figure_inventory_table(), hide_index=True, width="stretch")
+    st.caption(
+        "The dashboard intentionally mixes static explanation with dynamic charts. The charts explain model structure and relative indices; they are not empirical performance results."
+    )
+
+
 def render_current_state() -> None:
     st.subheader("Current state of the policy problem and the project")
     st.markdown(
@@ -260,6 +285,7 @@ def render_current_state() -> None:
     status_df = build_public_status_table()
     st.dataframe(status_df, hide_index=True, width="stretch")
     render_readiness_chart(status_df)
+    render_figure_inventory()
 
 
 @st.cache_data(show_spinner=False)
@@ -315,6 +341,97 @@ def render_reference_scatter(df: pd.DataFrame) -> None:
     st.plotly_chart(fig, width="stretch")
     st.caption(
         "A lower hospital-pressure score is better. These indices compare policy logics under assumptions; they are not calibrated forecasts."
+    )
+
+
+def render_reference_heatmap(df: pd.DataFrame) -> None:
+    heatmap_columns = [
+        "hybrid_viability_score",
+        "supply_generation_score",
+        "equity_legitimacy_score",
+        "governance_resilience_score",
+        "hospital_pressure_score",
+        "gaming_risk_score",
+    ]
+    existing = [column for column in heatmap_columns if column in df.columns]
+    if not existing:
+        st.info("Scenario heatmap cannot be shown because the expected score columns are unavailable.")
+        return
+
+    matrix = df.set_index("scenario_id")[existing].sort_index()
+    fig = px.imshow(
+        matrix,
+        aspect="auto",
+        color_continuous_scale="Viridis",
+        labels={"x": "Model-generated index", "y": "Reference scenario", "color": "Index score"},
+        title="Scenario score matrix — model-generated indices",
+    )
+    fig.update_layout(height=520, margin=dict(l=10, r=10, t=45, b=10))
+    st.plotly_chart(fig, width="stretch")
+    st.caption(
+        "This heatmap helps compare patterns across scenarios. It is a model-index view, not observed New Zealand performance data."
+    )
+
+
+def render_scenario_profile_radar(df: pd.DataFrame) -> None:
+    required = [
+        "scenario_id",
+        "scenario_name",
+        "hybrid_viability_score",
+        "supply_generation_score",
+        "equity_legitimacy_score",
+        "governance_resilience_score",
+        "hospital_pressure_score",
+        "gaming_risk_score",
+    ]
+    missing = [column for column in required if column not in df.columns]
+    if missing:
+        st.info(f"Scenario profile cannot be shown because columns are missing: {', '.join(missing)}.")
+        return
+
+    scenario_options = {
+        f"{row.scenario_id} — {row.scenario_name}": row
+        for row in df.sort_values("scenario_id").itertuples(index=False)
+    }
+    selected_label = st.selectbox("Choose a reference scenario profile", list(scenario_options))
+    selected = scenario_options[selected_label]
+
+    categories = [
+        "Hybrid viability",
+        "Supply generation",
+        "Equity legitimacy",
+        "Governance resilience",
+        "Hospital pressure (inverted)",
+        "Gaming risk (inverted)",
+    ]
+    values = [
+        selected.hybrid_viability_score,
+        selected.supply_generation_score,
+        selected.equity_legitimacy_score,
+        selected.governance_resilience_score,
+        100 - selected.hospital_pressure_score,
+        100 - selected.gaming_risk_score,
+    ]
+
+    fig = go.Figure()
+    fig.add_trace(
+        go.Scatterpolar(
+            r=values + [values[0]],
+            theta=categories + [categories[0]],
+            fill="toself",
+            name=selected.scenario_id,
+        )
+    )
+    fig.update_layout(
+        polar=dict(radialaxis=dict(visible=True, range=[0, 100])),
+        showlegend=False,
+        height=520,
+        margin=dict(l=40, r=40, t=45, b=20),
+        title=f"Selected scenario profile — {selected.scenario_id}",
+    )
+    st.plotly_chart(fig, width="stretch")
+    st.caption(
+        "Hospital pressure and gaming risk are inverted here so that larger radar areas consistently mean more favourable scaffold logic."
     )
 
 
@@ -486,6 +603,9 @@ def render_app() -> None:
                 render_reference_viability(df)
             with col2:
                 render_reference_scatter(df)
+            st.markdown("### Additional dynamic views")
+            render_reference_heatmap(df)
+            render_scenario_profile_radar(df)
 
     with tabs[3]:
         st.subheader("Toy explainer")
