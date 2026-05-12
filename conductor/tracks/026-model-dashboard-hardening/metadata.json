@@ -1,8 +1,10 @@
 {
   "track_id": "026-model-dashboard-hardening",
-  "version": "1.8.0",
-  "status": "implementation-ready",
+  "version": "1.8.1",
+  "status": "complete",
   "scope": "Harden the model-service layer, Streamlit dashboard, Quarto public report, public caveats, evidence tracker and tests. Excludes Substack content.",
   "owner": "Dylan A Mordaunt",
-  "created": "2026-05-12"
+  "created": "2026-05-12",
+  "completed": "2026-05-12",
+  "commit": "7b83877f33f8ce3dad0833f6651419e2052d24a7"
 }
