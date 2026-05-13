@@ -3,32 +3,32 @@
 [![CI](https://github.com/edithatogo/gtpcnz/actions/workflows/ci.yml/badge.svg)](https://github.com/edithatogo/gtpcnz/actions/workflows/ci.yml)
 [![Quarto Pages](https://github.com/edithatogo/gtpcnz/actions/workflows/pages.yml/badge.svg)](https://github.com/edithatogo/gtpcnz/actions/workflows/pages.yml)
 
-GTPCNZ is a public policy-research and translation package on primary care funding architecture in Aotearoa New Zealand and Australia.
+GTPCNZ is a public policy-research package about primary care funding in Aotearoa New Zealand, with comparative material for Australia.
 
 Website: https://edithatogo.github.io/gtpcnz/
 
-## What This Is
+## What this is
 
 - A source-informed model scaffold for exploring primary care funding architecture.
 - A Quarto website and reproducible report.
 - A Streamlit dashboard for interactive explanation of scenario logic.
 - A public audit trail of assumptions, caveats, and launch materials.
 
-## What This Is Not
+## What this is not
 
 - It is not an endorsed policy position.
 - It is not a real-data calibrated forecasting model.
 - It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
 
-## Current Thesis
+## Current thesis
 
-Capitation should be retained for continuity, enrolment, baseline viability, and population responsibility. Eligible primary medical activity should also have an uncapped, scheduled, rules-based fee-for-service stream, controlled through item rules, provider scope, clinical governance, documentation, audit, co-payment protections, and place-based accountability.
+The thesis is specific: keep capitation for continuity, enrolment, baseline viability, and population responsibility. Add an uncapped, scheduled, rules-based fee-for-service stream for eligible primary medical activity, controlled through item rules, provider scope, clinical governance, documentation, audit, co-payment protections, and place-based accountability.
 
 Short version:
 
 > Uncapped does not mean uncontrolled.
 
-## Public Surfaces
+## Public pages
 
 - Quarto website: https://edithatogo.github.io/gtpcnz/
 - Interactive explainer (Streamlit): https://gtpcnz.streamlit.app/
@@ -40,7 +40,7 @@ Short version:
 - Evidence tracker: `docs/public-site/evidence-tracker-public-v1.8.1.md`
 - Calibration readiness: `docs/public-site/calibration-readiness-page-v1.8.1.md`
 
-## Run Locally
+## Run locally
 
 Install dependencies:
 
@@ -76,6 +76,6 @@ Streamlit Community Cloud can deploy this app with:
 - Branch: `main`
 - Entrypoint: `streamlit_app.py`
 
-## License And Citation
+## License and citation
 
 See `LICENSE` for the mixed code/content licensing terms and `CITATION.cff` for citation metadata.

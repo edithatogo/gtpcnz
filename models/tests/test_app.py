@@ -52,4 +52,4 @@ def test_app_expander_exists():
     at = AppTest.from_file(APP_PATH, default_timeout=30)
     at.run()
     assert len(at.expander) > 0
-    assert "Learn the 'Big Words'" in at.expander[0].label
+    assert "Learn the big words" in at.expander[0].label

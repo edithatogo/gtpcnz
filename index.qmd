@@ -3,16 +3,18 @@ title: "GTPCNZ"
 subtitle: "Primary care funding architecture model and dashboard"
 ---
 
-GTPCNZ is a public-facing reporting layer for a source-informed model scaffold about primary care funding architecture in Aotearoa New Zealand.
+GTPCNZ is the public reporting layer for a source-informed model scaffold about primary care funding in Aotearoa New Zealand.
 
 ## Start here
 
-1. [Read the public report](reports/primary_care_architecture.qmd)
-2. [Open the dashboard guide](docs/REPORTS-AND-DASHBOARD.md)
-3. [Read the model card](docs/calibration/model-card-v1.7.2.md)
-4. [Read the claim boundaries](docs/launch/claim-boundaries-v1.7.2.md)
-5. [Review the evidence tracker](docs/public-site/evidence-tracker-public-v1.8.1.md)
-6. [Review calibration readiness](docs/public-site/calibration-readiness-page-v1.8.1.md)
+If you are new to the project, read these in order:
+
+1. [Public report](reports/primary_care_architecture.qmd)
+2. [Dashboard guide](docs/REPORTS-AND-DASHBOARD.md)
+3. [Model card](docs/calibration/model-card-v1.7.2.md)
+4. [Claim boundaries](docs/launch/claim-boundaries-v1.7.2.md)
+5. [Evidence tracker](docs/public-site/evidence-tracker-public-v1.8.1.md)
+6. [Calibration readiness](docs/public-site/calibration-readiness-page-v1.8.1.md)
 
 ## Current status
 
@@ -22,13 +24,13 @@ This is a **source-informed, parameterised policy model scaffold**.
 
 ## Current thesis
 
-Capitation should be retained for continuity, enrolment, baseline viability and population responsibility. Eligible primary medical activity should also have an uncapped, scheduled, rules-based fee-for-service stream, controlled through item rules, provider scope, clinical governance, documentation, audit, co-payment protections and place-based accountability.
+The thesis is narrow. Keep capitation for continuity, enrolment, baseline viability and population responsibility. Add an uncapped, scheduled, rules-based fee-for-service stream for eligible primary medical activity, with item rules, provider scope, clinical governance, documentation, audit, co-payment protections and place-based accountability.
 
 Short version:
 
 > Uncapped does not mean uncontrolled.
 
-## Public surfaces
+## Public pages
 
 - GitHub Pages: this site.
 - Streamlit: [interactive explainer and scenario dashboard](https://gtpcnz.streamlit.app/).

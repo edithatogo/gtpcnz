@@ -14,7 +14,7 @@ def test_dashboard_uses_explainer_and_not_forecast_language():
         + "\n"
         + Path("models/primarycare_model/scenario_service.py").read_text(encoding="utf-8")
     )
-    assert "Funding Architecture Explainer" in text
+    assert "funding architecture explainer" in text
     assert "not a real-data calibrated forecast" in text
     assert "toy" in text.lower()
     assert "not a calibrated prediction" in text.lower()
@@ -39,7 +39,7 @@ def test_dashboard_uses_explainer_and_not_forecast_language():
     assert "Current New Zealand reform pathway used as the comparator" in text
     assert "How the public explainer fits together" in text
     assert "Public project status" in text
-    assert "Where the project is mature versus still early" in text
+    assert "What is mature and what is still early" in text
     assert "not an empirical performance result" in text
     assert "Figure and table inventory" in text
     assert "render_reference_heatmap" in text

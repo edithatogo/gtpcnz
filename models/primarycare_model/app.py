@@ -33,18 +33,18 @@ def render_reader_guide() -> None:
         """
         ### How to read this dashboard
 
-        This dashboard is a public explanation layer for the GTPCNZ model scaffold.
-        It is designed to help a reader understand the argument, the assumptions,
-        and the evidence still needed before any real-world claim could be made.
+        This dashboard explains the GTPCNZ model scaffold. It sets out the
+        argument, the assumptions, and the evidence still needed before anyone
+        could make a real-world claim from it.
 
-        **The most important distinction:**
+        Keep this distinction in mind:
 
         - **Reference scenarios** are precomputed, model-generated indices from the
           source-informed scaffold.
         - **Toy explainer sliders** are simplified teaching controls. They are not
           the 70-parameter model and they do not estimate New Zealand outcomes.
 
-        Read the page in this order: start with the thesis, compare reference
+        Read it in this order: start with the thesis, compare the reference
         scenarios, use the toy sliders to learn the mechanism, then check the
         evidence and calibration-readiness tabs before drawing conclusions.
         """
@@ -56,13 +56,13 @@ def render_interpretation_rules() -> None:
         """
         ### Interpretation rules
 
-        Use these outputs as **structured reasoning**, not as results from a
-        validated forecasting model.
+        Use these outputs as structured reasoning, not as results from a
+        validated forecast model.
 
         - Higher viability, access, supply and governance indices mean the policy
           logic performs better inside the scaffold assumptions.
         - Lower hospital-pressure and gaming-risk indices are preferable.
-        - Differences between scenarios are more meaningful than any single score.
+        - Differences between scenarios matter more than any single score.
         - A strong scenario still needs implementation design, equity review,
           stakeholder validation and real-data calibration.
         - Do not convert index differences into dollars saved, beds avoided,
@@ -90,9 +90,8 @@ def render_reference_scenario_explainer() -> None:
           activity-sensitive payment, place accountability, controls, data and
           equity protections.
 
-        Treat F0 as the comparator. The question is not whether New Zealand is
-        doing nothing; the question is whether the current pathway changes the
-        supply game enough.
+        Treat F0 as the comparator. New Zealand is not doing nothing. The
+        question is whether the current pathway changes the supply game enough.
         """
     )
 
@@ -102,16 +101,16 @@ def render_toy_explainer_context() -> None:
         """
         ### What the toy sliders are for
 
-        The sliders deliberately compress the problem into a few visible health-system levers.
-        They are not parameters estimated from New Zealand data. They are teaching
-        controls that let a reader see the direction of the argument.
+        The sliders compress the problem into a few visible health-system
+        levers. They are not parameters estimated from New Zealand data. They
+        are teaching controls that show the direction of the argument.
 
         Each slider is scaled from **0 to 100**:
 
         - **0** means the lever is absent or very weak in the toy explanation.
         - **100** means the lever is strong and reliably implemented.
 
-        The toy output is a teaching artefact. It should never be quoted as an
+        The toy output is a teaching artefact. It should not be quoted as an
         estimated effect size.
         """
     )
@@ -127,8 +126,8 @@ def render_next_steps_context() -> None:
         pathways, emergency department presentations, admissions, geography and
         equity strata.
 
-        The immediate next work is evidence collection and calibration readiness:
-        submit or update the OIA requests, verify public-source assumptions,
+        The immediate work is evidence collection and calibration readiness:
+        submit or update the OIA requests, check public-source assumptions,
         map available datasets, and test whether the load-bearing assumptions
         survive stakeholder review.
         """
@@ -146,7 +145,7 @@ def build_current_reform_table() -> pd.DataFrame:
             (
                 "Primary care access target",
                 "A public target for getting people timely primary care access.",
-                "Useful as a signal, but targets need enough workforce, funding and data support to change behaviour.",
+                "Useful as a signal, but targets need workforce, funding and data support to change behaviour.",
             ),
             (
                 "National Primary Care Dataset",
@@ -161,7 +160,7 @@ def build_current_reform_table() -> pd.DataFrame:
             (
                 "Urgent and after-hours care work",
                 "Policy attention to alternatives before emergency department presentation.",
-                "Potentially important, but needs funding architecture and workforce support to shift demand safely.",
+                "May matter, but needs funding architecture and workforce support to shift demand safely.",
             ),
             (
                 "PHO accountability and commissioning",
@@ -192,7 +191,7 @@ def build_figure_inventory_table() -> pd.DataFrame:
         [
             ("Static table", "Current reform pathway", "Current state tab", "Explains the real comparator in plain English."),
             ("Static table", "Public project status", "Current state tab", "Shows what is mature and what is still early."),
-            ("Static diagram", "Public explainer architecture", "Current state tab", "Shows how reform, model scaffold, toy explainer, evidence and calibration fit together."),
+            ("Static diagram", "Public explainer architecture", "Current state tab", "Shows how reform, the scaffold, the toy explainer, evidence and calibration fit together."),
             ("Dynamic bar chart", "Reference scenario viability", "Reference scenarios tab", "Compares model-generated viability indices."),
             ("Dynamic scatter plot", "Supply generation versus hospital pressure", "Reference scenarios tab", "Shows the trade-off between access/supply and hospital-pressure index."),
             ("Dynamic heatmap", "Scenario score matrix", "Reference scenarios tab", "Shows multiple indices across scenarios at once."),
@@ -264,7 +263,7 @@ def render_readiness_chart(status_df: pd.DataFrame) -> None:
         x="Illustrative readiness index",
         y="Readiness area",
         orientation="h",
-        title="Where the project is mature versus still early",
+        title="What is mature and what is still early",
         labels={"Illustrative readiness index": "Readiness index (0-100)", "Readiness area": ""},
         range_x=[0, 100],
     )
@@ -279,7 +278,7 @@ def render_figure_inventory() -> None:
     st.markdown("### Figure and table inventory")
     st.dataframe(build_figure_inventory_table(), hide_index=True, width="stretch")
     st.caption(
-        "The dashboard intentionally mixes static explanation with dynamic charts. The charts explain model structure and relative indices; they are not empirical performance results."
+        "The dashboard mixes static explanation with dynamic charts. The charts explain model structure and relative indices; they are not empirical performance results."
     )
 
 
@@ -287,8 +286,8 @@ def render_current_state() -> None:
     st.subheader("Current state of the policy problem and the project")
     st.markdown(
         """
-        This section is the orientation page for a general reader. It separates
-        three things that are easy to confuse: what New Zealand is already doing,
+        This is the orientation page for a general reader. It separates three
+        things that are easy to confuse: what New Zealand is already doing,
         what this project has built, and what evidence is still missing.
         """
     )
@@ -296,7 +295,7 @@ def render_current_state() -> None:
     st.markdown("### Current New Zealand reform pathway used as the comparator")
     st.dataframe(build_current_reform_table(), hide_index=True, width="stretch")
     st.caption(
-        "The model treats the current reform pathway as the comparator. It does not assume no reform is happening."
+        "The model treats the current reform pathway as the comparator. It does not pretend no reform is happening."
     )
 
     st.markdown("### How the public explainer fits together")
@@ -334,7 +333,7 @@ def render_reference_viability(df: pd.DataFrame) -> None:
         y="scenario_name",
         orientation="h",
         labels={"hybrid_viability_score": "Hybrid viability index", "scenario_name": ""},
-        title="Reference scenario comparison — model-generated index",
+        title="Reference scenario comparison: model-generated index",
     )
     fig.update_layout(height=560, margin=dict(l=10, r=10, t=45, b=10))
     st.plotly_chart(fig, width="stretch")
@@ -385,12 +384,12 @@ def render_reference_heatmap(df: pd.DataFrame) -> None:
         aspect="auto",
         color_continuous_scale="Viridis",
         labels={"x": "Model-generated index", "y": "Reference scenario", "color": "Index score"},
-        title="Scenario score matrix — model-generated indices",
+        title="Scenario score matrix: model-generated indices",
     )
     fig.update_layout(height=520, margin=dict(l=10, r=10, t=45, b=10))
     st.plotly_chart(fig, width="stretch")
     st.caption(
-        "This heatmap helps compare patterns across scenarios. It is a model-index view, not observed New Zealand performance data."
+        "This heatmap compares patterns across scenarios. It is a model-index view, not observed New Zealand performance data."
     )
 
 
@@ -411,7 +410,7 @@ def render_scenario_profile_radar(df: pd.DataFrame) -> None:
         return
 
     scenario_options = {
-        f"{row.scenario_id} — {row.scenario_name}": row
+        f"{row.scenario_id} - {row.scenario_name}": row
         for row in df.sort_values("scenario_id").itertuples(index=False)
     }
     selected_label = st.selectbox("Choose a reference scenario profile", list(scenario_options))
@@ -448,11 +447,11 @@ def render_scenario_profile_radar(df: pd.DataFrame) -> None:
         showlegend=False,
         height=520,
         margin=dict(l=40, r=40, t=45, b=20),
-        title=f"Selected scenario profile — {selected.scenario_id}",
+        title=f"Selected scenario profile: {selected.scenario_id}",
     )
     st.plotly_chart(fig, width="stretch")
     st.caption(
-        "Hospital pressure and gaming risk are inverted here so that larger radar areas consistently mean more favourable scaffold logic."
+        "Hospital pressure and gaming risk are inverted here so that larger radar areas mean more favourable scaffold logic."
     )
 
 
@@ -473,7 +472,7 @@ def render_toy_chart(scores: dict[str, float]) -> None:
         x="score",
         y="index",
         orientation="h",
-        title="Toy explainer output — not the model forecast",
+        title="Toy explainer output: not the model forecast",
         labels={"score": "Score", "index": ""},
     )
     fig.update_layout(height=420, margin=dict(l=10, r=10, t=45, b=10))
@@ -484,7 +483,7 @@ def render_toy_parameter_dictionary() -> None:
     st.markdown("### Toy parameter dictionary")
     st.dataframe(build_toy_parameter_dictionary(), hide_index=True, width="stretch")
     st.caption(
-        "These are qualitative teaching levers, not estimated structural parameters. Their purpose is to make the causal logic inspectable."
+        "These are qualitative teaching levers, not estimated structural parameters. They make the causal logic visible."
     )
 
 
@@ -521,12 +520,12 @@ def render_model_status() -> None:
 def render_app() -> None:
     st.set_page_config(page_title="GTPCNZ", page_icon="🩺", layout="wide")
 
-    st.title("🩺 GTPCNZ: Funding Architecture Explainer")
+    st.title("GTPCNZ: funding architecture explainer")
     st.markdown(
         """
-        Explore a source-informed model scaffold about primary care funding architecture
-        in Aotearoa New Zealand. The dashboard separates **reference scenarios** from
-        a small **toy explainer**. The toy sliders help explain the logic; they do not
+        This is a source-informed model scaffold about primary care funding
+        in Aotearoa New Zealand. The dashboard separates reference scenarios from
+        a small toy explainer. The toy sliders help explain the logic; they do not
         rerun the full parameterised model.
         """
     )
@@ -609,8 +608,8 @@ def render_app() -> None:
         st.markdown(
             """
             The proposal is not to abandon capitation. It is to use capitation for what
-            it does well — continuity, enrolment, baseline viability and population
-            responsibility — while adding an uncapped, scheduled, rules-based
+            it does well: continuity, enrolment, baseline viability and population
+            responsibility. It then adds an uncapped, scheduled, rules-based
             fee-for-service stream for eligible primary medical activity.
 
             **Uncapped does not mean uncontrolled.** It means scheduled, rules-based,
@@ -645,8 +644,8 @@ def render_app() -> None:
         render_toy_parameter_dictionary()
         st.markdown(
             """
-            These sliders are deliberately simple. They are useful for teaching the
-            trade-offs, but they are **not** the 70-parameter scaffold and **not a calibrated prediction**.
+            These sliders are deliberately simple. They teach the trade-offs, but
+            they are not the 70-parameter scaffold and not a calibrated prediction.
             """
         )
         metric_cols = st.columns(3)
@@ -691,7 +690,7 @@ def render_app() -> None:
             - **Toy explainer:** a simplified interactive teaching tool, not the model forecast.
             """
         )
-        with st.expander("Learn the 'Big Words'"):
+        with st.expander("Learn the big words"):
             st.markdown(
                 """
                 - **Uncapped** means eligible activity is not limited by a fixed global activity envelope.
@@ -701,7 +700,7 @@ def render_app() -> None:
                 """
             )
 
-    st.caption(f"GTPCNZ v{APP_VERSION}. Demonstrative explainer only — not a calibrated forecast.")
+    st.caption(f"GTPCNZ v{APP_VERSION}. Demonstrative explainer only, not a calibrated forecast.")
 
 
 if __name__ == "__main__":

@@ -10,7 +10,7 @@ The Streamlit dashboard satisfies the v1.8.1 content and presentation contract a
 
 | Contract requirement | Implementation evidence | Status |
 |---|---|---|
-| First screen identifies the dashboard as an explainer | `models/primarycare_model/app.py` title: `GTPCNZ: Funding Architecture Explainer` | Pass |
+| First screen identifies the dashboard as an explainer | `models/primarycare_model/app.py` title: `GTPCNZ: funding architecture explainer` | Pass |
 | Full model caveat appears in the dashboard | `caveat_box()` renders the full caveat | Pass |
 | Reader guide explains reference scenarios versus toy sliders | `render_reader_guide()` | Pass |
 | Interpretation rules are visible | `render_interpretation_rules()` | Pass |

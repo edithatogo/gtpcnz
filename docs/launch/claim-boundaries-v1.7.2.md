@@ -4,11 +4,11 @@
 
 | Claim level | Public wording | What not to say |
 |---|---|---|
-| Public document | “Public documents show…” | “This proves…” |
-| Economic theory | “Theory predicts…” | “This necessarily happens…” |
-| Stakeholder intelligence | “Stakeholder feedback suggests…” | “This is established fact…” |
-| Model scaffold | “The scaffold shows the logic of…” | “The model predicts…” |
-| Policy judgement | “I think this warrants testing…” | “Government should implement immediately…” |
+| Public document | "Public documents show..." | "This proves..." |
+| Economic theory | "Theory predicts..." | "This necessarily happens..." |
+| Stakeholder intelligence | "Stakeholder feedback suggests..." | "This is established fact..." |
+| Model scaffold | "The scaffold shows the logic of..." | "The model predicts..." |
+| Policy judgement | "I think this warrants testing..." | "Government should implement immediately..." |
 
 ## Required caveats
 

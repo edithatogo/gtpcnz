@@ -1,4 +1,4 @@
-# Model card v1.7.2 — full parameterised primary care funding scaffold
+# Model card v1.7.2: full parameterised primary care funding scaffold
 
 ## Model name
 Full parameterised scaffold for primary care funding architecture in Aotearoa New Zealand.
@@ -20,10 +20,10 @@ v1.7.2. This version incorporates red-team and devil's advocate findings into th
 - Arguing that fee-for-service alone is superior to capitation.
 
 ## Core policy question
-Does a hybrid architecture — capitation for population responsibility plus an uncapped, scheduled, rules-based fee-for-service stream for eligible primary medical activity plus place-based accountability — allow lower-cost upstream care to expand safely before need becomes hospital demand?
+Does a hybrid architecture allow lower-cost upstream care to expand safely before need becomes hospital demand? In this model, hybrid means capitation for population responsibility plus an uncapped, scheduled, rules-based fee-for-service stream for eligible primary medical activity, with place-based accountability.
 
 ## Strongest counter-hypothesis
-The current reform pathway — capitation reweighting, access target, National Primary Care Dataset, digital access, urgent-care investment, PHO accountability and separate appropriations — may be sufficient to improve access without a new uncapped scheduled fee-for-service stream.
+The current reform pathway may be sufficient to improve access without a new uncapped scheduled fee-for-service stream. That pathway includes capitation reweighting, the access target, the National Primary Care Dataset, digital access, urgent-care investment, PHO accountability and separate appropriations.
 
 ## What the model must not hide
 - Uncapped activity without audit, item rules and place accountability is a high-risk scenario.

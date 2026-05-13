@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The Streamlit dashboard must be readable by a general audience while remaining safe for policy, research and public communication. It is an explainer for a source-informed model scaffold, not a calibrated simulator.
+The Streamlit dashboard must be readable by a general audience and safe for policy, research and public communication. It is an explainer for a source-informed model scaffold, not a calibrated simulator.
 
 ## Audience
 
@@ -12,7 +12,7 @@ The dashboard should not assume that the reader already understands capitation, 
 
 ## Required first-screen content
 
-The first screen must contain:
+The first screen needs:
 
 - A plain-English title identifying the dashboard as a funding architecture explainer.
 - The full model caveat:
@@ -20,11 +20,11 @@ The first screen must contain:
 > This is a source-informed parameterised scaffold and educational explainer. It is not a real-data calibrated forecast and should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
 
 - A short reader guide explaining the difference between reference scenarios and toy slider settings.
-- Clear direction on how to read the dashboard.
+- A short guide to reading the dashboard.
 
 ## Required sections
 
-The dashboard must include these sections or tabs:
+The dashboard needs these sections or tabs:
 
 - Start here: thesis, claim boundary, model status and interpretation rules.
 - Current state: current New Zealand reform pathway, public project status, static table and static diagram.
@@ -37,7 +37,7 @@ The dashboard must include these sections or tabs:
 
 ## Required current-state information
 
-The current-state section must explain that the current reform pathway is the comparator, not a straw man. It must cover:
+The current-state section must explain that the current reform pathway is the comparator, not a straw man. It should cover:
 
 - capitation reweighting;
 - primary care access target;
@@ -48,7 +48,7 @@ The current-state section must explain that the current reform pathway is the co
 
 ## Required visual and tabular material
 
-The dashboard must include both static and dynamic explanatory material:
+The dashboard must mix static and dynamic material:
 
 - Static tables:
   - current reform pathway table;

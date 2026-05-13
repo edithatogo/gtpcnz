@@ -1,5 +1,5 @@
 ---
-title: "GTPCNZ: Public Funding Architecture Report"
+title: "GTPCNZ: public funding architecture report"
 subtitle: "Source-informed scaffold for primary care funding policy discussion"
 author: "Dylan A Mordaunt"
 date: "2026-05-12"
@@ -23,7 +23,7 @@ execute:
 
 **Source-confidence label: policy judgement + model scaffold.**
 
-This report summarises a source-informed scaffold for thinking about primary care funding architecture in Aotearoa New Zealand.
+This report explains a source-informed scaffold for primary care funding in Aotearoa New Zealand.
 
 > This is a source-informed parameterised scaffold and educational explainer. It is not a real-data calibrated forecast and should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
 
@@ -31,12 +31,12 @@ The central question is simple:
 
 > Do current funding rules allow lower-cost upstream care to expand safely before need becomes hospital demand?
 
-The proposed architecture is a hybrid:
+The proposal is a hybrid:
 
 1. **Capitation** for continuity, enrolment, baseline viability and population responsibility.
 2. **Uncapped scheduled fee-for-service** for eligible primary medical activity.
-3. **Place-based accountability** to protect comprehensive population responsibility and reduce cherry-picking.
-4. **Item rules, clinical governance, documentation, audit and data visibility** to reduce gaming and low-value activity.
+3. **Place-based accountability** so providers remain responsible for whole communities, not only easy activity.
+4. **Item rules, clinical governance, documentation, audit and data visibility** to control gaming and low-value activity.
 5. **Equity and co-payment protections** so price does not become the rationing mechanism.
 
 Short version:
@@ -47,7 +47,7 @@ Short version:
 
 **Source-confidence label: claim boundary.**
 
-This report is a public explanation of a model scaffold. It can be used to compare policy logics, identify assumptions and guide stakeholder validation.
+This report is a public explanation of a model scaffold. It can compare policy logics, identify assumptions and guide stakeholder validation.
 
 It is not:
 
@@ -57,17 +57,17 @@ It is not:
 - a prediction that any scenario will reduce hospital demand by a precise amount;
 - a claim that fee-for-service alone is better than capitation.
 
-For the formal model boundary, see the model card and claim-boundary documents rendered on this site.
+The formal boundary is in the model card and claim-boundary documents on this site.
 
 # 2. The current reform pathway is the comparator
 
 **Source-confidence label: public document + policy interpretation.**
 
-A weak critique would pretend New Zealand is doing nothing. That is not the argument here.
+A weak critique would pretend New Zealand is doing nothing. That is not the argument.
 
-The current reform pathway includes capitation reweighting, a primary care access target, the National Primary Care Dataset, digital access work, urgent and after-hours care, Primary Health Organisation accountability work and separate appropriation structures.
+The current reform pathway already includes capitation reweighting, a primary care access target, the National Primary Care Dataset, digital access work, urgent and after-hours care, Primary Health Organisation accountability work and separate appropriation structures.
 
-The real question is whether that pathway changes the supply game enough.
+The hard question is whether that pathway changes the supply game enough.
 
 A capitation formula can improve how funding is allocated across enrolled populations. It does not necessarily create a strong marginal payment signal for the next clinically necessary appointment, procedure or urgent episode. That is the gap this model explores.
 
@@ -75,7 +75,7 @@ A capitation formula can improve how funding is allocated across enrolled popula
 
 **Source-confidence label: economic theory + model assumption.**
 
-Capitation pays a fixed amount for an enrolled person or population. It can support continuity and population responsibility. It can also help with budget predictability.
+Capitation pays a fixed amount for an enrolled person or population. It can support continuity, population responsibility and budget predictability.
 
 But when demand rises, the next appointment still takes clinician time, room time, nursing time, documentation, risk, follow-up and administration. If the marginal payment for that extra work is weak, the system may ration through waiting time, closed books, short consultations, co-payments or hospital overflow.
 
@@ -85,7 +85,7 @@ This is not an argument against capitation. It is an argument against expecting 
 
 **Source-confidence label: policy judgement + ACC analogy.**
 
-The proposal is not uncontrolled billing.
+This is not a proposal for uncontrolled billing.
 
 A scheduled fee-for-service stream would mean that eligible primary medical activity can be paid when it is delivered, without a fixed global activity ceiling. The controls sit elsewhere:
 
@@ -99,15 +99,15 @@ A scheduled fee-for-service stream would mean that eligible primary medical acti
 - data reporting;
 - quality and safety governance.
 
-The Accident Compensation Corporation analogy is useful because it already uses rules-based treatment payments, provider eligibility, contracts and regulation. It is not a complete template for illness-based primary care.
+The Accident Compensation Corporation analogy is useful because ACC already uses rules-based treatment payments, provider eligibility, contracts and regulation. It is not a complete template for illness-based primary care.
 
 # 5. Why place-based accountability matters
 
 **Source-confidence label: red-team finding + policy judgement.**
 
-A fee-for-service stream can improve marginal supply, but it can also create cherry-picking. Providers may select easier, shorter or more profitable contacts unless the system also protects hard-to-reach populations, rural communities, complex patients and people with high unmet need.
+A fee-for-service stream can improve marginal supply, but it can also encourage cherry-picking. Providers may select easier, shorter or more profitable contacts unless the system protects hard-to-reach populations, rural communities, complex patients and people with high unmet need.
 
-That is why place-based accountability is not optional. A national benefit schedule should sit alongside responsibility for whole populations.
+That is why place-based accountability is not optional. A national benefit schedule should sit beside responsibility for whole populations.
 
 # 6. Scenario results from the scaffold
 
@@ -140,7 +140,7 @@ df_sorted = df.sort_values("rank_by_hybrid_viability")
 plt.figure(figsize=(10, 6))
 plt.barh(df_sorted["scenario_name"], df_sorted["hybrid_viability_score"])
 plt.xlabel("Hybrid viability index")
-plt.title("Reference scenarios — model-generated indices")
+plt.title("Reference scenarios: model-generated indices")
 plt.gca().invert_yaxis()
 plt.tight_layout()
 plt.show()
@@ -152,18 +152,18 @@ plt.show()
 
 **Source-confidence label: model scaffold + policy judgement.**
 
-The scaffold suggests four patterns:
+The scaffold points to four patterns:
 
 1. Capitation reweighting improves allocation, but may not solve marginal supply.
 2. Uncapped scheduled fee-for-service improves the marginal supply signal.
 3. Uncapped activity without strong controls is high risk.
-4. The strongest scenario is the full hybrid: capitation, scheduled fee-for-service, place accountability, urgent/ambulance alternatives, scope-enabled supply, data, audit and key performance indicators.
+4. The strongest scenario is the full hybrid: capitation, scheduled fee-for-service, place accountability, urgent/ambulance alternatives, scope-enabled supply, data, audit and performance measures.
 
 # 8. What would change my mind
 
 **Source-confidence label: falsification framework.**
 
-This argument would be weaker if evidence showed that:
+This argument should lose force if evidence shows that:
 
 - capitation reweighting plus the access target materially improves appointment supply without an activity-sensitive stream;
 - unmet primary care access does not predict emergency department, ambulance or admission pressure;
@@ -176,7 +176,7 @@ This argument would be weaker if evidence showed that:
 
 **Source-confidence label: research plan.**
 
-The next step is not to make the scaffold more complicated. It is to validate the load-bearing assumptions:
+The next step is not a more complicated scaffold. It is testing the load-bearing assumptions:
 
 - marginal supply response to scheduled benefits;
 - unmet primary care to emergency department and ambulance conversion;
@@ -193,6 +193,6 @@ The next step is not to make the scaffold more complicated. It is to validate th
 
 The current reform pathway may be necessary. It may not be sufficient.
 
-The strongest policy question is not whether capitation or fee-for-service is morally superior. It is whether the funding architecture allows safe upstream care to expand before unmet need becomes hospital demand.
+The strongest policy question is not whether capitation or fee-for-service is morally superior. It is whether the funding architecture lets safe upstream care expand before unmet need becomes hospital demand.
 
 > **Uncapped does not mean uncontrolled.** It means scheduled, rules-based, audited, clinically governed and place-accountable.
