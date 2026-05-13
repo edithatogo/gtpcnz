@@ -39,11 +39,20 @@ def test_validate_scenario_results_accepts_expected_schema():
     assert validate_scenario_results(df) == []
 
 
-def test_load_scenario_results_adds_claim_boundary(tmp_path: Path):
+def test_load_scenario_results_adds_claim_boundary():
     df = minimal_results_frame()
-    source = tmp_path / "results.csv"
-    df.to_csv(source, index=False)
-    loaded = load_scenario_results(source)
+    source = Path("codex-tmp") / "scenario-service-test-results.csv"
+    source.parent.mkdir(exist_ok=True)
+    try:
+        df.to_csv(source, index=False)
+        loaded = load_scenario_results(source)
+    finally:
+        if source.exists():
+            try:
+                source.unlink()
+            except PermissionError:
+                # Windows/OneDrive can briefly hold the file after pandas reads it.
+                pass
     assert "scenario_role" in loaded.columns
     assert "claim_boundary" in loaded.columns
     assert loaded["claim_boundary"].str.contains("not a real-data calibrated forecast").all()

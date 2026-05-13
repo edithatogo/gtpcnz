@@ -41,9 +41,9 @@ The Streamlit dashboard satisfies the v1.8.1 content and presentation contract a
 
 Local validation after implementation:
 
-- `pytest -q -p no:cacheprovider --basetemp=C:\tmp\gtpcnz-pytest`: 14 passed.
-- `python -m compileall models`: passed.
-- `python -m py_compile streamlit_app.py models/primarycare_model/app.py models/primarycare_model/scenario_service.py`: passed.
+- Contract/dashboard tests passed.
+- Model package compilation passed.
+- Streamlit entrypoint and dashboard modules passed Python syntax checks.
 
 Remote validation after push:
 

@@ -71,6 +71,21 @@ The hard question is whether that pathway changes the supply game enough.
 
 A capitation formula can improve how funding is allocated across enrolled populations. It does not necessarily create a strong marginal payment signal for the next clinically necessary appointment, procedure or urgent episode. That is the gap this model explores.
 
+```{mermaid}
+flowchart LR
+  A[Current reform pathway] --> B[Capitation reweighting]
+  A --> C[Access target]
+  A --> D[National Primary Care Dataset]
+  A --> E[Digital, urgent and after-hours care]
+  B --> F{Tested gap}
+  C --> F
+  D --> F
+  E --> F
+  F --> G[Does marginal supply expand enough?]
+```
+
+*Figure 1. Current reform pathway used as the comparator. This is a public-policy map, not a model result.*
+
 # 3. Why capitation can be fair and still constrain supply
 
 **Source-confidence label: economic theory + model assumption.**
@@ -80,6 +95,20 @@ Capitation pays a fixed amount for an enrolled person or population. It can supp
 But when demand rises, the next appointment still takes clinician time, room time, nursing time, documentation, risk, follow-up and administration. If the marginal payment for that extra work is weak, the system may ration through waiting time, closed books, short consultations, co-payments or hospital overflow.
 
 This is not an argument against capitation. It is an argument against expecting capitation to solve every problem.
+
+```{mermaid}
+flowchart TB
+  A[Enrolled population payment] --> B[Baseline responsibility]
+  B --> C[Continuity and planning]
+  B --> D[Fixed or weak marginal revenue]
+  E[Rising need] --> F[More appointments, calls, follow-up and risk]
+  D --> G{Extra contact viable?}
+  F --> G
+  G -->|yes| H[Supply can expand]
+  G -->|no| I[Waiting, closed books, higher fees or hospital spillover]
+```
+
+*Figure 2. The marginal payment gap. This is a conceptual microeconomics diagram, not an estimate.*
 
 # 4. What uncapped scheduled fee-for-service means
 
@@ -101,6 +130,18 @@ A scheduled fee-for-service stream would mean that eligible primary medical acti
 
 The Accident Compensation Corporation analogy is useful because ACC already uses rules-based treatment payments, provider eligibility, contracts and regulation. It is not a complete template for illness-based primary care.
 
+```{mermaid}
+flowchart LR
+  A[Eligible clinical activity] --> B[Scheduled item price]
+  B --> C[Provider scope rules]
+  C --> D[Documentation]
+  D --> E[Audit and unusual-pattern checks]
+  E --> F[Place accountability]
+  F --> G[Payment follows eligible activity]
+```
+
+*Figure 3. Uncapped but controlled. The activity envelope is not globally capped, but the item, provider, documentation, audit and place rules still bind.*
+
 # 5. Why place-based accountability matters
 
 **Source-confidence label: red-team finding + policy judgement.**
@@ -115,36 +156,38 @@ That is why place-based accountability is not optional. A national benefit sched
 
 The table below uses source-informed model-generated indices. These are not observed New Zealand outcomes.
 
-```{python}
-import pandas as pd
-from pathlib import Path
+| Rank | Scenario | Name | Hybrid viability | Supply generation | Hospital pressure | Gaming risk |
+|---:|---|---|---:|---:|---:|---:|
+| 1 | F4 | Full hybrid upstream architecture | 77.26 | 55.66 | 61.61 | 27.30 |
+| 2 | F3 | Uncapped medical FFS + place accountability | 62.51 | 40.10 | 74.36 | 30.76 |
+| 3 | F2 | Uncapped scheduled medical FFS | 56.40 | 40.38 | 75.86 | 39.10 |
+| 4 | F9 | Place-based commissioning only | 54.26 | 14.33 | 79.07 | 30.35 |
+| 5 | F8 | Scope-enabled supply only | 52.96 | 21.29 | 78.25 | 36.22 |
+| 6 | F7 | Ambulance and urgent alternatives only | 52.74 | 14.33 | 72.31 | 35.75 |
+| 7 | F0 | Current reform pathway | 52.24 | 15.43 | 78.07 | 34.04 |
+| 8 | F1 | Capitation reweighting only | 50.37 | 14.11 | 79.91 | 35.45 |
+| 9 | F6 | ACC activity constraint shock | 50.11 | 13.87 | 80.21 | 35.35 |
+| 10 | F5 | Uncapped weak-control model | 46.11 | 37.25 | 77.18 | 70.64 |
 
-path = Path("../outputs/full-parameterised-summary-results-v1.7.0.csv")
-df = pd.read_csv(path)
-cols = [
-    "rank_by_hybrid_viability",
-    "scenario_id",
-    "scenario_name",
-    "hybrid_viability_score",
-    "supply_generation_score",
-    "hospital_pressure_score",
-    "gaming_risk_score",
-]
-df[cols].sort_values("rank_by_hybrid_viability")
+```{mermaid}
+xychart-beta
+  title "Reference scenarios: hybrid viability index"
+  x-axis ["F4","F3","F2","F9","F8","F7","F0","F1","F6","F5"]
+  y-axis "Model-generated index" 0 --> 100
+  bar [77.26,62.51,56.40,54.26,52.96,52.74,52.24,50.37,50.11,46.11]
 ```
 
-```{python}
-import matplotlib.pyplot as plt
+*Figure 4. Static scenario rank plot. Scores are model-generated indices, not observed New Zealand outcomes.*
 
-df_sorted = df.sort_values("rank_by_hybrid_viability")
-plt.figure(figsize=(10, 6))
-plt.barh(df_sorted["scenario_name"], df_sorted["hybrid_viability_score"])
-plt.xlabel("Hybrid viability index")
-plt.title("Reference scenarios: model-generated indices")
-plt.gca().invert_yaxis()
-plt.tight_layout()
-plt.show()
+```{mermaid}
+xychart-beta
+  title "Supply generation index by reference scenario"
+  x-axis ["F4","F3","F2","F9","F8","F7","F0","F1","F6","F5"]
+  y-axis "Model-generated index" 0 --> 100
+  bar [55.66,40.10,40.38,14.33,21.29,14.33,15.43,14.11,13.87,37.25]
 ```
+
+*Figure 5. Static supply-generation plot. This shows scenario logic under assumptions, not measured supply.*
 
 **Interpretation rule:** the chart compares relative scenario logic under assumptions. It does not predict real-world effect sizes.
 
@@ -196,3 +239,98 @@ The current reform pathway may be necessary. It may not be sufficient.
 The strongest policy question is not whether capitation or fee-for-service is morally superior. It is whether the funding architecture lets safe upstream care expand before unmet need becomes hospital demand.
 
 > **Uncapped does not mean uncontrolled.** It means scheduled, rules-based, audited, clinically governed and place-accountable.
+
+# Appendix A. Public funding formula forms
+
+**Source-confidence label: public formula forms + accounting identities.**
+
+The formulae below use publicly available funding descriptions and rate schedules. They are not a complete operational model of every PHO contract, pass-through rule, final coefficient or local practice fee. Where the public source gives only the structure, the notation is deliberately written as a transparent accounting identity.
+
+## A1. Capitation
+
+[Health New Zealand's capitation rates page](https://www.healthnz.govt.nz/health-professionals/guidance-standards/topic/primary-care/primary-care-funding-subsidies/capitation-rates) describes capitation as payment by enrolled population rather than visit count, and publishes annualised rate tables from 1 July 2025.
+
+$$
+\text{Capitation}_{p}
+=
+\sum_{i \in E_p} r(a_i, s_i, h_i, q_p)
++
+\sum_{k \in A_p} \text{AddOn}_{k}
+$$
+
+Here \(p\) is the practice or enrolled provider population; \(E_p\) is its enrolled population; \(r(a_i, s_i, h_i, q_p)\) is the published annual rate for person \(i\), varying by age band, sex, high-use-health-card status and practice/payment category; and \(A_p\) covers eligible add-on streams such as health promotion, access funding, Care Plus, immunisation administration, rural workforce retention, management services, very-low-cost-access support, zero-fees support, Community Services Card support and contingent capitation.
+
+The marginal point is:
+
+$$
+\frac{\partial \text{Capitation}_{p}}{\partial \text{Visits}_{p}} \approx 0
+$$
+
+Once the enrolled population and eligible add-ons are fixed, an extra clinically necessary contact usually adds workload before it adds revenue.
+
+The [Ministry of Health capitation reweighting page](https://www.health.govt.nz/strategies-initiatives/programmes-and-initiatives/primary-and-community-health-care/capitation-reweighting) says the revised formula considers age, sex, multimorbidity, rurality and socio-economic deprivation, with implementation expected from 1 July 2026 subject to negotiation. A cautious public-form notation is:
+
+$$
+\text{FutureCapitation}_{p}
+=
+\sum_{i \in E_p}
+f(a_i, s_i, m_i, u_i, d_i)
+$$
+
+where \(m_i\) is multimorbidity, \(u_i\) is rurality or distance from urban areas, and \(d_i\) is socio-economic deprivation. This is the published structure, not the final coefficient table.
+
+## A2. Scheduled fee-for-service
+
+ACC provides a public example of scheduled activity payments. The [Accident Compensation treatment-cost regulations](https://www.legislation.govt.nz/secondary-legislation/pco-drafted/2024/36/en/latest/) set amounts ACC is liable to pay or contribute for specified treatment, and ACC publishes a [medical practitioner, nurse practitioner and nurse cost schedule](https://www.acc.co.nz/assets/provider/ACC1520-Med-pract-nurse-pract-and-nurses-costs-v2.pdf).
+
+$$
+\text{ACCContribution}_{v}
+=
+B(g_v, c_v, a_v)
++
+T_{\max(v)}
++
+0.5 \sum_{t \in O_v} T_t
+$$
+
+Here \(v\) is a covered treatment visit; \(B(g_v, c_v, a_v)\) is the base visit contribution by provider group, card/dependent status and age category; \(T_{\max(v)}\) is the most expensive eligible treatment item at the visit; and \(O_v\) is the set of other eligible treatment items for different injuries at the same visit.
+
+The policy analogy is not to copy ACC exactly. It is that eligible services can be priced in advance, paid when delivered, documented and audited.
+
+## A3. Blended funding and viability
+
+The [Health New Zealand annual primary care funding page](https://www.tewhatuora.govt.nz/for-health-providers/primary-care-sector/annual-primary-care-funding) describes current primary care funding as including capitation, contingent capitation, performance-based funding, co-payment settings, minor planned care and immunisation funding. A simple blended identity is:
+
+$$
+\text{PracticeFunding}_{p}
+=
+\text{Capitation}_{p}
++
+\text{ProgrammeFunding}_{p}
++
+\sum_{j \in S_p} P_j q_{pj}
++
+\text{PatientCoPayments}_{p}
+$$
+
+where \(S_p\) is the set of scheduled eligible activities, \(P_j\) is the scheduled public payment for activity \(j\), and \(q_{pj}\) is the quantity of activity \(j\) delivered by practice \(p\).
+
+For access, the practical question is whether one more safe contact is viable:
+
+$$
+\text{ExtraContactViable}_{j}
+\iff
+P_j + C_j \geq MC_j
+$$
+
+where \(C_j\) is the allowed or actual patient co-payment and \(MC_j\) is the marginal cost of providing the extra contact.
+
+Co-payment protection is therefore part of the formula, not a side issue:
+
+$$
+\text{PatientCharge}_{j}
+\leq
+\text{AllowedFee}_{j}
+$$
+
+If an activity payment is added without charge controls, the reform can become a price increase rather than an access improvement.

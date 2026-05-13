@@ -1,6 +1,10 @@
 __pycache__/
 *.pyc
 .pytest_cache/
+pytest-cache-files-*/
+.tmp/
+codex-tmp/
+docs/figures/public-proof/browser-audit-*/
 .venv/
 .env
 .streamlit/secrets.toml
@@ -21,3 +25,4 @@ __pycache__/
 /reports/primary_care_architecture_files/
 /reports/primary_care_architecture.tex
 **/*.quarto_ipynb
+**/*.quarto_ipynb_*
