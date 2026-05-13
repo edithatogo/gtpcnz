@@ -43,6 +43,113 @@ Short version:
 
 > **Uncapped does not mean uncontrolled.** It means uncapped at the global activity-envelope level, but controlled at the item, scope, audit, clinical-governance and place-accountability level.
 
+# How the posts map to this report and dashboard {#post-map}
+
+**Source-confidence label: public reading map.**
+
+This section gives stable anchors for the first six public posts. It also keeps the dashboard wording aligned with the report: the public surfaces use model-generated indices, not observed outcomes.
+
+| Post | Stable anchor | Main report surface | Dashboard surface | Status / caveat |
+|---|---|---|---|---|
+| 01 | [Post 01](#post-01) | Executive summary; comparator framing; scenario interpretation | Start here; Current state; Reference scenarios | Model-generated index, not an empirical outcome |
+| 02 | [Post 02](#post-02) | Funding model explainer; formula appendix | Funding models module; Toy explainer | Source-informed scaffold, not a forecast |
+| 03 | [Post 03](#post-03) | Marginal supply and the extra-contact viability threshold | Microeconomics lab | Static teaching diagram, not a measured curve |
+| 04 | [Post 04](#post-04) | Game theory, controls and gaming risk | Game theory lab | Strategic teaching diagram, not an estimate |
+| 05 | [Post 05](#post-05) | Current reform comparator and F0/current reform pathway | Current state; Reference scenarios | F0/current reform remains the comparator |
+| 06 | [Post 06](#post-06) | Controlled scheduled payment and uncapping logic | Toy explainer; Microeconomics lab | Model-generated index wording stays in place |
+
+## Post 01. Are we buying hospital growth by rationing cheaper care upstream? {#post-01}
+
+**Source-confidence label: executive-summary framing.**
+
+**Accessibility description:** This post is the entry point. It links the policy question, the current reform comparator and the scenario ranking so the reader can move from the question to the model scaffold without needing the dashboard first.
+
+This post maps to the executive summary, the current reform comparator section and the scenario interpretation section. It is the clearest place to start if the reader wants the public policy question before the technical detail.
+
+## Post 02. Fee-for-service, capitation and blended funding {#post-02}
+
+**Source-confidence label: funding-formula explanation.**
+
+**Accessibility description:** This post explains the basic funding pieces in plain English and points the reader to the formula appendix where the accounting identities are written out.
+
+This post maps to the funding-model explanation and the appendix that lays out capitation, scheduled payment and blended funding identities.
+
+## Post 03. Marginal supply {#post-03}
+
+**Source-confidence label: microeconomics teaching diagram.**
+
+**Accessibility description:** The diagram below shows the viability threshold for one more primary care contact. If the funded payment plus any allowed charge does not meet marginal cost, the extra contact is rationed.
+
+```{mermaid}
+flowchart LR
+  A[More clinically necessary contact] --> B{Does funded value meet marginal cost?}
+  C[Scheduled payment + allowed co-payment] --> B
+  D[Marginal cost: clinician time, room time, admin, follow-up] --> B
+  B -->|yes| E[Extra contact is viable]
+  B -->|no| F[Waiting, closed books or higher fees]
+```
+
+*Post 03 diagram 1. Marginal supply threshold. This is a static microeconomics teaching diagram, not an estimated cost curve.*
+
+This post maps to the marginal-supply section and the formula appendix. It gives the reader the simplest possible microeconomics reading of the model: a safe extra contact needs a viable marginal payment signal.
+
+## Post 04. Why formulas do not solve games {#post-04}
+
+**Source-confidence label: game theory and controls.**
+
+**Accessibility description:** This post explains why incentive design matters. The same funding formula can produce different behaviour depending on provider strategy, audit strength and whether the system protects whole-population access.
+
+This is the explicit game-theory section. The report is not only asking what the formula pays; it is asking how providers, commissioners and patients respond when the rules change.
+
+| Provider strategy | Weak controls | Strong controls |
+|---|---|---|
+| Select easy or profitable contacts | High short-run revenue, weak access, high gaming risk | Limited upside, audit exposure, lower gaming payoff |
+| Serve the whole population | Moderate revenue, lower gaming risk, better access | Highest alignment between payment, access and legitimacy |
+
+*Post 04 diagram 1. Qualitative payoff matrix for the primary-care incentive game. This is a static game-theory teaching table, not an estimate.*
+
+```{mermaid}
+flowchart TB
+  A[System sets schedule, scope and audit rules] --> B{Provider best response}
+  B --> C[Expand access and accept harder cases]
+  B --> D[Cherry-pick easier activity]
+  C --> E[Better access and legitimacy]
+  D --> F[Higher gaming risk and weaker access]
+  F --> G[Need stronger controls]
+  G --> A
+```
+
+*Post 04 diagram 2. Best-response loop and controls stack. This is a static game-theory teaching diagram, not an empirical model.*
+
+This post maps to the gaming-risk discussion, the controls section and the place-accountability argument. It is where the report makes the strategic logic explicit.
+
+## Post 05. Current reform pathway {#post-05}
+
+**Source-confidence label: comparator surface.**
+
+**Accessibility description:** This post keeps the current New Zealand reform pathway visible as the comparator. It is not a straw man, and it is not a blank slate.
+
+This post maps to the current reform comparator section and the F0 scenario. The report keeps current reform in view so the reader can compare the public scaffold against the real policy path.
+
+## Post 06. What I mean by uncapping primary care funding {#post-06}
+
+**Source-confidence label: controlled scheduled payment.**
+
+**Accessibility description:** This diagram shows the controlled version of uncapping. The payment can be uncapped at the activity-envelope level while still being constrained by item rules, co-payment limits, scope, audit and place accountability.
+
+```{mermaid}
+flowchart LR
+  A[Eligible primary care activity] --> B[Scheduled payment]
+  B --> C{Do controls still bind?}
+  D[Item rules, scope, audit, place accountability and fee limits] --> C
+  C -->|yes| E[Uncapped but controlled]
+  C -->|no| F[Price increase rather than access gain]
+```
+
+*Post 06 diagram 1. Controlled uncapping threshold. This is a static microeconomics teaching diagram, not a forecast.*
+
+This post maps to the uncapping explanation and the formula appendix. It reinforces the point that uncapping is a payment design choice, not a permission slip for uncontrolled billing.
+
 # 1. What this report is and is not
 
 **Source-confidence label: claim boundary.**

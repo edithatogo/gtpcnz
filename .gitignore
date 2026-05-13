@@ -21,6 +21,7 @@ docs/figures/public-proof/browser-audit-*/
 # Quarto render output; keep the source .qmd tracked.
 /.quarto/
 /_site/
+/site_libs/
 /reports/primary_care_architecture.html
 /reports/primary_care_architecture_files/
 /reports/primary_care_architecture.tex

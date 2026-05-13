@@ -9,6 +9,8 @@ project:
     - docs/public-site/model-dashboard-hardening-spec-v1.8.1.md
     - docs/public-site/streamlit-dashboard-contract-v1.8.1.md
     - docs/public-site/streamlit-dashboard-audit-v1.8.1.md
+    - docs/public-site/post-surface-crosswalk-contract-v1.8.2.md
+    - docs/public-site/game-theory-microeconomics-simulation-spec-v1.8.2.md
     - docs/public-site/evidence-tracker-public-v1.8.1.md
     - docs/public-site/calibration-readiness-page-v1.8.1.md
     - docs/calibration/model-card-v1.7.2.md
@@ -36,6 +38,8 @@ website:
         href: docs/public-site/calibration-readiness-page-v1.8.1.md
       - text: "Dashboard contract"
         href: docs/public-site/streamlit-dashboard-contract-v1.8.1.md
+      - text: "Post crosswalk"
+        href: docs/public-site/post-surface-crosswalk-contract-v1.8.2.md
       - text: "Repository guide"
         href: README.md
   page-footer:

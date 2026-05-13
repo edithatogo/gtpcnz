@@ -1,37 +1,323 @@
 ---
 title: "GTPCNZ"
-subtitle: "Primary care funding architecture model and dashboard"
+subtitle: "Visual reading map for the public report, dashboard and launch posts"
 ---
 
-GTPCNZ is the public reporting layer for a source-informed model scaffold about primary care funding in Aotearoa New Zealand.
+<style>
+  :root {
+    --gtpcnz-ink: #17212b;
+    --gtpcnz-muted: #5f6b7a;
+    --gtpcnz-surface: #ffffff;
+    --gtpcnz-surface-alt: #f6f1e8;
+    --gtpcnz-border: rgba(23, 33, 43, 0.12);
+    --gtpcnz-accent: #0f766e;
+    --gtpcnz-accent-2: #a16207;
+    --gtpcnz-accent-3: #7c3aed;
+  }
 
-## Start here
+  .gtpcnz-hero {
+    background: linear-gradient(135deg, rgba(15, 118, 110, 0.12), rgba(161, 98, 7, 0.10));
+    border: 1px solid var(--gtpcnz-border);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: 0 18px 50px rgba(23, 33, 43, 0.08);
+  }
 
-If you are new to the project, read these in order:
+  .gtpcnz-kicker {
+    color: var(--gtpcnz-accent);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
 
-1. [Public report](reports/primary_care_architecture.qmd)
-2. [Dashboard guide](docs/REPORTS-AND-DASHBOARD.md)
-3. [Model card](docs/calibration/model-card-v1.7.2.md)
-4. [Claim boundaries](docs/launch/claim-boundaries-v1.7.2.md)
-5. [Evidence tracker](docs/public-site/evidence-tracker-public-v1.8.1.md)
-6. [Calibration readiness](docs/public-site/calibration-readiness-page-v1.8.1.md)
+  .gtpcnz-title {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    line-height: 1.02;
+    color: var(--gtpcnz-ink);
+  }
 
-## Current status
+  .gtpcnz-lead {
+    max-width: 70ch;
+    font-size: 1.08rem;
+    color: var(--gtpcnz-muted);
+    margin: 1rem 0 1.2rem;
+  }
 
-This is a **source-informed, parameterised policy model scaffold**.
+  .gtpcnz-caveat {
+    max-width: 78ch;
+    margin: 1rem 0 1.25rem;
+    padding: 1rem 1.1rem;
+    border-left: 4px solid var(--gtpcnz-accent-2);
+    background: rgba(161, 98, 7, 0.08);
+    border-radius: 0.75rem;
+    color: var(--gtpcnz-ink);
+  }
 
-> This is a source-informed parameterised scaffold and educational explainer. It is not a real-data calibrated forecast and should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
+  .gtpcnz-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1.2rem 0 0.75rem;
+  }
 
-## Current thesis
+  .gtpcnz-pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
 
-The thesis is narrow. Keep capitation for continuity, enrolment, baseline viability and population responsibility. Add an uncapped, scheduled, rules-based fee-for-service stream for eligible primary medical activity, with item rules, provider scope, clinical governance, documentation, audit, co-payment protections and place-based accountability.
+  .gtpcnz-pill,
+  .gtpcnz-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-radius: 999px;
+    padding: 0.35rem 0.7rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    border: 1px solid var(--gtpcnz-border);
+    background: rgba(255, 255, 255, 0.82);
+    color: var(--gtpcnz-ink);
+  }
 
-Short version:
+  .gtpcnz-section {
+    margin-top: 2rem;
+  }
 
-> Uncapped does not mean uncontrolled.
+  .gtpcnz-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
 
-## Public pages
+  .gtpcnz-card {
+    background: var(--gtpcnz-surface);
+    border: 1px solid var(--gtpcnz-border);
+    border-radius: 1.25rem;
+    padding: 1rem 1rem 1.05rem;
+    box-shadow: 0 12px 24px rgba(23, 33, 43, 0.04);
+    min-height: 100%;
+  }
 
-- GitHub Pages: this site.
-- Streamlit: [interactive explainer and scenario dashboard](https://gtpcnz.streamlit.app/).
-- Repository: source code, outputs, model card, claim boundaries and tests.
+  .gtpcnz-card h3,
+  .gtpcnz-card h4 {
+    margin-top: 0.75rem;
+    margin-bottom: 0.5rem;
+    color: var(--gtpcnz-ink);
+  }
+
+  .gtpcnz-card p {
+    color: var(--gtpcnz-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .gtpcnz-card .gtpcnz-status {
+    background: var(--gtpcnz-surface-alt);
+  }
+
+  .gtpcnz-card .btn {
+    margin-right: 0.45rem;
+    margin-top: 0.15rem;
+  }
+
+  .gtpcnz-card .gtpcnz-meta {
+    font-size: 0.92rem;
+    color: var(--gtpcnz-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .gtpcnz-span-2 {
+    grid-column: span 2;
+  }
+
+  .gtpcnz-note {
+    color: var(--gtpcnz-muted);
+    margin-top: 0.4rem;
+    font-size: 0.96rem;
+  }
+
+  @media (max-width: 900px) {
+    .gtpcnz-span-2 {
+      grid-column: span 1;
+    }
+  }
+</style>
+
+<div class="gtpcnz-hero">
+  <div class="gtpcnz-kicker">Public reading map</div>
+  <h1 class="gtpcnz-title">GTPCNZ visual gallery</h1>
+  <p class="gtpcnz-lead">
+    GTPCNZ is the public reporting layer for a source-informed model scaffold about primary care funding in Aotearoa New Zealand.
+    Use this page as the first screen: choose the report, the dashboard, or the specific launch post that answers your question.
+  </p>
+  <div class="gtpcnz-caveat">
+    This is a source-informed parameterised scaffold and educational explainer. It is not a real-data calibrated forecast and should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
+  </div>
+  <div class="gtpcnz-actions">
+    <a class="btn btn-primary btn-lg" href="reports/primary_care_architecture.qmd">Read the public report</a>
+    <a class="btn btn-outline-primary btn-lg" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Open the dashboard</a>
+    <a class="btn btn-outline-secondary btn-lg" href="docs/REPORTS-AND-DASHBOARD.md">Read the dashboard guide</a>
+  </div>
+  <div class="gtpcnz-pill-row" aria-label="status labels">
+    <span class="gtpcnz-pill">Conceptual</span>
+    <span class="gtpcnz-pill">Toy</span>
+    <span class="gtpcnz-pill">Model-generated index</span>
+    <span class="gtpcnz-pill">Evidence readiness</span>
+    <span class="gtpcnz-pill">Calibration readiness</span>
+  </div>
+</div>
+
+## Visual reading map
+
+<div class="gtpcnz-grid">
+  <div class="gtpcnz-card">
+    <span class="gtpcnz-status">Conceptual</span>
+    <h3>Argument map and thesis</h3>
+    <p>Read the executive summary, controls stack and claim boundary first.</p>
+    <p class="gtpcnz-meta">Quarto: public report overview and thesis sections.</p>
+    <a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd">Report</a>
+    <a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
+  </div>
+  <div class="gtpcnz-card">
+    <span class="gtpcnz-status">Conceptual</span>
+    <h3>Current reform pathway</h3>
+    <p>Compare the F0/current reform comparator with the proposed pathway.</p>
+    <p class="gtpcnz-meta">Quarto: current reform comparator section.</p>
+    <a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd">Report</a>
+    <a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
+  </div>
+  <div class="gtpcnz-card">
+    <span class="gtpcnz-status">Model-generated index</span>
+    <h3>Scenario rank chart</h3>
+    <p>Use the model-generated scenario order as an index, not a forecast.</p>
+    <p class="gtpcnz-meta">Quarto: scenario interpretation and results sections.</p>
+    <a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd">Report</a>
+    <a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
+  </div>
+  <div class="gtpcnz-card">
+    <span class="gtpcnz-status">Evidence readiness</span>
+    <h3>Evidence tracker</h3>
+    <p>See what is sufficiently sourced, what still needs checking, and what remains provisional.</p>
+    <p class="gtpcnz-meta">Public evidence tracker and supporting audit trail.</p>
+    <a class="btn btn-sm btn-primary" href="docs/public-site/evidence-tracker-public-v1.8.1.md">Open tracker</a>
+    <a class="btn btn-sm btn-outline-primary" href="reports/primary_care_architecture.qmd">Report</a>
+  </div>
+  <div class="gtpcnz-card">
+    <span class="gtpcnz-status">Calibration readiness</span>
+    <h3>Calibration readiness</h3>
+    <p>Check what is ready for tighter modelling and what remains a source-informed scaffold.</p>
+    <p class="gtpcnz-meta">Public calibration readiness page and model card.</p>
+    <a class="btn btn-sm btn-primary" href="docs/public-site/calibration-readiness-page-v1.8.1.md">Open page</a>
+    <a class="btn btn-sm btn-outline-primary" href="docs/calibration/model-card-v1.7.2.md">Model card</a>
+  </div>
+</div>
+
+## First six launch posts
+
+<div class="gtpcnz-grid">
+  <div class="gtpcnz-card">
+    <span class="gtpcnz-status">Model-generated index</span>
+    <h3>01. Are we buying hospital growth by rationing cheaper care upstream?</h3>
+    <p>Quarto: executive summary; hospital spillover pathway; scenario interpretation.</p>
+    <p class="gtpcnz-meta">Streamlit: Start here; Current state; Reference scenarios.</p>
+    <a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd">Report</a>
+    <a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
+  </div>
+  <div class="gtpcnz-card">
+    <span class="gtpcnz-status">Toy</span>
+    <h3>02. Fee-for-service, capitation and blended funding</h3>
+    <p>Quarto: funding model explainer; formula appendix.</p>
+    <p class="gtpcnz-meta">Streamlit: Funding models module; toy explainer.</p>
+    <a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd">Report</a>
+    <a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
+  </div>
+  <div class="gtpcnz-card">
+    <span class="gtpcnz-status">Toy</span>
+    <h3>03. Marginal supply</h3>
+    <p>Quarto: microeconomics section.</p>
+    <p class="gtpcnz-meta">Streamlit: Microeconomics lab.</p>
+    <a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd">Report</a>
+    <a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
+  </div>
+  <div class="gtpcnz-card">
+    <span class="gtpcnz-status">Toy</span>
+    <h3>04. Why formulas do not solve games</h3>
+    <p>Quarto: game theory section; controls section.</p>
+    <p class="gtpcnz-meta">Streamlit: Game theory lab.</p>
+    <a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd">Report</a>
+    <a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
+  </div>
+  <div class="gtpcnz-card">
+    <span class="gtpcnz-status">Conceptual</span>
+    <h3>05. Current reform pathway</h3>
+    <p>Quarto: current reform comparator section.</p>
+    <p class="gtpcnz-meta">Streamlit: Current state; reference scenarios.</p>
+    <a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd">Report</a>
+    <a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
+  </div>
+  <div class="gtpcnz-card">
+    <span class="gtpcnz-status">Toy</span>
+    <h3>06. What I mean by uncapping primary care funding</h3>
+    <p>Quarto: controlled scheduled payment section.</p>
+    <p class="gtpcnz-meta">Streamlit: Toy explainer; microeconomics lab.</p>
+    <a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd">Report</a>
+    <a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
+  </div>
+</div>
+
+## Game-theory extension
+
+<div class="gtpcnz-grid">
+  <div class="gtpcnz-card gtpcnz-span-2">
+    <span class="gtpcnz-status">Toy</span>
+    <h3>Later game-theory modules</h3>
+    <p>
+      Game-theory appendices and long-form posts need public companion modules. The public surfaces treat them as toy teaching simulations, not estimates.
+    </p>
+    <p class="gtpcnz-meta">
+      Themes: hospital salience and allocation game; capitation marginal-supply game; PHO function, friction and cherry-picking;
+      ACC, ambulance and urgent care; co-payments and equity; the 19 games map; hybrid game; game-informed MCDA.
+    </p>
+    <a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd">Report</a>
+    <a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
+  </div>
+</div>
+
+## Public surfaces
+
+<div class="gtpcnz-grid">
+  <div class="gtpcnz-card">
+    <span class="gtpcnz-status">Conceptual</span>
+    <h3>Public report</h3>
+    <p>The main Quarto report explains the model scaffold, caveat and reading path.</p>
+    <a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd">Open report</a>
+  </div>
+  <div class="gtpcnz-card">
+    <span class="gtpcnz-status">Toy</span>
+    <h3>Streamlit dashboard</h3>
+    <p>The interactive explainer and scenario dashboard live at the public URL.</p>
+    <a class="btn btn-sm btn-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Open dashboard</a>
+  </div>
+  <div class="gtpcnz-card">
+    <span class="gtpcnz-status">Evidence readiness</span>
+    <h3>Model card and tracker</h3>
+    <p>Use these to check what is supported by the current source base.</p>
+    <a class="btn btn-sm btn-primary" href="docs/calibration/model-card-v1.7.2.md">Model card</a>
+    <a class="btn btn-sm btn-outline-primary" href="docs/public-site/evidence-tracker-public-v1.8.1.md">Evidence tracker</a>
+  </div>
+  <div class="gtpcnz-card">
+    <span class="gtpcnz-status">Calibration readiness</span>
+    <h3>Calibration readiness page</h3>
+    <p>Use this to separate mature model pieces from early scaffold work.</p>
+    <a class="btn btn-sm btn-primary" href="docs/public-site/calibration-readiness-page-v1.8.1.md">Open page</a>
+  </div>
+</div>
+
+<p class="gtpcnz-note">
+  Uncapped does not mean uncontrolled; it means scheduled, rules-based, audited, clinically governed and place-accountable.
+</p>
