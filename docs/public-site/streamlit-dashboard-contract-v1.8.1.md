@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The Streamlit dashboard must be readable by a general audience and safe for policy, research and public communication. It is an explainer for a source-informed model scaffold, not a calibrated simulator.
+The Streamlit dashboard must be readable by a general audience and safe for policy, research and public communication. It is an explainer for a public-data anchored benchmark, not a calibrated simulator.
 
 ## Audience
 
@@ -17,7 +17,7 @@ The first screen needs:
 - A plain-English title identifying the dashboard as a funding architecture explainer.
 - The full model caveat:
 
-> This is a source-informed parameterised scaffold and educational explainer. It is not a real-data calibrated forecast and should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
+> This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
 
 - A short reader guide explaining the difference between reference scenarios and toy slider settings.
 - A short guide to reading the dashboard.
@@ -59,7 +59,7 @@ The dashboard must mix static and dynamic material:
   - evidence/OIA tracker table;
   - calibration-readiness table.
 - Static diagram:
-  - public explainer architecture diagram showing current reform pathway, tested gap, scaffold, toy explainer, evidence tracker and calibration readiness.
+  - public explainer architecture diagram showing current reform pathway, tested gap, benchmark, toy explainer, evidence tracker and calibration readiness.
 - Dynamic figures:
   - reference scenario viability chart;
   - reference scenario supply-generation versus hospital-pressure scatter plot;
@@ -95,7 +95,7 @@ Later game-theory posts and appendices that are referenced by the public surface
 
 The dashboard must:
 
-- use "explainer", "source-informed scaffold", "reference scenario", "toy explainer" and "model-generated index";
+- use "explainer", "public-data anchored benchmark", "reference scenario", "toy explainer" and "model-generated index";
 - describe outputs as model-generated indices, not observed New Zealand outcomes;
 - state that F0/current reform is the comparator;
 - state that toy sliders do not rerun the full parameterised model;

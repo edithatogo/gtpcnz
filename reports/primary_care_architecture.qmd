@@ -1,6 +1,6 @@
 ---
 title: "GTPCNZ: public funding architecture report"
-subtitle: "Source-informed scaffold for primary care funding policy discussion"
+subtitle: "Public-data anchored benchmark for primary care funding policy discussion"
 author: "Dylan A Mordaunt"
 date: "2026-05-12"
 version: "1.8.1"
@@ -21,11 +21,11 @@ execute:
 
 # Executive summary
 
-**Source-confidence label: policy judgement + model scaffold.**
+**Source-confidence label: policy judgement + public-data benchmark.**
 
-This report explains a source-informed scaffold for primary care funding in Aotearoa New Zealand.
+This report explains a public-data anchored benchmark for primary care funding in Aotearoa New Zealand.
 
-> This is a source-informed parameterised scaffold and educational explainer. It is not a real-data calibrated forecast and should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
+> This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
 
 The central question is simple:
 
@@ -52,7 +52,7 @@ This section gives stable anchors for the first six public posts. It also keeps 
 | Post | Stable anchor | Main report surface | Dashboard surface | Status / caveat |
 |---|---|---|---|---|
 | 01 | [Post 01](#post-01) | Executive summary; comparator framing; scenario interpretation | Start here; Current state; Reference scenarios | Model-generated index, not an empirical outcome |
-| 02 | [Post 02](#post-02) | Funding model explainer; formula appendix | Funding models module; Toy explainer | Source-informed scaffold, not a forecast |
+| 02 | [Post 02](#post-02) | Funding model explainer; formula appendix | Funding models module; Toy explainer | Public-data benchmark, not a forecast |
 | 03 | [Post 03](#post-03) | Marginal supply and the extra-contact viability threshold | Microeconomics lab | Static teaching diagram, not a measured curve |
 | 04 | [Post 04](#post-04) | Game theory, controls and gaming risk | Game theory lab | Strategic teaching diagram, not an estimate |
 | 05 | [Post 05](#post-05) | Current reform comparator and F0/current reform pathway | Current state; Reference scenarios | F0/current reform remains the comparator |
@@ -62,7 +62,7 @@ This section gives stable anchors for the first six public posts. It also keeps 
 
 **Source-confidence label: executive-summary framing.**
 
-**Accessibility description:** This post is the entry point. It links the policy question, the current reform comparator and the scenario ranking so the reader can move from the question to the model scaffold without needing the dashboard first.
+**Accessibility description:** This post is the entry point. It links the policy question, the current reform comparator and the scenario ranking so the reader can move from the question to the benchmark without needing the dashboard first.
 
 This post maps to the executive summary, the current reform comparator section and the scenario interpretation section. It is the clearest place to start if the reader wants the public policy question before the technical detail.
 
@@ -129,7 +129,7 @@ This post maps to the gaming-risk discussion, the controls section and the place
 
 **Accessibility description:** This post keeps the current New Zealand reform pathway visible as the comparator. It is not a straw man, and it is not a blank slate.
 
-This post maps to the current reform comparator section and the F0 scenario. The report keeps current reform in view so the reader can compare the public scaffold against the real policy path.
+This post maps to the current reform comparator section and the F0 scenario. The report keeps current reform in view so the reader can compare the public benchmark against the real policy path.
 
 ## Post 06. What I mean by uncapping primary care funding {#post-06}
 
@@ -154,7 +154,7 @@ This post maps to the uncapping explanation and the formula appendix. It reinfor
 
 **Source-confidence label: claim boundary.**
 
-This report is a public explanation of a model scaffold. It can compare policy logics, identify assumptions and guide stakeholder validation.
+This report is a public explanation of a model-generated benchmark. It can compare policy logics, identify assumptions and guide stakeholder validation.
 
 It is not:
 
@@ -257,11 +257,11 @@ A fee-for-service stream can improve marginal supply, but it can also encourage 
 
 That is why place-based accountability is not optional. A national benefit schedule should sit beside responsibility for whole populations.
 
-# 6. Scenario results from the scaffold
+# 6. Scenario results from the benchmark
 
-**Source-confidence label: model scaffold.**
+**Source-confidence label: public-data benchmark.**
 
-The table below uses source-informed model-generated indices. These are not observed New Zealand outcomes.
+The table below uses public-data anchored model-generated indices. These are not observed New Zealand outcomes.
 
 | Rank | Scenario | Name | Hybrid viability | Supply generation | Hospital pressure | Gaming risk |
 |---:|---|---|---:|---:|---:|---:|
@@ -298,11 +298,11 @@ xychart-beta
 
 **Interpretation rule:** the chart compares relative scenario logic under assumptions. It does not predict real-world effect sizes.
 
-# 7. What the scaffold suggests
+# 7. What the benchmark suggests
 
-**Source-confidence label: model scaffold + policy judgement.**
+**Source-confidence label: public-data benchmark + policy judgement.**
 
-The scaffold points to four patterns:
+The benchmark points to four patterns:
 
 1. Capitation reweighting improves allocation, but may not solve marginal supply.
 2. Uncapped scheduled fee-for-service improves the marginal supply signal.
@@ -326,7 +326,7 @@ This argument should lose force if evidence shows that:
 
 **Source-confidence label: research plan.**
 
-The next step is not a more complicated scaffold. It is testing the load-bearing assumptions:
+The next step is not a more complicated benchmark. It is testing the load-bearing assumptions:
 
 - marginal supply response to scheduled benefits;
 - unmet primary care to emergency department and ambulance conversion;

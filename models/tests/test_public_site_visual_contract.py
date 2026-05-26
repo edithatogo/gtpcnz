@@ -11,8 +11,9 @@ REQUIRED_STRINGS = [
     "Read the public report",
     "Open the dashboard",
     "Read the dashboard guide",
-    "This is a source-informed parameterised scaffold and educational explainer.",
-    "not a real-data calibrated forecast",
+    "This is a public-data anchored benchmark and educational explainer.",
+    "not linked-data calibrated",
+    "not a patient-level forecast",
     "should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.",
     "Argument map and thesis",
     "Current reform pathway",
@@ -85,3 +86,11 @@ def test_public_homepage_has_no_private_substack_or_local_paths():
 
     for snippet in FORBIDDEN_SNIPPETS:
         assert snippet not in text
+
+
+def test_public_homepage_has_no_stale_claim_boundary():
+    text = read_index()
+
+    assert "source-informed parameterised scaffold" not in text
+    assert "source-informed model scaffold" not in text
+    assert "not a real-data calibrated forecast" not in text

@@ -2,10 +2,16 @@ from pathlib import Path
 
 CANONICAL_STREAMLIT_URL = "https://gtpcnz.streamlit.app/"
 FULL_CAVEAT = (
-    "This is a source-informed parameterised scaffold and educational explainer. "
-    "It is not a real-data calibrated forecast and should not be used to claim "
+    "This is a public-data anchored benchmark and educational explainer. "
+    "It is not linked-data calibrated and not a patient-level forecast. "
+    "It should not be used to claim "
     "precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts."
 )
+STALE_PUBLIC_CLAIM_PHRASES = [
+    "source-informed parameterised scaffold",
+    "source-informed model scaffold",
+    "not a real-data calibrated forecast",
+]
 
 
 def test_dashboard_uses_explainer_and_not_forecast_language():
@@ -15,7 +21,8 @@ def test_dashboard_uses_explainer_and_not_forecast_language():
         + Path("models/primarycare_model/scenario_service.py").read_text(encoding="utf-8")
     )
     assert "funding architecture explainer" in text
-    assert "not a real-data calibrated forecast" in text
+    assert "not linked-data calibrated" in text
+    assert "not a patient-level forecast" in text
     assert "toy" in text.lower()
     assert "not a calibrated prediction" in text.lower()
     assert "use_container_width" not in text
@@ -76,7 +83,32 @@ def test_public_surfaces_include_canonical_streamlit_url_and_full_caveat():
     ]:
         text = path.read_text(encoding="utf-8")
         assert "implementation impacts" in text
-        assert "not a real-data calibrated forecast" in text
+        assert "not linked-data calibrated" in text
+        assert "not a patient-level forecast" in text
+
+
+def test_public_surfaces_do_not_reintroduce_stale_claim_boundary():
+    paths = [
+        Path("README.md"),
+        Path("index.qmd"),
+        Path("_quarto.yml"),
+        Path("docs/REPORTS-AND-DASHBOARD.md"),
+        Path("docs/STREAMLIT-DEPLOYMENT.md"),
+        Path("docs/calibration/model-card-v1.7.2.md"),
+        Path("docs/launch/claim-boundaries-v1.7.2.md"),
+        Path("docs/public-site/calibration-readiness-page-v1.8.1.md"),
+        Path("docs/public-site/evidence-tracker-public-v1.8.1.md"),
+        Path("docs/public-site/model-dashboard-hardening-spec-v1.8.1.md"),
+        Path("docs/public-site/streamlit-dashboard-contract-v1.8.1.md"),
+        Path("reports/primary_care_architecture.qmd"),
+        Path("models/primarycare_model/app.py"),
+        Path("models/primarycare_model/scenario_service.py"),
+        Path("models/primarycare_model/runtime_lab.py"),
+    ]
+    for path in paths:
+        text = path.read_text(encoding="utf-8")
+        for phrase in STALE_PUBLIC_CLAIM_PHRASES:
+            assert phrase not in text
 
 
 def test_quarto_renders_model_card_and_claim_boundaries():
@@ -87,6 +119,12 @@ def test_quarto_renders_model_card_and_claim_boundaries():
     assert "docs/public-site/streamlit-dashboard-audit-v1.8.1.md" in text
     assert "docs/public-site/evidence-tracker-public-v1.8.1.md" in text
     assert "docs/public-site/calibration-readiness-page-v1.8.1.md" in text
+
+
+def test_streamlit_page_does_not_render_repo_only_document_paths():
+    text = Path("models/primarycare_model/app.py").read_text(encoding="utf-8")
+    assert "Model card: `docs/calibration/model-card-v1.7.2.md`" not in text
+    assert "Claim boundaries: `docs/launch/claim-boundaries-v1.7.2.md`" not in text
 
 
 def test_streamlit_dashboard_contract_and_audit_are_explicit():

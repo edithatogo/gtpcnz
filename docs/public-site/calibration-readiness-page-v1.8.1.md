@@ -1,6 +1,6 @@
 # Calibration readiness
 
-GTPCNZ is currently a source-informed parameterised scaffold. The next stage would require real data and validation.
+GTPCNZ is currently a public-data anchored benchmark and educational explainer. The next stage would require linked data and validation.
 
 ## Data needed
 
@@ -26,4 +26,4 @@ GTPCNZ is currently a source-informed parameterised scaffold. The next stage wou
 
 ## Claim boundary
 
-Until those tests are passed, public outputs should use phrases such as **source-informed scaffold**, **model-generated index**, and **not a calibrated forecast**.
+Until those tests are passed, public outputs should use phrases such as **public-data anchored benchmark**, **model-generated index**, **not linked-data calibrated**, and **not a patient-level forecast**.

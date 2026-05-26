@@ -4,7 +4,7 @@ GTPCNZ has two public reading surfaces: a Quarto report and a Streamlit dashboar
 
 ## Public report
 
-`reports/primary_care_architecture.qmd` explains the funding architecture model. Read it with:
+The public funding architecture report explains the funding architecture model. Read it with:
 
 - `docs/calibration/model-card-v1.7.2.md`
 - `docs/launch/claim-boundaries-v1.7.2.md`
@@ -36,7 +36,7 @@ Do not describe the toy slider outputs as forecasts.
 
 Use this wording:
 
-> This is a source-informed parameterised scaffold and educational explainer. It is not a real-data calibrated forecast and should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
+> This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
 
 ## Plain-language phrase
 

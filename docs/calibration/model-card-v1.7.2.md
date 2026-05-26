@@ -1,7 +1,7 @@
-# Model card v1.7.2: full parameterised primary care funding scaffold
+# Model card v1.7.2: public-data anchored primary care funding benchmark
 
 ## Model name
-Full parameterised scaffold for primary care funding architecture in Aotearoa New Zealand.
+Public-data anchored benchmark for primary care funding architecture in Aotearoa New Zealand.
 
 ## Version
 v1.7.2. This version incorporates red-team and devil's advocate findings into the model communication layer.
@@ -33,7 +33,7 @@ The current reform pathway may be sufficient to improve access without a new unc
 - Accident Compensation Corporation is an analogy for rules-based claims, not a complete model for illness-based primary care.
 
 ## Inputs
-The scaffold uses 70 parameters across demand, supply, funding, governance, ambulance, hospital, equity, risk and implementation domains. v1.7.1/v1.7.2 tiers these into core, extended and exploratory parameters.
+The benchmark uses 70 parameters across demand, supply, funding, governance, ambulance, hospital, equity, risk and implementation domains. v1.7.1/v1.7.2 tiers these into core, extended and exploratory parameters.
 
 ## Outputs
 - Access and supply indices.
@@ -43,7 +43,7 @@ The scaffold uses 70 parameters across demand, supply, funding, governance, ambu
 - Scenario comparison and sensitivity outputs.
 
 ## Validation status
-Parameterised scaffold only. Not empirically calibrated to linked New Zealand administrative data.
+Public-data anchored benchmark only. Not linked-data calibrated and not a patient-level forecast.
 
 ## Interpretation rule
 Use the model to ask better questions and prioritise validation. Do not use it to claim final effect sizes.

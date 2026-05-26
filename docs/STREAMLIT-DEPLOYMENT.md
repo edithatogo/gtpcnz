@@ -40,6 +40,6 @@ streamlit run streamlit_app.py
 
 ## Caveat
 
-The dashboard is an educational explainer. It is not a calibrated simulator or real-data calibrated policy forecast.
+The dashboard is an educational explainer. It is not a calibrated simulator, linked-data calibrated policy forecast, or patient-level forecast.
 
-> This is a source-informed parameterised scaffold and educational explainer. It is not a real-data calibrated forecast and should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
+> This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.

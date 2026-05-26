@@ -12,7 +12,7 @@ Make the GTPCNZ public dashboard and GitHub Pages site clear about what the mode
 4. Render evidence tracker and calibration-readiness pages.
 5. Rewrite the public report so the current reform pathway is the comparator.
 6. Add source-confidence labels to the public report sections.
-7. Add tests that enforce the caveat: source-informed scaffold, not a real-data calibrated forecast.
+7. Add tests that enforce the caveat: public-data anchored benchmark, not linked-data calibrated and not a patient-level forecast.
 
 ## Acceptance criteria
 

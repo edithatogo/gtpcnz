@@ -1,6 +1,6 @@
 # Evidence and OIA tracker
 
-This page tracks the documents and data needed to move GTPCNZ from a source-informed scaffold toward empirical calibration.
+This page tracks the documents and data needed to move GTPCNZ from a public-data anchored benchmark toward linked-data calibration.
 
 The tracker is deliberately cautious. A document may be:
 

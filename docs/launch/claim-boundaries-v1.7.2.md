@@ -7,7 +7,7 @@
 | Public document | "Public documents show..." | "This proves..." |
 | Economic theory | "Theory predicts..." | "This necessarily happens..." |
 | Stakeholder intelligence | "Stakeholder feedback suggests..." | "This is established fact..." |
-| Model scaffold | "The scaffold shows the logic of..." | "The model predicts..." |
+| Public-data benchmark | "The benchmark shows the logic of..." | "The model predicts patient outcomes..." |
 | Policy judgement | "I think this warrants testing..." | "Government should implement immediately..." |
 
 ## Required caveats
@@ -18,7 +18,7 @@
 - Equity protections are core to the proposal.
 - Accident Compensation Corporation is an analogy for rules-based treatment payments, not a wholesale template.
 - Hospital growth has multiple causes; upstream access is a candidate driver, not the sole driver.
-- Model outputs are source-informed/scaffolded unless explicitly labelled as real-data calibrated.
+- Model outputs are public-data anchored benchmarks unless explicitly labelled as linked-data calibrated patient-level forecasts.
 
 ## Preferred short line
 

@@ -152,11 +152,11 @@ subtitle: "Visual reading map for the public report, dashboard and launch posts"
   <div class="gtpcnz-kicker">Public reading map</div>
   <h1 class="gtpcnz-title">GTPCNZ visual gallery</h1>
   <p class="gtpcnz-lead">
-    GTPCNZ is the public reporting layer for a source-informed model scaffold about primary care funding in Aotearoa New Zealand.
+    GTPCNZ is the public reporting layer for a public-data anchored benchmark about primary care funding in Aotearoa New Zealand.
     Use this page as the first screen: choose the report, the dashboard, or the specific launch post that answers your question.
   </p>
   <div class="gtpcnz-caveat">
-    This is a source-informed parameterised scaffold and educational explainer. It is not a real-data calibrated forecast and should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
+    This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
   </div>
   <div class="gtpcnz-actions">
     <a class="btn btn-primary btn-lg" href="reports/primary_care_architecture.qmd">Read the public report</a>
@@ -210,7 +210,7 @@ subtitle: "Visual reading map for the public report, dashboard and launch posts"
   <div class="gtpcnz-card">
     <span class="gtpcnz-status">Calibration readiness</span>
     <h3>Calibration readiness</h3>
-    <p>Check what is ready for tighter modelling and what remains a source-informed scaffold.</p>
+    <p>Check what is ready for tighter modelling and what remains a public-data anchored benchmark.</p>
     <p class="gtpcnz-meta">Public calibration readiness page and model card.</p>
     <a class="btn btn-sm btn-primary" href="docs/public-site/calibration-readiness-page-v1.8.1.md">Open page</a>
     <a class="btn btn-sm btn-outline-primary" href="docs/calibration/model-card-v1.7.2.md">Model card</a>
@@ -294,7 +294,7 @@ subtitle: "Visual reading map for the public report, dashboard and launch posts"
   <div class="gtpcnz-card">
     <span class="gtpcnz-status">Conceptual</span>
     <h3>Public report</h3>
-    <p>The main Quarto report explains the model scaffold, caveat and reading path.</p>
+    <p>The main Quarto report explains the benchmark, caveat and reading path.</p>
     <a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd">Open report</a>
   </div>
   <div class="gtpcnz-card">
@@ -313,7 +313,7 @@ subtitle: "Visual reading map for the public report, dashboard and launch posts"
   <div class="gtpcnz-card">
     <span class="gtpcnz-status">Calibration readiness</span>
     <h3>Calibration readiness page</h3>
-    <p>Use this to separate mature model pieces from early scaffold work.</p>
+    <p>Use this to separate mature model pieces from early benchmark work.</p>
     <a class="btn btn-sm btn-primary" href="docs/public-site/calibration-readiness-page-v1.8.1.md">Open page</a>
   </div>
 </div>

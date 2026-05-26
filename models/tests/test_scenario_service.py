@@ -55,7 +55,8 @@ def test_load_scenario_results_adds_claim_boundary():
                 pass
     assert "scenario_role" in loaded.columns
     assert "claim_boundary" in loaded.columns
-    assert loaded["claim_boundary"].str.contains("not a real-data calibrated forecast").all()
+    assert loaded["claim_boundary"].str.contains("not linked-data calibrated", regex=False).all()
+    assert loaded["claim_boundary"].str.contains("not a patient-level forecast", regex=False).all()
 
 
 def test_score_toy_settings_returns_scores_in_range():

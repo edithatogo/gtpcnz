@@ -9,7 +9,7 @@ Website: https://edithatogo.github.io/gtpcnz/
 
 ## What this is
 
-- A source-informed model scaffold for exploring primary care funding architecture.
+- A public-data anchored benchmark and educational explainer for exploring primary care funding architecture.
 - A Quarto website and reproducible report.
 - A Streamlit dashboard for interactive explanation of scenario logic.
 - A public audit trail of assumptions, caveats, and launch materials.
@@ -17,7 +17,7 @@ Website: https://edithatogo.github.io/gtpcnz/
 ## What this is not
 
 - It is not an endorsed policy position.
-- It is not a real-data calibrated forecasting model.
+- It is not linked-data calibrated and not a patient-level forecast.
 - It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
 
 ## Current thesis

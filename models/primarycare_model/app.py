@@ -1,10 +1,24 @@
 from pathlib import Path
+import time
 
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 
+from models.primarycare_model.runtime_lab import (
+    DEFAULT_ABM_POPULATION,
+    DEFAULT_MONTE_CARLO_DRAWS,
+    MAX_ABM_POPULATION,
+    MAX_MONTHS,
+    MAX_MONTE_CARLO_DRAWS,
+    calculation_trace,
+    model_gap_map,
+    run_agent_lens,
+    run_reference_calculation,
+    run_stochastic_uncertainty,
+    run_stock_flow_trace,
+)
 from models.primarycare_model.scenario_service import (
     CLAIM_BOUNDARY_TEXT,
     TOY_LEVER_DEFINITIONS,
@@ -24,8 +38,6 @@ OIA_TRACKER_CANDIDATES = [
     ROOT / "docs" / "audit" / "oia-request-tracker.csv",
     ROOT / "data" / "evidence" / "oia_request_tracker.csv",
 ]
-MODEL_CARD_PATH = ROOT / "docs" / "calibration" / "model-card-v1.7.2.md"
-CLAIM_BOUNDARIES_PATH = ROOT / "docs" / "launch" / "claim-boundaries-v1.7.2.md"
 
 
 def render_reader_guide() -> None:
@@ -33,14 +45,14 @@ def render_reader_guide() -> None:
         """
         ### How to read this dashboard
 
-        This dashboard explains the GTPCNZ model scaffold. It sets out the
+        This dashboard explains the GTPCNZ public-data anchored benchmark. It sets out the
         argument, the assumptions, and the evidence still needed before anyone
         could make a real-world claim from it.
 
         Keep this distinction in mind:
 
         - **Reference scenarios** are precomputed, model-generated indices from the
-          source-informed scaffold.
+          public-data anchored benchmark.
         - **Toy explainer sliders** are simplified teaching controls. They are not
           the 70-parameter model and they do not estimate New Zealand outcomes.
 
@@ -60,7 +72,7 @@ def render_interpretation_rules() -> None:
         validated forecast model.
 
         - Higher viability, access, supply and governance indices mean the policy
-          logic performs better inside the scaffold assumptions.
+          logic performs better inside the benchmark assumptions.
         - Lower hospital-pressure and gaming-risk indices are preferable.
         - Differences between scenarios matter more than any single score.
         - A strong scenario still needs implementation design, equity review,
@@ -209,7 +221,7 @@ def render_post_guide_and_reading_map() -> None:
         """
     )
     st.caption(
-        "The post guide is a navigation aid. It does not add new evidence or turn the scaffold into a forecast."
+        "The post guide is a navigation aid. It does not add new evidence or turn the benchmark into a forecast."
     )
 
 
@@ -974,7 +986,7 @@ def build_current_reform_table() -> pd.DataFrame:
 def build_public_status_table() -> pd.DataFrame:
     return pd.DataFrame(
         [
-            ("Model status", "Source-informed scaffold", "Ready for explanation; not ready for forecasting."),
+            ("Model status", "Public-data anchored benchmark", "Ready for explanation; not ready for forecasting."),
             ("Dashboard status", "Educational explainer", "Shows reference indices and toy mechanisms separately."),
             ("Evidence status", "Tracker created", "OIA/data requests still need submission or update."),
             ("Calibration status", "Readiness mapped", "Real linked data and validation tests still required."),
@@ -990,7 +1002,7 @@ def build_figure_inventory_table() -> pd.DataFrame:
         [
             ("Static table", "Current reform pathway", "Current state tab", "Explains the real comparator in plain English."),
             ("Static table", "Public project status", "Current state tab", "Shows what is mature and what is still early."),
-            ("Static diagram", "Public explainer architecture", "Current state tab", "Shows how reform, the scaffold, the toy explainer, evidence and calibration fit together."),
+            ("Static diagram", "Public explainer architecture", "Current state tab", "Shows how reform, the benchmark, the toy explainer, evidence and calibration fit together."),
             ("Dynamic bar chart", "Reference scenario viability", "Reference scenarios tab", "Compares model-generated viability indices."),
             ("Dynamic scatter plot", "Supply generation versus hospital pressure", "Reference scenarios tab", "Shows the trade-off between access/supply and hospital-pressure index."),
             ("Dynamic heatmap", "Scenario score matrix", "Reference scenarios tab", "Shows multiple indices across scenarios at once."),
@@ -1032,14 +1044,14 @@ def render_current_state_diagram() -> None:
 
           Reform [label="Current reform pathway\\n(capitation, access target, NPCD, urgent care)"];
           Gap [label="Question tested here\\nDoes this change marginal supply enough?"];
-          Scaffold [label="GTPCNZ scaffold\\nsource-informed indices"];
+          Benchmark [label="GTPCNZ benchmark\\npublic-data anchored indices"];
           Toy [label="Toy explainer\\nlearning sliders only"];
           Evidence [label="Evidence and OIA tracker\\nwhat must be verified"];
           Calibration [label="Calibration readiness\\nreal data needed before forecasts"];
 
-          Reform -> Gap -> Scaffold;
-          Scaffold -> Toy;
-          Scaffold -> Evidence -> Calibration;
+          Reform -> Gap -> Benchmark;
+          Benchmark -> Toy;
+          Benchmark -> Evidence -> Calibration;
         }
         """,
         width="stretch",
@@ -1117,12 +1129,28 @@ def cached_oia_tracker(paths: tuple[str, ...]) -> pd.DataFrame:
     return load_first_existing(paths)
 
 
+@st.cache_data(show_spinner=False)
+def cached_live_reference(months: int) -> pd.DataFrame:
+    return run_reference_calculation(months=months)
+
+
+@st.cache_data(show_spinner=False)
+def cached_stochastic(scenario_id: str, draws: int, seed: int, sd: float) -> tuple[pd.DataFrame, pd.DataFrame]:
+    return run_stochastic_uncertainty(scenario_id=scenario_id, draws=draws, seed=seed, sd=sd)
+
+
+@st.cache_data(show_spinner=False)
+def cached_stock_flow(scenario_id: str, months: int) -> pd.DataFrame:
+    return run_stock_flow_trace(scenario_id=scenario_id, months=months)
+
+
+@st.cache_data(show_spinner=False)
+def cached_agent_lens(scenario_id: str, population_size: int, months: int, seed: int) -> tuple[pd.DataFrame, pd.DataFrame]:
+    return run_agent_lens(scenario_id=scenario_id, population_size=population_size, months=months, seed=seed)
+
+
 def caveat_box() -> None:
-    st.warning(
-        "This is a source-informed parameterised scaffold and educational explainer. "
-        "It is not a real-data calibrated forecast and should not be used to claim "
-        "precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts."
-    )
+    st.warning(CLAIM_BOUNDARY_TEXT)
 
 
 def render_reference_viability(df: pd.DataFrame) -> None:
@@ -1137,7 +1165,7 @@ def render_reference_viability(df: pd.DataFrame) -> None:
     fig.update_layout(height=560, margin=dict(l=10, r=10, t=45, b=10))
     st.plotly_chart(fig, width="stretch")
     st.caption(
-        "These are model-generated indices from the source-informed scaffold, not observed New Zealand outcomes."
+        "These are model-generated indices from the public-data anchored benchmark, not observed New Zealand outcomes."
     )
 
 
@@ -1250,7 +1278,7 @@ def render_scenario_profile_radar(df: pd.DataFrame) -> None:
     )
     st.plotly_chart(fig, width="stretch")
     st.caption(
-        "Hospital pressure and gaming risk are inverted here so that larger radar areas mean more favourable scaffold logic."
+        "Hospital pressure and gaming risk are inverted here so that larger radar areas mean more favourable benchmark logic."
     )
 
 
@@ -1310,10 +1338,155 @@ def render_model_status() -> None:
     st.info(
         "Preferred wording: uncapped at the global activity-envelope level; controlled at the item, scope, audit, clinical-governance and place-accountability level."
     )
+
+
+def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
+    st.subheader("Live model lab")
     st.markdown(
-        f"Model card: `{MODEL_CARD_PATH.relative_to(ROOT)}`  \n"
-        f"Claim boundaries: `{CLAIM_BOUNDARIES_PATH.relative_to(ROOT)}`"
+        """
+        This is the advanced inspection layer. It shows selected calculations being
+        performed at runtime, then separates live calculation, cached stochastic
+        demo and precomputed reference material. These are demonstrative
+        model-generated indices, not linked-data calibrated or patient-level forecasts.
+        """
     )
+
+    live_months = st.slider("Live deterministic run length", 12, MAX_MONTHS, 60, 12)
+    started = time.perf_counter()
+    live_df = cached_live_reference(live_months)
+    elapsed_ms = (time.perf_counter() - started) * 1000
+    st.caption(f"Calculation source: live calculation, cached by settings. Last runtime: {elapsed_ms:.1f} ms.")
+
+    st.markdown("### Recalculate reference scenarios")
+    st.dataframe(
+        live_df[
+            [
+                "rank_by_hybrid_viability",
+                "scenario_id",
+                "scenario_name",
+                "hybrid_viability_score",
+                "access_score",
+                "supply_generation_score",
+                "hospital_pressure_score",
+                "gaming_risk_score",
+                "calculation_status",
+            ]
+        ],
+        hide_index=True,
+        width="stretch",
+    )
+
+    if not precomputed_df.empty:
+        compare_columns = [
+            "hybrid_viability_score",
+            "access_score",
+            "supply_generation_score",
+            "hospital_pressure_score",
+            "gaming_risk_score",
+        ]
+        comparison = live_df[["scenario_id", *compare_columns]].merge(
+            precomputed_df[["scenario_id", *compare_columns]],
+            on="scenario_id",
+            suffixes=("_live", "_precomputed"),
+        )
+        for column in compare_columns:
+            comparison[f"{column}_delta"] = (
+                comparison[f"{column}_live"].astype(float) - comparison[f"{column}_precomputed"].astype(float)
+            ).round(2)
+        delta_columns = ["scenario_id", *[f"{column}_delta" for column in compare_columns]]
+        st.markdown("### Live versus precomputed delta")
+        st.dataframe(comparison[delta_columns], hide_index=True, width="stretch")
+        st.caption(
+            "Deltas are an audit view of the compact public runtime recipe against the shipped precomputed benchmark output."
+        )
+
+    st.markdown("### Calculation trace")
+    scenario_options = list(live_df["scenario_id"])
+    selected_scenario = st.selectbox("Scenario for calculation trace", scenario_options, index=scenario_options.index("F4") if "F4" in scenario_options else 0)
+    trace = calculation_trace(selected_scenario)
+    st.dataframe(trace, hide_index=True, width="stretch")
+    trace_fig = px.bar(
+        trace,
+        x="index_value",
+        y="calculation",
+        orientation="h",
+        text="index_value",
+        title="Calculation trace: selected model-generated indices",
+        labels={"index_value": "Index value (0-100)", "calculation": ""},
+        range_x=[0, 100],
+    )
+    trace_fig.update_layout(height=390, margin=dict(l=10, r=10, t=45, b=10))
+    st.plotly_chart(trace_fig, width="stretch")
+
+    st.markdown("### Stochastic uncertainty")
+    col_a, col_b, col_c = st.columns(3)
+    draws = col_a.slider("Monte Carlo draws", 10, MAX_MONTE_CARLO_DRAWS, DEFAULT_MONTE_CARLO_DRAWS, 10)
+    seed = col_b.number_input("Seed", min_value=1, max_value=999999, value=260526, step=1)
+    sd = col_c.slider("Perturbation width", 0.01, 0.20, 0.08, 0.01)
+    draw_frame, uncertainty_summary = cached_stochastic(selected_scenario, draws, int(seed), float(sd))
+    st.caption("Calculation source: cached stochastic demo; demonstrative uncertainty only; not an empirical probability.")
+    st.dataframe(uncertainty_summary, hide_index=True, width="stretch")
+    uncertainty_fig = px.violin(
+        draw_frame,
+        y="hybrid_viability_score",
+        box=True,
+        points=False,
+        title=f"Seeded uncertainty replay: {selected_scenario} hybrid viability",
+        labels={"hybrid_viability_score": "Hybrid viability index"},
+    )
+    uncertainty_fig.update_layout(height=360, margin=dict(l=10, r=10, t=45, b=10))
+    st.plotly_chart(uncertainty_fig, width="stretch")
+
+    st.markdown("### Stock-flow dynamics")
+    stock_months = st.slider("Stock-flow months", 6, MAX_MONTHS, 36, 6)
+    stock_flow = cached_stock_flow(selected_scenario, stock_months)
+    stock_fig = px.line(
+        stock_flow,
+        x="month",
+        y=["unmet_need", "primary_capacity", "hospital_pressure", "fiscal_pressure"],
+        title="Live stock-flow trace: unmet need, capacity and pressure",
+        labels={"value": "Index value", "month": "Month", "variable": "Trace"},
+    )
+    stock_fig.update_layout(height=440, margin=dict(l=10, r=10, t=45, b=10), hovermode="x unified")
+    st.plotly_chart(stock_fig, width="stretch")
+    st.dataframe(stock_flow.tail(12), hide_index=True, width="stretch")
+
+    st.markdown("### Agent lens")
+    col_d, col_e, col_f = st.columns(3)
+    population_size = col_d.slider("Agent population cap", 50, MAX_ABM_POPULATION, DEFAULT_ABM_POPULATION, 10)
+    agent_months = col_e.slider("Agent months", 3, 24, 12, 3)
+    agent_seed = col_f.number_input("Agent seed", min_value=1, max_value=999999, value=260526, step=1)
+    agent_frame, agent_summary = cached_agent_lens(selected_scenario, population_size, agent_months, int(agent_seed))
+    st.dataframe(agent_summary, hide_index=True, width="stretch")
+    agent_fig = px.scatter(
+        agent_frame,
+        x="access_barrier",
+        y="access_probability",
+        size="served_contacts",
+        color="rural",
+        hover_data=["patient_id", "high_need_score", "unmet_attempts"],
+        title="Capped agent lens: access barrier versus access probability",
+        labels={"access_barrier": "Access barrier", "access_probability": "Access probability", "rural": "Rural flag"},
+    )
+    agent_fig.update_layout(height=430, margin=dict(l=10, r=10, t=45, b=10))
+    st.plotly_chart(agent_fig, width="stretch")
+    st.caption(
+        "The agent lens is a capped teaching view. It lets readers see allocation mechanics, not patient-level forecasts."
+    )
+
+    st.markdown("### Model map and gaps")
+    gap_df = model_gap_map()
+    st.dataframe(gap_df, hide_index=True, width="stretch")
+    gap_counts = gap_df.groupby("tier", as_index=False).size().rename(columns={"size": "items"})
+    gap_fig = px.bar(
+        gap_counts,
+        x="tier",
+        y="items",
+        title="Current, comprehensive, SOTA and bleeding-edge map",
+        labels={"tier": "Tier", "items": "Mapped assets or gaps"},
+    )
+    gap_fig.update_layout(height=340, margin=dict(l=10, r=10, t=45, b=10))
+    st.plotly_chart(gap_fig, width="stretch")
 
 
 def render_app() -> None:
@@ -1322,7 +1495,7 @@ def render_app() -> None:
     st.title("GTPCNZ: funding architecture explainer")
     st.markdown(
         """
-        This is a source-informed model scaffold about primary care funding
+        This is a public-data anchored benchmark about primary care funding
         in Aotearoa New Zealand. The dashboard separates reference scenarios from
         a small toy explainer. The toy sliders help explain the logic; they do not
         rerun the full parameterised model.
@@ -1398,6 +1571,7 @@ def render_app() -> None:
         "Reference scenarios",
         "Microeconomics lab",
         "Game theory lab",
+        "Live model lab",
         "Toy explainer",
         "Evidence & OIA",
         "Calibration readiness",
@@ -1428,7 +1602,7 @@ def render_app() -> None:
         render_current_state()
 
     with tabs[3]:
-        st.subheader("Reference scenarios from the scaffold")
+        st.subheader("Reference scenarios from the benchmark")
         render_reference_scenario_explainer()
         if df.empty:
             st.error(f"Could not find model results at `{RESULTS_PATH.relative_to(ROOT)}`.")
@@ -1450,13 +1624,16 @@ def render_app() -> None:
         render_game_theory_lab()
 
     with tabs[6]:
+        render_live_model_lab(df)
+
+    with tabs[7]:
         st.subheader("Toy explainer")
         render_toy_explainer_context()
         render_toy_parameter_dictionary()
         st.markdown(
             """
             These sliders are deliberately simple. They teach the trade-offs, but
-            they are not the 70-parameter scaffold and not a calibrated prediction.
+            they are not the 70-parameter benchmark and not a calibrated prediction.
             """
         )
         metric_cols = st.columns(3)
@@ -1465,7 +1642,7 @@ def render_app() -> None:
         metric_cols[2].metric("Toy hospital pressure", toy_scores["toy_hospital_pressure_score"])
         render_toy_chart(toy_scores)
 
-    with tabs[7]:
+    with tabs[8]:
         st.subheader("Evidence and Official Information Act tracker")
         tracker = cached_oia_tracker(tuple(str(p) for p in OIA_TRACKER_CANDIDATES))
         if tracker.empty:
@@ -1474,20 +1651,20 @@ def render_app() -> None:
             st.dataframe(tracker, width="stretch", hide_index=True)
         st.caption("OIA responses and linked data are needed before treating the model as calibrated.")
 
-    with tabs[8]:
+    with tabs[9]:
         st.subheader("What would make this a real calibrated model?")
         render_next_steps_context()
         readiness = build_calibration_readiness_table()
         st.dataframe(readiness, width="stretch", hide_index=True)
         st.markdown(
             """
-            The next stage is not more sliders. It is replacing source-informed priors
+            The next stage is not more sliders. It is replacing public-data anchored priors
             with real data on appointments, payments, co-payments, workforce, ambulance
             pathways, emergency department presentations and hospital admissions.
             """
         )
 
-    with tabs[9]:
+    with tabs[10]:
         st.subheader("Plain-English glossary")
         st.markdown(
             """
@@ -1496,7 +1673,7 @@ def render_app() -> None:
             - **Uncapped:** no fixed global ceiling on eligible activity.
             - **Controlled:** item rules, clinical governance, documentation, audit and accountability still apply.
             - **Place-based accountability:** responsibility for a whole local population, including hard-to-reach people.
-            - **Scaffold:** a transparent model structure that still needs real calibration data.
+            - **Benchmark:** a transparent model structure that still needs real calibration data.
             - **Reference scenario:** a model-generated scenario already stored in the project outputs.
             - **Toy explainer:** a simplified interactive teaching tool, not the model forecast.
             """
@@ -1506,7 +1683,7 @@ def render_app() -> None:
                 """
                 - **Uncapped** means eligible activity is not limited by a fixed global activity envelope.
                 - **Controlled** means item rules, provider scope, clinical governance, documentation, audit and place accountability still apply.
-                - **Model-generated index** means the number comes from the scaffold logic, not from observed New Zealand outcomes.
+                - **Model-generated index** means the number comes from the benchmark logic, not from observed New Zealand outcomes.
                 - **Toy explainer** means the slider result is a teaching aid, not a calibrated forecast.
                 """
             )

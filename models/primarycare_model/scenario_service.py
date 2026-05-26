@@ -57,8 +57,9 @@ SCENARIO_INTERPRETATION = {
 }
 
 CLAIM_BOUNDARY_TEXT = (
-    "This is a source-informed parameterised scaffold and educational explainer. "
-    "It is not a real-data calibrated forecast and should not be used to claim "
+    "This is a public-data anchored benchmark and educational explainer. "
+    "It is not linked-data calibrated and not a patient-level forecast. "
+    "It should not be used to claim "
     "precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts."
 )
 
