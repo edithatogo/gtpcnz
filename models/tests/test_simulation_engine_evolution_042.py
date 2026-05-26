@@ -1,6 +1,7 @@
 import numpy as np
 
 from primarycare_model.diffusion import BassDiffusionParams, simulate_bass
+from primarycare_model.gnn_pathways import ReferralGraph, referral_pressure_scores
 from primarycare_model.ipc import ArrowMemoryChannel
 from primarycare_model.jax_mc import MCConfig, compute_summary_stats, run_deterministic, run_mc_sweep, run_monte_carlo
 from primarycare_model.mpc import compute_mpc_cost, optimize_policy
@@ -124,3 +125,20 @@ def test_sensitivity_mpc_and_bayesian_optimisation_fallbacks_run():
     result = run_bayesian_optimization(lambda x: float(np.sum((x - 0.25) ** 2)), bounds, n_init=3, n_iter=2)
     assert result["best_params"].shape == (2,)
     assert result["all_params"].shape[0] == 5
+
+
+def test_referral_graph_pressure_scores_are_bounded_and_capacity_weighted():
+    graph = ReferralGraph(
+        n_practices=3,
+        n_cohorts=2,
+        senders=np.array([0, 0, 1, 2]),
+        receivers=np.array([3, 4, 3, 4]),
+        edge_weights=np.array([0.5, 1.0, 0.25, 0.75]),
+        practice_features=np.array([[0.2, 0.0], [0.8, 0.0], [0.5, 0.0]]),
+        cohort_features=np.array([[0.1, 0.0], [0.3, 0.0]]),
+    )
+
+    scores = referral_pressure_scores(graph)
+    assert scores.shape == (3,)
+    assert np.all((scores >= 0.0) & (scores <= 1.0))
+    np.testing.assert_allclose(scores, [0.94, 0.1766666667, 0.5])
