@@ -21,8 +21,11 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v6
 
-      - name: Set up Quarto
-        uses: quarto-dev/quarto-actions/setup@v2
+      - name: Install Quarto
+        run: |
+          curl -L -o quarto.deb https://github.com/quarto-dev/quarto-cli/releases/download/v1.9.37/quarto-1.9.37-linux-amd64.deb
+          sudo dpkg -i quarto.deb
+          quarto --version
 
       - name: Set up Python
         uses: actions/setup-python@v6
