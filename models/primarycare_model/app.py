@@ -1367,7 +1367,11 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
     started = time.perf_counter()
     live_df = cached_live_reference(live_months)
     elapsed_ms = (time.perf_counter() - started) * 1000
-    st.caption(f"Calculation source: live calculation, cached by settings. Last runtime: {elapsed_ms:.1f} ms.")
+    st.caption(
+        "Calculation source: live calculation, cached by settings. "
+        f"Last runtime: {elapsed_ms:.1f} ms. "
+        "The run-length control changes the derived last-12-month public-cost index."
+    )
 
     st.markdown("### Recalculate reference scenarios")
     st.dataframe(
@@ -1381,6 +1385,7 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
                 "supply_generation_score",
                 "hospital_pressure_score",
                 "gaming_risk_score",
+                "mean_last12_public_cost_index",
                 "calculation_status",
             ]
         ],
@@ -1395,6 +1400,7 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
             "supply_generation_score",
             "hospital_pressure_score",
             "gaming_risk_score",
+            "mean_last12_public_cost_index",
         ]
         comparison = live_df[["scenario_id", *compare_columns]].merge(
             precomputed_df[["scenario_id", *compare_columns]],
