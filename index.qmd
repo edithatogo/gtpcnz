@@ -302,7 +302,7 @@ subtitle: "Visual reading map for the public report, dashboard and launch posts"
     <span class="gtpcnz-status">Toy</span>
     <h3>Streamlit dashboard</h3>
     <p>The interactive explainer and scenario dashboard live at the public URL.</p>
-    <a class="btn btn-sm btn-primary" href="https://primary-care-funding-architecture.streamlit.app/" target="_blank" rel="noopener">Open dashboard</a>
+    <a class="btn btn-sm btn-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Open dashboard</a>
   </div>
   <div class="gtpcnz-card">
     <span class="gtpcnz-status">Evidence readiness</span>
