@@ -28,6 +28,7 @@ def minimal_results_frame():
                 "fiscal_risk_score": 30,
                 "gaming_risk_score": 30,
                 "hospital_pressure_score": 70,
+                "mean_last12_public_cost_index": 1.0,
                 "rank_by_hybrid_viability": idx,
             }
         )

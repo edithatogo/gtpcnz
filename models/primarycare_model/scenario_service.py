@@ -27,6 +27,7 @@ REQUIRED_SCENARIO_COLUMNS = {
     "fiscal_risk_score",
     "gaming_risk_score",
     "hospital_pressure_score",
+    "mean_last12_public_cost_index",
     "rank_by_hybrid_viability",
 }
 

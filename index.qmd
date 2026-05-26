@@ -181,6 +181,7 @@ subtitle: "Visual reading map for the public report, dashboard and launch posts"
     <p>Read the executive summary, controls stack and claim boundary first.</p>
     <p class="gtpcnz-meta">Quarto: public report overview and thesis sections.</p>
     <a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd">Report</a>
+    <a class="btn btn-sm btn-outline-primary" href="docs/launch/claim-boundaries-v1.7.2.html">Claim boundaries</a>
     <a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
   </div>
   <div class="gtpcnz-card">
