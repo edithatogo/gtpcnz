@@ -79,6 +79,8 @@ def test_public_surfaces_include_canonical_streamlit_url_and_full_caveat():
         Path("index.qmd"),
         Path("docs/REPORTS-AND-DASHBOARD.md"),
         Path("docs/STREAMLIT-DEPLOYMENT.md"),
+        Path("docs/calibration/model-card-v1.7.2.md"),
+        Path("docs/launch/claim-boundaries-v1.7.2.md"),
         Path("reports/primary_care_architecture.qmd"),
     ]:
         text = path.read_text(encoding="utf-8")

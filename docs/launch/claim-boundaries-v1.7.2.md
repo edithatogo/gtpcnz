@@ -12,6 +12,7 @@
 
 ## Required caveats
 
+- This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
 - Current reforms are the comparator, not a straw man.
 - Uncapped means uncapped at the global activity-envelope level, not uncontrolled billing.
 - Place-based accountability is core to the proposal.

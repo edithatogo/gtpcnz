@@ -43,7 +43,7 @@ The benchmark uses 70 parameters across demand, supply, funding, governance, amb
 - Scenario comparison and sensitivity outputs.
 
 ## Validation status
-Public-data anchored benchmark only. Not linked-data calibrated and not a patient-level forecast.
+This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
 
 ## Interpretation rule
 Use the model to ask better questions and prioritise validation. Do not use it to claim final effect sizes.

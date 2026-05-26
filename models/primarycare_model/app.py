@@ -83,6 +83,18 @@ def render_interpretation_rules() -> None:
     )
 
 
+def render_big_words_expander() -> None:
+    with st.expander("Learn the big words"):
+        st.markdown(
+            """
+            - **Uncapped** means eligible activity is not limited by a fixed global activity envelope.
+            - **Controlled** means item rules, provider scope, clinical governance, documentation, audit and place accountability still apply.
+            - **Model-generated index** means the number comes from the benchmark logic, not from observed New Zealand outcomes.
+            - **Toy explainer** means the slider result is a teaching aid, not a calibrated forecast.
+            """
+        )
+
+
 def render_reference_scenario_explainer() -> None:
     st.markdown(
         """
@@ -1503,6 +1515,7 @@ def render_app() -> None:
     )
     caveat_box()
     render_reader_guide()
+    render_big_words_expander()
 
     df = cached_scenario_results(str(RESULTS_PATH))
 
@@ -1678,15 +1691,7 @@ def render_app() -> None:
             - **Toy explainer:** a simplified interactive teaching tool, not the model forecast.
             """
         )
-        with st.expander("Learn the big words"):
-            st.markdown(
-                """
-                - **Uncapped** means eligible activity is not limited by a fixed global activity envelope.
-                - **Controlled** means item rules, provider scope, clinical governance, documentation, audit and place accountability still apply.
-                - **Model-generated index** means the number comes from the benchmark logic, not from observed New Zealand outcomes.
-                - **Toy explainer** means the slider result is a teaching aid, not a calibrated forecast.
-                """
-            )
+        render_big_words_expander()
 
     st.caption(f"GTPCNZ v{APP_VERSION}. Demonstrative explainer only, not a calibrated forecast.")
 
