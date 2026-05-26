@@ -1,43 +1,51 @@
-# GTPCNZ reports and dashboard
+# GTPCNZ Interactive Reporting & Visualization Suite
 
-GTPCNZ has two public reading surfaces: a Quarto report and a Streamlit dashboard.
+Canonical Streamlit URL: https://gtpcnz.streamlit.app/
 
-## Public report
+This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. The Streamlit surface now focuses on the modelling and dashboard views, then links readers to the Substack posts. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
 
-The public funding architecture report explains the funding architecture model. Read it with:
+This project includes a reproducible reporting layer and an interactive dashboard designed to make the primary care funding model accessible to both policy experts and non-specialist readers.
 
-- `docs/calibration/model-card-v1.7.2.md`
-- `docs/launch/claim-boundaries-v1.7.2.md`
-- `docs/public-site/streamlit-dashboard-contract-v1.8.1.md`
-- `docs/public-site/streamlit-dashboard-audit-v1.8.1.md`
-- `docs/public-site/evidence-tracker-public-v1.8.1.md`
-- `docs/public-site/calibration-readiness-page-v1.8.1.md`
+## 1. Quarto Report: `reports/primary_care_architecture.qmd`
 
-## Streamlit dashboard
+The Quarto report is a reproducible document that combines technical thesis writing with live Python data analysis.
 
-Public URL:
+### How to Render
+To generate the HTML or PDF version, ensure you have [Quarto](https://quarto.org/) installed and run:
 
-<https://gtpcnz.streamlit.app/>
+```bash
+quarto render reports/primary_care_architecture.qmd
+```
 
-Entrypoint:
+### Design Philosophy
+- **Narrative first:** Explains the "Game Theory" of healthcare using relatable metaphors (e.g., video games, subscription services).
+- **Traceable model outputs:** Pulls directly from `outputs/full-parameterised-summary-results-v1.7.0.csv`.
+
+## 2. Streamlit Dashboard: `streamlit_app.py`
+
+**GTPCNZ** is a public-data anchored benchmark and dashboard for comparing funding architecture scenarios and reading paths.
+
+### How to Run
+Ensure you have the dependencies installed:
+
+```bash
+pip install -r requirements.txt
+```
+
+Then launch the dashboard:
 
 ```bash
 streamlit run streamlit_app.py
 ```
 
-The dashboard is an **interactive explainer**, not a calibrated simulator. It keeps two kinds of output separate:
+### Features
+- **Interactive Sliders:** Adjust Capitation vs. FFS weights.
+- **Educational Tooltips:** Instant definitions for complex healthcare terms.
+- **Real-time Plotting:** Shows qualitative changes in model-generated supply and hospital-pressure index values.
+- **Deployment-ready Entry Point:** `streamlit_app.py` is the Streamlit Community Cloud entrypoint.
 
-1. **Reference scenarios** loaded from `outputs/full-parameterised-summary-results-v1.7.0.csv`.
-2. **Toy explainer slider scores** from a simple teaching formula.
-
-Do not describe the toy slider outputs as forecasts.
-
-## Public claim boundary
-
-Use this wording:
-
-> This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
-
-## Plain-language phrase
-
-> Uncapped does not mean uncontrolled; it means scheduled, rules-based, audited, clinically governed and place-accountable.
+## Technical Standards
+- **Modularity:** The dashboard leverages the existing project data structure.
+- **Accessibility:** Content is simplified without losing technical rigor.
+- **Transparency:** All visualisations are generated from traceable project outputs.
+- **Automated Testing:** `models/tests/test_app.py` uses Streamlit's native `AppTest` API.

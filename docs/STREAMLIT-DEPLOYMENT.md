@@ -1,10 +1,10 @@
 # Streamlit Deployment
 
+Canonical Streamlit URL: https://gtpcnz.streamlit.app/
+
+This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. The dashboard surfaces the modelling views and links out to the Substack post sequence. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
+
 GTPCNZ is prepared for Streamlit Community Cloud.
-
-Public app URL:
-
-<https://gtpcnz.streamlit.app/>
 
 ## Entrypoint
 
@@ -33,13 +33,11 @@ streamlit run streamlit_app.py
 
 ## Community Cloud Settings
 
-- Repository: `edithatogo/gtpcnz`
+- Repository: `edithatogo/primary-care-funding-architecture`
 - Branch: `main`
 - Main file path: `streamlit_app.py`
 - Python version: `3.11`
 
 ## Caveat
 
-The dashboard is an educational explainer. It is not a calibrated simulator, linked-data calibrated policy forecast, or patient-level forecast.
-
-> This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
+The dashboard is a public-data anchored benchmark and educational explainer. It is not a linked-data calibrated or patient-level forecast.
