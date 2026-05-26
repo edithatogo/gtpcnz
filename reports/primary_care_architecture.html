@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dylan A Mordaunt">
-<meta name="dcterms.date" content="2026-05-11">
+<meta name="dcterms.date" content="2026-05-12">
 
-<title>GTPCNZ: The Funding Architecture Report – GTPCNZ</title>
+<title>GTPCNZ: public funding architecture report – GTPCNZ</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -72,7 +72,39 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -99,19 +131,39 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="../reports/primary_care_architecture.html" aria-current="page"> 
-<span class="menu-text">Funding Architecture Report</span></a>
+<span class="menu-text">Public report</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../docs/REPORTS-AND-DASHBOARD.html"> 
 <span class="menu-text">Dashboard</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../docs/STREAMLIT-DEPLOYMENT.html"> 
-<span class="menu-text">Streamlit Deploy</span></a>
+    <a class="nav-link" href="../docs/calibration/model-card-v1.7.2.html"> 
+<span class="menu-text">Model card</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../docs/launch/claim-boundaries-v1.7.2.html"> 
+<span class="menu-text">Claim boundaries</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../docs/public-site/evidence-tracker-public-v1.8.1.html"> 
+<span class="menu-text">Evidence tracker</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../docs/public-site/calibration-readiness-page-v1.8.1.html"> 
+<span class="menu-text">Calibration readiness</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../docs/public-site/streamlit-dashboard-contract-v1.8.1.html"> 
+<span class="menu-text">Dashboard contract</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../docs/public-site/post-surface-crosswalk-contract-v1.8.2.html"> 
+<span class="menu-text">Post crosswalk</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../README.html"> 
-<span class="menu-text">Repository Guide</span></a>
+<span class="menu-text">Repository guide</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -129,17 +181,32 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link active" data-scroll-target="#executive-summary">Executive Summary</a></li>
-  <li><a href="#the-big-idea-uncapped-but-controlled" id="toc-the-big-idea-uncapped-but-controlled" class="nav-link" data-scroll-target="#the-big-idea-uncapped-but-controlled">1. The Big Idea: “Uncapped but Controlled”</a>
+  <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link active" data-scroll-target="#executive-summary">Executive summary</a></li>
+  <li><a href="#post-map" id="toc-post-map" class="nav-link" data-scroll-target="#post-map">How the posts map to this report and dashboard</a>
   <ul class="collapse">
-  <li><a href="#what-does-this-mean" id="toc-what-does-this-mean" class="nav-link" data-scroll-target="#what-does-this-mean">What does this mean?</a></li>
+  <li><a href="#post-01" id="toc-post-01" class="nav-link" data-scroll-target="#post-01">Post 01. Are we buying hospital growth by rationing cheaper care upstream?</a></li>
+  <li><a href="#post-02" id="toc-post-02" class="nav-link" data-scroll-target="#post-02">Post 02. Fee-for-service, capitation and blended funding</a></li>
+  <li><a href="#post-03" id="toc-post-03" class="nav-link" data-scroll-target="#post-03">Post 03. Marginal supply</a></li>
+  <li><a href="#post-04" id="toc-post-04" class="nav-link" data-scroll-target="#post-04">Post 04. Why formulas do not solve games</a></li>
+  <li><a href="#post-05" id="toc-post-05" class="nav-link" data-scroll-target="#post-05">Post 05. Current reform pathway</a></li>
+  <li><a href="#post-06" id="toc-post-06" class="nav-link" data-scroll-target="#post-06">Post 06. What I mean by uncapping primary care funding</a></li>
   </ul></li>
-  <li><a href="#what-is-capitation" id="toc-what-is-capitation" class="nav-link" data-scroll-target="#what-is-capitation">3. What is “Capitation”?</a></li>
-  <li><a href="#results-why-the-full-hybrid-model-wins" id="toc-results-why-the-full-hybrid-model-wins" class="nav-link" data-scroll-target="#results-why-the-full-hybrid-model-wins">4. Results: Why the “Full Hybrid” Model Wins</a>
+  <li><a href="#what-this-report-is-and-is-not" id="toc-what-this-report-is-and-is-not" class="nav-link" data-scroll-target="#what-this-report-is-and-is-not">1. What this report is and is not</a></li>
+  <li><a href="#the-current-reform-pathway-is-the-comparator" id="toc-the-current-reform-pathway-is-the-comparator" class="nav-link" data-scroll-target="#the-current-reform-pathway-is-the-comparator">2. The current reform pathway is the comparator</a></li>
+  <li><a href="#why-capitation-can-be-fair-and-still-constrain-supply" id="toc-why-capitation-can-be-fair-and-still-constrain-supply" class="nav-link" data-scroll-target="#why-capitation-can-be-fair-and-still-constrain-supply">3. Why capitation can be fair and still constrain supply</a></li>
+  <li><a href="#what-uncapped-scheduled-fee-for-service-means" id="toc-what-uncapped-scheduled-fee-for-service-means" class="nav-link" data-scroll-target="#what-uncapped-scheduled-fee-for-service-means">4. What uncapped scheduled fee-for-service means</a></li>
+  <li><a href="#why-place-based-accountability-matters" id="toc-why-place-based-accountability-matters" class="nav-link" data-scroll-target="#why-place-based-accountability-matters">5. Why place-based accountability matters</a></li>
+  <li><a href="#scenario-results-from-the-benchmark" id="toc-scenario-results-from-the-benchmark" class="nav-link" data-scroll-target="#scenario-results-from-the-benchmark">6. Scenario results from the benchmark</a></li>
+  <li><a href="#what-the-benchmark-suggests" id="toc-what-the-benchmark-suggests" class="nav-link" data-scroll-target="#what-the-benchmark-suggests">7. What the benchmark suggests</a></li>
+  <li><a href="#what-would-change-my-mind" id="toc-what-would-change-my-mind" class="nav-link" data-scroll-target="#what-would-change-my-mind">8. What would change my mind</a></li>
+  <li><a href="#what-needs-to-be-tested-next" id="toc-what-needs-to-be-tested-next" class="nav-link" data-scroll-target="#what-needs-to-be-tested-next">9. What needs to be tested next</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">10. Conclusion</a></li>
+  <li><a href="#appendix-a.-public-funding-formula-forms" id="toc-appendix-a.-public-funding-formula-forms" class="nav-link" data-scroll-target="#appendix-a.-public-funding-formula-forms">Appendix A. Public funding formula forms</a>
   <ul class="collapse">
-  <li><a href="#key-findings" id="toc-key-findings" class="nav-link" data-scroll-target="#key-findings">Key Findings:</a></li>
+  <li><a href="#a1.-capitation" id="toc-a1.-capitation" class="nav-link" data-scroll-target="#a1.-capitation">A1. Capitation</a></li>
+  <li><a href="#a2.-scheduled-fee-for-service" id="toc-a2.-scheduled-fee-for-service" class="nav-link" data-scroll-target="#a2.-scheduled-fee-for-service">A2. Scheduled fee-for-service</a></li>
+  <li><a href="#a3.-blended-funding-and-viability" id="toc-a3.-blended-funding-and-viability" class="nav-link" data-scroll-target="#a3.-blended-funding-and-viability">A3. Blended funding and viability</a></li>
   </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">5. Conclusion</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="primary_care_architecture.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
@@ -148,8 +215,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">GTPCNZ: The Funding Architecture Report</h1>
-<p class="subtitle lead">Understanding how we pay for doctors and why it matters for everyone</p>
+<h1 class="title">GTPCNZ: public funding architecture report</h1>
+<p class="subtitle lead">Public-data anchored benchmark for primary care funding policy discussion</p>
 </div>
 
 
@@ -166,7 +233,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 11, 2026</p>
+      <p class="date">May 12, 2026</p>
     </div>
   </div>
   
@@ -179,58 +246,602 @@ ul.task-list li input[type="checkbox"] {
 
 
 <section id="executive-summary" class="level1">
-<h1>Executive Summary</h1>
-<p>Imagine you are playing a video game where you have to keep a city healthy. If you only pay the doctors when they work in the big, expensive hospitals, but don’t pay them enough to work in the small neighborhood clinics, what happens? People get sick in their neighborhoods and then rush to the hospital all at once. The hospital gets crowded, and everyone has to wait a long time.</p>
-<p>This report explains a new way to fund (pay for) primary care—the doctors and nurses in your neighborhood. We want to make sure they are paid fairly for every person they help, so that they can stop health problems before they become big enough to need a hospital visit.</p>
+<h1>Executive summary</h1>
+<p><strong>Source-confidence label: policy judgement + public-data benchmark.</strong></p>
+<p>This report explains a public-data anchored benchmark for primary care funding in Aotearoa New Zealand.</p>
+<blockquote class="blockquote">
+<p>This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.</p>
+</blockquote>
+<p>The central question is simple:</p>
+<blockquote class="blockquote">
+<p>Do current funding rules allow lower-cost upstream care to expand safely before need becomes hospital demand?</p>
+</blockquote>
+<p>The proposal is a hybrid:</p>
+<ol type="1">
+<li><strong>Capitation</strong> for continuity, enrolment, baseline viability and population responsibility.</li>
+<li><strong>Uncapped scheduled fee-for-service</strong> for eligible primary medical activity.</li>
+<li><strong>Place-based accountability</strong> so providers remain responsible for whole communities, not only easy activity.</li>
+<li><strong>Item rules, clinical governance, documentation, audit and data visibility</strong> to control gaming and low-value activity.</li>
+<li><strong>Equity and co-payment protections</strong> so price does not become the rationing mechanism.</li>
+</ol>
+<p>Short version:</p>
+<blockquote class="blockquote">
+<p><strong>Uncapped does not mean uncontrolled.</strong> It means uncapped at the global activity-envelope level, but controlled at the item, scope, audit, clinical-governance and place-accountability level.</p>
+</blockquote>
 </section>
-<section id="the-big-idea-uncapped-but-controlled" class="level1">
-<h1>1. The Big Idea: “Uncapped but Controlled”</h1>
-<p>Right now, funding for doctors can be like a “fixed envelope” of money. Once that envelope is empty, it’s hard for doctors to help more people without losing money themselves.</p>
-<p>Our proposal is different: <strong>“Uncapped at the activity-envelope level, but controlled at the item level.”</strong></p>
-<section id="what-does-this-mean" class="level3">
-<h3 class="anchored" data-anchor-id="what-does-this-mean">What does this mean?</h3>
-<ul>
-<li><strong>Uncapped:</strong> There is no fixed limit on how many people a doctor can help. If someone is sick, the doctor should be able to help them and be paid for that work.</li>
-<li><strong>Controlled:</strong> Just because there is no limit doesn’t mean there are no rules. We use strict rules (like a rulebook in a game) to make sure the right care is given to the right people by the right providers.</li>
-</ul>
+<section id="post-map" class="level1">
+<h1>How the posts map to this report and dashboard</h1>
+<p><strong>Source-confidence label: public reading map.</strong></p>
+<p>This section gives stable anchors for the first six public posts. It also keeps the dashboard wording aligned with the report: the public surfaces use model-generated indices, not observed outcomes.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Post</th>
+<th>Stable anchor</th>
+<th>Main report surface</th>
+<th>Dashboard surface</th>
+<th>Status / caveat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>01</td>
+<td><a href="#post-01">Post 01</a></td>
+<td>Executive summary; comparator framing; scenario interpretation</td>
+<td>Start here; Current state; Reference scenarios</td>
+<td>Model-generated index, not an empirical outcome</td>
+</tr>
+<tr class="even">
+<td>02</td>
+<td><a href="#post-02">Post 02</a></td>
+<td>Funding model explainer; formula appendix</td>
+<td>Funding models module; Toy explainer</td>
+<td>Public-data benchmark, not a forecast</td>
+</tr>
+<tr class="odd">
+<td>03</td>
+<td><a href="#post-03">Post 03</a></td>
+<td>Marginal supply and the extra-contact viability threshold</td>
+<td>Microeconomics lab</td>
+<td>Static teaching diagram, not a measured curve</td>
+</tr>
+<tr class="even">
+<td>04</td>
+<td><a href="#post-04">Post 04</a></td>
+<td>Game theory, controls and gaming risk</td>
+<td>Game theory lab</td>
+<td>Strategic teaching diagram, not an estimate</td>
+</tr>
+<tr class="odd">
+<td>05</td>
+<td><a href="#post-05">Post 05</a></td>
+<td>Current reform comparator and F0/current reform pathway</td>
+<td>Current state; Reference scenarios</td>
+<td>F0/current reform remains the comparator</td>
+</tr>
+<tr class="even">
+<td>06</td>
+<td><a href="#post-06">Post 06</a></td>
+<td>Controlled scheduled payment and uncapping logic</td>
+<td>Toy explainer; Microeconomics lab</td>
+<td>Model-generated index wording stays in place</td>
+</tr>
+</tbody>
+</table>
+<section id="post-01" class="level2">
+<h2 class="anchored" data-anchor-id="post-01">Post 01. Are we buying hospital growth by rationing cheaper care upstream?</h2>
+<p><strong>Source-confidence label: executive-summary framing.</strong></p>
+<p><strong>Accessibility description:</strong> This post is the entry point. It links the policy question, the current reform comparator and the scenario ranking so the reader can move from the question to the benchmark without needing the dashboard first.</p>
+<p>This post maps to the executive summary, the current reform comparator section and the scenario interpretation section. It is the clearest place to start if the reader wants the public policy question before the technical detail.</p>
 </section>
+<section id="post-02" class="level2">
+<h2 class="anchored" data-anchor-id="post-02">Post 02. Fee-for-service, capitation and blended funding</h2>
+<p><strong>Source-confidence label: funding-formula explanation.</strong></p>
+<p><strong>Accessibility description:</strong> This post explains the basic funding pieces in plain English and points the reader to the formula appendix where the accounting identities are written out.</p>
+<p>This post maps to the funding-model explanation and the appendix that lays out capitation, scheduled payment and blended funding identities.</p>
 </section>
-<section id="what-is-capitation" class="level1">
-<h1>3. What is “Capitation”?</h1>
-<p>In healthcare, <strong>Capitation</strong> is like a subscription service for your doctor.</p>
-<p>Imagine you pay a monthly fee to a music streaming app. You can listen to as many songs as you want, and the app gets the same amount of money whether you listen to 1 song or 1,000 songs.</p>
-<ul>
-<li><strong>The Good Side:</strong> The doctor has a steady income and knows they are responsible for your health all year round.</li>
-<li><strong>The Bad Side:</strong> If 1,000 people all want an appointment at the same time, the doctor might not have enough money (or staff) to see everyone, because the “subscription fee” doesn’t increase when the work increases.</li>
-</ul>
-</section>
-<section id="results-why-the-full-hybrid-model-wins" class="level1">
-<h1>4. Results: Why the “Full Hybrid” Model Wins</h1>
-<p>We tested 10 different ways to pay for healthcare. Here is how they compare in our simulation.</p>
-<div id="cell-result-summary" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display">
+<section id="post-03" class="level2">
+<h2 class="anchored" data-anchor-id="post-03">Post 03. Marginal supply</h2>
+<p><strong>Source-confidence label: microeconomics teaching diagram.</strong></p>
+<p><strong>Accessibility description:</strong> The diagram below shows the viability threshold for one more primary care contact. If the funded payment plus any allowed charge does not meet marginal cost, the extra contact is rationed.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="primary_care_architecture_files/figure-html/result-summary-output-1.png" id="result-summary" width="948" height="566" class="figure-img"></p>
-</figure>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[More clinically necessary contact] --&gt; B{Does funded value meet marginal cost?}
+  C[Scheduled payment + allowed co-payment] --&gt; B
+  D[Marginal cost: clinician time, room time, admin, follow-up] --&gt; B
+  B --&gt;|yes| E[Extra contact is viable]
+  B --&gt;|no| F[Waiting, closed books or higher fees]
+</pre>
+</div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
-<section id="key-findings" class="level3">
-<h3 class="anchored" data-anchor-id="key-findings">Key Findings:</h3>
+<p><em>Post 03 diagram 1. Marginal supply threshold. This is a static microeconomics teaching diagram, not an estimated cost curve.</em></p>
+<p>This post maps to the marginal-supply section and the formula appendix. It gives the reader the simplest possible microeconomics reading of the model: a safe extra contact needs a viable marginal payment signal.</p>
+</section>
+<section id="post-04" class="level2">
+<h2 class="anchored" data-anchor-id="post-04">Post 04. Why formulas do not solve games</h2>
+<p><strong>Source-confidence label: game theory and controls.</strong></p>
+<p><strong>Accessibility description:</strong> This post explains why incentive design matters. The same funding formula can produce different behaviour depending on provider strategy, audit strength and whether the system protects whole-population access.</p>
+<p>This is the explicit game-theory section. The report is not only asking what the formula pays; it is asking how providers, commissioners and patients respond when the rules change.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Provider strategy</th>
+<th>Weak controls</th>
+<th>Strong controls</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Select easy or profitable contacts</td>
+<td>High short-run revenue, weak access, high gaming risk</td>
+<td>Limited upside, audit exposure, lower gaming payoff</td>
+</tr>
+<tr class="even">
+<td>Serve the whole population</td>
+<td>Moderate revenue, lower gaming risk, better access</td>
+<td>Highest alignment between payment, access and legitimacy</td>
+</tr>
+</tbody>
+</table>
+<p><em>Post 04 diagram 1. Qualitative payoff matrix for the primary-care incentive game. This is a static game-theory teaching table, not an estimate.</em></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+  A[System sets schedule, scope and audit rules] --&gt; B{Provider best response}
+  B --&gt; C[Expand access and accept harder cases]
+  B --&gt; D[Cherry-pick easier activity]
+  C --&gt; E[Better access and legitimacy]
+  D --&gt; F[Higher gaming risk and weaker access]
+  F --&gt; G[Need stronger controls]
+  G --&gt; A
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><em>Post 04 diagram 2. Best-response loop and controls stack. This is a static game-theory teaching diagram, not an empirical model.</em></p>
+<p>This post maps to the gaming-risk discussion, the controls section and the place-accountability argument. It is where the report makes the strategic logic explicit.</p>
+</section>
+<section id="post-05" class="level2">
+<h2 class="anchored" data-anchor-id="post-05">Post 05. Current reform pathway</h2>
+<p><strong>Source-confidence label: comparator surface.</strong></p>
+<p><strong>Accessibility description:</strong> This post keeps the current New Zealand reform pathway visible as the comparator. It is not a straw man, and it is not a blank slate.</p>
+<p>This post maps to the current reform comparator section and the F0 scenario. The report keeps current reform in view so the reader can compare the public benchmark against the real policy path.</p>
+</section>
+<section id="post-06" class="level2">
+<h2 class="anchored" data-anchor-id="post-06">Post 06. What I mean by uncapping primary care funding</h2>
+<p><strong>Source-confidence label: controlled scheduled payment.</strong></p>
+<p><strong>Accessibility description:</strong> This diagram shows the controlled version of uncapping. The payment can be uncapped at the activity-envelope level while still being constrained by item rules, co-payment limits, scope, audit and place accountability.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[Eligible primary care activity] --&gt; B[Scheduled payment]
+  B --&gt; C{Do controls still bind?}
+  D[Item rules, scope, audit, place accountability and fee limits] --&gt; C
+  C --&gt;|yes| E[Uncapped but controlled]
+  C --&gt;|no| F[Price increase rather than access gain]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><em>Post 06 diagram 1. Controlled uncapping threshold. This is a static microeconomics teaching diagram, not a forecast.</em></p>
+<p>This post maps to the uncapping explanation and the formula appendix. It reinforces the point that uncapping is a payment design choice, not a permission slip for uncontrolled billing.</p>
+</section>
+</section>
+<section id="what-this-report-is-and-is-not" class="level1">
+<h1>1. What this report is and is not</h1>
+<p><strong>Source-confidence label: claim boundary.</strong></p>
+<p>This report is a public explanation of a model-generated benchmark. It can compare policy logics, identify assumptions and guide stakeholder validation.</p>
+<p>It is not:</p>
 <ul>
-<li><strong>Full Hybrid Upstream Architecture (Winner):</strong> This model combines the “subscription” (Capitation) with a “pay-per-visit” (FFS) system. It makes it easier for you to see a doctor and reduces the pressure on big hospitals.</li>
-<li><strong>Current Reform Pathway:</strong> While it makes some improvements, it doesn’t do as much to help doctors offer more appointments when demand is high.</li>
+<li>a government-endorsed policy position;</li>
+<li>a business case;</li>
+<li>a calibrated fiscal forecast;</li>
+<li>a prediction that any scenario will reduce hospital demand by a precise amount;</li>
+<li>a claim that fee-for-service alone is better than capitation.</li>
+</ul>
+<p>The formal boundary is in the model card and claim-boundary documents on this site.</p>
+</section>
+<section id="the-current-reform-pathway-is-the-comparator" class="level1">
+<h1>2. The current reform pathway is the comparator</h1>
+<p><strong>Source-confidence label: public document + policy interpretation.</strong></p>
+<p>A weak critique would pretend New Zealand is doing nothing. That is not the argument.</p>
+<p>The current reform pathway already includes capitation reweighting, a primary care access target, the National Primary Care Dataset, digital access work, urgent and after-hours care, Primary Health Organisation accountability work and separate appropriation structures.</p>
+<p>The hard question is whether that pathway changes the supply game enough.</p>
+<p>A capitation formula can improve how funding is allocated across enrolled populations. It does not necessarily create a strong marginal payment signal for the next clinically necessary appointment, procedure or urgent episode. That is the gap this model explores.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[Current reform pathway] --&gt; B[Capitation reweighting]
+  A --&gt; C[Access target]
+  A --&gt; D[National Primary Care Dataset]
+  A --&gt; E[Digital, urgent and after-hours care]
+  B --&gt; F{Tested gap}
+  C --&gt; F
+  D --&gt; F
+  E --&gt; F
+  F --&gt; G[Does marginal supply expand enough?]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><em>Figure 1. Current reform pathway used as the comparator. This is a public-policy map, not a model result.</em></p>
+</section>
+<section id="why-capitation-can-be-fair-and-still-constrain-supply" class="level1">
+<h1>3. Why capitation can be fair and still constrain supply</h1>
+<p><strong>Source-confidence label: economic theory + model assumption.</strong></p>
+<p>Capitation pays a fixed amount for an enrolled person or population. It can support continuity, population responsibility and budget predictability.</p>
+<p>But when demand rises, the next appointment still takes clinician time, room time, nursing time, documentation, risk, follow-up and administration. If the marginal payment for that extra work is weak, the system may ration through waiting time, closed books, short consultations, co-payments or hospital overflow.</p>
+<p>This is not an argument against capitation. It is an argument against expecting capitation to solve every problem.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+  A[Enrolled population payment] --&gt; B[Baseline responsibility]
+  B --&gt; C[Continuity and planning]
+  B --&gt; D[Fixed or weak marginal revenue]
+  E[Rising need] --&gt; F[More appointments, calls, follow-up and risk]
+  D --&gt; G{Extra contact viable?}
+  F --&gt; G
+  G --&gt;|yes| H[Supply can expand]
+  G --&gt;|no| I[Waiting, closed books, higher fees or hospital spillover]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><em>Figure 2. The marginal payment gap. This is a conceptual microeconomics diagram, not an estimate.</em></p>
+</section>
+<section id="what-uncapped-scheduled-fee-for-service-means" class="level1">
+<h1>4. What uncapped scheduled fee-for-service means</h1>
+<p><strong>Source-confidence label: policy judgement + ACC analogy.</strong></p>
+<p>This is not a proposal for uncontrolled billing.</p>
+<p>A scheduled fee-for-service stream would mean that eligible primary medical activity can be paid when it is delivered, without a fixed global activity ceiling. The controls sit elsewhere:</p>
+<ul>
+<li>item definitions;</li>
+<li>provider eligibility and scope;</li>
+<li>clinical necessity;</li>
+<li>documentation rules;</li>
+<li>audit and unusual-pattern detection;</li>
+<li>co-payment protections;</li>
+<li>place-based population accountability;</li>
+<li>data reporting;</li>
+<li>quality and safety governance.</li>
+</ul>
+<p>The Accident Compensation Corporation analogy is useful because ACC already uses rules-based treatment payments, provider eligibility, contracts and regulation. It is not a complete template for illness-based primary care.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[Eligible clinical activity] --&gt; B[Scheduled item price]
+  B --&gt; C[Provider scope rules]
+  C --&gt; D[Documentation]
+  D --&gt; E[Audit and unusual-pattern checks]
+  E --&gt; F[Place accountability]
+  F --&gt; G[Payment follows eligible activity]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><em>Figure 3. Uncapped but controlled. The activity envelope is not globally capped, but the item, provider, documentation, audit and place rules still bind.</em></p>
+</section>
+<section id="why-place-based-accountability-matters" class="level1">
+<h1>5. Why place-based accountability matters</h1>
+<p><strong>Source-confidence label: red-team finding + policy judgement.</strong></p>
+<p>A fee-for-service stream can improve marginal supply, but it can also encourage cherry-picking. Providers may select easier, shorter or more profitable contacts unless the system protects hard-to-reach populations, rural communities, complex patients and people with high unmet need.</p>
+<p>That is why place-based accountability is not optional. A national benefit schedule should sit beside responsibility for whole populations.</p>
+</section>
+<section id="scenario-results-from-the-benchmark" class="level1">
+<h1>6. Scenario results from the benchmark</h1>
+<p><strong>Source-confidence label: public-data benchmark.</strong></p>
+<p>The table below uses public-data anchored model-generated indices. These are not observed New Zealand outcomes.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Rank</th>
+<th>Scenario</th>
+<th>Name</th>
+<th style="text-align: right;">Hybrid viability</th>
+<th style="text-align: right;">Supply generation</th>
+<th style="text-align: right;">Hospital pressure</th>
+<th style="text-align: right;">Gaming risk</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td>F4</td>
+<td>Full hybrid upstream architecture</td>
+<td style="text-align: right;">77.26</td>
+<td style="text-align: right;">55.66</td>
+<td style="text-align: right;">61.61</td>
+<td style="text-align: right;">27.30</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td>F3</td>
+<td>Uncapped medical FFS + place accountability</td>
+<td style="text-align: right;">62.51</td>
+<td style="text-align: right;">40.10</td>
+<td style="text-align: right;">74.36</td>
+<td style="text-align: right;">30.76</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td>F2</td>
+<td>Uncapped scheduled medical FFS</td>
+<td style="text-align: right;">56.40</td>
+<td style="text-align: right;">40.38</td>
+<td style="text-align: right;">75.86</td>
+<td style="text-align: right;">39.10</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td>F9</td>
+<td>Place-based commissioning only</td>
+<td style="text-align: right;">54.26</td>
+<td style="text-align: right;">14.33</td>
+<td style="text-align: right;">79.07</td>
+<td style="text-align: right;">30.35</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td>F8</td>
+<td>Scope-enabled supply only</td>
+<td style="text-align: right;">52.96</td>
+<td style="text-align: right;">21.29</td>
+<td style="text-align: right;">78.25</td>
+<td style="text-align: right;">36.22</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td>F7</td>
+<td>Ambulance and urgent alternatives only</td>
+<td style="text-align: right;">52.74</td>
+<td style="text-align: right;">14.33</td>
+<td style="text-align: right;">72.31</td>
+<td style="text-align: right;">35.75</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td>F0</td>
+<td>Current reform pathway</td>
+<td style="text-align: right;">52.24</td>
+<td style="text-align: right;">15.43</td>
+<td style="text-align: right;">78.07</td>
+<td style="text-align: right;">34.04</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td>F1</td>
+<td>Capitation reweighting only</td>
+<td style="text-align: right;">50.37</td>
+<td style="text-align: right;">14.11</td>
+<td style="text-align: right;">79.91</td>
+<td style="text-align: right;">35.45</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td>F6</td>
+<td>ACC activity constraint shock</td>
+<td style="text-align: right;">50.11</td>
+<td style="text-align: right;">13.87</td>
+<td style="text-align: right;">80.21</td>
+<td style="text-align: right;">35.35</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td>F5</td>
+<td>Uncapped weak-control model</td>
+<td style="text-align: right;">46.11</td>
+<td style="text-align: right;">37.25</td>
+<td style="text-align: right;">77.18</td>
+<td style="text-align: right;">70.64</td>
+</tr>
+</tbody>
+</table>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">xychart-beta
+  title "Reference scenarios: hybrid viability index"
+  x-axis ["F4","F3","F2","F9","F8","F7","F0","F1","F6","F5"]
+  y-axis "Model-generated index" 0 --&gt; 100
+  bar [77.26,62.51,56.40,54.26,52.96,52.74,52.24,50.37,50.11,46.11]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><em>Figure 4. Static scenario rank plot. Scores are model-generated indices, not observed New Zealand outcomes.</em></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">xychart-beta
+  title "Supply generation index by reference scenario"
+  x-axis ["F4","F3","F2","F9","F8","F7","F0","F1","F6","F5"]
+  y-axis "Model-generated index" 0 --&gt; 100
+  bar [55.66,40.10,40.38,14.33,21.29,14.33,15.43,14.11,13.87,37.25]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><em>Figure 5. Static supply-generation plot. This shows scenario logic under assumptions, not measured supply.</em></p>
+<p><strong>Interpretation rule:</strong> the chart compares relative scenario logic under assumptions. It does not predict real-world effect sizes.</p>
+</section>
+<section id="what-the-benchmark-suggests" class="level1">
+<h1>7. What the benchmark suggests</h1>
+<p><strong>Source-confidence label: public-data benchmark + policy judgement.</strong></p>
+<p>The benchmark points to four patterns:</p>
+<ol type="1">
+<li>Capitation reweighting improves allocation, but may not solve marginal supply.</li>
+<li>Uncapped scheduled fee-for-service improves the marginal supply signal.</li>
+<li>Uncapped activity without strong controls is high risk.</li>
+<li>The strongest scenario is the full hybrid: capitation, scheduled fee-for-service, place accountability, urgent/ambulance alternatives, scope-enabled supply, data, audit and performance measures.</li>
+</ol>
+</section>
+<section id="what-would-change-my-mind" class="level1">
+<h1>8. What would change my mind</h1>
+<p><strong>Source-confidence label: falsification framework.</strong></p>
+<p>This argument should lose force if evidence shows that:</p>
+<ul>
+<li>capitation reweighting plus the access target materially improves appointment supply without an activity-sensitive stream;</li>
+<li>unmet primary care access does not predict emergency department, ambulance or admission pressure;</li>
+<li>scheduled fee-for-service mainly produces low-value activity rather than needed access;</li>
+<li>PHO pass-through and intermediation are already transparent, rapid and low-friction;</li>
+<li>co-payment protections cannot prevent inequity under an activity-sensitive stream;</li>
+<li>place-based accountability cannot coexist with scheduled benefits.</li>
 </ul>
 </section>
+<section id="what-needs-to-be-tested-next" class="level1">
+<h1>9. What needs to be tested next</h1>
+<p><strong>Source-confidence label: research plan.</strong></p>
+<p>The next step is not a more complicated benchmark. It is testing the load-bearing assumptions:</p>
+<ul>
+<li>marginal supply response to scheduled benefits;</li>
+<li>unmet primary care to emergency department and ambulance conversion;</li>
+<li>co-payment and equity effects;</li>
+<li>provider-scope expansion and safety;</li>
+<li>PHO pass-through and transaction-cost effects;</li>
+<li>ambulance alternative-disposition effects;</li>
+<li>Accident Compensation Corporation activity-stabilisation effects;</li>
+<li>rural in-person supply response.</li>
+</ul>
 </section>
 <section id="conclusion" class="level1">
-<h1>5. Conclusion</h1>
-<p>By changing the rules of the “funding game,” we can make sure that your neighborhood doctor is there when you need them. This doesn’t just help you; it helps the whole country by keeping our big hospitals free for real emergencies.</p>
-<hr>
-<p><strong>Technical Note:</strong> This report was automatically generated using Quarto. The data comes from the <code>full-parameterised-summary-results-v1.7.0.csv</code> file in the project outputs.</p>
+<h1>10. Conclusion</h1>
+<p><strong>Source-confidence label: policy judgement.</strong></p>
+<p>The current reform pathway may be necessary. It may not be sufficient.</p>
+<p>The strongest policy question is not whether capitation or fee-for-service is morally superior. It is whether the funding architecture lets safe upstream care expand before unmet need becomes hospital demand.</p>
+<blockquote class="blockquote">
+<p><strong>Uncapped does not mean uncontrolled.</strong> It means scheduled, rules-based, audited, clinically governed and place-accountable.</p>
+</blockquote>
+</section>
+<section id="appendix-a.-public-funding-formula-forms" class="level1">
+<h1>Appendix A. Public funding formula forms</h1>
+<p><strong>Source-confidence label: public formula forms + accounting identities.</strong></p>
+<p>The formulae below use publicly available funding descriptions and rate schedules. They are not a complete operational model of every PHO contract, pass-through rule, final coefficient or local practice fee. Where the public source gives only the structure, the notation is deliberately written as a transparent accounting identity.</p>
+<section id="a1.-capitation" class="level2">
+<h2 class="anchored" data-anchor-id="a1.-capitation">A1. Capitation</h2>
+<p><a href="https://www.healthnz.govt.nz/health-professionals/guidance-standards/topic/primary-care/primary-care-funding-subsidies/capitation-rates">Health New Zealand’s capitation rates page</a> describes capitation as payment by enrolled population rather than visit count, and publishes annualised rate tables from 1 July 2025.</p>
+<p><span class="math display">\[
+\text{Capitation}_{p}
+=
+\sum_{i \in E_p} r(a_i, s_i, h_i, q_p)
++
+\sum_{k \in A_p} \text{AddOn}_{k}
+\]</span></p>
+<p>Here (p) is the practice or enrolled provider population; (E_p) is its enrolled population; (r(a_i, s_i, h_i, q_p)) is the published annual rate for person (i), varying by age band, sex, high-use-health-card status and practice/payment category; and (A_p) covers eligible add-on streams such as health promotion, access funding, Care Plus, immunisation administration, rural workforce retention, management services, very-low-cost-access support, zero-fees support, Community Services Card support and contingent capitation.</p>
+<p>The marginal point is:</p>
+<p><span class="math display">\[
+\frac{\partial \text{Capitation}_{p}}{\partial \text{Visits}_{p}} \approx 0
+\]</span></p>
+<p>Once the enrolled population and eligible add-ons are fixed, an extra clinically necessary contact usually adds workload before it adds revenue.</p>
+<p>The <a href="https://www.health.govt.nz/strategies-initiatives/programmes-and-initiatives/primary-and-community-health-care/capitation-reweighting">Ministry of Health capitation reweighting page</a> says the revised formula considers age, sex, multimorbidity, rurality and socio-economic deprivation, with implementation expected from 1 July 2026 subject to negotiation. A cautious public-form notation is:</p>
+<p><span class="math display">\[
+\text{FutureCapitation}_{p}
+=
+\sum_{i \in E_p}
+f(a_i, s_i, m_i, u_i, d_i)
+\]</span></p>
+<p>where (m_i) is multimorbidity, (u_i) is rurality or distance from urban areas, and (d_i) is socio-economic deprivation. This is the published structure, not the final coefficient table.</p>
+</section>
+<section id="a2.-scheduled-fee-for-service" class="level2">
+<h2 class="anchored" data-anchor-id="a2.-scheduled-fee-for-service">A2. Scheduled fee-for-service</h2>
+<p>ACC provides a public example of scheduled activity payments. The <a href="https://www.legislation.govt.nz/secondary-legislation/pco-drafted/2024/36/en/latest/">Accident Compensation treatment-cost regulations</a> set amounts ACC is liable to pay or contribute for specified treatment, and ACC publishes a <a href="https://www.acc.co.nz/assets/provider/ACC1520-Med-pract-nurse-pract-and-nurses-costs-v2.pdf">medical practitioner, nurse practitioner and nurse cost schedule</a>.</p>
+<p><span class="math display">\[
+\text{ACCContribution}_{v}
+=
+B(g_v, c_v, a_v)
++
+T_{\max(v)}
++
+0.5 \sum_{t \in O_v} T_t
+\]</span></p>
+<p>Here (v) is a covered treatment visit; (B(g_v, c_v, a_v)) is the base visit contribution by provider group, card/dependent status and age category; (T_{(v)}) is the most expensive eligible treatment item at the visit; and (O_v) is the set of other eligible treatment items for different injuries at the same visit.</p>
+<p>The policy analogy is not to copy ACC exactly. It is that eligible services can be priced in advance, paid when delivered, documented and audited.</p>
+</section>
+<section id="a3.-blended-funding-and-viability" class="level2">
+<h2 class="anchored" data-anchor-id="a3.-blended-funding-and-viability">A3. Blended funding and viability</h2>
+<p>The <a href="https://www.tewhatuora.govt.nz/for-health-providers/primary-care-sector/annual-primary-care-funding">Health New Zealand annual primary care funding page</a> describes current primary care funding as including capitation, contingent capitation, performance-based funding, co-payment settings, minor planned care and immunisation funding. A simple blended identity is:</p>
+<p><span class="math display">\[
+\text{PracticeFunding}_{p}
+=
+\text{Capitation}_{p}
++
+\text{ProgrammeFunding}_{p}
++
+\sum_{j \in S_p} P_j q_{pj}
++
+\text{PatientCoPayments}_{p}
+\]</span></p>
+<p>where (S_p) is the set of scheduled eligible activities, (P_j) is the scheduled public payment for activity (j), and (q_{pj}) is the quantity of activity (j) delivered by practice (p).</p>
+<p>For access, the practical question is whether one more safe contact is viable:</p>
+<p><span class="math display">\[
+\text{ExtraContactViable}_{j}
+\iff
+P_j + C_j \geq MC_j
+\]</span></p>
+<p>where (C_j) is the allowed or actual patient co-payment and (MC_j) is the marginal cost of providing the extra contact.</p>
+<p>Co-payment protection is therefore part of the formula, not a side issue:</p>
+<p><span class="math display">\[
+\text{PatientCharge}_{j}
+\leq
+\text{AllowedFee}_{j}
+\]</span></p>
+<p>If an activity payment is added without charge controls, the reform can become a price increase rather than an access improvement.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -644,7 +1255,7 @@ ul.task-list li input[type="checkbox"] {
       &nbsp;
     </div>
     <div class="nav-footer-right">
-<p>Generated with Quarto</p>
+<p>Public-data anchored benchmark; not linked-data calibrated or a patient-level forecast</p>
 </div>
   </div>
 </footer>

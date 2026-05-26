@@ -132,19 +132,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./reports/primary_care_architecture.html"> 
-<span class="menu-text">Funding Architecture Report</span></a>
+<span class="menu-text">Public report</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./docs/REPORTS-AND-DASHBOARD.html"> 
 <span class="menu-text">Dashboard</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./docs/STREAMLIT-DEPLOYMENT.html"> 
-<span class="menu-text">Streamlit Deploy</span></a>
+    <a class="nav-link" href="./docs/calibration/model-card-v1.7.2.html"> 
+<span class="menu-text">Model card</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./docs/launch/claim-boundaries-v1.7.2.html"> 
+<span class="menu-text">Claim boundaries</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./docs/public-site/evidence-tracker-public-v1.8.1.html"> 
+<span class="menu-text">Evidence tracker</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./docs/public-site/calibration-readiness-page-v1.8.1.html"> 
+<span class="menu-text">Calibration readiness</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./docs/public-site/streamlit-dashboard-contract-v1.8.1.html"> 
+<span class="menu-text">Dashboard contract</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./docs/public-site/post-surface-crosswalk-contract-v1.8.2.html"> 
+<span class="menu-text">Post crosswalk</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./README.html" aria-current="page"> 
-<span class="menu-text">Repository Guide</span></a>
+<span class="menu-text">Repository guide</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -164,13 +184,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#gtpcnz" id="toc-gtpcnz" class="nav-link active" data-scroll-target="#gtpcnz">GTPCNZ</a>
   <ul class="collapse">
-  <li><a href="#what-this-is" id="toc-what-this-is" class="nav-link" data-scroll-target="#what-this-is">What This Is</a></li>
-  <li><a href="#what-this-is-not" id="toc-what-this-is-not" class="nav-link" data-scroll-target="#what-this-is-not">What This Is Not</a></li>
-  <li><a href="#current-thesis" id="toc-current-thesis" class="nav-link" data-scroll-target="#current-thesis">Current Thesis</a></li>
-  <li><a href="#public-surfaces" id="toc-public-surfaces" class="nav-link" data-scroll-target="#public-surfaces">Public Surfaces</a></li>
-  <li><a href="#run-locally" id="toc-run-locally" class="nav-link" data-scroll-target="#run-locally">Run Locally</a></li>
+  <li><a href="#what-this-is" id="toc-what-this-is" class="nav-link" data-scroll-target="#what-this-is">What this is</a></li>
+  <li><a href="#what-this-is-not" id="toc-what-this-is-not" class="nav-link" data-scroll-target="#what-this-is-not">What this is not</a></li>
+  <li><a href="#current-thesis" id="toc-current-thesis" class="nav-link" data-scroll-target="#current-thesis">Current thesis</a></li>
+  <li><a href="#public-pages" id="toc-public-pages" class="nav-link" data-scroll-target="#public-pages">Public pages</a></li>
+  <li><a href="#run-locally" id="toc-run-locally" class="nav-link" data-scroll-target="#run-locally">Run locally</a></li>
   <li><a href="#deploy" id="toc-deploy" class="nav-link" data-scroll-target="#deploy">Deploy</a></li>
-  <li><a href="#license-and-citation" id="toc-license-and-citation" class="nav-link" data-scroll-target="#license-and-citation">License And Citation</a></li>
+  <li><a href="#license-and-citation" id="toc-license-and-citation" class="nav-link" data-scroll-target="#license-and-citation">License and citation</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -184,46 +204,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="gtpcnz" class="level1">
 <h1>GTPCNZ</h1>
 <p><a href="https://github.com/edithatogo/gtpcnz/actions/workflows/ci.yml"><img src="https://github.com/edithatogo/gtpcnz/actions/workflows/ci.yml/badge.svg" class="img-fluid" alt="CI"></a> <a href="https://github.com/edithatogo/gtpcnz/actions/workflows/pages.yml"><img src="https://github.com/edithatogo/gtpcnz/actions/workflows/pages.yml/badge.svg" class="img-fluid" alt="Quarto Pages"></a></p>
-<p>GTPCNZ is a public policy-research and translation package on primary care funding architecture in Aotearoa New Zealand and Australia.</p>
+<p>GTPCNZ is a public policy-research package about primary care funding in Aotearoa New Zealand, with comparative material for Australia.</p>
 <p>Website: https://edithatogo.github.io/gtpcnz/</p>
 <section id="what-this-is" class="level2">
-<h2 class="anchored" data-anchor-id="what-this-is">What This Is</h2>
+<h2 class="anchored" data-anchor-id="what-this-is">What this is</h2>
 <ul>
-<li>A source-informed model scaffold for exploring primary care funding architecture.</li>
+<li>A public-data anchored benchmark and educational explainer for exploring primary care funding architecture.</li>
 <li>A Quarto website and reproducible report.</li>
-<li>A Streamlit dashboard for interactive scenario exploration.</li>
+<li>A Streamlit dashboard for interactive explanation of scenario logic.</li>
 <li>A public audit trail of assumptions, caveats, and launch materials.</li>
 </ul>
 </section>
 <section id="what-this-is-not" class="level2">
-<h2 class="anchored" data-anchor-id="what-this-is-not">What This Is Not</h2>
+<h2 class="anchored" data-anchor-id="what-this-is-not">What this is not</h2>
 <ul>
 <li>It is not an endorsed policy position.</li>
-<li>It is not a real-data calibrated forecasting model.</li>
-<li>It should not be used to claim precise fiscal savings, hospital-demand reductions, or workforce effects.</li>
+<li>It is not linked-data calibrated and not a patient-level forecast.</li>
+<li>It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.</li>
 </ul>
 </section>
 <section id="current-thesis" class="level2">
-<h2 class="anchored" data-anchor-id="current-thesis">Current Thesis</h2>
-<p>Capitation should be retained for continuity, enrolment, baseline viability, and population responsibility. Eligible primary medical activity should also have an uncapped, scheduled, rules-based fee-for-service stream, controlled through item rules, provider scope, clinical governance, documentation, audit, co-payment protections, and place-based accountability.</p>
+<h2 class="anchored" data-anchor-id="current-thesis">Current thesis</h2>
+<p>The thesis is specific: keep capitation for continuity, enrolment, baseline viability, and population responsibility. Add an uncapped, scheduled, rules-based fee-for-service stream for eligible primary medical activity, controlled through item rules, provider scope, clinical governance, documentation, audit, co-payment protections, and place-based accountability.</p>
 <p>Short version:</p>
 <blockquote class="blockquote">
 <p>Uncapped does not mean uncontrolled.</p>
 </blockquote>
 </section>
-<section id="public-surfaces" class="level2">
-<h2 class="anchored" data-anchor-id="public-surfaces">Public Surfaces</h2>
+<section id="public-pages" class="level2">
+<h2 class="anchored" data-anchor-id="public-pages">Public pages</h2>
 <ul>
 <li>Quarto website: https://edithatogo.github.io/gtpcnz/</li>
+<li>Interactive explainer (Streamlit): https://gtpcnz.streamlit.app/</li>
 <li>Quarto source report: <code>reports/primary_care_architecture.qmd</code></li>
 <li>Streamlit dashboard entrypoint: <code>streamlit_app.py</code></li>
 <li>Dashboard implementation: <code>models/primarycare_model/app.py</code></li>
 <li>Model card: <code>docs/calibration/model-card-v1.7.2.md</code></li>
 <li>Claim boundaries: <code>docs/launch/claim-boundaries-v1.7.2.md</code></li>
+<li>Evidence tracker: <code>docs/public-site/evidence-tracker-public-v1.8.1.md</code></li>
+<li>Calibration readiness: <code>docs/public-site/calibration-readiness-page-v1.8.1.md</code></li>
 </ul>
 </section>
 <section id="run-locally" class="level2">
-<h2 class="anchored" data-anchor-id="run-locally">Run Locally</h2>
+<h2 class="anchored" data-anchor-id="run-locally">Run locally</h2>
 <p>Install dependencies:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Run tests:</p>
@@ -244,7 +267,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 <section id="license-and-citation" class="level2">
-<h2 class="anchored" data-anchor-id="license-and-citation">License And Citation</h2>
+<h2 class="anchored" data-anchor-id="license-and-citation">License and citation</h2>
 <p>See <code>LICENSE</code> for the mixed code/content licensing terms and <code>CITATION.cff</code> for citation metadata.</p>
 
 
@@ -662,7 +685,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       &nbsp;
     </div>
     <div class="nav-footer-right">
-<p>Generated with Quarto</p>
+<p>Public-data anchored benchmark; not linked-data calibrated or a patient-level forecast</p>
 </div>
   </div>
 </footer>
