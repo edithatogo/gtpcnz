@@ -97,39 +97,19 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../reports/primary_care_architecture.html"> 
-<span class="menu-text">Public report</span></a>
+<span class="menu-text">Funding Architecture Report</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../docs/REPORTS-AND-DASHBOARD.html"> 
 <span class="menu-text">Dashboard</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../docs/calibration/model-card-v1.7.2.html"> 
-<span class="menu-text">Model card</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../docs/launch/claim-boundaries-v1.7.2.html"> 
-<span class="menu-text">Claim boundaries</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../docs/public-site/evidence-tracker-public-v1.8.1.html"> 
-<span class="menu-text">Evidence tracker</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="../../docs/public-site/calibration-readiness-page-v1.8.1.html" aria-current="page"> 
-<span class="menu-text">Calibration readiness</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../docs/public-site/streamlit-dashboard-contract-v1.8.1.html"> 
-<span class="menu-text">Dashboard contract</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../docs/public-site/post-surface-crosswalk-contract-v1.8.2.html"> 
-<span class="menu-text">Post crosswalk</span></a>
+    <a class="nav-link" href="../../docs/STREAMLIT-DEPLOYMENT.html"> 
+<span class="menu-text">Streamlit Deploy</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../README.html"> 
-<span class="menu-text">Repository guide</span></a>
+<span class="menu-text">Repository Guide</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -147,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#calibration-readiness" id="toc-calibration-readiness" class="nav-link active" data-scroll-target="#calibration-readiness">Calibration readiness</a>
+  <li><a href="#public-calibration" id="toc-public-calibration" class="nav-link active" data-scroll-target="#public-calibration">Public calibration</a>
   <ul class="collapse">
   <li><a href="#data-needed" id="toc-data-needed" class="nav-link" data-scroll-target="#data-needed">Data needed</a></li>
   <li><a href="#minimum-validation-tests" id="toc-minimum-validation-tests" class="nav-link" data-scroll-target="#minimum-validation-tests">Minimum validation tests</a></li>
@@ -162,9 +142,9 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="calibration-readiness" class="level1">
-<h1>Calibration readiness</h1>
-<p>GTPCNZ is currently a public-data anchored benchmark and educational explainer. The next stage would require linked data and validation.</p>
+<section id="public-calibration" class="level1">
+<h1>Public calibration</h1>
+<p>GTPCNZ is currently a public-data anchored benchmark for explanation and scenario comparison. Linked-data validation is required before using it for predictive, fiscal or implementation claims.</p>
 <section id="data-needed" class="level2">
 <h2 class="anchored" data-anchor-id="data-needed">Data needed</h2>
 <table class="caption-top table">
@@ -237,7 +217,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="claim-boundary" class="level2">
 <h2 class="anchored" data-anchor-id="claim-boundary">Claim boundary</h2>
-<p>Until those tests are passed, public outputs should use phrases such as <strong>public-data anchored benchmark</strong>, <strong>model-generated index</strong>, <strong>not linked-data calibrated</strong>, and <strong>not a patient-level forecast</strong>.</p>
+<p>Public outputs should use phrases such as <strong>public-data anchored benchmark</strong>, <strong>model-generated index</strong>, <strong>not linked-data calibrated</strong>, and <strong>not a patient-level forecast</strong>. Linked-data validation can tighten the benchmark later.</p>
 
 
 </section>
@@ -317,7 +297,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/edithatogo\.github\.io\/gtpcnz\/");
+        var filterRegex = new RegExp("https:\/\/edithatogo\.github\.io\/primary-care-funding-architecture\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -654,7 +634,7 @@ ul.task-list li input[type="checkbox"] {
       &nbsp;
     </div>
     <div class="nav-footer-right">
-<p>Public-data anchored benchmark; not linked-data calibrated or a patient-level forecast</p>
+<p>Generated with Quarto</p>
 </div>
   </div>
 </footer>

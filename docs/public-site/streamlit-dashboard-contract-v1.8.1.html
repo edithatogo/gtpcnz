@@ -97,39 +97,19 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../reports/primary_care_architecture.html"> 
-<span class="menu-text">Public report</span></a>
+<span class="menu-text">Funding Architecture Report</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../docs/REPORTS-AND-DASHBOARD.html"> 
 <span class="menu-text">Dashboard</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../docs/calibration/model-card-v1.7.2.html"> 
-<span class="menu-text">Model card</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../docs/launch/claim-boundaries-v1.7.2.html"> 
-<span class="menu-text">Claim boundaries</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../docs/public-site/evidence-tracker-public-v1.8.1.html"> 
-<span class="menu-text">Evidence tracker</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../docs/public-site/calibration-readiness-page-v1.8.1.html"> 
-<span class="menu-text">Calibration readiness</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="../../docs/public-site/streamlit-dashboard-contract-v1.8.1.html" aria-current="page"> 
-<span class="menu-text">Dashboard contract</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../docs/public-site/post-surface-crosswalk-contract-v1.8.2.html"> 
-<span class="menu-text">Post crosswalk</span></a>
+    <a class="nav-link" href="../../docs/STREAMLIT-DEPLOYMENT.html"> 
+<span class="menu-text">Streamlit Deploy</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../README.html"> 
-<span class="menu-text">Repository guide</span></a>
+<span class="menu-text">Repository Guide</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -172,12 +152,12 @@ ul.task-list li input[type="checkbox"] {
 <h1>Streamlit dashboard content and presentation contract v1.8.1</h1>
 <section id="purpose" class="level2">
 <h2 class="anchored" data-anchor-id="purpose">Purpose</h2>
-<p>The Streamlit dashboard must be readable by a general audience and safe for policy, research and public communication. It is an explainer for a public-data anchored benchmark, not a calibrated simulator.</p>
+<p>The Streamlit dashboard must be readable by a general audience and safe as a public explainer of model logic. It is an explainer for a public-data anchored benchmark, not a patient-level simulator, implementation-evidence source, or decision-advice tool. The dashboard should surface the modelling and the dashboard itself, then link out to the Substack posts.</p>
 </section>
 <section id="audience" class="level2">
 <h2 class="anchored" data-anchor-id="audience">Audience</h2>
 <p>The primary audience is an interested public reader, journalist, policy stakeholder, clinician, public servant or reviewer who has not read the full project.</p>
-<p>The dashboard should not assume that the reader already understands capitation, fee-for-service, PHOs, NPCD, OIA, calibration or model indices.</p>
+<p>The dashboard should not assume that the reader already understands capitation, fee-for-service, PHOs, NPCD, OIA or model indices.</p>
 </section>
 <section id="required-first-screen-content" class="level2">
 <h2 class="anchored" data-anchor-id="required-first-screen-content">Required first-screen content</h2>
@@ -192,22 +172,18 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>A short reader guide explaining the difference between reference scenarios and toy slider settings.</li>
 <li>A short guide to reading the dashboard.</li>
+<li>A short outbound link section for the launch-series Substack posts.</li>
 </ul>
 </section>
 <section id="required-sections" class="level2">
 <h2 class="anchored" data-anchor-id="required-sections">Required sections</h2>
 <p>The dashboard needs these sections or tabs:</p>
 <ul>
-<li>Start here: thesis, claim boundary, model status and interpretation rules.</li>
-<li>Post guide / reading map: each public post mapped to the corresponding Quarto section, Streamlit module, GitHub Pages card, static visual and dynamic visual.</li>
-<li>Current state: current New Zealand reform pathway, public project status, static table and static diagram.</li>
-<li>Reference scenarios: precomputed model-generated indices and dynamic charts.</li>
-<li>Microeconomics lab: marginal supply, capitation budget constraint, scheduled activity payment and co-payment barrier modules.</li>
-<li>Game theory lab: formulas-do-not-solve-games module, payoff/best-response explanation, controls/gaming-risk module and guided toy incentive simulation.</li>
+<li>Dashboard: thesis, claim boundary, model status and interpretation rules.</li>
+<li>Modelling: the reference scenarios, selected-game drill-down and key charts.</li>
+<li>Substack posts: outbound links to the launch-series reading path.</li>
 <li>Toy explainer: educational sliders and dynamic toy-output chart.</li>
 <li>Toy parameter dictionary: plain-English definitions for every slider, including what 0, 100 and a high value mean.</li>
-<li>Evidence and OIA: public evidence tracker table.</li>
-<li>Calibration readiness: table of data required before real calibration.</li>
 <li>Glossary: plain-English definitions of core terms.</li>
 </ul>
 </section>
@@ -230,13 +206,13 @@ ul.task-list li input[type="checkbox"] {
 <li>Static tables:
 <ul>
 <li>current reform pathway table;</li>
-<li>public project status table;</li>
-<li>evidence/OIA tracker table;</li>
-<li>calibration-readiness table.</li>
+<li>model summary table;</li>
+<li>scenario score table;</li>
+<li>toy parameter dictionary.</li>
 </ul></li>
 <li>Static diagram:
 <ul>
-<li>public explainer architecture diagram showing current reform pathway, tested gap, benchmark, toy explainer, evidence tracker and calibration readiness.</li>
+<li>public explainer architecture diagram showing current reform pathway, tested gap, benchmark and toy explainer.</li>
 </ul></li>
 <li>Dynamic figures:
 <ul>
@@ -245,7 +221,6 @@ ul.task-list li input[type="checkbox"] {
 <li>scenario score heatmap;</li>
 <li>selected scenario radar/profile chart;</li>
 <li>toy explainer output chart;</li>
-<li>project readiness chart.</li>
 <li>marginal supply simulation;</li>
 <li>co-payment/access barrier simulation;</li>
 <li>game-theory payoff or best-response simulation;</li>
@@ -255,7 +230,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="post-to-dashboard-crosswalk" class="level2">
 <h2 class="anchored" data-anchor-id="post-to-dashboard-crosswalk">Post-to-dashboard crosswalk</h2>
-<p>The dashboard must implement the public reading map defined in:</p>
+<p>The dashboard must surface the post links defined in:</p>
 <ul>
 <li><code>docs/public-site/post-surface-crosswalk-contract-v1.8.2.md</code></li>
 </ul>
@@ -319,26 +294,28 @@ ul.task-list li input[type="checkbox"] {
 <li>state that toy sliders are qualitative teaching levers, not estimated structural parameters;</li>
 <li>define the toy scale as 0 = absent/weak and 100 = strong/reliably implemented;</li>
 <li>use public slider labels that explain the policy lever rather than exposing only internal implementation names;</li>
-<li>state that index differences must not be converted into dollars saved, beds avoided, workforce numbers, ED reductions or implementation impacts.</li>
+<li>state that index differences must not be converted into dollars saved, beds avoided, workforce numbers, ED reductions or implementation impacts;</li>
+<li>include outbound links to the launch-series Substack posts.</li>
 </ul>
 <p>The dashboard must not:</p>
 <ul>
 <li>describe itself as a calibrated simulator;</li>
 <li>describe slider output as a forecast;</li>
 <li>imply precise fiscal savings, hospital-demand reductions, workforce effects or implementation impacts;</li>
-<li>imply government endorsement.</li>
+<li>imply government endorsement;</li>
+<li>present an in-app calibration/OIA tab.</li>
 </ul>
 </section>
 <section id="deployment-contract" class="level2">
 <h2 class="anchored" data-anchor-id="deployment-contract">Deployment contract</h2>
 <p>The dashboard must be deployable from Streamlit Community Cloud using:</p>
 <ul>
-<li>repository: <code>edithatogo/gtpcnz</code>;</li>
+<li>repository: <code>edithatogo/primary-care-funding-architecture</code>;</li>
 <li>branch: <code>main</code>;</li>
 <li>entrypoint: <code>streamlit_app.py</code>.</li>
 </ul>
 <p>The public URL is:</p>
-<p><a href="https://gtpcnz.streamlit.app/" class="uri">https://gtpcnz.streamlit.app/</a></p>
+<p><a href="https://primary-care-funding-architecture.streamlit.app/" class="uri">https://primary-care-funding-architecture.streamlit.app/</a></p>
 
 
 </section>
@@ -418,7 +395,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/edithatogo\.github\.io\/gtpcnz\/");
+        var filterRegex = new RegExp("https:\/\/edithatogo\.github\.io\/primary-care-funding-architecture\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -755,7 +732,7 @@ ul.task-list li input[type="checkbox"] {
       &nbsp;
     </div>
     <div class="nav-footer-right">
-<p>Public-data anchored benchmark; not linked-data calibrated or a patient-level forecast</p>
+<p>Generated with Quarto</p>
 </div>
   </div>
 </footer>

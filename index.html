@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -97,39 +132,19 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./reports/primary_care_architecture.html"> 
-<span class="menu-text">Public report</span></a>
+<span class="menu-text">Funding Architecture Report</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./docs/REPORTS-AND-DASHBOARD.html"> 
 <span class="menu-text">Dashboard</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./docs/calibration/model-card-v1.7.2.html"> 
-<span class="menu-text">Model card</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./docs/launch/claim-boundaries-v1.7.2.html"> 
-<span class="menu-text">Claim boundaries</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./docs/public-site/evidence-tracker-public-v1.8.1.html"> 
-<span class="menu-text">Evidence tracker</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./docs/public-site/calibration-readiness-page-v1.8.1.html"> 
-<span class="menu-text">Calibration readiness</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./docs/public-site/streamlit-dashboard-contract-v1.8.1.html"> 
-<span class="menu-text">Dashboard contract</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./docs/public-site/post-surface-crosswalk-contract-v1.8.2.html"> 
-<span class="menu-text">Post crosswalk</span></a>
+    <a class="nav-link" href="./docs/STREAMLIT-DEPLOYMENT.html"> 
+<span class="menu-text">Streamlit Deploy</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./README.html"> 
-<span class="menu-text">Repository guide</span></a>
+<span class="menu-text">Repository Guide</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -147,10 +162,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#visual-reading-map" id="toc-visual-reading-map" class="nav-link active" data-scroll-target="#visual-reading-map">Visual reading map</a></li>
-  <li><a href="#first-six-launch-posts" id="toc-first-six-launch-posts" class="nav-link" data-scroll-target="#first-six-launch-posts">First six launch posts</a></li>
-  <li><a href="#game-theory-extension" id="toc-game-theory-extension" class="nav-link" data-scroll-target="#game-theory-extension">Game-theory extension</a></li>
-  <li><a href="#public-surfaces" id="toc-public-surfaces" class="nav-link" data-scroll-target="#public-surfaces">Public surfaces</a></li>
+  <li><a href="#start-here" id="toc-start-here" class="nav-link active" data-scroll-target="#start-here">Start Here</a></li>
+  <li><a href="#current-status" id="toc-current-status" class="nav-link" data-scroll-target="#current-status">Current Status</a></li>
+  <li><a href="#local-commands" id="toc-local-commands" class="nav-link" data-scroll-target="#local-commands">Local Commands</a></li>
   </ul>
 </nav>
     </div>
@@ -160,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">GTPCNZ</h1>
-<p class="subtitle lead">Visual reading map for the public report, dashboard and launch posts</p>
+<p class="subtitle lead">Model, dashboard, and Substack reading path</p>
 </div>
 
 
@@ -177,324 +191,29 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<style>
-  :root {
-    --gtpcnz-ink: #17212b;
-    --gtpcnz-muted: #5f6b7a;
-    --gtpcnz-surface: #ffffff;
-    --gtpcnz-surface-alt: #f6f1e8;
-    --gtpcnz-border: rgba(23, 33, 43, 0.12);
-    --gtpcnz-accent: #0f766e;
-    --gtpcnz-accent-2: #a16207;
-    --gtpcnz-accent-3: #7c3aed;
-  }
-
-  .gtpcnz-hero {
-    background: linear-gradient(135deg, rgba(15, 118, 110, 0.12), rgba(161, 98, 7, 0.10));
-    border: 1px solid var(--gtpcnz-border);
-    border-radius: 1.5rem;
-    padding: 2rem;
-    box-shadow: 0 18px 50px rgba(23, 33, 43, 0.08);
-  }
-
-  .gtpcnz-kicker {
-    color: var(--gtpcnz-accent);
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-  }
-
-  .gtpcnz-title {
-    margin: 0;
-    font-size: clamp(2rem, 4vw, 3.25rem);
-    line-height: 1.02;
-    color: var(--gtpcnz-ink);
-  }
-
-  .gtpcnz-lead {
-    max-width: 70ch;
-    font-size: 1.08rem;
-    color: var(--gtpcnz-muted);
-    margin: 1rem 0 1.2rem;
-  }
-
-  .gtpcnz-caveat {
-    max-width: 78ch;
-    margin: 1rem 0 1.25rem;
-    padding: 1rem 1.1rem;
-    border-left: 4px solid var(--gtpcnz-accent-2);
-    background: rgba(161, 98, 7, 0.08);
-    border-radius: 0.75rem;
-    color: var(--gtpcnz-ink);
-  }
-
-  .gtpcnz-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin: 1.2rem 0 0.75rem;
-  }
-
-  .gtpcnz-pill-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1rem;
-  }
-
-  .gtpcnz-pill,
-  .gtpcnz-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    border-radius: 999px;
-    padding: 0.35rem 0.7rem;
-    font-size: 0.82rem;
-    font-weight: 700;
-    border: 1px solid var(--gtpcnz-border);
-    background: rgba(255, 255, 255, 0.82);
-    color: var(--gtpcnz-ink);
-  }
-
-  .gtpcnz-section {
-    margin-top: 2rem;
-  }
-
-  .gtpcnz-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-
-  .gtpcnz-card {
-    background: var(--gtpcnz-surface);
-    border: 1px solid var(--gtpcnz-border);
-    border-radius: 1.25rem;
-    padding: 1rem 1rem 1.05rem;
-    box-shadow: 0 12px 24px rgba(23, 33, 43, 0.04);
-    min-height: 100%;
-  }
-
-  .gtpcnz-card h3,
-  .gtpcnz-card h4 {
-    margin-top: 0.75rem;
-    margin-bottom: 0.5rem;
-    color: var(--gtpcnz-ink);
-  }
-
-  .gtpcnz-card p {
-    color: var(--gtpcnz-muted);
-    margin-bottom: 0.75rem;
-  }
-
-  .gtpcnz-card .gtpcnz-status {
-    background: var(--gtpcnz-surface-alt);
-  }
-
-  .gtpcnz-card .btn {
-    margin-right: 0.45rem;
-    margin-top: 0.15rem;
-  }
-
-  .gtpcnz-card .gtpcnz-meta {
-    font-size: 0.92rem;
-    color: var(--gtpcnz-muted);
-    margin-bottom: 0.75rem;
-  }
-
-  .gtpcnz-span-2 {
-    grid-column: span 2;
-  }
-
-  .gtpcnz-note {
-    color: var(--gtpcnz-muted);
-    margin-top: 0.4rem;
-    font-size: 0.96rem;
-  }
-
-  @media (max-width: 900px) {
-    .gtpcnz-span-2 {
-      grid-column: span 1;
-    }
-  }
-</style>
-<div class="gtpcnz-hero">
-<div class="gtpcnz-kicker">
-Public reading map
-</div>
-<h1 class="gtpcnz-title">
-GTPCNZ visual gallery
-</h1>
-<p class="gtpcnz-lead">
-GTPCNZ is the public reporting layer for a public-data anchored benchmark about primary care funding in Aotearoa New Zealand. Use this page as the first screen: choose the report, the dashboard, or the specific launch post that answers your question.
-</p>
-<div class="gtpcnz-caveat">
-<pre><code>This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.</code></pre>
-</div>
-<div class="gtpcnz-actions">
-<pre><code>&lt;a class="btn btn-primary btn-lg" href="reports/primary_care_architecture.qmd"&gt;Read the public report&lt;/a&gt;
-&lt;a class="btn btn-outline-primary btn-lg" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener"&gt;Open the dashboard&lt;/a&gt;
-&lt;a class="btn btn-outline-secondary btn-lg" href="docs/REPORTS-AND-DASHBOARD.md"&gt;Read the dashboard guide&lt;/a&gt;</code></pre>
-</div>
-<div class="gtpcnz-pill-row" aria-label="status labels">
-<pre><code>&lt;span class="gtpcnz-pill"&gt;Conceptual&lt;/span&gt;
-&lt;span class="gtpcnz-pill"&gt;Toy&lt;/span&gt;
-&lt;span class="gtpcnz-pill"&gt;Model-generated index&lt;/span&gt;
-&lt;span class="gtpcnz-pill"&gt;Evidence readiness&lt;/span&gt;
-&lt;span class="gtpcnz-pill"&gt;Calibration readiness&lt;/span&gt;</code></pre>
-</div>
-</div>
-<section id="visual-reading-map" class="level2">
-<h2 class="anchored" data-anchor-id="visual-reading-map">Visual reading map</h2>
-<div class="gtpcnz-grid">
-<div class="gtpcnz-card">
-<pre><code>&lt;span class="gtpcnz-status"&gt;Conceptual&lt;/span&gt;
-&lt;h3&gt;Argument map and thesis&lt;/h3&gt;
-&lt;p&gt;Read the executive summary, controls stack and claim boundary first.&lt;/p&gt;
-&lt;p class="gtpcnz-meta"&gt;Quarto: public report overview and thesis sections.&lt;/p&gt;
-&lt;a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd"&gt;Report&lt;/a&gt;
-&lt;a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener"&gt;Dashboard&lt;/a&gt;</code></pre>
-</div>
-<div class="gtpcnz-card">
-<pre><code>&lt;span class="gtpcnz-status"&gt;Conceptual&lt;/span&gt;
-&lt;h3&gt;Current reform pathway&lt;/h3&gt;
-&lt;p&gt;Compare the F0/current reform comparator with the proposed pathway.&lt;/p&gt;
-&lt;p class="gtpcnz-meta"&gt;Quarto: current reform comparator section.&lt;/p&gt;
-&lt;a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd"&gt;Report&lt;/a&gt;
-&lt;a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener"&gt;Dashboard&lt;/a&gt;</code></pre>
-</div>
-<div class="gtpcnz-card">
-<pre><code>&lt;span class="gtpcnz-status"&gt;Model-generated index&lt;/span&gt;
-&lt;h3&gt;Scenario rank chart&lt;/h3&gt;
-&lt;p&gt;Use the model-generated scenario order as an index, not a forecast.&lt;/p&gt;
-&lt;p class="gtpcnz-meta"&gt;Quarto: scenario interpretation and results sections.&lt;/p&gt;
-&lt;a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd"&gt;Report&lt;/a&gt;
-&lt;a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener"&gt;Dashboard&lt;/a&gt;</code></pre>
-</div>
-<div class="gtpcnz-card">
-<pre><code>&lt;span class="gtpcnz-status"&gt;Evidence readiness&lt;/span&gt;
-&lt;h3&gt;Evidence tracker&lt;/h3&gt;
-&lt;p&gt;See what is sufficiently sourced, what still needs checking, and what remains provisional.&lt;/p&gt;
-&lt;p class="gtpcnz-meta"&gt;Public evidence tracker and supporting audit trail.&lt;/p&gt;
-&lt;a class="btn btn-sm btn-primary" href="docs/public-site/evidence-tracker-public-v1.8.1.md"&gt;Open tracker&lt;/a&gt;
-&lt;a class="btn btn-sm btn-outline-primary" href="reports/primary_care_architecture.qmd"&gt;Report&lt;/a&gt;</code></pre>
-</div>
-<div class="gtpcnz-card">
-<pre><code>&lt;span class="gtpcnz-status"&gt;Calibration readiness&lt;/span&gt;
-&lt;h3&gt;Calibration readiness&lt;/h3&gt;
-&lt;p&gt;Check what is ready for tighter modelling and what remains a public-data anchored benchmark.&lt;/p&gt;
-&lt;p class="gtpcnz-meta"&gt;Public calibration readiness page and model card.&lt;/p&gt;
-&lt;a class="btn btn-sm btn-primary" href="docs/public-site/calibration-readiness-page-v1.8.1.md"&gt;Open page&lt;/a&gt;
-&lt;a class="btn btn-sm btn-outline-primary" href="docs/calibration/model-card-v1.7.2.md"&gt;Model card&lt;/a&gt;</code></pre>
-</div>
-</div>
+<p>GTPCNZ is a public-facing reporting layer for the primary care funding architecture model. It translates the model into a readable website, reproducible Quarto report, and Streamlit surface that focuses on the modelling and dashboard views, then links to the Substack posts.</p>
+<p>Streamlit dashboard: https://primary-care-funding-architecture.streamlit.app/</p>
+<p>This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.</p>
+<section id="start-here" class="level2">
+<h2 class="anchored" data-anchor-id="start-here">Start Here</h2>
+<ul>
+<li><a href="./reports/primary_care_architecture.html">Read the funding architecture report</a></li>
+<li><a href="https://primary-care-funding-architecture.streamlit.app/">Open the Streamlit dashboard and modelling views</a></li>
+<li><a href="./docs/REPORTS-AND-DASHBOARD.html">Run the Streamlit dashboard locally</a></li>
+<li><a href="./docs/STREAMLIT-DEPLOYMENT.html">Deploy the Streamlit dashboard</a></li>
+<li><a href="./README.html">Review the repository guide</a></li>
+</ul>
 </section>
-<section id="first-six-launch-posts" class="level2">
-<h2 class="anchored" data-anchor-id="first-six-launch-posts">First six launch posts</h2>
-<div class="gtpcnz-grid">
-<div class="gtpcnz-card">
-<pre><code>&lt;span class="gtpcnz-status"&gt;Model-generated index&lt;/span&gt;
-&lt;h3&gt;01. Are we buying hospital growth by rationing cheaper care upstream?&lt;/h3&gt;
-&lt;p&gt;Quarto: executive summary; hospital spillover pathway; scenario interpretation.&lt;/p&gt;
-&lt;p class="gtpcnz-meta"&gt;Streamlit: Start here; Current state; Reference scenarios.&lt;/p&gt;
-&lt;a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd"&gt;Report&lt;/a&gt;
-&lt;a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener"&gt;Dashboard&lt;/a&gt;</code></pre>
-</div>
-<div class="gtpcnz-card">
-<pre><code>&lt;span class="gtpcnz-status"&gt;Toy&lt;/span&gt;
-&lt;h3&gt;02. Fee-for-service, capitation and blended funding&lt;/h3&gt;
-&lt;p&gt;Quarto: funding model explainer; formula appendix.&lt;/p&gt;
-&lt;p class="gtpcnz-meta"&gt;Streamlit: Funding models module; toy explainer.&lt;/p&gt;
-&lt;a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd"&gt;Report&lt;/a&gt;
-&lt;a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener"&gt;Dashboard&lt;/a&gt;</code></pre>
-</div>
-<div class="gtpcnz-card">
-<pre><code>&lt;span class="gtpcnz-status"&gt;Toy&lt;/span&gt;
-&lt;h3&gt;03. Marginal supply&lt;/h3&gt;
-&lt;p&gt;Quarto: microeconomics section.&lt;/p&gt;
-&lt;p class="gtpcnz-meta"&gt;Streamlit: Microeconomics lab.&lt;/p&gt;
-&lt;a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd"&gt;Report&lt;/a&gt;
-&lt;a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener"&gt;Dashboard&lt;/a&gt;</code></pre>
-</div>
-<div class="gtpcnz-card">
-<pre><code>&lt;span class="gtpcnz-status"&gt;Toy&lt;/span&gt;
-&lt;h3&gt;04. Why formulas do not solve games&lt;/h3&gt;
-&lt;p&gt;Quarto: game theory section; controls section.&lt;/p&gt;
-&lt;p class="gtpcnz-meta"&gt;Streamlit: Game theory lab.&lt;/p&gt;
-&lt;a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd"&gt;Report&lt;/a&gt;
-&lt;a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener"&gt;Dashboard&lt;/a&gt;</code></pre>
-</div>
-<div class="gtpcnz-card">
-<pre><code>&lt;span class="gtpcnz-status"&gt;Conceptual&lt;/span&gt;
-&lt;h3&gt;05. Current reform pathway&lt;/h3&gt;
-&lt;p&gt;Quarto: current reform comparator section.&lt;/p&gt;
-&lt;p class="gtpcnz-meta"&gt;Streamlit: Current state; reference scenarios.&lt;/p&gt;
-&lt;a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd"&gt;Report&lt;/a&gt;
-&lt;a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener"&gt;Dashboard&lt;/a&gt;</code></pre>
-</div>
-<div class="gtpcnz-card">
-<pre><code>&lt;span class="gtpcnz-status"&gt;Toy&lt;/span&gt;
-&lt;h3&gt;06. What I mean by uncapping primary care funding&lt;/h3&gt;
-&lt;p&gt;Quarto: controlled scheduled payment section.&lt;/p&gt;
-&lt;p class="gtpcnz-meta"&gt;Streamlit: Toy explainer; microeconomics lab.&lt;/p&gt;
-&lt;a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd"&gt;Report&lt;/a&gt;
-&lt;a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener"&gt;Dashboard&lt;/a&gt;</code></pre>
-</div>
-</div>
+<section id="current-status" class="level2">
+<h2 class="anchored" data-anchor-id="current-status">Current Status</h2>
+<p>This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.</p>
 </section>
-<section id="game-theory-extension" class="level2">
-<h2 class="anchored" data-anchor-id="game-theory-extension">Game-theory extension</h2>
-<div class="gtpcnz-grid">
-<div class="gtpcnz-card gtpcnz-span-2">
-<pre><code>&lt;span class="gtpcnz-status"&gt;Toy&lt;/span&gt;
-&lt;h3&gt;Later game-theory modules&lt;/h3&gt;
-&lt;p&gt;
-  Game-theory appendices and long-form posts need public companion modules. The public surfaces treat them as toy teaching simulations, not estimates.
-&lt;/p&gt;
-&lt;p class="gtpcnz-meta"&gt;
-  Themes: hospital salience and allocation game; capitation marginal-supply game; PHO function, friction and cherry-picking;
-  ACC, ambulance and urgent care; co-payments and equity; the 19 games map; hybrid game; game-informed MCDA.
-&lt;/p&gt;
-&lt;a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd"&gt;Report&lt;/a&gt;
-&lt;a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener"&gt;Dashboard&lt;/a&gt;</code></pre>
-</div>
-</div>
-</section>
-<section id="public-surfaces" class="level2">
-<h2 class="anchored" data-anchor-id="public-surfaces">Public surfaces</h2>
-<div class="gtpcnz-grid">
-<div class="gtpcnz-card">
-<pre><code>&lt;span class="gtpcnz-status"&gt;Conceptual&lt;/span&gt;
-&lt;h3&gt;Public report&lt;/h3&gt;
-&lt;p&gt;The main Quarto report explains the benchmark, caveat and reading path.&lt;/p&gt;
-&lt;a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd"&gt;Open report&lt;/a&gt;</code></pre>
-</div>
-<div class="gtpcnz-card">
-<pre><code>&lt;span class="gtpcnz-status"&gt;Toy&lt;/span&gt;
-&lt;h3&gt;Streamlit dashboard&lt;/h3&gt;
-&lt;p&gt;The interactive explainer and scenario dashboard live at the public URL.&lt;/p&gt;
-&lt;a class="btn btn-sm btn-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener"&gt;Open dashboard&lt;/a&gt;</code></pre>
-</div>
-<div class="gtpcnz-card">
-<pre><code>&lt;span class="gtpcnz-status"&gt;Evidence readiness&lt;/span&gt;
-&lt;h3&gt;Model card and tracker&lt;/h3&gt;
-&lt;p&gt;Use these to check what is supported by the current source base.&lt;/p&gt;
-&lt;a class="btn btn-sm btn-primary" href="docs/calibration/model-card-v1.7.2.md"&gt;Model card&lt;/a&gt;
-&lt;a class="btn btn-sm btn-outline-primary" href="docs/public-site/evidence-tracker-public-v1.8.1.md"&gt;Evidence tracker&lt;/a&gt;</code></pre>
-</div>
-<div class="gtpcnz-card">
-<pre><code>&lt;span class="gtpcnz-status"&gt;Calibration readiness&lt;/span&gt;
-&lt;h3&gt;Calibration readiness page&lt;/h3&gt;
-&lt;p&gt;Use this to separate mature model pieces from early benchmark work.&lt;/p&gt;
-&lt;a class="btn btn-sm btn-primary" href="docs/public-site/calibration-readiness-page-v1.8.1.md"&gt;Open page&lt;/a&gt;</code></pre>
-</div>
-</div>
-<p class="gtpcnz-note">
-Uncapped does not mean uncontrolled; it means scheduled, rules-based, audited, clinically governed and place-accountable.
-</p>
+<section id="local-commands" class="level2">
+<h2 class="anchored" data-anchor-id="local-commands">Local Commands</h2>
+<p>Render the website:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Run the dashboard:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">streamlit</span> run models/primarycare_model/app.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>
@@ -573,7 +292,7 @@ Uncapped does not mean uncontrolled; it means scheduled, rules-based, audited, c
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/edithatogo\.github\.io\/gtpcnz\/");
+        var filterRegex = new RegExp("https:\/\/edithatogo\.github\.io\/primary-care-funding-architecture\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -910,7 +629,7 @@ Uncapped does not mean uncontrolled; it means scheduled, rules-based, audited, c
       &nbsp;
     </div>
     <div class="nav-footer-right">
-<p>Public-data anchored benchmark; not linked-data calibrated or a patient-level forecast</p>
+<p>Generated with Quarto</p>
 </div>
   </div>
 </footer>
