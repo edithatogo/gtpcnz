@@ -97,19 +97,39 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../reports/primary_care_architecture.html"> 
-<span class="menu-text">Funding Architecture Report</span></a>
+<span class="menu-text">Public report</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../docs/REPORTS-AND-DASHBOARD.html"> 
 <span class="menu-text">Dashboard</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../docs/STREAMLIT-DEPLOYMENT.html"> 
-<span class="menu-text">Streamlit Deploy</span></a>
+    <a class="nav-link active" href="../../docs/calibration/model-card-v1.7.2.html" aria-current="page"> 
+<span class="menu-text">Model card</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/launch/claim-boundaries-v1.7.2.html"> 
+<span class="menu-text">Claim boundaries</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/public-site/evidence-tracker-public-v1.8.1.html"> 
+<span class="menu-text">Evidence tracker</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/public-site/calibration-readiness-page-v1.8.1.html"> 
+<span class="menu-text">Calibration readiness</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/public-site/streamlit-dashboard-contract-v1.8.1.html"> 
+<span class="menu-text">Dashboard contract</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/public-site/post-surface-crosswalk-contract-v1.8.2.html"> 
+<span class="menu-text">Post crosswalk</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../README.html"> 
-<span class="menu-text">Repository Guide</span></a>
+<span class="menu-text">Repository guide</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -127,7 +147,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#model-card-v1.7.2-public-data-anchored-primary-care-benchmark" id="toc-model-card-v1.7.2-public-data-anchored-primary-care-benchmark" class="nav-link active" data-scroll-target="#model-card-v1.7.2-public-data-anchored-primary-care-benchmark">Model card v1.7.2 — public-data anchored primary care benchmark</a>
+  <li><a href="#model-card-v1.7.2-public-data-anchored-primary-care-funding-benchmark" id="toc-model-card-v1.7.2-public-data-anchored-primary-care-funding-benchmark" class="nav-link active" data-scroll-target="#model-card-v1.7.2-public-data-anchored-primary-care-funding-benchmark">Model card v1.7.2: public-data anchored primary care funding benchmark</a>
   <ul class="collapse">
   <li><a href="#model-name" id="toc-model-name" class="nav-link" data-scroll-target="#model-name">Model name</a></li>
   <li><a href="#version" id="toc-version" class="nav-link" data-scroll-target="#version">Version</a></li>
@@ -139,7 +159,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#inputs" id="toc-inputs" class="nav-link" data-scroll-target="#inputs">Inputs</a></li>
   <li><a href="#outputs" id="toc-outputs" class="nav-link" data-scroll-target="#outputs">Outputs</a></li>
   <li><a href="#validation-status" id="toc-validation-status" class="nav-link" data-scroll-target="#validation-status">Validation status</a></li>
-  <li><a href="#completed-simulation-layers" id="toc-completed-simulation-layers" class="nav-link" data-scroll-target="#completed-simulation-layers">Completed simulation layers</a></li>
   <li><a href="#interpretation-rule" id="toc-interpretation-rule" class="nav-link" data-scroll-target="#interpretation-rule">Interpretation rule</a></li>
   </ul></li>
   </ul>
@@ -151,8 +170,8 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="model-card-v1.7.2-public-data-anchored-primary-care-benchmark" class="level1">
-<h1>Model card v1.7.2 — public-data anchored primary care benchmark</h1>
+<section id="model-card-v1.7.2-public-data-anchored-primary-care-funding-benchmark" class="level1">
+<h1>Model card v1.7.2: public-data anchored primary care funding benchmark</h1>
 <section id="model-name" class="level2">
 <h2 class="anchored" data-anchor-id="model-name">Model name</h2>
 <p>Public-data anchored benchmark for primary care funding architecture in Aotearoa New Zealand.</p>
@@ -167,7 +186,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Compare the relative logic of funding architectures.</li>
 <li>Identify which assumptions are load-bearing.</li>
 <li>Support public explanation, policy discussion, stakeholder validation and OIA/data planning.</li>
-<li>Preserve the public-data benchmark boundary while supporting future precision updates.</li>
+<li>Prepare the pathway for future empirical calibration.</li>
 </ul>
 </section>
 <section id="not-intended-for" class="level2">
@@ -182,11 +201,11 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="core-policy-question" class="level2">
 <h2 class="anchored" data-anchor-id="core-policy-question">Core policy question</h2>
-<p>Does a hybrid architecture — capitation for population responsibility plus an uncapped, scheduled, rules-based fee-for-service stream for eligible primary medical activity plus place-based accountability — allow lower-cost upstream care to expand safely before need becomes hospital demand?</p>
+<p>Does a hybrid architecture allow lower-cost upstream care to expand safely before need becomes hospital demand? In this model, hybrid means capitation for population responsibility plus an uncapped, scheduled, rules-based fee-for-service stream for eligible primary medical activity, with place-based accountability.</p>
 </section>
 <section id="strongest-counter-hypothesis" class="level2">
 <h2 class="anchored" data-anchor-id="strongest-counter-hypothesis">Strongest counter-hypothesis</h2>
-<p>The current reform pathway — capitation reweighting, access target, National Primary Care Dataset, digital access, urgent-care investment, PHO accountability and separate appropriations — may be sufficient to improve access without a new uncapped scheduled fee-for-service stream.</p>
+<p>The current reform pathway may be sufficient to improve access without a new uncapped scheduled fee-for-service stream. That pathway includes capitation reweighting, the access target, the National Primary Care Dataset, digital access, urgent-care investment, PHO accountability and separate appropriations.</p>
 </section>
 <section id="what-the-model-must-not-hide" class="level2">
 <h2 class="anchored" data-anchor-id="what-the-model-must-not-hide">What the model must not hide</h2>
@@ -214,15 +233,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="validation-status" class="level2">
 <h2 class="anchored" data-anchor-id="validation-status">Validation status</h2>
-<p>Public-data anchored benchmark. Not a linked-data calibrated or patient-level forecast.</p>
-</section>
-<section id="completed-simulation-layers" class="level2">
-<h2 class="anchored" data-anchor-id="completed-simulation-layers">Completed simulation layers</h2>
-<ul>
-<li><code>models/primarycare_model/abm.py</code> provides a completed public-data anchored agent-based layer for patient demand, provider capacity, scope rules, access, equity and gaming/fiscal-risk signals.</li>
-<li><code>models/primarycare_model/sd.py</code> provides a completed public-data anchored stock-flow layer for unmet need, primary-care capacity, ambulance resolution, hospital pressure and fiscal-pressure signals.</li>
-<li>Neither layer should be described as a patient-level predictive model unless linked data and validation evidence are added later.</li>
-</ul>
+<p>This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.</p>
 </section>
 <section id="interpretation-rule" class="level2">
 <h2 class="anchored" data-anchor-id="interpretation-rule">Interpretation rule</h2>
@@ -306,7 +317,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/edithatogo\.github\.io\/primary-care-funding-architecture\/");
+        var filterRegex = new RegExp("https:\/\/edithatogo\.github\.io\/gtpcnz\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -643,7 +654,7 @@ ul.task-list li input[type="checkbox"] {
       &nbsp;
     </div>
     <div class="nav-footer-right">
-<p>Generated with Quarto</p>
+<p>Public-data anchored benchmark; not linked-data calibrated or a patient-level forecast</p>
 </div>
   </div>
 </footer>

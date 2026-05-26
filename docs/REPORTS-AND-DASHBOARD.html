@@ -132,19 +132,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../reports/primary_care_architecture.html"> 
-<span class="menu-text">Funding Architecture Report</span></a>
+<span class="menu-text">Public report</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="../docs/REPORTS-AND-DASHBOARD.html" aria-current="page"> 
 <span class="menu-text">Dashboard</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../docs/STREAMLIT-DEPLOYMENT.html"> 
-<span class="menu-text">Streamlit Deploy</span></a>
+    <a class="nav-link" href="../docs/calibration/model-card-v1.7.2.html"> 
+<span class="menu-text">Model card</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../docs/launch/claim-boundaries-v1.7.2.html"> 
+<span class="menu-text">Claim boundaries</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../docs/public-site/evidence-tracker-public-v1.8.1.html"> 
+<span class="menu-text">Evidence tracker</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../docs/public-site/calibration-readiness-page-v1.8.1.html"> 
+<span class="menu-text">Calibration readiness</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../docs/public-site/streamlit-dashboard-contract-v1.8.1.html"> 
+<span class="menu-text">Dashboard contract</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../docs/public-site/post-surface-crosswalk-contract-v1.8.2.html"> 
+<span class="menu-text">Post crosswalk</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../README.html"> 
-<span class="menu-text">Repository Guide</span></a>
+<span class="menu-text">Repository guide</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -162,19 +182,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#gtpcnz-interactive-reporting-visualization-suite" id="toc-gtpcnz-interactive-reporting-visualization-suite" class="nav-link active" data-scroll-target="#gtpcnz-interactive-reporting-visualization-suite">GTPCNZ Interactive Reporting &amp; Visualization Suite</a>
+  <li><a href="#gtpcnz-reports-and-dashboard" id="toc-gtpcnz-reports-and-dashboard" class="nav-link active" data-scroll-target="#gtpcnz-reports-and-dashboard">GTPCNZ reports and dashboard</a>
   <ul class="collapse">
-  <li><a href="#quarto-report-reportsprimary_care_architecture.qmd" id="toc-quarto-report-reportsprimary_care_architecture.qmd" class="nav-link" data-scroll-target="#quarto-report-reportsprimary_care_architecture.qmd">1. Quarto Report: <code>reports/primary_care_architecture.qmd</code></a>
-  <ul class="collapse">
-  <li><a href="#how-to-render" id="toc-how-to-render" class="nav-link" data-scroll-target="#how-to-render">How to Render</a></li>
-  <li><a href="#design-philosophy" id="toc-design-philosophy" class="nav-link" data-scroll-target="#design-philosophy">Design Philosophy</a></li>
-  </ul></li>
-  <li><a href="#streamlit-dashboard-streamlit_app.py" id="toc-streamlit-dashboard-streamlit_app.py" class="nav-link" data-scroll-target="#streamlit-dashboard-streamlit_app.py">2. Streamlit Dashboard: <code>streamlit_app.py</code></a>
-  <ul class="collapse">
-  <li><a href="#how-to-run" id="toc-how-to-run" class="nav-link" data-scroll-target="#how-to-run">How to Run</a></li>
-  <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">Features</a></li>
-  </ul></li>
-  <li><a href="#technical-standards" id="toc-technical-standards" class="nav-link" data-scroll-target="#technical-standards">Technical Standards</a></li>
+  <li><a href="#public-report" id="toc-public-report" class="nav-link" data-scroll-target="#public-report">Public report</a></li>
+  <li><a href="#streamlit-dashboard" id="toc-streamlit-dashboard" class="nav-link" data-scroll-target="#streamlit-dashboard">Streamlit dashboard</a></li>
+  <li><a href="#public-claim-boundary" id="toc-public-claim-boundary" class="nav-link" data-scroll-target="#public-claim-boundary">Public claim boundary</a></li>
+  <li><a href="#plain-language-phrase" id="toc-plain-language-phrase" class="nav-link" data-scroll-target="#plain-language-phrase">Plain-language phrase</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -185,55 +198,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="gtpcnz-interactive-reporting-visualization-suite" class="level1">
-<h1>GTPCNZ Interactive Reporting &amp; Visualization Suite</h1>
-<p>Canonical Streamlit URL: https://primary-care-funding-architecture.streamlit.app/</p>
-<p>This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. The Streamlit surface now focuses on the modelling and dashboard views, then links readers to the Substack posts. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.</p>
-<p>This project includes a reproducible reporting layer and an interactive dashboard designed to make the primary care funding model accessible to both policy experts and non-specialist readers.</p>
-<section id="quarto-report-reportsprimary_care_architecture.qmd" class="level2">
-<h2 class="anchored" data-anchor-id="quarto-report-reportsprimary_care_architecture.qmd">1. Quarto Report: <code>reports/primary_care_architecture.qmd</code></h2>
-<p>The Quarto report is a reproducible document that combines technical thesis writing with live Python data analysis.</p>
-<section id="how-to-render" class="level3">
-<h3 class="anchored" data-anchor-id="how-to-render">How to Render</h3>
-<p>To generate the HTML or PDF version, ensure you have <a href="https://quarto.org/">Quarto</a> installed and run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render reports/primary_care_architecture.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="design-philosophy" class="level3">
-<h3 class="anchored" data-anchor-id="design-philosophy">Design Philosophy</h3>
+<section id="gtpcnz-reports-and-dashboard" class="level1">
+<h1>GTPCNZ reports and dashboard</h1>
+<p>GTPCNZ has two public reading surfaces: a Quarto report and a Streamlit dashboard.</p>
+<section id="public-report" class="level2">
+<h2 class="anchored" data-anchor-id="public-report">Public report</h2>
+<p>The public funding architecture report explains the funding architecture model. Read it with:</p>
 <ul>
-<li><strong>Narrative first:</strong> Explains the “Game Theory” of healthcare using relatable metaphors (e.g., video games, subscription services).</li>
-<li><strong>Traceable model outputs:</strong> Pulls directly from <code>outputs/full-parameterised-summary-results-v1.7.0.csv</code>.</li>
+<li><code>docs/calibration/model-card-v1.7.2.md</code></li>
+<li><code>docs/launch/claim-boundaries-v1.7.2.md</code></li>
+<li><code>docs/public-site/streamlit-dashboard-contract-v1.8.1.md</code></li>
+<li><code>docs/public-site/streamlit-dashboard-audit-v1.8.1.md</code></li>
+<li><code>docs/public-site/evidence-tracker-public-v1.8.1.md</code></li>
+<li><code>docs/public-site/calibration-readiness-page-v1.8.1.md</code></li>
 </ul>
 </section>
+<section id="streamlit-dashboard" class="level2">
+<h2 class="anchored" data-anchor-id="streamlit-dashboard">Streamlit dashboard</h2>
+<p>Public URL:</p>
+<p><a href="https://gtpcnz.streamlit.app/" class="uri">https://gtpcnz.streamlit.app/</a></p>
+<p>Entrypoint:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">streamlit</span> run streamlit_app.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The dashboard is an <strong>interactive explainer</strong>, not a calibrated simulator. It keeps two kinds of output separate:</p>
+<ol type="1">
+<li><strong>Reference scenarios</strong> loaded from <code>outputs/full-parameterised-summary-results-v1.7.0.csv</code>.</li>
+<li><strong>Toy explainer slider scores</strong> from a simple teaching formula.</li>
+</ol>
+<p>Do not describe the toy slider outputs as forecasts.</p>
 </section>
-<section id="streamlit-dashboard-streamlit_app.py" class="level2">
-<h2 class="anchored" data-anchor-id="streamlit-dashboard-streamlit_app.py">2. Streamlit Dashboard: <code>streamlit_app.py</code></h2>
-<p><strong>GTPCNZ</strong> is a public-data anchored benchmark and dashboard for comparing funding architecture scenarios and reading paths.</p>
-<section id="how-to-run" class="level3">
-<h3 class="anchored" data-anchor-id="how-to-run">How to Run</h3>
-<p>Ensure you have the dependencies installed:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Then launch the dashboard:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">streamlit</span> run streamlit_app.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="public-claim-boundary" class="level2">
+<h2 class="anchored" data-anchor-id="public-claim-boundary">Public claim boundary</h2>
+<p>Use this wording:</p>
+<blockquote class="blockquote">
+<p>This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.</p>
+</blockquote>
 </section>
-<section id="features" class="level3">
-<h3 class="anchored" data-anchor-id="features">Features</h3>
-<ul>
-<li><strong>Interactive Sliders:</strong> Adjust Capitation vs.&nbsp;FFS weights.</li>
-<li><strong>Educational Tooltips:</strong> Instant definitions for complex healthcare terms.</li>
-<li><strong>Real-time Plotting:</strong> Shows qualitative changes in model-generated supply and hospital-pressure index values.</li>
-<li><strong>Deployment-ready Entry Point:</strong> <code>streamlit_app.py</code> is the Streamlit Community Cloud entrypoint.</li>
-</ul>
-</section>
-</section>
-<section id="technical-standards" class="level2">
-<h2 class="anchored" data-anchor-id="technical-standards">Technical Standards</h2>
-<ul>
-<li><strong>Modularity:</strong> The dashboard leverages the existing project data structure.</li>
-<li><strong>Accessibility:</strong> Content is simplified without losing technical rigor.</li>
-<li><strong>Transparency:</strong> All visualisations are generated from traceable project outputs.</li>
-<li><strong>Automated Testing:</strong> <code>models/tests/test_app.py</code> uses Streamlit’s native <code>AppTest</code> API.</li>
-</ul>
+<section id="plain-language-phrase" class="level2">
+<h2 class="anchored" data-anchor-id="plain-language-phrase">Plain-language phrase</h2>
+<blockquote class="blockquote">
+<p>Uncapped does not mean uncontrolled; it means scheduled, rules-based, audited, clinically governed and place-accountable.</p>
+</blockquote>
 
 
 </section>
@@ -313,7 +317,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/edithatogo\.github\.io\/primary-care-funding-architecture\/");
+        var filterRegex = new RegExp("https:\/\/edithatogo\.github\.io\/gtpcnz\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -650,7 +654,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       &nbsp;
     </div>
     <div class="nav-footer-right">
-<p>Generated with Quarto</p>
+<p>Public-data anchored benchmark; not linked-data calibrated or a patient-level forecast</p>
 </div>
   </div>
 </footer>

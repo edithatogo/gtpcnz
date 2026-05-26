@@ -132,19 +132,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../reports/primary_care_architecture.html"> 
-<span class="menu-text">Funding Architecture Report</span></a>
+<span class="menu-text">Public report</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../docs/REPORTS-AND-DASHBOARD.html"> 
 <span class="menu-text">Dashboard</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../docs/STREAMLIT-DEPLOYMENT.html" aria-current="page"> 
-<span class="menu-text">Streamlit Deploy</span></a>
+    <a class="nav-link" href="../docs/calibration/model-card-v1.7.2.html"> 
+<span class="menu-text">Model card</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../docs/launch/claim-boundaries-v1.7.2.html"> 
+<span class="menu-text">Claim boundaries</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../docs/public-site/evidence-tracker-public-v1.8.1.html"> 
+<span class="menu-text">Evidence tracker</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../docs/public-site/calibration-readiness-page-v1.8.1.html"> 
+<span class="menu-text">Calibration readiness</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../docs/public-site/streamlit-dashboard-contract-v1.8.1.html"> 
+<span class="menu-text">Dashboard contract</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../docs/public-site/post-surface-crosswalk-contract-v1.8.2.html"> 
+<span class="menu-text">Post crosswalk</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../README.html"> 
-<span class="menu-text">Repository Guide</span></a>
+<span class="menu-text">Repository guide</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -181,9 +201,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="streamlit-deployment" class="level1">
 <h1>Streamlit Deployment</h1>
-<p>Canonical Streamlit URL: https://primary-care-funding-architecture.streamlit.app/</p>
-<p>This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. The dashboard surfaces the modelling views and links out to the Substack post sequence. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.</p>
 <p>GTPCNZ is prepared for Streamlit Community Cloud.</p>
+<p>Public app URL:</p>
+<p><a href="https://gtpcnz.streamlit.app/" class="uri">https://gtpcnz.streamlit.app/</a></p>
 <section id="entrypoint" class="level2">
 <h2 class="anchored" data-anchor-id="entrypoint">Entrypoint</h2>
 <p>Use:</p>
@@ -208,7 +228,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="community-cloud-settings" class="level2">
 <h2 class="anchored" data-anchor-id="community-cloud-settings">Community Cloud Settings</h2>
 <ul>
-<li>Repository: <code>edithatogo/primary-care-funding-architecture</code></li>
+<li>Repository: <code>edithatogo/gtpcnz</code></li>
 <li>Branch: <code>main</code></li>
 <li>Main file path: <code>streamlit_app.py</code></li>
 <li>Python version: <code>3.11</code></li>
@@ -216,7 +236,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="caveat" class="level2">
 <h2 class="anchored" data-anchor-id="caveat">Caveat</h2>
-<p>The dashboard is a public-data anchored benchmark and educational explainer. It is not a linked-data calibrated or patient-level forecast.</p>
+<p>The dashboard is an educational explainer. It is not a calibrated simulator, linked-data calibrated policy forecast, or patient-level forecast.</p>
+<blockquote class="blockquote">
+<p>This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.</p>
+</blockquote>
 
 
 </section>
@@ -296,7 +319,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/edithatogo\.github\.io\/primary-care-funding-architecture\/");
+        var filterRegex = new RegExp("https:\/\/edithatogo\.github\.io\/gtpcnz\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -633,7 +656,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       &nbsp;
     </div>
     <div class="nav-footer-right">
-<p>Generated with Quarto</p>
+<p>Public-data anchored benchmark; not linked-data calibrated or a patient-level forecast</p>
 </div>
   </div>
 </footer>

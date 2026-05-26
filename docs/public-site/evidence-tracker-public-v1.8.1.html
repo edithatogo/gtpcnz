@@ -97,19 +97,39 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../reports/primary_care_architecture.html"> 
-<span class="menu-text">Funding Architecture Report</span></a>
+<span class="menu-text">Public report</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../docs/REPORTS-AND-DASHBOARD.html"> 
 <span class="menu-text">Dashboard</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../docs/STREAMLIT-DEPLOYMENT.html"> 
-<span class="menu-text">Streamlit Deploy</span></a>
+    <a class="nav-link" href="../../docs/calibration/model-card-v1.7.2.html"> 
+<span class="menu-text">Model card</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/launch/claim-boundaries-v1.7.2.html"> 
+<span class="menu-text">Claim boundaries</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../docs/public-site/evidence-tracker-public-v1.8.1.html" aria-current="page"> 
+<span class="menu-text">Evidence tracker</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/public-site/calibration-readiness-page-v1.8.1.html"> 
+<span class="menu-text">Calibration readiness</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/public-site/streamlit-dashboard-contract-v1.8.1.html"> 
+<span class="menu-text">Dashboard contract</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/public-site/post-surface-crosswalk-contract-v1.8.2.html"> 
+<span class="menu-text">Post crosswalk</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../README.html"> 
-<span class="menu-text">Repository Guide</span></a>
+<span class="menu-text">Repository guide</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -232,7 +252,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Source CSVs: <code>docs/audit/oia-request-tracker.csv</code> and <code>data/evidence/oia_request_tracker.csv</code>.</p>
 <section id="interpretation" class="level2">
 <h2 class="anchored" data-anchor-id="interpretation">Interpretation</h2>
-<p>OIA responses and linked administrative data are needed before model outputs can be interpreted as linked-data calibrated estimates. The current benchmark is anchored to public data but remains an explanatory scenario benchmark.</p>
+<p>OIA responses and linked administrative data are needed before model outputs can be interpreted as calibrated estimates.</p>
 
 
 </section>
@@ -312,7 +332,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/edithatogo\.github\.io\/primary-care-funding-architecture\/");
+        var filterRegex = new RegExp("https:\/\/edithatogo\.github\.io\/gtpcnz\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -649,7 +669,7 @@ ul.task-list li input[type="checkbox"] {
       &nbsp;
     </div>
     <div class="nav-footer-right">
-<p>Generated with Quarto</p>
+<p>Public-data anchored benchmark; not linked-data calibrated or a patient-level forecast</p>
 </div>
   </div>
 </footer>

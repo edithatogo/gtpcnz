@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>streamlit-dashboard-contract-v1.8.1 – GTPCNZ</title>
+<title>model-dashboard-hardening-spec-v1.8.1 – GTPCNZ</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -120,7 +120,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Calibration readiness</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../../docs/public-site/streamlit-dashboard-contract-v1.8.1.html" aria-current="page"> 
+    <a class="nav-link" href="../../docs/public-site/streamlit-dashboard-contract-v1.8.1.html"> 
 <span class="menu-text">Dashboard contract</span></a>
   </li>  
   <li class="nav-item">
@@ -147,17 +147,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#streamlit-dashboard-content-and-presentation-contract-v1.8.1" id="toc-streamlit-dashboard-content-and-presentation-contract-v1.8.1" class="nav-link active" data-scroll-target="#streamlit-dashboard-content-and-presentation-contract-v1.8.1">Streamlit dashboard content and presentation contract v1.8.1</a>
+  <li><a href="#model-and-dashboard-hardening-spec-v1.8.1" id="toc-model-and-dashboard-hardening-spec-v1.8.1" class="nav-link active" data-scroll-target="#model-and-dashboard-hardening-spec-v1.8.1">Model and dashboard hardening spec v1.8.1</a>
   <ul class="collapse">
   <li><a href="#purpose" id="toc-purpose" class="nav-link" data-scroll-target="#purpose">Purpose</a></li>
-  <li><a href="#audience" id="toc-audience" class="nav-link" data-scroll-target="#audience">Audience</a></li>
-  <li><a href="#required-first-screen-content" id="toc-required-first-screen-content" class="nav-link" data-scroll-target="#required-first-screen-content">Required first-screen content</a></li>
-  <li><a href="#required-sections" id="toc-required-sections" class="nav-link" data-scroll-target="#required-sections">Required sections</a></li>
-  <li><a href="#required-current-state-information" id="toc-required-current-state-information" class="nav-link" data-scroll-target="#required-current-state-information">Required current-state information</a></li>
-  <li><a href="#required-visual-and-tabular-material" id="toc-required-visual-and-tabular-material" class="nav-link" data-scroll-target="#required-visual-and-tabular-material">Required visual and tabular material</a></li>
-  <li><a href="#post-to-dashboard-crosswalk" id="toc-post-to-dashboard-crosswalk" class="nav-link" data-scroll-target="#post-to-dashboard-crosswalk">Post-to-dashboard crosswalk</a></li>
-  <li><a href="#wording-constraints" id="toc-wording-constraints" class="nav-link" data-scroll-target="#wording-constraints">Wording constraints</a></li>
-  <li><a href="#deployment-contract" id="toc-deployment-contract" class="nav-link" data-scroll-target="#deployment-contract">Deployment contract</a></li>
+  <li><a href="#required-changes" id="toc-required-changes" class="nav-link" data-scroll-target="#required-changes">Required changes</a></li>
+  <li><a href="#acceptance-criteria" id="toc-acceptance-criteria" class="nav-link" data-scroll-target="#acceptance-criteria">Acceptance criteria</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -168,177 +162,34 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="streamlit-dashboard-content-and-presentation-contract-v1.8.1" class="level1">
-<h1>Streamlit dashboard content and presentation contract v1.8.1</h1>
+<section id="model-and-dashboard-hardening-spec-v1.8.1" class="level1">
+<h1>Model and dashboard hardening spec v1.8.1</h1>
 <section id="purpose" class="level2">
 <h2 class="anchored" data-anchor-id="purpose">Purpose</h2>
-<p>The Streamlit dashboard must be readable by a general audience and safe for policy, research and public communication. It is an explainer for a public-data anchored benchmark, not a calibrated simulator.</p>
+<p>Make the GTPCNZ public dashboard and GitHub Pages site clear about what the model can and cannot do.</p>
 </section>
-<section id="audience" class="level2">
-<h2 class="anchored" data-anchor-id="audience">Audience</h2>
-<p>The primary audience is an interested public reader, journalist, policy stakeholder, clinician, public servant or reviewer who has not read the full project.</p>
-<p>The dashboard should not assume that the reader already understands capitation, fee-for-service, PHOs, NPCD, OIA, calibration or model indices.</p>
+<section id="required-changes" class="level2">
+<h2 class="anchored" data-anchor-id="required-changes">Required changes</h2>
+<ol type="1">
+<li>Present the dashboard as an <strong>explainer</strong>, not a forecast simulator.</li>
+<li>Separate reference scenario outputs from toy slider scores.</li>
+<li>Render model card and claim boundaries on GitHub Pages.</li>
+<li>Render evidence tracker and calibration-readiness pages.</li>
+<li>Rewrite the public report so the current reform pathway is the comparator.</li>
+<li>Add source-confidence labels to the public report sections.</li>
+<li>Add tests that enforce the caveat: public-data anchored benchmark, not linked-data calibrated and not a patient-level forecast.</li>
+</ol>
 </section>
-<section id="required-first-screen-content" class="level2">
-<h2 class="anchored" data-anchor-id="required-first-screen-content">Required first-screen content</h2>
-<p>The first screen needs:</p>
+<section id="acceptance-criteria" class="level2">
+<h2 class="anchored" data-anchor-id="acceptance-criteria">Acceptance criteria</h2>
 <ul>
-<li>A plain-English title identifying the dashboard as a funding architecture explainer.</li>
-<li>The full model caveat:</li>
+<li>The dashboard warning appears on first load.</li>
+<li>The sliders are described as toy/explainer levers.</li>
+<li>Reference scenario charts are labelled as model-generated indices.</li>
+<li>The public report says results are not observed outcomes.</li>
+<li>Quarto renders model card, claim boundaries, evidence tracker and calibration-readiness pages.</li>
+<li>Tests pass.</li>
 </ul>
-<blockquote class="blockquote">
-<p>This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.</p>
-</blockquote>
-<ul>
-<li>A short reader guide explaining the difference between reference scenarios and toy slider settings.</li>
-<li>A short guide to reading the dashboard.</li>
-</ul>
-</section>
-<section id="required-sections" class="level2">
-<h2 class="anchored" data-anchor-id="required-sections">Required sections</h2>
-<p>The dashboard needs these sections or tabs:</p>
-<ul>
-<li>Start here: thesis, claim boundary, model status and interpretation rules.</li>
-<li>Post guide / reading map: each public post mapped to the corresponding Quarto section, Streamlit module, GitHub Pages card, static visual and dynamic visual.</li>
-<li>Current state: current New Zealand reform pathway, public project status, static table and static diagram.</li>
-<li>Reference scenarios: precomputed model-generated indices and dynamic charts.</li>
-<li>Microeconomics lab: marginal supply, capitation budget constraint, scheduled activity payment and co-payment barrier modules.</li>
-<li>Game theory lab: formulas-do-not-solve-games module, payoff/best-response explanation, controls/gaming-risk module and guided toy incentive simulation.</li>
-<li>Toy explainer: educational sliders and dynamic toy-output chart.</li>
-<li>Toy parameter dictionary: plain-English definitions for every slider, including what 0, 100 and a high value mean.</li>
-<li>Evidence and OIA: public evidence tracker table.</li>
-<li>Calibration readiness: table of data required before real calibration.</li>
-<li>Glossary: plain-English definitions of core terms.</li>
-</ul>
-</section>
-<section id="required-current-state-information" class="level2">
-<h2 class="anchored" data-anchor-id="required-current-state-information">Required current-state information</h2>
-<p>The current-state section must explain that the current reform pathway is the comparator, not a straw man. It should cover:</p>
-<ul>
-<li>capitation reweighting;</li>
-<li>primary care access target;</li>
-<li>National Primary Care Dataset;</li>
-<li>digital access and telehealth;</li>
-<li>urgent and after-hours care;</li>
-<li>PHO accountability and commissioning.</li>
-</ul>
-</section>
-<section id="required-visual-and-tabular-material" class="level2">
-<h2 class="anchored" data-anchor-id="required-visual-and-tabular-material">Required visual and tabular material</h2>
-<p>The dashboard must mix static and dynamic material:</p>
-<ul>
-<li>Static tables:
-<ul>
-<li>current reform pathway table;</li>
-<li>public project status table;</li>
-<li>evidence/OIA tracker table;</li>
-<li>calibration-readiness table.</li>
-</ul></li>
-<li>Static diagram:
-<ul>
-<li>public explainer architecture diagram showing current reform pathway, tested gap, benchmark, toy explainer, evidence tracker and calibration readiness.</li>
-</ul></li>
-<li>Dynamic figures:
-<ul>
-<li>reference scenario viability chart;</li>
-<li>reference scenario supply-generation versus hospital-pressure scatter plot;</li>
-<li>scenario score heatmap;</li>
-<li>selected scenario radar/profile chart;</li>
-<li>toy explainer output chart;</li>
-<li>project readiness chart.</li>
-<li>marginal supply simulation;</li>
-<li>co-payment/access barrier simulation;</li>
-<li>game-theory payoff or best-response simulation;</li>
-<li>gaming-risk frontier or controls-stack simulation.</li>
-</ul></li>
-</ul>
-</section>
-<section id="post-to-dashboard-crosswalk" class="level2">
-<h2 class="anchored" data-anchor-id="post-to-dashboard-crosswalk">Post-to-dashboard crosswalk</h2>
-<p>The dashboard must implement the public reading map defined in:</p>
-<ul>
-<li><code>docs/public-site/post-surface-crosswalk-contract-v1.8.2.md</code></li>
-</ul>
-<p>Minimum mappings:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Post</th>
-<th>Streamlit destination</th>
-<th>Required dynamic component</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>01 upstream rationing and hospital growth</td>
-<td>Start here; Current state; Reference scenarios</td>
-<td>Supply versus hospital-pressure plot</td>
-</tr>
-<tr class="even">
-<td>02 FFS/capitation/blended funding</td>
-<td>Funding models or Toy explainer</td>
-<td>Funding comparison toy module</td>
-</tr>
-<tr class="odd">
-<td>03 marginal supply</td>
-<td>Microeconomics lab</td>
-<td>Marginal supply simulation</td>
-</tr>
-<tr class="even">
-<td>04 formulas do not solve games</td>
-<td>Game theory lab</td>
-<td>Toy incentive game or best-response simulation</td>
-</tr>
-<tr class="odd">
-<td>05 current reform pathway</td>
-<td>Current state; Reference scenarios</td>
-<td>F0/current reform comparator selector</td>
-</tr>
-<tr class="even">
-<td>06 uncapping primary care funding</td>
-<td>Toy explainer; Microeconomics lab</td>
-<td>Activity/payment/control simulation</td>
-</tr>
-</tbody>
-</table>
-<p>Later game-theory posts and appendices that are referenced by the public surfaces must have a corresponding dashboard module or guided explainer. They must not remain only as off-dashboard background.</p>
-</section>
-<section id="wording-constraints" class="level2">
-<h2 class="anchored" data-anchor-id="wording-constraints">Wording constraints</h2>
-<p>The dashboard must:</p>
-<ul>
-<li>use “explainer”, “public-data anchored benchmark”, “reference scenario”, “toy explainer” and “model-generated index”;</li>
-<li>describe outputs as model-generated indices, not observed New Zealand outcomes;</li>
-<li>state that F0/current reform is the comparator;</li>
-<li>state that toy sliders do not rerun the full parameterised model;</li>
-<li>state that toy sliders are qualitative teaching levers, not estimated structural parameters;</li>
-<li>define the toy scale as 0 = absent/weak and 100 = strong/reliably implemented;</li>
-<li>use public slider labels that explain the policy lever rather than exposing only internal implementation names;</li>
-<li>state that index differences must not be converted into dollars saved, beds avoided, workforce numbers, ED reductions or implementation impacts.</li>
-</ul>
-<p>The dashboard must not:</p>
-<ul>
-<li>describe itself as a calibrated simulator;</li>
-<li>describe slider output as a forecast;</li>
-<li>imply precise fiscal savings, hospital-demand reductions, workforce effects or implementation impacts;</li>
-<li>imply government endorsement.</li>
-</ul>
-</section>
-<section id="deployment-contract" class="level2">
-<h2 class="anchored" data-anchor-id="deployment-contract">Deployment contract</h2>
-<p>The dashboard must be deployable from Streamlit Community Cloud using:</p>
-<ul>
-<li>repository: <code>edithatogo/gtpcnz</code>;</li>
-<li>branch: <code>main</code>;</li>
-<li>entrypoint: <code>streamlit_app.py</code>.</li>
-</ul>
-<p>The public URL is:</p>
-<p><a href="https://gtpcnz.streamlit.app/" class="uri">https://gtpcnz.streamlit.app/</a></p>
 
 
 </section>

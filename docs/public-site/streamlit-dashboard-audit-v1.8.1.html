@@ -97,19 +97,39 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../reports/primary_care_architecture.html"> 
-<span class="menu-text">Funding Architecture Report</span></a>
+<span class="menu-text">Public report</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../docs/REPORTS-AND-DASHBOARD.html"> 
 <span class="menu-text">Dashboard</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../docs/STREAMLIT-DEPLOYMENT.html"> 
-<span class="menu-text">Streamlit Deploy</span></a>
+    <a class="nav-link" href="../../docs/calibration/model-card-v1.7.2.html"> 
+<span class="menu-text">Model card</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/launch/claim-boundaries-v1.7.2.html"> 
+<span class="menu-text">Claim boundaries</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/public-site/evidence-tracker-public-v1.8.1.html"> 
+<span class="menu-text">Evidence tracker</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/public-site/calibration-readiness-page-v1.8.1.html"> 
+<span class="menu-text">Calibration readiness</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/public-site/streamlit-dashboard-contract-v1.8.1.html"> 
+<span class="menu-text">Dashboard contract</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/public-site/post-surface-crosswalk-contract-v1.8.2.html"> 
+<span class="menu-text">Post crosswalk</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../README.html"> 
-<span class="menu-text">Repository Guide</span></a>
+<span class="menu-text">Repository guide</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -146,8 +166,8 @@ ul.task-list li input[type="checkbox"] {
 <h1>Streamlit dashboard contract audit v1.8.1</h1>
 <section id="audit-conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="audit-conclusion">Audit conclusion</h2>
-<p>Status: historical pass for the fuller v1.8.1 dashboard concept; current simplified dashboard requires a narrower current-state audit.</p>
-<p>The current Streamlit dashboard is a simplified public-data anchored benchmark explainer. It exposes Dashboard and Modelling tabs, summary index metrics, model-generated game outputs, and links to the launch-series posts. Rows below that reference glossary tabs, current-state render helpers, toy-chart helpers, readiness charts, or other removed helper functions are retained as historical audit evidence, not as claims about the current app surface.</p>
+<p>Status: pass.</p>
+<p>The Streamlit dashboard satisfies the v1.8.1 content and presentation contract after the current-state, diagram, table and explanation updates.</p>
 </section>
 <section id="evidence-matrix" class="level2">
 <h2 class="anchored" data-anchor-id="evidence-matrix">Evidence matrix</h2>
@@ -167,125 +187,130 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td>First screen identifies the dashboard as an explainer</td>
-<td><code>models/primarycare_model/app.py</code> title: <code>GTPCNZ</code></td>
+<td><code>models/primarycare_model/app.py</code> title: <code>GTPCNZ: funding architecture explainer</code></td>
 <td>Pass</td>
 </tr>
 <tr class="even">
 <td>Full model caveat appears in the dashboard</td>
-<td>Current app text and metric help text identify outputs as model-generated indices, not observed outcomes</td>
-<td>Current simplified surface</td>
+<td><code>caveat_box()</code> renders the full caveat</td>
+<td>Pass</td>
 </tr>
 <tr class="odd">
 <td>Reader guide explains reference scenarios versus toy sliders</td>
-<td>Historical fuller dashboard helper: <code>render_reader_guide()</code></td>
-<td>Historical evidence</td>
+<td><code>render_reader_guide()</code></td>
+<td>Pass</td>
 </tr>
 <tr class="even">
 <td>Interpretation rules are visible</td>
-<td>Historical fuller dashboard helper: <code>render_interpretation_rules()</code></td>
-<td>Historical evidence</td>
+<td><code>render_interpretation_rules()</code></td>
+<td>Pass</td>
 </tr>
 <tr class="odd">
 <td>Current reform pathway is explained as comparator</td>
-<td>Historical fuller dashboard helpers: <code>render_current_state()</code> and <code>build_current_reform_table()</code></td>
-<td>Historical evidence</td>
+<td><code>render_current_state()</code> and <code>build_current_reform_table()</code></td>
+<td>Pass</td>
 </tr>
 <tr class="even">
 <td>Current state includes capitation, access target, NPCD, digital access, urgent care and PHO accountability</td>
-<td>Historical fuller dashboard helper: <code>build_current_reform_table()</code></td>
-<td>Historical evidence</td>
+<td><code>build_current_reform_table()</code></td>
+<td>Pass</td>
 </tr>
 <tr class="odd">
 <td>Static current-state table exists</td>
-<td>Historical fuller dashboard evidence: <code>st.dataframe(build_current_reform_table())</code></td>
-<td>Historical evidence</td>
+<td><code>st.dataframe(build_current_reform_table())</code></td>
+<td>Pass</td>
 </tr>
 <tr class="even">
 <td>Static project-status table exists</td>
-<td>Historical fuller dashboard helper: <code>build_public_status_table()</code></td>
-<td>Historical evidence</td>
+<td><code>build_public_status_table()</code></td>
+<td>Pass</td>
 </tr>
 <tr class="odd">
 <td>Static architecture diagram exists</td>
-<td>Historical fuller dashboard helper: <code>render_current_state_diagram()</code> used <code>st.graphviz_chart()</code></td>
-<td>Historical evidence</td>
+<td><code>render_current_state_diagram()</code> uses <code>st.graphviz_chart()</code></td>
+<td>Pass</td>
 </tr>
 <tr class="even">
 <td>Dynamic reference-scenario viability chart exists</td>
-<td>Historical fuller dashboard helper: <code>render_reference_viability()</code> used Plotly</td>
-<td>Historical evidence</td>
+<td><code>render_reference_viability()</code> uses Plotly</td>
+<td>Pass</td>
 </tr>
 <tr class="odd">
 <td>Dynamic supply-generation versus hospital-pressure chart exists</td>
-<td>Current app uses a Plotly scatter of access score and hospital-pressure index</td>
-<td>Current simplified surface</td>
+<td><code>render_reference_scatter()</code> uses Plotly</td>
+<td>Pass</td>
 </tr>
 <tr class="even">
 <td>Dynamic scenario score heatmap exists</td>
-<td>Historical fuller dashboard helper: <code>render_reference_heatmap()</code> used Plotly <code>px.imshow()</code></td>
-<td>Historical evidence</td>
+<td><code>render_reference_heatmap()</code> uses Plotly <code>px.imshow()</code></td>
+<td>Pass</td>
 </tr>
 <tr class="odd">
 <td>Dynamic selected scenario radar/profile chart exists</td>
-<td>Historical fuller dashboard helper: <code>render_scenario_profile_radar()</code> used Plotly <code>go.Scatterpolar()</code></td>
-<td>Historical evidence</td>
+<td><code>render_scenario_profile_radar()</code> uses Plotly <code>go.Scatterpolar()</code></td>
+<td>Pass</td>
 </tr>
 <tr class="even">
 <td>Dynamic toy explainer chart exists</td>
-<td>Historical fuller dashboard helper: <code>render_toy_chart()</code> used Plotly</td>
-<td>Historical evidence</td>
+<td><code>render_toy_chart()</code> uses Plotly</td>
+<td>Pass</td>
 </tr>
 <tr class="odd">
 <td>Dynamic project readiness chart exists</td>
-<td>Historical fuller dashboard helper: <code>render_readiness_chart()</code> used Plotly</td>
-<td>Historical evidence</td>
+<td><code>render_readiness_chart()</code> uses Plotly</td>
+<td>Pass</td>
 </tr>
 <tr class="even">
-<td>Dashboard and modelling sections exist</td>
-<td>Dashboard tab, Modelling tab and summary metrics</td>
+<td>Static/dynamic figure inventory exists</td>
+<td><code>render_figure_inventory()</code> lists static tables, static diagram and dynamic figures</td>
 <td>Pass</td>
 </tr>
 <tr class="odd">
-<td>Substack posts section exists</td>
-<td>Markdown links to the launch-series posts</td>
+<td>Evidence/OIA table exists</td>
+<td><code>cached_oia_tracker()</code> and Evidence &amp; OIA tab</td>
 <td>Pass</td>
 </tr>
 <tr class="even">
+<td>Calibration-readiness table exists</td>
+<td><code>build_calibration_readiness_table()</code> and Calibration readiness tab</td>
+<td>Pass</td>
+</tr>
+<tr class="odd">
 <td>Plain-English glossary exists</td>
-<td>Current simplified app retains the sidebar <code>Learn the 'Big Words'</code> expander; the historical fuller dashboard had a Glossary tab</td>
-<td>Current simplified surface</td>
+<td>Glossary tab and <code>Learn the 'Big Words'</code> expander</td>
+<td>Pass</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Toy sliders are not presented as forecast controls</td>
 <td>Sidebar and toy-explainer text say they are educational and do not rerun the full benchmark</td>
 <td>Pass</td>
 </tr>
-<tr class="even">
-<td>Toy parameter dictionary exists</td>
-<td>Historical fuller dashboard helper: <code>render_toy_parameter_dictionary()</code> presented public labels, health-economics meanings, high-value meanings and toy-output effects</td>
-<td>Historical evidence</td>
-</tr>
 <tr class="odd">
+<td>Toy parameter dictionary exists</td>
+<td><code>render_toy_parameter_dictionary()</code> presents public labels, health-economics meanings, high-value meanings and toy-output effects</td>
+<td>Pass</td>
+</tr>
+<tr class="even">
 <td>Toy slider scale is defined</td>
 <td>Sidebar says <code>0 means absent/weak; 100 means strong/reliably implemented</code></td>
 <td>Pass</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Toy labels are plain policy levers rather than unexplained internal names</td>
 <td><code>TOY_LEVER_DEFINITIONS</code> provides labels such as <code>Payment for extra primary care activity</code>, <code>Stable population-based base funding</code> and <code>Whole-population local accountability</code></td>
 <td>Pass</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Outputs are described as model-generated indices, not observed outcomes</td>
 <td>Reference chart captions and glossary</td>
 <td>Pass</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>No deprecated Streamlit <code>use_container_width</code> usage in app</td>
 <td>Regression test asserts absence</td>
 <td>Pass</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Public Streamlit URL is documented</td>
 <td>README, index, dashboard docs and deployment docs</td>
 <td>Pass</td>
@@ -387,7 +412,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/edithatogo\.github\.io\/primary-care-funding-architecture\/");
+        var filterRegex = new RegExp("https:\/\/edithatogo\.github\.io\/gtpcnz\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -724,7 +749,7 @@ ul.task-list li input[type="checkbox"] {
       &nbsp;
     </div>
     <div class="nav-footer-right">
-<p>Generated with Quarto</p>
+<p>Public-data anchored benchmark; not linked-data calibrated or a patient-level forecast</p>
 </div>
   </div>
 </footer>
