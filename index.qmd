@@ -160,7 +160,7 @@ subtitle: "Visual reading map for the public report, dashboard and launch posts"
   </div>
   <div class="gtpcnz-actions">
     <a class="btn btn-primary btn-lg" href="reports/primary_care_architecture.qmd">Read the public report</a>
-    <a class="btn btn-outline-primary btn-lg" href="https://primary-care-funding-architecture.streamlit.app/" target="_blank" rel="noopener">Open the dashboard</a>
+    <a class="btn btn-outline-primary btn-lg" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Open the dashboard</a>
     <a class="btn btn-outline-secondary btn-lg" href="docs/REPORTS-AND-DASHBOARD.md">Read the dashboard guide</a>
   </div>
   <div class="gtpcnz-pill-row" aria-label="status labels">
@@ -182,7 +182,7 @@ subtitle: "Visual reading map for the public report, dashboard and launch posts"
     <p class="gtpcnz-meta">Quarto: public report overview and thesis sections.</p>
     <a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd">Report</a>
     <a class="btn btn-sm btn-outline-primary" href="docs/launch/claim-boundaries-v1.7.2.html">Claim boundaries</a>
-    <a class="btn btn-sm btn-outline-primary" href="https://primary-care-funding-architecture.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
+    <a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
   </div>
   <div class="gtpcnz-card">
     <span class="gtpcnz-status">Conceptual</span>
@@ -190,7 +190,7 @@ subtitle: "Visual reading map for the public report, dashboard and launch posts"
     <p>Compare the F0/current reform comparator with the proposed pathway.</p>
     <p class="gtpcnz-meta">Quarto: current reform comparator section.</p>
     <a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd">Report</a>
-    <a class="btn btn-sm btn-outline-primary" href="https://primary-care-funding-architecture.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
+    <a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
   </div>
   <div class="gtpcnz-card">
     <span class="gtpcnz-status">Model-generated index</span>
@@ -198,7 +198,7 @@ subtitle: "Visual reading map for the public report, dashboard and launch posts"
     <p>Use the model-generated scenario order as an index, not a forecast.</p>
     <p class="gtpcnz-meta">Quarto: scenario interpretation and results sections.</p>
     <a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd">Report</a>
-    <a class="btn btn-sm btn-outline-primary" href="https://primary-care-funding-architecture.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
+    <a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
   </div>
   <div class="gtpcnz-card">
     <span class="gtpcnz-status">Evidence readiness</span>
@@ -227,7 +227,7 @@ subtitle: "Visual reading map for the public report, dashboard and launch posts"
     <p>Quarto: executive summary; hospital spillover pathway; scenario interpretation.</p>
     <p class="gtpcnz-meta">Streamlit: Start here; Current state; Reference scenarios.</p>
     <a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd">Report</a>
-    <a class="btn btn-sm btn-outline-primary" href="https://primary-care-funding-architecture.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
+    <a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
   </div>
   <div class="gtpcnz-card">
     <span class="gtpcnz-status">Toy</span>
@@ -235,7 +235,7 @@ subtitle: "Visual reading map for the public report, dashboard and launch posts"
     <p>Quarto: funding model explainer; formula appendix.</p>
     <p class="gtpcnz-meta">Streamlit: Funding models module; toy explainer.</p>
     <a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd">Report</a>
-    <a class="btn btn-sm btn-outline-primary" href="https://primary-care-funding-architecture.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
+    <a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
   </div>
   <div class="gtpcnz-card">
     <span class="gtpcnz-status">Toy</span>
@@ -243,7 +243,7 @@ subtitle: "Visual reading map for the public report, dashboard and launch posts"
     <p>Quarto: microeconomics section.</p>
     <p class="gtpcnz-meta">Streamlit: Microeconomics lab.</p>
     <a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd">Report</a>
-    <a class="btn btn-sm btn-outline-primary" href="https://primary-care-funding-architecture.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
+    <a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
   </div>
   <div class="gtpcnz-card">
     <span class="gtpcnz-status">Toy</span>
@@ -251,7 +251,7 @@ subtitle: "Visual reading map for the public report, dashboard and launch posts"
     <p>Quarto: game theory section; controls section.</p>
     <p class="gtpcnz-meta">Streamlit: Game theory lab.</p>
     <a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd">Report</a>
-    <a class="btn btn-sm btn-outline-primary" href="https://primary-care-funding-architecture.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
+    <a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
   </div>
   <div class="gtpcnz-card">
     <span class="gtpcnz-status">Conceptual</span>
@@ -259,7 +259,7 @@ subtitle: "Visual reading map for the public report, dashboard and launch posts"
     <p>Quarto: current reform comparator section.</p>
     <p class="gtpcnz-meta">Streamlit: Current state; reference scenarios.</p>
     <a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd">Report</a>
-    <a class="btn btn-sm btn-outline-primary" href="https://primary-care-funding-architecture.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
+    <a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
   </div>
   <div class="gtpcnz-card">
     <span class="gtpcnz-status">Toy</span>
@@ -267,7 +267,7 @@ subtitle: "Visual reading map for the public report, dashboard and launch posts"
     <p>Quarto: controlled scheduled payment section.</p>
     <p class="gtpcnz-meta">Streamlit: Toy explainer; microeconomics lab.</p>
     <a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd">Report</a>
-    <a class="btn btn-sm btn-outline-primary" href="https://primary-care-funding-architecture.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
+    <a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
   </div>
 </div>
 
@@ -285,7 +285,7 @@ subtitle: "Visual reading map for the public report, dashboard and launch posts"
       ACC, ambulance and urgent care; co-payments and equity; the 19 games map; hybrid game; game-informed MCDA.
     </p>
     <a class="btn btn-sm btn-primary" href="reports/primary_care_architecture.qmd">Report</a>
-    <a class="btn btn-sm btn-outline-primary" href="https://primary-care-funding-architecture.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
+    <a class="btn btn-sm btn-outline-primary" href="https://gtpcnz.streamlit.app/" target="_blank" rel="noopener">Dashboard</a>
   </div>
 </div>
 
