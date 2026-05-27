@@ -7,6 +7,7 @@ Current active tracks:
 - `043-concern-extraction-strict-validation_20260526`: extracts contracts, registries, validation boundaries and Streamlit UI bindings into typed layers. All 7 phases completed.
 - `048-equilibrium-solver-exploration_20260528`: decides whether to keep Nash as an educational heuristic or add a separate analytical solver lane.
 - `049-bleeding-edge-analytical-enhancements_20260528`: ranks additional inputs, subgroup analyses, secondary analyses, visualisations, and simulation modes worth promoting without breaking the public-data boundary.
+- `050-strict-quality-toolchain_20260528`: hardens type checking, dependency automation, coverage, property/mutation tests, profiling, security scans and GitHub enforcement.
 
 Completed subagent workstreams:
 

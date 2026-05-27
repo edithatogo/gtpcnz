@@ -1,0 +1,13 @@
+- [ ] Add a `basedpyright` strict config and decide the exact checked package surface.
+- [ ] Keep `mypy --strict` as a secondary gate until basedpyright has matched or exceeded it on this repo.
+- [ ] Add `ty check` as a non-blocking scheduled/manual canary.
+- [ ] Add `ruff` config and wire `ruff check` into local and CI gates.
+- [ ] Add coverage tooling and enforce at least `--cov-fail-under=90` for the model package, or document a ratchet if the first strict run falls short.
+- [ ] Add property-based tests using Hypothesis for contracts, registries, clamps, seeded stochastic paths, and engine invariants.
+- [ ] Add mutation testing with `mutmut` or equivalent for pure calculation and engine modules.
+- [ ] Add Scalene as a profiling dependency or tool command, then run and record a baseline profile for Streamlit-free calculation paths.
+- [ ] Add Renovate config and decide whether activation is via GitHub App or scheduled workflow.
+- [ ] Add `pip-audit` and CodeQL to CI.
+- [ ] Turn on or document GitHub security settings: Dependabot security updates, secret scanning where available, code scanning, branch rulesets, and required checks.
+- [ ] Update `scripts/dev_check.py` so local checks match the blocking CI gates.
+- [ ] Re-run full local gates and record the resulting quality score in Conductor state.
