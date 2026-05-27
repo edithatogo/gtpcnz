@@ -9,13 +9,51 @@ Streamlit dashboard: https://gtpcnz.streamlit.app/
 
 This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
 
-## Start Here
+## Visual reading map
 
-- [Read the funding architecture report](reports/primary_care_architecture.qmd)
-- [Open the Streamlit dashboard and modelling views](https://gtpcnz.streamlit.app/)
-- [Run the Streamlit dashboard locally](docs/REPORTS-AND-DASHBOARD.md)
-- [Deploy the Streamlit dashboard](docs/STREAMLIT-DEPLOYMENT.md)
-- [Review the repository guide](README.md)
+### GTPCNZ visual gallery
+
+- [Read the public report](reports/primary_care_architecture.qmd)
+- [Open the dashboard](https://gtpcnz.streamlit.app/)
+- [Read the dashboard guide](docs/REPORTS-AND-DASHBOARD.md)
+- [Review the model card and tracker](docs/calibration/model-card-v1.7.2.md)
+
+<a href="reports/primary_care_architecture.qmd">Read the public report</a>
+
+<a href="https://gtpcnz.streamlit.app/">Open the dashboard</a>
+
+## Public surfaces
+
+| Surface | Status | Purpose |
+|---|---|---|
+| Public report | Model-generated index | Argument map and thesis, Current reform pathway, Scenario rank chart |
+| Streamlit dashboard | Educational explainer | Dynamic educational explainer and live model lab |
+| Model card and tracker | Evidence readiness | Evidence tracker and claim-boundary controls |
+| Calibration readiness page | Calibration readiness | Data gaps and validation pathway |
+
+## First six launch posts
+
+1. 01. Are we buying hospital growth by rationing cheaper care upstream?
+2. 02. Fee-for-service, capitation and blended funding
+3. 03. Marginal supply
+4. 04. Why formulas do not solve games
+5. 05. Current reform pathway
+6. 06. What I mean by uncapping primary care funding
+
+## Visual modules
+
+- Argument map and thesis
+- Current reform pathway
+- Scenario rank chart
+- Evidence tracker
+- Calibration readiness
+- First six launch posts
+- Game-theory extension
+- Later game-theory modules
+
+Status labels used across the public surface: Conceptual, Educational explainer, Model-generated index, Evidence readiness, Calibration readiness.
+
+Uncapped does not mean uncontrolled; it means scheduled, rules-based, audited, clinically governed and place-accountable.
 
 ## Current Status
 
