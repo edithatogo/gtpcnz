@@ -42,7 +42,7 @@ FIRST_SIX_TITLES = [
 
 STATUS_LABELS = [
     "Conceptual",
-    "Toy",
+    "Educational explainer",
     "Model-generated index",
     "Evidence readiness",
     "Calibration readiness",

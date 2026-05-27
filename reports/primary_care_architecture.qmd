@@ -52,11 +52,11 @@ This section gives stable anchors for the first six public posts. It also keeps 
 | Post | Stable anchor | Main report surface | Dashboard surface | Status / caveat |
 |---|---|---|---|---|
 | 01 | [Post 01](#post-01) | Executive summary; comparator framing; scenario interpretation | Start here; Current state; Reference scenarios | Model-generated index, not an empirical outcome |
-| 02 | [Post 02](#post-02) | Funding model explainer; formula appendix | Funding models module; Toy explainer | Public-data benchmark, not a forecast |
+| 02 | [Post 02](#post-02) | Funding model explainer; formula appendix | Funding models module; Educational explainer | Public-data benchmark, not a forecast |
 | 03 | [Post 03](#post-03) | Marginal supply and the extra-contact viability threshold | Microeconomics lab | Static teaching diagram, not a measured curve |
 | 04 | [Post 04](#post-04) | Game theory, controls and gaming risk | Game theory lab | Strategic teaching diagram, not an estimate |
 | 05 | [Post 05](#post-05) | Current reform comparator and F0/current reform pathway | Current state; Reference scenarios | F0/current reform remains the comparator |
-| 06 | [Post 06](#post-06) | Controlled scheduled payment and uncapping logic | Toy explainer; Microeconomics lab | Model-generated index wording stays in place |
+| 06 | [Post 06](#post-06) | Controlled scheduled payment and uncapping logic | Educational explainer; Microeconomics lab | Model-generated index wording stays in place |
 
 ## Post 01. Are we buying hospital growth by rationing cheaper care upstream? {#post-01}
 
