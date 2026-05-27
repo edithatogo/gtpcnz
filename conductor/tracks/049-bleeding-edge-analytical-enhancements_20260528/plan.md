@@ -4,6 +4,7 @@
 - [ ] Decide which subgroup cuts are informative without becoming demographic overreach.
 - [ ] Select the first wave of secondary analyses and visualisations to implement.
 - [ ] Select the first wave of simulation enhancements to implement.
+- [ ] Prioritise the first implementation wave as subgroup stratification, sensitivity/decomposition, one dense visual package, and seeded cohort Monte Carlo.
 - [ ] Determine whether any solver upgrade belongs in this enhancement track or stays in the separate equilibrium-solver track.
 - [ ] Update Conductor state and any public docs only after the shortlist is final.
 - [ ] Run the relevant targeted tests after the shortlist is approved.
