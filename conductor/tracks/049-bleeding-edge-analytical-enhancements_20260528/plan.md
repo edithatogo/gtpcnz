@@ -1,0 +1,9 @@
+- [ ] Inventory the current public inputs, subgroup labels, and simulation surfaces already exposed in the app and docs.
+- [ ] Rank candidate additions using a simple MoSCoW or similar scheme.
+- [ ] Decide which additional inputs are safe and useful under the public-data boundary.
+- [ ] Decide which subgroup cuts are informative without becoming demographic overreach.
+- [ ] Select the first wave of secondary analyses and visualisations to implement.
+- [ ] Select the first wave of simulation enhancements to implement.
+- [ ] Determine whether any solver upgrade belongs in this enhancement track or stays in the separate equilibrium-solver track.
+- [ ] Update Conductor state and any public docs only after the shortlist is final.
+- [ ] Run the relevant targeted tests after the shortlist is approved.
