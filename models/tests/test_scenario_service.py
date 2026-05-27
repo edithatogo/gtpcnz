@@ -1,12 +1,13 @@
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
 from models.primarycare_model.scenario_service import (
     EXPECTED_SCENARIO_IDS,
-    ToySettings,
+    EducationalSettings,
     load_scenario_results,
-    score_toy_settings,
+    score_educational_settings,
     validate_scenario_results,
 )
 
@@ -60,9 +61,9 @@ def test_load_scenario_results_adds_claim_boundary():
     assert loaded["claim_boundary"].str.contains("not a patient-level forecast", regex=False).all()
 
 
-def test_score_toy_settings_returns_scores_in_range():
-    scores = score_toy_settings(
-        ToySettings(
+def test_score_educational_settings_returns_scores_in_range():
+    scores = score_educational_settings(
+        EducationalSettings(
             scheduled_benefit_level=60,
             capitation_support=70,
             place_accountability=70,
@@ -73,11 +74,31 @@ def test_score_toy_settings_returns_scores_in_range():
         )
     )
     assert set(scores) == {
-        "toy_supply_score",
-        "toy_governance_score",
-        "toy_equity_score",
-        "toy_hospital_pressure_score",
-        "toy_gaming_risk_score",
-        "toy_viability_score",
+        "educational_supply_score",
+        "educational_governance_score",
+        "educational_equity_score",
+        "educational_hospital_pressure_score",
+        "educational_gaming_risk_score",
+        "educational_viability_score",
     }
     assert all(0 <= value <= 100 for value in scores.values())
+
+
+def test_educational_supply_response_is_not_linear_in_scheduled_benefit():
+    values = [
+        score_educational_settings(
+            EducationalSettings(
+                scheduled_benefit_level=benefit,
+                capitation_support=70,
+                place_accountability=70,
+                audit_strength=80,
+                equity_protection=80,
+                scope_flexibility=60,
+                local_in_person_support=60,
+            )
+        )["educational_supply_score"]
+        for benefit in range(10, 91, 10)
+    ]
+    second_diff = np.diff(values, n=2)
+
+    assert np.max(np.abs(second_diff)) > 0.5

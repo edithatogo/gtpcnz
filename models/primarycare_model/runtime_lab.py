@@ -28,6 +28,15 @@ def clamp(value: float, lower: float = 0.0, upper: float = 100.0) -> float:
     return float(max(lower, min(upper, value)))
 
 
+def diminishing_return(value: float, rate: float = 2.4) -> float:
+    bounded = clamp(value, 0.0, 1.0)
+    return (1.0 - np.exp(-rate * bounded)) / (1.0 - np.exp(-rate))
+
+
+def strategic_response(value: float, threshold: float = 0.5, steepness: float = 6.0) -> float:
+    return 1.0 / (1.0 + np.exp(-steepness * (value - threshold)))
+
+
 @dataclass(frozen=True)
 class RuntimeScenario:
     scenario_id: str
