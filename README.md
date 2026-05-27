@@ -1,13 +1,13 @@
 # GTPCNZ
 
-[![CI](https://github.com/edithatogo/primary-care-funding-architecture/actions/workflows/ci.yml/badge.svg)](https://github.com/edithatogo/primary-care-funding-architecture/actions/workflows/ci.yml)
-[![Quarto Pages](https://github.com/edithatogo/primary-care-funding-architecture/actions/workflows/pages.yml/badge.svg)](https://github.com/edithatogo/primary-care-funding-architecture/actions/workflows/pages.yml)
+[![CI](https://github.com/edithatogo/gtpcnz/actions/workflows/ci.yml/badge.svg)](https://github.com/edithatogo/gtpcnz/actions/workflows/ci.yml)
+[![Quarto Pages](https://github.com/edithatogo/gtpcnz/actions/workflows/pages.yml/badge.svg)](https://github.com/edithatogo/gtpcnz/actions/workflows/pages.yml)
 
 GTPCNZ is a public policy-research and translation package on primary care funding architecture in Aotearoa New Zealand and Australia.
 
-Repository: https://github.com/edithatogo/primary-care-funding-architecture
+Repository: https://github.com/edithatogo/gtpcnz
 
-Website: https://edithatogo.github.io/primary-care-funding-architecture/
+Website: https://edithatogo.github.io/gtpcnz/
 
 ## What This Is
 
@@ -34,7 +34,7 @@ Short version:
 
 ## Public Surfaces
 
-- Quarto website: https://edithatogo.github.io/primary-care-funding-architecture/
+- Quarto website: https://edithatogo.github.io/gtpcnz/
 - Streamlit dashboard and modelling views: https://gtpcnz.streamlit.app/
 - Quarto source report: `reports/primary_care_architecture.qmd`
 - Streamlit dashboard entrypoint: `streamlit_app.py`
@@ -88,7 +88,7 @@ GitHub Pages is deployed from `.github/workflows/pages.yml`.
 
 Streamlit Community Cloud can deploy this app with:
 
-- Repository: `edithatogo/primary-care-funding-architecture`
+- Repository: `edithatogo/gtpcnz`
 - Branch: `main`
 - Entrypoint: `streamlit_app.py`
 

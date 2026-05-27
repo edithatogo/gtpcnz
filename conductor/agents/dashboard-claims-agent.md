@@ -23,5 +23,5 @@ Keep the public Streamlit dashboard precise, readable, and claim-safe.
 
 ```powershell
 python -m pytest -q models/tests/test_app.py models/tests/test_dashboard_claims.py models/tests/test_scenario_service.py
-rg -n "primary-care-funding-architecture.streamlit.app" README.md index.qmd docs models scripts
+rg -n "primary-care-funding-architecture.streamlit.app|edithatogo/primary-care-funding-architecture|edithatogo.github.io/primary-care-funding-architecture" README.md index.qmd docs models scripts
 ```

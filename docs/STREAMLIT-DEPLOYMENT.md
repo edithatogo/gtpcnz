@@ -33,7 +33,7 @@ streamlit run streamlit_app.py
 
 ## Community Cloud Settings
 
-- Repository: `edithatogo/primary-care-funding-architecture`
+- Repository: `edithatogo/gtpcnz`
 - Branch: `main`
 - Main file path: `streamlit_app.py`
 - Python version: `3.11`

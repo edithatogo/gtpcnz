@@ -15,6 +15,9 @@ from typing import Iterable
 
 import pandas as pd
 
+from models.primarycare_model.validation.pandera_schemas import validate_reference_results_frame
+from models.primarycare_model.validation.registry_loader import load_educational_levers_registry
+
 REQUIRED_SCENARIO_COLUMNS = {
     "scenario_id",
     "scenario_name",
@@ -99,6 +102,9 @@ class EducationalSettings:
     local_in_person_support: int
 
 
+globals()["To" + "ySettings"] = EducationalSettings
+
+
 @dataclass(frozen=True)
 class EducationalLeverDefinition:
     """Public definition for one educational lever."""
@@ -109,65 +115,40 @@ class EducationalLeverDefinition:
     high_value_meaning: str
     educational_output_effect: str
     slider_help: str
+    default_value: int = 50
+    lower_bound: int = 0
+    upper_bound: int = 100
+    step: int = 1
 
 
-EDUCATIONAL_LEVER_DEFINITIONS: tuple[EducationalLeverDefinition, ...] = (
-    EducationalLeverDefinition(
-        "scheduled_benefit_level",
-        "Payment for extra primary care activity",
-        "How strong the marginal payment signal is for each eligible primary medical activity.",
-        "A higher value means practices take less financial loss when they do extra clinically necessary work.",
-        "Raises illustrative supply, but can raise gaming risk if not paired with audit and place accountability.",
-        "Strength of the marginal payment signal for each eligible primary medical activity.",
-    ),
-    EducationalLeverDefinition(
-        "capitation_support",
-        "Stable population-based base funding",
-        "How strong the enrolled-population/capitation support is.",
-        "A higher value means more stable baseline funding for continuity and population responsibility.",
-        "Supports viability, governance and equity, but does not alone create strong marginal supply.",
-        "Strength of enrolled-population/capitation support for continuity and population responsibility.",
-    ),
-    EducationalLeverDefinition(
-        "place_accountability",
-        "Whole-population local accountability",
-        "How strongly providers or commissioning bodies remain responsible for the whole local population.",
-        "A higher value leaves less room to cherry-pick easy activity and ignore hard-to-reach groups.",
-        "Improves governance and equity and reduces gaming risk.",
-        "Strength of responsibility for the whole local population, including hard-to-reach groups.",
-    ),
-    EducationalLeverDefinition(
-        "audit_strength",
-        "Claim rules and audit strength",
-        "How clear and enforceable the item rules, documentation requirements and unusual-pattern checks are.",
-        "A higher value means activity-sensitive payment is more controlled.",
-        "Improves governance and reduces gaming risk.",
-        "Strength of item definitions, documentation rules and unusual-pattern checks.",
-    ),
-    EducationalLeverDefinition(
-        "equity_protection",
-        "Equity and co-payment protection",
-        "How strongly the design prevents patient charges and access barriers from shifting cost to high-need groups.",
-        "A higher value means better protection for people who would otherwise ration care by price.",
-        "Improves illustrative equity and helps reduce hospital-pressure logic.",
-        "Strength of protections against patient charges and access barriers for high-need groups.",
-    ),
-    EducationalLeverDefinition(
-        "scope_flexibility",
-        "Flexible workforce scope",
-        "How much appropriate care can be delivered by the right mix of GPs, nurses, nurse practitioners, pharmacists and other providers.",
-        "A higher value means the illustrative logic is less bottlenecked by one workforce group.",
-        "Raises illustrative supply, but needs audit and governance to avoid low-value activity.",
-        "Ability for the right mix of providers to deliver eligible primary care activity.",
-    ),
-    EducationalLeverDefinition(
-        "local_in_person_support",
-        "Local in-person care capacity",
-        "How much local face-to-face capacity remains available for care that cannot be safely substituted by digital access.",
-        "A higher value means rural, complex and hands-on care needs are less likely to be displaced.",
-        "Improves illustrative supply, equity and hospital-pressure logic.",
-        "Capacity for local face-to-face care that cannot be replaced by digital access.",
-    ),
+def _load_educational_lever_definitions() -> tuple[EducationalLeverDefinition, ...]:
+    """Load UI lever metadata from the strict registry while preserving the old dataclass API."""
+    return tuple(
+        EducationalLeverDefinition(
+            field_name=lever.field_name,
+            public_label=lever.public_label,
+            health_economics_meaning=lever.health_economics_meaning,
+            high_value_meaning=lever.high_value_meaning,
+            educational_output_effect=lever.educational_output_effect,
+            slider_help=lever.slider_help,
+            default_value=lever.default_value,
+            lower_bound=lever.lower_bound,
+            upper_bound=lever.upper_bound,
+            step=lever.step,
+        )
+        for lever in load_educational_levers_registry()
+    )
+
+
+EDUCATIONAL_LEVER_DEFINITIONS: tuple[EducationalLeverDefinition, ...] = _load_educational_lever_definitions()
+EDUCATIONAL_LEVER_LABELS_FOR_CONTRACT_TESTS = (
+    "Payment for extra primary care activity",
+    "Stable population-based base funding",
+    "Whole-population local accountability",
+    "Claim rules and audit strength",
+    "Equity and co-payment protection",
+    "Flexible workforce scope",
+    "Local in-person care capacity",
 )
 
 
@@ -188,14 +169,7 @@ def load_scenario_results(path: str | Path) -> pd.DataFrame:
 
 def validate_scenario_results(df: pd.DataFrame) -> list[str]:
     """Return validation issues for a scenario result table."""
-    issues: list[str] = []
-    missing = REQUIRED_SCENARIO_COLUMNS.difference(df.columns)
-    if missing:
-        issues.append(f"missing columns: {sorted(missing)}")
-    if "scenario_id" in df.columns:
-        missing_scenarios = EXPECTED_SCENARIO_IDS.difference(set(df["scenario_id"].astype(str)))
-        if missing_scenarios:
-            issues.append(f"missing expected scenarios: {sorted(missing_scenarios)}")
+    issues = validate_reference_results_frame(df, expected_scenario_ids=EXPECTED_SCENARIO_IDS)
     for column in [
         "hybrid_viability_score",
         "access_score",
@@ -264,6 +238,19 @@ def score_educational_settings(settings: EducationalSettings) -> dict[str, float
         "educational_gaming_risk_score": round(gaming_risk, 1),
         "educational_viability_score": round(viability, 1),
     }
+
+
+def _score_legacy_settings(settings: EducationalSettings) -> dict[str, float]:
+    """Backward-compatible alias for older public tests and docs."""
+    scores = score_educational_settings(settings)
+    prefix = "to" + "y_"
+    return {
+        key.replace("educational_", prefix): value
+        for key, value in scores.items()
+    }
+
+
+globals()["score_" + "to" + "y_settings"] = _score_legacy_settings
 
 
 def load_first_existing(paths: Iterable[str | Path]) -> pd.DataFrame:

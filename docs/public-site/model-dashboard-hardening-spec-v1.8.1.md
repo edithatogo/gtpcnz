@@ -7,7 +7,7 @@ Make the GTPCNZ public dashboard and GitHub Pages site clear about what the mode
 ## Required changes
 
 1. Present the dashboard as an **explainer**, not a forecast simulator.
-2. Separate reference scenario outputs from toy slider scores.
+2. Separate reference scenario outputs from educational slider scores.
 3. Render model card and claim boundaries on GitHub Pages.
 4. Render evidence tracker and calibration-readiness pages.
 5. Rewrite the public report so the current reform pathway is the comparator.
@@ -17,7 +17,7 @@ Make the GTPCNZ public dashboard and GitHub Pages site clear about what the mode
 ## Acceptance criteria
 
 - The dashboard warning appears on first load.
-- The sliders are described as toy/explainer levers.
+- The sliders are described as educational/explainer levers.
 - Reference scenario charts are labelled as model-generated indices.
 - The public report says results are not observed outcomes.
 - Quarto renders model card, claim boundaries, evidence tracker and calibration-readiness pages.

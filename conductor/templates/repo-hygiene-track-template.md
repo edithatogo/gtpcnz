@@ -36,7 +36,7 @@ git stash list
 git submodule status --recursive
 python -m pytest -q -p no:cacheprovider models/tests
 python scripts/check_repo_health.py
-rg -n "primary-care-funding-architecture.streamlit.app|edithatogo/gtpcnz|edithatogo.github.io/gtpcnz" README.md index.qmd docs models scripts
+rg -n "primary-care-funding-architecture.streamlit.app|edithatogo/primary-care-funding-architecture|edithatogo.github.io/primary-care-funding-architecture" README.md index.qmd docs models scripts
 ```
 
 If `scripts/check_repo_health.py` fails because of missing local support modules, record the exact missing module and run the closest focused tests instead.

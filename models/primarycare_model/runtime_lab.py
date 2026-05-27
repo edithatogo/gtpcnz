@@ -13,6 +13,8 @@ from typing import Iterable
 import numpy as np
 import pandas as pd
 
+from models.primarycare_model.validation.registry_loader import load_runtime_scenarios_registry
+
 
 CLAIM_LABEL = "live calculation; demonstrative model-generated index; not linked-data calibrated and not a patient-level forecast"
 STOCHASTIC_LABEL = "cached stochastic demo; demonstrative uncertainty only; not an empirical probability"
@@ -56,20 +58,42 @@ class RuntimeScenario:
     complexity: float
 
 
-SCENARIOS: tuple[RuntimeScenario, ...] = (
-    RuntimeScenario("F0", "Current reform pathway", "Current reform without uncapped primary medical FFS.", 18, 70, 42, 36, 58, 48, 55, 46, 58, 76, 88, 45),
-    RuntimeScenario("F1", "Capitation reweighting only", "Formula improves allocation but marginal activity remains weakly funded.", 20, 78, 42, 36, 55, 50, 53, 48, 55, 76, 86, 44),
-    RuntimeScenario("F2", "Uncapped scheduled medical FFS", "Demand-led eligible activity, weaker place accountability.", 78, 70, 38, 48, 58, 60, 63, 55, 45, 60, 76, 62),
-    RuntimeScenario("F3", "Uncapped medical FFS + place accountability", "Demand-led eligible activity plus explicit population responsibility.", 76, 78, 78, 52, 60, 70, 70, 70, 40, 58, 72, 64),
-    RuntimeScenario("F4", "Full hybrid upstream architecture", "Capitation plus scheduled FFS, place accountability, urgent alternatives, scope, data and audit.", 78, 82, 82, 68, 74, 82, 82, 78, 35, 55, 65, 72),
-    RuntimeScenario("F5", "Uncapped weak-control model", "Demand-led activity with weak controls, place accountability and equity protections.", 82, 60, 20, 70, 62, 45, 22, 30, 65, 80, 70, 76),
-    RuntimeScenario("F6", "ACC activity constraint shock", "ACC activity payments constrained without compensating upstream supply.", 12, 70, 42, 32, 50, 48, 52, 44, 58, 86, 90, 48),
-    RuntimeScenario("F7", "Ambulance and urgent alternatives only", "Urgent and ambulance alternatives strengthened while primary marginal payment remains weak.", 18, 70, 44, 38, 74, 68, 55, 46, 55, 70, 76, 52),
-    RuntimeScenario("F8", "Scope-enabled supply only", "Broader providers can generate activity, but payment and place accountability remain incomplete.", 35, 70, 42, 68, 56, 55, 58, 46, 54, 68, 78, 58),
-    RuntimeScenario("F9", "Place-based commissioning only", "Population accountability improves without materially uncapping marginal activity funding.", 18, 72, 78, 38, 55, 58, 55, 74, 50, 72, 78, 54),
-)
+def _load_runtime_scenarios() -> tuple[RuntimeScenario, ...]:
+    """Load runtime scenario defaults from the strict scenario registry."""
+    return tuple(
+        RuntimeScenario(
+            scenario.scenario_id,
+            scenario.scenario_name,
+            scenario.description,
+            scenario.activity_signal,
+            scenario.capitation,
+            scenario.place_accountability,
+            scenario.scope_capacity,
+            scenario.urgent_ambulance,
+            scenario.data_visibility,
+            scenario.governance,
+            scenario.equity_protection,
+            scenario.copayment_burden,
+            scenario.budget_tightness,
+            scenario.hospital_salience,
+            scenario.complexity,
+        )
+        for scenario in load_runtime_scenarios_registry()
+    )
+
+
+SCENARIOS: tuple[RuntimeScenario, ...] = _load_runtime_scenarios()
 
 SCENARIO_BY_ID = {scenario.scenario_id: scenario for scenario in SCENARIOS}
+
+
+def get_runtime_scenario(scenario_id: str) -> RuntimeScenario:
+    """Return a runtime scenario or raise a public-safe validation error."""
+    try:
+        return SCENARIO_BY_ID[scenario_id]
+    except KeyError as exc:
+        valid = ", ".join(sorted(SCENARIO_BY_ID))
+        raise ValueError(f"Unknown scenario_id {scenario_id!r}; valid IDs are: {valid}") from exc
 
 
 def _as_fraction(value: float) -> float:
@@ -161,7 +185,7 @@ def run_reference_calculation(months: int = MAX_MONTHS, scenarios: Iterable[Runt
 
 
 def calculation_trace(scenario_id: str) -> pd.DataFrame:
-    scenario = SCENARIO_BY_ID[scenario_id]
+    scenario = get_runtime_scenario(scenario_id)
     idx = calculate_indices(scenario)
     rows = [
         ("Supply generation", "activity + capitation + scope + urgent alternatives + place - budget tightness", idx["supply_generation_score"]),
@@ -183,7 +207,7 @@ def run_stochastic_uncertainty(
     draws = int(min(max(10, draws), MAX_MONTE_CARLO_DRAWS))
     sd = float(min(max(sd, 0.01), 0.20))
     rng = np.random.default_rng(seed)
-    scenario = SCENARIO_BY_ID[scenario_id]
+    scenario = get_runtime_scenario(scenario_id)
     rows: list[dict[str, object]] = []
     for draw in range(draws):
         perturbed = _scenario_with_perturbation(scenario, rng, sd)
@@ -219,7 +243,7 @@ def run_stochastic_uncertainty(
 
 def run_stock_flow_trace(scenario_id: str, months: int = 36) -> pd.DataFrame:
     months = int(min(max(6, months), MAX_MONTHS))
-    scenario = SCENARIO_BY_ID[scenario_id]
+    scenario = get_runtime_scenario(scenario_id)
     idx = calculate_indices(scenario)
     capacity = 35 + 0.45 * idx["supply_generation_score"]
     unmet = 70 + 0.35 * scenario.budget_tightness - 0.55 * idx["access_score"]
@@ -258,7 +282,7 @@ def run_agent_lens(
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     population_size = int(min(max(50, population_size), MAX_ABM_POPULATION))
     months = int(min(max(3, months), 24))
-    scenario = SCENARIO_BY_ID[scenario_id]
+    scenario = get_runtime_scenario(scenario_id)
     idx = calculate_indices(scenario)
     rng = np.random.default_rng(seed)
     high_need = rng.beta(2.2, 3.4, population_size)
@@ -295,9 +319,9 @@ def run_agent_lens(
 
 def model_gap_map() -> pd.DataFrame:
     rows = [
-        ("Current", "14-game demonstrative layer", "Executable in parent repo; partially represented in public toy labs", "Good benchmark, incomplete public runtime coverage"),
+        ("Current", "14-game demonstrative layer", "Executable in parent repo; partially represented in public educational labs", "Good benchmark, incomplete public runtime coverage"),
         ("Current", "Static diagrams and Mermaid previews", "Many PNG/SVG/Mermaid assets exist across docs and Substack-ready figures", "Strong explainer inventory, not all connected to Streamlit modules"),
-        ("Current", "Public Streamlit runtime", "Toy labs calculate at runtime; reference scenarios load precomputed CSV", "Needs explicit live/cached/precomputed source labels"),
+        ("Current", "Public Streamlit runtime", "Educational labs calculate at runtime; reference scenarios load precomputed CSV", "Needs explicit live/cached/precomputed source labels"),
         ("Comprehensive", "All-game executable navigator", "Not yet complete in public app", "Add a 19-games navigator with linked formulas, posts and visuals"),
         ("Comprehensive", "Unified formula registry", "Formula sketches exist across docs and code", "Expose formula cards and calculation trace per scenario"),
         ("SOTA", "Global sensitivity and uncertainty provenance", "Monte Carlo exists in parent repo", "Add bounded public uncertainty intervals and top-driver visuals"),

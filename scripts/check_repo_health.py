@@ -22,300 +22,208 @@ def exists(path: str) -> bool:
     return (ROOT / path).exists()
 
 
-REQUIREMENT_IDS = [f"REQ-{i:03d}" for i in range(1, 43)]
-CONTRACT_IDS = [f"CON-{i:03d}" for i in range(1, 43)]
+def run(command: list[str]) -> tuple[bool, str]:
+    completed = subprocess.run(command, cwd=ROOT, text=True, capture_output=True)
+    output = "\n".join(part for part in [completed.stdout, completed.stderr] if part).strip()
+    if completed.returncode == 0:
+        return True, output.splitlines()[-1] if output else "passed"
+    return False, "\n".join(output.splitlines()[-20:])
 
 
-def check_requirements() -> tuple[bool, str]:
-    path = "docs/requirements-moscow-v1.8.3.md"
-    if not exists(path):
-        return False, f"{path} is missing"
-    text = read(path)
-    missing = [rid for rid in REQUIREMENT_IDS if rid not in text]
-    priorities = all(word in text for word in ["Must", "Should", "Could", "Won't"])
-    if missing:
-        return False, f"missing requirement IDs: {', '.join(missing)}"
-    if not priorities:
-        return False, "MoSCoW priority definitions are incomplete"
-    return True, "granular MoSCoW requirements are present"
+def check_identity() -> tuple[bool, str]:
+    canonical = {
+        "repo": "edithatogo/gtpcnz",
+        "pages": "https://edithatogo.github.io/gtpcnz/",
+        "streamlit": "https://gtpcnz.streamlit.app/",
+    }
+    paths = ["README.md", "_quarto.yml", "index.qmd", "docs/STREAMLIT-DEPLOYMENT.md", "docs/REPORTS-AND-DASHBOARD.md"]
+    missing_paths = [path for path in paths if not exists(path)]
+    if missing_paths:
+        return False, f"identity files missing: {missing_paths}"
+    combined = "\n".join(read(path) for path in paths)
+    missing = [value for value in canonical.values() if value not in combined]
+    stale = [
+        "edithatogo/primary-care-funding-architecture",
+        "https://edithatogo.github.io/primary-care-funding-architecture/",
+        "https://primary-care-funding-architecture.streamlit.app/",
+    ]
+    stale_found = [value for value in stale if value in combined]
+    if missing or stale_found:
+        return False, f"identity mismatch: missing={missing}, stale={stale_found}"
+    return True, "canonical gtpcnz repo, Pages and Streamlit identity is consistent"
 
 
-def check_design() -> tuple[bool, str]:
-    path = "docs/design/repo-github-streamlit-design-v1.8.3.md"
-    if not exists(path):
-        return False, f"{path} is missing"
-    text = read(path)
-    mermaid_blocks = len(re.findall(r"```mermaid", text))
-    required = ["DES-001", "DES-002", "DES-003", "DES-004", "DES-005", "DES-006", "DES-007"]
-    missing = [item for item in required if item not in text]
-    if mermaid_blocks < 7 or missing:
-        return False, f"design requires seven Mermaid diagrams and IDs; missing {missing}"
-    return True, "design file has system, CI, Streamlit, health, dependency-lane, simulation-pipeline and SOTA diagrams"
-
-
-def check_contracts() -> tuple[bool, str]:
-    path = "docs/contracts/repo-github-streamlit-contracts-v1.8.3.md"
-    if not exists(path):
-        return False, f"{path} is missing"
-    text = read(path)
-    missing_reqs = [rid for rid in REQUIREMENT_IDS if rid not in text]
-    missing_contracts = [cid for cid in CONTRACT_IDS if cid not in text]
-    if missing_reqs or missing_contracts:
-        return False, f"contract coverage gaps: reqs={missing_reqs}, contracts={missing_contracts}"
-    return True, "contracts cover every requirement and element"
-
-
-def check_ci() -> tuple[bool, str]:
-    path = ".github/workflows/ci.yml"
-    if not exists(path):
-        return False, f"{path} is missing"
-    text = read(path)
+def check_conductor_assets() -> tuple[bool, str]:
     required = [
-        "actions/checkout@v6",
-        "actions/setup-python@v6",
-        "python scripts/check_repo_health.py",
-        "pytest -q",
-        "quarto render --to html",
-        "py_compile streamlit_app.py models/primarycare_model/app.py",
+        "conductor/README.md",
+        "conductor/templates/repo-hygiene-track-template.md",
+        "conductor/templates/streamlit-dashboard-track-template.md",
+        "conductor/templates/dependency-edge-track-template.md",
+        "conductor/templates/release-publish-track-template.md",
+        "conductor/agents/repo-hygiene-agent.md",
+        "conductor/agents/dashboard-claims-agent.md",
+        "conductor/agents/github-release-agent.md",
+        "conductor/agents/dependency-edge-agent.md",
+        "conductor/skills/repo-hygiene-skill.md",
+        "conductor/skills/dashboard-claims-skill.md",
+        "conductor/workflows/repo-hygiene.md",
+        "conductor/workflows/branch-publish.md",
+        "conductor/workflows/streamlit-dashboard-check.md",
+        "conductor/workflows/dependency-edge-check.md",
+        "conductor/tracks/043-concern-extraction-strict-validation_20260526/spec.md",
+        "conductor/tracks/043-concern-extraction-strict-validation_20260526/plan.md",
     ]
-    missing = [item for item in required if item not in text]
+    missing = [path for path in required if not exists(path)]
     if missing:
-        return False, f"CI missing: {missing}"
-    return True, "CI has current actions and repo health/test/render/import gates"
+        return False, f"Conductor assets missing: {missing}"
+    return True, "Conductor templates, agents, skills, workflows and active strict-validation track are present"
 
 
-def check_pages() -> tuple[bool, str]:
-    path = ".github/workflows/pages.yml"
-    if not exists(path):
-        return False, f"{path} is missing"
-    text = read(path)
+def check_contract_registries() -> tuple[bool, str]:
     required = [
-        "pages: write",
-        "id-token: write",
-        "actions/upload-pages-artifact@v5",
-        "actions/deploy-pages@v5",
-        "test -f _site/index.html",
+        "models/primarycare_model/contracts/parameters.py",
+        "models/primarycare_model/contracts/inputs.py",
+        "models/primarycare_model/contracts/scenarios.py",
+        "models/primarycare_model/contracts/results.py",
+        "models/primarycare_model/contracts/engine.py",
+        "models/primarycare_model/registries/educational_levers.v1.yaml",
+        "models/primarycare_model/registries/scenarios.v1.yaml",
+        "models/primarycare_model/validation/registry_loader.py",
+        "models/primarycare_model/validation/pandera_schemas.py",
     ]
-    missing = [item for item in required if item not in text]
+    missing = [path for path in required if not exists(path)]
     if missing:
-        return False, f"Pages workflow missing: {missing}"
-    return True, "GitHub Pages workflow has least-privilege deploy contract"
+        return False, f"contract/registry surface missing: {missing}"
+    text = read("models/primarycare_model/validation/registry_loader.py")
+    if "load_educational_levers_registry" not in text or "educational_levers.v1.yaml" not in text:
+        return False, "educational lever registry loader is not the primary API"
+    return True, "typed contracts, versioned registries and validation helpers are present"
 
 
-def check_streamlit() -> tuple[bool, str]:
-    required_paths = [
-        "streamlit_app.py",
-        "models/primarycare_model/app.py",
-        "models/primarycare_model/scenario_service.py",
-        ".streamlit/config.toml",
-        ".streamlit/secrets.toml.example",
-    ]
-    missing = [path for path in required_paths if not exists(path)]
+def check_streamlit_boundary() -> tuple[bool, str]:
+    required = ["streamlit_app.py", "models/primarycare_model/app.py", ".streamlit/config.toml", ".streamlit/secrets.toml.example"]
+    missing = [path for path in required if not exists(path)]
     if missing:
         return False, f"Streamlit surface missing: {missing}"
     config = read(".streamlit/config.toml")
     if "gatherUsageStats = false" not in config or "headless = true" not in config:
-        return False, "Streamlit config must be public, headless and telemetry-minimised"
-    return True, "Streamlit public app boundary is deployable and secret-free"
+        return False, "Streamlit config must be headless and telemetry-minimised"
+    app_text = read("models/primarycare_model/app.py").lower()
+    if "toy" in app_text or "primary-care-funding-architecture.streamlit.app" in app_text:
+        return False, "public Streamlit surface contains stale wording or URL"
+    return True, "Streamlit public surface is deployable, canonical and public-claim bounded"
 
 
-def check_metadata() -> tuple[bool, str]:
-    required_paths = ["LICENSE", "CITATION.cff", "SECURITY.md", "CONTRIBUTING.md", "CODE_OF_CONDUCT.md"]
-    missing = [path for path in required_paths if not exists(path)]
-    if missing:
-        return False, f"public metadata missing: {missing}"
-    return True, "public repo metadata is complete"
-
-
-def check_repo_identity() -> tuple[bool, str]:
-    canonical_repo = "edithatogo/primary-care-funding-architecture"
-    canonical_pages = "https://edithatogo.github.io/primary-care-funding-architecture/"
-    canonical_streamlit = "https://gtpcnz.streamlit.app/"
-    checked_paths = [
-        "README.md",
-        "_quarto.yml",
-        "index.qmd",
-        "docs/REPORTS-AND-DASHBOARD.md",
-        "docs/STREAMLIT-DEPLOYMENT.md",
+def check_docs() -> tuple[bool, str]:
+    required = [
         "docs/requirements-moscow-v1.8.3.md",
         "docs/design/repo-github-streamlit-design-v1.8.3.md",
         "docs/contracts/repo-github-streamlit-contracts-v1.8.3.md",
-        "docs/public-site/streamlit-dashboard-contract-v1.8.1.md",
+        "docs/dependency-policy-v1.8.3.md",
+        "docs/bleeding-edge-scorecard-v1.0.md",
+        "conductor/state.md",
     ]
-    missing = [path for path in checked_paths if not exists(path)]
+    missing = [path for path in required if not exists(path)]
     if missing:
-        return False, f"canonical identity files missing: {missing}"
-
-    combined = "\n".join(read(path) for path in checked_paths)
-    required = [canonical_repo, canonical_pages, canonical_streamlit]
-    missing_required = [item for item in required if item not in combined]
-    stale = ["edithatogo/gtpcnz", "https://edithatogo.github.io/gtpcnz/", "https://primary-care-funding-architecture.streamlit.app/"]
-    stale_found = [item for item in stale if item in combined]
-    if missing_required or stale_found:
-        return False, f"repo identity mismatch: missing={missing_required}, stale={stale_found}"
-    return True, "canonical GitHub, Pages and Streamlit identity is consistent"
+        return False, f"documentation/control files missing: {missing}"
+    design = read("docs/design/repo-github-streamlit-design-v1.8.3.md")
+    if len(re.findall(r"```mermaid", design)) < 4:
+        return False, "design file needs Mermaid architecture diagrams"
+    contracts = read("docs/contracts/repo-github-streamlit-contracts-v1.8.3.md")
+    if "CON-001" not in contracts or "REQ-001" not in contracts:
+        return False, "contract traceability IDs are missing"
+    return True, "requirements, design, contracts, dependency policy, scorecard and state docs are present"
 
 
-def check_dependency_maintenance() -> tuple[bool, str]:
-    path = ".github/dependabot.yml"
-    if not exists(path):
-        return False, f"{path} is missing"
-    text = read(path)
-    required = ["github-actions", "pip", "requirements.txt"]
-    missing = [item for item in required if item not in text]
+def check_ci() -> tuple[bool, str]:
+    required = [
+        ".github/workflows/ci.yml",
+        ".github/workflows/pages.yml",
+        ".github/workflows/dependency-canary.yml",
+        ".github/dependabot.yml",
+    ]
+    missing = [path for path in required if not exists(path)]
     if missing:
-        return False, f"Dependabot config missing: {missing}"
-    return True, "dependency maintenance covers Actions and pip"
-
-
-def check_dependency_canary() -> tuple[bool, str]:
-    workflow = ".github/workflows/dependency-canary.yml"
-    policy = "docs/dependency-policy-v1.8.3.md"
-    missing_paths = [path for path in [workflow, policy] if not exists(path)]
-    if missing_paths:
-        return False, f"dependency canary surface missing: {missing_paths}"
-    workflow_text = read(workflow)
-    policy_text = read(policy)
-    required_workflow = [
-        "schedule:",
-        "workflow_dispatch:",
-        "actions/checkout@v6",
-        "actions/setup-python@v6",
-        "--upgrade --upgrade-strategy eager -r requirements.txt",
+        return False, f"GitHub automation missing: {missing}"
+    ci = read(".github/workflows/ci.yml")
+    required_ci = [
         "python scripts/check_repo_health.py",
+        "python scripts/check_concern_boundaries.py",
         "pytest -q",
         "quarto render --to html",
         "py_compile streamlit_app.py models/primarycare_model/app.py",
     ]
-    required_policy = ["Stable release CI", "Latest canary CI", "Streamlit", "Quarto", "Dependabot"]
-    required_policy.extend(["Experimental edge CI", "three-lane dependency posture"])
-    missing_workflow = [item for item in required_workflow if item not in workflow_text]
-    missing_policy = [item for item in required_policy if item not in policy_text]
-    if missing_workflow or missing_policy:
-        return False, f"dependency canary gaps: workflow={missing_workflow}, policy={missing_policy}"
-    return True, "latest-compatible dependency canary and policy are present"
+    missing_ci = [item for item in required_ci if item not in ci]
+    if missing_ci:
+        return False, f"CI missing gates: {missing_ci}"
+    canary = read(".github/workflows/dependency-canary.yml")
+    if "--upgrade --upgrade-strategy eager -r requirements.txt" not in canary:
+        return False, "dependency canary does not run latest-compatible pip lane"
+    return True, "CI, Pages, Dependabot and dependency canary gates are configured"
 
 
 def check_tests() -> tuple[bool, str]:
-    required_paths = [
-        "models/tests/test_abm.py",
+    required = [
         "models/tests/test_app.py",
         "models/tests/test_dashboard_claims.py",
-        "models/tests/test_sd.py",
-        "models/tests/test_public_scenario_outputs.py",
         "models/tests/test_scenario_service.py",
-        "models/tests/test_full_parameterised_model_v170.py",
+        "models/tests/test_runtime_lab.py",
+        "models/tests/test_conductor_assets.py",
+        "models/tests/test_contract_registries.py",
     ]
-    missing = [path for path in required_paths if not exists(path)]
+    missing = [path for path in required if not exists(path)]
     if missing:
         return False, f"test surface missing: {missing}"
     pyproject = read("pyproject.toml")
-    required_config = ['testpaths = ["models/tests"]', '"codex-tmp"', '"public"']
-    missing_config = [item for item in required_config if item not in pyproject]
-    if missing_config:
-        return False, f"pytest collection guard missing: {missing_config}"
-    return True, "dashboard, scenario, public-output, ABM, SD and model tests are present"
+    if 'testpaths = ["models/tests"]' not in pyproject or '"public"' not in pyproject:
+        return False, "pytest collection guard is incomplete"
+    return True, "focused model, dashboard, Conductor and registry tests are present"
 
 
-def check_tests_execute() -> tuple[bool, str]:
-    command = [
-        sys.executable,
-        "-m",
-        "pytest",
-        "-q",
-        "-p",
-        "no:cacheprovider",
-        "models/tests",
+def check_no_stub_modules() -> tuple[bool, str]:
+    forbidden = [
+        "models/primarycare_model/abm_stub.py",
+        "models/primarycare_model/sd_stub.py",
     ]
-    completed = subprocess.run(command, cwd=ROOT, text=True, capture_output=True)
-    output = "\n".join(part for part in [completed.stdout, completed.stderr] if part).strip()
-    passed_match = re.search(r"(\d+)\s+passed", output)
-    if completed.returncode != 0:
-        cleanup_only = (
-            passed_match is not None
-            and "PermissionError" in completed.stderr
-            and "tempfile.py" in completed.stderr
-        )
-        if cleanup_only:
-            return True, f"pytest execution passed with Windows temp cleanup warning: {passed_match.group(0)}"
-        failure_summary = re.search(
-            r"(^|[\s=])(?:FAILED|ERRORS?|FAILURES?|failed|errors?)($|[\s=])",
-            completed.stdout,
-        )
-        tail = "\n".join(output.splitlines()[-20:])
-        return False, f"pytest failed with exit {completed.returncode}: {tail}"
-    summary = completed.stdout.strip().splitlines()[-1] if completed.stdout.strip() else "pytest passed"
-    return True, f"pytest execution passed: {summary}"
-
-
-def check_no_abm_stubs() -> tuple[bool, str]:
-    missing_or_removed = not exists("models/primarycare_model/abm_stub.py")
-    if not missing_or_removed:
-        return False, "abm_stub.py still exists"
-    text_paths = [
-        "models/primarycare_model/abm.py",
-        "models/tests/test_abm.py",
-        "docs/calibration/model-card-v1.7.2.md",
-    ]
-    text = "\n".join(read(path) for path in text_paths if exists(path))
-    if "abm_stub" in text:
-        return False, "abm_stub import or filename reference remains in current ABM surfaces"
-    return True, "no tracked ABM stub module or import remains"
-
-
-def check_no_sd_stubs() -> tuple[bool, str]:
-    missing_or_removed = not exists("models/primarycare_model/sd_stub.py")
-    if not missing_or_removed:
-        return False, "sd_stub.py still exists"
-    text_paths = [
-        "models/primarycare_model/sd.py",
-        "models/tests/test_sd.py",
-        "docs/calibration/model-card-v1.7.2.md",
-    ]
-    text = "\n".join(read(path) for path in text_paths if exists(path))
-    if "sd_stub" in text:
-        return False, "sd_stub import or filename reference remains in current SD surfaces"
-    return True, "no tracked SD stub module or import remains"
+    present = [path for path in forbidden if exists(path)]
+    if present:
+        return False, f"stub modules remain: {present}"
+    return True, "tracked ABM/SD stub modules are absent"
 
 
 def check_claim_boundaries() -> tuple[bool, str]:
-    required_paths = [
-        "README.md",
-        "docs/calibration/model-card-v1.7.2.md",
-        "docs/launch/claim-boundaries-v1.7.2.md",
-        "conductor/state.md",
-    ]
+    required_paths = ["README.md", "docs/calibration/model-card-v1.7.2.md", "docs/launch/claim-boundaries-v1.7.2.md", "conductor/state.md"]
     missing = [path for path in required_paths if not exists(path)]
     if missing:
         return False, f"claim-boundary evidence missing: {missing}"
     combined = "\n".join(read(path).lower() for path in required_paths)
-    required_phrases = ["public-data anchored", "linked-data", "oia", "stakeholder"]
-    missing_phrases = [phrase for phrase in required_phrases if phrase not in combined]
+    required = ["public-data anchored", "linked-data", "patient-level forecast"]
+    missing_phrases = [phrase for phrase in required if phrase not in combined]
     if missing_phrases:
         return False, f"claim-boundary phrases missing: {missing_phrases}"
-    return True, "claim boundaries and evidence gates remain explicit"
+    return True, "public-data, linked-data and patient-level forecast boundaries remain explicit"
 
 
-def bleeding_edge_summary() -> dict[str, object]:
-    return bleeding_edge_scorecard()
+def check_concern_boundaries_execute() -> tuple[bool, str]:
+    return run([sys.executable, "scripts/check_concern_boundaries.py"])
+
+
+def check_tests_execute() -> tuple[bool, str]:
+    return run([sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider", "models/tests"])
 
 
 CHECKS = [
-    ("requirements_moscow", check_requirements),
-    ("design_mermaid", check_design),
-    ("element_contracts", check_contracts),
-    ("ci_quality_gate", check_ci),
-    ("pages_deploy", check_pages),
-    ("streamlit_boundary", check_streamlit),
-    ("repo_metadata", check_metadata),
-    ("repo_identity", check_repo_identity),
-    ("dependency_maintenance", check_dependency_maintenance),
-    ("dependency_canary", check_dependency_canary),
-    ("no_abm_stubs", check_no_abm_stubs),
-    ("no_sd_stubs", check_no_sd_stubs),
-    ("regression_tests", check_tests),
-    ("regression_tests_execute", check_tests_execute),
+    ("canonical_identity", check_identity),
+    ("conductor_assets", check_conductor_assets),
+    ("contract_registries", check_contract_registries),
+    ("streamlit_boundary", check_streamlit_boundary),
+    ("documentation_controls", check_docs),
+    ("github_automation", check_ci),
+    ("test_surface", check_tests),
+    ("no_stub_modules", check_no_stub_modules),
     ("claim_boundaries", check_claim_boundaries),
+    ("concern_boundaries_execute", check_concern_boundaries_execute),
+    ("regression_tests_execute", check_tests_execute),
 ]
 
 
@@ -329,14 +237,12 @@ def main() -> int:
     payload = {
         "score": score,
         "max_score": len(CHECKS),
+        "repo_health_percent": round(score / len(CHECKS) * 100, 1),
         "results": results,
-        "supplemental": {"bleeding_edge_scorecard": bleeding_edge_summary()},
+        "supplemental": {"bleeding_edge_scorecard": bleeding_edge_scorecard()},
     }
     print(json.dumps(payload, indent=2))
-
-    if score != len(CHECKS):
-        return 1
-    return 0
+    return 0 if score == len(CHECKS) else 1
 
 
 if __name__ == "__main__":

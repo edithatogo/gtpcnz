@@ -25,5 +25,5 @@ Use this skill for Streamlit dashboard wording, units, claim boundaries, and pub
 
 ```powershell
 python -m pytest -q models/tests/test_app.py models/tests/test_dashboard_claims.py models/tests/test_scenario_service.py
-rg -n "toy|primary-care-funding-architecture.streamlit.app" models/primarycare_model/app.py models/primarycare_model/scenario_service.py models/tests/test_dashboard_claims.py
+rg -n "toy|gtpcnz.streamlit.app" models/primarycare_model/app.py models/primarycare_model/scenario_service.py models/tests/test_dashboard_claims.py
 ```

@@ -6,5 +6,6 @@ matplotlib
 plotly
 jupyter
 pyyaml
+pydantic>=2,<3
 pytest
 pytest-mock

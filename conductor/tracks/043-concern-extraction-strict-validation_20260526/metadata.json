@@ -1,0 +1,10 @@
+{
+  "id": "043-concern-extraction-strict-validation_20260526",
+  "title": "Concern Extraction and Strict Validation Architecture",
+  "status": "active",
+  "created": "2026-05-26",
+  "updated": "2026-05-26",
+  "progress": "Implemented first extraction slice: Pydantic contracts, versioned YAML registries for educational levers and runtime scenarios, registry loaders, optional Pandera-compatible result validation, Streamlit control binding to registry metadata, runtime scenario lookup validation, public mirror sync, concern-boundary scanner, and regression tests. Track remains active for absent full parameterised-model modules when available.",
+  "owner": "codex",
+  "output": "Typed contracts, versioned registries, registry-backed runtime/UI adapters, optional Pandera-compatible validation, concern-boundary gate, public mirror, and green root/public validation"
+}

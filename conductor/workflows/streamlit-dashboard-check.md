@@ -9,7 +9,7 @@ Verify that the public Streamlit dashboard is claim-safe, unit-clear, and deploy
 1. Check canonical URL references:
 
 ```powershell
-rg -n "gtpcnz.streamlit.app|primary-care-funding-architecture.streamlit.app" README.md index.qmd docs models scripts
+rg -n "gtpcnz.streamlit.app|gtpcnz.streamlit.app" README.md index.qmd docs models scripts
 ```
 
 2. Check dashboard wording:

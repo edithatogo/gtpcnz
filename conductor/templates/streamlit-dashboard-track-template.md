@@ -29,7 +29,7 @@ The Streamlit surface is public-facing. Wording, units, claim boundaries, and UR
 ```powershell
 python -m pytest -q models/tests/test_app.py models/tests/test_dashboard_claims.py models/tests/test_scenario_service.py
 python -c "import ast, pathlib; [ast.parse(pathlib.Path(p).read_text(encoding='utf-8')) for p in ['streamlit_app.py','models/primarycare_model/app.py']]"
-rg -n "primary-care-funding-architecture.streamlit.app|toy" models/primarycare_model/app.py models/primarycare_model/scenario_service.py models/tests/test_dashboard_claims.py
+rg -n "gtpcnz.streamlit.app|toy" models/primarycare_model/app.py models/primarycare_model/scenario_service.py models/tests/test_dashboard_claims.py
 ```
 
 ## Acceptance Criteria
