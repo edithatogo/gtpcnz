@@ -13,20 +13,23 @@ from models.primarycare_model.runtime_lab import (
     MAX_MONTHS,
     MAX_MONTE_CARLO_DRAWS,
     calculation_trace,
+    clamp,
+    diminishing_return,
     model_gap_map,
     run_agent_lens,
     run_reference_calculation,
     run_stochastic_uncertainty,
     run_stock_flow_trace,
+    strategic_response,
 )
 from models.primarycare_model.scenario_service import (
     CLAIM_BOUNDARY_TEXT,
-    TOY_LEVER_DEFINITIONS,
-    ToySettings,
+    EDUCATIONAL_LEVER_DEFINITIONS,
+    EducationalSettings,
     build_calibration_readiness_table,
     load_first_existing,
     load_scenario_results,
-    score_toy_settings,
+    score_educational_settings,
     summarise_reference_results,
 )
 
@@ -53,11 +56,18 @@ def render_reader_guide() -> None:
 
         - **Reference scenarios** are precomputed, model-generated indices from the
           public-data anchored benchmark.
-        - **Toy explainer sliders** are simplified teaching controls. They are not
+        - **Educational explainer sliders** are simplified teaching controls. They are not
           the 70-parameter model and they do not estimate New Zealand outcomes.
 
+        - **Units used in the dashboard**:
+          - model-generated indices use a 0-100 scale and are unitless scores;
+          - policy-strength sliders use a 0-100 scale unless a label says otherwise;
+          - appointment and activity charts use counts of appointments or eligible activity units;
+          - budget and payment charts use illustrative NZD;
+          - share charts use percentages of need met.
+
         Read it in this order: start with the thesis, compare the reference
-        scenarios, use the toy sliders to learn the mechanism, then check the
+        scenarios, use the educational sliders to learn the mechanism, then check the
         evidence and calibration-readiness tabs before drawing conclusions.
         """
     )
@@ -90,9 +100,9 @@ def render_big_words_expander() -> None:
             - **Uncapped** means eligible activity is not limited by a fixed global activity envelope.
             - **Controlled** means item rules, provider scope, clinical governance, documentation, audit and place accountability still apply.
             - **Model-generated index** means the number comes from the benchmark logic, not from observed New Zealand outcomes.
-            - **Toy explainer** means the slider result is a teaching aid, not a calibrated forecast.
-            """
-        )
+            - **Educational explainer** means the slider result is a teaching aid, not a calibrated forecast.
+        """
+    )
 
 
 def render_reference_scenario_explainer() -> None:
@@ -120,10 +130,10 @@ def render_reference_scenario_explainer() -> None:
     )
 
 
-def render_toy_explainer_context() -> None:
+def render_educational_explainer_context() -> None:
     st.markdown(
         """
-        ### What the toy sliders are for
+        ### What the educational sliders are for
 
         The sliders compress the problem into a few visible health-system
         levers. They are not parameters estimated from New Zealand data. They
@@ -131,10 +141,10 @@ def render_toy_explainer_context() -> None:
 
         Each slider is scaled from **0 to 100**:
 
-        - **0** means the lever is absent or very weak in the toy explanation.
+        - **0** means the lever is absent or very weak in the educational explanation.
         - **100** means the lever is strong and reliably implemented.
 
-        The toy output is a teaching artefact. It should not be quoted as an
+        The educational output is a teaching artefact. It should not be quoted as an
         estimated effect size.
         """
     )
@@ -156,10 +166,10 @@ def build_post_reading_map_table() -> pd.DataFrame:
                 "02",
                 "Fee-for-service, capitation and blended funding",
                 "Funding model explainer; formula appendix.",
-                "Funding models module; Toy explainer.",
+                "Funding models module; educational explainer.",
                 "First-six launch post card; funding-model card",
-                "Funding comparison toy module; capitation and payment diagram",
-                "Toy funding comparison chart; blended-funding explainer",
+                "Funding comparison educational module; capitation and payment diagram",
+                "Educational funding comparison chart; blended-funding explainer",
             ),
             (
                 "03",
@@ -177,7 +187,7 @@ def build_post_reading_map_table() -> pd.DataFrame:
                 "Game theory lab.",
                 "First-six launch post card; game-theory extension card",
                 "Payoff matrix; best-response or controls-stack diagram",
-                "Toy incentive game; best-response simulation; gaming-risk frontier",
+                "Educational incentive game; best-response simulation; gaming-risk frontier",
             ),
             (
                 "05",
@@ -192,10 +202,10 @@ def build_post_reading_map_table() -> pd.DataFrame:
                 "06",
                 "What I mean by uncapping primary care funding",
                 "Controlled scheduled payment section.",
-                "Toy explainer; Microeconomics lab.",
+                "Educational explainer; Microeconomics lab.",
                 "First-six launch post card; controlled-payment card",
                 "Activity/payment/control simulation; uncapping explanation card",
-                "Toy explainer output; scheduled-payment control simulation",
+                "Educational explainer output; scheduled-payment control simulation",
             ),
         ],
         columns=[
@@ -215,8 +225,9 @@ def render_post_guide_and_reading_map() -> None:
     st.markdown(
         """
         This page is the navigation layer for the post and the dashboard.
-        It separates the comparator, the model-generated indices, and the toy
-        teaching simulations so the reader does not mix them together. The table
+        It separates the comparator, the model-generated indices, and the
+        educational teaching simulations so the reader does not mix them
+        together. The table
         below maps posts 01-06 to the report destination, Streamlit module, and
         public reading-map cards.
         """
@@ -228,7 +239,7 @@ def render_post_guide_and_reading_map() -> None:
 
         - Start with the comparator: `F0` is the current reform pathway used as the baseline.
         - Treat scenario tables and charts as model-generated indices.
-        - Treat the labs as toy teaching simulations only.
+        - Treat the labs as educational teaching simulations only.
         - If you want a claim about New Zealand, you still need real data and validation.
         """
     )
@@ -241,11 +252,11 @@ def render_microeconomics_activity_response_lab() -> None:
     st.markdown("### Microeconomics lab 1: marginal supply")
     st.markdown(
         """
-        **What this shows:** a toy marginal-supply curve for eligible primary
+        **What this shows:** an illustrative marginal-supply curve for eligible primary
         care activity as the scheduled payment signal changes.
 
         **How to read it:** move the sliders to see the curve shift up or down.
-        A stronger marginal signal raises the toy volume, but the gain tapers at
+        A stronger marginal signal raises the illustrative volume, but the gain tapers at
         higher values.
 
         **What it does not prove:** this is not a measured New Zealand demand
@@ -268,7 +279,7 @@ def render_microeconomics_activity_response_lab() -> None:
             260,
             130,
             key="micro_baseline_capacity",
-            help="A higher value means the toy system starts with more capacity before the marginal response is added.",
+            help="A higher value means the illustrative system starts with more capacity before the marginal response is added.",
         )
         response_responsiveness = st.slider(
             "Response responsiveness",
@@ -276,7 +287,7 @@ def render_microeconomics_activity_response_lab() -> None:
             100,
             48,
             key="micro_response_responsiveness",
-            help="Higher values make the toy response curve steeper at low-to-mid payment levels.",
+            help="Higher values make the illustrative response curve steeper at low-to-mid payment levels.",
         )
         admin_friction = st.slider(
             "Administrative friction",
@@ -284,7 +295,7 @@ def render_microeconomics_activity_response_lab() -> None:
             100,
             30,
             key="micro_admin_friction",
-            help="Higher values flatten the toy response because claims and administration are assumed to be harder.",
+            help="Higher values flatten the illustrative response because claims and administration are assumed to be harder.",
         )
     payment_levels = list(range(0, 101, 5))
     curve: list[float] = []
@@ -302,7 +313,7 @@ def render_microeconomics_activity_response_lab() -> None:
             x=payment_levels,
             y=curve,
             mode="lines",
-            name="Toy activity response",
+            name="Illustrative activity response",
             line=dict(color="#2f6f67", width=3),
         )
     )
@@ -316,20 +327,20 @@ def render_microeconomics_activity_response_lab() -> None:
         )
     )
     fig.update_layout(
-        title="Toy marginal supply response to the scheduled payment signal",
+        title="Illustrative marginal supply response to the scheduled payment signal",
         xaxis_title="Marginal payment signal (0-100)",
-        yaxis_title="Illustrative eligible appointments",
+        yaxis_title="Illustrative appointments per period",
         height=420,
         margin=dict(l=10, r=10, t=45, b=10),
     )
     with chart:
         st.plotly_chart(fig, width="stretch")
         metric_cols = st.columns(3)
-        metric_cols[0].metric("Toy appointments", f"{current_value:.1f}")
+        metric_cols[0].metric("Appointments", f"{current_value:.1f}")
         metric_cols[1].metric("Increment vs no signal", f"{current_value - zero_value:+.1f}")
-        metric_cols[2].metric("Activity ceiling", "300")
+        metric_cols[2].metric("Maximum appointments", "300")
         st.caption(
-            "This chart is a toy microeconomics simulation. It illustrates marginal supply direction and tapering, not observed response data."
+            "This chart is an illustrative microeconomics simulation. It uses appointment counts per representative period, not observed response data."
         )
 
 
@@ -341,7 +352,7 @@ def render_microeconomics_capitation_budget_lab() -> None:
         when expected costs and demand growth rise.
 
         **How to read it:** compare the capitation budget with the expected
-        cost line. The gap is the toy headroom or shortfall.
+        cost line. The gap is the illustrative headroom or shortfall.
 
         **What it does not prove:** this is not an estimate of real practice
         margins, and it is not a claim about New Zealand funding adequacy.
@@ -355,7 +366,7 @@ def render_microeconomics_capitation_budget_lab() -> None:
             5000,
             1400,
             key="micro_enrolled_patients",
-            help="Higher values mean the toy practice carries more enrolled population responsibility.",
+            help="Higher values mean the illustrative practice carries more enrolled population responsibility.",
         )
         capitation_rate = st.slider(
             "Capitation rate per enrolled patient",
@@ -363,7 +374,7 @@ def render_microeconomics_capitation_budget_lab() -> None:
             240,
             120,
             key="micro_capitation_rate",
-            help="Higher values mean the toy budget grows more strongly with enrolment.",
+            help="Higher values mean the illustrative budget grows more strongly with enrolment.",
         )
         expected_cost_per_patient = st.slider(
             "Expected cost per patient",
@@ -371,7 +382,7 @@ def render_microeconomics_capitation_budget_lab() -> None:
             260,
             140,
             key="micro_expected_cost_per_patient",
-            help="Higher values mean the toy cost base is more expensive to serve.",
+            help="Higher values mean the illustrative cost base is more expensive to serve.",
         )
         demand_growth = st.slider(
             "Demand growth pressure",
@@ -403,8 +414,8 @@ def render_microeconomics_capitation_budget_lab() -> None:
             "Budget headroom": "#4f7eb6",
             "Budget shortfall": "#d1495b",
         },
-        title="Toy capitation budget constraint",
-        labels={"Value": "Illustrative dollars or budget units", "Measure": ""},
+        title="Illustrative capitation budget constraint (NZD)",
+        labels={"Value": "NZD (illustrative)", "Measure": ""},
     )
     fig.update_layout(showlegend=False, height=420, margin=dict(l=10, r=10, t=45, b=10))
     with chart:
@@ -414,7 +425,7 @@ def render_microeconomics_capitation_budget_lab() -> None:
         metric_cols[1].metric("Expected cost", f"{expected_cost:,.0f}")
         metric_cols[2].metric("Headroom", f"{headroom:,.0f}")
         st.caption(
-            "This is a toy budget-constraint simulation. It shows capitation pressure and headroom, not a practice finance forecast."
+            "This is an illustrative budget-constraint simulation. It shows capitation pressure and headroom using NZD-like units, not a practice finance forecast."
         )
 
 
@@ -426,7 +437,7 @@ def render_microeconomics_scheduled_payment_lab() -> None:
         controlled through rules, scope and audit settings.
 
         **How to read it:** compare the gross scheduled payment with the control
-        adjustment and the net toy payment.
+        adjustment and the net illustrative payment.
 
         **What it does not prove:** this is not a fiscal estimate and not a
         claim that uncapping removes the need for controls.
@@ -440,7 +451,7 @@ def render_microeconomics_scheduled_payment_lab() -> None:
             1000,
             420,
             key="micro_activity_units",
-            help="Higher values mean more eligible activity is being delivered in the toy system.",
+            help="Higher values mean more eligible activity is being delivered in the illustrative system.",
         )
         scheduled_rate = st.slider(
             "Scheduled payment rate",
@@ -464,7 +475,7 @@ def render_microeconomics_scheduled_payment_lab() -> None:
             100,
             60,
             key="micro_scope_flexibility",
-            help="Higher values mean the toy system can pay for a wider eligible scope.",
+            help="Higher values mean the illustrative system can pay for a wider eligible scope.",
         )
     gross_payment = activity_units * scheduled_rate
     control_adjustment = gross_payment * (0.12 + control_strength / 320)
@@ -489,8 +500,8 @@ def render_microeconomics_scheduled_payment_lab() -> None:
             "Scope bonus": "#4f7eb6",
             "Net scheduled payment": "#6649a6",
         },
-        title="Toy scheduled activity payment with controls",
-        labels={"Value": "Illustrative payment units", "Measure": ""},
+        title="Illustrative scheduled activity payment with controls (NZD)",
+        labels={"Value": "NZD (illustrative)", "Measure": ""},
     )
     fig.update_layout(showlegend=False, height=420, margin=dict(l=10, r=10, t=45, b=10))
     with chart:
@@ -500,7 +511,7 @@ def render_microeconomics_scheduled_payment_lab() -> None:
         metric_cols[1].metric("Control adjustment", f"{control_adjustment:,.0f}")
         metric_cols[2].metric("Net payment", f"{net_payment:,.0f}")
         st.caption(
-            "This is a toy scheduled-payment simulation. It shows how payment can be uncapped but still controlled."
+            "This is an illustrative scheduled-payment simulation. It shows how payment can be uncapped but still controlled."
         )
 
 
@@ -527,7 +538,7 @@ def render_microeconomics_access_mix_lab() -> None:
             100,
             24,
             key="micro_co_payment",
-            help="Higher values mean the toy system pushes more price to the patient at the point of care.",
+            help="Higher values mean the illustrative system pushes more price to the patient at the point of care.",
         )
         local_in_person = st.slider(
             "Local in-person care capacity",
@@ -535,7 +546,7 @@ def render_microeconomics_access_mix_lab() -> None:
             100,
             64,
             key="micro_local_in_person",
-            help="Higher values mean the toy system retains more face-to-face capacity for hands-on care.",
+            help="Higher values mean the illustrative system retains more face-to-face capacity for hands-on care.",
         )
         digital_access = st.slider(
             "Digital access reach",
@@ -559,7 +570,7 @@ def render_microeconomics_access_mix_lab() -> None:
             100,
             34,
             key="micro_travel_barrier",
-            help="Higher values make the toy system more dependent on local in-person capacity.",
+            help="Higher values make the illustrative system more dependent on local in-person capacity.",
         )
     bands = [
         ("Low complexity", 0.92),
@@ -595,8 +606,8 @@ def render_microeconomics_access_mix_lab() -> None:
             "Digital-suitable": "#5f84c2",
             "Deferred / unmet": "#c47a2c",
         },
-        title="Toy co-payment and access barrier mix across need bands",
-        labels={"Share": "Share of need met (0-100)", "Need band": ""},
+        title="Illustrative co-payment and access barrier mix across need bands",
+        labels={"Share": "Share of need met (%)", "Need band": ""},
     )
     fig.update_layout(height=440, margin=dict(l=10, r=10, t=45, b=10))
     with chart:
@@ -607,7 +618,7 @@ def render_microeconomics_access_mix_lab() -> None:
         metric_cols[1].metric("Local care emphasis", f"{local_in_person:.0f}")
         metric_cols[2].metric("Deferred pressure", f"{max(0.0, 100 - covered_share):.1f}")
         st.caption(
-            "This is a toy service-mix simulation. It shows how co-payments can become access barriers, not observed utilisation or unmet-need rates."
+            "This is an illustrative service-mix simulation. It shows how co-payments can become access barriers, not observed utilisation or unmet-need rates."
         )
 
 
@@ -615,7 +626,7 @@ def render_microeconomics_lab() -> None:
     st.subheader("Microeconomics lab")
     st.markdown(
         """
-        This lab contains four guided toy simulations. They cover marginal
+        This lab contains four guided educational simulations. They cover marginal
         supply, capitation budget constraint, scheduled activity payment and
         co-payment / access barrier logic.
         """
@@ -633,12 +644,12 @@ def render_claims_audit_game_lab() -> None:
     st.markdown("### Game theory lab 1: formulas do not solve games")
     st.markdown(
         """
-        **What this shows:** a toy strategic-behaviour game in which the payoff
+        **What this shows:** an illustrative strategic-behaviour game in which the payoff
         to honest claiming and claim inflation changes as audit strength rises.
         It is a reminder that formulas do not solve games by themselves.
 
         **How to read it:** look for the point where honest claiming overtakes
-        gaming. That is the toy threshold at which the strategy mix flips.
+        gaming. That is the illustrative threshold at which the strategy mix flips.
 
         **What it does not prove:** this is not an estimated claim-compliance
         model and it does not predict provider behaviour.
@@ -682,8 +693,16 @@ def render_claims_audit_game_lab() -> None:
     honest = []
     gaming = []
     for audit_level in audit_levels:
-        honest_payoff = 52 + marginal_gain * 0.28 + claim_quality * 0.24 + place_accountability * 0.22 - audit_level * 0.08
-        gaming_payoff = 52 + marginal_gain * 0.62 + (100 - claim_quality) * 0.12 + (100 - place_accountability) * 0.10 - audit_level * (0.26 + audit_cost / 240)
+        audit = audit_level / 100
+        gain = marginal_gain / 100
+        quality = claim_quality / 100
+        place = place_accountability / 100
+        penalty = audit_cost / 100
+        honest_bonus = strategic_response(0.42 * quality + 0.34 * place + 0.24 * audit, 0.48, 7.0)
+        detection_risk = strategic_response(0.55 * audit + 0.25 * penalty + 0.20 * place, 0.46, 7.0)
+        gaming_attraction = strategic_response(0.62 * gain + 0.22 * (1 - quality) + 0.16 * (1 - place), 0.42, 7.0)
+        honest_payoff = 48 + 34 * honest_bonus + 14 * diminishing_return(gain) - 8 * audit
+        gaming_payoff = 48 + 42 * gaming_attraction - 36 * detection_risk - 8 * audit ** 1.2
         honest.append(round(honest_payoff, 1))
         gaming.append(round(gaming_payoff, 1))
     selected_audit = audit_cost - audit_cost % 5
@@ -701,7 +720,7 @@ def render_claims_audit_game_lab() -> None:
         )
     )
     fig.update_layout(
-        title="Toy strategic payoffs as audit strength rises",
+        title="Illustrative strategic payoffs as audit strength rises",
         xaxis_title="Audit strength (0-100)",
         yaxis_title="Illustrative payoff",
         height=420,
@@ -715,7 +734,7 @@ def render_claims_audit_game_lab() -> None:
         metric_cols[1].metric("Gaming payoff now", f"{gaming[selected_index]:.1f}")
         metric_cols[2].metric("Flip threshold", "Above current" if threshold is not None and threshold <= selected_audit else "Not reached")
         st.caption(
-            "This is a toy game-theory simulation. It illustrates incentive direction and threshold logic, not observed compliance rates."
+            "This is an illustrative game-theory simulation. It illustrates incentive direction and threshold logic, not observed compliance rates."
         )
 
 
@@ -728,7 +747,7 @@ def render_coordination_game_lab() -> None:
         response is the action with the higher payoff at the selected setting.
 
         **How to read it:** compare the cooperation line with the cherry-pick
-        line. When cooperation sits above cherry-picking, the toy system is
+        line. When cooperation sits above cherry-picking, the illustrative system is
         more stable for whole-population care.
 
         **What it does not prove:** this is not a calibrated model of provider
@@ -781,8 +800,11 @@ def render_coordination_game_lab() -> None:
     cooperate = []
     cherry_pick = []
     for place_level in place_levels:
-        coop_payoff = 50 + cooperation_gain * 0.38 + equity_protection * 0.25 + scope_flexibility * 0.20 + place_level * 0.24
-        cherry_payoff = 50 + cherry_pick_gain * 0.56 + (100 - equity_protection) * 0.12 + (100 - scope_flexibility) * 0.10 - place_level * 0.34
+        place = place_level / 100
+        coop_signal = 0.38 * cooperation_gain / 100 + 0.25 * equity_protection / 100 + 0.20 * scope_flexibility / 100 + 0.24 * place
+        cherry_signal = 0.56 * cherry_pick_gain / 100 + 0.12 * (1 - equity_protection / 100) + 0.10 * (1 - scope_flexibility / 100) - 0.34 * place
+        coop_payoff = 46 + 48 * strategic_response(coop_signal, 0.48, 7.0)
+        cherry_payoff = 46 + 48 * strategic_response(cherry_signal, 0.32, 7.0)
         cooperate.append(round(coop_payoff, 1))
         cherry_pick.append(round(cherry_payoff, 1))
     selected_place = place_accountability - place_accountability % 5
@@ -800,7 +822,7 @@ def render_coordination_game_lab() -> None:
         )
     )
     fig.update_layout(
-        title="Toy coordination payoffs as place accountability rises",
+        title="Illustrative coordination payoffs as place accountability rises",
         xaxis_title="Place accountability (0-100)",
         yaxis_title="Illustrative payoff",
         height=420,
@@ -814,7 +836,7 @@ def render_coordination_game_lab() -> None:
         metric_cols[1].metric("Cherry-pick payoff now", f"{cherry_pick[selected_index]:.1f}")
         metric_cols[2].metric("Coordination threshold", f"{threshold}" if threshold is not None else "Not reached")
         st.caption(
-            "This is a toy payoff and best-response simulation. It shows how stronger place accountability can shift the incentive balance."
+            "This is an illustrative payoff and best-response simulation. It shows how stronger place accountability can shift the incentive balance."
         )
 
 
@@ -822,7 +844,7 @@ def render_gaming_risk_frontier_lab() -> None:
     st.markdown("### Game theory lab 3: controls and gaming-risk frontier")
     st.markdown(
         """
-        **What this shows:** a toy frontier that shows how access gains can be
+        **What this shows:** an illustrative frontier that shows how access gains can be
         traded against gaming risk as controls and monitoring change.
 
         **How to read it:** move the sliders to see the frontier shift. Lower
@@ -841,7 +863,7 @@ def render_gaming_risk_frontier_lab() -> None:
             100,
             58,
             key="game_access_gain",
-            help="Higher values mean the toy design is trying to improve access more strongly.",
+            help="Higher values mean the illustrative design is trying to improve access more strongly.",
         )
         control_strength = st.slider(
             "Control strength",
@@ -871,10 +893,16 @@ def render_gaming_risk_frontier_lab() -> None:
     gaming_risk = []
     access_score = []
     for level in control_levels:
-        risk_value = 72 + access_gain * 0.18 - level * 0.36 - monitoring_cost * 0.12 - place_accountability * 0.08
-        access_value = 34 + access_gain * 0.42 + level * 0.14 - monitoring_cost * 0.06 + place_accountability * 0.08
-        gaming_risk.append(round(max(0.0, min(100.0, risk_value)), 1))
-        access_score.append(round(max(0.0, min(100.0, access_value)), 1))
+        control = level / 100
+        access_pressure = access_gain / 100
+        monitoring = monitoring_cost / 100
+        place = place_accountability / 100
+        risk_signal = 0.54 * access_pressure - 0.42 * control - 0.16 * place + 0.14 * monitoring
+        access_signal = 0.48 * access_pressure + 0.18 * diminishing_return(control) + 0.16 * place - 0.10 * monitoring ** 1.2
+        risk_value = 100 * strategic_response(risk_signal, 0.10, 7.0)
+        access_value = 100 * strategic_response(access_signal, 0.35, 6.5)
+        gaming_risk.append(round(clamp(risk_value), 1))
+        access_score.append(round(clamp(access_value), 1))
     selected_control = control_strength - control_strength % 5
     selected_index = control_levels.index(selected_control)
     fig = go.Figure()
@@ -906,7 +934,7 @@ def render_gaming_risk_frontier_lab() -> None:
         )
     )
     fig.update_layout(
-        title="Toy gaming-risk frontier as controls rise",
+        title="Illustrative gaming-risk frontier as controls rise",
         xaxis_title="Control strength (0-100)",
         yaxis_title="Illustrative score",
         height=420,
@@ -919,7 +947,7 @@ def render_gaming_risk_frontier_lab() -> None:
         metric_cols[1].metric("Access gain now", f"{access_score[selected_index]:.1f}")
         metric_cols[2].metric("Control setting", f"{selected_control}")
         st.caption(
-            "This is a toy controls-and-risk frontier. It shows the direction of the trade-off, not a measured frontier."
+            "This is an illustrative controls-and-risk frontier. It shows the direction of the trade-off, not a measured frontier."
         )
 
 
@@ -927,7 +955,7 @@ def render_game_theory_lab() -> None:
     st.subheader("Game theory lab")
     st.markdown(
         """
-        This lab contains three guided toy incentive simulations. They separate
+        This lab contains three guided educational incentive simulations. They separate
         formula logic, payoff/best-response logic, and controls/gaming-risk
         frontier logic so the reader can inspect each piece on its own.
         """
@@ -999,7 +1027,7 @@ def build_public_status_table() -> pd.DataFrame:
     return pd.DataFrame(
         [
             ("Model status", "Public-data anchored benchmark", "Ready for explanation; not ready for forecasting."),
-            ("Dashboard status", "Educational explainer", "Shows reference indices and toy mechanisms separately."),
+            ("Dashboard status", "Educational explainer", "Shows reference indices and educational mechanisms separately."),
             ("Evidence status", "Tracker created", "OIA/data requests still need submission or update."),
             ("Calibration status", "Readiness mapped", "Real linked data and validation tests still required."),
             ("Claim status", "Bounded", "No precise fiscal, hospital-demand, workforce or implementation-impact claims."),
@@ -1014,34 +1042,34 @@ def build_figure_inventory_table() -> pd.DataFrame:
         [
             ("Static table", "Current reform pathway", "Current state tab", "Explains the real comparator in plain English."),
             ("Static table", "Public project status", "Current state tab", "Shows what is mature and what is still early."),
-            ("Static diagram", "Public explainer architecture", "Current state tab", "Shows how reform, the benchmark, the toy explainer, evidence and calibration fit together."),
+            ("Static diagram", "Public explainer architecture", "Current state tab", "Shows how reform, the benchmark, the educational explainer, evidence and calibration fit together."),
             ("Dynamic bar chart", "Reference scenario viability", "Reference scenarios tab", "Compares model-generated viability indices."),
             ("Dynamic scatter plot", "Supply generation versus hospital pressure", "Reference scenarios tab", "Shows the trade-off between access/supply and hospital-pressure index."),
             ("Dynamic heatmap", "Scenario score matrix", "Reference scenarios tab", "Shows multiple indices across scenarios at once."),
             ("Dynamic radar chart", "Selected scenario profile", "Reference scenarios tab", "Shows one selected scenario across several dimensions."),
-            ("Dynamic bar chart", "Toy explainer output", "Toy explainer tab", "Shows simplified teaching outputs from toy slider settings."),
+            ("Dynamic bar chart", "Educational explainer output", "Educational explainer tab", "Shows simplified teaching outputs from educational slider settings."),
             ("Dynamic bar chart", "Project readiness", "Current state tab", "Shows maturity of explanation, evidence, validation and calibration work."),
         ],
         columns=["Type", "Figure or table", "Location", "Purpose"],
     )
 
 
-def build_toy_parameter_dictionary() -> pd.DataFrame:
+def build_educational_parameter_dictionary() -> pd.DataFrame:
     return pd.DataFrame(
         [
             (
                 definition.public_label,
                 definition.health_economics_meaning,
                 definition.high_value_meaning,
-                definition.toy_output_effect,
+                definition.educational_output_effect,
             )
-            for definition in TOY_LEVER_DEFINITIONS
+            for definition in EDUCATIONAL_LEVER_DEFINITIONS
         ],
         columns=[
-            "Toy lever",
+            "Educational lever",
             "Health-economics meaning",
             "What a high value means",
-            "How it affects the toy output",
+            "How it affects the educational output",
         ],
     )
 
@@ -1057,12 +1085,12 @@ def render_current_state_diagram() -> None:
           Reform [label="Current reform pathway\\n(capitation, access target, NPCD, urgent care)"];
           Gap [label="Question tested here\\nDoes this change marginal supply enough?"];
           Benchmark [label="GTPCNZ benchmark\\npublic-data anchored indices"];
-          Toy [label="Toy explainer\\nlearning sliders only"];
+          Educational [label="Educational explainer\\nlearning sliders only"];
           Evidence [label="Evidence and OIA tracker\\nwhat must be verified"];
           Calibration [label="Calibration readiness\\nreal data needed before forecasts"];
 
           Reform -> Gap -> Benchmark;
-          Benchmark -> Toy;
+          Benchmark -> Educational;
           Benchmark -> Evidence -> Calibration;
         }
         """,
@@ -1294,35 +1322,35 @@ def render_scenario_profile_radar(df: pd.DataFrame) -> None:
     )
 
 
-def render_toy_chart(scores: dict[str, float]) -> None:
-    toy_df = pd.DataFrame(
+def render_educational_chart(scores: dict[str, float]) -> None:
+    educational_df = pd.DataFrame(
         [
-            ("Supply", scores["toy_supply_score"]),
-            ("Governance", scores["toy_governance_score"]),
-            ("Equity", scores["toy_equity_score"]),
-            ("Viability", scores["toy_viability_score"]),
-            ("Hospital pressure", scores["toy_hospital_pressure_score"]),
-            ("Gaming risk", scores["toy_gaming_risk_score"]),
+            ("Supply", scores["educational_supply_score"]),
+            ("Governance", scores["educational_governance_score"]),
+            ("Equity", scores["educational_equity_score"]),
+            ("Viability", scores["educational_viability_score"]),
+            ("Hospital pressure", scores["educational_hospital_pressure_score"]),
+            ("Gaming risk", scores["educational_gaming_risk_score"]),
         ],
         columns=["index", "score"],
     )
     fig = px.bar(
-        toy_df,
+        educational_df,
         x="score",
         y="index",
         orientation="h",
-        title="Toy explainer output: not the model forecast",
-        labels={"score": "Score", "index": ""},
+        title="Educational explainer output: not the model forecast",
+        labels={"score": "Score (0-100)", "index": ""},
     )
     fig.update_layout(height=420, margin=dict(l=10, r=10, t=45, b=10))
     st.plotly_chart(fig, width="stretch")
 
 
-def render_toy_parameter_dictionary() -> None:
-    st.markdown("### Toy parameter dictionary")
-    st.dataframe(build_toy_parameter_dictionary(), hide_index=True, width="stretch")
+def render_educational_parameter_dictionary() -> None:
+    st.markdown("### Educational parameter dictionary")
+    st.dataframe(build_educational_parameter_dictionary(), hide_index=True, width="stretch")
     st.caption(
-        "These are qualitative teaching levers, not estimated structural parameters. They make the causal logic visible."
+        "These are policy-strength levers, not estimated parameters. They make the causal logic visible."
     )
 
 
@@ -1515,8 +1543,8 @@ def render_app() -> None:
         """
         This is a public-data anchored benchmark about primary care funding
         in Aotearoa New Zealand. The dashboard separates reference scenarios from
-        a small toy explainer. The toy sliders help explain the logic; they do not
-        rerun the full parameterised model.
+        a small educational explainer. The educational sliders help explain the
+        logic; they do not rerun the full parameterised model.
         """
     )
     caveat_box()
@@ -1525,63 +1553,70 @@ def render_app() -> None:
 
     df = cached_scenario_results(str(RESULTS_PATH))
 
-    st.sidebar.header("Toy explainer levers")
+    st.sidebar.header("Educational explainer levers")
     st.sidebar.caption(
-        "0 means absent/weak; 100 means strong/reliably implemented. These are educational levers, not estimated parameters."
+        "0 means absent/weak; 100 means strong/reliably implemented. These are policy-strength levers, not estimated parameters."
     )
-    slider_definitions = {definition.field_name: definition for definition in TOY_LEVER_DEFINITIONS}
-    toy_settings = ToySettings(
+    slider_definitions = {definition.field_name: definition for definition in EDUCATIONAL_LEVER_DEFINITIONS}
+    educational_settings = EducationalSettings(
         scheduled_benefit_level=st.sidebar.slider(
             slider_definitions["scheduled_benefit_level"].public_label,
-            0,
-            100,
-            55,
+            slider_definitions["scheduled_benefit_level"].lower_bound,
+            slider_definitions["scheduled_benefit_level"].upper_bound,
+            slider_definitions["scheduled_benefit_level"].default_value,
+            slider_definitions["scheduled_benefit_level"].step,
             help=slider_definitions["scheduled_benefit_level"].slider_help,
         ),
         capitation_support=st.sidebar.slider(
             slider_definitions["capitation_support"].public_label,
-            0,
-            100,
-            70,
+            slider_definitions["capitation_support"].lower_bound,
+            slider_definitions["capitation_support"].upper_bound,
+            slider_definitions["capitation_support"].default_value,
+            slider_definitions["capitation_support"].step,
             help=slider_definitions["capitation_support"].slider_help,
         ),
         place_accountability=st.sidebar.slider(
             slider_definitions["place_accountability"].public_label,
-            0,
-            100,
-            65,
+            slider_definitions["place_accountability"].lower_bound,
+            slider_definitions["place_accountability"].upper_bound,
+            slider_definitions["place_accountability"].default_value,
+            slider_definitions["place_accountability"].step,
             help=slider_definitions["place_accountability"].slider_help,
         ),
         audit_strength=st.sidebar.slider(
             slider_definitions["audit_strength"].public_label,
-            0,
-            100,
-            75,
+            slider_definitions["audit_strength"].lower_bound,
+            slider_definitions["audit_strength"].upper_bound,
+            slider_definitions["audit_strength"].default_value,
+            slider_definitions["audit_strength"].step,
             help=slider_definitions["audit_strength"].slider_help,
         ),
         equity_protection=st.sidebar.slider(
             slider_definitions["equity_protection"].public_label,
-            0,
-            100,
-            70,
+            slider_definitions["equity_protection"].lower_bound,
+            slider_definitions["equity_protection"].upper_bound,
+            slider_definitions["equity_protection"].default_value,
+            slider_definitions["equity_protection"].step,
             help=slider_definitions["equity_protection"].slider_help,
         ),
         scope_flexibility=st.sidebar.slider(
             slider_definitions["scope_flexibility"].public_label,
-            0,
-            100,
-            60,
+            slider_definitions["scope_flexibility"].lower_bound,
+            slider_definitions["scope_flexibility"].upper_bound,
+            slider_definitions["scope_flexibility"].default_value,
+            slider_definitions["scope_flexibility"].step,
             help=slider_definitions["scope_flexibility"].slider_help,
         ),
         local_in_person_support=st.sidebar.slider(
             slider_definitions["local_in_person_support"].public_label,
-            0,
-            100,
-            60,
+            slider_definitions["local_in_person_support"].lower_bound,
+            slider_definitions["local_in_person_support"].upper_bound,
+            slider_definitions["local_in_person_support"].default_value,
+            slider_definitions["local_in_person_support"].step,
             help=slider_definitions["local_in_person_support"].slider_help,
         ),
     )
-    toy_scores = score_toy_settings(toy_settings)
+    educational_scores = score_educational_settings(educational_settings)
 
     tab_names = [
         "Start here",
@@ -1591,7 +1626,7 @@ def render_app() -> None:
         "Microeconomics lab",
         "Game theory lab",
         "Live model lab",
-        "Toy explainer",
+        "Educational explainer",
         "Evidence & OIA",
         "Calibration readiness",
         "Glossary",
@@ -1646,9 +1681,9 @@ def render_app() -> None:
         render_live_model_lab(df)
 
     with tabs[7]:
-        st.subheader("Toy explainer")
-        render_toy_explainer_context()
-        render_toy_parameter_dictionary()
+        st.subheader("Educational explainer")
+        render_educational_explainer_context()
+        render_educational_parameter_dictionary()
         st.markdown(
             """
             These sliders are deliberately simple. They teach the trade-offs, but
@@ -1656,10 +1691,10 @@ def render_app() -> None:
             """
         )
         metric_cols = st.columns(3)
-        metric_cols[0].metric("Toy viability", toy_scores["toy_viability_score"])
-        metric_cols[1].metric("Toy supply", toy_scores["toy_supply_score"])
-        metric_cols[2].metric("Toy hospital pressure", toy_scores["toy_hospital_pressure_score"])
-        render_toy_chart(toy_scores)
+        metric_cols[0].metric("Viability index", educational_scores["educational_viability_score"])
+        metric_cols[1].metric("Supply index", educational_scores["educational_supply_score"])
+        metric_cols[2].metric("Hospital pressure index", educational_scores["educational_hospital_pressure_score"])
+        render_educational_chart(educational_scores)
 
     with tabs[8]:
         st.subheader("Evidence and Official Information Act tracker")
@@ -1694,8 +1729,8 @@ def render_app() -> None:
             - **Place-based accountability:** responsibility for a whole local population, including hard-to-reach people.
             - **Benchmark:** a transparent model structure that still needs real calibration data.
             - **Reference scenario:** a model-generated scenario already stored in the project outputs.
-            - **Toy explainer:** a simplified interactive teaching tool, not the model forecast.
-            """
+            - **Educational explainer:** a simplified interactive teaching tool, not the model forecast.
+        """
         )
         render_big_words_expander()
 

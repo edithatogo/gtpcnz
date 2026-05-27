@@ -1,21 +1,19 @@
-name: CI
+name: Dependency canary
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  schedule:
+    - cron: "17 18 * * 1"
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: ci-${{ github.ref }}
+  group: dependency-canary-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  test-and-render:
+  latest-compatible:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -27,8 +25,8 @@ jobs:
           python-version: "3.11"
           cache: pip
 
-      - name: Install Python dependencies
-        run: pip install -r requirements.txt
+      - name: Install latest compatible dependencies
+        run: pip install --upgrade --upgrade-strategy eager -r requirements.txt
 
       - name: Check repository health
         run: python scripts/check_repo_health.py

@@ -1,0 +1,85 @@
+levers:
+  - field_name: scheduled_benefit_level
+    public_label: Payment for extra primary care activity
+    health_economics_meaning: How strong the marginal payment signal is for each eligible primary medical activity.
+    high_value_meaning: A higher value means practices take less financial loss when they do extra clinically necessary work.
+    educational_output_effect: Raises illustrative supply, but can raise gaming risk if not paired with audit and place accountability.
+    slider_help: Strength of the marginal payment signal for each eligible primary medical activity.
+    default_value: 55
+    lower_bound: 0
+    upper_bound: 100
+    step: 1
+    source: Track 043 extracted educational lever registry
+    claim_boundary: Educational explainer lever, not an estimated parameter.
+  - field_name: capitation_support
+    public_label: Stable population-based base funding
+    health_economics_meaning: How strong the enrolled-population/capitation support is.
+    high_value_meaning: A higher value means more stable baseline funding for continuity and population responsibility.
+    educational_output_effect: Supports viability, governance and equity, but does not alone create strong marginal supply.
+    slider_help: Strength of enrolled-population/capitation support for continuity and population responsibility.
+    default_value: 70
+    lower_bound: 0
+    upper_bound: 100
+    step: 1
+    source: Track 043 extracted educational lever registry
+    claim_boundary: Educational explainer lever, not an estimated parameter.
+  - field_name: place_accountability
+    public_label: Whole-population local accountability
+    health_economics_meaning: How strongly providers or commissioning bodies remain responsible for the whole local population.
+    high_value_meaning: A higher value leaves less room to cherry-pick easy activity and ignore hard-to-reach groups.
+    educational_output_effect: Improves governance and equity and reduces gaming risk.
+    slider_help: Strength of responsibility for the whole local population, including hard-to-reach groups.
+    default_value: 65
+    lower_bound: 0
+    upper_bound: 100
+    step: 1
+    source: Track 043 extracted educational lever registry
+    claim_boundary: Educational explainer lever, not an estimated parameter.
+  - field_name: audit_strength
+    public_label: Claim rules and audit strength
+    health_economics_meaning: How clear and enforceable the item rules, documentation requirements and unusual-pattern checks are.
+    high_value_meaning: A higher value means activity-sensitive payment is more controlled.
+    educational_output_effect: Improves governance and reduces gaming risk.
+    slider_help: Strength of item definitions, documentation rules and unusual-pattern checks.
+    default_value: 75
+    lower_bound: 0
+    upper_bound: 100
+    step: 1
+    source: Track 043 extracted educational lever registry
+    claim_boundary: Educational explainer lever, not an estimated parameter.
+  - field_name: equity_protection
+    public_label: Equity and co-payment protection
+    health_economics_meaning: How strongly the design prevents patient charges and access barriers from shifting cost to high-need groups.
+    high_value_meaning: A higher value means better protection for people who would otherwise ration care by price.
+    educational_output_effect: Improves illustrative equity and helps reduce hospital-pressure logic.
+    slider_help: Strength of protections against patient charges and access barriers for high-need groups.
+    default_value: 70
+    lower_bound: 0
+    upper_bound: 100
+    step: 1
+    source: Track 043 extracted educational lever registry
+    claim_boundary: Educational explainer lever, not an estimated parameter.
+  - field_name: scope_flexibility
+    public_label: Flexible workforce scope
+    health_economics_meaning: How much appropriate care can be delivered by the right mix of GPs, nurses, nurse practitioners, pharmacists and other providers.
+    high_value_meaning: A higher value means the illustrative logic is less bottlenecked by one workforce group.
+    educational_output_effect: Raises illustrative supply, but needs audit and governance to avoid low-value activity.
+    slider_help: Ability for the right mix of providers to deliver eligible primary care activity.
+    default_value: 60
+    lower_bound: 0
+    upper_bound: 100
+    step: 1
+    source: Track 043 extracted educational lever registry
+    claim_boundary: Educational explainer lever, not an estimated parameter.
+  - field_name: local_in_person_support
+    public_label: Local in-person care capacity
+    health_economics_meaning: How much local face-to-face capacity remains available for care that cannot be safely substituted by digital access.
+    high_value_meaning: A higher value means rural, complex and hands-on care needs are less likely to be displaced.
+    educational_output_effect: Improves illustrative supply, equity and hospital-pressure logic.
+    slider_help: Capacity for local face-to-face care that cannot be replaced by digital access.
+    default_value: 60
+    lower_bound: 0
+    upper_bound: 100
+    step: 1
+    source: Track 043 extracted educational lever registry
+    claim_boundary: Educational explainer lever, not an estimated parameter.
