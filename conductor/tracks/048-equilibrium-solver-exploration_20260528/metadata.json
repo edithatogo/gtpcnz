@@ -1,0 +1,10 @@
+{
+  "id": "048-equilibrium-solver-exploration_20260528",
+  "title": "Equilibrium Solver Exploration",
+  "status": "active",
+  "created": "2026-05-28",
+  "updated": "2026-05-28",
+  "progress": "Exploring whether the existing Nash-style best-response adapter should remain an educational heuristic or be promoted to a more advanced analytical solver lane with JAX/XLA and equilibrium-method options.",
+  "owner": "codex",
+  "output": "A clear solver decision: keep the public explainer heuristic, or add a separate analytical-equilibrium lane with tests and performance gates"
+}

@@ -4,12 +4,26 @@ GTPCNZ is a public-data anchored benchmark and educational explainer. It is not 
 
 Current active tracks:
 
-- `043-concern-extraction-strict-validation_20260526`: extracts contracts, registries, validation boundaries and Streamlit UI bindings into typed layers.
+- `043-concern-extraction-strict-validation_20260526`: extracts contracts, registries, validation boundaries and Streamlit UI bindings into typed layers. All 7 phases completed.
+- `048-equilibrium-solver-exploration_20260528`: decides whether to keep Nash as an educational heuristic or add a separate analytical solver lane.
+
+Completed subagent workstreams:
+
+| Workstream | Outputs | Status |
+|---|---|---|
+| A - Contracts | `contracts/*` (parameters, inputs, scenarios, results, engine protocol), schema tests | Done |
+| B - Registries | `registries/parameters.v1.yaml` (24 params), `registries/inputs.v1.yaml` (7 datasets), loader tests | Done |
+| C - Pandera/Arrow | `validation/arrow_schemas.py`, `validation/runtime_checks.py`, schema alignment | Done |
+| D - Engines | `engines/*` (7 typed adapters: ABM, SD, JAX-MC, sensitivity, diffusion, MPC, Nash opt) | Done |
+| E - UI/Visuals | Live validation badges, calculation panel, stochastic replay, result-manifest badges | Done |
+| F - CI/Audit | mypy strict config, concern-boundary scanner (5 gates), check_no_patient_data.py | Done |
+| G - Tests | 113 passing tests (engine adapters, registries, validation, concern boundaries) | Done |
 
 Current public gates:
 
 - `python scripts/check_repo_health.py`
 - `python scripts/check_concern_boundaries.py`
+- `python scripts/check_no_patient_data.py --verbose`
 - `pytest -q`
 - `quarto render --to html`
 
