@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>model-card-v1.7.2 – GTPCNZ</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">GTPCNZ</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../reports/primary_care_architecture.html"> 
+<span class="menu-text">Public report</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/REPORTS-AND-DASHBOARD.html"> 
+<span class="menu-text">Dashboard</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../docs/calibration/model-card-v1.7.2.html" aria-current="page"> 
+<span class="menu-text">Model card</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/launch/claim-boundaries-v1.7.2.html"> 
+<span class="menu-text">Claim boundaries</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/public-site/evidence-tracker-public-v1.8.1.html"> 
+<span class="menu-text">Evidence tracker</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/public-site/calibration-readiness-page-v1.8.1.html"> 
+<span class="menu-text">Calibration readiness</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/public-site/streamlit-dashboard-contract-v1.8.1.html"> 
+<span class="menu-text">Dashboard contract</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/public-site/post-surface-crosswalk-contract-v1.8.2.html"> 
+<span class="menu-text">Post crosswalk</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../README.html"> 
+<span class="menu-text">Repository guide</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#model-card-v1.7.2-public-data-anchored-primary-care-funding-benchmark" id="toc-model-card-v1.7.2-public-data-anchored-primary-care-funding-benchmark" class="nav-link active" data-scroll-target="#model-card-v1.7.2-public-data-anchored-primary-care-funding-benchmark">Model card v1.7.2: public-data anchored primary care funding benchmark</a>
+  <ul class="collapse">
+  <li><a href="#model-name" id="toc-model-name" class="nav-link" data-scroll-target="#model-name">Model name</a></li>
+  <li><a href="#version" id="toc-version" class="nav-link" data-scroll-target="#version">Version</a></li>
+  <li><a href="#intended-use" id="toc-intended-use" class="nav-link" data-scroll-target="#intended-use">Intended use</a></li>
+  <li><a href="#not-intended-for" id="toc-not-intended-for" class="nav-link" data-scroll-target="#not-intended-for">Not intended for</a></li>
+  <li><a href="#core-policy-question" id="toc-core-policy-question" class="nav-link" data-scroll-target="#core-policy-question">Core policy question</a></li>
+  <li><a href="#strongest-counter-hypothesis" id="toc-strongest-counter-hypothesis" class="nav-link" data-scroll-target="#strongest-counter-hypothesis">Strongest counter-hypothesis</a></li>
+  <li><a href="#what-the-model-must-not-hide" id="toc-what-the-model-must-not-hide" class="nav-link" data-scroll-target="#what-the-model-must-not-hide">What the model must not hide</a></li>
+  <li><a href="#inputs" id="toc-inputs" class="nav-link" data-scroll-target="#inputs">Inputs</a></li>
+  <li><a href="#outputs" id="toc-outputs" class="nav-link" data-scroll-target="#outputs">Outputs</a></li>
+  <li><a href="#validation-status" id="toc-validation-status" class="nav-link" data-scroll-target="#validation-status">Validation status</a></li>
+  <li><a href="#registry-backed-parameters-and-scenarios" id="toc-registry-backed-parameters-and-scenarios" class="nav-link" data-scroll-target="#registry-backed-parameters-and-scenarios">Registry-backed parameters and scenarios</a>
+  <ul class="collapse">
+  <li><a href="#parameter-catalogue-summary" id="toc-parameter-catalogue-summary" class="nav-link" data-scroll-target="#parameter-catalogue-summary">Parameter catalogue summary</a></li>
+  <li><a href="#scenario-catalogue-summary" id="toc-scenario-catalogue-summary" class="nav-link" data-scroll-target="#scenario-catalogue-summary">Scenario catalogue summary</a></li>
+  </ul></li>
+  <li><a href="#what-is-calculated-vs.-what-is-assumed" id="toc-what-is-calculated-vs.-what-is-assumed" class="nav-link" data-scroll-target="#what-is-calculated-vs.-what-is-assumed">What is calculated vs.&nbsp;what is assumed</a></li>
+  <li><a href="#validation-boundaries-and-result-manifest-structure" id="toc-validation-boundaries-and-result-manifest-structure" class="nav-link" data-scroll-target="#validation-boundaries-and-result-manifest-structure">Validation boundaries and result-manifest structure</a>
+  <ul class="collapse">
+  <li><a href="#resultmanifest-fields" id="toc-resultmanifest-fields" class="nav-link" data-scroll-target="#resultmanifest-fields">ResultManifest fields</a></li>
+  <li><a href="#scenarioresult-fields" id="toc-scenarioresult-fields" class="nav-link" data-scroll-target="#scenarioresult-fields">ScenarioResult fields</a></li>
+  <li><a href="#pandera-validation-optional" id="toc-pandera-validation-optional" class="nav-link" data-scroll-target="#pandera-validation-optional">Pandera validation (optional)</a></li>
+  </ul></li>
+  <li><a href="#runtime-calculation-modes" id="toc-runtime-calculation-modes" class="nav-link" data-scroll-target="#runtime-calculation-modes">Runtime calculation modes</a>
+  <ul class="collapse">
+  <li><a href="#what-each-mode-means-for-public-communication" id="toc-what-each-mode-means-for-public-communication" class="nav-link" data-scroll-target="#what-each-mode-means-for-public-communication">What each mode means for public communication</a></li>
+  </ul></li>
+  <li><a href="#interpretation-rule" id="toc-interpretation-rule" class="nav-link" data-scroll-target="#interpretation-rule">Interpretation rule</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="model-card-v1.7.2-public-data-anchored-primary-care-funding-benchmark" class="level1">
+<h1>Model card v1.7.2: public-data anchored primary care funding benchmark</h1>
+<section id="model-name" class="level2">
+<h2 class="anchored" data-anchor-id="model-name">Model name</h2>
+<p>Public-data anchored benchmark for primary care funding architecture in Aotearoa New Zealand.</p>
+</section>
+<section id="version" class="level2">
+<h2 class="anchored" data-anchor-id="version">Version</h2>
+<p>v1.7.2. This version incorporates red-team and devil’s advocate findings into the model communication layer.</p>
+</section>
+<section id="intended-use" class="level2">
+<h2 class="anchored" data-anchor-id="intended-use">Intended use</h2>
+<ul>
+<li>Compare the relative logic of funding architectures.</li>
+<li>Identify which assumptions are load-bearing.</li>
+<li>Support public explanation, policy discussion, stakeholder validation and OIA/data planning.</li>
+<li>Prepare the pathway for future empirical calibration.</li>
+</ul>
+</section>
+<section id="not-intended-for" class="level2">
+<h2 class="anchored" data-anchor-id="not-intended-for">Not intended for</h2>
+<ul>
+<li>Claiming precise reductions in emergency department presentations, admissions or costs.</li>
+<li>Producing an implementation business case.</li>
+<li>Replacing stakeholder validation, equity review or linked-data analysis.</li>
+<li>Claiming that any organisation has endorsed the model.</li>
+<li>Arguing that fee-for-service alone is superior to capitation.</li>
+</ul>
+</section>
+<section id="core-policy-question" class="level2">
+<h2 class="anchored" data-anchor-id="core-policy-question">Core policy question</h2>
+<p>Does a hybrid architecture allow lower-cost upstream care to expand safely before need becomes hospital demand? In this model, hybrid means capitation for population responsibility plus an uncapped, scheduled, rules-based fee-for-service stream for eligible primary medical activity, with place-based accountability.</p>
+</section>
+<section id="strongest-counter-hypothesis" class="level2">
+<h2 class="anchored" data-anchor-id="strongest-counter-hypothesis">Strongest counter-hypothesis</h2>
+<p>The current reform pathway may be sufficient to improve access without a new uncapped scheduled fee-for-service stream. That pathway includes capitation reweighting, the access target, the National Primary Care Dataset, digital access, urgent-care investment, PHO accountability and separate appropriations.</p>
+</section>
+<section id="what-the-model-must-not-hide" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-model-must-not-hide">What the model must not hide</h2>
+<ul>
+<li>Uncapped activity without audit, item rules and place accountability is a high-risk scenario.</li>
+<li>Co-payments can worsen inequity unless protected.</li>
+<li>Scope expansion can fragment care unless tied to shared records, governance and continuity.</li>
+<li>Rural access may need capital, workforce, housing, salaried and infrastructure levers as well as item payments.</li>
+<li>Accident Compensation Corporation is an analogy for rules-based claims, not a complete model for illness-based primary care.</li>
+</ul>
+</section>
+<section id="inputs" class="level2">
+<h2 class="anchored" data-anchor-id="inputs">Inputs</h2>
+<p>The benchmark uses 70 parameters across demand, supply, funding, governance, ambulance, hospital, equity, risk and implementation domains. v1.7.1/v1.7.2 tiers these into core, extended and exploratory parameters.</p>
+</section>
+<section id="outputs" class="level2">
+<h2 class="anchored" data-anchor-id="outputs">Outputs</h2>
+<ul>
+<li>Access and supply indices.</li>
+<li>Hospital pressure indices.</li>
+<li>Fiscal/gaming risk indices.</li>
+<li>Hybrid viability scores.</li>
+<li>Scenario comparison and sensitivity outputs.</li>
+</ul>
+</section>
+<section id="validation-status" class="level2">
+<h2 class="anchored" data-anchor-id="validation-status">Validation status</h2>
+<p>This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.</p>
+</section>
+<section id="registry-backed-parameters-and-scenarios" class="level2">
+<h2 class="anchored" data-anchor-id="registry-backed-parameters-and-scenarios">Registry-backed parameters and scenarios</h2>
+<p>All tunable model parameters are maintained in versioned YAML registries (<code>models/primarycare_model/registries/</code>). No production parameter default lives outside a registry. Each parameter record includes:</p>
+<ul>
+<li><code>parameter_id</code> — stable identifier referenced by scenarios and overrides</li>
+<li><code>value_type</code> — <code>integer</code>, <code>number</code>, <code>boolean</code>, or <code>categorical</code></li>
+<li><code>default_value</code> — the production default</li>
+<li><code>lower_bound</code>, <code>upper_bound</code> — validity range for runtime checks</li>
+<li><code>evidence_tier</code> — <code>assumption</code>, <code>public_data</code>, <code>stakeholder</code>, <code>linked_data</code>, or <code>calibrated</code></li>
+<li><code>sensitivity_class</code> — <code>public</code>, <code>public_aggregate</code>, <code>template</code>, <code>sensitive</code>, or <code>confidential</code></li>
+</ul>
+<section id="parameter-catalogue-summary" class="level3">
+<h3 class="anchored" data-anchor-id="parameter-catalogue-summary">Parameter catalogue summary</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Domain</th>
+<th>Parameters</th>
+<th>Evidence tiers</th>
+<th>Claim boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Capitation rates</td>
+<td><code>base_capitation_rate</code>, age weights, deprivation uplift</td>
+<td><code>public_data</code></td>
+<td>Public documents show…</td>
+</tr>
+<tr class="even">
+<td>FFS item values</td>
+<td>Consultations, after-hours, prolonged, vaccine admin, care coordination</td>
+<td><code>public_data</code> / <code>stakeholder</code></td>
+<td>Public documents show… / Stakeholder feedback suggests…</td>
+</tr>
+<tr class="odd">
+<td>Copayment thresholds</td>
+<td>Annual cap, income waiver, max gap</td>
+<td><code>public_data</code></td>
+<td>Public documents show…</td>
+</tr>
+<tr class="even">
+<td>Population counts</td>
+<td>Enrolled population, catchment estimate, patient-to-GP ratio</td>
+<td><code>public_data</code> / <code>stakeholder</code></td>
+<td>Public documents show…</td>
+</tr>
+<tr class="odd">
+<td>Workforce parameters</td>
+<td>Supply elasticity, nurse substitution, participation rate</td>
+<td><code>public_data</code> / <code>calibrated</code></td>
+<td>Public documents show… / Track 043 linked-data calibration</td>
+</tr>
+<tr class="even">
+<td>Governance parameters</td>
+<td>Audit intensity, data visibility, scope flexibility, governance index</td>
+<td><code>calibrated</code></td>
+<td>Track 043 linked-data calibration</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="scenario-catalogue-summary" class="level3">
+<h3 class="anchored" data-anchor-id="scenario-catalogue-summary">Scenario catalogue summary</h3>
+<p>Scenarios are defined in <code>registries/scenarios.v1.yaml</code> and loaded via <code>RegistryLoader</code>. Each scenario references known parameter IDs and supplies override values. The <code>RuntimeScenarioDefinition</code> contract (in <code>models/primarycare_model/contracts/scenarios.py</code>) defines the fields the calculation lab consumes.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Scenario ID</th>
+<th>Kind</th>
+<th>Claim boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>reference</code></td>
+<td><code>reference</code></td>
+<td>“The benchmark shows the logic of…”</td>
+</tr>
+<tr class="even">
+<td><code>high_capitation</code></td>
+<td><code>educational</code></td>
+<td>“I think this warrants testing…”</td>
+</tr>
+<tr class="odd">
+<td><code>high_ffs</code></td>
+<td><code>educational</code></td>
+<td>“I think this warrants testing…”</td>
+</tr>
+<tr class="even">
+<td><code>balanced_hybrid</code></td>
+<td><code>reference</code></td>
+<td>“The benchmark shows the logic of…”</td>
+</tr>
+<tr class="odd">
+<td>(user-defined)</td>
+<td><code>stochastic_demo</code></td>
+<td>“Theory predicts…”</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="what-is-calculated-vs.-what-is-assumed" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-calculated-vs.-what-is-assumed">What is calculated vs.&nbsp;what is assumed</h2>
+<p>The distinction between calculated quantities and assumed values is critical for correct interpretation. This table identifies every output value’s origin.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Output or intermediate</th>
+<th>Calculated by the model?</th>
+<th>Source / formula</th>
+<th>Claim boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Access index</td>
+<td><strong>Yes</strong> — deterministic formula of 9 slider inputs</td>
+<td><code>access_index = f(activity_signal, capitation, place_accountability, scope_capacity, urgent_ambulance, data_visibility, governance, equity_protection, copayment_burden)</code></td>
+<td>Benchmark shows the logic of…</td>
+</tr>
+<tr class="even">
+<td>Supply generation index</td>
+<td><strong>Yes</strong> — deterministic formula</td>
+<td><code>supply_index = f(capitation, activity_signal, scope_capacity, governance)</code></td>
+<td>Benchmark shows the logic of…</td>
+</tr>
+<tr class="odd">
+<td>Hospital pressure index</td>
+<td><strong>Yes</strong> — deterministic formula</td>
+<td><code>hospital_pressure = f(access_index, urgent_ambulance, hospital_salience)</code></td>
+<td>Benchmark shows the logic of…</td>
+</tr>
+<tr class="even">
+<td>Gaming risk index</td>
+<td><strong>Yes</strong> — deterministic formula</td>
+<td><code>gaming_risk = f(activity_signal, governance, data_visibility, audit_intensity)</code></td>
+<td>Benchmark shows the logic of…</td>
+</tr>
+<tr class="odd">
+<td>Hybrid viability score</td>
+<td><strong>Yes</strong> — composite of access, supply, hospital pressure, gaming risk</td>
+<td>Weighted average with equity and governance modifiers</td>
+<td>Benchmark shows the logic of…</td>
+</tr>
+<tr class="even">
+<td>Monte Carlo distribution (p05/p50/p95)</td>
+<td><strong>Yes</strong> — stochastic draws</td>
+<td><code>jax_mc_adapter</code> draws from seeded distribution; <code>UncertaintySummary</code> aggregates percentiles</td>
+<td>Theory predicts… (demonstrative shape only)</td>
+</tr>
+<tr class="odd">
+<td>ABM diffusion trace</td>
+<td><strong>Yes</strong> — agent-based simulation</td>
+<td><code>abm_adapter</code> runs seeded agent model over configurable population</td>
+<td>Theory predicts… (demonstrative shape only)</td>
+</tr>
+<tr class="even">
+<td>Capitation base rate</td>
+<td><strong>Assumed</strong> — registry default</td>
+<td>NZ Ministry of Health GP capitation funding schedule (2023/24)</td>
+<td>Public documents show…</td>
+</tr>
+<tr class="odd">
+<td>FFS item values</td>
+<td><strong>Assumed</strong> — registry default</td>
+<td>NZ PHO Services Agreement</td>
+<td>Public documents show…</td>
+</tr>
+<tr class="even">
+<td>GP supply elasticity</td>
+<td><strong>Assumed</strong> — registry default</td>
+<td>Track 043 calibrated parameter (linked data)</td>
+<td>Track 043 linked-data calibration</td>
+</tr>
+<tr class="odd">
+<td>Audit intensity factor</td>
+<td><strong>Assumed</strong> — registry default</td>
+<td>Track 043 calibrated parameter (linked data)</td>
+<td>Track 043 linked-data calibration</td>
+</tr>
+<tr class="even">
+<td>Population counts</td>
+<td><strong>Assumed</strong> — registry default</td>
+<td>Statistics NZ ERP / Ministry enrolment data</td>
+<td>Public documents show…</td>
+</tr>
+<tr class="odd">
+<td>Copayment thresholds</td>
+<td><strong>Assumed</strong> — registry default</td>
+<td>NZ Community Services Card / High Use Health Card policy</td>
+<td>Public documents show…</td>
+</tr>
+<tr class="even">
+<td>Educational lever effects</td>
+<td><strong>Calculated</strong> — simplified pedagogical formula</td>
+<td><code>educational_levers.v1.yaml</code> defines the lever; formula is illustrative</td>
+<td>I think this warrants testing…</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Rule of thumb</strong>: If you see it in a slider in the calculation lab, it’s a user-adjustable assumption with a registry default. If you see it in a score or index in the results table, it was calculated from those assumptions. The <code>ResultManifest</code> tells you which mode was used.</p>
+</section>
+<section id="validation-boundaries-and-result-manifest-structure" class="level2">
+<h2 class="anchored" data-anchor-id="validation-boundaries-and-result-manifest-structure">Validation boundaries and result-manifest structure</h2>
+<p>Every public-facing result is packaged in a <code>ResultManifest</code> contract (defined in <code>models/primarycare_model/contracts/results.py</code>). The manifest travels with the output through the Streamlit display layer and is included in any export or download.</p>
+<section id="resultmanifest-fields" class="level3">
+<h3 class="anchored" data-anchor-id="resultmanifest-fields">ResultManifest fields</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>result_id</code></td>
+<td><code>str</code> (min_length=1)</td>
+<td>Unique identifier for this specific run, e.g.&nbsp;<code>"sd_reference_42"</code></td>
+</tr>
+<tr class="even">
+<td><code>calculation_mode</code></td>
+<td><code>CalculationMode</code> literal</td>
+<td>One of <code>precomputed</code>, <code>live_deterministic</code>, <code>seeded_stochastic</code>, <code>educational</code></td>
+</tr>
+<tr class="odd">
+<td><code>scenario_id</code></td>
+<td><code>str</code> (min_length=1)</td>
+<td>The scenario definition used, e.g.&nbsp;<code>"reference"</code>, <code>"high_capitation"</code></td>
+</tr>
+<tr class="even">
+<td><code>seed</code></td>
+<td><code>int</code> or <code>None</code></td>
+<td>Seeded random seed for stochastic modes; <code>None</code> for deterministic</td>
+</tr>
+<tr class="odd">
+<td><code>draws</code></td>
+<td><code>int</code> or <code>None</code></td>
+<td>Number of stochastic draws; <code>None</code> for deterministic</td>
+</tr>
+<tr class="even">
+<td><code>claim_boundary</code></td>
+<td><code>str</code> (min_length=1)</td>
+<td>Wording rule from the claim ladder that applies to this result</td>
+</tr>
+<tr class="odd">
+<td><code>validation_status</code></td>
+<td><code>str</code> (min_length=1)</td>
+<td>Validation outcome: <code>"passed"</code>, <code>"warning"</code>, <code>"failed"</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="scenarioresult-fields" class="level3">
+<h3 class="anchored" data-anchor-id="scenarioresult-fields">ScenarioResult fields</h3>
+<p>Each scenario run produces a <code>ScenarioResult</code> (Pydantic strict contract) with scores bounded [0, 100]:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Bounds</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>scenario_id</code></td>
+<td>min_length=1</td>
+<td>Which scenario was calculated</td>
+</tr>
+<tr class="even">
+<td><code>hybrid_viability_score</code></td>
+<td>0–100</td>
+<td>Composite viability of the hybrid architecture under these settings</td>
+</tr>
+<tr class="odd">
+<td><code>access_score</code></td>
+<td>0–100</td>
+<td>Estimated population access to timely primary care</td>
+</tr>
+<tr class="even">
+<td><code>supply_generation_score</code></td>
+<td>0–100</td>
+<td>Ability of the funding settings to generate workforce supply</td>
+</tr>
+<tr class="odd">
+<td><code>hospital_pressure_score</code></td>
+<td>0–100</td>
+<td>Estimated avoided or deferred hospital demand (lower is better)</td>
+</tr>
+<tr class="even">
+<td><code>gaming_risk_score</code></td>
+<td>0–100</td>
+<td>Risk of claim inflation or gaming behaviour (lower is better)</td>
+</tr>
+<tr class="odd">
+<td><code>calculation_status</code></td>
+<td>min_length=1</td>
+<td><code>"completed"</code>, <code>"partial"</code>, or <code>"error"</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pandera-validation-optional" class="level3">
+<h3 class="anchored" data-anchor-id="pandera-validation-optional">Pandera validation (optional)</h3>
+<p>Public result frames are validated through a <code>ReferenceResultSchema</code> Pandera <code>DataFrameModel</code> when Pandera is installed. When Pandera is not available (the lean Streamlit deployment path), an equivalent <code>validate_reference_results_frame</code> function checks the same column presence, data types and 0–100 score bounds using local pandas operations. This guarantees that every value displayed in the Streamlit UI respects its declared bounds, regardless of deployment environment.</p>
+</section>
+</section>
+<section id="runtime-calculation-modes" class="level2">
+<h2 class="anchored" data-anchor-id="runtime-calculation-modes">Runtime calculation modes</h2>
+<p>The model executes in one of four calculation modes. Every public output carries a <code>ResultManifest</code> with the <code>calculation_mode</code> field set to one of these values, rendered as a coloured badge in the Streamlit UI.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mode</th>
+<th><code>calculation_mode</code> literal</th>
+<th>When used</th>
+<th>What guarantees are made</th>
+<th>Claim boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Public-data anchored</strong></td>
+<td><code>precomputed</code></td>
+<td>Default static benchmark tables and reference result frames</td>
+<td>Deterministic; uses only registry defaults; no runtime slider input</td>
+<td>“The benchmark shows the logic of…”</td>
+</tr>
+<tr class="even">
+<td><strong>Deterministic</strong></td>
+<td><code>live_deterministic</code></td>
+<td>User adjusts sliders in the calculation lab; formulas run once with the current slider state</td>
+<td>Deterministic for the same inputs; no random variation; seed is <code>None</code></td>
+<td>“The benchmark shows the logic of…”</td>
+</tr>
+<tr class="odd">
+<td><strong>Stochastic demo</strong></td>
+<td><code>seeded_stochastic</code></td>
+<td>User enables Monte Carlo, ABM, diffusion or MPC engines; results include a seed and draw count</td>
+<td>Reproducible when seed is recorded; distribution shape is demonstrative, not calibrated</td>
+<td>“Theory predicts…” / “The benchmark shows the logic of…”</td>
+</tr>
+<tr class="even">
+<td><strong>Educational</strong></td>
+<td><code>educational</code></td>
+<td>User explores educational simulation levers; formulas and effects are simplified for teaching</td>
+<td>Results are illustrative only; formulas are pedagogical simplifications</td>
+<td>“Stakeholder feedback suggests…” / “I think this warrants testing…”</td>
+</tr>
+</tbody>
+</table>
+<section id="what-each-mode-means-for-public-communication" class="level3">
+<h3 class="anchored" data-anchor-id="what-each-mode-means-for-public-communication">What each mode means for public communication</h3>
+<ul>
+<li><strong><code>precomputed</code></strong> — Every value in the output frame was calculated from the YAML registry defaults. No runtime user input changed the numbers. This is the safest mode for public documents.</li>
+<li><strong><code>live_deterministic</code></strong> — The user adjusted one or more sliders and the model ran the same deterministic formulas on the adjusted inputs. If two users set the same slider positions they get identical outputs. This is the mode used for “what if” exploration.</li>
+<li><strong><code>seeded_stochastic</code></strong> — The model ran a seeded random process (Monte Carlo, agent-based model, diffusion simulation, or MPC optimisation). The result includes the seed value and draw count so it can be reproduced. The <em>shape</em> of the distribution is a public-data anchored benchmark, not a calibrated forecast. The uncertainty summary (<code>p05</code>, <code>p50</code>, <code>p95</code>) is demonstrative.</li>
+<li><strong><code>educational</code></strong> — The result comes from a deliberately simplified formula designed to illustrate a policy concept (e.g.&nbsp;“if you raise capitation, hybrid viability goes up slightly”). Educational levers have registry-backed labels and explanations, but the formulas are not fit for policy calibration.</li>
+</ul>
+</section>
+</section>
+<section id="interpretation-rule" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-rule">Interpretation rule</h2>
+<p>Use the model to ask better questions and prioritise validation. Do not use it to claim final effect sizes.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/edithatogo\.github\.io\/gtpcnz\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>GTPCNZ</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Public-data anchored benchmark; not linked-data calibrated or a patient-level forecast</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
