@@ -1,0 +1,32 @@
+name: Profiling
+
+on:
+  schedule:
+    - cron: "23 18 * * 4"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: profiling-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  scalene:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install quality dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Run Scalene profile
+        run: python -m scalene --cli --reduced-profile --profile-all scripts/run_scalene_profile.py

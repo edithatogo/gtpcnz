@@ -51,7 +51,7 @@ class EducationalLeverDefinition(StrictContract):
     claim_boundary: str = Field(min_length=1)
 
     @model_validator(mode="after")
-    def _validate_bounds(self) -> "EducationalLeverDefinition":
+    def _validate_bounds(self) -> EducationalLeverDefinition:
         if self.lower_bound > self.upper_bound:
             raise ValueError("lower_bound cannot exceed upper_bound")
         if not self.lower_bound <= self.default_value <= self.upper_bound:

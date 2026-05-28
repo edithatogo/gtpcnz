@@ -1,0 +1,25 @@
+{
+  "include": [
+    "models/primarycare_model/contracts/engine.py",
+    "models/primarycare_model/contracts/inputs.py",
+    "models/primarycare_model/contracts/parameters.py",
+    "models/primarycare_model/contracts/results.py",
+    "models/primarycare_model/contracts/scenarios.py"
+  ],
+  "exclude": [
+    ".venv",
+    "_site",
+    "public",
+    "codex-tmp",
+    "build",
+    "__pycache__",
+    ".tmp"
+  ],
+  "pythonVersion": "3.11",
+  "typeCheckingMode": "strict",
+  "reportMissingTypeStubs": "none",
+  "reportUnknownMemberType": "warning",
+  "reportUnknownVariableType": "warning",
+  "reportUnknownArgumentType": "warning",
+  "reportUnknownLambdaType": "warning"
+}

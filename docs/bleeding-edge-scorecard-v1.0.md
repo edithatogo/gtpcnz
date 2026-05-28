@@ -18,5 +18,57 @@ The supplemental scorecard currently checks:
 - GitHub Pages deployment.
 - Dependabot coverage.
 - Public claim-control documents.
+- Enhancement shortlist decision record (Track 049).
 
-Target posture: `bleeding-edge controlled`, meaning current tooling is used with explicit public-claim, dependency, testing and deployment gates.
+## Analytical Enhancement Commitments (v1.8.5)
+
+The following enhancements are classified and scheduled by the Track 049 shortlist (`docs/decisions/enhancement-shortlist-v1.8.5.md`):
+
+### Wave 1 — In progress (Must)
+
+| # | Enhancement | Category |
+|---|---|---|
+| 1 | Subgroup equity/rural stratification on existing charts | Subgroup + Visual |
+| 2 | Tornado sensitivity chart | Analysis + Visual |
+| 3 | Seeded Monte Carlo ensembles (all-scenario) | Simulation |
+| 4 | Waterfall / decomposition chart | Visual |
+| 5 | Cohort-stratified runs | Simulation |
+
+### Wave 2 — Queued (Should)
+
+| # | Enhancement | Category |
+|---|---|---|
+| 6 | Variance decomposition | Analysis |
+| 7 | Heatmap matrix (scenario × subgroup) | Visual |
+| 8 | Policy shock sequences | Simulation |
+| 9 | Uncertainty ribbon on stock-flow path | Visual |
+| 10 | Ridge/violin distribution with subgroup facets | Visual |
+| 11 | Stress-test scenarios | Simulation |
+
+### Wave 3 — Future (Could)
+
+| # | Enhancement | Category |
+|---|---|---|
+| 12 | Phase portraits / vector fields | Visual |
+| 13 | Agent-based subgroup replay | Simulation |
+| 14 | Regime sweep simulation | Simulation |
+| 15 | Payoff surface (3D) | Visual |
+| 16 | Interaction scan | Analysis |
+
+### Explicit Exclusions
+
+| Item | Reason |
+|---|---|
+| Person-level analysis | Aggregate-subgroup boundary |
+| Private / patient-level data | Public-data boundary |
+| Black-box solvers | Transparency requirement |
+| Solver promotion | Delegated to Track 048 |
+
+Target posture: `bleeding-edge controlled`, meaning current tooling is used with explicit public-claim, dependency, testing and deployment gates, and analytical enhancements follow the ranked shortlist.
+
+## Verification
+
+```powershell
+rg -n "rural|depriv|equity|subgroup|tornado|variance decomposition|phase portrait|vector field|heatmap|violin|waterfall|frontier|ensemble|stochastic" models docs conductor
+python -m pytest -q models/tests
+```

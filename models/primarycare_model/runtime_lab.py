@@ -7,14 +7,13 @@ calculations, not calibrated forecasts.
 
 from __future__ import annotations
 
+from collections.abc import Iterable
 from dataclasses import asdict, dataclass, replace
-from typing import Iterable
 
 import numpy as np
 import pandas as pd
 
 from models.primarycare_model.validation.registry_loader import load_runtime_scenarios_registry
-
 
 CLAIM_LABEL = "live calculation; demonstrative model-generated index; not linked-data calibrated and not a patient-level forecast"
 STOCHASTIC_LABEL = "cached stochastic demo; demonstrative uncertainty only; not an empirical probability"
@@ -315,6 +314,171 @@ def run_agent_lens(
         columns=["metric", "value"],
     )
     return agent_frame, summary
+
+
+# ── Phase 5: Validation and calculation-detail helpers ──────────────────
+
+
+def validate_slider_value(
+    value: int | float,
+    field_name: str,
+    lower_bound: float | None = None,
+    upper_bound: float | None = None,
+) -> tuple[str, str]:
+    """Return (badge_emoji, tooltip_text) for a slider value.
+
+    Parameters
+    ----------
+    value : int | float
+        The current slider value.
+    field_name : str
+        Human-readable field name for error messages.
+    lower_bound : float | None
+        Expected lower bound (inclusive).
+    upper_bound : float | None
+        Expected upper bound (inclusive).
+
+    Returns
+    -------
+    tuple[str, str]
+        A badge emoji ("✅", "⚠️", "❌") and a tooltip/description string.
+    """
+    if lower_bound is not None and value < lower_bound:
+        return ("⚠️", f"{field_name}: value {value} is below lower bound {lower_bound}")
+    if upper_bound is not None and value > upper_bound:
+        return ("⚠️", f"{field_name}: value {value} is above upper bound {upper_bound}")
+    return ("✅", f"{field_name}: {value} within [{lower_bound or 0}, {upper_bound or 100}]")
+
+
+def get_calculation_details(
+    scenario_id: str | None = None,
+    scenario_name: str | None = None,
+) -> list[dict[str, str]]:
+    """Return deterministic formula summaries for display in the UI.
+
+    Parameters
+    ----------
+    scenario_id : str | None
+        Optional scenario identifier to include.
+    scenario_name : str | None
+        Optional scenario name to include.
+
+    Returns
+    -------
+    list[dict[str, str]]
+        A list of dicts with keys ``label``, ``formula`` and ``mode``.
+    """
+    details: list[dict[str, str]] = [
+        {
+            "label": "Supply generation",
+            "formula": "0.34×activity + 0.18×capitation + 0.24×scope + 0.12×urgent + 0.12×place − 0.12×budget_tightness",
+            "mode": "deterministic",
+        },
+        {
+            "label": "Access",
+            "formula": "0.42×supply + 0.18×urgent + 0.15×equity + 0.12×place + 0.10×data − 0.16×copay",
+            "mode": "deterministic",
+        },
+        {
+            "label": "Hospital deflection",
+            "formula": "0.32×access + 0.22×urgent + 0.16×supply + 0.16×data + 0.14×place − 0.10×complexity",
+            "mode": "deterministic",
+        },
+        {
+            "label": "Gaming risk",
+            "formula": "0.35×activity + 0.18×scope + 0.18×complexity − 0.30×governance − 0.18×data − 0.16×place",
+            "mode": "deterministic",
+        },
+        {
+            "label": "Fiscal risk",
+            "formula": "0.22×activity + 0.18×gaming_risk + 0.16×complexity + 0.14×(1−budget) − 0.18×governance − 0.14×deflection",
+            "mode": "deterministic",
+        },
+        {
+            "label": "Hybrid viability",
+            "formula": "0.24×supply + 0.18×access + 0.18×equity + 0.16×governance + 0.14×deflection + 0.06×(100−fiscal_risk) + 0.04×(100−gaming_risk)",
+            "mode": "deterministic",
+        },
+    ]
+    return details
+
+
+def format_formula_markdown(details: list[dict[str, str]]) -> str:
+    """Format calculation details as a Markdown block."""
+    lines = ["| Index | Formula sketch | Mode |", "|------|----------------|------|"]
+    for d in details:
+        mode_badge = "📐 Deterministic" if d["mode"] == "deterministic" else "🎲 Stochastic"
+        lines.append(f"| **{d['label']}** | {d['formula']} | {mode_badge} |")
+    return "\n".join(lines)
+
+
+def run_stochastic_replay(
+    scenario_id: str,
+    draws: int = 100,
+    fixed_seed: int = 260526,
+    random_seed: int | None = None,
+    sd: float = 0.08,
+) -> dict[str, pd.DataFrame]:
+    """Run fixed-seed and random-seed stochastic replays side by side.
+
+    Parameters
+    ----------
+    scenario_id : str
+        The scenario identifier.
+    draws : int
+        Number of Monte Carlo draws.
+    fixed_seed : int
+        Fixed seed for reproducible replay.
+    random_seed : int | None
+        Optional different seed for comparison. If ``None``, a random seed
+        is generated from the OS entropy pool.
+    sd : float
+        Perturbation width (0.01-0.20).
+
+    Returns
+    -------
+    dict[str, pd.DataFrame]
+        ``{"fixed": draw_frame, "random": draw_frame, "summary": combined_summary}``
+    """
+    if random_seed is None:
+        rng_os = np.random.default_rng()
+        random_seed = int(rng_os.integers(1, 999999))
+
+    fixed_frame, fixed_summary = run_stochastic_uncertainty(
+        scenario_id=scenario_id, draws=draws, seed=fixed_seed, sd=sd
+    )
+    random_frame, random_summary = run_stochastic_uncertainty(
+        scenario_id=scenario_id, draws=draws, seed=random_seed, sd=sd
+    )
+
+    # Combine summaries for comparison
+    combined = fixed_summary.copy()
+    combined = combined.rename(
+        columns={
+            "mean": "fixed_mean",
+            "p05": "fixed_p05",
+            "p50": "fixed_p50",
+            "p95": "fixed_p95",
+        }
+    )
+    random_renamed = random_summary.rename(
+        columns={
+            "mean": "random_mean",
+            "p05": "random_p05",
+            "p50": "random_p50",
+            "p95": "random_p95",
+        }
+    )
+    combined = combined.merge(random_renamed, on="metric", suffixes=("_fixed", "_random"))
+
+    return {
+        "fixed": fixed_frame,
+        "random": random_frame,
+        "summary": combined,
+    }
+
+
+# ── End Phase 5 helpers ─────────────────────────────────────────────────
 
 
 def model_gap_map() -> pd.DataFrame:

@@ -1,6 +1,5 @@
 from streamlit.testing.v1 import AppTest
 
-
 APP_PATH = "models/primarycare_model/app.py"
 DEPLOYMENT_ENTRYPOINT = "streamlit_app.py"
 

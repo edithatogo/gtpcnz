@@ -22,6 +22,13 @@ def bleeding_edge_scorecard() -> dict[str, object]:
         ("dependency_canary", "Latest-compatible dependency canary lane", ".github/workflows/dependency-canary.yml", _exists(".github/workflows/dependency-canary.yml")),
         ("pages_deploy", "GitHub Pages deployment workflow", ".github/workflows/pages.yml", _exists(".github/workflows/pages.yml")),
         ("dependabot", "Automated dependency maintenance", ".github/dependabot.yml", _exists(".github/dependabot.yml")),
+        ("renovate", "Renovate dependency maintenance", "renovate.json", _exists("renovate.json") and _exists(".github/workflows/renovate.yml")),
+        ("strict_type_gates", "Basedpyright and mypy strict gates", "pyrightconfig.json", _exists("pyrightconfig.json")),
+        ("quality_workflow", "Coverage, lint, audit and property-test workflow", ".github/workflows/quality.yml", _exists(".github/workflows/quality.yml")),
+        ("codeql", "CodeQL security-and-quality scan", ".github/workflows/codeql.yml", _exists(".github/workflows/codeql.yml")),
+        ("mutation_testing", "Mutation testing workflow", ".github/workflows/mutation.yml", _exists(".github/workflows/mutation.yml")),
+        ("scalene_profile", "Scalene profiling workflow and target", ".github/workflows/profiling.yml", _exists(".github/workflows/profiling.yml") and _exists("scripts/run_scalene_profile.py")),
+        ("property_tests", "Hypothesis property-based invariants", "models/tests/test_property_invariants.py", _exists("models/tests/test_property_invariants.py")),
         ("public_claim_controls", "Claim-boundary and model-card docs", "docs/launch/claim-boundaries-v1.7.2.md", _exists("docs/launch/claim-boundaries-v1.7.2.md")),
     ]
     passed = sum(1 for _, _, _, ok in checks if ok)
