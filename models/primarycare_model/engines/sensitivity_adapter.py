@@ -93,12 +93,12 @@ class SensitivityAnalysisAdapter:
 
         a, c, p, s, u, d, g, e, cp, b, hs, cx = [f(v) for v in (activity, capitation, place, scope, urgent, data, governance, equity, copay, budget, hosp_sal, compl)]
 
-        supply = 100 * (0.34 * a + 0.18 * c + 0.24 * s + 0.12 * u + 0.12 * p - 0.12 * b)
-        access = 100 * (0.42 * supply / 100 + 0.18 * u + 0.15 * e + 0.12 * p + 0.10 * d - 0.16 * cp)
-        equity_leg = 100 * (0.34 * e + 0.24 * p + 0.16 * c + 0.14 * d - 0.16 * cp)
-        gov_res = 100 * (0.44 * g + 0.20 * d + 0.18 * p + 0.10 * e + 0.08 * c)
-        hosp_def = 100 * (0.32 * access / 100 + 0.22 * u + 0.16 * supply / 100 + 0.16 * d + 0.14 * p - 0.10 * cx)
-        gaming = 100 * (0.35 * a + 0.18 * s + 0.18 * cx - 0.30 * g - 0.18 * d - 0.16 * p)
+        supply = SensitivityAnalysisAdapter._clamp(100 * (0.34 * a + 0.18 * c + 0.24 * s + 0.12 * u + 0.12 * p - 0.12 * b))
+        access = SensitivityAnalysisAdapter._clamp(100 * (0.42 * supply / 100 + 0.18 * u + 0.15 * e + 0.12 * p + 0.10 * d - 0.16 * cp))
+        equity_leg = SensitivityAnalysisAdapter._clamp(100 * (0.34 * e + 0.24 * p + 0.16 * c + 0.14 * d - 0.16 * cp))
+        gov_res = SensitivityAnalysisAdapter._clamp(100 * (0.44 * g + 0.20 * d + 0.18 * p + 0.10 * e + 0.08 * c))
+        hosp_def = SensitivityAnalysisAdapter._clamp(100 * (0.32 * access / 100 + 0.22 * u + 0.16 * supply / 100 + 0.16 * d + 0.14 * p - 0.10 * cx))
+        gaming = SensitivityAnalysisAdapter._clamp(100 * (0.35 * a + 0.18 * s + 0.18 * cx - 0.30 * g - 0.18 * d - 0.16 * p))
         fiscal = 100 * (0.22 * a + 0.18 * gaming / 100 + 0.16 * cx + 0.14 * (1 - b) - 0.18 * g - 0.14 * hosp_def / 100)
         hosp_pressure = 100 * (0.34 * hs + 0.26 * (1 - hosp_def / 100) + 0.16 * cx + 0.14 * b - 0.18 * access / 100 - 0.12 * u)
         hybrid = 0.24 * supply + 0.18 * access + 0.18 * equity_leg + 0.16 * gov_res + 0.14 * hosp_def + 0.06 * (100 - fiscal) + 0.04 * (100 - gaming)
