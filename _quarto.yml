@@ -15,6 +15,16 @@ project:
     - docs/public-site/calibration-readiness-page-v1.8.1.md
     - docs/calibration/model-card-v1.7.2.md
     - docs/launch/claim-boundaries-v1.7.2.md
+    - docs/public-site/public-wording-contract-v1.8.4.md
+    - docs/public-site/visual-gallery-contract-v1.8.4.md
+    - docs/public-site/what-is-calculated-now.md
+    - docs/design/repo-github-streamlit-design-v1.8.3.md
+    - docs/design/concern-extraction-architecture-v1.8.3.md
+    - docs/contracts/repo-github-streamlit-contracts-v1.8.3.md
+    - docs/operations/streamlit-release-runbook.md
+    - docs/operations/public-mirror-maintenance.md
+    - docs/decisions/solver-posture-v1.8.5.md
+    - docs/decisions/enhancement-shortlist-v1.8.5.md
     - README.md
 
 website:
