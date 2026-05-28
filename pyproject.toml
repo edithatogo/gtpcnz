@@ -16,9 +16,98 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest", "pytest-mock"]
+dev = [
+    "basedpyright>=1.39,<2",
+    "hypothesis>=6,<7",
+    "mutmut>=3.5,<4",
+    "mypy>=2,<3",
+    "pandera>=0.31,<0.32",
+    "pip-audit>=2.10,<3",
+    "pre-commit>=4,<5",
+    "pytest",
+    "pytest-cov>=7,<8",
+    "pytest-mock",
+    "ruff>=0.15,<0.16",
+    "scalene>=2.3,<3; platform_system != 'Windows'",
+    "ty>=0.0.40,<0.1",
+]
 
 [tool.pytest.ini_options]
 pythonpath = ["models"]
 testpaths = ["models/tests"]
-norecursedirs = ["codex-tmp", "public", "_site"]
+norecursedirs = ["codex-tmp", "public", "_site", ".hypothesis"]
+
+[tool.coverage.run]
+source = ["models/primarycare_model"]
+omit = [
+  "models/primarycare_model/app.py",
+  "models/primarycare_model/engines/*",
+  "models/primarycare_model/contracts/oia.py",
+  "models/primarycare_model/validation/arrow_schemas.py",
+  "models/primarycare_model/validation/runtime_checks.py",
+]
+
+[tool.coverage.report]
+fail_under = 90
+show_missing = true
+skip_empty = true
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+extend-exclude = [
+  ".venv",
+  "_site",
+  "public",
+  "codex-tmp",
+  "build",
+  ".tmp",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+ignore = [
+  "E501",
+  # Public dashboard strings intentionally use mathematical glyphs and range dashes.
+  "RUF001",
+]
+
+[tool.mutmut]
+paths_to_mutate = [
+  "models/primarycare_model/runtime_lab.py",
+  "models/primarycare_model/scenario_service.py",
+]
+tests_dir = "models/tests"
+runner = "python -m pytest -q models/tests/test_runtime_lab.py models/tests/test_scenario_service.py models/tests/test_property_invariants.py"
+
+[tool.mypy]
+strict = true
+python_version = "3.11"
+warn_unused_configs = true
+exclude = [
+  ".venv/",
+  "_site/",
+  "public/",
+  "codex-tmp/",
+  "build/",
+  "__pycache__/",
+  ".tmp/"
+]
+
+# Per-module overrides for known untyped third-party dependencies
+[[tool.mypy.overrides]]
+module = [
+  "numpy.*",
+  "pandas.*",
+  "streamlit.*",
+  "matplotlib.*",
+  "plotly.*",
+  "networkx.*",
+  "yaml.*",
+]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "pydantic.*"
+ignore_missing_imports = false
+warn_unused_ignores = true

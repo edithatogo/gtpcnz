@@ -1,5 +1,5 @@
-from pathlib import Path
 import time
+from pathlib import Path
 
 import pandas as pd
 import plotly.express as px
@@ -10,17 +10,21 @@ from models.primarycare_model.runtime_lab import (
     DEFAULT_ABM_POPULATION,
     DEFAULT_MONTE_CARLO_DRAWS,
     MAX_ABM_POPULATION,
-    MAX_MONTHS,
     MAX_MONTE_CARLO_DRAWS,
+    MAX_MONTHS,
     calculation_trace,
     clamp,
     diminishing_return,
+    format_formula_markdown,
+    get_calculation_details,
     model_gap_map,
     run_agent_lens,
     run_reference_calculation,
+    run_stochastic_replay,
     run_stochastic_uncertainty,
     run_stock_flow_trace,
     strategic_response,
+    validate_slider_value,
 )
 from models.primarycare_model.scenario_service import (
     CLAIM_BOUNDARY_TEXT,
@@ -33,7 +37,6 @@ from models.primarycare_model.scenario_service import (
     summarise_reference_results,
 )
 
-
 APP_VERSION = "1.8.1"
 ROOT = Path(__file__).resolve().parents[2]
 RESULTS_PATH = ROOT / "outputs" / "full-parameterised-summary-results-v1.7.0.csv"
@@ -41,6 +44,85 @@ OIA_TRACKER_CANDIDATES = [
     ROOT / "docs" / "audit" / "oia-request-tracker.csv",
     ROOT / "data" / "evidence" / "oia_request_tracker.csv",
 ]
+
+
+# ── Phase 5: UI helper functions ────────────────────────────────────────
+
+
+def _render_validation_badge(value: int | float, lower_bound: int, upper_bound: int, label: str) -> None:
+    """Render a small inline validation badge beside a slider control."""
+    badge, tooltip = validate_slider_value(value, label, lower_bound, upper_bound)
+    bg = "#e6ffe6" if badge == "\u2705" else ("#fff3cd" if badge == "\u26a0\ufe0f" else "#f8d7da")
+    color = "#155724" if badge == "\u2705" else ("#856404" if badge == "\u26a0\ufe0f" else "#721c24")
+    html = f'<span style="background:{bg}; color:{color}; padding:1px 6px; border-radius:8px; font-size:0.75em; display:inline-block;" title="{tooltip}">{badge} {value}</span>'
+    st.markdown(html, unsafe_allow_html=True)
+
+
+def _render_result_manifest_badge(mode: str, scenario_id: str = "") -> None:
+    """Render a colored result-manifest badge for a result display."""
+    badge_map = {
+        "precomputed": ("\U0001f4ca Public-data anchored", "#1e3a5f", "#d4e4f7"),
+        "live_deterministic": ("\U0001f4d0 Deterministic", "#2f6f67", "#d5efeb"),
+        "seeded_stochastic": ("\U0001f3b2 Stochastic demo", "#7b4c8c", "#e8dff0"),
+        "educational": ("\U0001f4da Educational", "#c47a2c", "#fdf0d5"),
+    }
+    text, fg, bg = badge_map.get(mode, ("\U0001f52c Model-generated", "#333", "#eee"))
+    html = f'<span style="background:{bg}; color:{fg}; padding:2px 8px; border-radius:10px; font-size:0.75em; font-weight:500; display:inline-block; margin-right:4px;">{text}</span>'
+    if scenario_id:
+        html += f'<span style="background:#f0f0f0; color:#555; padding:2px 6px; border-radius:10px; font-size:0.7em; display:inline-block;">{scenario_id}</span>'
+    st.markdown(html, unsafe_allow_html=True)
+
+
+def _render_calculation_expander(
+    scenario_id: str | None = None,
+    seed: int | None = None,
+    draws: int | None = None,
+    show_formulas: bool = True,
+    result_validation: str | None = None,
+) -> None:
+    """Render a collapsible "Show calculation details" expander."""
+    with st.expander("Show calculation details"):
+        if show_formulas:
+            st.markdown("**Deterministic formulas used**")
+            details = get_calculation_details(scenario_id=scenario_id)
+            st.markdown(format_formula_markdown(details))
+
+        if seed is not None or draws is not None:
+            meta_lines = []
+            if seed is not None:
+                meta_lines.append(f"- **Seed**: `{seed}`")
+            if draws is not None:
+                meta_lines.append(f"- **Draws**: `{draws}`")
+            if meta_lines:
+                st.markdown("**Stochastic configuration**")
+                st.markdown("\n".join(meta_lines))
+
+        if result_validation:
+            st.markdown(f"**Result validation**: {result_validation}")
+
+        st.markdown(
+            "*This is a demonstrative calculation. It uses model-generated indices, "
+            "not calibrated forecasts.*"
+        )
+
+
+def _render_seed_control(key_suffix: str = "") -> int:
+    """Render a seed number input and return the current value."""
+    return st.number_input(
+        "Seed",
+        min_value=1,
+        max_value=999999,
+        value=260526,
+        step=1,
+        key=f"seed_control_{key_suffix}",
+        help="Fixed seed for reproducible stochastic runs. Change to see different perturbation patterns.",
+    )
+
+
+# ── End Phase 5 helpers ─────────────────────────────────────────────────
+
+
+
 
 
 def render_reader_guide() -> None:
@@ -221,7 +303,7 @@ def build_post_reading_map_table() -> pd.DataFrame:
 
 
 def render_post_guide_and_reading_map() -> None:
-    st.subheader("Post guide / Reading map")
+    st.subheader("🗺️ Post guide / Reading map")
     st.markdown(
         """
         This page is the navigation layer for the post and the dashboard.
@@ -266,7 +348,7 @@ def render_microeconomics_activity_response_lab() -> None:
     controls, chart = st.columns([1, 1.8], vertical_alignment="top")
     with controls:
         payment_signal = st.slider(
-            "Marginal payment signal",
+            "Marginal payment signal (0–100)",
             0,
             100,
             58,
@@ -274,7 +356,7 @@ def render_microeconomics_activity_response_lab() -> None:
             help="Higher values represent a stronger uncapped marginal payment signal for eligible activity.",
         )
         baseline_capacity = st.slider(
-            "Baseline appointment capacity",
+            "Baseline appointment capacity (appointments per period)",
             40,
             260,
             130,
@@ -282,7 +364,7 @@ def render_microeconomics_activity_response_lab() -> None:
             help="A higher value means the illustrative system starts with more capacity before the marginal response is added.",
         )
         response_responsiveness = st.slider(
-            "Response responsiveness",
+            "Response responsiveness (0–100)",
             0,
             100,
             48,
@@ -290,7 +372,7 @@ def render_microeconomics_activity_response_lab() -> None:
             help="Higher values make the illustrative response curve steeper at low-to-mid payment levels.",
         )
         admin_friction = st.slider(
-            "Administrative friction",
+            "Administrative friction (0–100)",
             0,
             100,
             30,
@@ -300,9 +382,21 @@ def render_microeconomics_activity_response_lab() -> None:
     payment_levels = list(range(0, 101, 5))
     curve: list[float] = []
     for level in payment_levels:
-        saturation = level / (level + 18 + admin_friction * 0.45) if level else 0.0
-        uplift = (response_responsiveness + 18) * saturation * (0.55 + baseline_capacity / 520)
-        value = baseline_capacity + uplift - admin_friction * 0.35
+        # Normalise sliders to 0-1 for shared helpers
+        sig_frac = level / 100.0
+        resp_frac = response_responsiveness / 100.0
+        admin_frac = admin_friction / 100.0
+        cap_frac = baseline_capacity / 260.0
+
+        # Nonlinear saturation via strategic_response (sigmoid) replaces
+        # raw Michaelis-Menten — both are bounded 0-1 curves with S-shape
+        saturation = strategic_response(sig_frac, 0.35 + 0.12 * admin_frac, 5.0)
+        # Responsiveness uses diminishing_return so gain tapers at high values
+        resp_factor = diminishing_return(resp_frac, 2.5)
+        uplift = (resp_factor * 40 + 18) * saturation * (0.55 + cap_frac)
+        # Admin-friction penalty uses diminishing_return for nonlinear decay
+        admin_penalty = admin_friction * diminishing_return(admin_frac, 2.0) * 0.35
+        value = baseline_capacity + uplift - admin_penalty
         curve.append(round(max(0.0, min(300.0, value)), 1))
     current_index = payment_levels.index(payment_signal - payment_signal % 5)
     current_value = curve[current_index]
@@ -361,7 +455,7 @@ def render_microeconomics_capitation_budget_lab() -> None:
     controls, chart = st.columns([1, 1.8], vertical_alignment="top")
     with controls:
         enrolled_patients = st.slider(
-            "Enrolled patients",
+            "Enrolled patients (count)",
             200,
             5000,
             1400,
@@ -369,7 +463,7 @@ def render_microeconomics_capitation_budget_lab() -> None:
             help="Higher values mean the illustrative practice carries more enrolled population responsibility.",
         )
         capitation_rate = st.slider(
-            "Capitation rate per enrolled patient",
+            "Capitation rate per enrolled patient (NZD/patient)",
             40,
             240,
             120,
@@ -377,7 +471,7 @@ def render_microeconomics_capitation_budget_lab() -> None:
             help="Higher values mean the illustrative budget grows more strongly with enrolment.",
         )
         expected_cost_per_patient = st.slider(
-            "Expected cost per patient",
+            "Expected cost per patient (NZD/patient)",
             30,
             260,
             140,
@@ -385,15 +479,21 @@ def render_microeconomics_capitation_budget_lab() -> None:
             help="Higher values mean the illustrative cost base is more expensive to serve.",
         )
         demand_growth = st.slider(
-            "Demand growth pressure",
+            "Demand growth pressure (0–100)",
             0,
             100,
             35,
             key="micro_demand_growth",
             help="Higher values make expected demand grow faster than the budget.",
         )
+    # Budget is a straightforward multiplication, but demand-driven cost growth
+    # uses diminishing_return so the cost-pressure signal is nonlinear and bounded
+    demand_frac = demand_growth / 100.0
+    # Diminishing_return captures the idea that demand growth has a tapering
+    # marginal effect on expected costs (nonlinear saturation)
+    cost_multiplier = 1.0 + diminishing_return(demand_frac, 2.2) * 0.35
     budget = enrolled_patients * capitation_rate
-    expected_cost = enrolled_patients * expected_cost_per_patient * (1 + demand_growth / 220)
+    expected_cost = enrolled_patients * expected_cost_per_patient * cost_multiplier
     headroom = budget - expected_cost
     chart_df = pd.DataFrame(
         [
@@ -446,7 +546,7 @@ def render_microeconomics_scheduled_payment_lab() -> None:
     controls, chart = st.columns([1, 1.8], vertical_alignment="top")
     with controls:
         activity_units = st.slider(
-            "Eligible activity units",
+            "Eligible activity units (count)",
             0,
             1000,
             420,
@@ -454,7 +554,7 @@ def render_microeconomics_scheduled_payment_lab() -> None:
             help="Higher values mean more eligible activity is being delivered in the illustrative system.",
         )
         scheduled_rate = st.slider(
-            "Scheduled payment rate",
+            "Scheduled payment rate (NZD/unit)",
             0,
             180,
             85,
@@ -462,7 +562,7 @@ def render_microeconomics_scheduled_payment_lab() -> None:
             help="Higher values mean each eligible unit carries a stronger scheduled payment.",
         )
         control_strength = st.slider(
-            "Control strength",
+            "Control strength (0–100)",
             0,
             100,
             55,
@@ -470,7 +570,7 @@ def render_microeconomics_scheduled_payment_lab() -> None:
             help="Higher values mean audit and rule controls reduce the net payment more strongly.",
         )
         scope_flexibility = st.slider(
-            "Scope flexibility",
+            "Scope flexibility (0–100)",
             0,
             100,
             60,
@@ -478,8 +578,15 @@ def render_microeconomics_scheduled_payment_lab() -> None:
             help="Higher values mean the illustrative system can pay for a wider eligible scope.",
         )
     gross_payment = activity_units * scheduled_rate
-    control_adjustment = gross_payment * (0.12 + control_strength / 320)
-    scope_bonus = gross_payment * scope_flexibility / 700
+    # Control adjustment uses strategic_response so the audit effect is
+    # S-shaped: weak at low control, steep in mid-range, saturating at high
+    ctrl_frac = control_strength / 100.0
+    control_rate = strategic_response(ctrl_frac, 0.40, 5.0) * 0.35
+    control_adjustment = gross_payment * control_rate
+    # Scope bonus uses diminishing_return so flexibility gains taper
+    scope_frac = scope_flexibility / 100.0
+    scope_rate = diminishing_return(scope_frac, 2.0) * 0.18
+    scope_bonus = gross_payment * scope_rate
     net_payment = gross_payment - control_adjustment + scope_bonus
     payment_df = pd.DataFrame(
         [
@@ -533,7 +640,7 @@ def render_microeconomics_access_mix_lab() -> None:
     controls, chart = st.columns([1, 1.8], vertical_alignment="top")
     with controls:
         co_payment = st.slider(
-            "Co-payment",
+            "Co-payment (0–100)",
             0,
             100,
             24,
@@ -541,7 +648,7 @@ def render_microeconomics_access_mix_lab() -> None:
             help="Higher values mean the illustrative system pushes more price to the patient at the point of care.",
         )
         local_in_person = st.slider(
-            "Local in-person care capacity",
+            "Local in-person care capacity (0–100)",
             0,
             100,
             64,
@@ -549,7 +656,7 @@ def render_microeconomics_access_mix_lab() -> None:
             help="Higher values mean the illustrative system retains more face-to-face capacity for hands-on care.",
         )
         digital_access = st.slider(
-            "Digital access reach",
+            "Digital access reach (0–100)",
             0,
             100,
             52,
@@ -557,7 +664,7 @@ def render_microeconomics_access_mix_lab() -> None:
             help="Higher values mean more care can shift to digital channels where that is clinically suitable.",
         )
         equity_protection = st.slider(
-            "Equity protection",
+            "Equity protection (0–100)",
             0,
             100,
             68,
@@ -565,7 +672,7 @@ def render_microeconomics_access_mix_lab() -> None:
             help="Higher values reduce the chance that access barriers are shifted onto higher-need groups.",
         )
         travel_barrier = st.slider(
-            "Travel and geography friction",
+            "Travel and geography friction (0–100)",
             0,
             100,
             34,
@@ -579,10 +686,30 @@ def render_microeconomics_access_mix_lab() -> None:
     ]
     rows = []
     for label, complexity in bands:
-        barrier_pressure = co_payment * 0.45 + travel_barrier * 0.18 + (100 - equity_protection) * 0.10
-        local_share = local_in_person * complexity * (1.0 - travel_barrier / 260) * (1.0 - co_payment / 260)
-        digital_share_value = digital_access * (1.0 - (complexity - 0.92) * 0.45) * (0.55 + equity_protection / 180)
-        deferred_share = max(0.0, 100 - local_share - digital_share_value - equity_protection * 0.18 + barrier_pressure * 0.22)
+        # Normalise inputs for shared helpers
+        copay_frac = co_payment / 100.0
+        travel_frac = travel_barrier / 100.0
+        equity_frac = equity_protection / 100.0
+        local_frac = local_in_person / 100.0
+        digital_frac = digital_access / 100.0
+        # Barrier pressure uses diminishing_return so co-payment and travel
+        # friction have a saturating (nonlinear) effect on access barriers
+        barrier_pressure = 100 * (
+            diminishing_return(copay_frac, 2.0) * 0.50
+            + diminishing_return(travel_frac, 2.0) * 0.20
+            + (1.0 - diminishing_return(equity_frac, 2.5)) * 0.12
+        )
+        # Local share uses strategic_response for nonlinear capacity erosion
+        # by co-payment and travel friction
+        local_base = local_in_person * complexity * (1.0 - travel_frac * 0.40)
+        local_erosion = strategic_response(copay_frac + travel_frac, 0.50, 4.0)
+        local_share = local_base * (1.0 - local_erosion * 0.25)
+        # Digital share uses diminishing_return for equity-protection boost
+        complex_penalty = 1.0 - (complexity - 0.92) * 0.40
+        equity_boost = diminishing_return(equity_frac, 2.5) * 0.35
+        digital_share_value = digital_access * complex_penalty * (0.50 + equity_boost)
+        # Deferred share is the residual after nonlinear interaction
+        deferred_share = max(0.0, 100 - local_share - digital_share_value - equity_protection * 0.15 + barrier_pressure * 0.18)
         total = local_share + digital_share_value + deferred_share
         if total <= 0:
             total = 1.0
@@ -613,7 +740,15 @@ def render_microeconomics_access_mix_lab() -> None:
     with chart:
         st.plotly_chart(fig, width="stretch")
         metric_cols = st.columns(3)
-        covered_share = min(100.0, local_in_person * 0.55 + digital_access * 0.40 + equity_protection * 0.15 - travel_barrier * 0.10 - co_payment * 0.12)
+        # Access-coverage metric uses diminishing_return for each component
+        # so contributions taper: strong local + digital + equity protection
+        # nonlinearly reduce the access gap
+        cov_local = local_in_person * diminishing_return(local_frac, 2.0) * 0.55
+        cov_digital = digital_access * diminishing_return(digital_frac, 2.0) * 0.40
+        cov_equity = equity_protection * diminishing_return(equity_frac, 2.5) * 0.15
+        cov_barrier = travel_barrier * strategic_response(travel_frac, 0.30, 4.0) * 0.10
+        cov_copay = co_payment * strategic_response(copay_frac, 0.25, 4.0) * 0.12
+        covered_share = min(100.0, cov_local + cov_digital + cov_equity - cov_barrier - cov_copay)
         metric_cols[0].metric("Access coverage", f"{max(0.0, covered_share):.1f}")
         metric_cols[1].metric("Local care emphasis", f"{local_in_person:.0f}")
         metric_cols[2].metric("Deferred pressure", f"{max(0.0, 100 - covered_share):.1f}")
@@ -623,7 +758,7 @@ def render_microeconomics_access_mix_lab() -> None:
 
 
 def render_microeconomics_lab() -> None:
-    st.subheader("Microeconomics lab")
+    st.subheader("📈 Microeconomics lab")
     st.markdown(
         """
         This lab contains four guided educational simulations. They cover marginal
@@ -651,14 +786,14 @@ def render_claims_audit_game_lab() -> None:
         **How to read it:** look for the point where honest claiming overtakes
         gaming. That is the illustrative threshold at which the strategy mix flips.
 
-        **What it does not prove:** this is not an estimated claim-compliance
-        model and it does not predict provider behaviour.
+        **What it does not prove:** this is an illustrative pedagogical simulation
+        of claim-incentive logic. It is not a claim-compliance model and it does not simulate provider behaviour.
         """
     )
     controls, chart = st.columns([1, 1.8], vertical_alignment="top")
     with controls:
         marginal_gain = st.slider(
-            "Marginal gain from extra claims",
+            "Marginal gain from extra claims (0–100)",
             0,
             100,
             62,
@@ -666,7 +801,7 @@ def render_claims_audit_game_lab() -> None:
             help="Higher values make gaming more attractive before audit and governance are applied.",
         )
         audit_cost = st.slider(
-            "Audit cost / penalty strength",
+            "Audit cost / penalty strength (0–100)",
             0,
             100,
             58,
@@ -674,7 +809,7 @@ def render_claims_audit_game_lab() -> None:
             help="Higher values make claim inflation less attractive when auditing intensifies.",
         )
         claim_quality = st.slider(
-            "Claim rule clarity",
+            "Claim rule clarity (0–100)",
             0,
             100,
             72,
@@ -682,7 +817,7 @@ def render_claims_audit_game_lab() -> None:
             help="Higher values improve honest claiming and reduce the administrative advantage of gaming.",
         )
         place_accountability = st.slider(
-            "Place accountability",
+            "Place accountability (0–100)",
             0,
             100,
             64,
@@ -701,8 +836,8 @@ def render_claims_audit_game_lab() -> None:
         honest_bonus = strategic_response(0.42 * quality + 0.34 * place + 0.24 * audit, 0.48, 7.0)
         detection_risk = strategic_response(0.55 * audit + 0.25 * penalty + 0.20 * place, 0.46, 7.0)
         gaming_attraction = strategic_response(0.62 * gain + 0.22 * (1 - quality) + 0.16 * (1 - place), 0.42, 7.0)
-        honest_payoff = 48 + 34 * honest_bonus + 14 * diminishing_return(gain) - 8 * audit
-        gaming_payoff = 48 + 42 * gaming_attraction - 36 * detection_risk - 8 * audit ** 1.2
+        honest_payoff = 48 + 34 * honest_bonus + 14 * diminishing_return(gain) - 8 * diminishing_return(audit, 2.0)  # nonlinear audit penalty
+        gaming_payoff = 48 + 42 * gaming_attraction - 36 * detection_risk - 8 * diminishing_return(audit, 1.8)  # nonlinear audit penalty
         honest.append(round(honest_payoff, 1))
         gaming.append(round(gaming_payoff, 1))
     selected_audit = audit_cost - audit_cost % 5
@@ -728,7 +863,7 @@ def render_claims_audit_game_lab() -> None:
     )
     with chart:
         st.plotly_chart(fig, width="stretch")
-        threshold = next((audit_levels[i] for i, value in enumerate(zip(honest, gaming)) if value[0] >= value[1]), None)
+        threshold = next((audit_levels[i] for i, value in enumerate(zip(honest, gaming, strict=False)) if value[0] >= value[1]), None)
         metric_cols = st.columns(3)
         metric_cols[0].metric("Honest payoff now", f"{honest[selected_index]:.1f}")
         metric_cols[1].metric("Gaming payoff now", f"{gaming[selected_index]:.1f}")
@@ -757,7 +892,7 @@ def render_coordination_game_lab() -> None:
     controls, chart = st.columns([1, 1.8], vertical_alignment="top")
     with controls:
         cooperation_gain = st.slider(
-            "Cooperation gain",
+            "Cooperation gain (0–100)",
             0,
             100,
             55,
@@ -765,7 +900,7 @@ def render_coordination_game_lab() -> None:
             help="Higher values make coordinated whole-population care more attractive.",
         )
         cherry_pick_gain = st.slider(
-            "Cherry-pick gain",
+            "Cherry-pick gain (0–100)",
             0,
             100,
             48,
@@ -773,7 +908,7 @@ def render_coordination_game_lab() -> None:
             help="Higher values make selective activity more attractive when accountability is weak.",
         )
         equity_protection = st.slider(
-            "Equity protection",
+            "Equity protection (0–100)",
             0,
             100,
             64,
@@ -781,7 +916,7 @@ def render_coordination_game_lab() -> None:
             help="Higher values raise the cost of leaving harder-to-serve patients behind.",
         )
         scope_flexibility = st.slider(
-            "Scope flexibility",
+            "Scope flexibility (0–100)",
             0,
             100,
             60,
@@ -789,7 +924,7 @@ def render_coordination_game_lab() -> None:
             help="Higher values improve the ability to cooperate with the right workforce mix.",
         )
         place_accountability = st.slider(
-            "Place accountability",
+            "Place accountability (0–100)",
             0,
             100,
             66,
@@ -830,7 +965,7 @@ def render_coordination_game_lab() -> None:
     )
     with chart:
         st.plotly_chart(fig, width="stretch")
-        threshold = next((place_levels[i] for i, value in enumerate(zip(cooperate, cherry_pick)) if value[0] >= value[1]), None)
+        threshold = next((place_levels[i] for i, value in enumerate(zip(cooperate, cherry_pick, strict=False)) if value[0] >= value[1]), None)
         metric_cols = st.columns(3)
         metric_cols[0].metric("Cooperate payoff now", f"{cooperate[selected_index]:.1f}")
         metric_cols[1].metric("Cherry-pick payoff now", f"{cherry_pick[selected_index]:.1f}")
@@ -851,14 +986,14 @@ def render_gaming_risk_frontier_lab() -> None:
         gaming risk is better, but the point is to inspect the trade-off rather
         than chase a single number.
 
-        **What it does not prove:** this is not a measured gaming frontier and
-        it is not a policy-effect estimate.
+        **What it does not prove:** this is an illustrative pedagogical frontier
+        simulation. It is not a measured gaming frontier and it is not a policy-effect result.
         """
     )
     controls, chart = st.columns([1, 1.8], vertical_alignment="top")
     with controls:
         access_gain = st.slider(
-            "Access gain",
+            "Access gain (0–100)",
             0,
             100,
             58,
@@ -866,7 +1001,7 @@ def render_gaming_risk_frontier_lab() -> None:
             help="Higher values mean the illustrative design is trying to improve access more strongly.",
         )
         control_strength = st.slider(
-            "Control strength",
+            "Control strength (0–100)",
             0,
             100,
             62,
@@ -874,7 +1009,7 @@ def render_gaming_risk_frontier_lab() -> None:
             help="Higher values mean rules and monitoring are tighter.",
         )
         monitoring_cost = st.slider(
-            "Monitoring cost",
+            "Monitoring cost (0–100)",
             0,
             100,
             34,
@@ -898,7 +1033,7 @@ def render_gaming_risk_frontier_lab() -> None:
         monitoring = monitoring_cost / 100
         place = place_accountability / 100
         risk_signal = 0.54 * access_pressure - 0.42 * control - 0.16 * place + 0.14 * monitoring
-        access_signal = 0.48 * access_pressure + 0.18 * diminishing_return(control) + 0.16 * place - 0.10 * monitoring ** 1.2
+        access_signal = 0.48 * access_pressure + 0.18 * diminishing_return(control) + 0.16 * place - 0.10 * diminishing_return(monitoring, 2.0)  # nonlinear monitoring cost
         risk_value = 100 * strategic_response(risk_signal, 0.10, 7.0)
         access_value = 100 * strategic_response(access_signal, 0.35, 6.5)
         gaming_risk.append(round(clamp(risk_value), 1))
@@ -952,7 +1087,7 @@ def render_gaming_risk_frontier_lab() -> None:
 
 
 def render_game_theory_lab() -> None:
-    st.subheader("Game theory lab")
+    st.subheader("🎲 Game theory lab")
     st.markdown(
         """
         This lab contains three guided educational incentive simulations. They separate
@@ -1134,7 +1269,7 @@ def render_figure_inventory() -> None:
 
 
 def render_current_state() -> None:
-    st.subheader("Current state of the policy problem and the project")
+    st.subheader("🏛️ Current state of the policy problem and the project")
     st.markdown(
         """
         This is the orientation page for a general reader. It separates three
@@ -1303,8 +1438,8 @@ def render_scenario_profile_radar(df: pd.DataFrame) -> None:
     fig = go.Figure()
     fig.add_trace(
         go.Scatterpolar(
-            r=values + [values[0]],
-            theta=categories + [categories[0]],
+            r=[*values, values[0]],
+            theta=[*categories, categories[0]],
             fill="toself",
             name=selected.scenario_id,
         )
@@ -1381,7 +1516,7 @@ def render_model_status() -> None:
 
 
 def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
-    st.subheader("Live model lab")
+    st.subheader("🔬 Live model lab")
     st.markdown(
         """
         This is the advanced inspection layer. It shows selected calculations being
@@ -1391,7 +1526,7 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
         """
     )
 
-    live_months = st.slider("Live deterministic run length", 12, MAX_MONTHS, 60, 12)
+    live_months = st.slider("Live deterministic run length (months)", 12, MAX_MONTHS, 60, 12)
     started = time.perf_counter()
     live_df = cached_live_reference(live_months)
     elapsed_ms = (time.perf_counter() - started) * 1000
@@ -1402,6 +1537,7 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
     )
 
     st.markdown("### Recalculate reference scenarios")
+    _render_result_manifest_badge("live_deterministic", f"months={live_months}")
     st.dataframe(
         live_df[
             [
@@ -1465,10 +1601,11 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
     st.plotly_chart(trace_fig, width="stretch")
 
     st.markdown("### Stochastic uncertainty")
+    _render_result_manifest_badge("seeded_stochastic", selected_scenario)
     col_a, col_b, col_c = st.columns(3)
-    draws = col_a.slider("Monte Carlo draws", 10, MAX_MONTE_CARLO_DRAWS, DEFAULT_MONTE_CARLO_DRAWS, 10)
+    draws = col_a.slider("Monte Carlo draws (count)", 10, MAX_MONTE_CARLO_DRAWS, DEFAULT_MONTE_CARLO_DRAWS, 10)
     seed = col_b.number_input("Seed", min_value=1, max_value=999999, value=260526, step=1)
-    sd = col_c.slider("Perturbation width", 0.01, 0.20, 0.08, 0.01)
+    sd = col_c.slider("Perturbation width (± fraction)", 0.01, 0.20, 0.08, 0.01)
     draw_frame, uncertainty_summary = cached_stochastic(selected_scenario, draws, int(seed), float(sd))
     st.caption("Calculation source: cached stochastic demo; demonstrative uncertainty only; not an empirical probability.")
     st.dataframe(uncertainty_summary, hide_index=True, width="stretch")
@@ -1482,6 +1619,70 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
     )
     uncertainty_fig.update_layout(height=360, margin=dict(l=10, r=10, t=45, b=10))
     st.plotly_chart(uncertainty_fig, width="stretch")
+    _render_calculation_expander(
+        scenario_id=selected_scenario,
+        seed=int(seed),
+        draws=int(draws),
+        result_validation=f"Perturbation width: {sd:.2f}; seeded run with {draws} draws.",
+    )
+
+    st.markdown("### Stochastic replay: fixed-seed versus random-seed")
+    _render_result_manifest_badge("seeded_stochastic", selected_scenario)
+    replay_cols = st.columns(3)
+    replay_draws = replay_cols[0].slider(
+        "Replay draws (count)", 10, MAX_MONTE_CARLO_DRAWS, 50, 10, key="replay_draws",
+        help="Number of draws for each replay arm.",
+    )
+    replay_fixed_seed = replay_cols[1].number_input(
+        "Fixed seed", min_value=1, max_value=999999, value=260526, step=1, key="replay_fixed_seed",
+        help="Fixed seed for reproducible replay.",
+    )
+    replay_sd = replay_cols[2].slider(
+        "Perturbation width (± fraction)", 0.01, 0.20, 0.08, 0.01, key="replay_sd",
+        help="Width of the Gaussian perturbation applied to scenario parameters.",
+    )
+    replay_results = run_stochastic_replay(
+        selected_scenario,
+        draws=int(replay_draws),
+        fixed_seed=int(replay_fixed_seed),
+        sd=float(replay_sd),
+    )
+    st.dataframe(replay_results["summary"], hide_index=True, width="stretch")
+    replay_fig = go.Figure()
+    replay_fig.add_trace(
+        go.Violin(
+            y=replay_results["fixed"]["hybrid_viability_score"],
+            name="Fixed seed",
+            side="negative",
+            line_color="#2f6f67",
+            box_visible=True,
+            meanline_visible=True,
+        )
+    )
+    replay_fig.add_trace(
+        go.Violin(
+            y=replay_results["random"]["hybrid_viability_score"],
+            name="Random seed",
+            side="positive",
+            line_color="#c47a2c",
+            box_visible=True,
+            meanline_visible=True,
+        )
+    )
+    replay_fig.update_layout(
+        title=f"Stochastic replay comparison: {selected_scenario} hybrid viability",
+        yaxis_title="Hybrid viability index",
+        height=400,
+        margin=dict(l=10, r=10, t=45, b=10),
+        violingap=0,
+        violingroupgap=0,
+        violinmode="overlay",
+    )
+    st.plotly_chart(replay_fig, width="stretch")
+    st.caption(
+        "Fixed-seed and random-seed runs use the same perturbation width. "
+        "Differences illustrate stochastic uncertainty, not empirical probability."
+    )
 
     st.markdown("### Stock-flow dynamics")
     stock_months = st.slider("Stock-flow months", 6, MAX_MONTHS, 36, 6)
@@ -1499,7 +1700,7 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
 
     st.markdown("### Agent lens")
     col_d, col_e, col_f = st.columns(3)
-    population_size = col_d.slider("Agent population cap", 50, MAX_ABM_POPULATION, DEFAULT_ABM_POPULATION, 10)
+    population_size = col_d.slider("Agent population cap (agents)", 50, MAX_ABM_POPULATION, DEFAULT_ABM_POPULATION, 10)
     agent_months = col_e.slider("Agent months", 3, 24, 12, 3)
     agent_seed = col_f.number_input("Agent seed", min_value=1, max_value=999999, value=260526, step=1)
     agent_frame, agent_summary = cached_agent_lens(selected_scenario, population_size, agent_months, int(agent_seed))
@@ -1553,88 +1754,108 @@ def render_app() -> None:
 
     df = cached_scenario_results(str(RESULTS_PATH))
 
-    st.sidebar.header("Educational explainer levers")
+    st.sidebar.markdown("---")
+    st.sidebar.header("🎓 Educational explainer")
+    st.sidebar.caption(
+        "These are teaching controls — they show the direction of the policy logic, "
+        "not the 70-parameter benchmark."
+    )
     st.sidebar.caption(
         "0 means absent/weak; 100 means strong/reliably implemented. These are policy-strength levers, not estimated parameters."
     )
+    st.sidebar.markdown("---")
     slider_definitions = {definition.field_name: definition for definition in EDUCATIONAL_LEVER_DEFINITIONS}
+    _sb_level = st.sidebar.slider(
+        slider_definitions["scheduled_benefit_level"].public_label,
+        slider_definitions["scheduled_benefit_level"].lower_bound,
+        slider_definitions["scheduled_benefit_level"].upper_bound,
+        slider_definitions["scheduled_benefit_level"].default_value,
+        slider_definitions["scheduled_benefit_level"].step,
+        help=slider_definitions["scheduled_benefit_level"].slider_help,
+    )
+    _render_validation_badge(_sb_level, 0, 100, "scheduled_benefit_level")
+    _cap_support = st.sidebar.slider(
+        slider_definitions["capitation_support"].public_label,
+        slider_definitions["capitation_support"].lower_bound,
+        slider_definitions["capitation_support"].upper_bound,
+        slider_definitions["capitation_support"].default_value,
+        slider_definitions["capitation_support"].step,
+        help=slider_definitions["capitation_support"].slider_help,
+    )
+    _render_validation_badge(_cap_support, 0, 100, "capitation_support")
+    _place_acc = st.sidebar.slider(
+        slider_definitions["place_accountability"].public_label,
+        slider_definitions["place_accountability"].lower_bound,
+        slider_definitions["place_accountability"].upper_bound,
+        slider_definitions["place_accountability"].default_value,
+        slider_definitions["place_accountability"].step,
+        help=slider_definitions["place_accountability"].slider_help,
+    )
+    _render_validation_badge(_place_acc, 0, 100, "place_accountability")
+    _audit_st = st.sidebar.slider(
+        slider_definitions["audit_strength"].public_label,
+        slider_definitions["audit_strength"].lower_bound,
+        slider_definitions["audit_strength"].upper_bound,
+        slider_definitions["audit_strength"].default_value,
+        slider_definitions["audit_strength"].step,
+        help=slider_definitions["audit_strength"].slider_help,
+    )
+    _render_validation_badge(_audit_st, 0, 100, "audit_strength")
+    _equity_pro = st.sidebar.slider(
+        slider_definitions["equity_protection"].public_label,
+        slider_definitions["equity_protection"].lower_bound,
+        slider_definitions["equity_protection"].upper_bound,
+        slider_definitions["equity_protection"].default_value,
+        slider_definitions["equity_protection"].step,
+        help=slider_definitions["equity_protection"].slider_help,
+    )
+    _render_validation_badge(_equity_pro, 0, 100, "equity_protection")
+    _scope_flex = st.sidebar.slider(
+        slider_definitions["scope_flexibility"].public_label,
+        slider_definitions["scope_flexibility"].lower_bound,
+        slider_definitions["scope_flexibility"].upper_bound,
+        slider_definitions["scope_flexibility"].default_value,
+        slider_definitions["scope_flexibility"].step,
+        help=slider_definitions["scope_flexibility"].slider_help,
+    )
+    _render_validation_badge(_scope_flex, 0, 100, "scope_flexibility")
+    _local_in_person = st.sidebar.slider(
+        slider_definitions["local_in_person_support"].public_label,
+        slider_definitions["local_in_person_support"].lower_bound,
+        slider_definitions["local_in_person_support"].upper_bound,
+        slider_definitions["local_in_person_support"].default_value,
+        slider_definitions["local_in_person_support"].step,
+        help=slider_definitions["local_in_person_support"].slider_help,
+    )
+    _render_validation_badge(_local_in_person, 0, 100, "local_in_person_support")
     educational_settings = EducationalSettings(
-        scheduled_benefit_level=st.sidebar.slider(
-            slider_definitions["scheduled_benefit_level"].public_label,
-            slider_definitions["scheduled_benefit_level"].lower_bound,
-            slider_definitions["scheduled_benefit_level"].upper_bound,
-            slider_definitions["scheduled_benefit_level"].default_value,
-            slider_definitions["scheduled_benefit_level"].step,
-            help=slider_definitions["scheduled_benefit_level"].slider_help,
-        ),
-        capitation_support=st.sidebar.slider(
-            slider_definitions["capitation_support"].public_label,
-            slider_definitions["capitation_support"].lower_bound,
-            slider_definitions["capitation_support"].upper_bound,
-            slider_definitions["capitation_support"].default_value,
-            slider_definitions["capitation_support"].step,
-            help=slider_definitions["capitation_support"].slider_help,
-        ),
-        place_accountability=st.sidebar.slider(
-            slider_definitions["place_accountability"].public_label,
-            slider_definitions["place_accountability"].lower_bound,
-            slider_definitions["place_accountability"].upper_bound,
-            slider_definitions["place_accountability"].default_value,
-            slider_definitions["place_accountability"].step,
-            help=slider_definitions["place_accountability"].slider_help,
-        ),
-        audit_strength=st.sidebar.slider(
-            slider_definitions["audit_strength"].public_label,
-            slider_definitions["audit_strength"].lower_bound,
-            slider_definitions["audit_strength"].upper_bound,
-            slider_definitions["audit_strength"].default_value,
-            slider_definitions["audit_strength"].step,
-            help=slider_definitions["audit_strength"].slider_help,
-        ),
-        equity_protection=st.sidebar.slider(
-            slider_definitions["equity_protection"].public_label,
-            slider_definitions["equity_protection"].lower_bound,
-            slider_definitions["equity_protection"].upper_bound,
-            slider_definitions["equity_protection"].default_value,
-            slider_definitions["equity_protection"].step,
-            help=slider_definitions["equity_protection"].slider_help,
-        ),
-        scope_flexibility=st.sidebar.slider(
-            slider_definitions["scope_flexibility"].public_label,
-            slider_definitions["scope_flexibility"].lower_bound,
-            slider_definitions["scope_flexibility"].upper_bound,
-            slider_definitions["scope_flexibility"].default_value,
-            slider_definitions["scope_flexibility"].step,
-            help=slider_definitions["scope_flexibility"].slider_help,
-        ),
-        local_in_person_support=st.sidebar.slider(
-            slider_definitions["local_in_person_support"].public_label,
-            slider_definitions["local_in_person_support"].lower_bound,
-            slider_definitions["local_in_person_support"].upper_bound,
-            slider_definitions["local_in_person_support"].default_value,
-            slider_definitions["local_in_person_support"].step,
-            help=slider_definitions["local_in_person_support"].slider_help,
-        ),
+        scheduled_benefit_level=_sb_level,
+        capitation_support=_cap_support,
+        place_accountability=_place_acc,
+        audit_strength=_audit_st,
+        equity_protection=_equity_pro,
+        scope_flexibility=_scope_flex,
+        local_in_person_support=_local_in_person,
     )
     educational_scores = score_educational_settings(educational_settings)
 
     tab_names = [
-        "Start here",
-        "Post guide",
-        "Current state",
-        "Reference scenarios",
-        "Microeconomics lab",
-        "Game theory lab",
-        "Live model lab",
-        "Educational explainer",
-        "Evidence & OIA",
-        "Calibration readiness",
-        "Glossary",
+        "📖 Start here",
+        "🗺️ Post guide",
+        "🏛️ Current state",
+        "📊 Reference scenarios",
+        "📈 Microeconomics lab",
+        "🎲 Game theory lab",
+        "🔬 Live model lab",
+        "🎓 Educational explainer",
+        "📋 Evidence & OIA",
+        "🎯 Calibration readiness",
+        "📖 Glossary",
     ]
     tabs = st.tabs(tab_names)
 
     with tabs[0]:
-        st.subheader("Core thesis")
+        st.subheader("📖 Core thesis")
         st.markdown(
             """
             The proposal is not to abandon capitation. It is to use capitation for what
@@ -1656,11 +1877,12 @@ def render_app() -> None:
         render_current_state()
 
     with tabs[3]:
-        st.subheader("Reference scenarios from the benchmark")
+        st.subheader("📊 Reference scenarios from the benchmark")
         render_reference_scenario_explainer()
         if df.empty:
             st.error(f"Could not find model results at `{RESULTS_PATH.relative_to(ROOT)}`.")
         else:
+            _render_result_manifest_badge("precomputed", "F0-F9")
             st.dataframe(summarise_reference_results(df), hide_index=True, width="stretch")
             col1, col2 = st.columns(2)
             with col1:
@@ -1681,7 +1903,7 @@ def render_app() -> None:
         render_live_model_lab(df)
 
     with tabs[7]:
-        st.subheader("Educational explainer")
+        st.subheader("🎓 Educational explainer")
         render_educational_explainer_context()
         render_educational_parameter_dictionary()
         st.markdown(
@@ -1690,14 +1912,19 @@ def render_app() -> None:
             they are not the 70-parameter benchmark and not a calibrated prediction.
             """
         )
+        _render_result_manifest_badge("educational", "sidebar-slider")
         metric_cols = st.columns(3)
         metric_cols[0].metric("Viability index", educational_scores["educational_viability_score"])
         metric_cols[1].metric("Supply index", educational_scores["educational_supply_score"])
         metric_cols[2].metric("Hospital pressure index", educational_scores["educational_hospital_pressure_score"])
         render_educational_chart(educational_scores)
+        _render_calculation_expander(
+            show_formulas=False,
+            result_validation="Educational explainer scores use simplified strategic-response formulas with sigmoid activation (steepness 6.0-6.5). These are not the 70-parameter benchmark.",
+        )
 
     with tabs[8]:
-        st.subheader("Evidence and Official Information Act tracker")
+        st.subheader("📋 Evidence and Official Information Act tracker")
         tracker = cached_oia_tracker(tuple(str(p) for p in OIA_TRACKER_CANDIDATES))
         if tracker.empty:
             st.info("Evidence/OIA tracker data is not available in this checkout.")
@@ -1706,7 +1933,7 @@ def render_app() -> None:
         st.caption("OIA responses and linked data are needed before treating the model as calibrated.")
 
     with tabs[9]:
-        st.subheader("What would make this a real calibrated model?")
+        st.subheader("🎯 What would make this a real calibrated model?")
         render_next_steps_context()
         readiness = build_calibration_readiness_table()
         st.dataframe(readiness, width="stretch", hide_index=True)
@@ -1719,7 +1946,7 @@ def render_app() -> None:
         )
 
     with tabs[10]:
-        st.subheader("Plain-English glossary")
+        st.subheader("📖 Plain-English glossary")
         st.markdown(
             """
             - **Capitation:** baseline funding for enrolled population responsibility.

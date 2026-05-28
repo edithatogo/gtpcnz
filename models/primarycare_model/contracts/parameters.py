@@ -35,7 +35,7 @@ class ParameterDefinition(StrictContract):
     tags: tuple[str, ...] = ()
 
     @model_validator(mode="after")
-    def _validate_default(self) -> "ParameterDefinition":
+    def _validate_default(self) -> ParameterDefinition:
         if self.lower_bound is not None and self.upper_bound is not None and self.lower_bound > self.upper_bound:
             raise ValueError("lower_bound cannot exceed upper_bound")
         if self.value_type == "integer" and type(self.default_value) is not int:
@@ -67,7 +67,7 @@ class ParameterValue(StrictContract):
     value: int | float | bool | str
     source: str = Field(min_length=1)
 
-    def validate_against(self, definition: ParameterDefinition) -> "ParameterValue":
+    def validate_against(self, definition: ParameterDefinition) -> ParameterValue:
         if self.parameter_id != definition.parameter_id:
             raise ValueError("parameter_id does not match definition")
         if definition.value_type == "integer" and type(self.value) is not int:

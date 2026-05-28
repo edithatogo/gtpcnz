@@ -1,6 +1,15 @@
 __pycache__/
 *.pyc
 .pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.hypothesis/
+.coverage
+coverage.xml
+htmlcov/
+mutmut-cache/
+scalene*.json
+scalene*.html
 pytest-cache-files-*/
 .tmp/
 codex-tmp/

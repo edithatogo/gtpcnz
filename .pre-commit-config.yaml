@@ -1,0 +1,32 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.14
+    hooks:
+      - id: ruff-check
+        args: ["--fix"]
+      - id: ruff-format
+
+  - repo: local
+    hooks:
+      - id: basedpyright
+        name: basedpyright strict type gate
+        entry: basedpyright
+        language: system
+        pass_filenames: false
+        types_or: [python]
+      - id: mypy-strict
+        name: mypy strict compatibility gate
+        entry: mypy models/primarycare_model/contracts models/primarycare_model/validation/pandera_schemas.py
+        language: system
+        pass_filenames: false
+        types_or: [python]
+      - id: no-patient-data
+        name: no patient-data references
+        entry: python scripts/check_no_patient_data.py
+        language: system
+        pass_filenames: false
+      - id: concern-boundaries
+        name: concern-boundary scanner
+        entry: python scripts/check_concern_boundaries.py
+        language: system
+        pass_filenames: false

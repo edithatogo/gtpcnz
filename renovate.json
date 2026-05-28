@@ -1,0 +1,31 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":separateMajorReleases"
+  ],
+  "labels": ["dependencies", "automation"],
+  "timezone": "Australia/Sydney",
+  "schedule": ["before 8am on monday"],
+  "minimumReleaseAge": "3 days",
+  "enabledManagers": ["github-actions", "pip_requirements", "pep621"],
+  "packageRules": [
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "github actions"
+    },
+    {
+      "matchPackageNames": ["streamlit", "pydantic", "pandas", "numpy", "plotly"],
+      "groupName": "dashboard runtime core"
+    },
+    {
+      "matchPackageNames": ["basedpyright", "mypy", "ruff", "ty", "pytest", "pytest-cov", "hypothesis"],
+      "groupName": "quality toolchain"
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": true
+  }
+}
