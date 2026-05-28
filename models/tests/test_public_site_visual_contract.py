@@ -1,6 +1,5 @@
 from pathlib import Path
 
-
 CANONICAL_STREAMLIT_URL = "https://gtpcnz.streamlit.app/"
 REPORT_LINK = "reports/primary_care_architecture.qmd"
 PUBLIC_INDEX = Path(__file__).resolve().parents[2] / "index.qmd"

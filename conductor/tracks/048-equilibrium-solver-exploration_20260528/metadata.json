@@ -1,0 +1,10 @@
+{
+  "id": "048-equilibrium-solver-exploration_20260528",
+  "title": "Equilibrium Solver Exploration",
+  "status": "completed",
+  "created": "2026-05-28",
+  "updated": "2026-05-28",
+  "progress": "Decision made: keep current iterated best-response heuristic; do NOT add analytical solver lane. Documented in docs/decisions/solver-posture-v1.8.5.md. Adapter hardened with scope docstring and inline comments.",
+  "owner": "codex",
+  "output": "docs/decisions/solver-posture-v1.8.5.md — Decision to keep heuristic, harden tests, reject analytical lane at this stage. Four trigger conditions documented for future reconsideration."
+}

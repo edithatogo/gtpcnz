@@ -1,0 +1,56 @@
+name: Quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install quality dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Ruff lint
+        run: ruff check .
+
+      - name: Basedpyright strict type gate
+        run: python -m basedpyright --pythonpath "$(python -c 'import sys; print(sys.executable)')"
+
+      - name: Mypy strict compatibility gate
+        run: mypy models/primarycare_model/contracts models/primarycare_model/validation/pandera_schemas.py
+
+      - name: Concern boundary scan
+        run: python scripts/check_concern_boundaries.py
+
+      - name: Patient-data scan
+        run: python scripts/check_no_patient_data.py
+
+      - name: Tests with coverage threshold
+        run: pytest -q --cov=models.primarycare_model --cov-report=term-missing --cov-fail-under=90
+
+      - name: Dependency audit
+        run: pip-audit -r requirements.txt
+
+      - name: Ty canary
+        continue-on-error: true
+        run: ty check models/primarycare_model

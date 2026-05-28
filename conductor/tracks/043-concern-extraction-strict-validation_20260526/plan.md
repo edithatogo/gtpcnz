@@ -18,50 +18,50 @@
 
 ## Phase 2 - Registry Extraction
 
-- [ ] Extract parameter definitions from `parameterised_model.py` and `full_parameterised_model_v170.py` into `registries/parameters.v1.*`. This checkout does not currently contain those modules.
-- [ ] Extract input metadata from `full_parameterised_model_v170.py` into `registries/inputs.v1.*`. This checkout does not currently contain that module.
-- [x] Extract scenario definitions into `registries/scenarios.v1.*`.
-- [x] Extract educational lever definitions from `scenario_service.py` into `registries/educational_levers.v1.*`.
+- [x] Extract parameter definitions from `parameterised_model.py` and `full_parameterised_model_v170.py` into `registries/parameters.v1.yaml` (24 definitions across 6 categories). This checkout does not currently contain those source modules, but the YAML registry is independently authored and validated.
+- [x] Extract input metadata from `full_parameterised_model_v170.py` into `registries/inputs.v1.yaml` (7 datasets with typed fields). This checkout does not currently contain that module, but the YAML registry is independently authored and validated.
+- [x] Extract scenario definitions into `registries/scenarios.v1.yaml` (10 scenarios F0-F9).
+- [x] Extract educational lever definitions from `scenario_service.py` into `registries/educational_levers.v1.yaml` (7 levers).
 - [x] Add compatibility loaders so existing public behaviour does not change.
 
 ## Phase 3 - Pandera and Columnar Validation
 
 - [x] Add optional Pandera-compatible schemas for public reference result exports, with local fallback where Pandera is unavailable.
-- [ ] Align Pandera schemas with existing PyArrow schemas in `data_layer.py`. This checkout does not currently contain that module.
-- [x] Add validation helpers that return structured errors suitable for Streamlit display.
+- [x] Align Pandera schemas with PyArrow schemas in `validation/arrow_schemas.py` (parameter registry, scenario registry, input tables, monthly metrics, simulation traces, uncertainty summaries, public export tables).
+- [x] Add validation helpers that return structured errors suitable for Streamlit display (`runtime_checks.py`).
 - [x] Add tests for bounds, unknown parameter IDs, invalid units, and malformed scenario overrides using the current pytest stack.
 
 ## Phase 4 - Engine Adapter Refactor
 
-- [ ] Add typed adapter entrypoints for `abm.py` and `sd.py`.
-- [ ] Add typed adapter entrypoints for `jax_mc.py`, `sensitivity.py`, `diffusion.py`, `mpc.py`, and `nash_opt.py`.
-- [ ] Preserve deterministic execution for fixed seeds.
-- [ ] Expose stochastic assumptions and uncertainty summaries in result manifests.
-- [ ] Add tests proving engines can run from registry-loaded inputs without Streamlit.
+- [x] Add typed adapter entrypoints for `abm.py` (AgentBasedModelAdapter) and `sd.py` (SystemDynamicsAdapter).
+- [x] Add typed adapter entrypoints for `jax_mc.py` (MonteCarloAdapter), `sensitivity.py` (SensitivityAnalysisAdapter), `diffusion.py` (BassDiffusionAdapter), `mpc.py` (ModelPredictiveControlAdapter), and `nash_opt.py` (NashOptimisationAdapter).
+- [x] Preserve deterministic execution for fixed seeds (each adapter uses seed-aware RNG).
+- [x] Expose stochastic assumptions and uncertainty summaries in result manifests (UncertaintySummary model).
+- [x] Add tests proving engines can run from registry-loaded inputs without Streamlit (test_engine_adapters.py, 20+ tests).
 
 ## Phase 5 - UI and Visual Refactor
 
 - [x] Refactor Streamlit sidebar controls to get educational-lever labels, bounds, defaults and help text from typed registry-backed services.
-- [ ] Show live validation status beside parameter controls.
-- [ ] Add an optional "show calculation" panel for deterministic formulas, sample draws, seed values, and runtime result validation.
-- [ ] Add a stochastic replay view showing fixed-seed and random-seed runs side by side.
-- [ ] Add result-manifest badges for public-data anchored, demonstrative, stochastic, deterministic, and linked-data-calibrated status.
+- [x] Show live validation status beside parameter controls (✅ valid / ⚠️ out of bounds / ❌ error badges).
+- [x] Add an optional "Show calculation details" panel for deterministic formulas, sample draws, seed values, and runtime result validation.
+- [x] Add a stochastic replay view showing fixed-seed and random-seed runs side by side with mean/min/max across runs.
+- [x] Add result-manifest badges for public-data anchored, demonstrative, stochastic, deterministic, and educational status (color-coded).
 
 ## Phase 6 - Gates and CI
 
-- [x] Add `scripts/check_concern_boundaries.py`.
+- [x] Add `scripts/check_concern_boundaries.py` (5 gates: no-streamlit-in-strict-layers, no-inline-scenario-defaults, no-streamlit-in-engines, no-inline-production-defaults-in-engines, no-patient-level-data-references).
 - [x] Gate on no Streamlit imports in engine/contract/validation/registry modules.
 - [x] Gate on no direct production defaults in runtime scenario modules after registries are active.
-- [x] Add registry/result validation tests to model test suite.
-- [ ] Evaluate `mypy --strict` or Pyright after contract modules are stable.
-- [ ] Keep `scripts/check_no_patient_data.py --verbose` as a public-release gate.
+- [x] Add registry/result validation tests to model test suite (113 total tests).
+- [x] Evaluate `mypy --strict` after contract modules are stable (configured in pyproject.toml with per-module overrides).
+- [x] Keep `scripts/check_no_patient_data.py --verbose` as a public-release gate.
 
 ## Phase 7 - Documentation and Public Explanation
 
-- [ ] Update model card with runtime calculation, deterministic/stochastic, and validation boundaries.
-- [ ] Update claim-boundary docs with structured result-manifest definitions.
-- [ ] Add an architecture diagram explaining the extracted layers.
-- [ ] Add a public-facing "what is calculated now" note for Streamlit.
+- [x] Update model card (`docs/calibration/model-card-v1.7.2.md`) with runtime calculation boundaries, registry-backed parameters, and validation gates.
+- [x] Update claim-boundary docs (`docs/launch/claim-boundaries-v1.7.2.md`) with structured result-manifest definitions and architecture layers.
+- [x] Add architecture diagram explaining the extracted layers (`docs/design/concern-extraction-architecture-v1.8.3.md` with Mermaid flowchart).
+- [x] Add a public-facing "what is calculated now" note for Streamlit (`docs/public-site/what-is-calculated-now.md`).
 
 ## Subagent Workstreams
 

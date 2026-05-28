@@ -51,6 +51,28 @@ Shared labeling rules:
 | Gaming-risk frontier | How much gaming risk remains as access expands? | Post 04 `Why formulas do not solve games`; PHO / cherry-picking appendix; hybrid-game appendix | Quarto trade-off section; Streamlit risk-frontier module; GitHub Pages card | Frontier curve or two-axis trade-off plot | Risk-frontier slider that moves along the access-control trade-off | Access gain; control strength; monitoring cost; provider response | Frontier point; risk band; access-gain score | `risk = g(access_gain, control_strength, monitoring_cost)` | Static: `conceptual explainer`; dynamic: `educational teaching simulation`; not a measured frontier | Use full-word axis titles; include a text summary of the chosen point; avoid colour-only risk zones | Schema test for frontier fields; wording test for no forecast/reduction claim; axis-label accessibility check |
 | 19-games navigator or stepper | How do the different strategic games fit together? | 19-games map appendix; later game-theory extension posts | Quarto map appendix; Streamlit navigator page; GitHub Pages reading-map card | Game map or card grid | Stepper / navigator that moves between named game modules | Selected game; theme; control family; reading depth | Current game card; related posts; related module links | `selected_state = f(game, theme, control_family)` | Static: `conceptual explainer`; dynamic: `educational teaching simulation` for navigation only; not a simulation of outcomes | Make keyboard stepper controls visible; include a short summary for each card; show focus state | Schema test for navigator fields; link-target test for every card; accessibility test for keyboard navigation |
 
+## Formula-nonlinearity assurance
+
+All game-theory and microeconomics curves in this spec use one of two shared helper functions defined in `runtime_lab.py`:
+
+- **`strategic_response(value, threshold, steepness)`** — a sigmoid (logistic) activation that produces an S-shaped bounded curve. Returns values in (0, 1). Used wherever a threshold-crossing or saturation effect is the intended pedagogical logic (e.g., detection risk tipping over at a certain audit level, or cooperation gain saturating at high place accountability).
+
+- **`diminishing_return(value, rate)`** — an exponential tapering function that models diminishing marginal gains. Returns values in (0, 1). Used wherever the pedagogical intent is to show that additional input yields progressively smaller output (e.g., demand-growth pressure on expected costs, or scope-flexibility bonuses).
+
+Both helpers are bounded to `[0, 1]` and deterministic for fixed inputs. The `clamp(value, lower, upper)` helper provides safe bounding of raw scores.
+
+### Curve-crossing thresholds are explicit
+
+Every game-theory module that computes a crossing between two curves (e.g., honest claiming vs. claim inflation, cooperate vs. cherry-pick) computes the threshold explicitly:
+
+- **`render_claims_audit_game_lab`**: `threshold = next((audit_levels[i] for i, value in enumerate(zip(honest, gaming)) if value[0] >= value[1]), None)` — finds the first audit level where the honest payoff meets or exceeds the gaming payoff.
+
+- **`render_coordination_game_lab`**: `threshold = next((place_levels[i] for i, value in enumerate(zip(cooperate, cherry_pick)) if value[0] >= value[1]), None)` — finds the first place-accountability level where cooperation meets or exceeds cherry-picking.
+
+- **`render_gaming_risk_frontier_lab`**: No single crossing is computed; the frontier is read visually as the point where the access-gain and gaming-risk curves cross on the control-strength axis. The metric display shows `Control setting` rather than a computed threshold.
+
+These thresholds are pedagogical artefacts of the simulation logic, not empirically derived tipping points. They exist to help the reader see *when* a strategy mix would flip under the illustrative assumptions.
+
 ## Shared validation contract
 
 Track 033 should add tests that verify the following across all modules:

@@ -1,0 +1,342 @@
+parameters:
+  # ── Capitation rates ──────────────────────────────────────────────────
+  - parameter_id: base_capitation_rate
+    label: Base per-capita annual capitation rate
+    value_type: number
+    unit: NZD per person per year
+    default_value: 195.0
+    lower_bound: 100.0
+    upper_bound: 500.0
+    category_values: []
+    description: Annual capitation amount paid per enrolled person before any weighting or adjustment.
+    source: NZ Ministry of Health GP capitation funding schedule (2023/24)
+    sensitivity_class: public_aggregate
+    evidence_tier: public_data
+    tags: [capitation, funding, base_rate]
+
+  - parameter_id: capitation_age_weight_0_4
+    label: Age weight for children 0–4 years
+    value_type: number
+    unit: dimensionless
+    default_value: 1.35
+    lower_bound: 0.5
+    upper_bound: 3.0
+    category_values: []
+    description: Relative capitation weight for children aged 0–4 vs the standardised enrolled person unit.
+    source: NZ Ministry of Health capitation weighting formulae
+    sensitivity_class: public_aggregate
+    evidence_tier: public_data
+    tags: [capitation, weighting, age]
+
+  - parameter_id: capitation_age_weight_65_74
+    label: Age weight for adults 65–74 years
+    value_type: number
+    unit: dimensionless
+    default_value: 1.85
+    lower_bound: 0.5
+    upper_bound: 3.0
+    category_values: []
+    description: Relative capitation weight for adults aged 65–74 vs the standardised enrolled person unit.
+    source: NZ Ministry of Health capitation weighting formulae
+    sensitivity_class: public_aggregate
+    evidence_tier: public_data
+    tags: [capitation, weighting, age]
+
+  - parameter_id: capitation_age_weight_75_plus
+    label: Age weight for adults aged 75+ years
+    value_type: number
+    unit: dimensionless
+    default_value: 2.35
+    lower_bound: 0.5
+    upper_bound: 4.0
+    category_values: []
+    description: Relative capitation weight for adults aged 75 and over vs the standardised enrolled person unit.
+    source: NZ Ministry of Health capitation weighting formulae
+    sensitivity_class: public_aggregate
+    evidence_tier: public_data
+    tags: [capitation, weighting, age]
+
+  - parameter_id: capitation_deprivation_uplift
+    label: Deprivation index capitation uplift factor
+    value_type: number
+    unit: dimensionless
+    default_value: 1.15
+    lower_bound: 1.0
+    upper_bound: 1.5
+    category_values: []
+    description: Uplift multiplier applied to capitation for high-deprivation (NZDep quintile 5) enrolled populations.
+    source: NZ Ministry of Health equity adjustment policy
+    sensitivity_class: public_aggregate
+    evidence_tier: public_data
+    tags: [capitation, equity, deprivation]
+
+  # ── FFS item values ───────────────────────────────────────────────────
+  - parameter_id: standard_consultation_fee
+    label: Standard consultation FFS item value
+    value_type: number
+    unit: NZD
+    default_value: 45.00
+    lower_bound: 20.00
+    upper_bound: 120.00
+    category_values: []
+    description: Reimbursed amount for a standard (Level 3) face-to-face consultation with a GP.
+    source: NZ PHO Services Agreement (GST-inclusive schedule)
+    sensitivity_class: public_aggregate
+    evidence_tier: public_data
+    tags: [ffs, consultation, gp]
+
+  - parameter_id: after_hours_consultation_fee
+    label: After-hours consultation FFS item value
+    value_type: number
+    unit: NZD
+    default_value: 75.00
+    lower_bound: 30.00
+    upper_bound: 180.00
+    category_values: []
+    description: Reimbursed amount for an after-hours (Level 4) GP consultation.
+    source: NZ PHO Services Agreement after-hours schedule
+    sensitivity_class: public_aggregate
+    evidence_tier: public_data
+    tags: [ffs, after_hours, consultation]
+
+  - parameter_id: prolonged_consultation_fee
+    label: Prolonged consultation FFS item value
+    value_type: number
+    unit: NZD
+    default_value: 75.00
+    lower_bound: 30.00
+    upper_bound: 160.00
+    category_values: []
+    description: Reimbursed amount for a prolonged (Level 5) GP consultation of at least 30 minutes.
+    source: NZ PHO Services Agreement item schedule
+    sensitivity_class: public_aggregate
+    evidence_tier: public_data
+    tags: [ffs, consultation, prolonged]
+
+  - parameter_id: vaccine_admin_fee
+    label: Vaccine administration FFS item value
+    value_type: number
+    unit: NZD
+    default_value: 18.50
+    lower_bound: 8.00
+    upper_bound: 40.00
+    category_values: []
+    description: Reimbursed amount for administering a scheduled vaccination (per dose).
+    source: NZ Immunisation Schedule funding agreement
+    sensitivity_class: public_aggregate
+    evidence_tier: public_data
+    tags: [ffs, vaccination, prevention]
+
+  - parameter_id: care_coordination_fee
+    label: Care coordination FFS item value
+    value_type: number
+    unit: NZD
+    default_value: 60.00
+    lower_bound: 20.00
+    upper_bound: 150.00
+    category_values: []
+    description: Reimbursed amount for a care coordination activity such as multi-disciplinary planning or complex case review.
+    source: NZ Alliance Agreement care coordination schedule
+    sensitivity_class: public_aggregate
+    evidence_tier: stakeholder
+    tags: [ffs, coordination, complex_care]
+
+  # ── Copayment thresholds ──────────────────────────────────────────────
+  - parameter_id: copayment_cap_annual
+    label: Annual copayment cap per enrolled person
+    value_type: number
+    unit: NZD per year
+    default_value: 100.0
+    lower_bound: 0.0
+    upper_bound: 500.0
+    category_values: []
+    description: Maximum total copayment an enrolled person pays per year before free access.
+    source: NZ Community Services Card / High Use Health Card policy thresholds
+    sensitivity_class: public_aggregate
+    evidence_tier: public_data
+    tags: [copayment, cap, access, equity]
+
+  - parameter_id: copayment_waiver_income_threshold
+    label: Income threshold for full copayment waiver
+    value_type: number
+    unit: NZD gross annual household
+    default_value: 35000.0
+    lower_bound: 15000.0
+    upper_bound: 60000.0
+    category_values: []
+    description: Gross annual household income below which all copayments are waived.
+    source: NZ Community Services Card eligibility thresholds
+    sensitivity_class: public_aggregate
+    evidence_tier: public_data
+    tags: [copayment, waiver, equity, income]
+
+  - parameter_id: max_gap_payment
+    label: Maximum gap payment for non-funded items
+    value_type: number
+    unit: NZD
+    default_value: 50.00
+    lower_bound: 0.0
+    upper_bound: 200.00
+    category_values: []
+    description: Maximum out-of-pocket gap payment a practice may charge for an item not fully covered by the schedule.
+    source: NZ PHO Services Agreement gap payment provisions
+    sensitivity_class: public_aggregate
+    evidence_tier: public_data
+    tags: [copayment, gap, patient_charges]
+
+  # ── Population counts ─────────────────────────────────────────────────
+  - parameter_id: enrolled_population_count
+    label: Total enrolled population count
+    value_type: integer
+    unit: persons
+    default_value: 4500000
+    lower_bound: 1000000.0
+    upper_bound: 6000000.0
+    category_values: []
+    description: Total number of enrolled patients across all PHOs (calibrated to NZ total).
+    source: NZ Ministry of Health Primary Care Enrolment data
+    sensitivity_class: public_aggregate
+    evidence_tier: public_data
+    tags: [population, enrolment, denominator]
+
+  - parameter_id: catchment_population_estimate
+    label: Estimated catchment population (including unenrolled)
+    value_type: integer
+    unit: persons
+    default_value: 5100000
+    lower_bound: 2000000.0
+    upper_bound: 6000000.0
+    category_values: []
+    description: Estimated resident population within PHO catchment areas, including those not formally enrolled.
+    source: Statistics NZ estimated resident population (ERP) subnational
+    sensitivity_class: public_aggregate
+    evidence_tier: public_data
+    tags: [population, catchment, denominator]
+
+  - parameter_id: patient_to_gp_ratio_target
+    label: Patient-to-full-time-GP ratio target
+    value_type: number
+    unit: patients per FTE GP
+    default_value: 1200.0
+    lower_bound: 600.0
+    upper_bound: 2500.0
+    category_values: []
+    description: Target ratio of enrolled patients per full-time-equivalent GP for planning purposes.
+    source: RNZCGP workforce survey and NZ Health Workforce Plan
+    sensitivity_class: public_aggregate
+    evidence_tier: stakeholder
+    tags: [workforce, gp, planning, ratio]
+
+  # ── Workforce parameters ──────────────────────────────────────────────
+  - parameter_id: gp_supply_elasticity
+    label: GP supply elasticity to marginal payment
+    value_type: number
+    unit: dimensionless
+    default_value: 0.25
+    lower_bound: 0.0
+    upper_bound: 1.0
+    category_values: []
+    description: Elasticity of GP FTE supply with respect to a 1% increase in marginal FFS payment per consultation.
+    source: Track 043 calibrated parameter (linked data)
+    sensitivity_class: sensitive
+    evidence_tier: calibrated
+    tags: [workforce, supply, elasticity, gp]
+
+  - parameter_id: nurse_substitution_elasticity
+    label: Nurse practitioner substitution elasticity
+    value_type: number
+    unit: dimensionless
+    default_value: 0.40
+    lower_bound: 0.0
+    upper_bound: 1.0
+    category_values: []
+    description: Elasticity of nurse/GP substitution — share of GP consultations shifted to NP or practice nurse per unit scope expansion.
+    source: Track 043 calibrated parameter (linked data)
+    sensitivity_class: sensitive
+    evidence_tier: calibrated
+    tags: [workforce, substitution, nursing, scope]
+
+  - parameter_id: workforce_participation_rate
+    label: GP workforce participation rate
+    value_type: number
+    unit: fraction (0–1)
+    default_value: 0.72
+    lower_bound: 0.50
+    upper_bound: 0.95
+    category_values: []
+    description: Fraction of registered GPs who are currently practising (employed or contracted in primary care).
+    source: Medical Council of NZ workforce survey
+    sensitivity_class: public_aggregate
+    evidence_tier: public_data
+    tags: [workforce, gp, participation, supply]
+
+  # ── Governance parameters ─────────────────────────────────────────────
+  - parameter_id: audit_intensity_factor
+    label: Audit and claim integrity intensity
+    value_type: number
+    unit: dimensionless (index 0–1)
+    default_value: 0.65
+    lower_bound: 0.0
+    upper_bound: 1.0
+    category_values: []
+    description: Strength of post-payment auditing, claim validation and unusual-pattern monitoring relative to maximum feasible.
+    source: Track 043 calibrated parameter (linked data)
+    sensitivity_class: sensitive
+    evidence_tier: calibrated
+    tags: [governance, audit, integrity, control]
+
+  - parameter_id: data_visibility_factor
+    label: Data visibility and transparency factor
+    value_type: number
+    unit: dimensionless (index 0–1)
+    default_value: 0.55
+    lower_bound: 0.0
+    upper_bound: 1.0
+    category_values: []
+    description: Extent to which utilisation, cost and quality data are visible to commissioners, providers and the public.
+    source: Track 043 calibrated parameter (linked data)
+    sensitivity_class: sensitive
+    evidence_tier: calibrated
+    tags: [governance, data, transparency, visibility]
+
+  - parameter_id: scope_flexibility_factor
+    label: Workforce scope flexibility factor
+    value_type: number
+    unit: dimensionless (index 0–1)
+    default_value: 0.50
+    lower_bound: 0.0
+    upper_bound: 1.0
+    category_values: []
+    description: Degree to which regulatory and funding settings allow care to be delivered by the most appropriate provider type.
+    source: Track 043 calibrated parameter (linked data)
+    sensitivity_class: sensitive
+    evidence_tier: calibrated
+    tags: [governance, scope, workforce, flexibility]
+
+  - parameter_id: governance_effectiveness_index
+    label: Overall governance effectiveness index
+    value_type: number
+    unit: dimensionless (index 0–1)
+    default_value: 0.60
+    lower_bound: 0.0
+    upper_bound: 1.0
+    category_values: []
+    description: Composite index capturing audit strength, data visibility, accountability enforcement and governance maturity.
+    source: Track 043 calibrated parameter (linked data)
+    sensitivity_class: sensitive
+    evidence_tier: calibrated
+    tags: [governance, composite, index]
+
+  - parameter_id: capitation_region
+    label: Geographic region for capitation rules
+    value_type: categorical
+    unit: region code
+    default_value: nz_urban
+    lower_bound: null
+    upper_bound: null
+    category_values: [nz_urban, nz_mixed, nz_rural, nz_remote]
+    description: Geographic classification that selects the appropriate capitation adjustment and rural weighting schedule.
+    source: NZ Ministry of Health rural classification framework
+    sensitivity_class: public_aggregate
+    evidence_tier: public_data
+    tags: [capitation, region, rural, classification]

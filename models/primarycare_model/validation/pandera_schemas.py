@@ -12,11 +12,11 @@ from typing import Any
 import pandas as pd
 
 try:  # pragma: no cover - exercised only in environments with pandera.
-    import pandera as pa
+    import pandera.pandas as pa
     from pandera.typing import Series
 except ImportError:  # pragma: no cover - local fallback is the normal lean path.
-    pa = None
-    Series = Any
+    pa = None  # type: ignore[assignment]
+    Series = Any  # type: ignore[assignment, misc]
 
 
 REFERENCE_RESULT_COLUMNS = {
@@ -52,6 +52,9 @@ SCORE_COLUMNS = [
 if pa is not None:  # pragma: no cover
 
     class ReferenceResultSchema(pa.DataFrameModel):
+        class Config:
+            coerce = True
+
         scenario_id: Series[str]
         scenario_name: Series[str]
         description: Series[str]
@@ -82,13 +85,13 @@ def validate_reference_results_frame(df: pd.DataFrame, expected_scenario_ids: se
             ReferenceResultSchema.validate(df, lazy=True)
         except pa.errors.SchemaErrors as exc:
             issues.append(f"pandera validation failed: {exc.failure_cases.to_dict(orient='records')}")
-    else:
-        for column in SCORE_COLUMNS:
-            numeric = pd.to_numeric(df[column], errors="coerce")
-            if numeric.isna().any():
-                issues.append(f"{column} contains non-numeric or null values")
-            elif not numeric.between(0, 100).all():
-                issues.append(f"{column} contains values outside 0-100")
+
+    for column in SCORE_COLUMNS:
+        numeric = pd.to_numeric(df[column], errors="coerce")
+        if numeric.isna().any():
+            issues.append(f"{column} contains non-numeric or null values")
+        elif not numeric.between(0, 100).all():
+            issues.append(f"{column} contains values outside 0-100")
 
     if expected_scenario_ids is not None:
         found = set(df["scenario_id"].astype(str))

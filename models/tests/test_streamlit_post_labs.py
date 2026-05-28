@@ -2,7 +2,6 @@ from pathlib import Path
 
 from streamlit.testing.v1 import AppTest
 
-
 SOURCE_PATH = Path(__file__).resolve().parents[1] / "primarycare_model" / "app.py"
 APP_PATH = str(SOURCE_PATH)
 

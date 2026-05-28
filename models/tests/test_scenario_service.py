@@ -1,3 +1,4 @@
+from contextlib import suppress
 from pathlib import Path
 
 import numpy as np
@@ -50,11 +51,8 @@ def test_load_scenario_results_adds_claim_boundary():
         loaded = load_scenario_results(source)
     finally:
         if source.exists():
-            try:
+            with suppress(PermissionError):
                 source.unlink()
-            except PermissionError:
-                # Windows/OneDrive can briefly hold the file after pandas reads it.
-                pass
     assert "scenario_role" in loaded.columns
     assert "claim_boundary" in loaded.columns
     assert loaded["claim_boundary"].str.contains("not linked-data calibrated", regex=False).all()

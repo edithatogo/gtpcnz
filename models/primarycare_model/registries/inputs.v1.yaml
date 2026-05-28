@@ -1,0 +1,271 @@
+datasets:
+  # ── Population demographics ──────────────────────────────────────────
+  - dataset_id: population_demographics
+    label: Population demographics by age, sex and deprivation
+    source: Statistics NZ Census and NZDep combined dataset
+    sensitivity_class: sensitive
+    fields:
+      - field_name: age_group
+        data_type: categorical
+        unit: years band
+        required: true
+        description: Age band (e.g. 0–4, 5–14, 15–44, 45–64, 65–74, 75+)
+      - field_name: sex
+        data_type: categorical
+        unit: male/female
+        required: true
+        description: Sex classification
+      - field_name: deprivation_quintile
+        data_type: categorical
+        unit: NZDep quintile 1–5
+        required: true
+        description: NZ Deprivation Index quintile from 1 (least deprived) to 5 (most deprived)
+      - field_name: population_count
+        data_type: integer
+        unit: persons
+        required: true
+        description: Estimated population count in the stratum
+      - field_name: enrolled_count
+        data_type: integer
+        unit: persons
+        required: false
+        description: Number enrolled in a PHO within the stratum
+      - field_name: unenrolled_estimate
+        data_type: integer
+        unit: persons
+        required: false
+        description: Estimated unenrolled residents within the stratum
+    claim_boundary: Aggregated Statistics NZ and MOH enrolment data; small-cell suppression applied below 5.
+
+  # ── Funding pool data ────────────────────────────────────────────────
+  - dataset_id: funding_pool_data
+    label: Primary care funding pool allocations
+    source: NZ Ministry of Health funding returns and PHO Services Agreement
+    sensitivity_class: public_aggregate
+    fields:
+      - field_name: pho_id
+        data_type: string
+        unit: PHO identifier
+        required: true
+        description: Unique PHO identifier
+      - field_name: financial_year
+        data_type: string
+        unit: FY label
+        required: true
+        description: Financial year label (e.g. 2023/24)
+      - field_name: capitation_funding
+        data_type: number
+        unit: NZD
+        required: true
+        description: Total capitation funding paid to the PHO
+      - field_name: ffs_schedule_funding
+        data_type: number
+        unit: NZD
+        required: true
+        description: Total FFS item schedule funding paid
+      - field_name: targeted_programme_funding
+        data_type: number
+        unit: NZD
+        required: false
+        description: Targeted programme and innovation funding
+      - field_name: after_hours_funding
+        data_type: number
+        unit: NZD
+        required: false
+        description: After-hours and urgent care funding allocation
+      - field_name: total_pool
+        data_type: number
+        unit: NZD
+        required: true
+        description: Total combined primary care funding pool
+    claim_boundary: Publicly reported aggregate PHO funding; not patient-level.
+
+  # ── Activity data ────────────────────────────────────────────────────
+  - dataset_id: activity_data
+    label: Primary care activity and service utilisation
+    source: NZ PHO claims and activity data warehouse
+    sensitivity_class: sensitive
+    fields:
+      - field_name: consultation_type
+        data_type: categorical
+        unit: consultation code
+        required: true
+        description: Type of consultation (standard, prolonged, after_hours, telephone, video)
+      - field_name: provider_type
+        data_type: categorical
+        unit: provider code
+        required: true
+        description: Provider type (GP, NP, practice_nurse, pharmacist, other)
+      - field_name: patient_age_group
+        data_type: categorical
+        unit: years band
+        required: true
+        description: Age band of the patient
+      - field_name: patient_deprivation_quintile
+        data_type: categorical
+        unit: NZDep quintile 1–5
+        required: true
+        description: NZ Deprivation Index quintile of patient residence
+      - field_name: claim_count
+        data_type: integer
+        unit: claims
+        required: true
+        description: Number of claims submitted
+      - field_name: total_funding
+        data_type: number
+        unit: NZD
+        required: true
+        description: Total funding amount claimed
+      - field_name: service_month
+        data_type: string
+        unit: YYYY-MM
+        required: true
+        description: Calendar month of service delivery
+    claim_boundary: PHO-level aggregated claims data; no individual patient identifiers. Small-cell suppression applied.
+
+  # ── Workforce data ───────────────────────────────────────────────────
+  - dataset_id: workforce_data
+    label: Primary care workforce supply and composition
+    source: Medical Council of NZ, Nursing Council of NZ and NZ Health Workforce Information Programme
+    sensitivity_class: public_aggregate
+    fields:
+      - field_name: provider_type
+        data_type: categorical
+        unit: provider code
+        required: true
+        description: Provider type (GP, NP, practice_nurse, pharmacist, other)
+      - field_name: fte_count
+        data_type: number
+        unit: full-time-equivalents
+        required: true
+        description: Full-time-equivalent count
+      - field_name: head_count
+        data_type: integer
+        unit: persons
+        required: true
+        description: Number of individual providers
+      - field_name: age_group
+        data_type: categorical
+        unit: years band
+        required: false
+        description: Age band of the workforce (for retirement modelling)
+      - field_name: region
+        data_type: categorical
+        unit: region code
+        required: true
+        description: Geographic region of practice location
+      - field_name: participation_rate
+        data_type: number
+        unit: fraction (0–1)
+        required: false
+        description: Proportion of registered providers currently practising
+    claim_boundary: Published workforce survey data at DHB / region level; no individual practitioner data.
+
+  # ── Equity indicators ────────────────────────────────────────────────
+  - dataset_id: equity_indicators
+    label: Equity indicators for access and outcomes
+    source: NZ Ministry of Health equity data pack and Health Quality & Safety Commission indicators
+    sensitivity_class: sensitive
+    fields:
+      - field_name: indicator_id
+        data_type: string
+        unit: indicator code
+        required: true
+        description: Unique equity indicator identifier
+      - field_name: population_group
+        data_type: categorical
+        unit: group label
+        required: true
+        description: Population group (e.g. Māori, Pacific, Asian, European/Other, deprivation quintile)
+      - field_name: metric_name
+        data_type: string
+        unit: metric label
+        required: true
+        description: Metric name (e.g. unmet_need_rate, avoidable_hospitalisation_rate, immunisation_coverage)
+      - field_name: metric_value
+        data_type: number
+        unit: varies by metric
+        required: true
+        description: Numerical value of the equity metric
+      - field_name: metric_denominator
+        data_type: integer
+        unit: persons
+        required: false
+        description: Population denominator for the metric
+      - field_name: source_year
+        data_type: string
+        unit: calendar year
+        required: true
+        description: Year of data collection
+    claim_boundary: Published equity indicators at national and DHB level; small-cell suppression applied.
+
+  # ── Cost and price data ──────────────────────────────────────────────
+  - dataset_id: cost_price_data
+    label: Practice cost and price schedule data
+    source: NZ PHO Services Agreement price schedule and practice cost surveys
+    sensitivity_class: confidential
+    fields:
+      - field_name: item_code
+        data_type: string
+        unit: schedule item code
+        required: true
+        description: Unique FFS schedule item code
+      - field_name: item_label
+        data_type: string
+        unit: label
+        required: true
+        description: Human-readable item label
+      - field_name: schedule_price
+        data_type: number
+        unit: NZD
+        required: true
+        description: Scheduled reimbursement price (GST-inclusive)
+      - field_name: typical_cost
+        data_type: number
+        unit: NZD
+        required: false
+        description: Estimated typical practice cost to deliver the item
+      - field_name: copayment_allowed
+        data_type: boolean
+        unit: true/false
+        required: true
+        description: Whether a copayment may be charged for this item
+      - field_name: typical_copayment
+        data_type: number
+        unit: NZD
+        required: false
+        description: Typical copayment charged for this item
+    claim_boundary: Published schedule prices and anonymised cost survey averages; no practice-identifiable data.
+
+  # ── Governance metrics ───────────────────────────────────────────────
+  - dataset_id: governance_metrics
+    label: Governance, audit and data transparency metrics
+    source: NZ Health Quality & Safety Commission and PHO performance reports
+    sensitivity_class: public_aggregate
+    fields:
+      - field_name: metric_id
+        data_type: string
+        unit: metric code
+        required: true
+        description: Unique governance metric identifier
+      - field_name: pho_id
+        data_type: string
+        unit: PHO identifier
+        required: true
+        description: Unique PHO identifier
+      - field_name: domain
+        data_type: categorical
+        unit: domain label
+        required: true
+        description: Governance domain (audit, data_visibility, accountability, equity_enforcement)
+      - field_name: score
+        data_type: number
+        unit: index 0–100
+        required: true
+        description: Performance score for the governance metric
+      - field_name: assessment_period
+        data_type: string
+        unit: period label
+        required: true
+        description: Assessment period (e.g. Q1_2024, FY2023/24)
+    claim_boundary: Aggregated PHO-level performance indicators; not individual practice or patient data.

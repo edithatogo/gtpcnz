@@ -11,8 +11,6 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from repo_scorecards import bleeding_edge_scorecard
-
 
 def read(path: str) -> str:
     return (ROOT / path).read_text(encoding="utf-8")
@@ -228,6 +226,8 @@ CHECKS = [
 
 
 def main() -> int:
+    from repo_scorecards import bleeding_edge_scorecard
+
     results = []
     for name, check in CHECKS:
         ok, detail = check()
