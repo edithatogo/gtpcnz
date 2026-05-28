@@ -1,9 +1,11 @@
 """Sync root source files to public/gtpcnz mirror."""
 from __future__ import annotations
+
 import filecmp
 import shutil
 import sys
 from pathlib import Path
+
 ROOT = Path(__file__).resolve().parents[1]
 MIRROR = ROOT / "public" / "gtpcnz"
 COPY_MAP = [
@@ -43,10 +45,10 @@ def main() -> int:
             print(f"COPY {src_rel} -> {dst_rel}")
     if check_only:
         outcome = "FAILED" if failures else "PASSED"
-        print(f"")
+        print("")
         print(f"Result: {outcome} ({failures} drift items)")
     else:
-        print(f"")
+        print("")
         print(f"Sync complete. {failures} errors.")
     return 1 if failures else 0
 if __name__ == "__main__":

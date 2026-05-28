@@ -11,7 +11,7 @@ Current active tracks:
 - `047-streamlit-deployment-experience_20260527`: UI polish, accessibility captions, deployment runbook.
 - `048-equilibrium-solver-exploration_20260528`: decided — keep heuristic Nash, do NOT add analytical solver lane. Documented in `docs/decisions/solver-posture-v1.8.5.md`.
 - `049-bleeding-edge-analytical-enhancements_20260528`: MoSCoW shortlist complete. First-wave: tornado sensitivity, equity/rural stratification, seeded Monte Carlo, waterfall charts, heatmap matrix. Documented in `docs/decisions/enhancement-shortlist-v1.8.5.md`.
-- `050-strict-quality-toolchain_20260528`: hardens type checking, dependency automation, coverage, property/mutation tests, profiling, security scans and GitHub enforcement. Local gates passed on 2026-05-28 with repo health 11/11, bleeding-edge scorecard 17/17, 134 tests passed, and 91.68% model-package coverage. Remote enforcement now has active default-branch ruleset `main baseline protection` requiring PR flow, resolved review threads, linear history, no deletion/force-push, and the `test-and-render` CI check.
+- `050-strict-quality-toolchain_20260528`: hardens type checking, dependency automation, coverage, property/mutation tests, profiling, security scans and GitHub enforcement. Local gates passed on 2026-05-28 with repo health 11/11, bleeding-edge scorecard 17/17, 134 tests passed, and 91.68% model-package coverage. Remote enforcement now has active default-branch ruleset `main baseline protection` requiring PR flow, resolved review threads, linear history, no deletion/force-push, and both `test-and-render` and `Quality / python-quality` CI checks.
 
 Completed subagent workstreams:
 

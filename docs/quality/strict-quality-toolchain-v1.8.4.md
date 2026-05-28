@@ -60,6 +60,6 @@ Repository-side settings checked on 2026-05-28:
 - Secret scanning push protection: enabled.
 - Secret scanning non-provider patterns and validity checks: unavailable or still disabled on the current public-repo plan/API response.
 - Code scanning: configured by `.github/workflows/codeql.yml`; it will become active after the workflow lands on `main` and runs.
-- Branch rulesets / required checks: active baseline repository ruleset `main baseline protection` is enabled for the default branch. It blocks branch deletion and force pushes, requires linear history, requires pull-request flow with resolved review threads, and requires the existing `test-and-render` CI status check with strict up-to-date checks.
+- Branch rulesets / required checks: active baseline repository ruleset `main baseline protection` is enabled for the default branch. It blocks branch deletion and force pushes, requires linear history, requires pull-request flow with resolved review threads, and requires both the existing `test-and-render` CI status check and the new `Quality / python-quality` status check with strict up-to-date checks.
 
-After this branch lands on `main`, tighten the ruleset by adding the new `python-quality` job from `.github/workflows/quality.yml` as a required check. CodeQL, mutation testing, profiling and Renovate are configured as scheduled/manual control lanes rather than every-PR blocking checks.
+CodeQL, mutation testing, profiling and Renovate are configured as scheduled/manual control lanes rather than every-PR blocking checks.
