@@ -244,7 +244,7 @@ def build_provenance_summary() -> dict[str, Any]:
 
 
 @lru_cache(maxsize=1)
-def load_oia_component_map_registry() -> tuple:
+def load_oia_component_map_registry() -> tuple[Any, ...]:
     payload = _read_yaml(_registry_path("oia_component_map.v1.yaml"))
     entries = TypeAdapter(tuple[OIAComponentEntry, ...]).validate_python(payload["entries"])
     _check_unique(entries, "oia_id", "OIA component map")
