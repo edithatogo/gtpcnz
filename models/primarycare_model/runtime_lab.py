@@ -1339,7 +1339,108 @@ def build_evidence_table() -> pd.DataFrame:
         "URL": r.get("URL",""), "Note": r.get("note","")} for r in refs])
 
 
-# ── End calibration, evidence, and documentation ──────────────────────
+# ── Clustering and animation infrastructure ──────────────────────────
+
+
+def run_outcome_clustering(
+    n_clusters: int = 4,
+    scenario_ids: tuple[str, ...] = ("F0", "F3", "F4", "F8"),
+    seed: int = 260526,
+) -> pd.DataFrame:
+    """Cluster outcomes using KMeans + logistic regression."""
+    from sklearn.cluster import KMeans
+    from sklearn.preprocessing import StandardScaler
+    from sklearn.linear_model import LogisticRegression
+    rng = np.random.default_rng(seed)
+    scenarios = [get_runtime_scenario(sid) for sid in scenario_ids]
+    rows = []
+    for sc in scenarios:
+        for _ in range(50):
+            p = _scenario_with_perturbation(sc, rng, 0.08)
+            idx = calculate_indices(p)
+            rows.append({"scenario_id": sc.scenario_id,
+                "activity_signal": p.activity_signal, "capitation": p.capitation,
+                "governance": p.governance, "equity_protection": p.equity_protection,
+                "copayment_burden": p.copayment_burden, "complexity": p.complexity, **idx})
+    df = pd.DataFrame(rows)
+    mc = ["hybrid_viability_score", "access_score", "supply_generation_score",
+          "equity_legitimacy_score", "hospital_pressure_score", "gaming_risk_score"]
+    X = StandardScaler().fit_transform(df[mc])
+    km = KMeans(n_clusters=n_clusters, random_state=seed, n_init=10)
+    df["cluster"] = km.fit_predict(X)
+    pc = ["activity_signal", "capitation", "governance", "equity_protection", "copayment_burden", "complexity"]
+    clf = LogisticRegression(max_iter=1000, random_state=seed)
+    clf.fit(df[pc], df["cluster"])
+    summary = []
+    for sid in scenario_ids:
+        sub = df[df["scenario_id"] == sid]
+        if sub.empty: continue
+        mc_val = int(sub["cluster"].mode().iloc[0])
+        top_idx = np.argsort(np.abs(km.cluster_centers_[mc_val]))[-3:][::-1]
+        summary.append({"scenario_id": sid, "cluster": mc_val,
+            "mean_viability": round(sub["hybrid_viability_score"].mean(), 1),
+            "top_metrics": ", ".join(mc[i] for i in top_idx)})
+    return pd.DataFrame(summary)
+
+
+def run_composite_meta_analysis(
+    n_points: int = 36, seed: int = 260526,
+) -> pd.DataFrame:
+    """Sweep all 12 parameters and compute all indices."""
+    rng = __import__('numpy').random.default_rng(seed)
+    base = get_runtime_scenario("F4")
+    fields = ["activity_signal","capitation","place_accountability","scope_capacity",
+              "urgent_ambulance","data_visibility","governance","equity_protection",
+              "copayment_burden","budget_tightness","hospital_salience","complexity"]
+    rows = []
+    for i in range(n_points):
+        pd_ = {}
+        for f in fields:
+            pd_[f] = clamp(float(getattr(base, f)) + (__import__('numpy').random.random() - 0.5) * 60.0)
+        idx = calculate_indices(replace(base, **pd_))
+        rows.append({**pd_, **idx})
+    return pd.DataFrame(rows)
+
+
+def create_animation_frames(
+    param_x: str = "activity_signal",
+    param_y: str = "governance",
+    steps: int = 10, scenario_id: str = "F4",
+) -> pd.DataFrame:
+    """Generate animation frames for a 2-parameter sweep."""
+    scenario = get_runtime_scenario(scenario_id)
+    values = [round(i * 100.0 / steps) for i in range(steps + 1)]
+    rows = []
+    for fi, vx in enumerate(values):
+        for vy in values:
+            s = replace(scenario, **{param_x: float(vx), param_y: float(vy)})
+            idx = calculate_indices(s)
+            rows.append({param_x: vx, param_y: vy, "frame": fi,
+                "hybrid_viability_score": idx["hybrid_viability_score"],
+                "hospital_pressure_score": idx["hospital_pressure_score"]})
+    return pd.DataFrame(rows)
+
+
+SUBSTACK_POSTS = {
+    "01": {"title": "Are we buying hospital growth by rationing cheaper care?",
+            "file": "docs/substack-ready/posts-v1.7.2-launch/post-01-...md",
+            "models": ["Reference scenarios", "F0-F9 comparison"]},
+    "02": {"title": "Fee-for-service, capitation and blended funding",
+            "file": "docs/substack-ready/posts-v1.7.2-launch/post-02-...md",
+            "models": ["Funding model comparison", "Educational explainer"]},
+    "03": {"title": "Marginal supply",
+            "file": "docs/substack-ready/posts-v1.7.2-launch/post-03-...md",
+            "models": ["Microeconomics lab 1", "Supply generation"]},
+    "04": {"title": "Why formulas do not solve games",
+            "file": "docs/substack-ready/posts-v1.7.2-launch/post-04-...md",
+            "models": ["Game theory labs", "Gaming risk"]},
+    "05": {"title": "Current reform pathway",
+            "file": "docs/substack-ready/posts-v1.7.2-launch/post-05-...md",
+            "models": ["Reference scenario F0"]},
+    "06": {"title": "What I mean by uncapping primary care funding",
+            "file": "docs/substack-ready/posts-v1.7.2-launch/post-06-...md",
+            "models": ["Microeconomics lab 3", "Scheduled payment"]},
+}
 
 
 def model_gap_map() -> pd.DataFrame:
