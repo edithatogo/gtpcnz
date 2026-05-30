@@ -1,5 +1,7 @@
 # Spec — v1.7.1 model hardening and launch simplification
 
+**Status:** Complete
+
 ## Goal
 Harden the v1.7.0 parameterised benchmark and simplify the public launch pathway.
 

@@ -1,5 +1,7 @@
 # Spec: GitHub Pages Visual Gallery
 
+**Status:** Complete
+
 ## Problem
 
 The GitHub Pages site must be more than a directory of links. It needs to surface the reading map, the main visuals and clear entry points into the Quarto report and Streamlit dashboard.

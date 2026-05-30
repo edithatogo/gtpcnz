@@ -1,5 +1,7 @@
 # Track 018 — Contract-compliance audit
 
+**Status:** Complete
+
 ## Goal
 
 Systematically check the package against the accumulated requirements and patch housekeeping gaps that would weaken defensibility.

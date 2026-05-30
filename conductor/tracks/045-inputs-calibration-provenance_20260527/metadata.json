@@ -1,10 +1,10 @@
 {
   "id": "045-inputs-calibration-provenance_20260527",
   "title": "Inputs, Calibration, and Provenance",
-  "status": "active",
+  "status": "completed",
   "created": "2026-05-27",
-  "updated": "2026-05-27",
-  "progress": "Derived from the inputs and assumptions investigator report. Track covers public-source provenance, calibration readiness, OIA/data gaps, and machine-readable boundary metadata.",
+  "updated": "2026-05-31",
+  "progress": "Completed public-source provenance, calibration readiness, OIA/data-gap mapping, machine-readable boundary metadata, and data-freshness gates.",
   "owner": "codex",
   "output": "Typed provenance and calibration-readiness artifacts with explicit public-data boundaries"
 }

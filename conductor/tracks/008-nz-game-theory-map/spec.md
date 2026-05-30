@@ -1,5 +1,7 @@
 # Track 008 spec: NZ broader policy game-theory map
 
+**Status:** Complete
+
 ## Purpose
 
 Make the game-theoretic analysis of New Zealand primary care, ambulance, PHO, ACC, workforce-scope and hospital budget architecture explicit enough to support policy briefs, Substack posts, modelling and an NZMJ article.

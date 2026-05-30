@@ -1,10 +1,10 @@
 {
   "id": "046-public-website-visual-contract_20260527",
   "title": "Public Website and Visual Contract",
-  "status": "active",
+  "status": "completed",
   "created": "2026-05-27",
-  "updated": "2026-05-27",
-  "progress": "Based on the visualisations, tables, report, and docs investigator reports. Track covers the public homepage, report, visual gallery, tables, mirrored public docs, and launch-readiness wording.",
+  "updated": "2026-05-31",
+  "progress": "Completed public homepage/report/visual contract work, mirrored public docs, stable wording, and launch-readiness checks.",
   "owner": "codex",
   "output": "Consistent public website contract, readable visual gallery, and stable report/document surface"
 }

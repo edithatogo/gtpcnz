@@ -1,5 +1,7 @@
 # Spec: Visual Contract Validation and Release
 
+**Status:** Complete
+
 ## Problem
 
 The public visual contract spans multiple surfaces. It needs an integrated closeout track that proves the contracts were implemented, tests pass, deployment updated and screenshots show the real public UX.

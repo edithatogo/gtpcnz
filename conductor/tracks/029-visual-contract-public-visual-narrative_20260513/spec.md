@@ -1,5 +1,7 @@
 # Spec: Visual Contract and Public Visual Narrative
 
+**Status:** Complete
+
 ## Problem
 
 The public site and dashboard are now safe, but they are still too text-heavy. A general reader should not have to infer the policy logic from tables and paragraphs. The public surfaces need a visual spine: conceptual microeconomics diagrams, static plots, dynamic explainer simulations and page structure that follows the same sequence as the public posts.

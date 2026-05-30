@@ -1,5 +1,7 @@
 # Track 009 — Research audit and traceability pack
 
+**Status:** Complete
+
 ## Purpose
 
 Create a defensible audit trail for the New Zealand primary care funding game map, showing how the work artefacts were produced, what sources support the mapping, what assumptions remain untested, and what further empirical work is required.

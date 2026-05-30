@@ -1,10 +1,10 @@
 {
   "id": "050-strict-quality-toolchain_20260528",
   "title": "Strict Quality Toolchain",
-  "status": "active",
+  "status": "completed",
   "created": "2026-05-28",
-  "updated": "2026-05-28",
-  "progress": "Turns the quality-tooling questions into an enforceable track: basedpyright versus ty versus mypy, Renovate activation, Pydantic v2 posture, coverage thresholds, edge/property/mutation tests, Scalene profiling, and strict CI/CD controls.",
+  "updated": "2026-05-31",
+  "progress": "Completed the strict quality-toolchain track: basedpyright/mypy posture, Ruff, Renovate, coverage thresholds, property and mutation tests, Scalene profiling, pip-audit, CodeQL, and CI/CD controls.",
   "owner": "codex",
   "output": "A strict, measurable CI and local quality stack with documented type-checker posture, dependency automation, coverage and profiling evidence"
 }

@@ -1,5 +1,7 @@
 # Spec: Agent-Based Model Stub Completion
 
+**Status:** Complete
+
 ## Problem
 
 `models/primarycare_model/abm_stub.py` is still a placeholder. It defines patient and provider data classes, but it does not run a genuine agent-based simulation, does not consume the full parameterised scenario surface, and cannot honestly support a "no stubs" model-status claim.

@@ -1,5 +1,7 @@
 # Track 016 - Pragmatic validation without full calibration (v1.1.0)
 
+**Status:** Complete
+
 ## Intent
 Proceed with the recommended next phase without attempting a fully empirically calibrated predictive model.
 

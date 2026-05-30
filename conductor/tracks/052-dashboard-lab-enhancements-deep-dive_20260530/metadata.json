@@ -1,0 +1,10 @@
+{
+  "id": "052-dashboard-lab-enhancements-deep-dive_20260530",
+  "title": "Dashboard Lab Enhancements: Deep-Dive Clarifications",
+  "status": "completed",
+  "created": "2026-05-30",
+  "updated": "2026-05-31",
+  "progress": "Completed How this works expanders for all 7 labs, combined microeconomics and game-theory analyses, outcome clustering, row highlighting, linked Substack cross-references, and focused regression tests.",
+  "owner": "codex",
+  "output": "Deeper lab explanations, combined model controls, cluster displays, linked cross-references, and table highlighting in the Streamlit app"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "051-dashboard-ui-methodology-completion_20260530",
+  "title": "Dashboard UI Methodology Completion",
+  "status": "completed",
+  "created": "2026-05-30",
+  "updated": "2026-05-31",
+  "progress": "Completed Methodology & evidence tab, canonical definitions, evidence downloads, linked Substack badges, lazy animated sweep, outcome clustering, composite meta-analysis, figure/table/abbreviation index, and focused regression tests.",
+  "owner": "codex",
+  "output": "Methodology/evidence Streamlit surface with linked definitions, evidence table, exports, on-demand analytical visualisations, and test coverage"
+}

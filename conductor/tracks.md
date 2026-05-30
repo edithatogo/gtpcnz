@@ -47,6 +47,16 @@
 | 040 | Bleeding edge experimental lane and scorecard | Completed | Three-lane dependency posture, edge scorecard, prerelease workflow and triage note |
 | 041 | GitHub Pages public site claim-boundary hardening | Complete | Public site, dashboard and tests updated to public-data anchored benchmark contract |
 | 042 | Simulation Engine Evolution with Rust-Core, VOI, MARS, Diffusion | Active | Rust-core DES simulation spec, linked references, Vale prose linting, Moscow requirements register |
+| 043 | Concern extraction and strict validation architecture | Complete | Typed contracts, versioned registries, validation helpers, Streamlit bindings, concern-boundary scanner and tests |
+| 044 | Game theory formula validation | Complete | Nonlinear payoff logic, best-response curves, gaming-risk frontier and formula regression tests |
+| 045 | Inputs, calibration and provenance | Complete | Provenance registry, OIA component map, data-freshness gate and calibration-boundary metadata |
+| 046 | Public website and visual contract | Complete | Public wording contract, visual gallery contract and public mirror sync |
+| 047 | Streamlit deployment experience | Complete | App structure, tabs, controls, smoke tests, deployment entrypoint and accessibility/performance polish |
+| 048 | Equilibrium solver exploration | Complete | Decision to keep heuristic Nash and defer analytical solver lane |
+| 049 | Bleeding edge analytical enhancements | Complete | Three-wave analytical lane with sensitivity, subgroup, uncertainty, stress, interaction, VOI, diffusion, clustering, composite, evidence and UI wiring |
+| 050 | Strict quality toolchain | Complete | Strict type/lint/test/security/dependency/profile toolchain and CI controls |
+| 051 | Dashboard UI methodology completion | Complete | Methodology/evidence tab, linked definitions, evidence exports, lazy analytical views and focused tests |
+| 052 | Dashboard lab enhancements: deep-dive clarifications | Complete | How this works expanders for all 7 labs, combined analyses, clustering, row highlighting and linked cross-references |
 | — | Interactive Reporting and Visualization Suite | Complete | Interactive reporting and visualization suite (non-numeric companion track) |
 
 
@@ -70,6 +80,3 @@
 
 ### Track details
 Per-track specifications, plans, and metadata live in individual track directories under `conductor/tracks/`. The table above is the authoritative registry.
-
-| 051 | Dashboard UI methodology completion | Complete | Methodology/evidence tab, canonical definitions, animated plots, clustering display, composite meta-plot, Substack cross-refs, evidence downloads (CSV + CSL-JSON) |
-| 052 | Dashboard lab enhancements: deep-dive clarifications | Complete | How this works expanders for all 7 labs (4 micro + 3 game), combined microeconomics model, combined game theory model, outcome clustering |

@@ -1,5 +1,7 @@
 # Track 014 - Game-informed MCDA decision support v0.9.0
 
+**Status:** Complete
+
 ## Objective
 
 Create a deliberative decision-support layer that uses the mapped games to structure MCDA scoring, stakeholder weighting, policy option comparison and validation planning.

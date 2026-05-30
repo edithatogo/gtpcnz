@@ -1,5 +1,7 @@
 # Spec: Quarto Post-Aligned Visual Report
 
+**Status:** Complete
+
 ## Problem
 
 The Quarto report has useful static visuals, but it does not yet function as the canonical visual companion to each public post. Game-theory and microeconomics explanations need clearer section anchors, diagrams and reader guidance.

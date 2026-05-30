@@ -1,5 +1,7 @@
 # Track 024 — Red-team incorporation v1.7.2
 
+**Status:** Complete
+
 ## Objective
 Close the loop between critique and artefacts. The red-team and devil's advocate reviews should not sit as separate documents; they should visibly change the publishable thesis, model caveats, Substack launch posts, decision-maker summary, action register and Conductor governance trail.
 

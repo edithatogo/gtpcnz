@@ -1387,7 +1387,7 @@ def run_composite_meta_analysis(
     n_points: int = 36, seed: int = 260526,
 ) -> pd.DataFrame:
     """Sweep all 12 parameters and compute all indices."""
-    rng = __import__('numpy').random.default_rng(seed)
+    rng = np.random.default_rng(seed)
     base = get_runtime_scenario("F4")
     fields = ["activity_signal","capitation","place_accountability","scope_capacity",
               "urgent_ambulance","data_visibility","governance","equity_protection",
@@ -1396,7 +1396,7 @@ def run_composite_meta_analysis(
     for i in range(n_points):
         pd_ = {}
         for f in fields:
-            pd_[f] = clamp(float(getattr(base, f)) + (__import__('numpy').random.random() - 0.5) * 60.0)
+            pd_[f] = clamp(float(getattr(base, f)) + (float(rng.random()) - 0.5) * 60.0)
         idx = calculate_indices(replace(base, **pd_))
         rows.append({**pd_, **idx})
     return pd.DataFrame(rows)

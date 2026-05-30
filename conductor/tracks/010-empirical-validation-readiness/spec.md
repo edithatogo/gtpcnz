@@ -1,5 +1,7 @@
 # Track 010 — Empirical validation readiness
 
+**Status:** Complete
+
 ## Purpose
 
 Convert the v0.4.1 research audit from a conceptual traceability pack into a practical empirical validation workbench. The track makes the game-theory mapping testable by linking claims to sources, standards, data requirements, stakeholder validation, model parameters and quality gates.

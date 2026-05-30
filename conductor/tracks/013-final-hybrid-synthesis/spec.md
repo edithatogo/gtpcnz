@@ -1,5 +1,7 @@
 # Track 013 - Final hybrid synthesis v0.8.0
 
+**Status:** Complete
+
 ## Objective
 
 Create a consolidated final artefact pack that answers whether the policy games have been mapped, modelled, stress-tested and synthesised into a single hybrid model.

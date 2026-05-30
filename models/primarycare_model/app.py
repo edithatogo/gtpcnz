@@ -404,9 +404,11 @@ def _render_download_exports(evidence_df: pd.DataFrame) -> None:
         publisher = str(row.get("Publisher", ""))
         url = str(row.get("URL", ""))
         ris_lines.extend(["TY  - GEN", f"ID  - {ref_id}", f"TI  - {title}", f"PB  - {publisher}", f"UR  - {url}", "ER  - ", ""])
-        bib_lines.append(f"@misc{{{ref_id or 'reference'},\n  title = {{{title}}},\n  publisher = {{{publisher}}},\n  url = {{{url}}}\n}}\n")
-        xml_lines.append(f'  <reference id="{ref_id}"><title>{title}</title><url>{url}</url></reference>')
-        yaml_lines.extend([f"- id: {ref_id}", f"  title: {title}", f"  publisher: {publisher}", f"  url: {url}"])
+        bib_lines.append(f"@misc{{{ref_id or 'reference'},\n  title = {{{title.replace('{', '').replace('}', '')}}},\n  publisher = {{{publisher.replace('{', '').replace('}', '')}}},\n  url = {{{url.replace('{', '').replace('}', '')}}}\n}}\n")
+        xml_lines.append(
+            f'  <reference id="{escape(ref_id, quote=True)}"><title>{escape(title)}</title><url>{escape(url)}</url></reference>'
+        )
+        yaml_lines.extend([f"- id: {ref_id}", f"  title: {title!r}", f"  publisher: {publisher!r}", f"  url: {url!r}"])
     xml_lines.append("</references>")
     cff_text = (
         "cff-version: 1.2.0\n"

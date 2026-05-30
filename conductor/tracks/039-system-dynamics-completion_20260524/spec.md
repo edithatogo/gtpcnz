@@ -1,5 +1,7 @@
 # Spec: System Dynamics Stub Completion
 
+**Status:** Complete
+
 ## Problem
 
 `models/primarycare_model/sd_stub.py` is still a placeholder. It advances a simple unmet-need and hospital-pressure state, but it does not provide a complete stock-flow model, does not expose calibrated-ready parameter contracts, and cannot honestly support a "no stubs" model-status claim.

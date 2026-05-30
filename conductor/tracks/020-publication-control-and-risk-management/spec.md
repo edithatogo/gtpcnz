@@ -1,5 +1,7 @@
 # Track 020 spec: publication control and risk management
 
+**Status:** Complete
+
 ## Goal
 
 Convert the v1.5.1 short-form series into a controlled publication package.

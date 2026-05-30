@@ -1,10 +1,10 @@
 {
   "id": "047-streamlit-deployment-experience_20260527",
   "title": "Streamlit Deployment Experience",
-  "status": "active",
+  "status": "completed",
   "created": "2026-05-27",
-  "updated": "2026-05-27",
-  "progress": "Derived from the Streamlit deployment report. Track covers app structure, tabs, controls, smoke tests, deployment entrypoint, public URL contract, and accessibility/performance polish.",
+  "updated": "2026-05-31",
+  "progress": "Completed Streamlit structure, tabs, controls, smoke tests, deployment entrypoint, public URL contract, and accessibility/performance polish.",
   "owner": "codex",
   "output": "A clearer, more accessible Streamlit app and a tighter deployment contract"
 }

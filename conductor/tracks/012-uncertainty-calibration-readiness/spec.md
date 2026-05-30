@@ -1,5 +1,7 @@
 # Track 012 spec: uncertainty and calibration readiness
 
+**Status:** Complete
+
 ## Objective
 
 Move from one-off game outputs to an auditable uncertainty layer that shows which assumptions drive the results and what data are needed for calibration.

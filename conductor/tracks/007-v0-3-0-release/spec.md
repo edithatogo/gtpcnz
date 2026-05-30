@@ -1,5 +1,7 @@
 # Spec: v0.3.0 public-facing polish release
 
+**Status:** Complete
+
 ## Goal
 
 Advance the repo from a planning scaffold to a usable public-facing policy and publication package.
