@@ -1,0 +1,3 @@
+[submodule "public/gtpcnz"]
+	path = public/gtpcnz
+	url = https://github.com/edithatogo/gtpcnz.git

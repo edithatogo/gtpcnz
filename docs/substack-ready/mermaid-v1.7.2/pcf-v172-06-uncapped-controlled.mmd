@@ -1,0 +1,21 @@
+---
+title: Uncapped does not mean uncontrolled
+---
+flowchart TB
+  classDef activity fill:#E8F3FF,stroke:#1E5A8A,stroke-width:2px,color:#102A43;
+  classDef gate fill:#FFF2D8,stroke:#A86400,stroke-width:2px,color:#3B2600;
+  classDef control fill:#F3E8FF,stroke:#6E3AA8,stroke-width:2px,color:#2E174B;
+  classDef outcome fill:#E9F8EF,stroke:#1F7A4D,stroke-width:2px,color:#123524;
+
+  A[Eligible primary medical activity]:::activity --> B{Claim gates}:::gate
+  B --> C[Clinical necessity]:::control
+  B --> D[Provider scope]:::control
+  B --> E[Item rules and documentation]:::control
+  B --> F[Equity and co-payment protections]:::control
+  B --> G[Audit and anomaly detection]:::control
+  C --> H[Volume can grow when need is real]:::outcome
+  D --> H
+  E --> H
+  F --> H
+  G --> H
+  H --> I[More upstream capacity before hospital escalation]:::outcome

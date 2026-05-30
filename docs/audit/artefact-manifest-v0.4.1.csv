@@ -1,0 +1,11 @@
+Artefact_ID,Path,Class,Purpose,Status,Maturity,Audit_Note
+A001,docs/concepts/nz-policy-game-atlas-v0.4.0.md,Conceptual mapping,Primary atlas of NZ policy games,Current,Moderate-high,Needs stakeholder validation
+A002,docs/modelling/nz-game-theory-formalisation-v0.4.0.md,Formal model,"Players, strategies, payoffs and equilibrium hypotheses",Current,Moderate,Needs parameterisation
+A003,docs/policy-briefs/brief-06-nz-game-theory-map-v0.4.0.md,Policy translation,RACMA/policy-facing brief of the game map,Current,Moderate,Needs source footnotes and peer review
+A004,docs/nzmj/game-theory-methods-annex-v0.4.0.md,Publication support,Methods annex for NZMJ-style article,Current,Moderate,Needs journal formatting
+A005,docs/substack/post-09-the-nz-primary-care-funding-game-v0.4.0.md,Public translation,Plain-English explanation of NZ game,Current,Moderate,Needs editorial polish
+A006,docs/modelling/game-mapping-matrix-v0.4.0.csv,Trace matrix,Earlier game mapping matrix,Current,Moderate,Superseded by audit v0.4.1 matrix for traceability
+A007,docs/figures/nz-policy-game-layers-v0.4.0.dot,Figure source,Graphviz source for policy game layers,Current,Moderate,Needs rendered figure with citation note
+A008,models/primarycare_model/nz_game_map.py,Code scaffold,Machine-readable game-layer representation,Current,Low-moderate,Needs empirical data links
+A009,docs/audit/game-map-traceability-matrix-v0.4.1.csv,Audit traceability,Crosswalk of games to evidence and assumptions,New,Moderate,Needs references expanded in Zotero
+A010,docs/audit/claims-assumptions-register-v0.4.1.csv,Audit traceability,Claim-level evidence and testing register,New,Moderate,Needs review owner assignment

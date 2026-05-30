@@ -1,0 +1,23 @@
+digraph G {
+  graph [rankdir=LR, fontsize=12, fontname="Arial", labelloc="t", label="Primary Care Benefits Schedule mechanism"];
+  node [shape=box, style="rounded,filled", fillcolor="#fbfbf5", color="#4a5568", fontname="Arial", fontsize=10];
+  edge [color="#4a5568", arrowsize=0.8, fontname="Arial", fontsize=9];
+
+  Rules [label="Defined eligible contact types\nurgent, complex, procedural, chronic, in-person rural, ambulance alternatives"];
+  Scope [label="Provider eligibility by scope, credentialing and clinical governance"];
+  Claims [label="Rules-based claims platform\npatient-linked, auditable, transparent"];
+  Copay [label="Co-payment settings\ndemand signal + equity safeguards"];
+  Supply [label="Expanded multidisciplinary supply\nGPs, NPs, pharmacists, nurses, allied health, paramedics"];
+  Access [label="Improved access / lower unmet need"];
+  Hospital [label="Reduced avoidable hospital and ED pressure"];
+  Monitoring [label="Top-tier KPIs and anti-gaming audit"];
+
+  Rules -> Claims;
+  Scope -> Claims;
+  Copay -> Claims;
+  Claims -> Supply;
+  Supply -> Access;
+  Access -> Hospital;
+  Monitoring -> Claims [label="adjust benefits and rules"];
+  Monitoring -> Scope [label="quality / safety"];
+}

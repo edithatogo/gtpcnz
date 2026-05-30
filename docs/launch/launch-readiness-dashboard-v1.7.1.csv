@@ -1,0 +1,11 @@
+item,status,location_or_note
+Model card,Pass,docs/calibration/model-card-v1.7.1.md
+Parameter tiering,Pass,docs/calibration/parameter-tiering-v1.7.1.csv
+Identifiability map,Pass,docs/calibration/parameter-identifiability-map-v1.7.1.csv
+Red-team review,Pass,docs/audit/red-team-review-v1.7.1.md
+Devil's advocate review,Pass,docs/audit/devils-advocate-review-v1.7.1.md
+RACMA excluded from active path,Pass,docs/launch/racma-exclusion-note-v1.7.1.md
+First six posts launch set,Pass,docs/substack-ready/posts-v1.7.1-launch/
+Stakeholder survey,Pass,docs/launch/stakeholder-validation-survey-v1.7.1.md
+Figure caption audit,Pass,docs/substack-ready/figure-caption-audit-v1.7.1.csv
+Full empirical calibration,Deferred,Requires real administrative data and validation

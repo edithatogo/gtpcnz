@@ -1,0 +1,12 @@
+flowchart TB
+  classDef title fill:#16324F,stroke:#16324F,stroke-width:0px,color:#FFFFFF,font-size:32px;
+  classDef primary fill:#E8F3FF,stroke:#1E5A8A,stroke-width:3px,color:#102A43,font-size:24px;
+  classDef pressure fill:#FFF2D8,stroke:#A86400,stroke-width:3px,color:#3B2600,font-size:24px;
+  classDef outcome fill:#E9F8EF,stroke:#1F7A4D,stroke-width:3px,color:#123524,font-size:24px;
+  classDef footer fill:#F5F7FA,stroke:#CBD5E1,stroke-width:2px,color:#334155,font-size:18px;
+
+  T["Why formulas do not solve games"]:::title
+  A["Better formula"]:::primary --> B["Fixed envelope"]:::pressure --> C["Same supply cap"]:::outcome
+  F["Post 04 · Primary Care Funding Architecture"]:::footer
+  T --> A
+  C --- F

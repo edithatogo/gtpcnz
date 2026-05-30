@@ -1,0 +1,11 @@
+{
+  "id": "034-github-pages-visual-gallery_20260513",
+  "title": "GitHub Pages Visual Gallery",
+  "status": "complete",
+  "created": "2026-05-13",
+  "updated": "2026-05-14",
+  "owner": "codex",
+  "parent": "029-visual-contract-public-visual-narrative_20260513",
+  "depends_on": ["031-post-surface-crosswalk-contract_20260513"],
+  "output": "GitHub Pages homepage and gallery with post-aligned visual cards linking to Quarto and Streamlit"
+}

@@ -1,0 +1,1 @@
+**Note:** This series is exploratory policy analysis. It is not a party-political argument, not a claim that any single funding model is perfect, and not a calibrated prediction of savings. The central question is whether New Zealand's current funding architecture lets lower-cost upstream care expand safely before need becomes hospital demand.

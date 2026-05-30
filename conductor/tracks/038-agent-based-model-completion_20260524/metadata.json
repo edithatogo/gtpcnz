@@ -1,0 +1,13 @@
+{
+  "id": "038-agent-based-model-completion_20260524",
+  "title": "Agent-Based Model Stub Completion",
+  "status": "complete",
+  "created": "2026-05-24",
+  "updated": "2026-05-24",
+  "owner": "codex",
+  "depends_on": [
+    "022-full-parameterised-model-v1.7.0",
+    "023-model-hardening-launch-simplification"
+  ],
+  "output": "Completed agent-based simulation module replacing abm_stub.py with tested scenario, agent, scheduler, and output contracts (fb998b5)"
+}

@@ -1,0 +1,15 @@
+{
+  "id": "040-bleeding-edge-experimental-lane_20260526",
+  "title": "Bleeding Edge Experimental Lane and Scorecard",
+  "status": "completed",
+  "created": "2026-05-26",
+  "updated": "2026-05-26",
+  "owner": "codex",
+  "depends_on": [
+    "022-full-parameterised-model-v1.7.0",
+    "023-model-hardening-launch-simplification",
+    "027-public-dashboard-deployment_20260512",
+    "037-conductor-state-and-track-registry-reconciliation_20260514"
+  ],
+  "output": "Three-lane dependency posture, experimental edge workflow, bleeding-edge scorecard and triage runbook"
+}

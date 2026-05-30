@@ -1,0 +1,183 @@
+[
+  {
+    "id": "SRC01",
+    "type": "webpage",
+    "title": "Capitation reweighting programme",
+    "URL": "https://www.health.govt.nz/strategies-initiatives/programmes-and-initiatives/primary-and-community-health-care/capitation-reweighting",
+    "publisher": "NZ Ministry of Health",
+    "note": "Capitation context; reweighting variables include age, sex, multimorbidity, rurality and deprivation."
+  },
+  {
+    "id": "SRC02",
+    "type": "report",
+    "title": "Cabinet paper: Primary Health Care Funding Improvements",
+    "URL": "https://www.health.govt.nz/system/files/2025-07/Cabinet%20paper%20-%20Primary%20Health%20Care%20Funding%20Improvements%20Redacted.pdf",
+    "publisher": "NZ Ministry of Health",
+    "note": "Reweighting within available primary care funding."
+  },
+  {
+    "id": "SRC03",
+    "type": "webpage",
+    "title": "National Primary Care Dataset and health target",
+    "URL": "https://www.healthnz.govt.nz/about-us/what-we-do/planning-and-performance/primary-care-tactical-action-plan/national-primary-care-dataset-and-new-primary-care-health-target",
+    "publisher": "Health NZ",
+    "note": "Primary care encounter/appointment dataset, 80% access target."
+  },
+  {
+    "id": "SRC04",
+    "type": "report",
+    "title": "PHO finances briefing H2025069314",
+    "URL": "https://www.health.govt.nz/system/files/2025-11/H2025069314-Briefing-PHO-finances-a-summary-of-available-information.pdf",
+    "publisher": "NZ Ministry of Health",
+    "note": "PHO transparency and monitoring limitations."
+  },
+  {
+    "id": "SRC05",
+    "type": "report",
+    "title": "NZ Health Survey 2024/25 annual update",
+    "URL": "https://www.health.govt.nz/publications/annual-update-of-key-results-202425-new-zealand-health-survey",
+    "publisher": "NZ Ministry of Health",
+    "note": "Unmet need and GP cost barrier."
+  },
+  {
+    "id": "SRC06",
+    "type": "article-journal",
+    "title": "Closed books in NZ general practice",
+    "URL": "https://pubmed.ncbi.nlm.nih.gov/38452229/",
+    "note": "Evidence of closed/limited enrolment in NZ general practice."
+  },
+  {
+    "id": "SRC07",
+    "type": "webpage",
+    "title": "ACC Paying for patient treatment",
+    "URL": "https://www.acc.co.nz/for-providers/invoicing-us/paying-patient-treatment",
+    "publisher": "ACC",
+    "note": "ACC treatment contribution under contracts and regulations."
+  },
+  {
+    "id": "SRC08",
+    "type": "webpage",
+    "title": "Health NZ Ambulance Team",
+    "URL": "https://www.healthnz.govt.nz/about-us/what-we-do/programmes-and-initiatives/the-ambulance-team",
+    "publisher": "Health NZ",
+    "note": "Ambulance commissioning and performance data."
+  },
+  {
+    "id": "SRC09",
+    "type": "report",
+    "title": "Emergency ambulance national performance 2025",
+    "URL": "https://www.healthnz.govt.nz/publications/emergency-ambulance-service-national-performance-reports-2025",
+    "publisher": "Health NZ",
+    "note": "Response times, demand, performance reporting."
+  },
+  {
+    "id": "SRC10",
+    "type": "webpage",
+    "title": "OIA requests",
+    "URL": "https://www.health.govt.nz/about-us/contact-us/oia-requests",
+    "publisher": "NZ Ministry of Health",
+    "note": "OIA process and requirements."
+  },
+  {
+    "id": "SRC11",
+    "type": "webpage",
+    "title": "PRISMA-ScR",
+    "URL": "https://www.prisma-statement.org/scoping",
+    "publisher": "PRISMA",
+    "note": "Scoping review reporting standard."
+  },
+  {
+    "id": "SRC12",
+    "type": "article-journal",
+    "title": "ISPOR MCDA introduction",
+    "URL": "https://www.ispor.org/heor-resources/good-practices/article/multiple-criteria-decision-analysis-for-health-care-decision-making---an-introduction",
+    "publisher": "ISPOR",
+    "note": "MCDA decision-support framing."
+  },
+  {
+    "id": "SRC13",
+    "type": "article-journal",
+    "title": "STRESS simulation reporting guidelines",
+    "URL": "https://www.equator-network.org/reporting-guidelines/strengthening-the-reporting-of-empirical-simulation-studies-introducing-the-stress-guidelines/",
+    "publisher": "EQUATOR",
+    "note": "Simulation reporting framework."
+  },
+  {
+    "id": "SRC14",
+    "type": "webpage",
+    "title": "Stats NZ: Health topics",
+    "URL": "https://www.stats.govt.nz/topics/health",
+    "publisher": "Statistics NZ",
+    "note": "Population denominators, demographic projections."
+  },
+  {
+    "id": "SRC15",
+    "type": "webpage",
+    "title": "Stats NZ: Maori population",
+    "URL": "https://www.stats.govt.nz/topics/maori",
+    "publisher": "Statistics NZ",
+    "note": "Maori population estimates for equity analysis."
+  },
+  {
+    "id": "SRC16",
+    "type": "webpage",
+    "title": "NZDep2018 Index of Deprivation",
+    "URL": "https://www.stats.govt.nz/indicators/socioeconomic-deprivation-index/",
+    "publisher": "Statistics NZ",
+    "note": "Deprivation quintiles for equity stratification."
+  },
+  {
+    "id": "SRC17",
+    "type": "webpage",
+    "title": "Stats NZ: Urban area classification",
+    "URL": "https://www.stats.govt.nz/methods/urban-area-definitions-and-classifications/",
+    "publisher": "Statistics NZ",
+    "note": "Rural/urban classifications for access analysis."
+  },
+  {
+    "id": "SRC18",
+    "type": "report",
+    "title": "Health and Disability System Review Final Report",
+    "URL": "https://www.health.govt.nz/publications/health-and-disability-system-review-final-report",
+    "publisher": "NZ Ministry of Health",
+    "note": "Tier 1 funding and PHO contracting recommendations."
+  },
+  {
+    "id": "SRC19",
+    "type": "report",
+    "title": "Sapere capitation reweighting review",
+    "URL": "https://www.health.govt.nz/system/files/2025-10/Briefing-Sapere-report-and-re-weighting-primary-care-capitation-funding-H2024057558.pdf",
+    "publisher": "Sapere/MoH",
+    "note": "Current model, significant predictors, limitations."
+  },
+  {
+    "id": "SRC20",
+    "type": "article-journal",
+    "title": "Value of information analysis in health care",
+    "publisher": "Value in Health",
+    "note": "VOI methodology for EVPI/EVPPI estimation."
+  },
+  {
+    "id": "SRC21",
+    "type": "article-journal",
+    "title": "Bass diffusion model for policy adoption",
+    "publisher": "Management Science",
+    "note": "Diffusion model for policy-adoption forecasting."
+  },
+  {
+    "id": "SRC22",
+    "type": "webpage",
+    "title": "HQSC Atlas of Healthcare Variation",
+    "URL": "https://www.hqsc.govt.nz/our-data/atlas-of-healthcare-variation/",
+    "publisher": "Health Quality and Safety Commission NZ",
+    "note": "Geographic variation in primary care, ASH, ED use."
+  },
+  {
+    "id": "SRC23",
+    "type": "report",
+    "title": "Treasury NZ Budget Economic and Fiscal Update 2025",
+    "URL": "https://www.treasury.govt.nz/publications/budget-economic-and-fiscal-update",
+    "publisher": "NZ Treasury",
+    "note": "Health spending projections and fiscal context."
+  }
+]

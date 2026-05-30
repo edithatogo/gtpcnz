@@ -1,0 +1,15 @@
+Group,Minimum_N,Priority,Rationale,Recruitment_Notes
+General practice owners,6,High,"Practice viability, open books, marginal activity response","Include urban, rural, high-deprivation, corporate and independent."
+Salaried GPs,4,Medium,Workforce and workload behaviour,Include early-career and rural.
+Nurse practitioners / practice nurses,4,High,Scope-enabled supply,Include independent and practice-employed.
+Pharmacists / pharmacist prescribers,4,High,Contact-type benefits and scope expansion,Include rural/community pharmacy.
+Allied health first-contact providers,4,Medium,MSK/mental health/chronic care substitution,"Physio, psychologist/HIP, dietetics if relevant."
+Māori providers / iwi health leaders,6,Critical,"Equity, Te Tiriti and trust functions",Independent review/advice recommended.
+Pacific providers,4,Critical,Equity and locality effects,Include provider and consumer perspectives.
+PHO leaders,4,High,Function versus intermediation,Different size/ownership regions.
+Health NZ commissioning/operations,4,High,Internal allocation game,Primary/community and hospital operations.
+ACC officials/former officials,3,High,ACC stabiliser and cross-funder effects,"Primary care, ambulance and claims policy."
+Treasury/Ministry officials/former officials,3,High,Budget architecture and fiscal risk,Could be confidential/non-attributable.
+Ambulance leaders/paramedics,5,High,Conveyance game and alternatives,Include rural and extended care paramedics.
+Hospital/ED leaders,4,Medium,Downstream consequences and ED substitution,ED and hospital executives.
+Consumer/patient advocates,6,High,"Co-payment, access and trust","Oversample rural, disabled, high-needs groups."

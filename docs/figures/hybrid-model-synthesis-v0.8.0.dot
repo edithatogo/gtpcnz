@@ -1,0 +1,35 @@
+
+ digraph HybridModel {
+   graph [rankdir=LR, bgcolor="white"];
+   node [shape=box, style="rounded,filled", fillcolor="white", color="gray35", fontname="Arial"];
+   edge [color="gray35", fontname="Arial"];
+   Funding [label="Funding architecture
+(capitation + contact benefits + ACC)"];
+   Claiming [label="Payment gateway
+(direct/optional claiming vs PHO intermediation)"];
+   Scope [label="Scope-enabled supply
+(GPs, NPs, pharmacists, allied health, paramedics)"];
+   Equity [label="Equity & trust protections
+(kaupapa Maori, Pacific, locality, co-payment protections)"];
+   Governance [label="Governance & controls
+(scope, safety, data, audit, coding)"];
+   Ambulance [label="Ambulance / urgent access
+(treat-and-refer, non-conveyance, after-hours)"];
+   Access [label="Upstream access generated"];
+   Delay [label="Unmet need / delayed care"];
+   Hospital [label="ED and hospital pressure"];
+   KPIs [label="Top-tier KPIs and observability"];
+   Funding -> Access;
+   Claiming -> Access;
+   Scope -> Access;
+   Equity -> Access;
+   Governance -> Access;
+   Ambulance -> Access;
+   Access -> Delay [label="reduces"];
+   Delay -> Hospital [label="increases"];
+   Hospital -> Funding [label="hospital rescue loop"];
+   KPIs -> Funding [label="shifts salience upstream"];
+   Governance -> KPIs;
+   KPIs -> Ambulance;
+   KPIs -> Equity;
+ }

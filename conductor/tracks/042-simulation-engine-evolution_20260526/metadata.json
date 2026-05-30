@@ -1,0 +1,10 @@
+{
+  "id": "042-simulation-engine-evolution_20260526",
+  "title": "Simulation Engine Evolution with Rust-Core, VOI, MARS, and Diffusion",
+  "status": "active",
+  "created": "2026-05-26",
+  "updated": "2026-05-26",
+  "progress": "Foundation bootstrap plus Python simulation-core fallbacks complete: data layer, JAX/NumPy Monte Carlo, sensitivity, diffusion, Nash trace, IPC, MPC, SHAP attribution, and Bayesian optimisation smoke coverage.",
+  "owner": "codex",
+  "output": "Rust-core DES simulation spec, linked references, Vale prose linting gates, and updated Moscow requirements register"
+}

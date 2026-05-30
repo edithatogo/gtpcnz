@@ -1,0 +1,8 @@
+{
+  "id": "037-conductor-state-and-track-registry-reconciliation_20260514",
+  "title": "Conductor state and track registry reconciliation",
+  "status": "complete",
+  "created": "2026-05-14",
+  "scope": "Reconcile central Conductor status surfaces with track-local metadata after public visual-contract release closeout.",
+  "updated": "2026-05-22"
+}

@@ -1,0 +1,14 @@
+source_id,name,url,use
+SRC01,Ministry of Health capitation reweighting,https://www.health.govt.nz/strategies-initiatives/programmes-and-initiatives/primary-and-community-health-care/capitation-reweighting,"Broad capitation context; 1 July 2026 reweighting; variables include age, sex, multimorbidity, rurality and deprivation."
+SRC02,Cabinet paper: Primary Health Care Funding Improvements,https://www.health.govt.nz/system/files/2025-07/Cabinet%20paper%20-%20Primary%20Health%20Care%20Funding%20Improvements%20Redacted.pdf,Reweighting implemented within available primary care funding; variable additions and constraints.
+SRC03,Health NZ National Primary Care Dataset and health target,https://www.healthnz.govt.nz/about-us/what-we-do/planning-and-performance/primary-care-tactical-action-plan/national-primary-care-dataset-and-new-primary-care-health-target,"Primary care encounter and appointment dataset, 80% within-seven-days access target."
+SRC04,Ministry of Health PHO finances briefing H2025069314,https://www.health.govt.nz/system/files/2025-11/H2025069314-Briefing-PHO-finances-a-summary-of-available-information.pdf,"PHO transparency, monitoring limitations, ownership/financial information issues."
+SRC05,NZ Health Survey 2024/25 annual update,https://www.health.govt.nz/publications/annual-update-of-key-results-202425-new-zealand-health-survey,Unmet need and GP cost barrier context.
+SRC06,Closed books study - PubMed abstract,https://pubmed.ncbi.nlm.nih.gov/38452229/,Evidence of closed/limited enrolment in Aotearoa New Zealand general practice.
+SRC07,ACC provider payment page,https://www.acc.co.nz/for-providers/invoicing-us/paying-patient-treatment,"ACC contribution to treatment under contracts, regulations and agreements; provider-type payments."
+SRC08,Health NZ Ambulance Team,https://www.healthnz.govt.nz/about-us/what-we-do/programmes-and-initiatives/the-ambulance-team,Ambulance commissioning on behalf of Health NZ and ACC; performance data/KPI context.
+SRC09,Health NZ emergency ambulance national performance reports,https://www.healthnz.govt.nz/publications/emergency-ambulance-service-national-performance-reports-2025,"Response times, call types, demand, contracted performance reporting."
+SRC10,Ministry of Health OIA requests page,https://www.health.govt.nz/about-us/contact-us/oia-requests,OIA process and request requirements.
+SRC11,PRISMA-ScR,https://www.prisma-statement.org/scoping,Scoping review reporting standard.
+SRC12,ISPOR MCDA introduction,https://www.ispor.org/heor-resources/good-practices/article/multiple-criteria-decision-analysis-for-health-care-decision-making---an-introduction,MCDA decision-support framing and healthcare use cases.
+SRC13,STRESS guidelines,https://www.equator-network.org/reporting-guidelines/strengthening-the-reporting-of-empirical-simulation-studies-introducing-the-stress-guidelines/,Simulation reporting framework if modelling is later empirically calibrated.

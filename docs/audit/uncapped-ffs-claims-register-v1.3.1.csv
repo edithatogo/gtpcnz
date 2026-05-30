@@ -1,0 +1,6 @@
+claim_id,claim,evidence_status,basis,incorporation
+UFS-001,"The proposal is to remove global caps on eligible primary medical activity, not to remove item-level controls.",Policy clarification,User clarification + model update,Central thesis update
+UFS-002,Capitation currently provides a fixed annual amount per enrolled person and remains the core way general practice is funded.,Public documented fact,Ministry capitation reweighting,Used to define capped/fixed funding baseline
+UFS-003,"ACC uses regulations, contracts and purchase orders, with clinical necessity/scope/documentation requirements.",Public documented fact,ACC provider guidance,Used as analogy for FFS rules-based stream
+UFS-004,Uncapped FFS without controls can increase low-value activity/gaming/fiscal exposure.,Economic theory / modelling assumption,Health economics and previous model,Risk penalty in MCDA
+UFS-005,Uncapped FFS with capitation and place accountability can restore marginal supply while protecting equity.,Policy hypothesis,"Modelled scenario, needs validation",Preferred architecture

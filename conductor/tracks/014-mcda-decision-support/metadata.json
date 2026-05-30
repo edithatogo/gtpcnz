@@ -1,0 +1,7 @@
+{
+  "track_id": "014-mcda-decision-support",
+  "version": "0.9.0",
+  "status": "complete at demonstrative decision-support stage",
+  "created": "2026-05-08",
+  "purpose": "Add a game-informed MCDA layer to help decision-makers score games, weight criteria, compare policy options and plan validation."
+}

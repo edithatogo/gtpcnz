@@ -1,0 +1,13 @@
+{
+  "id": "039-system-dynamics-completion_20260524",
+  "title": "System Dynamics Stub Completion",
+  "status": "completed",
+  "created": "2026-05-24",
+  "updated": "2026-05-24",
+  "owner": "codex",
+  "depends_on": [
+    "022-full-parameterised-model-v1.7.0",
+    "023-model-hardening-launch-simplification"
+  ],
+  "output": "Completed stock-flow simulation module replacing sd_stub.py with tested unmet-need, capacity, hospital-pressure, and scenario contracts; commit recorded after validation"
+}

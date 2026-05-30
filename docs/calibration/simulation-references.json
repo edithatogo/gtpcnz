@@ -1,0 +1,74 @@
+[
+  {
+    "id": "kairos2026",
+    "type": "software",
+    "title": "kairos: Rust-first deterministic DES/ABM simulation engine with ECS state, conformance fixtures, docs, and polyglot binding previews",
+    "author": [
+      {
+        "family": "Atogo",
+        "given": "Edith"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [2026]
+      ]
+    },
+    "url": "https://github.com/edithatogo/kairos",
+    "publisher": "GitHub"
+  },
+  {
+    "id": "voiage2026",
+    "type": "software",
+    "title": "voiage: A Python Library for Value of Information Analysis",
+    "author": [
+      {
+        "family": "Atogo",
+        "given": "Edith"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [2026]
+      ]
+    },
+    "url": "https://github.com/edithatogo/voiage",
+    "publisher": "GitHub"
+  },
+  {
+    "id": "mars2026",
+    "type": "software",
+    "title": "mars: A Pure Python Implementation of Multivariate Adaptive Regression Splines (MARS)",
+    "author": [
+      {
+        "family": "Atogo",
+        "given": "Edith"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [2026]
+      ]
+    },
+    "url": "https://github.com/edithatogo/mars",
+    "publisher": "GitHub"
+  },
+  {
+    "id": "innovate2026",
+    "type": "software",
+    "title": "innovate: A Contract-First Diffusion Modeling Library",
+    "author": [
+      {
+        "family": "Atogo",
+        "given": "Edith"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [2026]
+      ]
+    },
+    "url": "https://github.com/edithatogo/innovate",
+    "publisher": "GitHub"
+  }
+]

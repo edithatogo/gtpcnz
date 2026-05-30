@@ -1,0 +1,20 @@
+---
+title: Whole-system pressure map
+---
+flowchart LR
+  classDef patient fill:#E8F3FF,stroke:#1E5A8A,stroke-width:2px,color:#102A43;
+  classDef care fill:#E9F8EF,stroke:#1F7A4D,stroke-width:2px,color:#123524;
+  classDef pressure fill:#FFF2D8,stroke:#A86400,stroke-width:2px,color:#3B2600;
+  classDef hospital fill:#FDE8E8,stroke:#B42318,stroke-width:2px,color:#3D0B0B;
+  classDef control fill:#F3E8FF,stroke:#6E3AA8,stroke-width:2px,color:#2E174B;
+
+  A[Patient need appears]:::patient --> B{Primary care access?}:::care
+  B -->|Timely appointment| C[Earlier diagnosis and management]:::care
+  B -->|Wait, fee, closed books| D[Unmet need accumulates]:::pressure
+  D --> E[Urgent care / telehealth / ambulance]:::pressure
+  E --> F[Emergency department]:::hospital
+  F --> G[Hospital pressure becomes visible]:::hospital
+  G --> H[Funding follows visible pressure]:::hospital
+  H -. reinforces .-> F
+  I[Rules-based upstream funding]:::control --> B
+  I --> C

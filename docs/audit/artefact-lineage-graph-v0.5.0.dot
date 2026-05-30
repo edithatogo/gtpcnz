@@ -1,0 +1,37 @@
+digraph G {
+  rankdir=LR;
+  graph [fontsize=10, labelloc="t", label="Primary care funding architecture: artefact lineage v0.5.0"];
+  node [shape=box, style="rounded", fontsize=10];
+  thesis [label="Core thesis\nwood-from-trees / upstream constraint"];
+  sources [label="Public sources\nMoH, Health NZ, HDSR, PHO finance"];
+  theory [label="Theory\nmicroeconomics, game theory, transaction cost"];
+  map [label="NZ game atlas\n14 component games"];
+  formal [label="Formal game model\nplayers, strategies, payoffs"];
+  claims [label="Claim-source ledger\nC001-C025"];
+  audit [label="Audit dossier\nquality gates and traceability"];
+  review [label="Evidence review\nPRISMA-ScR protocol"];
+  qual [label="Stakeholder validation\ninterview guides and sampling frame"];
+  sd [label="System dynamics\nfeedback loops and stocks"];
+  abm [label="Agent-based model\nagents and contact choices"];
+  briefs [label="Policy briefs\nRACMA/NZ/Aus/PHO/ambulance/KPI"];
+  substack [label="Substack series\npublic explanation"];
+  nzmj [label="NZMJ pathway\nViewpoint or empirical article"];
+  thesis -> map;
+  sources -> claims;
+  theory -> claims;
+  map -> formal;
+  map -> claims;
+  claims -> audit;
+  audit -> review;
+  audit -> qual;
+  audit -> sd;
+  audit -> abm;
+  formal -> sd;
+  formal -> abm;
+  review -> briefs;
+  qual -> briefs;
+  sd -> nzmj;
+  abm -> nzmj;
+  briefs -> substack;
+  briefs -> nzmj;
+}
