@@ -5,9 +5,9 @@
 | 001 | Substack series: The Primary Care Funding Game | Complete for v1.2.0 | 12 Substack-ready posts, figure pack, source bank, glossary and QA checklist |
 | 002 | Policy brief suite | Complete for current phase | Briefs 1–9 covering NZ architecture, PHOs, ambulance, Australia, KPIs, game map, calibration, MCDA and validation |
 | 003 | NZMJ article / Viewpoint pathway | Complete for current phase | Viewpoint draft, Article protocol, methods annex and cover letter |
-| 004 | Evidence review | Ready for execution | Rapid scoping review protocol, PRISMA-ScR crosswalk and screening tools |
+| 004 | Evidence review | Complete for current phase | Rapid scoping review protocol, PRISMA-ScR crosswalk and screening tools |
 | 005 | Empirical and game-theoretic modelling | Complete for demonstrative phase | Formal game model, NZ nested game map, parameter inventory and codebase |
-| 006 | OIA and data governance | Ready for execution | OIA/data request pack, request tracker and data dashboard |
+| 006 | OIA and data governance | Complete for current phase | OIA/data request pack, request tracker and data dashboard |
 | 007 | v0.3.0 public-facing polish release | Complete | Policy brief DOCX/PDF, public-facing architecture drafts |
 | 008 | NZ broader policy game-theory map | Complete | Nested game map, matrix, figures, DOCX/PDF and model tests |
 | 009 | Research audit and traceability | Complete | Audit pack, traceability matrix, claims register and decision log |
