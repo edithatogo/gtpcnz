@@ -1,0 +1,11 @@
+{
+  "id": "033-streamlit-post-aligned-interactive-labs_20260513",
+  "title": "Streamlit Post-Aligned Interactive Labs",
+  "status": "complete",
+  "created": "2026-05-13",
+  "updated": "2026-05-14",
+  "owner": "codex",
+  "parent": "029-visual-contract-public-visual-narrative_20260513",
+  "depends_on": ["031-post-surface-crosswalk-contract_20260513", "035-game-theory-microeconomics-simulation-layer_20260513"],
+  "output": "Streamlit dashboard with post guide, microeconomics lab, game theory lab and page-local dynamic simulations"
+}

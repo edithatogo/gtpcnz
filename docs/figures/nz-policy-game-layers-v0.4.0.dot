@@ -1,0 +1,38 @@
+digraph G {
+  graph [rankdir=TB, fontsize=14, fontname="Arial", labelloc="t", label="NZ primary care funding architecture as nested games", nodesep=0.45, ranksep=0.5];
+  node [shape=box, style="rounded,filled", fillcolor="#f5f7fb", color="#40506a", fontname="Arial", fontsize=11, margin="0.08,0.06"];
+  edge [color="#40506a", arrowsize=0.7, fontname="Arial", fontsize=8];
+
+  Ministers [label="Cabinet / Ministers\npriorities, targets, fiscal choices"];
+  Treasury [label="Treasury\nfiscal discipline\nwhole-system value"];
+  MoH [label="Ministry of Health\npolicy, stewardship, monitoring"];
+  HNZ [label="Health NZ\nplans, commissions, delivers"];
+
+  Hospitals [label="Hospitals / specialist services\nvisible pressure\ndirect operation"];
+  PHO [label="PHOs / locality intermediaries\npopulation-health support\npayment intermediation"];
+  Primary [label="Primary care providers\nGPs, NPs, nurses, pharmacists,\nallied health, Maori/Pacific providers"];
+  Ambulance [label="Ambulance / prehospital care\nconveyance and alternatives"];
+  ACC [label="ACC\ninjury-related activity payments"];
+  Patients [label="Consumers / whanau\nchoice under price, wait,\naccess and trust"];
+
+  {rank=same; Treasury; MoH;}
+  {rank=same; Hospitals; PHO; Ambulance; ACC;}
+
+  Treasury -> Ministers [label="budget advice"];
+  MoH -> Ministers [label="stewardship"];
+  Ministers -> HNZ [label="expectations"];
+  HNZ -> Hospitals [label="operate"];
+  HNZ -> PHO [label="contract"];
+  PHO -> Primary [label="fund/support"];
+  HNZ -> Primary [label="commission"];
+  HNZ -> Ambulance [label="medical"];
+  ACC -> Ambulance [label="injury"];
+  ACC -> Primary [label="injury"];
+  Primary -> Patients [label="contacts"];
+  Ambulance -> Patients [label="access"];
+  Patients -> Primary [label="demand"];
+  Patients -> Hospitals [label="ED fallback"];
+  Ambulance -> Hospitals [label="conveyance"];
+  Primary -> Hospitals [label="avoidance/referral"];
+  Hospitals -> Ministers [label="salient pressure"];
+}

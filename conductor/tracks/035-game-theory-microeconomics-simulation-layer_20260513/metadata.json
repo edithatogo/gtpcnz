@@ -1,0 +1,11 @@
+{
+  "id": "035-game-theory-microeconomics-simulation-layer_20260513",
+  "title": "Game-Theory and Microeconomics Simulation Layer",
+  "status": "complete",
+  "created": "2026-05-13",
+  "updated": "2026-05-14",
+  "owner": "codex",
+  "parent": "029-visual-contract-public-visual-narrative_20260513",
+  "depends_on": ["031-post-surface-crosswalk-contract_20260513"],
+  "output": "Shared specifications for static diagrams and toy simulations used by Quarto and Streamlit"
+}

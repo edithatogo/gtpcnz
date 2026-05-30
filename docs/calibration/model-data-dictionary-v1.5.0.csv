@@ -1,0 +1,7 @@
+field,definition,source_needed,used_for
+primary_contacts,Monthly primary care contacts by provider/practice/locality,National Primary Care Dataset,supply calibration
+booked_to_seen_days,Days between booking and appointment,National Primary Care Dataset,access calibration
+ed_presentations,Monthly emergency department presentations,NNPAC / Health NZ ED data,downstream pressure calibration
+ambulance_conveyances,Monthly ambulance conveyances to hospital,ambulance event/disposition data,prehospital pathway calibration
+acc_claims_and_payments,ACC treatment claim volumes and payments,ACC claims/payment data,ACC stabilisation parameter
+mean_copayment,Average patient co-payment by contact type and group,practice fee schedules / claims data,price elasticity and equity calibration

@@ -1,0 +1,21 @@
+Parameter_ID,Parameter,Role,Candidate_Source,Current_Status,Priority,Notes
+P001,Population size by age/sex/ethnicity/deprivation/rurality,Patient agent generation and capitation weighting,Stats NZ; MoH datasets,Public aggregate likely available,High,Need compatible geographic units.
+P002,Multimorbidity distribution,Need generation and capitation reweighting,Sapere analysis; linked primary/hospital data,Not directly available in repo,High,Requires access/data governance.
+P003,General practice enrolment/open books,Market access and provider supply constraint,National Enrolment Service; sector surveys; OIA,Gap,High,Open-books measure important for market failure claim.
+P004,Appointment waiting time / within-seven-day access,Primary access outcome,National Primary Care Dataset,Emerging official data,High,Definitions and denominators critical.
+P005,Encounter volume by provider type and contact type,Supply elasticity and benefits schedule volume,NPCD; PMS data; practice sample,Gap,High,"Must distinguish GP, NP, nurse, pharmacist, allied health, telehealth."
+P006,Provider marginal cost by contact type,Supply response and net margin,Practice costing study; stakeholder survey,Gap,High,Needed to estimate viability of contact benefits.
+P007,Public benefit amount by contact type,Policy scenario input,Policy design,To define,High,Run sensitivity ranges rather than point estimates initially.
+P008,Patient co-payment by contact type and group,Demand signal and equity effects,Practice fee schedules; survey; Cleanbill-like data if available,Gap,High,"Need distributions, not averages only."
+P009,Price elasticity of primary care use,Co-payment calibration,Literature review; NZ Health Survey affordability data,Gap,High,Likely heterogeneous by deprivation and urgency.
+P010,ED presentations by urgency/diagnosis/avoidable proxy,Downstream hospital pressure,Health NZ/Ministry hospital data,Aggregate public possible; linked data gap,High,Lower-urgency ED requires careful interpretation.
+P011,Ambulatory sensitive hospitalisations,Hospital-avoidance outcome,MoH/Health NZ indicators,Public aggregate likely,High,"Use as one outcome, not sole proof."
+P012,"Ambulance response, conveyance, non-conveyance, hear-and-treat/treat-and-refer",Ambulance access game,Health NZ ambulance performance reports; OIA,"Part public, part gap",High,Need safety outcomes after non-conveyance.
+P013,ED handover/offload delay,Ambulance-hospital interface,Health NZ ambulance and ED data,Gap,Medium,Relevant to ramping and opportunity cost.
+P014,ACC primary care claim volume and revenue,ACC stabiliser hypothesis,ACC data/OIA; practice revenue sample,Gap,High,Central to ACC claim; high priority.
+P015,PHO administration cost and pass-through rules,PHO transaction-cost game,PHO accounts; PHO Services Agreement; OIA,Partial public data,High,Need distinguish overhead from value-adding functions.
+P016,Provider scope/legal eligibility by contact type,Scope-enabled supply,Regulatory scopes; professional standards,Gap,Medium,Requires legal/regulatory review.
+P017,Telehealth substitution/complementarity,Rural/local supply dynamics,Literature review; provider data,Gap,Medium,Separate simple acute from chronic/complex/procedural care.
+P018,Workforce entry/exit/burnout,Supply stock/flow,Workforce surveys; regulatory workforce data,Gap,High,Needed for dynamic supply model.
+P019,Hospital budget growth and primary/community spending growth,Hospital-salience budget game,"Vote Health, Health NZ annual reports, Cabinet papers",Partial public,Medium,Needs consistent time series.
+P020,Equity outcomes by ethnicity/deprivation/rurality,Equity and trust game,MoH/HNZ equity indicators; NZ Health Survey,Partial public,High,Must be built into every scenario.

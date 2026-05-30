@@ -1,0 +1,7 @@
+Request_ID,Topic,Recipient,Rationale,Key_Items,Status,Priority
+OIA001,Operational capitation formula,Ministry of Health / Health NZ,Determine whether formula is publicly reproducible,"Current formula, rate tables, weightings, calculation workbook/code, PHO Services Agreement schedules",Draft exists,High
+OIA002,H2025067082 PHO advice,Ministry of Health,Unreleased advice on PHO roles/functions/options for change,"Full briefing, appendices, related advice list",Draft exists,High
+OIA003,PHO pass-through and overhead,Health NZ / Ministry,Test transaction-cost claim,"Funding flows, payment timing, retained amounts, administrative costs, performance reporting",New,High
+OIA004,ACC primary care activity and revenue,ACC,Test ACC stabiliser hypothesis,Claims volume/payment by provider/contact type/region; GP practice revenue proxies if available,New,High
+OIA005,Ambulance alternative disposition,Health NZ / ACC,Model ambulance as hospital-avoidance infrastructure,"Hear-and-treat, treat-and-refer, non-conveyance, recontact, ED conveyance, handover delay",New,High
+OIA006,Primary care target definitions,Health NZ,Use National Primary Care Dataset in modelling,"Data dictionary, appointment definitions, denominator rules, provider type fields, exclusion rules",New,High

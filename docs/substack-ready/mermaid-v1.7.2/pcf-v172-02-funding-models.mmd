@@ -1,0 +1,20 @@
+---
+title: Funding models and incentives
+---
+flowchart TB
+  classDef model fill:#E8F3FF,stroke:#1E5A8A,stroke-width:2px,color:#102A43;
+  classDef strength fill:#E9F8EF,stroke:#1F7A4D,stroke-width:2px,color:#123524;
+  classDef risk fill:#FFF2D8,stroke:#A86400,stroke-width:2px,color:#3B2600;
+  classDef blend fill:#F3E8FF,stroke:#6E3AA8,stroke-width:2px,color:#2E174B;
+
+  A[Capitation]:::model --> A1[Continuity and population responsibility]:::strength
+  A --> A2[Weak payment for the next contact]:::risk
+  B[Fee-for-service]:::model --> B1[Activity can grow with need]:::strength
+  B --> B2[Low-value volume risk]:::risk
+  C[Blended model]:::blend --> C1[Keep continuity]:::strength
+  C --> C2[Fund eligible extra work]:::strength
+  C --> C3[Use rules, audit and equity controls]:::blend
+  A1 --> C
+  B1 --> C
+  A2 --> C3
+  B2 --> C3

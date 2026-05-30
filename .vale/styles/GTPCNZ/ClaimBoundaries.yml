@@ -1,0 +1,9 @@
+extends: existence
+message: "Avoid unbounded public-effect claims; use claim-boundary wording instead."
+level: error
+ignorecase: true
+tokens:
+  - "guaranteed savings"
+  - "guaranteed reduction"
+  - "proven causal effect"
+  - "guaranteed hospital reduction"

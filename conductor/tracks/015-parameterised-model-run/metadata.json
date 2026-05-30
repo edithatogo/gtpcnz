@@ -1,0 +1,9 @@
+{
+  "id": "015-parameterised-model-run",
+  "title": "Source-informed parameterised model run",
+  "status": "implemented",
+  "version": "v1.0.0",
+  "created": "2026-05-08",
+  "updated": "2026-05-08",
+  "description": "Identify parameters, attach inputs, update and run models with plots and tables."
+}

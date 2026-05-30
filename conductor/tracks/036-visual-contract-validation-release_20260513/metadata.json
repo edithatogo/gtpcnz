@@ -1,0 +1,11 @@
+{
+  "id": "036-visual-contract-validation-release_20260513",
+  "title": "Visual Contract Validation and Release",
+  "status": "complete",
+  "created": "2026-05-13",
+  "updated": "2026-05-14",
+  "owner": "codex",
+  "parent": "029-visual-contract-public-visual-narrative_20260513",
+  "depends_on": ["031-post-surface-crosswalk-contract_20260513", "032-quarto-post-aligned-visual-report_20260513", "033-streamlit-post-aligned-interactive-labs_20260513", "034-github-pages-visual-gallery_20260513", "035-game-theory-microeconomics-simulation-layer_20260513"],
+  "output": "Integrated validation, conductor-review closeout, deployment proof and release evidence for public visual contract"
+}

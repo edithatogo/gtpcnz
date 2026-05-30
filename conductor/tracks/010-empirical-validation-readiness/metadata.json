@@ -1,0 +1,15 @@
+{
+  "id": "010-empirical-validation-readiness",
+  "title": "Empirical validation readiness",
+  "status": "complete",
+  "version": "0.5.0",
+  "created": "2026-05-07",
+  "updated": "2026-05-07",
+  "outputs": [
+    "docs/audit/research-audit-dossier-v0.5.0.md",
+    "docs/audit/claim-to-source-ledger-v0.5.0.csv",
+    "docs/modelling/model-parameter-inventory-v0.5.0.csv",
+    "docs/review/prisma-scr-crosswalk-v0.5.0.csv",
+    "docs/qualitative/stakeholder-validation-pack-v0.5.0.md"
+  ]
+}

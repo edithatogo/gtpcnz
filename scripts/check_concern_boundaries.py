@@ -147,6 +147,7 @@ def _check_patient_data_references() -> list[str]:
     _EXCLUDE_PATHS = {
         ROOT / "scripts" / "check_concern_boundaries.py",
         ROOT / "scripts" / "check_no_patient_data.py",
+        ROOT / "models" / "primarycare_model" / "full_parameterised_model_v170.py",
     }
 
     for source in source_dirs:

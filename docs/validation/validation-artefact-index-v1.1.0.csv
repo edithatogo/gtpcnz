@@ -1,0 +1,9 @@
+artefact,path,purpose
+pragmatic-validation-plan,docs/validation/pragmatic-validation-plan-v1.1.0.md,Main validation plan and evidence threshold.
+stakeholder-workshop-pack,docs/validation/stakeholder-mcda-workshop-pack-v1.1.0.md,Workshop guide and game validation structure.
+rapid-review-protocol,docs/review/rapid-scoping-review-protocol-v1.1.0.md,PRISMA-ScR aligned rapid review protocol.
+OIA request pack,docs/oia/oia-request-pack-v1.1.0.md,Draft information requests.
+pilot evaluation plan,docs/pilot/prospective-pilot-evaluation-plan-v1.1.0.md,Prospective evaluation design options.
+priority empirical checks,docs/validation/priority-empirical-checks-v1.1.0.csv,Five load-bearing assumptions.
+stakeholder survey template,data/templates/stakeholder-game-validation-survey-v1.1.0.csv,Scoring template for 14 games.
+MCDA scoring template,data/templates/mcda-workshop-scoring-template-v1.1.0.csv,Decision criteria and policy-option scoring.

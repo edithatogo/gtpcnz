@@ -1,0 +1,8 @@
+model_layer,inputs,output,real_data_needed
+demand burden,"chronic need, rurality, deprivation, multimorbidity",demand_burden,NPCD/NES/NZDep/rurality/multimorbidity
+marginal payment,"scheduled benefit strength, price adequacy, activity signal, ACC activity, global cap",marginal_payment_signal,"item prices, marginal costs, ACC payments, capitation rules"
+supply generation,"marginal payment, scope capacity, direct claiming, rural loading, market entry, local in-person constraint",supply_generation,"workforce, open books, claim volume, practice entry/exit"
+access,"supply generation, urgent/ambulance alternatives, telehealth, co-payment burden, demand burden",access_index,"appointment/wait data, fees, mode, urgency"
+hospital deflection,"access, urgent/ambulance alternatives, data/KPIs, place accountability, scope capacity, demand burden",hospital_deflection,linked primary/ambulance/ED/admission data
+risk,"low-value activity, moral hazard, fiscal leakage, cherry-picking, governance, item rules",gaming_risk and fiscal_risk,"claims, audit, outliers, re-presentations, equity monitoring"
+monthly dynamics,"access, supply generation, unmet need persistence, ED conversion, ambulance conveyance, admissions, costs",monthly outcomes,monthly panels and event linkages

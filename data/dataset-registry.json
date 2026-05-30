@@ -1,0 +1,68 @@
+{
+  "version": "1.0.0",
+  "description": "Registry of approved public datasets used in primary-care-funding-architecture",
+  "policy": "Only publicly available, referenced aggregate data is permitted. No patient-level or confidential data.",
+  "datasets": [
+    {
+      "path": "data/dataset-registry.json",
+      "type": "registry",
+      "source": "Repository-maintained allowlist for aggregate public datasets",
+      "status": "approved"
+    },
+    {
+      "path": "docs/calibration/simulation-inputs-calculations-map.md",
+      "type": "documentation",
+      "source": "Publicly available NZ Ministry of Health aggregate statistics",
+      "status": "approved"
+    },
+    {
+      "path": "docs/calibration/simulation-references.json",
+      "type": "reference",
+      "source": "Publicly available published literature and government reports",
+      "status": "approved"
+    },
+    {
+      "path": "data/public-calibration/public-data-anchors-v1.8.4.csv",
+      "type": "aggregate calibration anchor",
+      "source": "Public aggregate data anchors used for public-data calibration checks",
+      "status": "approved"
+    },
+    {
+      "path": "data/templates/game-position-scoring-template-v0.9.0.csv",
+      "type": "template",
+      "source": "Blank scoring template; no data content",
+      "status": "approved"
+    },
+    {
+      "path": "data/templates/mcda-workshop-scoring-template-v1.1.0.csv",
+      "type": "template",
+      "source": "Blank scoring template; no data content",
+      "status": "approved"
+    },
+    {
+      "path": "data/templates/policy-option-mcda-template-v0.9.0.csv",
+      "type": "template",
+      "source": "Blank scoring template; no data content",
+      "status": "approved"
+    },
+    {
+      "path": "data/templates/rapid-review-screening-template-v1.1.0.csv",
+      "type": "template",
+      "source": "Blank screening template; no data content",
+      "status": "approved"
+    },
+    {
+      "path": "data/templates/stakeholder-game-validation-survey-v1.1.0.csv",
+      "type": "template",
+      "source": "Blank validation survey template; no data content",
+      "status": "approved"
+    }
+  ],
+  "audit_log": [
+    {
+      "date": "2026-05-26",
+      "action": "created",
+      "description": "Initial dataset registry for Task 2.17 compliance check"
+    }
+  ]
+}

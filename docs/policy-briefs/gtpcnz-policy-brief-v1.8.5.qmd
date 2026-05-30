@@ -1,0 +1,76 @@
+---
+title: "Can we fund primary care like ACC? A policy brief"
+author: "Dylan A Mordaunt"
+date: "2026-05-29"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+  pdf:
+    toc: true
+    toc-depth: 3
+bibliography: ../references/gtpcnz-references-v1.8.5.json
+---
+
+## The question
+
+New Zealand is reweighting its capitation formula from July 2026. That is worth doing. But a better formula inside a fixed funding envelope still does not create the next appointment when clinical need exceeds capacity. The core design question is whether the funding architecture generates enough marginal supply to meet need.
+
+The GTPCNZ benchmark tests this using public-data anchored indices across 10 scenarios (F0-F9). It is not a calibrated forecast. It is a transparent, reproducible analytical framework.
+
+## The headline
+
+The full hybrid architecture (F4: capitation + uncapped scheduled activity payment + place accountability + governance + equity protections) scores consistently highest:
+
+- Viability: 72/100 vs F0 current reform at 42/100
+- Access: 67 vs 42
+- Equity legitimacy: 66 vs 48
+- Gaming risk: 0 (near-zero) vs F5 weak-controls at 74
+
+The gaming result is informative. An uncapped payment only creates gaming risk when governance, audit and place accountability are weak. Pair the payment with controls and the risk nearly disappears.
+
+## What this means in NZ terms
+
+Using public MoH and Health NZ benchmark ranges (2023-2025):
+
+| Metric | F0 | F4 | NZ range |
+|---|---|---|---|
+| GP visits/1000/yr | ~3,900 | ~4,300 | 3,800-4,600 |
+| ED/100k/yr | ~320 | ~300 | 280-350 |
+| Admissions/100k | ~100 | ~95 | 85-120 |
+| Spend/capita/yr | ~$340 | ~$380 | $280-420 |
+
+These are linear mappings from indices to public-data ranges. A beta-distribution alternative also exists that propagates uncertainty (F4 GP visits: 4,404 with 90% interval 4,243-4,534). Both are illustrative, not calibrated.
+
+## Sensitivity and stress
+
+The five most influential levers are urgent/ambulance alternatives, hospital salience, place accountability, complexity and budget tightness. The combined stress scenario (high copay + weak governance + high complexity + low scope) drops F4 viability from 72 to 49.
+
+## Budget impact
+
+Using a Bass diffusion curve (p=0.15, q=0.40) over 5 years: F4 discounted budget ~$4.2B vs F0 ~$3.8B. Illustrative only.
+
+## What is still needed
+
+To move from benchmark to calibrated forecast: linked patient-level data, OIA submissions, Māori governance review, stakeholder MCDA weighting, and workforce data. The VOI analysis identifies governance strength, equity protection and copayment burden as the highest-value parameters for data collection.
+
+## Recommendations
+
+**To MoH, Health NZ and Treasury:** The capitation reweighting is sensible but may not change the marginal supply equation. The benchmark suggests testing an activity-sensitive payment stream with controls.
+
+**To professional and training organisations (RNZCGP, GPNZ, ASMS, NZRDA, CMC, RACMA, RACP, NZCPHM, Hauora Collection):** The dashboard is designed for stakeholder exploration. If the indices do not match what your members or communities experience in practice, that is useful feedback for the next iteration. The equity legitimacy index and gaming risk index were designed to surface the kinds of incentives your members see on the ground.
+
+**To political parties (health spokespeople for Labour, National, ACT, Greens, Te Pāti Māori, NZ First):** The benchmark provides a structured way to test whether current policy settings create the right marginal supply and equity incentives. The key finding is that the current reform pathway (capitation reweighting alone) leaves the marginal supply question unanswered. The full hybrid option scores consistently higher but would require a funding design change and a separate implementation pathway. Copies of this brief and the interactive dashboard can be made available to policy advisors.
+
+**To researchers:** The model, calibration methods, VOI framework and reference list (23 sources in CSL-JSON format) are all open source. Contributions anchoring parameters to published NZ data are particularly welcome.
+
+## Appendix: index summary
+
+| Scenario | Viability | Access | Equity | Governance | Hosp pressure | Gaming risk |
+|---|---|---|---|---|---|---|
+| F4 Full hybrid | 72 | 67 | 66 | 82 | 29 | 0 |
+| F3 +Place | 64 | 62 | 60 | 76 | 31 | 2 |
+| F9 Place only | 53 | 53 | 52 | 56 | 39 | 4 |
+| F2 Activity only | 53 | 54 | 47 | 56 | 42 | 14 |
+| F0 Current reform | 42 | 42 | 48 | 56 | 38 | 2 |
+| F5 Weak controls | 39 | 40 | 40 | 44 | 42 | 74 |

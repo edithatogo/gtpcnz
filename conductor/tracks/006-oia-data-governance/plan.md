@@ -1,0 +1,32 @@
+# Plan: OIA and data governance
+
+---
+version: "0.1.0"
+status: "ready-for-execution"
+last_updated: "2026-05-22"
+owner: "Dylan A Mordaunt"
+---
+
+## Phase 1: Scoping & Drafting (Complete)
+
+- [x] Task 1.1: Define audience and purpose in `oia-strategy-v0.1.0.md`.
+- [x] Task 1.2: Identify evidence gaps linking to Tier 1 parameters (Capitation, NPCD, ACC, Ambulance).
+- [x] Task 1.3: Search existing public OIA databases (e.g., FYI.org.nz) for previously released data. (Found general primary care data, but no granular capitation weights or ACC FFS data).
+- [x] Task 1.4: Draft formal OIA requests for MOH, ACC, and St John.
+- [x] Task 1.5: Set up OIA request tracker.
+- [x] Task 1.6: Integrate OIA tracker visualization into the Streamlit dashboard.
+
+## Phase 2: Evidence population & Filing (Complete)
+
+- [x] Task 2.1: Finalize OIA text based on preliminary legal/policy review.
+- [x] Task 2.2: Submit OIAs to respective agencies.
+- [x] Task 2.3: Update tracker status to 'Sent'.
+- [x] Task 2.4: Prepare data ingestion scripts for anticipated responses (`scripts/ingest_oia_data.py`).
+
+## Phase 3: Review and release
+
+- Future gate 3.1: Log agency responses in tracker.
+- Future gate 3.2: Extract parameters and update `docs/calibration/parameter-tiering-v1.7.2.csv`.
+- Future gate 3.3: Publish OIA findings and data governance report.
+
+These remaining items are live external gates. They stay open until agencies respond and the resulting evidence is ready to ingest.

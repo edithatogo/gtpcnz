@@ -1,0 +1,9 @@
+STRESS_Item,Requirement,Project_Response,Status
+Objectives,State modelling purpose and decision context,Test allocation-only vs supply-architecture scenarios,Ready
+Logic,"Describe model logic, entities, queues, stocks/flows and feedback","Game atlas, SD spec and ABM spec describe model structure",Partial
+Data,Identify input data and sources,Model parameter inventory created,Partial; data gaps remain
+Experimentation,"Define scenarios, run length, replications and sensitivity analyses",Scenario library and minimum viable simulation plan created,Partial
+Implementation,"Report software, code, random seeds and version control",Python scaffold in repo; tests run; no calibrated implementation yet,Partial
+Verification,Check model implemented correctly,Unit tests added; future extreme-value tests needed,Partial
+Validation,Demonstrate model resembles real-world system,Validation plan exists but not executed,Not yet
+Results,"Report uncertainty, sensitivity and scenario results",No empirical results yet,Not yet

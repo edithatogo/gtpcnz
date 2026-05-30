@@ -1,0 +1,50 @@
+name: Experimental dependency edge
+
+on:
+  schedule:
+    - cron: "23 3 * * 2"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dependency-edge-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  experimental-edge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.14-dev"
+          cache: pip
+
+      - name: Install prerelease edge dependencies
+        run: python -m pip install --pre --upgrade --upgrade-strategy eager -r requirements-edge.txt
+
+      - name: Check bleeding-edge scorecard
+        run: python scripts/check_bleeding_edge_scorecard.py
+
+      - name: Check repo health contract
+        run: python scripts/check_repo_health.py
+
+      - name: Run tests
+        run: pytest -q
+
+      - name: Install Quarto
+        run: |
+          curl -L -o quarto.deb https://github.com/quarto-dev/quarto-cli/releases/download/v1.9.37/quarto-1.9.37-linux-amd64.deb
+          sudo dpkg -i quarto.deb
+          quarto --version
+
+      - name: Render Quarto website
+        run: quarto render --to html
+
+      - name: Verify Streamlit entrypoint imports
+        run: python -m py_compile streamlit_app.py models/primarycare_model/app.py

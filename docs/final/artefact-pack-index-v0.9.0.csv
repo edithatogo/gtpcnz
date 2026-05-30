@@ -1,0 +1,27 @@
+path,version,type,purpose
+docs/mcda/mcda-framework-v0.9.0.md,0.9.0,md,MCDA decision-support layer
+docs/mcda/game-position-scoring-rubric-v0.9.0.md,0.9.0,md,MCDA decision-support layer
+docs/mcda/policy-option-mcda-rubric-v0.9.0.md,0.9.0,md,MCDA decision-support layer
+docs/mcda/stakeholder-workshop-guide-v0.9.0.md,0.9.0,md,MCDA decision-support layer
+docs/mcda/weighting-methods-note-v0.9.0.md,0.9.0,md,MCDA decision-support layer
+docs/mcda/mcda-results-interpretation-guide-v0.9.0.md,0.9.0,md,MCDA decision-support layer
+docs/mcda/mcda-decision-support-report-v0.9.0.md,0.9.0,md,MCDA decision-support layer
+docs/policy-briefs/brief-08-game-informed-mcda-v0.9.0.md,0.9.0,md,MCDA decision-support layer
+docs/substack/post-10-game-informed-mcda-v0.9.0.md,0.9.0,md,MCDA decision-support layer
+models/primarycare_model/mcda.py,0.9.0,py,MCDA decision-support layer
+models/tests/test_mcda.py,0.9.0,py,MCDA decision-support layer
+outputs/mcda-example-results-v0.9.0.csv,0.9.0,csv,MCDA decision-support layer
+outputs/mcda-weight-sensitivity-v0.9.0.csv,0.9.0,csv,MCDA decision-support layer
+outputs/mcda-game-position-example-v0.9.0.csv,0.9.0,csv,MCDA decision-support layer
+outputs/mcda-policy-option-scorecard-v0.9.0.csv,0.9.0,csv,MCDA decision-support layer
+outputs/mcda-criteria-v0.9.0.csv,0.9.0,csv,MCDA decision-support layer
+outputs/mcda-policy-options-v0.9.0.csv,0.9.0,csv,MCDA decision-support layer
+outputs/mcda-weight-sets-v0.9.0.csv,0.9.0,csv,MCDA decision-support layer
+data/templates/policy-option-mcda-template-v0.9.0.csv,0.9.0,csv,MCDA decision-support layer
+data/templates/game-position-scoring-template-v0.9.0.csv,0.9.0,csv,MCDA decision-support layer
+outputs/mcda-default-ranking-v0.9.0.png,0.9.0,png,MCDA decision-support layer
+outputs/mcda-game-priority-v0.9.0.png,0.9.0,png,MCDA decision-support layer
+outputs/mcda-weight-sensitivity-v0.9.0.png,0.9.0,png,MCDA decision-support layer
+outputs/mcda-decision-support-report-v0.9.0.docx,0.9.0,docx,MCDA decision-support layer
+outputs/mcda-decision-support-report-v0.9.0.pdf,0.9.0,pdf,MCDA decision-support layer
+outputs/mcda-workbook-v0.9.0.xlsx,0.9.0,xlsx,MCDA decision-support layer

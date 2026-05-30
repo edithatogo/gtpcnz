@@ -1,0 +1,10 @@
+{
+  "id": "031-post-surface-crosswalk-contract_20260513",
+  "title": "Post-to-Surface Crosswalk Contract",
+  "status": "complete",
+  "created": "2026-05-13",
+  "updated": "2026-05-14",
+  "owner": "codex",
+  "parent": "029-visual-contract-public-visual-narrative_20260513",
+  "output": "Binding post-by-post crosswalk linking public posts to Quarto, Streamlit, GitHub Pages, visuals, simulations and tests"
+}

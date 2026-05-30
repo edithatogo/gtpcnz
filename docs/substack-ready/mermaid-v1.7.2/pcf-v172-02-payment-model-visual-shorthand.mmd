@@ -1,0 +1,9 @@
+flowchart LR
+  classDef ffs fill:#E8F3FF,stroke:#1E5A8A,stroke-width:3px,color:#102A43,font-size:22px;
+  classDef cap fill:#E9F8EF,stroke:#1F7A4D,stroke-width:3px,color:#123524,font-size:22px;
+  classDef prog fill:#FFF2D8,stroke:#A86400,stroke-width:3px,color:#3B2600,font-size:22px;
+  classDef note fill:#F5F7FA,stroke:#CBD5E1,stroke-width:2px,color:#334155,font-size:18px;
+
+  A1["Service delivered"]:::ffs --> A2["Payment follows"]:::ffs --> A3["Access expands if activity is viable"]:::note
+  B1["Enrolled population"]:::cap --> B2["Fixed payment"]:::cap --> B3["Continuity is funded, extra contact may be rationed"]:::note
+  C1["Priority programme"]:::prog --> C2["Rules, forms and reporting"]:::prog --> C3["Specific work is funded, but care can fragment"]:::note

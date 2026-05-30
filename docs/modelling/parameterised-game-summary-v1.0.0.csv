@@ -1,0 +1,10 @@
+scenario_id,scenario_name,access_score,provider_viability,equity_score,fiscal_control,hospital_pressure,gaming_risk,system_welfare
+P0,Current source-informed baseline,38.1,38.99,62.27,77.52,72.07,20.42,45.58
+P1,Capitation reweighting plus access target,41.41,40.57,68.41,78.68,68.66,19.6,48.97
+P2,National Primary Care Benefits Schedule,66.69,64.44,74.28,71.1,48.81,18.93,63.17
+P3,Full upstream access architecture,76.44,71.48,83.38,72.43,37.63,15.38,71.61
+P4,Benefits without adequate controls,66.62,66.24,56.6,63.39,52.52,34.04,54.96
+P5,ACC activity constraint shock,36.13,36.53,62.07,78.28,74.05,20.37,44.41
+P6,Ambulance alternatives only,42.39,41.26,64.67,80.35,66.05,18.01,49.5
+P7,Scope-enabled provider supply only,51.74,50.96,66.4,74.74,60.87,20.78,53.46
+P8,Direct claims and PHO intermediation reform only,45.88,45.96,63.14,77.89,66.51,19.25,50.25

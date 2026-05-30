@@ -1,0 +1,13 @@
+{
+  "id": "041-github-pages-public-site-claim-boundary-hardening_20260526",
+  "title": "GitHub Pages Public Site Claim-Boundary Hardening",
+  "status": "complete",
+  "created": "2026-05-26",
+  "updated": "2026-05-26",
+  "owner": "codex",
+  "parent": "029-visual-contract-public-visual-narrative_20260513",
+  "depends_on": [
+    "036-visual-contract-validation-release_20260513"
+  ],
+  "output": "Hardens the public GitHub Pages and Streamlit claim boundary from old scaffold wording to the public-data anchored benchmark contract"
+}

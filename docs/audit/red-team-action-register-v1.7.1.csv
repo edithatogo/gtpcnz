@@ -1,0 +1,9 @@
+id,risk,action,priority,status
+RT01,Overclaiming predictive effect,Use model-card caveat in every model-facing output,High,Open until public posts reviewed
+RT02,Uncapped misread as uncontrolled,"Use preferred phrase: uncapped at envelope, controlled at item/scope/audit/accountability level",High,Embedded in launch guide
+RT03,Equity critique,Complete Māori/Pacific/equity review before posts 13 and 18,High,Required gate
+RT04,RACMA distraction,Exclude RACMA from active engagement path; they can re-enter if they approach,Medium,Implemented in v1.7.1
+RT05,Too many model assumptions,Tier parameters and publish identifiability map,High,Implemented in v1.7.1
+RT06,PHO critique too broad,Frame as function versus intermediation/pass-through/transparency,High,Ongoing wording gate
+RT07,Current reform straw man,Treat current reform as main comparator,High,Ongoing wording gate
+RT08,Unverified email intelligence,"Label as stakeholder intelligence or OIA target, not evidence claim",Medium,Source-confidence labels added

@@ -1,0 +1,18 @@
+{
+  "track_id": "024-red-team-incorporation-v1.7.2",
+  "title": "Red-team incorporation and closed-loop launch updates",
+  "version": "1.7.2",
+  "status": "complete",
+  "created": "2026-05-10",
+  "purpose": "Turn red-team and devil's advocate reviews into concrete edits to thesis, model caveats, launch materials, Substack posts, risk register and stakeholder posture.",
+  "outputs": [
+    "docs/audit/red-team-incorporation-summary-v1.7.2.md",
+    "docs/audit/red-team-action-register-v1.7.2.csv",
+    "docs/concepts/risk-controlled-thesis-v1.7.2.md",
+    "docs/calibration/model-card-v1.7.2.md",
+    "docs/launch/decision-maker-summary-v1.7.2.md",
+    "docs/launch/red-team-launch-gates-v1.7.2.md",
+    "docs/substack-ready/posts-v1.7.2-launch/",
+    "outputs/first-six-posts-v1.7.2.md"
+  ]
+}
