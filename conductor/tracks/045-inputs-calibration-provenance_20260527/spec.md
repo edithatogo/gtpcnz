@@ -1,5 +1,7 @@
 # Inputs, Calibration, and Provenance
 
+**Status:** Complete
+
 ## Problem
 
 The repo is honest about being a public-data anchored benchmark, but the inputs layer is still mostly documentary. The user needs a stronger provenance and calibration-readiness story so that each public source, assumption, and missing dataset can be traced cleanly.

@@ -1,5 +1,7 @@
 # Public Website and Visual Contract
 
+**Status:** Complete
+
 ## Problem
 
 The public website layer is useful, but it is spread across the homepage, the Quarto report, several docs, and a mirrored `public/gtpcnz` bundle. The reader can follow the story, but the site still needs a cleaner governing contract for visuals, tables, and public wording.

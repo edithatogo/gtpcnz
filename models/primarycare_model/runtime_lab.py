@@ -1329,7 +1329,7 @@ def build_evidence_table() -> pd.DataFrame:
     """Build the evidence/reference table from the CSL-JSON file."""
     import json
     from pathlib import Path
-    ref_path = Path(__file__).resolve().parents[1] / "docs" / "references" / "gtpcnz-references-v1.8.5.json"
+    ref_path = Path(__file__).resolve().parents[2] / "docs" / "references" / "gtpcnz-references-v1.8.5.json"
     if not ref_path.exists():
         return pd.DataFrame(columns=["ID", "Type", "Title", "Publisher", "URL", "Note"])
     refs = json.loads(ref_path.read_text(encoding="utf-8"))
@@ -1423,22 +1423,22 @@ def create_animation_frames(
 
 SUBSTACK_POSTS = {
     "01": {"title": "Are we buying hospital growth by rationing cheaper care?",
-            "file": "docs/substack-ready/posts-v1.7.2-launch/post-01-...md",
+            "file": "docs/substack-ready/posts-v1.7.2-launch/post-01-are-we-buying-hospital-growth-by-rationing-cheaper-care-upstream-v1.7.2.md",
             "models": ["Reference scenarios", "F0-F9 comparison"]},
     "02": {"title": "Fee-for-service, capitation and blended funding",
-            "file": "docs/substack-ready/posts-v1.7.2-launch/post-02-...md",
+            "file": "docs/substack-ready/posts-v1.7.2-launch/post-02-fee-for-service-capitation-and-blended-funding-the-plain-english-version-v1.7.2.md",
             "models": ["Funding model comparison", "Educational explainer"]},
     "03": {"title": "Marginal supply",
-            "file": "docs/substack-ready/posts-v1.7.2-launch/post-03-...md",
+            "file": "docs/substack-ready/posts-v1.7.2-launch/post-03-marginal-supply-the-tiny-economic-idea-that-decides-whether-appointments-exist-v1.7.2.md",
             "models": ["Microeconomics lab 1", "Supply generation"]},
     "04": {"title": "Why formulas do not solve games",
-            "file": "docs/substack-ready/posts-v1.7.2-launch/post-04-...md",
+            "file": "docs/substack-ready/posts-v1.7.2-launch/post-04-why-formulas-do-not-solve-games-v1.7.2.md",
             "models": ["Game theory labs", "Gaming risk"]},
     "05": {"title": "Current reform pathway",
-            "file": "docs/substack-ready/posts-v1.7.2-launch/post-05-...md",
+            "file": "docs/substack-ready/posts-v1.7.2-launch/post-05-the-current-reform-pathway-stronger-than-a-straw-man-but-maybe-still-incomplete-v1.7.2.md",
             "models": ["Reference scenario F0"]},
     "06": {"title": "What I mean by uncapping primary care funding",
-            "file": "docs/substack-ready/posts-v1.7.2-launch/post-06-...md",
+            "file": "docs/substack-ready/posts-v1.7.2-launch/post-06-what-i-mean-by-uncapping-primary-care-funding-v1.7.2.md",
             "models": ["Microeconomics lab 3", "Scheduled payment"]},
 }
 

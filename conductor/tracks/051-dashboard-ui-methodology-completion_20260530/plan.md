@@ -1,11 +1,11 @@
-- [ ] Add "📚 Methodology & evidence" tab to tab_names in render_app()
-- [ ] Add canonical definitions display using CANONICAL_DEFS
-- [ ] Add evidence table from build_evidence_table() with download buttons
-- [ ] Add animated parameter-sweep plots using create_animation_frames()
-- [ ] Add outcome clustering display from run_outcome_clustering()
-- [ ] Add composite meta-analysis plot from run_composite_meta_analysis()
-- [ ] Add Substack cross-reference badges using SUBSTACK_POSTS
-- [ ] Add metric-to-definition hyperlinks in dataframes
-- [ ] Add table of figures, table of tables, abbreviation index
-- [ ] Update conductor state on completion
-- [ ] Run tests and verify 134+ pass
+- [x] Add "📚 Methodology & evidence" tab to tab_names in render_app()
+- [x] Add canonical definitions display using CANONICAL_DEFS
+- [x] Add evidence table from build_evidence_table() with download buttons
+- [x] Add animated parameter-sweep plots using create_animation_frames()
+- [x] Add outcome clustering display from run_outcome_clustering()
+- [x] Add composite meta-analysis plot from run_composite_meta_analysis()
+- [x] Add Substack cross-reference badges using SUBSTACK_POSTS
+- [x] Add metric-to-definition hyperlinks in dataframes
+- [x] Add table of figures, table of tables, abbreviation index
+- [x] Update conductor state on completion
+- [x] Run tests and verify 134+ pass

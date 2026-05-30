@@ -1,5 +1,7 @@
 # Game Theory Formula Validation
 
+**Status:** Complete
+
 ## Problem
 
 The public game-theory modules are supposed to show strategic behaviour, not simple linear trend lines. The current code has already been corrected away from the worst linear forms, but the repo still needs a dedicated track to keep payoff logic, best-response curves, and gaming-risk frontiers nonlinear, bounded, and explainable.

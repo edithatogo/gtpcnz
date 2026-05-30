@@ -88,7 +88,7 @@ def simulate_months(params: CalibrationParameters, inputs: ScenarioInputs, month
     """Run a minimal dynamic monthly simulation.
 
     The equations are stylised. They are placeholders for empirically estimated transition
-    functions once linked data are available.
+    functions once governed record linkage is available.
     """
     rows=[]
     unmet=55.0

@@ -1,14 +1,14 @@
-- [ ] Add "How this works" expander to microeconomics lab 1 (marginal supply)
-- [ ] Add "How this works" expander to microeconomics lab 2 (capitation)
-- [ ] Add "How this works" expander to microeconomics lab 3 (scheduled payment)
-- [ ] Add "How this works" expander to microeconomics lab 4 (access mix)
-- [ ] Add "How this works" expander to game theory lab 1 (claims audit)
-- [ ] Add "How this works" expander to game theory lab 2 (coordination)
-- [ ] Add "How this works" expander to game theory lab 3 (gaming frontier)
-- [ ] Add combined/hybrid model at end of microeconomics lab page
-- [ ] Add combined/hybrid model at end of game theory lab page
-- [ ] Apply outcome clustering to lab outputs
-- [ ] Add table filters and row highlighting
-- [ ] Cross-reference links between labs
-- [ ] Update conductor state on completion
-- [ ] Run tests and verify 134+ pass
+- [x] Add "How this works" expander to microeconomics lab 1 (marginal supply)
+- [x] Add "How this works" expander to microeconomics lab 2 (capitation)
+- [x] Add "How this works" expander to microeconomics lab 3 (scheduled payment)
+- [x] Add "How this works" expander to microeconomics lab 4 (access mix)
+- [x] Add "How this works" expander to game theory lab 1 (claims audit)
+- [x] Add "How this works" expander to game theory lab 2 (coordination)
+- [x] Add "How this works" expander to game theory lab 3 (gaming frontier)
+- [x] Add combined/hybrid model at end of microeconomics lab page
+- [x] Add combined/hybrid model at end of game theory lab page
+- [x] Apply outcome clustering to lab outputs
+- [x] Add table filters and row highlighting
+- [x] Cross-reference links between labs
+- [x] Update conductor state on completion
+- [x] Run tests and verify 134+ pass

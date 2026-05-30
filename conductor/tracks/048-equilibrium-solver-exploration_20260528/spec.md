@@ -1,5 +1,7 @@
 # Equilibrium Solver Exploration
 
+**Status:** Complete
+
 ## Problem
 
 The repo already has a Nash-style strategic adapter based on iterated best response. That is enough for an educational explainer, but it is not the same thing as a modern equilibrium solver stack. The current question is whether the project should stay with a readable heuristic or add a separate analytical lane with stronger numerical methods.

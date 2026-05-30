@@ -1,4 +1,6 @@
 import time
+from html import escape
+from dataclasses import replace
 from pathlib import Path
 
 import pandas as pd
@@ -42,7 +44,14 @@ from models.primarycare_model.runtime_lab import (
     run_budget_impact,
     BUDGET_IMPACT_NOTE,
     CANONICAL_DEFS,
+    SCENARIOS,
+    SUBSTACK_POSTS,
     build_evidence_table,
+    calculate_indices,
+    create_animation_frames,
+    get_runtime_scenario,
+    run_composite_meta_analysis,
+    run_outcome_clustering,
     run_stochastic_replay,
     run_stochastic_uncertainty,
     run_stock_flow_trace,
@@ -354,6 +363,198 @@ def render_post_guide_and_reading_map() -> None:
     )
 
 
+def _render_substack_badges(post_ids: tuple[str, ...]) -> None:
+    """Render compact linked source-to-post cross-reference badges."""
+    badge_parts = []
+    for post_id in post_ids:
+        post = SUBSTACK_POSTS.get(post_id)
+        if not post:
+            continue
+        title = post.get("title", f"Post {post_id}")
+        href = post.get("file", "")
+        badge_parts.append(
+            f'<a href="{escape(href)}" style="display:inline-block;margin:0 6px 6px 0;padding:3px 8px;'
+            f'border-radius:10px;background:#edf4f2;color:#173f37;font-size:0.78rem;text-decoration:none;">'
+            f'Post {escape(post_id)}: {escape(title)}</a>'
+        )
+    if badge_parts:
+        st.markdown("".join(badge_parts), unsafe_allow_html=True)
+
+
+def _highlight_priority_rows(row: pd.Series):
+    """Highlight rows that should be inspected first in dense result tables."""
+    text = " ".join(str(value).lower() for value in row.values)
+    if any(term in text for term in ("risk", "pressure", "shortfall", "gaming", "deferred")):
+        return ["background-color: #fff4df"] * len(row)
+    return [""] * len(row)
+
+
+def _render_download_exports(evidence_df: pd.DataFrame) -> None:
+    """Expose lightweight bibliographic downloads from the evidence table."""
+    csl_path = ROOT / "docs" / "references" / "gtpcnz-references-v1.8.5.json"
+    csl_text = csl_path.read_text(encoding="utf-8") if csl_path.exists() else "[]"
+    csv_text = evidence_df.to_csv(index=False)
+    ris_lines = []
+    bib_lines = []
+    xml_lines = ["<references>"]
+    yaml_lines = []
+    for row in evidence_df.to_dict(orient="records"):
+        ref_id = str(row.get("ID", ""))
+        title = str(row.get("Title", ""))
+        publisher = str(row.get("Publisher", ""))
+        url = str(row.get("URL", ""))
+        ris_lines.extend(["TY  - GEN", f"ID  - {ref_id}", f"TI  - {title}", f"PB  - {publisher}", f"UR  - {url}", "ER  - ", ""])
+        bib_lines.append(f"@misc{{{ref_id or 'reference'},\n  title = {{{title}}},\n  publisher = {{{publisher}}},\n  url = {{{url}}}\n}}\n")
+        xml_lines.append(f'  <reference id="{ref_id}"><title>{title}</title><url>{url}</url></reference>')
+        yaml_lines.extend([f"- id: {ref_id}", f"  title: {title}", f"  publisher: {publisher}", f"  url: {url}"])
+    xml_lines.append("</references>")
+    cff_text = (
+        "cff-version: 1.2.0\n"
+        "message: Cite the GTPCNZ public-data benchmark using the repo citation file.\n"
+        "title: Primary Care Funding Architecture public-data benchmark\n"
+    )
+    downloads = [
+        ("CSL-JSON", csl_text, "gtpcnz-references.csl.json", "application/json"),
+        ("RIS", "\n".join(ris_lines), "gtpcnz-references.ris", "application/x-research-info-systems"),
+        ("BibLaTeX", "\n".join(bib_lines), "gtpcnz-references.bib", "text/plain"),
+        ("EndNote XML", "\n".join(xml_lines), "gtpcnz-references.xml", "application/xml"),
+        ("CFF", cff_text, "CITATION.cff", "text/plain"),
+        ("YAML", "\n".join(yaml_lines), "gtpcnz-references.yaml", "text/yaml"),
+        ("Evidence CSV", csv_text, "gtpcnz-evidence-table.csv", "text/csv"),
+    ]
+    cols = st.columns(4)
+    for idx, (label, data, filename, mime) in enumerate(downloads):
+        cols[idx % 4].download_button(label, data=data, file_name=filename, mime=mime, key=f"download_{filename}")
+
+
+def render_methodology_and_evidence() -> None:
+    st.subheader("📚 Methodology and evidence")
+    _render_substack_badges(("01", "02", "03", "04", "05", "06"))
+
+    st.markdown("### Canonical definitions")
+    definitions_df = pd.DataFrame(
+        [
+            {
+                "Metric": key,
+                "Label": value["label"],
+                "Short name": value["short"],
+                "Range": value["range"],
+                "Meaning": value["meaning"],
+                "Higher is": value["higher_is"],
+                "Formula appendix anchor": f"docs/references/formula-appendix-v1.8.5.md#{key.replace('_', '-')}",
+            }
+            for key, value in CANONICAL_DEFS.items()
+        ]
+    )
+    st.dataframe(
+        definitions_df,
+        hide_index=True,
+        width="stretch",
+        column_config={
+            "Formula appendix anchor": st.column_config.LinkColumn(
+                "Formula appendix link",
+                display_text="Open formula definition",
+            )
+        },
+    )
+
+    st.markdown("### Evidence and references")
+    evidence_df = build_evidence_table()
+    if evidence_df.empty:
+        st.warning("Reference table is unavailable in this checkout.")
+    else:
+        ref_filter = st.text_input("Filter references", "", key="methodology_reference_filter")
+        filtered = evidence_df
+        if ref_filter:
+            mask = evidence_df.astype(str).apply(
+                lambda col: col.str.contains(ref_filter, case=False, regex=False)
+            ).any(axis=1)
+            filtered = evidence_df[mask]
+        st.dataframe(
+            filtered,
+            hide_index=True,
+            width="stretch",
+            column_config={"URL": st.column_config.LinkColumn("URL", display_text="Open source")},
+        )
+        _render_download_exports(evidence_df)
+
+    st.markdown("### Animated parameter sweep")
+    if st.button("Generate animated sweep", key="methodology_animation_btn"):
+        frames_df = create_animation_frames(steps=8)
+        fig = px.scatter(
+            frames_df,
+            x="activity_signal",
+            y="governance",
+            size="hybrid_viability_score",
+            color="hospital_pressure_score",
+            animation_frame="frame",
+            range_x=[0, 100],
+            range_y=[0, 100],
+            color_continuous_scale="Viridis",
+            title="Animated sweep: activity signal, governance, viability and hospital pressure",
+        )
+        fig.update_layout(height=430, margin=dict(l=10, r=10, t=45, b=10))
+        st.plotly_chart(fig, width="stretch")
+    else:
+        st.info("Generate the animated sweep when you want to inspect the parameter interaction.")
+
+    st.markdown("### Outcome clustering")
+    if st.button("Run outcome clustering", key="methodology_clustering_btn"):
+        cluster_df = run_outcome_clustering(n_clusters=3)
+        selected_cluster = st.multiselect(
+            "Show clusters",
+            sorted(cluster_df["cluster"].unique().tolist()),
+            default=sorted(cluster_df["cluster"].unique().tolist()),
+            key="methodology_cluster_filter",
+        )
+        st.dataframe(
+            cluster_df[cluster_df["cluster"].isin(selected_cluster)].style.apply(_highlight_priority_rows, axis=1),
+            hide_index=True,
+            width="stretch",
+        )
+    else:
+        st.info("Run clustering on demand to group benchmark scenarios by outcome pattern.")
+
+    st.markdown("### Composite meta-analysis")
+    if st.button("Run composite meta-analysis", key="methodology_meta_btn"):
+        meta_df = run_composite_meta_analysis(n_points=36)
+        meta_fig = px.scatter(
+            meta_df,
+            x="access_score",
+            y="hospital_pressure_score",
+            color="hybrid_viability_score",
+            size="gaming_risk_score",
+            title="Composite sweep across all benchmark levers",
+            labels={
+                "access_score": "Access index",
+                "hospital_pressure_score": "Hospital pressure index",
+                "hybrid_viability_score": "Viability",
+                "gaming_risk_score": "Gaming risk",
+            },
+        )
+        meta_fig.update_layout(height=430, margin=dict(l=10, r=10, t=45, b=10))
+        st.plotly_chart(meta_fig, width="stretch")
+    else:
+        st.info("Run the composite sweep on demand; it samples all benchmark levers.")
+
+    st.markdown("### Tables, figures and abbreviations")
+    st.dataframe(
+        pd.DataFrame(
+            [
+                {"Type": "Figure", "Name": "Animated parameter sweep", "Location": "Methodology and evidence"},
+                {"Type": "Figure", "Name": "Composite meta-analysis scatter", "Location": "Methodology and evidence"},
+                {"Type": "Table", "Name": "Canonical definitions", "Location": "Methodology and evidence"},
+                {"Type": "Table", "Name": "Evidence and references", "Location": "Methodology and evidence"},
+                {"Type": "Abbreviation", "Name": "CSL", "Meaning": "Citation Style Language"},
+                {"Type": "Abbreviation", "Name": "OIA", "Meaning": "Official Information Act"},
+                {"Type": "Abbreviation", "Name": "VOI", "Meaning": "Value of information"},
+            ]
+        ),
+        hide_index=True,
+        width="stretch",
+    )
+
+
 def render_microeconomics_activity_response_lab() -> None:
     st.markdown("### Microeconomics lab 1: marginal supply")
     with st.expander("How this works - inputs, assumptions, calculation, output"):
@@ -492,6 +693,30 @@ def render_microeconomics_activity_response_lab() -> None:
 
 def render_microeconomics_capitation_budget_lab() -> None:
     st.markdown("### Microeconomics lab 2: capitation budget constraint")
+    with st.expander("How this works - inputs, assumptions, calculation, output"):
+        st.markdown("#### Inputs")
+        st.markdown(
+            "- **Enrolled patients:** population responsibility attached to the budget."
+            "\n- **Capitation rate:** baseline funding per enrolled person."
+            "\n- **Expected cost per patient:** illustrative service cost."
+            "\n- **Demand growth pressure:** nonlinear uplift applied to expected costs."
+        )
+        st.markdown("#### Assumptions")
+        st.markdown(
+            "1. Budget scales linearly with enrolled population and rate."
+            "\n2. Demand pressure raises costs with a bounded diminishing-return curve."
+            "\n3. The model is a teaching surface, not a practice margin estimate."
+        )
+        st.markdown("#### Calculation")
+        st.latex(r"budget = enrolled\_patients \times capitation\_rate")
+        st.latex(r"expected\_cost = enrolled\_patients \times cost\_per\_patient \times (1 + f(demand))")
+        st.latex(r"headroom = budget - expected\_cost")
+        st.markdown("#### Output")
+        st.markdown(
+            "- **Bar chart:** budget, expected cost, headroom and shortfall."
+            "\n- **Headroom metric:** positive means budget exceeds expected cost in the illustration."
+            "\n- **Interpretation:** tight capitation can ration marginal activity even with stable baseline funding."
+        )
     st.markdown(
         """
         **What this shows:** how an enrolment-based budget can still feel tight
@@ -583,6 +808,30 @@ def render_microeconomics_capitation_budget_lab() -> None:
 
 def render_microeconomics_scheduled_payment_lab() -> None:
     st.markdown("### Microeconomics lab 3: scheduled activity payment")
+    with st.expander("How this works - inputs, assumptions, calculation, output"):
+        st.markdown("#### Inputs")
+        st.markdown(
+            "- **Eligible activity units:** claimable contacts or activity units."
+            "\n- **Scheduled payment rate:** payment per eligible unit."
+            "\n- **Control strength:** audit/rule pressure applied to payment."
+            "\n- **Scope flexibility:** additional eligible scope that can raise useful activity."
+        )
+        st.markdown("#### Assumptions")
+        st.markdown(
+            "1. Gross payment is activity units multiplied by the scheduled rate."
+            "\n2. Controls reduce payment through a sigmoid audit-response curve."
+            "\n3. Scope flexibility adds a bounded bonus with diminishing returns."
+            "\n4. Uncapped means no global activity ceiling; it does not mean uncontrolled payment."
+        )
+        st.markdown("#### Calculation")
+        st.latex(r"gross = units \times scheduled\_rate")
+        st.latex(r"net = gross - control\_adjustment + scope\_bonus")
+        st.markdown("#### Output")
+        st.markdown(
+            "- **Bar chart:** gross payment, control adjustment, scope bonus and net payment."
+            "\n- **Net payment metric:** illustrative payment after controls."
+            "\n- **Interpretation:** scheduled payment can expand marginal supply while still being rule-bound."
+        )
     st.markdown(
         """
         **What this shows:** how an uncapped scheduled payment can still be
@@ -838,6 +1087,7 @@ def render_microeconomics_lab() -> None:
         co-payment / access barrier logic.
         """
     )
+    _render_substack_badges(("02", "03", "06"))
     render_microeconomics_activity_response_lab()
     st.divider()
     render_microeconomics_capitation_budget_lab()
@@ -869,7 +1119,7 @@ def render_microeconomics_lab() -> None:
                 st.caption("Combined effect of co-payment and equity on benchmark indices. Higher access + equity = better.")
                 # Cluster outcome
                 cl_df = run_outcome_clustering(n_clusters=3)
-                st.dataframe(cl_df, hide_index=True, width="stretch")
+                st.dataframe(cl_df.style.apply(_highlight_priority_rows, axis=1), hide_index=True, width="stretch")
                 st.caption("Outcome clustering shows how scenarios group by combined effects.")
         else:
             st.info("Click to compute combined microeconomics interaction effects.")
@@ -1245,6 +1495,7 @@ def render_game_theory_lab() -> None:
         frontier logic so the reader can inspect each piece on its own.
         """
     )
+    _render_substack_badges(("04",))
     render_claims_audit_game_lab()
     st.divider()
     render_coordination_game_lab()
@@ -1273,7 +1524,7 @@ def render_game_theory_lab() -> None:
                 cols[2].metric("Viability", f"{idx['hybrid_viability_score']:.1f}")
                 st.caption("Combined effect of audit and place accountability. Higher governance + lower gaming risk = better.")
                 cl_df = run_outcome_clustering(n_clusters=3)
-                st.dataframe(cl_df, hide_index=True, width="stretch")
+                st.dataframe(cl_df.style.apply(_highlight_priority_rows, axis=1), hide_index=True, width="stretch")
                 st.caption("Clustering shows how combined game theory parameters group scenarios.")
         else:
             st.info("Click to compute combined game theory interaction effects.")
@@ -2277,6 +2528,7 @@ def render_app() -> None:
         "📈 Microeconomics lab",
         "🎲 Game theory lab",
         "🔬 Live model lab",
+        "📚 Methodology & evidence",
         "🎓 Educational explainer",
         "📋 Evidence & OIA",
         "🎯 Calibration readiness",
@@ -2451,6 +2703,9 @@ def render_app() -> None:
         render_live_model_lab(df)
 
     with tabs[7]:
+        render_methodology_and_evidence()
+
+    with tabs[8]:
         st.subheader("🎓 Educational explainer")
         render_educational_explainer_context()
         render_educational_parameter_dictionary()
@@ -2471,7 +2726,7 @@ def render_app() -> None:
             result_validation="Educational explainer scores use simplified strategic-response formulas with sigmoid activation (steepness 6.0-6.5). These are not the 70-parameter benchmark.",
         )
 
-    with tabs[8]:
+    with tabs[9]:
         st.subheader("📋 Evidence and Official Information Act tracker")
         tracker = cached_oia_tracker(tuple(str(p) for p in OIA_TRACKER_CANDIDATES))
         if tracker.empty:
@@ -2480,7 +2735,7 @@ def render_app() -> None:
             st.dataframe(tracker, width="stretch", hide_index=True)
         st.caption("OIA responses and linked data are needed before treating the model as calibrated.")
 
-    with tabs[9]:
+    with tabs[10]:
         st.subheader("🎯 What would make this a real calibrated model?")
         render_next_steps_context()
         readiness = build_calibration_readiness_table()
@@ -2493,7 +2748,7 @@ def render_app() -> None:
             """
         )
 
-    with tabs[10]:
+    with tabs[11]:
         st.subheader("📖 Plain-English glossary")
         st.markdown(
             """
