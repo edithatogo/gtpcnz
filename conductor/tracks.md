@@ -46,7 +46,7 @@
 | 039 | System Dynamics Stub Completion | Complete | Replaced sd_stub.py with tested stock-flow simulation module |
 | 040 | Bleeding edge experimental lane and scorecard | Completed | Three-lane dependency posture, edge scorecard, prerelease workflow and triage note |
 | 041 | GitHub Pages public site claim-boundary hardening | Complete | Public site, dashboard and tests updated to public-data anchored benchmark contract |
-| 042 | Simulation Engine Evolution with Rust-Core, VOI, MARS, Diffusion | Active | Rust-core DES simulation spec, linked references, Vale prose linting, Moscow requirements register |
+| 042 | Simulation Engine Evolution with Rust-Core, VOI, MARS, Diffusion | Complete | Rust-core DES simulation spec, linked references, Vale prose linting, Moscow requirements register |
 | 043 | Concern extraction and strict validation architecture | Complete | Typed contracts, versioned registries, validation helpers, Streamlit bindings, concern-boundary scanner and tests |
 | 044 | Game theory formula validation | Complete | Nonlinear payoff logic, best-response curves, gaming-risk frontier and formula regression tests |
 | 045 | Inputs, calibration and provenance | Complete | Provenance registry, OIA component map, data-freshness gate and calibration-boundary metadata |
