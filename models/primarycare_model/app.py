@@ -356,6 +356,34 @@ def render_post_guide_and_reading_map() -> None:
 
 def render_microeconomics_activity_response_lab() -> None:
     st.markdown("### Microeconomics lab 1: marginal supply")
+    with st.expander("How this works - inputs, assumptions, calculation, output"):
+        st.markdown("#### Inputs")
+        st.markdown(
+            "- **Marginal payment signal (0-100):** strength of scheduled payment per activity unit."
+            "\n- **Baseline appointment capacity:** starting volume before marginal response."
+            "\n- **Response responsiveness (0-100):** steepness of supply response to the payment signal."
+            "\n- **Administrative friction (0-100):** claims/compliance costs dampening response."
+        )
+        st.markdown("#### Assumptions")
+        st.markdown(
+            "1. Sigmoid supply response (strategic_response function)."
+            "\n2. Diminishing returns on responsiveness and friction."
+            "\n3. Fixed base capacity; marginal response adds."
+            "\n4. Illustrative parameters, not estimated from NZ data."
+        )
+        st.markdown("#### Calculation")
+        st.latex(r"supply = baseline + response_factor * sigmoid(payment_signal) - friction_penalty")
+        st.markdown(
+            "Sigmoid: `1 / (1 + exp(-steepness * (value - threshold)))`. "
+            "Diminishing return: `(1 - exp(-rate * value)) / (1 - exp(-rate))`."
+        )
+        st.markdown("#### Output")
+        st.markdown(
+            "- **Appointments per period:** predicted volume at current signal."
+            "\n- **Increment vs no signal:** extra supply from the payment signal."
+            "\n- **Interpretation:** direction and shape of marginal supply response - "
+            "not a forecast of NZ volumes."
+        )
     st.markdown(
         """
         **What this shows:** an illustrative marginal-supply curve for eligible primary
