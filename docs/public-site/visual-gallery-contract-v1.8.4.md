@@ -39,6 +39,15 @@ Every figure, table, and diagram on the GTPCNZ public site.
 | Table | Public project status | 6 area status summary |
 | Table | Figure inventory | All figures catalogued |
 
+## Live Model Lab (Wave 1 Enhancements)
+
+| Type | Figure | Purpose |
+|---|---|---|
+| Tornado chart | Tornado sensitivity | OAT sensitivity of hybrid viability to each parameter lever |
+| Waterfall chart | Hybrid viability decomposition | Weighted component contributions to the composite score |
+| Bar chart with error bars | Ensemble Monte Carlo | Seeded stochastic uncertainty across all 10 reference scenarios |
+| Grouped bar chart | Cohort-stratified comparison | Index scores under low vs high subgroup parameter settings |
+
 ## Other
 
 | Type | Figure | Location |

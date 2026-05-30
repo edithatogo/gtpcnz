@@ -28,5 +28,8 @@ jobs:
       - name: Install quality dependencies
         run: pip install -r requirements-dev.txt
 
+      - name: Upgrade scalene
+        run: pip install --upgrade scalene
+
       - name: Run Scalene profile
         run: python -m scalene --cli --reduced-profile --profile-all scripts/run_scalene_profile.py

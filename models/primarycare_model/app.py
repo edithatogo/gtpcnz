@@ -12,6 +12,7 @@ from models.primarycare_model.runtime_lab import (
     MAX_ABM_POPULATION,
     MAX_MONTE_CARLO_DRAWS,
     MAX_MONTHS,
+    build_waterfall_data,
     calculation_trace,
     clamp,
     diminishing_return,
@@ -19,10 +20,33 @@ from models.primarycare_model.runtime_lab import (
     get_calculation_details,
     model_gap_map,
     run_agent_lens,
+    run_cohort_stratified,
+    run_ensemble_mc,
+    run_heatmap_matrix,
+    run_interaction_scan,
+    run_phase_portrait,
+    run_policy_shock_sequence,
     run_reference_calculation,
+    run_regime_sweep,
+    run_agent_subgroup_replay,
+    run_stress_test_scenarios,
+    run_uncertainty_ribbon,
+    run_variance_decomposition,
+    run_voi_analysis,
+    calibrate_all_scenarios,
+    build_score_guide_dataframe,
+    CALIBRATION_NOTE,
+    SCORE_GUIDE_ENTRIES,
+    calibrate_distribution,
+    CALIBRATION_DIST_NOTE,
+    run_budget_impact,
+    BUDGET_IMPACT_NOTE,
+    CANONICAL_DEFS,
+    build_evidence_table,
     run_stochastic_replay,
     run_stochastic_uncertainty,
     run_stock_flow_trace,
+    run_tornado_sensitivity,
     strategic_response,
     validate_slider_value,
 )
@@ -1184,6 +1208,21 @@ def build_figure_inventory_table() -> pd.DataFrame:
             ("Dynamic radar chart", "Selected scenario profile", "Reference scenarios tab", "Shows one selected scenario across several dimensions."),
             ("Dynamic bar chart", "Educational explainer output", "Educational explainer tab", "Shows simplified teaching outputs from educational slider settings."),
             ("Dynamic bar chart", "Project readiness", "Current state tab", "Shows maturity of explanation, evidence, validation and calibration work."),
+            ("Dynamic tornado chart", "Tornado sensitivity", "Live model lab tab", "Shows OAT sensitivity of hybrid viability to each parameter lever."),
+            ("Dynamic waterfall chart", "Hybrid viability decomposition", "Live model lab tab", "Shows weighted component contributions to hybrid viability."),
+            ("Dynamic bar chart", "Ensemble Monte Carlo", "Live model lab tab", "Shows seeded stochastic uncertainty across all reference scenarios."),
+            ("Dynamic grouped bar chart", "Cohort-stratified comparison", "Live model lab tab", "Compares index scores under low vs high subgroup parameter settings."),
+            ("Dynamic bar chart", "Variance decomposition", "Live model lab tab", "Separates structural, subgroup, and stochastic variance contributions."),
+            ("Dynamic heatmap", "Scenario × subgroup heatmap", "Live model lab tab", "Shows hybrid viability across equity × complexity levels."),
+            ("Dynamic line chart", "Policy shock sequences", "Live model lab tab", "Models abrupt policy changes via stock-flow dynamics."),
+            ("Dynamic line chart", "Uncertainty ribbon (stock-flow)", "Live model lab tab", "Shows seeded stochastic spread around hospital pressure path."),
+            ("Dynamic violin chart", "Subgroup-stratified violin", "Live model lab tab", "Distribution of viability across equity subgroups."),
+            ("Dynamic bar chart", "Stress-test scenarios", "Live model lab tab", "Extreme-but-plausible input scenarios vs baseline."),
+            ("Dynamic heatmap", "Interaction scan", "Live model lab tab", "Detects equity × complexity interaction effects."),
+            ("Dynamic heatmap", "Regime sweep (2D)", "Live model lab tab", "Maps viability across 2D parameter space."),
+            ("Dynamic grouped bar chart", "Agent-based subgroup replay", "Live model lab tab", "Agent-level access patterns under different copayment settings."),
+            ("Dynamic scatter chart", "Phase portrait / vector field", "Live model lab tab", "Gradient direction of hybrid viability in 2D parameter space."),
+            ("Dynamic 3D surface", "3D payoff surface", "Live model lab tab", "3D surface of hybrid viability across two parameters."),
         ],
         columns=["Type", "Figure or table", "Location", "Purpose"],
     )
@@ -1698,6 +1737,89 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
     st.plotly_chart(stock_fig, width="stretch")
     st.dataframe(stock_flow.tail(12), hide_index=True, width="stretch")
 
+    # ── Wave 1: Tornado sensitivity chart ──────────────────────────────
+    st.markdown("### Tornado sensitivity")
+    _render_result_manifest_badge("live_deterministic", selected_scenario)
+    st.markdown(
+        "**What this shows:** how each parameter lever affects hybrid viability "
+        "and hospital pressure when perturbed up or down. "
+        "Levers ranked by total absolute impact (most influential at top)."
+    )
+    tornado_step = st.slider(
+        "Perturbation step (±)", 1, 50, 10, 1,
+        key="tornado_step",
+        help="How much each lever is shifted up/down from its baseline.",
+    )
+    if st.button("Run tornado analysis", key="run_tornado_btn"):
+        with st.spinner("Running OAT sensitivity across 12 levers..."):
+            tornado_df = run_tornado_sensitivity(selected_scenario, delta_step=float(tornado_step))
+        st.dataframe(tornado_df, hide_index=True, width="stretch")
+        tornado_fig = go.Figure()
+        levers_sorted = tornado_df["lever"].tolist()
+        tornado_fig.add_trace(go.Bar(
+            y=levers_sorted,
+            x=tornado_df["low_delta_viability"],
+            orientation="h",
+            name="Low perturbation",
+            marker_color="#c47a2c",
+        ))
+        tornado_fig.add_trace(go.Bar(
+            y=levers_sorted,
+            x=tornado_df["high_delta_viability"],
+            orientation="h",
+            name="High perturbation",
+            marker_color="#2f6f67",
+        ))
+        tornado_fig.update_layout(
+            title=f"Tornado: hybrid viability sensitivity ({selected_scenario})",
+            xaxis_title="Delta vs baseline index score",
+            yaxis_title="",
+            height=480,
+            barmode="overlay",
+            margin=dict(l=10, r=10, t=45, b=10),
+        )
+        st.plotly_chart(tornado_fig, width="stretch")
+        st.caption(
+            "Positive delta means the lever change improves the index. "
+            "This is an OAT sensitivity analysis, not a full variance decomposition."
+        )
+    else:
+        st.info("Click 'Run tornado analysis' to compute OAT sensitivity.")
+
+    # ── Wave 1: Waterfall / decomposition chart ─────────────────────────
+    st.markdown("### Waterfall: hybrid viability decomposition")
+    _render_result_manifest_badge("live_deterministic", selected_scenario)
+    st.markdown(
+        "**What this shows:** how seven component indices combine to produce "
+        "the hybrid viability score."
+    )
+    if st.button("Show waterfall", key="run_waterfall_btn"):
+        wf_df = build_waterfall_data(selected_scenario)
+        components = wf_df[~wf_df["is_total"]]["component"].tolist()
+        contributions = wf_df[~wf_df["is_total"]]["contribution"].tolist()
+        total_val = wf_df[wf_df["is_total"]]["contribution"].values[0]
+        waterfall_fig = go.Figure(go.Waterfall(
+            name="Contribution", orientation="v",
+            measure=["relative"] * len(components) + ["total"],
+            x=components + ["Hybrid viability"],
+            y=contributions + [total_val],
+            decreasing={"marker": {"color": "#c47a2c"}},
+            increasing={"marker": {"color": "#2f6f67"}},
+            totals={"marker": {"color": "#4f7eb6"}},
+        ))
+        waterfall_fig.update_layout(
+            title=f"Hybrid viability decomposition ({selected_scenario})",
+            height=440, margin=dict(l=10, r=10, t=45, b=10),
+        )
+        st.plotly_chart(waterfall_fig, width="stretch")
+        st.dataframe(wf_df, hide_index=True, width="stretch")
+        st.caption(
+            "The waterfall shows the additive weighted structure of the "
+            "hybrid viability formula."
+        )
+    else:
+        st.info("Click 'Show waterfall' to view the decomposition.")
+
     st.markdown("### Agent lens")
     col_d, col_e, col_f = st.columns(3)
     population_size = col_d.slider("Agent population cap (agents)", 50, MAX_ABM_POPULATION, DEFAULT_ABM_POPULATION, 10)
@@ -1721,6 +1843,108 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
         "The agent lens is a capped teaching view. It lets readers see allocation mechanics, not patient-level forecasts."
     )
 
+    # ── Wave 1: Ensemble Monte Carlo ───────────────────────────────────
+    st.markdown("### Ensemble Monte Carlo (all scenarios)")
+    _render_result_manifest_badge("seeded_stochastic")
+    st.markdown(
+        "**What this shows:** seeded stochastic uncertainty across all 10 "
+        "reference scenarios. Each scenario is perturbed with the same "
+        "random seed for reproducibility."
+    )
+    ens_draws = st.slider(
+        "Ensemble draws per scenario", 10, MAX_MONTE_CARLO_DRAWS, 50, 10,
+        key="ens_draws",
+        help="Number of Monte Carlo draws per scenario.",
+    )
+    ens_seed = st.number_input(
+        "Ensemble seed", min_value=1, max_value=999999, value=260526, step=1,
+        key="ens_seed",
+        help="Fixed seed for reproducible ensemble runs.",
+    )
+    ens_sd = st.slider(
+        "Ensemble perturbation (± fraction)", 0.01, 0.20, 0.08, 0.01,
+        key="ens_sd",
+    )
+    if st.button("Run ensemble MC", key="run_ensemble_btn"):
+        with st.spinner(f"Running {ens_draws} draws across all scenarios..."):
+            ens_df = run_ensemble_mc(draws=int(ens_draws), seed=int(ens_seed), sd=float(ens_sd))
+        st.dataframe(ens_df, hide_index=True, width="stretch")
+        ens_fig = go.Figure()
+        scenarios_ordered = sorted(ens_df["scenario_id"].tolist())
+        ens_fig.add_trace(go.Bar(
+            x=scenarios_ordered,
+            y=ens_df.set_index("scenario_id").loc[scenarios_ordered, "mean"],
+            name="Mean hybrid viability",
+            marker_color="#2f6f67",
+            error_y=dict(
+                type="data", symmetric=False,
+                array=ens_df.set_index("scenario_id").loc[scenarios_ordered, "p95"].values
+                      - ens_df.set_index("scenario_id").loc[scenarios_ordered, "mean"].values,
+                arrayminus=ens_df.set_index("scenario_id").loc[scenarios_ordered, "mean"].values
+                          - ens_df.set_index("scenario_id").loc[scenarios_ordered, "p05"].values,
+                color="#4f7eb6",
+            ),
+        ))
+        ens_fig.update_layout(
+            title="Ensemble uncertainty: hybrid viability across scenarios",
+            xaxis_title="Scenario",
+            yaxis_title="Hybrid viability index (p05/p50/p95)",
+            height=440, margin=dict(l=10, r=10, t=45, b=10),
+        )
+        st.plotly_chart(ens_fig, width="stretch")
+        st.caption(
+            "Error bars show the 5th-95th percentile range. "
+            "These are demonstrative uncertainty bounds, not empirical confidence intervals."
+        )
+    else:
+        st.info("Click 'Run ensemble MC' to compute all-scenario stochastic uncertainty.")
+
+    # ── Wave 1: Cohort-stratified comparison ───────────────────────────
+    st.markdown("### Cohort-stratified comparison")
+    _render_result_manifest_badge("live_deterministic", selected_scenario)
+    st.markdown(
+        "**What this shows:** how a subgroup parameter change shifts all "
+        "model indices. Select a parameter and two values to compare."
+    )
+    cohort_field_name = st.selectbox(
+        "Subgroup parameter",
+        ["equity_protection", "copayment_burden", "complexity", "activity_signal", "place_accountability"],
+        index=0,
+        key="cohort_field",
+    )
+    low_val = st.slider(f"Low value for {cohort_field_name}", 0, 100, 25, 5, key="cohort_low")
+    high_val = st.slider(f"High value for {cohort_field_name}", 0, 100, 75, 5, key="cohort_high")
+    label_low = st.text_input("Label for low group", "Low value", key="cohort_label_low")
+    label_high = st.text_input("Label for high group", "High value", key="cohort_label_high")
+    if st.button("Compare cohorts", key="run_cohort_btn"):
+        cs_df = run_cohort_stratified(
+            selected_scenario, subgroup_field=cohort_field_name,
+            low_value=float(low_val), high_value=float(high_val),
+            label_low=label_low, label_high=label_high,
+        )
+        st.dataframe(cs_df, hide_index=True, width="stretch")
+        cs_fig = go.Figure()
+        metrics_list = cs_df["metric"].tolist()
+        cs_fig.add_trace(go.Bar(
+            x=metrics_list, y=cs_df[label_low], name=label_low, marker_color="#c47a2c",
+        ))
+        cs_fig.add_trace(go.Bar(
+            x=metrics_list, y=cs_df[label_high], name=label_high, marker_color="#2f6f67",
+        ))
+        cs_fig.update_layout(
+            title=f"Cohort comparison: {cohort_field_name} ({selected_scenario})",
+            yaxis_title="Index score (0-100)", xaxis_title="",
+            barmode="group", height=440, margin=dict(l=10, r=10, t=45, b=150),
+        )
+        st.plotly_chart(cs_fig, width="stretch")
+        st.caption(
+            "This comparison shows how changing one parameter shifts all "
+            "model indices. It is a deterministic sensitivity test, not a "
+            "subgroup forecast."
+        )
+    else:
+        st.info("Click 'Compare cohorts' to run the stratified comparison.")
+
     st.markdown("### Model map and gaps")
     gap_df = model_gap_map()
     st.dataframe(gap_df, hide_index=True, width="stretch")
@@ -1734,6 +1958,66 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
     )
     gap_fig.update_layout(height=340, margin=dict(l=10, r=10, t=45, b=10))
     st.plotly_chart(gap_fig, width="stretch")
+
+    # ── Wave 2: Variance decomposition ─────────────────────────────────
+    st.markdown("### Variance decomposition")
+    _render_result_manifest_badge("seeded_stochastic", selected_scenario)
+    st.markdown("**What this shows:** separates total hybrid-viability variance into structural (parameter), subgroup (equity), and stochastic (residual) components.")
+    if st.button("Run variance decomposition", key="run_vardec_btn"):
+        with st.spinner("Running variance decomposition..."):
+            vd_df = run_variance_decomposition(selected_scenario, draws=200, seed=260526)
+        st.dataframe(vd_df, hide_index=True, width="stretch")
+        vd_fig = px.bar(vd_df, x="source", y="variance", color="source", text="proportion",
+                        title="Variance decomposition: what drives hybrid viability?",
+                        color_discrete_map={"Structural (parameter)": "#2f6f67", "Subgroup (equity)": "#4f7eb6", "Stochastic (residual)": "#c47a2c"})
+        vd_fig.update_traces(texttemplate="%{text:.1%}", textposition="outside")
+        vd_fig.update_layout(height=400, margin=dict(l=10, r=10, t=45, b=10), showlegend=False)
+        st.plotly_chart(vd_fig, width="stretch")
+        st.caption("Variance proportions sum to 1.0. Demonstrative seeded decomposition.")
+    else:
+        st.info("Click to run variance decomposition (200 draws).")
+
+    # ── Wave 2: Heatmap matrix ─────────────────────────────────────────
+    st.markdown("### Scenario × subgroup heatmap")
+    _render_result_manifest_badge("live_deterministic", selected_scenario)
+    st.markdown("**What this shows:** hybrid viability across equity protection and complexity levels.")
+    if st.button("Build heatmap matrix", key="run_heatmap_btn"):
+        hm_df = run_heatmap_matrix(selected_scenario)
+        cols = [c for c in hm_df.columns if c != "equity_level"]
+        hm_fig = px.imshow(hm_df.set_index("equity_level")[cols], aspect="auto", text_auto=True,
+                           color_continuous_scale="Viridis",
+                           labels={"x": "Complexity level", "y": "Equity level", "color": "Viability"},
+                           title=f"Scenario × subgroup heatmap ({selected_scenario})")
+        hm_fig.update_layout(height=400, margin=dict(l=10, r=10, t=45, b=10))
+        st.plotly_chart(hm_fig, width="stretch")
+        st.dataframe(hm_df, hide_index=True, width="stretch")
+        st.caption("Rows = equity protection, columns = complexity. Higher values = stronger viability.")
+    else:
+        st.info("Click to build the heatmap matrix.")
+
+    # ── Wave 2: Policy shock sequences ─────────────────────────────────
+    st.markdown("### Policy shock sequences")
+    _render_result_manifest_badge("live_deterministic", selected_scenario)
+    st.markdown("**What this shows:** how an abrupt policy change affects hospital and fiscal pressure over time.")
+    shock_field = st.selectbox("Shock parameter", ["activity_signal", "governance", "capitation", "equity_protection", "copayment_burden"], key="shock_field")
+    shock_delta = st.slider("Shock change (±)", -50, 50, -20, 5, key="shock_delta")
+    shock_months = st.slider("Post-shock months", 12, 48, 24, 6, key="shock_months")
+    if st.button("Run shock sequence", key="run_shock_btn"):
+        with st.spinner(f"Simulating shock..."):
+            shock_df = run_policy_shock_sequence(selected_scenario, shock_field=shock_field, shock_delta=float(shock_delta), post_shock_months=int(shock_months))
+        shock_fig = go.Figure()
+        shock_fig.add_trace(go.Scatter(x=shock_df["month"], y=shock_df["baseline_hospital_pressure"], mode="lines", name="Baseline", line=dict(color="#4f7eb6", width=2, dash="dash")))
+        shock_fig.add_trace(go.Scatter(x=shock_df["month"], y=shock_df["shock_hospital_pressure"], mode="lines", name=f"Shock", line=dict(color="#c47a2c", width=3)))
+        shock_fig.update_layout(title=f"Policy shock: hospital pressure", xaxis_title="Month", yaxis_title="Hospital pressure", height=380, margin=dict(l=10, r=10, t=45, b=10), hovermode="x unified")
+        st.plotly_chart(shock_fig, width="stretch")
+        shock_fig2 = go.Figure()
+        shock_fig2.add_trace(go.Scatter(x=shock_df["month"], y=shock_df["baseline_fiscal_pressure"], mode="lines", name="Baseline", line=dict(color="#4f7eb6", width=2, dash="dash")))
+        shock_fig2.add_trace(go.Scatter(x=shock_df["month"], y=shock_df["shock_fiscal_pressure"], mode="lines", name=f"Shock", line=dict(color="#c47a2c", width=3)))
+        shock_fig2.update_layout(title="Fiscal pressure response", xaxis_title="Month", yaxis_title="Fiscal pressure", height=340, margin=dict(l=10, r=10, t=45, b=10), hovermode="x unified")
+        st.plotly_chart(shock_fig2, width="stretch")
+        st.caption("Dashed = baseline. Solid = post-shock path. Applied at month 1.")
+    else:
+        st.info("Click to run the policy shock simulation.")
 
 
 def render_app() -> None:
@@ -1773,7 +2057,6 @@ def render_app() -> None:
         slider_definitions["scheduled_benefit_level"].step,
         help=slider_definitions["scheduled_benefit_level"].slider_help,
     )
-    _render_validation_badge(_sb_level, 0, 100, "scheduled_benefit_level")
     _cap_support = st.sidebar.slider(
         slider_definitions["capitation_support"].public_label,
         slider_definitions["capitation_support"].lower_bound,
@@ -1782,7 +2065,6 @@ def render_app() -> None:
         slider_definitions["capitation_support"].step,
         help=slider_definitions["capitation_support"].slider_help,
     )
-    _render_validation_badge(_cap_support, 0, 100, "capitation_support")
     _place_acc = st.sidebar.slider(
         slider_definitions["place_accountability"].public_label,
         slider_definitions["place_accountability"].lower_bound,
@@ -1791,7 +2073,6 @@ def render_app() -> None:
         slider_definitions["place_accountability"].step,
         help=slider_definitions["place_accountability"].slider_help,
     )
-    _render_validation_badge(_place_acc, 0, 100, "place_accountability")
     _audit_st = st.sidebar.slider(
         slider_definitions["audit_strength"].public_label,
         slider_definitions["audit_strength"].lower_bound,
@@ -1800,7 +2081,6 @@ def render_app() -> None:
         slider_definitions["audit_strength"].step,
         help=slider_definitions["audit_strength"].slider_help,
     )
-    _render_validation_badge(_audit_st, 0, 100, "audit_strength")
     _equity_pro = st.sidebar.slider(
         slider_definitions["equity_protection"].public_label,
         slider_definitions["equity_protection"].lower_bound,
@@ -1809,7 +2089,6 @@ def render_app() -> None:
         slider_definitions["equity_protection"].step,
         help=slider_definitions["equity_protection"].slider_help,
     )
-    _render_validation_badge(_equity_pro, 0, 100, "equity_protection")
     _scope_flex = st.sidebar.slider(
         slider_definitions["scope_flexibility"].public_label,
         slider_definitions["scope_flexibility"].lower_bound,
@@ -1818,7 +2097,6 @@ def render_app() -> None:
         slider_definitions["scope_flexibility"].step,
         help=slider_definitions["scope_flexibility"].slider_help,
     )
-    _render_validation_badge(_scope_flex, 0, 100, "scope_flexibility")
     _local_in_person = st.sidebar.slider(
         slider_definitions["local_in_person_support"].public_label,
         slider_definitions["local_in_person_support"].lower_bound,
@@ -1827,7 +2105,6 @@ def render_app() -> None:
         slider_definitions["local_in_person_support"].step,
         help=slider_definitions["local_in_person_support"].slider_help,
     )
-    _render_validation_badge(_local_in_person, 0, 100, "local_in_person_support")
     educational_settings = EducationalSettings(
         scheduled_benefit_level=_sb_level,
         capitation_support=_cap_support,
@@ -1878,6 +2155,124 @@ def render_app() -> None:
 
     with tabs[3]:
         st.subheader("📊 Reference scenarios from the benchmark")
+        # ── Calibrated public-stat parameters ────────────────────────
+        st.markdown("### What these scores would mean in NZ terms")
+        st.markdown(
+            "The table below maps the model's 0\u2013100 benchmark indices onto "
+            "real-world New Zealand public-data ranges using linear scaling. "
+        )
+        _render_result_manifest_badge("live_deterministic")
+        cal_df = calibrate_all_scenarios()
+        st.dataframe(cal_df, hide_index=True, width="stretch")
+        st.caption(CALIBRATION_NOTE)
+        st.markdown("")
+        st.markdown(
+            "For example: F4's access index of ~67 maps to approximately "
+            "**4,300 GP visits per 1,000 enrolled patients per year** "
+            "under the benchmark\u2019s assumptions. F0's access index of ~42 "
+            "maps to approximately **3,900 visits**. The range represents "
+            "the model\u2019s logic, not a calibrated prediction."
+        )
+
+        # ── Score interpretation guide ───────────────────────────────
+        with st.expander("How to interpret each index (TeX formulae, thresholds, components)"):
+            st.markdown("#### Index Interpretation Guide")
+            st.markdown(
+                "Each index is a 0\u2013100 unitless score calculated from a "
+                "deterministic linear formula. The table below explains what "
+                "each one measures, how to interpret the range, and the exact "
+                "TeX formula used."
+            )
+            for entry in SCORE_GUIDE_ENTRIES:
+                key, label, rng, meaning, direction, thresholds, formula, components = entry
+                st.markdown(f"**{label}** ({rng})")
+                st.markdown(f"- *Meaning:* {meaning}")
+                st.markdown(f"- *Higher is:* {direction}")
+                st.markdown(f"- *Thresholds:* " + "; ".join(f"{k}: {v}" for k, v in thresholds.items()))
+                st.latex(formula)
+                st.markdown(f"- *Components:* {components}")
+                st.markdown("---")
+
+        # ── Distribution-based calibration (alternative method) ──────
+        with st.expander("Distribution-based calibration (beta-distribution method)"):
+            st.markdown(
+                "**Alternative approach:** instead of linear 0\u2013100 to min-max mapping, "
+                "this method draws from beta distributions parametrised to NZ public-data "
+                "ranges, with the model index acting as a centering parameter. "
+                "This propagates uncertainty and produces plausible ranges."
+            )
+            col_d1, col_d2, col_d3 = st.columns(3)
+            with col_d1:
+                if st.button("Run distribution calibration", key="run_dist_cal"):
+                    with st.spinner("Drawing from beta distributions..."):
+                        dist_rows = []
+                        for sc in SCENARIOS:
+                            idx = calculate_indices(sc)
+                            cal = calibrate_distribution(idx)
+                            dist_rows.append({
+                                "scenario_id": sc.scenario_id,
+                                "GP visits/1000": f"{cal['dist_gp_visits_per_1000']['mean']:.0f} [{cal['dist_gp_visits_per_1000']['p05']:.0f}\u2013{cal['dist_gp_visits_per_1000']['p95']:.0f}]",
+                                "ED/100k": f"{cal['dist_ed_per_100k']['mean']:.0f} [{cal['dist_ed_per_100k']['p05']:.0f}\u2013{cal['dist_ed_per_100k']['p95']:.0f}]",
+                                "Admissions/100k": f"{cal['dist_admissions_per_100k']['mean']:.0f} [{cal['dist_admissions_per_100k']['p05']:.0f}\u2013{cal['dist_admissions_per_100k']['p95']:.0f}]",
+                                "Spend/capita NZD": f"${cal['dist_spend_per_capita_nzd']['mean']:.0f} [${cal['dist_spend_per_capita_nzd']['p05']:.0f}\u2013${cal['dist_spend_per_capita_nzd']['p95']:.0f}]",
+                            })
+                        st.dataframe(pd.DataFrame(dist_rows), hide_index=True, width="stretch")
+                        st.caption(CALIBRATION_DIST_NOTE)
+                else:
+                    st.info("Click to generate distribution-based calibration (1000 beta draws per scenario).")
+
+        # ── Budget impact analysis ────────────────────────────────────
+        with st.expander("Budget impact with Bass policy diffusion"):
+            st.markdown(
+                "**Illustrative budget estimates** using calibrated spend-per-capita "
+                "combined with a Bass diffusion curve (p=0.15 innovation, q=0.40 imitation) "
+                "to model gradual policy adoption over 5 years."
+            )
+            bi_scenarios = st.multiselect("Scenarios for budget impact", ["F0","F3","F4","F8"], default=["F0","F4"], key="bi_scenarios")
+            bi_pop = st.number_input("Enrolled population", min_value=100000, max_value=10000000, value=4500000, step=100000, key="bi_pop")
+            if st.button("Run budget impact", key="run_bi_btn"):
+                with st.spinner("Computing budget impact with diffusion..."):
+                    bi_df = run_budget_impact(tuple(bi_scenarios), enrolled_population=int(bi_pop))
+                totals = bi_df[bi_df["year"] == "Total"][["scenario_id", "discounted_budget_nzd", "undiscounted_budget_nzd"]]
+                st.dataframe(bi_df[~bi_df["year"].astype(str).str.isdigit()].reset_index(drop=True), hide_index=True, width="stretch")
+                bi_fig = px.line(
+                    bi_df[bi_df["year"] != "Total"].astype({"year": int}),
+                    x="year", y="discounted_budget_nzd", color="scenario_id",
+                    markers=True,
+                    title="Discounted budget impact by scenario (with Bass diffusion)",
+                    labels={"year": "Year", "discounted_budget_nzd": "Discounted budget (NZD)", "scenario_id": "Scenario"},
+                )
+                bi_fig.update_layout(height=400, margin=dict(l=10, r=10, t=45, b=10))
+                st.plotly_chart(bi_fig, width="stretch")
+                st.caption(BUDGET_IMPACT_NOTE)
+            else:
+                st.info("Click to run budget impact with Bass policy diffusion.")
+
+        # ── References section ────────────────────────────────────────
+        with st.expander("References and data sources"):
+            st.markdown(
+                "#### References (CSL-JSON)\n"
+                "A canonical reference list is maintained at "
+                "`docs/references/gtpcnz-references-v1.8.5.json` (23 entries). "
+                "Key sources used in this analysis:\n\n"
+            )
+            refs_text = [
+                "- **SRC01\u201303**: NZ Ministry of Health / Health NZ capitation and NPCD",
+                "- **SRC05**: NZ Health Survey (unmet need, cost barriers)",
+                "- **SRC14\u201317**: Statistics NZ (population, NZDep, rural/urban classification)",
+                "- **SRC18**: Health and Disability System Review (Tier 1 funding recommendations)",
+                "- **SRC19**: Sapere capitation reweighting review",
+                "- **SRC20\u201321**: VOI and Bass diffusion methodology",
+                "- **SRC22**: HQSC Atlas of Healthcare Variation",
+                "- **SRC23**: NZ Treasury Budget Update 2025",
+            ]
+            for line in refs_text:
+                st.markdown(line)
+            st.markdown(
+                "\n\n*All sources are publicly available. The reference list is "
+                "maintained alongside the model in the `docs/references/` directory.*"
+            )
+
         render_reference_scenario_explainer()
         if df.empty:
             st.error(f"Could not find model results at `{RESULTS_PATH.relative_to(ROOT)}`.")

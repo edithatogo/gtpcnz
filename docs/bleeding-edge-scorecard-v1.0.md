@@ -24,7 +24,7 @@ The supplemental scorecard currently checks:
 
 The following enhancements are classified and scheduled by the Track 049 shortlist (`docs/decisions/enhancement-shortlist-v1.8.5.md`):
 
-### Wave 1 — In progress (Must)
+### Wave 1 — Complete (Must)
 
 | # | Enhancement | Category |
 |---|---|---|
@@ -34,7 +34,7 @@ The following enhancements are classified and scheduled by the Track 049 shortli
 | 4 | Waterfall / decomposition chart | Visual |
 | 5 | Cohort-stratified runs | Simulation |
 
-### Wave 2 — Queued (Should)
+### Wave 2 — Complete (Should)
 
 | # | Enhancement | Category |
 |---|---|---|
@@ -45,7 +45,7 @@ The following enhancements are classified and scheduled by the Track 049 shortli
 | 10 | Ridge/violin distribution with subgroup facets | Visual |
 | 11 | Stress-test scenarios | Simulation |
 
-### Wave 3 — Future (Could)
+### Wave 3 — Complete (Could)
 
 | # | Enhancement | Category |
 |---|---|---|
