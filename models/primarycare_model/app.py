@@ -676,6 +676,26 @@ def render_microeconomics_scheduled_payment_lab() -> None:
 
 def render_microeconomics_access_mix_lab() -> None:
     st.markdown("### Microeconomics lab 4: co-payment / access barrier")
+    with st.expander("How this works - inputs, assumptions, calculation, output"):
+        st.markdown("#### Inputs")
+        st.markdown("- **Co-payment (0-100):** out-of-pocket cost burden."
+            "\\n- **Local in-person capacity (0-100):** face-to-face availability."
+            "\\n- **Digital access reach (0-100):** telehealth and online access."
+            "\\n- **Equity protection (0-100):** safeguards against access barriers."
+            "\\n- **Travel friction (0-100):** distance and transport barriers.")
+        st.markdown("#### Assumptions")
+        st.markdown("1. Barriers reduce effective access via nonlinear (diminishing_return) functions."
+            "\\n2. Digital can partly substitute for in-person care for suitable needs."
+            "\\n3. Equity protection offsets the effect of co-payment and travel barriers."
+            "\\n4. Deferred share is the residual - need not met through any access route.")
+        st.markdown("#### Calculation")
+        st.latex(r"local_share = f(capacity, copay, travel)")
+        st.latex(r"digital_share = f(access, equity)")
+        st.latex(r"deferred = 100 - local_share - digital_share - equity_offset")
+        st.markdown("#### Output")
+        st.markdown("- **Stacked bar chart:** share of need met through local, digital, or deferred."
+            "\\n- **Access coverage metric:** composite score."
+            "\\n- **Interpretation:** higher deferred share = access failure.")
     st.markdown(
         """
         **What this shows:** how co-payment pressure, local in-person capacity,
@@ -829,6 +849,23 @@ def render_microeconomics_lab() -> None:
 
 def render_claims_audit_game_lab() -> None:
     st.markdown("### Game theory lab 1: formulas do not solve games")
+    with st.expander("How this works - inputs, assumptions, calculation, output"):
+        st.markdown("#### Inputs")
+        st.markdown("- **Marginal gain (0-100):** incentive to inflate claims."
+            "\\n- **Audit cost/penalty (0-100):** deterrence from audit."
+            "\\n- **Claim rule clarity (0-100):** rule transparency."
+            "\\n- **Place accountability (0-100):** population responsibility.")
+        st.markdown("#### Assumptions")
+        st.markdown("1. Honest and gaming payoffs are sigmoid functions of input signals."
+            "\\n2. Detection risk rises with audit via strategic_response."
+            "\\n3. The flip threshold shows where honest overtakes gaming.")
+        st.markdown("#### Calculation")
+        st.latex(r"honest = f(quality, place, audit)")
+        st.latex(r"gaming = f(gain, detection, audit)")
+        st.markdown("#### Output")
+        st.markdown("- **Two payoff lines:** honest vs gaming as audit changes."
+            "\\n- **Flip threshold:** audit level where honest wins."
+            "\\n- **Interpretation:** formulas alone do not solve gaming.")
     st.markdown(
         """
         **What this shows:** an illustrative strategic-behaviour game in which the payoff
@@ -927,6 +964,23 @@ def render_claims_audit_game_lab() -> None:
 
 def render_coordination_game_lab() -> None:
     st.markdown("### Game theory lab 2: payoff and best-response")
+    with st.expander("How this works - inputs, assumptions, calculation, output"):
+        st.markdown("#### Inputs")
+        st.markdown("- **Cooperation gain (0-100):** benefit of coordination."
+            "\\n- **Cherry-pick gain (0-100):** benefit of selective activity."
+            "\\n- **Equity protection (0-100):** cost of leaving patients behind."
+            "\\n- **Scope flexibility (0-100):** workforce breadth."
+            "\\n- **Place accountability (0-100):** population responsibility.")
+        st.markdown("#### Assumptions")
+        st.markdown("1. Cooperate and cherry-pick payoffs are sigmoid functions."
+            "\\n2. Stronger place accountability shifts advantage to cooperation."
+            "\\n3. All values are illustrative.")
+        st.markdown("#### Calculation")
+        st.latex(r"cooperate = f(cooperation, equity, scope, place)")
+        st.latex(r"cherry\_pick = f(cherry, equity, scope, place)")
+        st.markdown("#### Output")
+        st.markdown("- **Two payoff lines:** cooperate vs cherry-pick as place rises."
+            "\\n- **Coordination threshold:** place level where cooperation wins.")
     st.markdown(
         """
         **What this shows:** a coordination game in which the value of
@@ -1029,6 +1083,22 @@ def render_coordination_game_lab() -> None:
 
 def render_gaming_risk_frontier_lab() -> None:
     st.markdown("### Game theory lab 3: controls and gaming-risk frontier")
+    with st.expander("How this works - inputs, assumptions, calculation, output"):
+        st.markdown("#### Inputs")
+        st.markdown("- **Access gain (0-100):** policy emphasis on improving access."
+            "\\n- **Control strength (0-100):** rules and monitoring intensity."
+            "\\n- **Monitoring cost (0-100):** admin cost of controls."
+            "\\n- **Place accountability (0-100):** population responsibility.")
+        st.markdown("#### Assumptions")
+        st.markdown("1. Gaming risk rises with access pressure, falls with controls."
+            "\\n2. Access gain is a trade-off with gaming risk."
+            "\\n3. The frontier shows the policy trade-off space.")
+        st.markdown("#### Calculation")
+        st.latex(r"gaming\_risk = f(access, control, place, monitoring)")
+        st.latex(r"access\_gain = f(access, control, place, monitoring)")
+        st.markdown("#### Output")
+        st.markdown("- **Gaming risk and access gain lines** as controls change."
+            "\\n- **Interpretation:** the frontier shows the trade-off.")
     st.markdown(
         """
         **What this shows:** an illustrative frontier that shows how access gains can be
