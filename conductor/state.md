@@ -4,10 +4,11 @@ GTPCNZ is a public-data anchored benchmark and educational explainer. It is not 
 
 Current active tracks:
 
-- `042-simulation-engine-evolution_20260526`: Rust-core DES, VOI, MARS, diffusion, ABM/GNN/WASM/privacy/formal-check follow-through, and final integration gates remain active.
+- None (all tracks complete)
 
 Recently completed tracks:
 
+- `042-simulation-engine-evolution_20260526`: Rust-core DES, VOI, MARS, diffusion, ABM/GNN/WASM/privacy/formal-check follow-through, and final integration gates completed.
 - `043-concern-extraction-strict-validation_20260526`: contracts, registries, validation boundaries and Streamlit UI bindings extracted into typed layers.
 - `044-game-theory-formula-validation_20260527`: nonlinear payoff logic, best-response curves, gaming-risk frontier and regression tests.
 - `045-inputs-calibration-provenance_20260527`: provenance registry, OIA component map, data-freshness gate and calibration-boundary metadata.
