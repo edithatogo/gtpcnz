@@ -70,3 +70,6 @@
 
 ### Track details
 Per-track specifications, plans, and metadata live in individual track directories under `conductor/tracks/`. The table above is the authoritative registry.
+
+| 051 | Dashboard UI methodology completion | Pending | Methodology/evidence tab, animated plots, clustering display, composite meta-plot, Substack cross-refs, evidence downloads |
+| 052 | Dashboard lab enhancements: deep-dive clarifications | Pending | How this works expanders, combined/hybrid models, outcome clustering, table filters, cross-reference links |
