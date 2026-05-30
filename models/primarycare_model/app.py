@@ -846,6 +846,34 @@ def render_microeconomics_lab() -> None:
     st.divider()
     render_microeconomics_access_mix_lab()
 
+    # ── Combined microeconomics model ────────────────────────────────
+    st.markdown("### Combined microeconomics: interaction effects")
+    st.markdown(
+        "**What this shows:** how the marginal supply, budget, scheduled payment, "
+        "and access barrier simulations interact. The sliders below control all "
+        "four simulations simultaneously."
+    )
+    with st.expander("Run combined microeconomics analysis"):
+        co_payment_all = st.slider("Co-payment (0-100)", 0, 100, 50, key="combined_copay")
+        equity_all = st.slider("Equity protection (0-100)", 0, 100, 50, key="combined_equity")
+        if st.button("Run combined analysis", key="combined_micro_btn"):
+            with st.spinner("Computing combined microeconomics..."):
+                base = get_runtime_scenario("F4")
+                modified = replace(base, copayment_burden=float(co_payment_all),
+                                   equity_protection=float(equity_all))
+                idx = calculate_indices(modified)
+                cols = st.columns(3)
+                cols[0].metric("Viability", f"{idx['hybrid_viability_score']:.1f}")
+                cols[1].metric("Access", f"{idx['access_score']:.1f}")
+                cols[2].metric("Equity", f"{idx['equity_legitimacy_score']:.1f}")
+                st.caption("Combined effect of co-payment and equity on benchmark indices. Higher access + equity = better.")
+                # Cluster outcome
+                cl_df = run_outcome_clustering(n_clusters=3)
+                st.dataframe(cl_df, hide_index=True, width="stretch")
+                st.caption("Outcome clustering shows how scenarios group by combined effects.")
+        else:
+            st.info("Click to compute combined microeconomics interaction effects.")
+
 
 def render_claims_audit_game_lab() -> None:
     st.markdown("### Game theory lab 1: formulas do not solve games")
@@ -1222,6 +1250,33 @@ def render_game_theory_lab() -> None:
     render_coordination_game_lab()
     st.divider()
     render_gaming_risk_frontier_lab()
+
+    # ── Combined game theory model ───────────────────────────────────
+    st.markdown("### Combined game theory: interaction effects")
+    st.markdown(
+        "**What this shows:** how the claims audit, coordination, and gaming-risk "
+        "frontier simulations interact. Below you can vary audit and place "
+        "accountability to see combined effects on gaming risk and governance."
+    )
+    with st.expander("Run combined game theory analysis"):
+        audit_combined = st.slider("Audit strength (0-100)", 0, 100, 60, key="combined_audit")
+        place_combined = st.slider("Place accountability (0-100)", 0, 100, 65, key="combined_place")
+        if st.button("Run combined game analysis", key="combined_game_btn"):
+            with st.spinner("Computing combined game theory..."):
+                base = get_runtime_scenario("F4")
+                modified = replace(base, governance=float(audit_combined),
+                                   place_accountability=float(place_combined))
+                idx = calculate_indices(modified)
+                cols = st.columns(3)
+                cols[0].metric("Gaming risk", f"{idx['gaming_risk_score']:.1f}")
+                cols[1].metric("Governance", f"{idx['governance_resilience_score']:.1f}")
+                cols[2].metric("Viability", f"{idx['hybrid_viability_score']:.1f}")
+                st.caption("Combined effect of audit and place accountability. Higher governance + lower gaming risk = better.")
+                cl_df = run_outcome_clustering(n_clusters=3)
+                st.dataframe(cl_df, hide_index=True, width="stretch")
+                st.caption("Clustering shows how combined game theory parameters group scenarios.")
+        else:
+            st.info("Click to compute combined game theory interaction effects.")
 
 
 def render_next_steps_context() -> None:
