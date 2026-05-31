@@ -1,0 +1,83 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.15, pytest-9.0.2, pluggy-1.6.0
+rootdir: C:\Users\60217257\OneDrive - Flinders\Blog\Substack\rareinsights\primary-care-funding-architecture-v1.7.2
+configfile: pyproject.toml
+plugins: anyio-4.13.0, hypothesis-6.153.6, asyncio-1.3.0, cov-7.1.0, mock-3.15.1, split-0.11.0, xdist-3.8.0, typeguard-4.5.2
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 24 items
+
+models\tests\test_validation_schemas.py FFF.....................         [100%]
+
+================================== FAILURES ===================================
+_____________ test_validate_reference_results_frame_accepts_valid _____________
+
+    def test_validate_reference_results_frame_accepts_valid():
+        issues = validate_reference_results_frame(_valid_frame(), None)
+>       assert issues == []
+E       assert ["pandera val...ber': None}]"] == []
+E         
+E         Left contains one more item: 'pandera validation failed: [{\'column\': \'hybrid_viability_score\', \'failure_case\': \'int64\', \'index\': None, \'... \'int64\', \'index\': None, \'schema_context\': \'Column\', \'check\': "dtype(\'float64\')", \'check_number\': None}]'
+E         Use -v to get more diff
+
+models\tests\test_validation_schemas.py:31: AssertionError
+_________ test_validate_reference_results_frame_rejects_out_of_bounds _________
+
+    def test_validate_reference_results_frame_rejects_out_of_bounds():
+        df = _valid_frame()
+        df.loc[0, "hybrid_viability_score"] = 120
+        issues = validate_reference_results_frame(df, None)
+>       assert any("outside 0-100" in i for i in issues)
+E       assert False
+E        +  where False = any(<generator object test_validate_reference_results_frame_rejects_out_of_bounds.<locals>.<genexpr> at 0x000002A42703C380>)
+
+models\tests\test_validation_schemas.py:36: AssertionError
+___________ test_validate_reference_results_frame_rejects_negative ____________
+
+    def test_validate_reference_results_frame_rejects_negative():
+        df = _valid_frame()
+        df.loc[0, "access_score"] = -5
+        issues = validate_reference_results_frame(df, None)
+>       assert any("outside 0-100" in i for i in issues)
+E       assert False
+E        +  where False = any(<generator object test_validate_reference_results_frame_rejects_negative.<locals>.<genexpr> at 0x000002A42703CD40>)
+
+models\tests\test_validation_schemas.py:41: AssertionError
+============================== warnings summary ===============================
+..\..\..\..\..\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\_hypothesis_pytestplugin.py:481
+  C:\Users\60217257\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\_hypothesis_pytestplugin.py:481: UserWarning: Skipping collection of '.hypothesis' directory - this usually means you've explicitly set the `norecursedirs` pytest config option, replacing rather than extending the default ignores.
+    warnings.warn(
+
+..\..\..\..\..\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\pandera\_pandas_deprecated.py:154
+  C:\Users\60217257\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\pandera\_pandas_deprecated.py:154: FutureWarning: Importing pandas-specific classes and functions from the
+  top-level pandera module will be **removed in a future version of pandera**.
+  If you're using pandera to validate pandas objects, we highly recommend updating
+  your import:
+  
+  ```
+  # old import
+  import pandera as pa
+  
+  # new import
+  import pandera.pandas as pa
+  ```
+  
+  If you're using pandera to validate objects from other compatible libraries
+  like pyspark or polars, see the supported libraries section of the documentation
+  for more information on how to import pandera:
+  
+  https://pandera.readthedocs.io/en/stable/supported_libraries.html
+  
+  To disable this warning, set the environment variable:
+  
+  ```
+  export DISABLE_PANDERA_IMPORT_WARNING=True
+  ```
+  
+    warnings.warn(_future_warning, FutureWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED models/tests/test_validation_schemas.py::test_validate_reference_results_frame_accepts_valid
+FAILED models/tests/test_validation_schemas.py::test_validate_reference_results_frame_rejects_out_of_bounds
+FAILED models/tests/test_validation_schemas.py::test_validate_reference_results_frame_rejects_negative
+================== 3 failed, 21 passed, 2 warnings in 1.77s ===================
