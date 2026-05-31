@@ -1,5 +1,7 @@
 # Bleeding Edge Analytical Enhancements
 
+**Status:** Complete
+
 ## Problem
 
 The repo already has a public educational explainer, several simulation engines, and a Nash-style heuristic lane. That is enough for a readable dashboard, but the broader analytical surface is still thin. The open question is which high-end additions would actually improve the product without drifting into unsupported forecasting or black-box modelling.

@@ -1,5 +1,7 @@
 # GitHub Pages Public Site Claim-Boundary Hardening
 
+**Status:** Complete
+
 ## Problem
 
 The live GTPCNZ GitHub Pages site still used older public wording: source-informed scaffold, not a real-data calibrated forecast. That wording was also enforced by local tests, which made the stale contract durable.

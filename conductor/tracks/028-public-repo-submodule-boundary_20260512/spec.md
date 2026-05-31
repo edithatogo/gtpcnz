@@ -1,5 +1,7 @@
 # Spec: Public Repo Submodule Boundary
 
+**Status:** Complete
+
 ## Problem
 
 The public GitHub repository must not mirror the full parent research workspace. The public surface should contain only the Streamlit and Quarto dashboards plus explicitly selected supporting files needed for deployment, citation, contribution, security and reproducibility.

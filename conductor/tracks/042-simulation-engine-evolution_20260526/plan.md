@@ -67,7 +67,7 @@ JAX MC → 3 parallel tasks (Sobol, MPC, Bayes Opt). Spawns 4 Level-3 agents.
 ### Workstream B: Visualisation & IPC (Level 2: Viz Lead)
 4 Streamlit animations + IPC streaming — parallel after foundation. Spawns 5 Level-3 agents.
 
-- [ ] **Task 2.7**: Streamlit live animations for `kairos` patient-flow ABM. *Depends:* 2.1, 2.3
+- [x] **Task 2.7**: Streamlit live animations for `kairos` patient-flow ABM. *Depends:* 2.1, 2.3
 - [x] **Task 2.8**: Animated `innovate` Bass diffusion choropleth/line chart. *Depends:* 2.1, 2.3
 - [x] **Task 2.9**: Nash optimisation convergence trace viz. *Depends:* 2.1, 2.3
 - [x] **Task 2.10**: Rolling histogram for batched JAX Monte Carlo sweeps. *Depends:* 2.4
@@ -77,38 +77,38 @@ JAX MC → 3 parallel tasks (Sobol, MPC, Bayes Opt). Spawns 4 Level-3 agents.
 SHAP attribution → GNN pathway model (sequential within). 2 Level-3 agents.
 
 - [x] **Task 2.19**: Extract/serialize SHAP from agent decision networks. *Depends:* 2.4
-- [ ] **Task 2.22**: GNN with `jraph` on JAX for referral bottlenecks. *Depends:* 2.4, 2.19
+- [x] **Task 2.22**: GNN with `jraph` on JAX for referral bottlenecks. *Depends:* 2.4, 2.19
 
 ### Workstream D: Quality & Infrastructure (Level 2: Quality Lead)
 Testing, profiling, privacy, formal verification — parallel after foundation. Spawns 4 Level-3 agents.
 
-- [ ] **Task 2.5**: Hypothesis + mutmut test suite. *Depends:* 2.1, 2.2
-- [ ] **Task 2.6**: Scalene profiling runs for bottleneck ID. *Depends:* 2.4
-- [ ] **Task 2.14**: Laplace noise demographic privacy modules. *Depends:* 2.2
-- [ ] **Task 2.16**: Queue safety invariants + formal spec. *Depends:* none (infra only)
+- [x] **Task 2.5**: Hypothesis + mutmut test suite. *Depends:* 2.1, 2.2
+- [x] **Task 2.6**: Scalene profiling runs for bottleneck ID. *Depends:* 2.4
+- [x] **Task 2.14**: Laplace noise demographic privacy modules. *Depends:* 2.2
+- [x] **Task 2.16**: Queue safety invariants + formal spec. *Depends:* none (infra only)
 
 ### Workstream E: Rust/WASM (Level 2: Rust Lead)
 Rust core, wasm-pack, compliance, Cargo caching. Spawns 3 Level-3 agents.
 
-- [ ] **Task 2.12**: Rust core `wasm-pack` compilation pipeline. *Depends:* 2.1
-- [ ] **Task 2.17**: Compliance test: zero patient-level data. *Depends:* 2.1
-- [ ] **Task 2.25**: Cargo compilation directory caching in CI. *Depends:* 2.12
+- [x] **Task 2.12**: Rust core `wasm-pack` compilation pipeline. *Depends:* 2.1
+- [x] **Task 2.17**: Compliance test: zero patient-level data. *Depends:* 2.1
+- [x] **Task 2.25**: Cargo compilation directory caching in CI. *Depends:* 2.12
 
 ### Workstream G: CI/CD & Infrastructure (Level 2: Infra Lead)
 Renovate, SAST, DVC — independent, fully parallel. Spawns 3 Level-3 agents.
 
-- [ ] **Task 2.18**: Renovate auto-upgrades for bleeding-edge pinning. *Depends:* 2.1
-- [ ] **Task 2.21**: Bandit + Semgrep SAST + secret scanning. *Depends:* 2.1
-- [ ] **Task 2.24**: Git LFS or DVC for simulation outcome versioning. *Depends:* 2.1
+- [x] **Task 2.18**: Renovate auto-upgrades for bleeding-edge pinning. *Depends:* 2.1
+- [x] **Task 2.21**: Bandit + Semgrep SAST + secret scanning. *Depends:* 2.1
+- [x] **Task 2.24**: Git LFS or DVC for simulation outcome versioning. *Depends:* 2.1
 
 ---
 
 ## Phase 2 — Integration & Closeout
 
-- [ ] **Task 2.23**: Execute multi-level subagent swarm dispatch (runs concurrently with Phase 1)
+- [x] **Task 2.23**: Execute multi-level subagent swarm dispatch (runs concurrently with Phase 1)
   - Orchestrator spawns all 7 Level-2 workstream leads simultaneously
-- [ ] Final integration: merge all workstream outputs, resolve conflicts
-- [ ] Final gates: `pytest`, `ruff check`, `mypy`, `vale`, `check_repo_health.py`
+- [x] Final integration: merge all workstream outputs, resolve conflicts
+- [x] Final gates: `pytest`, `ruff check`, `mypy`, `vale`, `check_repo_health.py`
 
 ## Implementation Notes
 

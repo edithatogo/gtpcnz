@@ -1,5 +1,7 @@
 # Concern Extraction and Strict Validation Architecture
 
+**Status:** Complete
+
 ## Problem
 
 The model now has enough runtime capability that the next risk is architectural drift. Inputs, parameter metadata, scenario settings, calculation formulas, Streamlit controls, validation checks, and claim-boundary text are partly separated, but they still cross module boundaries in ways that make it hard to prove what is being calculated, what is merely a UI control, and what is a public-data assumption.

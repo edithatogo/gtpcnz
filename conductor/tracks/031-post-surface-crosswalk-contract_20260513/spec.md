@@ -1,5 +1,7 @@
 # Spec: Post-to-Surface Crosswalk Contract
 
+**Status:** Complete
+
 ## Problem
 
 The public visual contract maps themes to surfaces, but implementation needs a binding post-by-post map. Without it, Quarto, Streamlit and GitHub Pages can drift into different structures, and game-theory posts can remain implied rather than surfaced.

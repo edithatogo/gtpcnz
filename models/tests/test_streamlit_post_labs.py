@@ -93,3 +93,29 @@ def test_game_theory_lab_sliders_are_defined_in_source():
     assert "Access gain" in text
     assert "Control strength" in text
     assert "Monitoring cost" in text
+
+
+def test_methodology_evidence_tab_is_defined_in_source():
+    text = _source_text()
+
+    assert "render_methodology_and_evidence" in text
+    assert "📚 Methodology & evidence" in text
+    assert "CANONICAL_DEFS" in text
+    assert "build_evidence_table" in text
+    assert "download_button" in text
+    assert "st.column_config.LinkColumn" in text
+    assert "Generate animated sweep" in text
+    assert "Run outcome clustering" in text
+    assert "Run composite meta-analysis" in text
+    assert "_render_substack_badges" in text
+
+
+def test_all_lab_deep_dive_expanders_are_defined_in_source():
+    text = _source_text()
+
+    assert text.count('st.expander("How this works - inputs, assumptions, calculation, output")') >= 7
+    assert "Microeconomics lab 2: capitation budget constraint" in text
+    assert "budget = enrolled\\_patients \\times capitation\\_rate" in text
+    assert "Microeconomics lab 3: scheduled activity payment" in text
+    assert "gross = units \\times scheduled\\_rate" in text
+    assert "_highlight_priority_rows" in text

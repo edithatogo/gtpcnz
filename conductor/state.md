@@ -4,14 +4,21 @@ GTPCNZ is a public-data anchored benchmark and educational explainer. It is not 
 
 Current active tracks:
 
-- `043-concern-extraction-strict-validation_20260526`: extracts contracts, registries, validation boundaries and Streamlit UI bindings into typed layers. All 7 phases completed.
-- `044-game-theory-formula-validation_20260527`: game formula nonlinearity audit, regression tests, educational-language docs.
-- `045-inputs-calibration-provenance_20260527`: provenance registry, OIA component map, data-freshness gate.
-- `046-public-website-visual-contract_20260527`: wording contract, visual gallery contract, public mirror sync.
-- `047-streamlit-deployment-experience_20260527`: UI polish, accessibility captions, deployment runbook.
-- `048-equilibrium-solver-exploration_20260528`: decided — keep heuristic Nash, do NOT add analytical solver lane. Documented in `docs/decisions/solver-posture-v1.8.5.md`.
-- `049-bleeding-edge-analytical-enhancements_20260528`: MoSCoW shortlist complete. First-wave: tornado sensitivity, equity/rural stratification, seeded Monte Carlo, waterfall charts, heatmap matrix. Documented in `docs/decisions/enhancement-shortlist-v1.8.5.md`.
-- `050-strict-quality-toolchain_20260528`: hardens type checking, dependency automation, coverage, property/mutation tests, profiling, security scans and GitHub enforcement. Local gates passed on 2026-05-28 with repo health 11/11, bleeding-edge scorecard 17/17, 134 tests passed, and 91.68% model-package coverage. Remote enforcement now has active default-branch ruleset `main baseline protection` requiring PR flow, resolved review threads, linear history, no deletion/force-push, and both `test-and-render` and `Quality / python-quality` CI checks.
+- None (all tracks complete)
+
+Recently completed tracks:
+
+- `042-simulation-engine-evolution_20260526`: Rust-core DES, VOI, MARS, diffusion, ABM/GNN/WASM/privacy/formal-check follow-through, and final integration gates completed.
+- `043-concern-extraction-strict-validation_20260526`: contracts, registries, validation boundaries and Streamlit UI bindings extracted into typed layers.
+- `044-game-theory-formula-validation_20260527`: nonlinear payoff logic, best-response curves, gaming-risk frontier and regression tests.
+- `045-inputs-calibration-provenance_20260527`: provenance registry, OIA component map, data-freshness gate and calibration-boundary metadata.
+- `046-public-website-visual-contract_20260527`: public wording contract, visual gallery contract and public mirror sync.
+- `047-streamlit-deployment-experience_20260527`: app structure, tabs, controls, smoke tests, deployment entrypoint and accessibility/performance polish.
+- `048-equilibrium-solver-exploration_20260528`: decided to keep heuristic Nash and not add an analytical solver lane. Documented in `docs/decisions/solver-posture-v1.8.5.md`.
+- `049-bleeding-edge-analytical-enhancements_20260528`: three analytical waves completed, including sensitivity, subgroup, uncertainty, stress, interaction, VOI, diffusion, clustering, composite, evidence and UI wiring work.
+- `050-strict-quality-toolchain_20260528`: strict type/lint/test/security/dependency/profile toolchain and CI controls completed.
+- `051-dashboard-ui-methodology-completion_20260530`: Methodology & evidence tab, linked definitions, evidence exports, lazy analytical views and focused tests completed.
+- `052-dashboard-lab-enhancements-deep-dive_20260530`: all seven lab explainers, combined analyses, clustering, row highlighting, linked Substack cross-references and focused tests completed.
 
 Completed subagent workstreams:
 

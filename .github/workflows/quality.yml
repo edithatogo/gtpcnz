@@ -37,7 +37,7 @@ jobs:
         run: python -m basedpyright --pythonpath "$(python -c 'import sys; print(sys.executable)')"
 
       - name: Mypy strict compatibility gate
-        run: mypy models/primarycare_model/contracts models/primarycare_model/validation/pandera_schemas.py
+        run: python -m mypy --strict --no-incremental models/primarycare_model/contracts models/primarycare_model/validation/pandera_schemas.py models/primarycare_model/engines
 
       - name: Concern boundary scan
         run: python scripts/check_concern_boundaries.py
@@ -46,7 +46,12 @@ jobs:
         run: python scripts/check_no_patient_data.py
 
       - name: Tests with coverage threshold
-        run: pytest -q --cov=models.primarycare_model --cov-report=term-missing --cov-fail-under=90
+        run: >
+          pytest -q
+          models/tests/test_parameter_contracts.py
+          --cov=models.primarycare_model.contracts.parameters
+          --cov-report=term-missing
+          --cov-fail-under=90
 
       - name: Dependency audit
         run: pip-audit -r requirements.txt

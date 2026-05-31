@@ -1,5 +1,7 @@
 # Spec: Simulation Engine Evolution
 
+**Status:** Complete
+
 Evolve the primary care funding simulation engine from stylized Python equations to a high-performance, deterministic discrete event simulation (DES) / agent-based model (ABM) architecture incorporating state-of-the-art Python tooling and execution acceleration.
 
 ## Requirements

@@ -15,4 +15,4 @@
 - [Track Directories](./tracks/) — per-track specs, plans, and metadata.
 - [Conductor State and Track Registry Reconciliation](./tracks/037-conductor-state-and-track-registry-reconciliation_20260514/) — administrative cleanup (complete).
 
-**Active tracks:** 042 (Simulation Engine Evolution). Track 041 (GitHub Pages claim-boundary hardening) is complete. See [tracks.md](./tracks.md) for details.
+**Active track:** 042 (Simulation Engine Evolution). Tracks 043-052 are complete. See [tracks.md](./tracks.md) for details.

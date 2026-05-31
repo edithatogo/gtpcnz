@@ -1,5 +1,7 @@
 # Track 022 — Full parameterised model v1.7.0
 
+**Status:** Complete
+
 ## Purpose
 
 Continue building the fully parameterised model without claiming empirical calibration.

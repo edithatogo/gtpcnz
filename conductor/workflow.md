@@ -49,3 +49,9 @@ A model can move from specification to prototype only when it has:
 - scenario library;
 - validation plan;
 - model limitations section.
+
+## Session history and traceability
+
+To maintain traceability of agent actions and track execution history, session logs are stored at:
+`C:\Users\60217257\.cline\data\sessions\` (resolved from `%USERPROFILE%\.cline\data\sessions\`). 
+Each session (conversation) is archived as a separate directory/file in this location and can be referenced for commit auditing and task verification.

@@ -1,5 +1,7 @@
 # Streamlit Deployment Experience
 
+**Status:** Complete
+
 ## Problem
 
 The Streamlit app already works as a public explainer, but it still reads like a competent dashboard rather than a fully polished public product. The deployment and UX layer needs sharper control labelling, stronger accessibility, and a cleaner release story.

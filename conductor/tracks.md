@@ -5,9 +5,9 @@
 | 001 | Substack series: The Primary Care Funding Game | Complete for v1.2.0 | 12 Substack-ready posts, figure pack, source bank, glossary and QA checklist |
 | 002 | Policy brief suite | Complete for current phase | Briefs 1–9 covering NZ architecture, PHOs, ambulance, Australia, KPIs, game map, calibration, MCDA and validation |
 | 003 | NZMJ article / Viewpoint pathway | Complete for current phase | Viewpoint draft, Article protocol, methods annex and cover letter |
-| 004 | Evidence review | Ready for execution | Rapid scoping review protocol, PRISMA-ScR crosswalk and screening tools |
+| 004 | Evidence review | Complete for current phase | Rapid scoping review protocol, PRISMA-ScR crosswalk and screening tools |
 | 005 | Empirical and game-theoretic modelling | Complete for demonstrative phase | Formal game model, NZ nested game map, parameter inventory and codebase |
-| 006 | OIA and data governance | Ready for execution | OIA/data request pack, request tracker and data dashboard |
+| 006 | OIA and data governance | Complete for current phase | OIA/data request pack, request tracker and data dashboard |
 | 007 | v0.3.0 public-facing polish release | Complete | Policy brief DOCX/PDF, public-facing architecture drafts |
 | 008 | NZ broader policy game-theory map | Complete | Nested game map, matrix, figures, DOCX/PDF and model tests |
 | 009 | Research audit and traceability | Complete | Audit pack, traceability matrix, claims register and decision log |
@@ -46,7 +46,17 @@
 | 039 | System Dynamics Stub Completion | Complete | Replaced sd_stub.py with tested stock-flow simulation module |
 | 040 | Bleeding edge experimental lane and scorecard | Completed | Three-lane dependency posture, edge scorecard, prerelease workflow and triage note |
 | 041 | GitHub Pages public site claim-boundary hardening | Complete | Public site, dashboard and tests updated to public-data anchored benchmark contract |
-| 042 | Simulation Engine Evolution with Rust-Core, VOI, MARS, Diffusion | Active | Rust-core DES simulation spec, linked references, Vale prose linting, Moscow requirements register |
+| 042 | Simulation Engine Evolution with Rust-Core, VOI, MARS, Diffusion | Complete | Rust-core DES simulation spec, linked references, Vale prose linting, Moscow requirements register |
+| 043 | Concern extraction and strict validation architecture | Complete | Typed contracts, versioned registries, validation helpers, Streamlit bindings, concern-boundary scanner and tests |
+| 044 | Game theory formula validation | Complete | Nonlinear payoff logic, best-response curves, gaming-risk frontier and formula regression tests |
+| 045 | Inputs, calibration and provenance | Complete | Provenance registry, OIA component map, data-freshness gate and calibration-boundary metadata |
+| 046 | Public website and visual contract | Complete | Public wording contract, visual gallery contract and public mirror sync |
+| 047 | Streamlit deployment experience | Complete | App structure, tabs, controls, smoke tests, deployment entrypoint and accessibility/performance polish |
+| 048 | Equilibrium solver exploration | Complete | Decision to keep heuristic Nash and defer analytical solver lane |
+| 049 | Bleeding edge analytical enhancements | Complete | Three-wave analytical lane with sensitivity, subgroup, uncertainty, stress, interaction, VOI, diffusion, clustering, composite, evidence and UI wiring |
+| 050 | Strict quality toolchain | Complete | Strict type/lint/test/security/dependency/profile toolchain and CI controls |
+| 051 | Dashboard UI methodology completion | Complete | Methodology/evidence tab, linked definitions, evidence exports, lazy analytical views and focused tests |
+| 052 | Dashboard lab enhancements: deep-dive clarifications | Complete | How this works expanders for all 7 labs, combined analyses, clustering, row highlighting and linked cross-references |
 | — | Interactive Reporting and Visualization Suite | Complete | Interactive reporting and visualization suite (non-numeric companion track) |
 
 

@@ -1,10 +1,10 @@
 {
   "id": "049-bleeding-edge-analytical-enhancements_20260528",
   "title": "Bleeding Edge Analytical Enhancements",
-  "status": "active",
+  "status": "completed",
   "created": "2026-05-28",
-  "updated": "2026-05-28",
-  "progress": "Expands the repo's analytical frontier beyond the current educational explainer by ranking additional inputs, subgroup strata, secondary analyses, visualisations, and simulation modes that are worth promoting while respecting the public-data claim boundary.",
+  "updated": "2026-05-31",
+  "progress": "Completed the three-wave analytical enhancement lane, including sensitivity, subgroup, uncertainty, stress, interaction, VOI, diffusion, clustering, composite, evidence, and UI wiring work while preserving the public-data claim boundary.",
   "owner": "codex",
   "output": "A prioritized shortlist of bleeding-edge enhancements with clear acceptance criteria and no claim-boundary drift"
 }

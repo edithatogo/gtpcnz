@@ -1,5 +1,7 @@
 # Track 017 — Substack-ready publication layer
 
+**Status:** Complete
+
 ## Goal
 
 Turn the policy-research package into a human-readable 12-part Substack series with diagrams, source links, glossary, plain-English explainers and Dylan-style narrative.

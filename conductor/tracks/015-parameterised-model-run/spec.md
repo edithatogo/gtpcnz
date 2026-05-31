@@ -1,5 +1,7 @@
 # Track 015 — Parameterised model run v1.0.0
 
+**Status:** Complete
+
 ## Goal
 Identify each model parameter, document its public-data input, update scenario values, rerun game/hybrid/uncertainty/MCDA models, and produce plots/tables.
 

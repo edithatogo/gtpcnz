@@ -1,5 +1,7 @@
 # Spec: Bleeding Edge Experimental Lane And Scorecard
 
+**Status:** Complete
+
 ## Problem
 
 The repository already has a stable release lane and a latest-compatible canary lane, but the public documentation still describes the latest canary as the only "bleeding edge" signal. That is not enough to honestly claim a truly bleeding-edge posture, because there is no isolated experimental lane, no edge-specific triage note, and no measurable scorecard for how far the repo has moved toward current preview tooling.

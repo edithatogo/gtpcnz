@@ -1,10 +1,10 @@
 {
   "id": "044-game-theory-formula-validation_20260527",
   "title": "Game Theory Formula Validation",
-  "status": "active",
+  "status": "completed",
   "created": "2026-05-27",
-  "updated": "2026-05-27",
-  "progress": "Captured the remaining game-theory and payoff concerns from the investigator reports. Track focuses on nonlinear payoff logic, best-response curves, gaming-risk frontiers, and formula tests that protect the public explainer from linear drift.",
+  "updated": "2026-05-31",
+  "progress": "Completed nonlinear payoff logic, best-response curves, gaming-risk frontiers, and formula tests that protect the public explainer from linear drift.",
   "owner": "codex",
   "output": "Validated nonlinear game-theory formulas, payoff/frontier tests, and clearer separation between pedagogical curves and empirical claims"
 }

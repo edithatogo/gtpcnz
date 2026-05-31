@@ -1,5 +1,7 @@
 # Track 024 — Red-team and devil's advocate incorporation
 
+**Status:** Complete
+
 ## Goal
 Fold the red-team and devil's advocate critiques into the live launch materials, model communication artefacts and Conductor system.
 

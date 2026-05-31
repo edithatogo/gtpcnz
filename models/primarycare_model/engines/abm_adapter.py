@@ -102,6 +102,10 @@ class _IndexCalculator:
         }
 
 
+def _summary_item(metric: str, value: int | float | str) -> dict[str, int | float | str]:
+    return {"metric": metric, "value": value}
+
+
 class AgentBasedModelAdapter:
     """Typed adapter for agent-based model simulation.
 
@@ -151,18 +155,18 @@ class AgentBasedModelAdapter:
             for pid in range(1, pop + 1)
         )
 
-        served_total = sum(a["served_contacts"] for a in agent_data)
-        unmet_total = sum(a["unmet_attempts"] for a in agent_data)
+        served_total = int(sum(int(a["served_contacts"]) for a in agent_data))
+        unmet_total = int(sum(int(a["unmet_attempts"]) for a in agent_data))
         mean_access_prob = float(np.mean(access_probability))
         high_barrier_share = float(np.mean(barrier >= 0.6))
 
-        summary = (
-            {"metric": "population_size", "value": pop},
-            {"metric": "months", "value": months},
-            {"metric": "mean_access_probability", "value": round(mean_access_prob, 3)},
-            {"metric": "served_contacts", "value": served_total},
-            {"metric": "unmet_attempts", "value": unmet_total},
-            {"metric": "high_barrier_share", "value": round(high_barrier_share, 3)},
+        summary: tuple[dict[str, int | float | str], ...] = (
+            _summary_item("population_size", pop),
+            _summary_item("months", months),
+            _summary_item("mean_access_probability", round(mean_access_prob, 3)),
+            _summary_item("served_contacts", served_total),
+            _summary_item("unmet_attempts", unmet_total),
+            _summary_item("high_barrier_share", round(high_barrier_share, 3)),
         )
 
         scenario_result = ScenarioResult(

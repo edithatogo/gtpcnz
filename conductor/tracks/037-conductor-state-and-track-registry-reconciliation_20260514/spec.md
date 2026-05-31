@@ -1,5 +1,7 @@
 # Spec
 
+**Status:** Complete
+
 ## Requirements
 
 - Reconcile `conductor/index.md`, `conductor/tracks.md`, `conductor/state.md` and track-local `metadata.json`.
