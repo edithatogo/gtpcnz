@@ -1,6 +1,6 @@
 import time
-from html import escape
 from dataclasses import replace
+from html import escape
 from pathlib import Path
 
 import pandas as pd
@@ -9,53 +9,45 @@ import plotly.graph_objects as go
 import streamlit as st
 
 from models.primarycare_model.runtime_lab import (
+    BUDGET_IMPACT_NOTE,
+    CALIBRATION_DIST_NOTE,
+    CALIBRATION_NOTE,
+    CANONICAL_DEFS,
     DEFAULT_ABM_POPULATION,
     DEFAULT_MONTE_CARLO_DRAWS,
     MAX_ABM_POPULATION,
     MAX_MONTE_CARLO_DRAWS,
     MAX_MONTHS,
+    SCENARIOS,
+    SCORE_GUIDE_ENTRIES,
+    SUBSTACK_POSTS,
+    build_evidence_table,
     build_waterfall_data,
+    calculate_indices,
     calculation_trace,
+    calibrate_all_scenarios,
+    calibrate_distribution,
     clamp,
+    create_animation_frames,
     diminishing_return,
     format_formula_markdown,
     get_calculation_details,
+    get_runtime_scenario,
     model_gap_map,
     run_agent_lens,
+    run_budget_impact,
     run_cohort_stratified,
+    run_composite_meta_analysis,
     run_ensemble_mc,
     run_heatmap_matrix,
-    run_interaction_scan,
-    run_phase_portrait,
+    run_outcome_clustering,
     run_policy_shock_sequence,
     run_reference_calculation,
-    run_regime_sweep,
-    run_agent_subgroup_replay,
-    run_stress_test_scenarios,
-    run_uncertainty_ribbon,
-    run_variance_decomposition,
-    run_voi_analysis,
-    calibrate_all_scenarios,
-    build_score_guide_dataframe,
-    CALIBRATION_NOTE,
-    SCORE_GUIDE_ENTRIES,
-    calibrate_distribution,
-    CALIBRATION_DIST_NOTE,
-    run_budget_impact,
-    BUDGET_IMPACT_NOTE,
-    CANONICAL_DEFS,
-    SCENARIOS,
-    SUBSTACK_POSTS,
-    build_evidence_table,
-    calculate_indices,
-    create_animation_frames,
-    get_runtime_scenario,
-    run_composite_meta_analysis,
-    run_outcome_clustering,
     run_stochastic_replay,
     run_stochastic_uncertainty,
     run_stock_flow_trace,
     run_tornado_sensitivity,
+    run_variance_decomposition,
     strategic_response,
     validate_slider_value,
 )
@@ -2207,8 +2199,8 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
         waterfall_fig = go.Figure(go.Waterfall(
             name="Contribution", orientation="v",
             measure=["relative"] * len(components) + ["total"],
-            x=components + ["Hybrid viability"],
-            y=contributions + [total_val],
+            x=[*components, "Hybrid viability"],
+            y=[*contributions, total_val],
             decreasing={"marker": {"color": "#c47a2c"}},
             increasing={"marker": {"color": "#2f6f67"}},
             totals={"marker": {"color": "#4f7eb6"}},
@@ -2409,16 +2401,16 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
     shock_delta = st.slider("Shock change (±)", -50, 50, -20, 5, key="shock_delta")
     shock_months = st.slider("Post-shock months", 12, 48, 24, 6, key="shock_months")
     if st.button("Run shock sequence", key="run_shock_btn"):
-        with st.spinner(f"Simulating shock..."):
+        with st.spinner("Simulating shock..."):
             shock_df = run_policy_shock_sequence(selected_scenario, shock_field=shock_field, shock_delta=float(shock_delta), post_shock_months=int(shock_months))
         shock_fig = go.Figure()
         shock_fig.add_trace(go.Scatter(x=shock_df["month"], y=shock_df["baseline_hospital_pressure"], mode="lines", name="Baseline", line=dict(color="#4f7eb6", width=2, dash="dash")))
-        shock_fig.add_trace(go.Scatter(x=shock_df["month"], y=shock_df["shock_hospital_pressure"], mode="lines", name=f"Shock", line=dict(color="#c47a2c", width=3)))
-        shock_fig.update_layout(title=f"Policy shock: hospital pressure", xaxis_title="Month", yaxis_title="Hospital pressure", height=380, margin=dict(l=10, r=10, t=45, b=10), hovermode="x unified")
+        shock_fig.add_trace(go.Scatter(x=shock_df["month"], y=shock_df["shock_hospital_pressure"], mode="lines", name="Shock", line=dict(color="#c47a2c", width=3)))
+        shock_fig.update_layout(title="Policy shock: hospital pressure", xaxis_title="Month", yaxis_title="Hospital pressure", height=380, margin=dict(l=10, r=10, t=45, b=10), hovermode="x unified")
         st.plotly_chart(shock_fig, width="stretch")
         shock_fig2 = go.Figure()
         shock_fig2.add_trace(go.Scatter(x=shock_df["month"], y=shock_df["baseline_fiscal_pressure"], mode="lines", name="Baseline", line=dict(color="#4f7eb6", width=2, dash="dash")))
-        shock_fig2.add_trace(go.Scatter(x=shock_df["month"], y=shock_df["shock_fiscal_pressure"], mode="lines", name=f"Shock", line=dict(color="#c47a2c", width=3)))
+        shock_fig2.add_trace(go.Scatter(x=shock_df["month"], y=shock_df["shock_fiscal_pressure"], mode="lines", name="Shock", line=dict(color="#c47a2c", width=3)))
         shock_fig2.update_layout(title="Fiscal pressure response", xaxis_title="Month", yaxis_title="Fiscal pressure", height=340, margin=dict(l=10, r=10, t=45, b=10), hovermode="x unified")
         st.plotly_chart(shock_fig2, width="stretch")
         st.caption("Dashed = baseline. Solid = post-shock path. Applied at month 1.")
@@ -2591,11 +2583,11 @@ def render_app() -> None:
                 "TeX formula used."
             )
             for entry in SCORE_GUIDE_ENTRIES:
-                key, label, rng, meaning, direction, thresholds, formula, components = entry
+                _key, label, rng, meaning, direction, thresholds, formula, components = entry
                 st.markdown(f"**{label}** ({rng})")
                 st.markdown(f"- *Meaning:* {meaning}")
                 st.markdown(f"- *Higher is:* {direction}")
-                st.markdown(f"- *Thresholds:* " + "; ".join(f"{k}: {v}" for k, v in thresholds.items()))
+                st.markdown("- *Thresholds:* " + "; ".join(f"{k}: {v}" for k, v in thresholds.items()))
                 st.latex(formula)
                 st.markdown(f"- *Components:* {components}")
                 st.markdown("---")
@@ -2608,7 +2600,7 @@ def render_app() -> None:
                 "ranges, with the model index acting as a centering parameter. "
                 "This propagates uncertainty and produces plausible ranges."
             )
-            col_d1, col_d2, col_d3 = st.columns(3)
+            col_d1, _col_d2, _col_d3 = st.columns(3)
             with col_d1:
                 if st.button("Run distribution calibration", key="run_dist_cal"):
                     with st.spinner("Drawing from beta distributions..."):
@@ -2640,7 +2632,6 @@ def render_app() -> None:
             if st.button("Run budget impact", key="run_bi_btn"):
                 with st.spinner("Computing budget impact with diffusion..."):
                     bi_df = run_budget_impact(tuple(bi_scenarios), enrolled_population=int(bi_pop))
-                totals = bi_df[bi_df["year"] == "Total"][["scenario_id", "discounted_budget_nzd", "undiscounted_budget_nzd"]]
                 st.dataframe(bi_df[~bi_df["year"].astype(str).str.isdigit()].reset_index(drop=True), hide_index=True, width="stretch")
                 bi_fig = px.line(
                     bi_df[bi_df["year"] != "Total"].astype({"year": int}),

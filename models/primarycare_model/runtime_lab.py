@@ -9,13 +9,34 @@ from __future__ import annotations
 
 from collections.abc import Iterable
 from dataclasses import asdict, dataclass, replace
+from functools import lru_cache
 
 import numpy as np
 import pandas as pd
 
+from models.primarycare_model.empirical_calibration import (
+    build_claim_boundary_text,
+    run_empirical_calibration_pipeline,
+)
 from models.primarycare_model.validation.registry_loader import load_runtime_scenarios_registry
 
-CLAIM_LABEL = "live calculation; demonstrative model-generated index; not linked-data calibrated and not a patient-level forecast"
+
+@lru_cache(maxsize=1)
+def _empirical_summary():
+    try:
+        return run_empirical_calibration_pipeline()
+    except Exception:
+        return None
+
+
+def _claim_label() -> str:
+    summary = _empirical_summary()
+    if summary is None:
+        return "live calculation; public-data anchored model-generated index; not linked-data calibrated and not a patient-level forecast"
+    return build_claim_boundary_text(summary)
+
+
+CLAIM_LABEL = _claim_label()
 STOCHASTIC_LABEL = "cached stochastic demo; demonstrative uncertainty only; not an empirical probability"
 
 MAX_MONTE_CARLO_DRAWS = 500
@@ -824,7 +845,7 @@ def run_stress_test_scenarios(
 def run_interaction_scan(
     scenario_id: str = "F4",
 ) -> pd.DataFrame:
-    """Detect where equity × complexity interaction effects shift outcomes."""
+    """Detect where equity x complexity interaction effects shift outcomes."""
     scenario = get_runtime_scenario(scenario_id)
     levels = [("Low", 20.0), ("Mid", 50.0), ("High", 80.0)]
     rows: list[dict[str, object]] = []
@@ -973,7 +994,7 @@ def run_uncertainty_ribbon(
 def run_heatmap_matrix(
     scenario_id: str = "F4",
 ) -> pd.DataFrame:
-    """Build equity_level × complexity_level heatmap with viability."""
+    """Build equity_level x complexity_level heatmap with viability."""
     scenario = get_runtime_scenario(scenario_id)
     levels = [("Low", 20.0), ("Med", 50.0), ("High", 80.0)]
     rows: list[dict[str, object]] = []
@@ -1068,7 +1089,7 @@ SCORE_GUIDE_ENTRIES = [
 def build_score_guide_dataframe() -> pd.DataFrame:
     rows: list[dict[str, str]] = []
     for entry in SCORE_GUIDE_ENTRIES:
-        key, label, rng, meaning, direction, thresholds, formula, components = entry
+        _key, label, rng, meaning, direction, thresholds, formula, components = entry
         thresh = "; ".join(f"{k}: {v}" for k, v in thresholds.items())
         rows.append({"Index": label, "Range": rng, "Meaning": meaning,
                      "Higher is": direction, "Thresholds": thresh,
@@ -1222,13 +1243,13 @@ def run_budget_impact(
 
     Returns yearly budget impact with discounted totals.
     """
-    rng = np.random.default_rng(seed)
+    _ = seed
 
     # Bass diffusion: fraction adopting each year
     years = list(range(1, time_horizon_years + 1))
     adoption: list[float] = []
     cumulative = adopters_start
-    for t in years:
+    for _t in years:
         new_adopters = (diffusion_rate + imitation_rate * cumulative) * (1 - cumulative)
         cumulative += new_adopters
         adoption.append(min(1.0, cumulative))
@@ -1241,7 +1262,7 @@ def run_budget_impact(
         spend_per_cap = cal["calibrated_spend_per_capita_nzd"]
 
         # Budget each year: enrolled * adoption * spend_per_cap
-        for t, adopt in zip(years, adoption):
+        for t, adopt in zip(years, adoption, strict=True):
             undiscounted = enrolled_population * adopt * spend_per_cap
             discounted = undiscounted / ((1 + discount_rate) ** t)
             rows.append({
@@ -1349,8 +1370,8 @@ def run_outcome_clustering(
 ) -> pd.DataFrame:
     """Cluster outcomes using KMeans + logistic regression."""
     from sklearn.cluster import KMeans
-    from sklearn.preprocessing import StandardScaler
     from sklearn.linear_model import LogisticRegression
+    from sklearn.preprocessing import StandardScaler
     rng = np.random.default_rng(seed)
     scenarios = [get_runtime_scenario(sid) for sid in scenario_ids]
     rows = []
@@ -1374,7 +1395,8 @@ def run_outcome_clustering(
     summary = []
     for sid in scenario_ids:
         sub = df[df["scenario_id"] == sid]
-        if sub.empty: continue
+        if sub.empty:
+            continue
         mc_val = int(sub["cluster"].mode().iloc[0])
         top_idx = np.argsort(np.abs(km.cluster_centers_[mc_val]))[-3:][::-1]
         summary.append({"scenario_id": sid, "cluster": mc_val,
@@ -1387,13 +1409,14 @@ def run_composite_meta_analysis(
     n_points: int = 36, seed: int = 260526,
 ) -> pd.DataFrame:
     """Sweep all 12 parameters and compute all indices."""
+    # seed argument retained for API compatibility with previous stochastic variants.
     rng = np.random.default_rng(seed)
     base = get_runtime_scenario("F4")
     fields = ["activity_signal","capitation","place_accountability","scope_capacity",
               "urgent_ambulance","data_visibility","governance","equity_protection",
               "copayment_burden","budget_tightness","hospital_salience","complexity"]
     rows = []
-    for i in range(n_points):
+    for _i in range(n_points):
         pd_ = {}
         for f in fields:
             pd_[f] = clamp(float(getattr(base, f)) + (float(rng.random()) - 0.5) * 60.0)
