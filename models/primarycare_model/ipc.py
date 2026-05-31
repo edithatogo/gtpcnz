@@ -90,7 +90,8 @@ class ArrowStreamServer:
         try:
             c, addr = self._server.accept()
             self._client = c
-        except TimeoutError: pass
+        except TimeoutError:
+            pass  # Non-blocking accept loop; caller may retry later.
 
     def stream_batch(self, batch: pa.RecordBatch) -> int:
         if self._client is None: raise RuntimeError("No client.")
@@ -110,7 +111,8 @@ class ArrowStreamServer:
         for s in (self._client, self._server):
             if s is not None:
                 try: s.close()
-                except OSError: pass
+                except OSError:
+                    pass  # Socket may already be closed during shutdown.
         self._client = self._server = None
 
 
@@ -154,7 +156,8 @@ class ArrowStreamClient:
     def close(self) -> None:
         if self._socket is not None:
             try: self._socket.close()
-            except OSError: pass
+            except OSError:
+                pass  # Socket may already be closed by the peer.
             self._socket = None
 
 

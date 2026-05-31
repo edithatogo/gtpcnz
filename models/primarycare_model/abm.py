@@ -426,8 +426,6 @@ class ABMSimulation:
             gaming_events = 0
             low_value_events = 0
             public_cost = 0.0
-            ed_events = 0.0
-            admissions = 0.0
             ambulance_events = 0.0
             high_need_attempts = 0
             low_need_attempts = 0

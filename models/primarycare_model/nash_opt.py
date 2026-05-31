@@ -9,13 +9,6 @@ from dataclasses import dataclass, field
 import numpy as np
 import pandas as pd
 
-try:
-    import jax.numpy as jnp
-    from jax import grad, jit
-    _HAS_JAX = True
-except ImportError:
-    _HAS_JAX = False
-
 
 @dataclass
 class PayoffMatrix:

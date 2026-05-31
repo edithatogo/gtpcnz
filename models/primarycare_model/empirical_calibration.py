@@ -430,7 +430,7 @@ def build_claim_boundary_text(summary: LinkedCalibrationSummary | None = None) -
         )
     if not summary.supported_where_valid:
         return (
-            "This is a public-data anchored benchmark with linked-data inputs. "
+            "This is a public-data anchored benchmark with calibration inputs. "
             "Calibration checks are incomplete, so claims are only empirically supported where valid; "
             "it is not a patient-level forecast."
         )

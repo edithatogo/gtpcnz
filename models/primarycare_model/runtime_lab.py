@@ -1249,7 +1249,7 @@ def run_budget_impact(
     years = list(range(1, time_horizon_years + 1))
     adoption: list[float] = []
     cumulative = adopters_start
-    for _t in years:
+    for _ in years:
         new_adopters = (diffusion_rate + imitation_rate * cumulative) * (1 - cumulative)
         cumulative += new_adopters
         adoption.append(min(1.0, cumulative))
