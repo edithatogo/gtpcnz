@@ -48,6 +48,9 @@ jobs:
       - name: Tests with coverage threshold
         run: >
           pytest -q
+          models/tests/test_parameter_contracts.py
+          models/tests/test_contract_registries.py
+          models/tests/test_scenario_service.py
           --cov=models.primarycare_model.contracts
           --cov=models.primarycare_model.validation.pandera_schemas
           --cov=models.primarycare_model.scenario_service
