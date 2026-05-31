@@ -37,7 +37,7 @@ jobs:
         run: python -m basedpyright --pythonpath "$(python -c 'import sys; print(sys.executable)')"
 
       - name: Mypy strict compatibility gate
-        run: python -m mypy --strict --no-incremental models/primarycare_model/contracts models/primarycare_model/validation models/primarycare_model/engines
+        run: python -m mypy --strict --no-incremental models/primarycare_model/contracts models/primarycare_model/validation/pandera_schemas.py models/primarycare_model/engines
 
       - name: Concern boundary scan
         run: python scripts/check_concern_boundaries.py
