@@ -19,12 +19,32 @@ GENERIC_ERROR_TEXT = (
 )
 
 
+def collect_frame_text(page, timeout_seconds: int) -> tuple[str, ...]:
+    texts: list[str] = []
+    for frame in page.frames:
+        if frame == page.main_frame:
+            continue
+        try:
+            text = frame.locator("body").inner_text(timeout=timeout_seconds * 1000)
+        except Exception:
+            continue
+        if text:
+            texts.append(text)
+    return tuple(texts)
+
+
+def safe_print(text: str) -> None:
+    encoding = sys.stdout.encoding or "utf-8"
+    print(text.encode(encoding, errors="backslashreplace").decode(encoding))
+
+
 @dataclass(frozen=True)
 class SmokeResult:
     ok: bool
     url: str
     title: str
     body_text: str
+    frame_text: tuple[str, ...]
     console_events: tuple[str, ...]
     failed_requests: tuple[str, ...]
     missing_text: tuple[str, ...]
@@ -56,6 +76,7 @@ def run_remote_smoke(url: str, settle_seconds: int, timeout_seconds: int) -> Smo
             page.goto(url, wait_until="domcontentloaded", timeout=timeout_seconds * 1000)
             page.wait_for_timeout(settle_seconds * 1000)
             body_text = page.locator("body").inner_text(timeout=timeout_seconds * 1000)
+            frame_text = collect_frame_text(page, timeout_seconds)
             title = page.title()
             final_url = page.url
         except Exception as exc:
@@ -64,6 +85,7 @@ def run_remote_smoke(url: str, settle_seconds: int, timeout_seconds: int) -> Smo
                 url=url,
                 title="",
                 body_text="",
+                frame_text=(),
                 console_events=tuple(console_events),
                 failed_requests=tuple(failed_requests),
                 missing_text=DEFAULT_REQUIRED_TEXT,
@@ -73,13 +95,15 @@ def run_remote_smoke(url: str, settle_seconds: int, timeout_seconds: int) -> Smo
         finally:
             browser.close()
 
-    missing_text = tuple(text for text in DEFAULT_REQUIRED_TEXT if text not in body_text)
-    generic_errors = tuple(text for text in GENERIC_ERROR_TEXT if text in body_text)
+    searchable_text = "\n".join((body_text, *frame_text))
+    missing_text = tuple(text for text in DEFAULT_REQUIRED_TEXT if text not in searchable_text)
+    generic_errors = tuple(text for text in GENERIC_ERROR_TEXT if text in searchable_text)
     return SmokeResult(
         ok=not missing_text and not generic_errors,
         url=final_url,
         title=title,
         body_text=body_text,
+        frame_text=frame_text,
         console_events=tuple(console_events),
         failed_requests=tuple(failed_requests),
         missing_text=missing_text,
@@ -99,14 +123,18 @@ def print_result(result: SmokeResult, attempt: int) -> None:
     if result.console_events:
         print("console_events:")
         for event in result.console_events[:20]:
-            print(f"- {event}")
+            safe_print(f"- {event}")
     if result.failed_requests:
         print("failed_requests:")
         for request in result.failed_requests[:20]:
-            print(f"- {request}")
+            safe_print(f"- {request}")
     print("body_text_start")
-    print(result.body_text[:3000])
+    safe_print(result.body_text[:3000])
     print("body_text_end")
+    for index, text in enumerate(result.frame_text[:5], start=1):
+        print(f"frame_{index}_text_start")
+        safe_print(text[:3000])
+        print(f"frame_{index}_text_end")
 
 
 def main() -> int:
