@@ -52,7 +52,7 @@ Using a Bass diffusion curve (p=0.15, q=0.40) over 5 years: F4 discounted budget
 
 ## What is still needed
 
-To move from benchmark to calibrated forecast: linked patient-level data, OIA submissions, Māori governance review, stakeholder MCDA weighting, and workforce data. The VOI analysis identifies governance strength, equity protection and copayment burden as the highest-value parameters for data collection.
+To move from benchmark to a stronger public aggregate model: published utilisation, access, workforce, expenditure, hospital-pressure, equity and rurality data need stronger provenance, transformations and validation targets. The VOI analysis identifies governance strength, equity protection and copayment burden as the highest-value parameters for public-data improvement and transparent normative sensitivity testing.
 
 ## Recommendations
 
