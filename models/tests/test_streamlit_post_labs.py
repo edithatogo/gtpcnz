@@ -99,12 +99,13 @@ def test_methodology_evidence_tab_is_defined_in_source():
     text = _source_text()
 
     assert "render_methodology_and_evidence" in text
-    assert "📚 Methodology & evidence" in text
+    assert "Methodology and evidence" in text
     assert "CANONICAL_DEFS" in text
     assert "build_evidence_table" in text
     assert "download_button" in text
     assert "st.column_config.LinkColumn" in text
-    assert "Generate animated sweep" in text
+    assert "Animated parameter sweep" in text
+    assert "animation_frame" in text
     assert "Run outcome clustering" in text
     assert "Run composite meta-analysis" in text
     assert "_render_substack_badges" in text

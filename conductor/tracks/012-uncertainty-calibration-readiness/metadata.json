@@ -1,9 +1,11 @@
 {
   "id": "012-uncertainty-calibration-readiness",
   "version": "0.7.0",
-  "status": "implemented",
+  "status": "complete-publication-phase",
   "title": "Uncertainty analysis and calibration readiness",
   "created": "2026-05-07",
+  "updated": "2026-05-31",
   "owner": "Dylan A Mordaunt",
-  "purpose": "Stress-test NZ game models, identify key sensitivity drivers, and define the empirical calibration pathway."
+  "purpose": "Stress-test NZ game models, identify key sensitivity drivers, and define the empirical calibration pathway.",
+  "progress": "Completed in the 0.7.0 public-data benchmark pass: uncertainty sampling and sensitivity outputs are reproducible, scenario comparisons are bounded as indices, and the calibration protocol was written through the explicit data roadmap and minimum validation tests."
 }

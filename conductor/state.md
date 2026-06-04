@@ -1,49 +1,92 @@
 # Conductor State
 
-GTPCNZ is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast.
+GTPCNZ is a public-data anchored benchmark and educational explainer. It is not a patient-level forecast.
+It is not linked-data calibrated in the public runtime path. Do not claim precise fiscal savings,
+ED reductions, hospital-demand reductions, workforce effects, implementation impacts, or causal effects
+unless the relevant public-data calibration and validation gates pass.
 
 Current active tracks:
 
-- None (all tracks complete)
+- `050-public-only-registry-purification`: public-only registry purification.
+- `051-parameter-ontology-and-distributions`: parameter ontology and uncertainty distributions.
+- `052-public-source-ingestion-and-snapshots`: public-source ingestion and reproducible snapshots.
+- `053-public-aggregate-calibration-engine`: public aggregate empirical calibration engine.
+- `054-structural-uncertainty-ensemble`: structural uncertainty and DAG ensemble.
+- `055-full-value-of-information-engine`: full VOI engine.
+- `056-streamlit-policy-cockpit-and-visual-grammar`: Streamlit policy cockpit and visual grammar.
+- `057-quarto-scientific-report-rebuild`: Quarto scientific report rebuild.
+- `058-australia-scope-decision`: Australia scope decision.
+- `059-release-engineering-and-model-cards`: release engineering and model cards.
+- `060-self-learning-public-evidence-monitor`: review-only public evidence monitor.
+- `061-visual-regression-accessibility-and-browser-tests`: visual, accessibility, and browser tests.
+- `062-dependency-locking-and-reproducible-runtime`: dependency locking and reproducible runtime.
+- `063-release-readiness-parallel-closeout`: post-050-062 diff audit, environment blocker classification, release gate rerun, commit packaging, and public-source readiness closeout.
+
+Parallel execution controls:
+
+- Cline/deepseek execution matrix: `conductor/cline-parallel-execution.md`.
+- Machine-readable dependency and file-ownership matrix: `conductor/parallel-execution-matrix.json`.
+- Subagent coordinator: `conductor/agents/cline-subagent-coordinator.md`.
+- Subagent prompt template: `conductor/prompts/deepseek-v4-flash-subagent-template.md`.
+- Track 063 Cline prompts: `conductor/tracks/063-release-readiness-parallel-closeout/agent-prompts.md`.
+- Validation gate: `python scripts/check_conductor_parallel_tracks.py`.
 
 Recently completed tracks:
 
-- `042-simulation-engine-evolution_20260526`: Rust-core DES, VOI, MARS, diffusion, ABM/GNN/WASM/privacy/formal-check follow-through, and final integration gates completed.
-- `043-concern-extraction-strict-validation_20260526`: contracts, registries, validation boundaries and Streamlit UI bindings extracted into typed layers.
-- `044-game-theory-formula-validation_20260527`: nonlinear payoff logic, best-response curves, gaming-risk frontier and regression tests.
-- `045-inputs-calibration-provenance_20260527`: provenance registry, OIA component map, data-freshness gate and calibration-boundary metadata.
-- `046-public-website-visual-contract_20260527`: public wording contract, visual gallery contract and public mirror sync.
-- `047-streamlit-deployment-experience_20260527`: app structure, tabs, controls, smoke tests, deployment entrypoint and accessibility/performance polish.
-- `048-equilibrium-solver-exploration_20260528`: decided to keep heuristic Nash and not add an analytical solver lane. Documented in `docs/decisions/solver-posture-v1.8.5.md`.
-- `049-bleeding-edge-analytical-enhancements_20260528`: three analytical waves completed, including sensitivity, subgroup, uncertainty, stress, interaction, VOI, diffusion, clustering, composite, evidence and UI wiring work.
-- `050-strict-quality-toolchain_20260528`: strict type/lint/test/security/dependency/profile toolchain and CI controls completed.
-- `051-dashboard-ui-methodology-completion_20260530`: Methodology & evidence tab, linked definitions, evidence exports, lazy analytical views and focused tests completed.
-- `052-dashboard-lab-enhancements-deep-dive_20260530`: all seven lab explainers, combined analyses, clustering, row highlighting, linked Substack cross-references and focused tests completed.
-
-Completed subagent workstreams:
-
-| Workstream | Outputs | Status |
-|---|---|---|
-| A - Contracts | `contracts/*` (parameters, inputs, scenarios, results, engine protocol), schema tests | Done |
-| B - Registries | `registries/parameters.v1.yaml` (24 params), `registries/inputs.v1.yaml` (7 datasets), loader tests | Done |
-| C - Pandera/Arrow | `validation/arrow_schemas.py`, `validation/runtime_checks.py`, schema alignment | Done |
-| D - Engines | `engines/*` (7 typed adapters: ABM, SD, JAX-MC, sensitivity, diffusion, MPC, Nash opt) | Done |
-| E - UI/Visuals | Live validation badges, calculation panel, stochastic replay, result-manifest badges | Done |
-| F - CI/Audit | basedpyright strict config, mypy strict compatibility gate, Ruff, pip-audit, CodeQL workflow, concern-boundary scanner (5 gates), check_no_patient_data.py | Done |
-| G - Tests | 134 passing tests with 91.68% model-package coverage, Hypothesis property tests, mutation-test workflow | Done |
+- Tracks 042-052 from the earlier v1.8.x hardening/dashboard programme remain completed as recorded in the historical registry.
 
 Current public gates:
 
-- `python scripts/check_repo_health.py`
+- `python scripts/check_conductor_parallel_tracks.py`
+- `python scripts/check_public_only_boundary.py`
+- `python scripts/check_parameter_traceability.py`
+- `python scripts/check_public_source_snapshot.py`
+- `python scripts/check_version_consistency.py`
+- `python scripts/check_dependency_lock.py`
 - `python scripts/check_concern_boundaries.py`
-- `python scripts/check_no_patient_data.py`
-- `python -m pytest -q --cov=models.primarycare_model --cov-report=term-missing --cov-fail-under=90`
-- `python -m basedpyright --pythonpath <current-python>`
-- `python -m mypy models/primarycare_model/contracts models/primarycare_model/validation/pandera_schemas.py`
-- `python -m ruff check .`
-- `python -m pip_audit -r requirements.txt`
+- `python scripts/check_repo_health.py`
+- `python scripts/run_public_aggregate_calibration.py --check-only`
+- `python scripts/run_voi.py --check-only`
+- `python -m pytest -q`
 - `quarto render --to html`
+- `python -m py_compile streamlit_app.py models/primarycare_model/app.py`
+- `python scripts/run_visual_regression.py --check-only`
+- `python scripts/run_accessibility_audit.py --check-only`
+- `python scripts/generate_release_model_card.py --check-only`
+- `python scripts/generate_release_manifest.py --check-only`
 
-Claim boundary:
 
-The repo may describe public-data anchored model-generated indices, deterministic calculations and seeded stochastic demonstrations. It must not claim patient-level forecast accuracy, linked-data calibration, realised fiscal savings, realised hospital-demand reductions, or implementation effects without a documented calibration upgrade.
+## Execution summary (2026-06-03 Cline DeepSeek v4 Flash coordinator run)
+
+### Waves completed
+
+| Wave | Tracks | Status |
+|------|--------|--------|
+| 0 (startup gates) | coordinator gates | PASSED - all 4 startup gates pass |
+| 1 | 050, 051, 052, 058, 062 | PASSED - all track gates pass |
+| 2 | 053, 054, 055, 060 | PASSED - all track gates pass |
+| 3 | 056, 057, 061 | PASSED - all track gates pass |
+| 4 | 059 | PASSED - all 4 release gates pass |
+
+### Closeout gates
+
+All 13 closeout gates pass:
+
+1. `python scripts/check_conductor_parallel_tracks.py` -> PASSED
+2. `python scripts/check_public_only_boundary.py` -> PASSED
+3. `python scripts/check_parameter_traceability.py` -> PASSED
+4. `python scripts/check_public_source_snapshot.py` -> PASSED
+5. `python scripts/run_public_aggregate_calibration.py --check-only` -> PASSED (calibration_readiness_only)
+6. `python scripts/run_voi.py --check-only` -> PASSED (decision-uncertainty analysis)
+7. `python scripts/run_accessibility_audit.py --check-only` -> PASSED
+8. `python scripts/generate_release_manifest.py --check-only` -> PASSED (v1.8.1)
+9. `python scripts/sync_public_mirror.py --check` -> PASSED (0 drift items)
+10. `python scripts/check_version_consistency.py` -> PASSED (v1.8.1)
+11. `python scripts/check_dependency_lock.py` -> PASSED
+12. `python scripts/check_concern_boundaries.py` -> PASSED (5/5)
+13. Full pytest suite (15 tests) -> ALL PASSED
+
+### Claim-boundary posture
+
+All tracks maintain public_benchmark claim level. Calibration is calibration_readiness_only.
+No precise fiscal savings, ED reductions, hospital-demand reductions, workforce effects, implementation impacts, or causal effects are claimed.

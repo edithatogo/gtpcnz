@@ -16,13 +16,23 @@ COPY_MAP = [
     (ROOT / "models" / "primarycare_model" / "scenario_service.py", MIRROR / "models" / "primarycare_model" / "scenario_service.py"),
     (ROOT / "models" / "primarycare_model" / "__init__.py", MIRROR / "models" / "primarycare_model" / "__init__.py"),
 ]
-for sub in ["contracts", "validation", "registries"]:
+for sub in [
+    "calibration",
+    "contracts",
+    "data",
+    "evidence",
+    "registries",
+    "ui",
+    "uncertainty",
+    "validation",
+    "voi",
+]:
     src_dir = ROOT / "models" / "primarycare_model" / sub
     dst_dir = MIRROR / "models" / "primarycare_model" / sub
     if src_dir.exists():
-        for pattern in ["*.py", "*.yaml"]:
+        for pattern in ["**/*.py", "**/*.yaml"]:
             for f in src_dir.glob(pattern):
-                COPY_MAP.append((f, dst_dir / f.name))
+                COPY_MAP.append((f, dst_dir / f.relative_to(src_dir)))
 def main() -> int:
     check_only = "--check" in sys.argv
     failures = 0

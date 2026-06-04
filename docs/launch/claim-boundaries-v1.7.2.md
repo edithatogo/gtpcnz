@@ -12,14 +12,16 @@
 
 ## Required caveats
 
-- This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
+- This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast.
+- Where linked-data checks pass, outputs may be described as empirically supported where valid; otherwise claims remain benchmark-level only.
+- It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts without a documented calibration upgrade.
 - Current reforms are the comparator, not a straw man.
 - Uncapped means uncapped at the global activity-envelope level, not uncontrolled billing.
 - Place-based accountability is core to the proposal.
 - Equity protections are core to the proposal.
 - Accident Compensation Corporation is an analogy for rules-based treatment payments, not a wholesale template.
 - Hospital growth has multiple causes; upstream access is a candidate driver, not the sole driver.
-- Model outputs are public-data anchored benchmarks unless explicitly labelled as linked-data calibrated patient-level forecasts.
+- Model outputs are public-data anchored benchmarks unless explicitly labelled as empirically supported where valid.
 
 ## Game-theory formula boundary
 
@@ -125,7 +127,7 @@ class UncertaintySummary(StrictContract):
     draws: int = 0
 ```
 
-This is always **demonstrative** — the distribution shape is a public-data anchored benchmark, not a calibrated forecast.
+This is an index-only distribution surface by default, with core dimensions upgraded to **empirically supported where valid** when linked-data calibration checks pass.
 
 ## Architecture layers: contract / registry / validation / engine
 
@@ -211,14 +213,14 @@ This gate is the outer perimeter of the privacy classification system defined in
 
 ### 3. Mypy strict gate (`mypy --strict`)
 
-A static type-checking gate runs `mypy --strict` (or Pyright) on the contract, validation, and engine layers once the type surface stabilises. The gate enforces:
+A static type-checking gate runs `mypy --strict` (or Pyright) on the contract, validation, and engine layers. The gate enforces:
 
 - All function signatures are typed.
 - No implicit `Any` in public interfaces.
 - All Pydantic model usage respects frozen/immutable constraints.
 - Protocol implementations match the `EngineProtocol` signature.
 
-Currently the gate is **prepared** (contract layer typed, Protocol defined) but the full `--strict` enforcement across all engine modules is gated behind Track 043 completion. The `ruff` lint gate (import hygiene, code style) runs unconditionally.
+The gate is enforced in CI across contracts, validation, and engines under strict-mode checks. The `ruff` lint gate (import hygiene, code style) runs unconditionally.
 
 ### Gate pipeline order
 
@@ -227,7 +229,7 @@ flowchart TD
     Pytest["pytest model tests"]
     Boundary["check_concern_boundaries.py"]
     NoPatient["check_no_patient_data.py"]
-    Mypy["mypy --strict (prepared)"]
+    Mypy["mypy --strict"]
     Ruff["ruff check"]
     Deploy["Pages/Streamlit deployment"]
 
@@ -238,4 +240,4 @@ flowchart TD
     Ruff --> Deploy
 ```
 
-**Note**: The mypy gate is prepared but not yet enforced at `--strict` level across all engines. The concern-boundary scanner and no-patient-data gates are enforced and blocking. Ruff linting runs unconditionally.
+**Note**: The mypy gate now runs across contract, validation, and engine layers in CI under strict mode. The concern-boundary scanner and no-patient-data gates are enforced and blocking. Ruff linting runs unconditionally.

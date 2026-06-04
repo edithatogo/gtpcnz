@@ -14,15 +14,19 @@ All column names and types are aligned with:
 
 from __future__ import annotations
 
+from typing import Any
+
 try:
     import pyarrow as pa
 except ImportError:
-    pa = None
+    pa = None  # type: ignore[assignment]
+
+PyArrowSchema = Any
 
 
 # -- Registry frames --------------------------------------------------------
 
-def parameter_registry_schema():
+def parameter_registry_schema() -> PyArrowSchema | None:
     """PyArrow schema for a parameter-definition registry table."""
     if pa is None:
         return None
@@ -42,7 +46,7 @@ def parameter_registry_schema():
         pa.field("tags", pa.list_(pa.string()), nullable=True),
     ])
 
-def educational_lever_registry_schema():
+def educational_lever_registry_schema() -> PyArrowSchema | None:
     """PyArrow schema for an educational-lever registry table."""
     if pa is None:
         return None
@@ -61,7 +65,7 @@ def educational_lever_registry_schema():
         pa.field("claim_boundary", pa.string(), nullable=False),
     ])
 
-def scenario_registry_schema():
+def scenario_registry_schema() -> PyArrowSchema | None:
     """PyArrow schema for a runtime-scenario registry table."""
     if pa is None:
         return None
@@ -86,7 +90,7 @@ def scenario_registry_schema():
         pa.field("claim_boundary", pa.string(), nullable=False),
     ])
 
-def input_dataset_registry_schema():
+def input_dataset_registry_schema() -> PyArrowSchema | None:
     """PyArrow schema for an input-dataset registry table."""
     if pa is None:
         return None
@@ -105,7 +109,7 @@ def input_dataset_registry_schema():
         pa.field("claim_boundary", pa.string(), nullable=False),
     ])
 
-def input_table_schema():
+def input_table_schema() -> PyArrowSchema | None:
     """PyArrow schema for a generic input-data table."""
     if pa is None:
         return None
@@ -114,7 +118,7 @@ def input_table_schema():
         pa.field("row_index", pa.int64(), nullable=False),
     ])# -- Calculation output frames ----------------------------------------------
 
-def reference_result_schema():
+def reference_result_schema() -> PyArrowSchema | None:
     """PyArrow schema for the public reference-scenario result frame."""
     if pa is None:
         return None
@@ -144,7 +148,7 @@ def reference_result_schema():
         pa.field("claim_boundary", pa.string(), nullable=True),
     ])
 
-def monthly_metrics_schema():
+def monthly_metrics_schema() -> PyArrowSchema | None:
     """PyArrow schema for the stock-flow monthly metrics frame."""
     if pa is None:
         return None
@@ -161,7 +165,7 @@ def monthly_metrics_schema():
         pa.field("calculation_status", pa.string(), nullable=True),
     ])
 
-def simulation_trace_schema():
+def simulation_trace_schema() -> PyArrowSchema | None:
     """PyArrow schema for a per-scenario calculation trace."""
     if pa is None:
         return None
@@ -171,7 +175,7 @@ def simulation_trace_schema():
         pa.field("index_value", pa.float64(), nullable=False),
     ])
 
-def stochastic_draw_schema():
+def stochastic_draw_schema() -> PyArrowSchema | None:
     """PyArrow schema for the full Monte Carlo draw frame."""
     if pa is None:
         return None
@@ -194,7 +198,7 @@ def stochastic_draw_schema():
 
 # -- Uncertainty / summary frames -------------------------------------------
 
-def uncertainty_summary_schema():
+def uncertainty_summary_schema() -> PyArrowSchema | None:
     """PyArrow schema for the per-metric uncertainty summary."""
     if pa is None:
         return None
@@ -208,7 +212,7 @@ def uncertainty_summary_schema():
         pa.field("draws", pa.int64(), nullable=False),
     ])
 
-def agent_frame_schema():
+def agent_frame_schema() -> PyArrowSchema | None:
     """PyArrow schema for the agent-lens patient-level frame."""
     if pa is None:
         return None
@@ -222,7 +226,7 @@ def agent_frame_schema():
         pa.field("unmet_attempts", pa.int64(), nullable=False),
     ])
 
-def agent_summary_schema():
+def agent_summary_schema() -> PyArrowSchema | None:
     """PyArrow schema for the agent-lens summary frame."""
     if pa is None:
         return None
@@ -234,7 +238,7 @@ def agent_summary_schema():
 
 # -- Public export ----------------------------------------------------------
 
-def public_export_schema():
+def public_export_schema() -> PyArrowSchema | None:
     """PyArrow schema for the public-facing export table."""
     if pa is None:
         return None
@@ -261,7 +265,7 @@ def public_export_schema():
 
 # -- Compatibility helper ---------------------------------------------------
 
-def as_pandas_dtypes(schema):
+def as_pandas_dtypes(schema: PyArrowSchema | None) -> dict[str, str]:
     """Convert a PyArrow schema to a pandas dtype dictionary."""
     if pa is None or schema is None:
         return {}
@@ -286,7 +290,7 @@ def as_pandas_dtypes(schema):
 
 # -- Schema lookup ----------------------------------------------------------
 
-_SCHEMA_REGISTRY = {
+_SCHEMA_REGISTRY: dict[str, PyArrowSchema | None] = {
     "parameter_registry": parameter_registry_schema(),
     "educational_lever_registry": educational_lever_registry_schema(),
     "scenario_registry": scenario_registry_schema(),
@@ -302,10 +306,10 @@ _SCHEMA_REGISTRY = {
     "public_export": public_export_schema(),
 }
 
-def get_schema(name):
+def get_schema(name: str) -> PyArrowSchema | None:
     """Retrieve a named PyArrow schema, or None if unavailable."""
     return _SCHEMA_REGISTRY.get(name)
 
-def registered_schema_names():
+def registered_schema_names() -> list[str]:
     """Return sorted list of available schema names."""
     return sorted(_SCHEMA_REGISTRY)

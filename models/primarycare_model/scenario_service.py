@@ -74,12 +74,22 @@ SCENARIO_INTERPRETATION = {
     "F9": "Place-based commissioning only",
 }
 
-CLAIM_BOUNDARY_TEXT = (
+_STATIC_CLAIM_BOUNDARY_TEXT = (
     "This is a public-data anchored benchmark and educational explainer. "
     "It is not linked-data calibrated and not a patient-level forecast. "
     "It should not be used to claim "
     "precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts."
 )
+
+
+def _claim_boundary_text() -> str:
+    # The public Streamlit path must preserve the public-data benchmark boundary.
+    # Future/private calibration helpers can exist, but they must not upgrade
+    # public claims automatically when local non-public artefacts are present.
+    return _STATIC_CLAIM_BOUNDARY_TEXT
+
+
+CLAIM_BOUNDARY_TEXT = _claim_boundary_text()
 
 
 @dataclass(frozen=True)
@@ -141,14 +151,21 @@ def _load_educational_lever_definitions() -> tuple[EducationalLeverDefinition, .
 
 
 EDUCATIONAL_LEVER_DEFINITIONS: tuple[EducationalLeverDefinition, ...] = _load_educational_lever_definitions()
+EDUCATIONAL_LEVER_DEFINITION_MAP = {definition.field_name: definition for definition in EDUCATIONAL_LEVER_DEFINITIONS}
+
+
+def _normalized_slider_value(settings: EducationalSettings, field_name: str) -> float:
+    """Normalize a slider value using its declared bounds."""
+    definition = EDUCATIONAL_LEVER_DEFINITION_MAP[field_name]
+    raw_value = getattr(settings, field_name)
+    span = definition.upper_bound - definition.lower_bound
+    if span <= 0:
+        return 0.0
+    return (raw_value - definition.lower_bound) / span
+
+
 EDUCATIONAL_LEVER_LABELS_FOR_CONTRACT_TESTS = (
-    "Payment for extra primary care activity",
-    "Stable population-based base funding",
-    "Whole-population local accountability",
-    "Claim rules and audit strength",
-    "Equity and co-payment protection",
-    "Flexible workforce scope",
-    "Local in-person care capacity",
+    *(definition.public_label for definition in EDUCATIONAL_LEVER_DEFINITIONS),
 )
 
 
@@ -163,7 +180,7 @@ def load_scenario_results(path: str | Path) -> pd.DataFrame:
         raise ValueError("Scenario results failed validation: " + "; ".join(issues))
     out = df.copy()
     out["scenario_role"] = out["scenario_id"].map(SCENARIO_INTERPRETATION).fillna("Other")
-    out["claim_boundary"] = CLAIM_BOUNDARY_TEXT
+    out["claim_boundary"] = _claim_boundary_text()
     return out
 
 
@@ -189,13 +206,13 @@ def score_educational_settings(settings: EducationalSettings) -> dict[str, float
     full parameterised model. It rewards supply-enhancing levers but penalises
     weak audit/place/equity controls.
     """
-    benefit = settings.scheduled_benefit_level / 100
-    capitation = settings.capitation_support / 100
-    place = settings.place_accountability / 100
-    audit = settings.audit_strength / 100
-    equity = settings.equity_protection / 100
-    scope = settings.scope_flexibility / 100
-    local = settings.local_in_person_support / 100
+    benefit = _normalized_slider_value(settings, "scheduled_benefit_level")
+    capitation = _normalized_slider_value(settings, "capitation_support")
+    place = _normalized_slider_value(settings, "place_accountability")
+    audit = _normalized_slider_value(settings, "audit_strength")
+    equity = _normalized_slider_value(settings, "equity_protection")
+    scope = _normalized_slider_value(settings, "scope_flexibility")
+    local = _normalized_slider_value(settings, "local_in_person_support")
 
     supply = 100 * _strategic_response(
         0.38 * benefit + 0.22 * scope + 0.16 * local + 0.14 * place + 0.10 * capitation,
@@ -263,17 +280,17 @@ def load_first_existing(paths: Iterable[str | Path]) -> pd.DataFrame:
 
 
 def build_calibration_readiness_table() -> pd.DataFrame:
-    """Return a static table describing data needed for real calibration."""
-    rows = [
-        ("Primary care appointments", "NPCD booking and encounter fields", "Needed", "Access and waiting-time calibration"),
-        ("Capitation and payment rules", "Rate tables, pass-through and programme funding", "Needed", "Practice revenue and marginal-supply calibration"),
-        ("Co-payments", "Practice fee schedules and patient out-of-pocket costs", "Needed", "Demand/equity response"),
-        ("Ambulance pathways", "Conveyance, hear-and-treat, treat-and-refer, handover delay", "Needed", "Hospital-deflection calibration"),
-        ("ACC treatment payments", "Cost of Treatment Regulations, contracts, claims", "Needed", "Cross-funder and supply-stabilisation effects"),
-        ("ED and inpatient data", "NNPAC/NMDS or equivalent linked hospital datasets", "Needed", "Downstream hospital-pressure validation"),
-        ("Workforce and scope", "Provider type, FTE, location, prescribing/scope rules", "Needed", "Scope-enabled supply calibration"),
-        ("Stakeholder MCDA", "Structured game validation and weighting", "Needed", "Decision support and face validity"),
-    ]
+    """Return a public-runtime readiness table without reading non-public inputs."""
+    rows: tuple[tuple[str, str, str, str], ...] = (
+        ("Primary care appointments", "Published aggregate utilisation/access series", "Needed", "Access and waiting-time calibration"),
+        ("Capitation and payment rules", "Published rate tables and programme funding summaries", "Needed", "Practice revenue and marginal-supply calibration"),
+        ("Co-payments", "Published fee and out-of-pocket cost summaries", "Needed", "Demand/equity response"),
+        ("Ambulance pathways", "Published conveyance and alternative pathway aggregates", "Needed", "Hospital-deflection calibration"),
+        ("ACC treatment payments", "Published Cost of Treatment Regulations, contracts, and aggregate claims", "Needed", "Cross-funder and supply-stabilisation effects"),
+        ("ED and inpatient pressure", "Published hospital/ED aggregate series", "Needed", "Downstream hospital-pressure validation"),
+        ("Workforce and scope", "Published workforce, FTE, location, prescribing, and scope summaries", "Needed", "Scope-enabled supply calibration"),
+        ("Normative decision weights", "Editable public model assumptions only", "Needed", "Decision support; not stakeholder preferences"),
+    )
     return pd.DataFrame(rows, columns=["domain", "input", "status", "why_it_matters"])
 
 

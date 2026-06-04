@@ -6,6 +6,8 @@ This is a public-data anchored benchmark and educational explainer. It is not li
 
 This project includes a reproducible reporting layer and an interactive dashboard designed to make the primary care funding model accessible to both policy experts and non-specialist readers.
 
+The GitHub Pages site now also has a canonical site map and release manifest at `docs/public-site/site-map-and-release-manifest-v1.8.4.md` so the public bundle has one explicit index.
+
 ## 1. Quarto Report: `reports/primary_care_architecture.qmd`
 
 The Quarto report is a reproducible document that combines technical thesis writing with live Python data analysis.

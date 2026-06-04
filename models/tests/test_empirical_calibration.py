@@ -125,4 +125,6 @@ def test_build_claim_boundary_text_supports_boundary_states():
     assert "not linked-data calibrated" in unavailable
     assert "only empirically supported where valid" in partial
     assert "empirically supported benchmark where valid" in supported
+    assert "Published aggregate calibration checks" in supported
+    assert "Linked-data calibration" not in supported
     assert "not a patient-level forecast" in supported

@@ -36,7 +36,9 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Render Quarto website
-        run: quarto render --to html
+        run: python scripts/build_public_source_snapshot.py
+          python scripts/generate_release_manifest.py
+          quarto render --to html
 
       - name: Verify site artifact
         run: test -f _site/index.html

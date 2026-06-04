@@ -10,7 +10,7 @@ The report/docs/public-website layer is unusually complete for a public explaine
 - launch boundary notes
 - mirrored public content under `public/gtpcnz`
 
-The main strength is consistency: the same caveat language and public-data anchor appears across the homepage, report, deployment docs, and dashboard contract. The main weakness is fragmentation. There are many companion docs, but no single canonical “what is the public site now?” index beyond the broader repo structure.
+The main strength is consistency: the same caveat language and public-data anchor appears across the homepage, report, deployment docs, and dashboard contract. The main weakness was fragmentation, but the repo now has a single canonical “what is the public site now?” index in the site map and release manifest.
 
 ## Evidence
 
@@ -25,7 +25,7 @@ The main strength is consistency: the same caveat language and public-data ancho
 
 ## Completion Assessment
 
-Substantially complete as a public reading system. Not fully complete as a single, tightly governed release artifact.
+Substantially complete as a public reading system and now close to a single, tightly governed release artifact.
 
 What is finished:
 - public report exists
@@ -34,18 +34,16 @@ What is finished:
 - public caveats are aligned
 
 What is incomplete:
-- the public mirror duplicates content without a clear canonicalization layer
-- there is no single generated release manifest for the whole site bundle
+- the public mirror still duplicates deployment-critical root files and needs routine drift checks
 - the docs are informative, but not yet machine-enforced end to end
 - some contracts still read like a project handbook rather than a release gate
 
 ## Bleeding-edge Recommendations
 
-1. Generate a single release manifest that enumerates every public surface and its status.
-2. Add a site map page that is generated from the repo metadata instead of maintained manually.
-3. Add a public “what changed in this release” page that summarizes all document deltas.
-4. Turn the audit and contract docs into machine-checked gates rather than advisory prose.
-5. Collapse the mirrored public bundle into a reproducible publish step with one source of truth.
+1. Keep the release manifest current as the public surface changes.
+2. Add a public “what changed in this release” page that summarizes all document deltas.
+3. Turn the audit and contract docs into machine-checked gates rather than advisory prose.
+4. Collapse the mirrored public bundle into a reproducible publish step with one source of truth.
 
 ## Risks
 

@@ -436,7 +436,7 @@ def build_claim_boundary_text(summary: LinkedCalibrationSummary | None = None) -
         )
     return (
         "This is an empirically supported benchmark where valid. "
-        "Linked-data calibration and validation checks have cleared the core outcomes and core subgroups. "
+        "Published aggregate calibration checks have cleared the documented public validation gates where available. "
         "It is still an indexed benchmark and is not a patient-level forecast."
     )
 

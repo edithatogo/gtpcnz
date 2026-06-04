@@ -48,6 +48,7 @@ EXCLUDE_DIRS: set[str] = {
 EXCLUDE_FILES: set[str] = {
     "scripts/check_concern_boundaries.py",
     "scripts/check_no_patient_data.py",
+    "scripts/check_public_only_boundary.py",
     "scripts/check_repo_health.py",
 }
 
@@ -87,6 +88,7 @@ _ALLOWED_LINE_PATTERNS: list[re.Pattern] = [
     re.compile(r"patient.data.anchored", re.IGNORECASE),
     re.compile(r"not a patient.level.forecast", re.IGNORECASE),
     re.compile(r"not linked.data.calibrated", re.IGNORECASE),
+    re.compile(r"linked-data inputs", re.IGNORECASE),
     re.compile(r"linked.data.*(calibration|calibrated|validation|needed|required|not available)", re.IGNORECASE),
     re.compile(r"(calibration|calibrated|validation|needed|required).*linked.data", re.IGNORECASE),
     re.compile(r"model-generated index", re.IGNORECASE),

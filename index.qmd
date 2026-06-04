@@ -17,6 +17,7 @@ This is a public-data anchored benchmark and educational explainer. It is not li
 - [Open the dashboard](https://gtpcnz.streamlit.app/)
 - [Read the dashboard guide](docs/REPORTS-AND-DASHBOARD.md)
 - [Review the model card and tracker](docs/calibration/model-card-v1.7.2.md)
+- [Open the site map and release manifest](docs/public-site/site-map-and-release-manifest-v1.8.4.md)
 
 <a href="reports/primary_care_architecture.qmd">Read the public report</a>
 
@@ -30,6 +31,7 @@ This is a public-data anchored benchmark and educational explainer. It is not li
 | Streamlit dashboard | Educational explainer | Dynamic educational explainer and live model lab |
 | Model card and tracker | Evidence readiness | Evidence tracker and claim-boundary controls |
 | Calibration readiness page | Calibration readiness | Data gaps and validation pathway |
+| Site map and release manifest | Canonical index | Public site inventory and release rules |
 
 ## First six launch posts
 
@@ -47,6 +49,7 @@ This is a public-data anchored benchmark and educational explainer. It is not li
 - Scenario rank chart
 - Evidence tracker
 - Calibration readiness
+- Site map and release manifest
 - First six launch posts
 - Game-theory extension
 - Later game-theory modules

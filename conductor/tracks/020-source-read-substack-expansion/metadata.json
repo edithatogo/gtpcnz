@@ -1,8 +1,9 @@
 {
   "id": "020-source-read-substack-expansion",
   "title": "Source-read audit and expanded Substack series",
-  "status": "implemented",
+  "status": "complete-publication-phase",
   "version": "v1.4.0",
   "created": "2026-05-09",
-  "updated": "2026-05-09"
+  "updated": "2026-05-31",
+  "progress": "Completed the source-read audit and Substack v1.4.0 publication expansion: source status segregation, citation incorporation into thesis and series, and publication pack updates were delivered."
 }

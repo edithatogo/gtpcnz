@@ -3,8 +3,11 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 .mypy_cache/
+.mypy_cache_ci/
+tmp_test_inputs*/
 .hypothesis/
 .coverage
+.coverage_ci_tmp.*
 coverage.xml
 htmlcov/
 mutmut-cache/
@@ -24,6 +27,7 @@ docs/figures/public-proof/browser-audit-*/
 /data/raw/
 /data/secure/
 /models/output/
+/output/
 
 /qa/
 

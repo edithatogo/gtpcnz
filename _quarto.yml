@@ -17,6 +17,7 @@ project:
     - docs/launch/claim-boundaries-v1.7.2.md
     - docs/public-site/public-wording-contract-v1.8.4.md
     - docs/public-site/visual-gallery-contract-v1.8.4.md
+    - docs/public-site/site-map-and-release-manifest-v1.8.4.md
     - docs/public-site/what-is-calculated-now.md
     - docs/design/repo-github-streamlit-design-v1.8.3.md
     - docs/design/concern-extraction-architecture-v1.8.3.md
@@ -44,6 +45,8 @@ website:
         href: docs/launch/claim-boundaries-v1.7.2.md
       - text: "Evidence tracker"
         href: docs/public-site/evidence-tracker-public-v1.8.1.md
+      - text: "Site map"
+        href: docs/public-site/site-map-and-release-manifest-v1.8.4.md
       - text: "Calibration readiness"
         href: docs/public-site/calibration-readiness-page-v1.8.1.md
       - text: "Dashboard contract"

@@ -1,6 +1,6 @@
 [project]
 name = "gtpcnz"
-version = "1.7.2"
+version = "1.8.1"
 description = "Quarto and Streamlit package for primary care funding architecture modelling"
 requires-python = ">=3.11"
 dependencies = [

@@ -1276,18 +1276,21 @@ def run_budget_impact(
 
     df = pd.DataFrame(rows)
 
-    # Add total row per scenario
+    # Add total row per scenario without concatenating all-NA helper frames.
+    total_rows: list[dict[str, object]] = []
     for sid in scenario_ids:
         subset = df[df["scenario_id"] == sid]
         total_discounted = subset["discounted_budget_nzd"].sum()
         total_undiscounted = subset["undiscounted_budget_nzd"].sum()
-        df = pd.concat([df, pd.DataFrame([{
+        total_rows.append({
             "scenario_id": sid, "year": "Total",
             "adoption_rate": 1.0,
             "undiscounted_budget_nzd": total_undiscounted,
             "discounted_budget_nzd": total_discounted,
-            "spend_per_capita_nzd": None,
-        }])], ignore_index=True)
+            "spend_per_capita_nzd": float("nan"),
+        })
+    if total_rows:
+        df = pd.concat([df, pd.DataFrame(total_rows)], ignore_index=True)
 
     return df
 

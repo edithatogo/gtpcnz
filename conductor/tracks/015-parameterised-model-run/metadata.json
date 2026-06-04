@@ -1,9 +1,10 @@
 {
   "id": "015-parameterised-model-run",
   "title": "Source-informed parameterised model run",
-  "status": "implemented",
+  "status": "complete-publication-phase",
   "version": "v1.0.0",
   "created": "2026-05-08",
-  "updated": "2026-05-08",
-  "description": "Identify parameters, attach inputs, update and run models with plots and tables."
+  "updated": "2026-05-31",
+  "description": "Identify parameters, attach inputs, update and run models with plots and tables.",
+  "progress": "Completed as public-data anchored benchmark run: parameter-input register, scenario updates, model reruns, uncertainty run handoff, and artefact generation were finished; no linked-data calibration asserted."
 }

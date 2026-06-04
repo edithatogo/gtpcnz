@@ -72,3 +72,7 @@ Target posture: `bleeding-edge controlled`, meaning current tooling is used with
 rg -n "rural|depriv|equity|subgroup|tornado|variance decomposition|phase portrait|vector field|heatmap|violin|waterfall|frontier|ensemble|stochastic" models docs conductor
 python -m pytest -q models/tests
 ```
+
+## Public-only SOTA gate
+
+SOTA/bleeding-edge status now requires public-only registry purity, parameter traceability, public aggregate calibration, structural uncertainty, full VOI, visual grammar, and release reproducibility gates.
