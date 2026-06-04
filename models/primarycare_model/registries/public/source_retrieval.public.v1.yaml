@@ -1,0 +1,73 @@
+retrieval_plans:
+  - source_id: src_hnz_capitation_schedule
+    landing_page_url: https://www.tewhatuora.govt.nz/for-health-providers/primary-care-sector/capitation-rates
+    download_url: null
+    expected_raw_dir: data/public_raw/src_hnz_capitation_schedule
+    expected_raw_artifact: capitation-rates.html
+    retrieval_method: Capture the public Health NZ capitation rates page as versioned HTML, then extract published table values.
+    retrieval_status: reference_pinned_pending_download
+    licence_basis: public_reference
+    public_access_status: public
+    transform_script: scripts/transform_hnz_capitation.py
+    expected_processed_artifact: data/public_processed/src_hnz_capitation_schedule/capitation_rates.csv
+    claim_boundary: Public capitation schedule reference only; not private payment data.
+  - source_id: src_pho_services_agreement
+    landing_page_url: https://www.tewhatuora.govt.nz/for-health-providers/primary-care-sector/primary-health-organisation-services-agreement
+    download_url: https://www.tewhatuora.govt.nz/assets/For-health-providers/Primary-care-sector/Master-PHO-Services-Agreement-.pdf
+    expected_raw_dir: data/public_raw/src_pho_services_agreement
+    expected_raw_artifact: master-pho-services-agreement.pdf
+    retrieval_method: Download the public PHO Services Agreement PDF from Health NZ and extract schedule tables.
+    retrieval_status: reference_pinned_pending_download
+    licence_basis: public_reference
+    public_access_status: public
+    transform_script: scripts/transform_pho_agreement.py
+    expected_processed_artifact: data/public_processed/src_pho_services_agreement/pho_services_schedule.csv
+    claim_boundary: Public schedule reference only; not contract-level private payment data.
+  - source_id: src_hnz_enrolment
+    landing_page_url: https://www.tewhatuora.govt.nz/for-health-professionals/data-and-statistics/primary-care
+    download_url: null
+    expected_raw_dir: data/public_raw/src_hnz_enrolment
+    expected_raw_artifact: primary-care-enrolment-public-data.html
+    retrieval_method: Capture public Health NZ primary-care enrolment data/statistics page and linked aggregate tables.
+    retrieval_status: reference_pinned_pending_download
+    licence_basis: public_reference
+    public_access_status: public
+    transform_script: scripts/transform_hnz_enrolment.py
+    expected_processed_artifact: data/public_processed/src_hnz_enrolment/enrolment_counts.csv
+    claim_boundary: Aggregate enrolment denominator only; no patient-level data.
+  - source_id: src_mcnz_workforce
+    landing_page_url: https://www.mcnz.org.nz/about-us/publications/workforce-survey/
+    download_url: https://www.mcnz.org.nz/assets/Publications/Workforce-Survey/Workforce-Survey-Report-2025.pdf
+    expected_raw_dir: data/public_raw/src_mcnz_workforce
+    expected_raw_artifact: workforce-survey-report-2025.pdf
+    retrieval_method: Download the public MCNZ workforce survey PDF and extract aggregate workforce tables.
+    retrieval_status: reference_pinned_pending_download
+    licence_basis: public_reference
+    public_access_status: public
+    transform_script: scripts/transform_mcnz_workforce.py
+    expected_processed_artifact: data/public_processed/src_mcnz_workforce/workforce_summary.csv
+    claim_boundary: Published aggregate workforce source only; no practitioner-level data.
+  - source_id: src_nz_health_survey
+    landing_page_url: https://www.health.govt.nz/publications/annual-update-of-key-results-202324-new-zealand-health-survey
+    download_url: https://minhealthnz.shinyapps.io/nz-health-survey-2023-24-annual-data-explorer/
+    expected_raw_dir: data/public_raw/src_nz_health_survey
+    expected_raw_artifact: nz-health-survey-2023-24-cost-barrier-export.csv
+    retrieval_method: Export public aggregate GP cost-barrier indicators from the NZ Health Survey data explorer.
+    retrieval_status: reference_pinned_pending_download
+    licence_basis: public_reference
+    public_access_status: public
+    transform_script: scripts/transform_nz_health_survey.py
+    expected_processed_artifact: data/public_processed/src_nz_health_survey/cost_barrier_gp.csv
+    claim_boundary: Public aggregate survey output only; no person-level survey microdata.
+  - source_id: src_statsnz_population
+    landing_page_url: https://www.stats.govt.nz/indicators/population-of-nz/
+    download_url: null
+    expected_raw_dir: data/public_raw/src_statsnz_population
+    expected_raw_artifact: population-of-nz-indicator.html
+    retrieval_method: Capture the public Stats NZ population indicator and linked national population estimate release.
+    retrieval_status: reference_pinned_pending_download
+    licence_basis: public_reference
+    public_access_status: public
+    transform_script: scripts/transform_statsnz_population.py
+    expected_processed_artifact: data/public_processed/src_statsnz_population/population_estimates.csv
+    claim_boundary: Aggregate population denominator only.
