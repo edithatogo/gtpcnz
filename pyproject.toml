@@ -10,6 +10,7 @@ dependencies = [
     "streamlit",
     "matplotlib",
     "plotly",
+    "scikit-learn",
     "jupyter",
     "pyyaml",
     "pydantic>=2,<3"
