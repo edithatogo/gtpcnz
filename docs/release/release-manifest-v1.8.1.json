@@ -1,0 +1,10 @@
+{
+  "accessibility_status": "gate-present",
+  "model_hash": "7d477aaf68ea8abc2c39472574238dc8afe730ec06b32a3842eebd152350ba72",
+  "output_hash": "20eae55b5bf29307dae29381aa5bd8ad2f50ed1c97ec144b5ef0d10449b8afad",
+  "parameter_hash": "fdb642505004dc8f52e60f3c9ce94e61e982f7a6ab00845e66cc3f2bf87bff8b",
+  "source_snapshot_hash": "898e12294a5e2d04135559d949720b38e3334b476eecba04e08d06f172093647",
+  "test_status": "not-run-by-manifest-generator",
+  "version": "1.8.1",
+  "visual_regression_status": "gate-present"
+}

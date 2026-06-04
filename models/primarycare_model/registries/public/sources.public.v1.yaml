@@ -1,0 +1,55 @@
+sources:
+  - source_id: src_hnz_capitation_schedule
+    label: Health NZ capitation and PHO services schedules
+    url_or_reference: https://www.tewhatuora.govt.nz/
+    retrieval_date: 2026-06-03
+    licence_status: public_reference
+    public_access_status: public
+    checksum: pending-download
+    transform_description: Manual public-reference registry entry pending reproducible download.
+    claim_boundary: Public schedule reference; not private payment data.
+  - source_id: src_pho_services_agreement
+    label: PHO Services Agreement public schedule
+    url_or_reference: https://www.tewhatuora.govt.nz/
+    retrieval_date: 2026-06-03
+    licence_status: public_reference
+    public_access_status: public
+    checksum: pending-download
+    transform_description: Public schedule reference used for benchmark parameter bounds.
+    claim_boundary: Public schedule reference only.
+  - source_id: src_hnz_enrolment
+    label: Primary care enrolment public data
+    url_or_reference: https://www.tewhatuora.govt.nz/
+    retrieval_date: 2026-06-03
+    licence_status: public_reference
+    public_access_status: public
+    checksum: pending-download
+    transform_description: Public aggregate enrolment denominator.
+    claim_boundary: Aggregate denominator; no patient-level data.
+  - source_id: src_mcnz_workforce
+    label: Medical Council workforce survey
+    url_or_reference: https://www.mcnz.org.nz/
+    retrieval_date: 2026-06-03
+    licence_status: public_reference
+    public_access_status: public
+    checksum: pending-download
+    transform_description: Published aggregate workforce prior.
+    claim_boundary: Aggregate workforce source; no practitioner-level data.
+  - source_id: src_nz_health_survey
+    label: New Zealand Health Survey public data explorer
+    url_or_reference: https://minhealthnz.shinyapps.io/nz-health-survey-2023-24-annual-data-explorer/
+    retrieval_date: 2026-06-03
+    licence_status: public_reference
+    public_access_status: public
+    checksum: pending-download
+    transform_description: Published aggregate survey target for cost-barrier calibration.
+    claim_boundary: Public aggregate survey data only.
+  - source_id: src_statsnz_population
+    label: Stats NZ population estimates
+    url_or_reference: https://www.stats.govt.nz/
+    retrieval_date: 2026-06-03
+    licence_status: public_reference
+    public_access_status: public
+    checksum: pending-download
+    transform_description: Public aggregate population denominator.
+    claim_boundary: Aggregate denominator only.

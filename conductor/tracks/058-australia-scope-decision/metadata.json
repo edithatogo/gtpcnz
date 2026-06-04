@@ -1,0 +1,35 @@
+{
+  "id": "058-australia-scope-decision",
+  "title": "Australia first-class implementation or scope narrowing",
+  "status": "active",
+  "created": "2026-06-03",
+  "updated": "2026-06-03",
+  "owner": "codex",
+  "contract": "CON-PUBLIC-001",
+  "claim_boundary": "Public-data anchored benchmark by default; no unsupported calibrated or causal claims.",
+  "execution_wave": 1,
+  "depends_on": [],
+  "blocks": [
+    "056-streamlit-policy-cockpit-and-visual-grammar",
+    "057-quarto-scientific-report-rebuild"
+  ],
+  "can_run_parallel_with": [
+    "051-parameter-ontology-and-distributions",
+    "052-public-source-ingestion-and-snapshots",
+    "062-dependency-locking-and-reproducible-runtime"
+  ],
+  "allowed_file_globs": [
+    "docs/decisions/australia-scope-decision-v1.md",
+    "models/primarycare_model/registries/public/jurisdictions.public.v1.yaml",
+    "models/tests/test_jurisdiction_claims.py",
+    "README.md"
+  ],
+  "forbidden_file_globs": [
+    "models/primarycare_model/registries/public/calibration_targets.public.v1.yaml"
+  ],
+  "required_gates": [
+    "python -m pytest -q models/tests/test_jurisdiction_claims.py"
+  ],
+  "max_agent_depth": 2,
+  "parallelism_note": "Safe for Cline/deepseek execution only within declared file ownership and dependency wave."
+}

@@ -19,6 +19,8 @@ def test_dashboard_uses_explainer_and_not_forecast_language():
         Path("models/primarycare_model/app.py").read_text(encoding="utf-8")
         + "\n"
         + Path("models/primarycare_model/scenario_service.py").read_text(encoding="utf-8")
+        + "\n"
+        + Path("models/primarycare_model/registries/educational_levers.v1.yaml").read_text(encoding="utf-8")
     )
     assert "funding architecture explainer" in text
     assert "not linked-data calibrated" in text
@@ -126,6 +128,7 @@ def test_quarto_renders_model_card_and_claim_boundaries():
     assert "docs/public-site/streamlit-dashboard-audit-v1.8.1.md" in text
     assert "docs/public-site/evidence-tracker-public-v1.8.1.md" in text
     assert "docs/public-site/calibration-readiness-page-v1.8.1.md" in text
+    assert "docs/public-site/site-map-and-release-manifest-v1.8.4.md" in text
 
 
 def test_streamlit_page_does_not_render_repo_only_document_paths():

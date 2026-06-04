@@ -277,9 +277,14 @@ The table below uses public-data anchored model-generated indices. These are not
 | 10 | F5 | Uncapped weak-control model | 46.11 | 37.25 | 77.18 | 70.64 |
 
 ```{mermaid}
+---
+config:
+  xyChart:
+    showDataLabel: true
+---
 xychart-beta
   title "Reference scenarios: hybrid viability index"
-  x-axis ["F4","F3","F2","F9","F8","F7","F0","F1","F6","F5"]
+  x-axis "Reference scenario" ["F4","F3","F2","F9","F8","F7","F0","F1","F6","F5"]
   y-axis "Model-generated index" 0 --> 100
   bar [77.26,62.51,56.40,54.26,52.96,52.74,52.24,50.37,50.11,46.11]
 ```
@@ -287,9 +292,14 @@ xychart-beta
 *Figure 4. Static scenario rank plot. Scores are model-generated indices, not observed New Zealand outcomes.*
 
 ```{mermaid}
+---
+config:
+  xyChart:
+    showDataLabel: true
+---
 xychart-beta
   title "Supply generation index by reference scenario"
-  x-axis ["F4","F3","F2","F9","F8","F7","F0","F1","F6","F5"]
+  x-axis "Reference scenario" ["F4","F3","F2","F9","F8","F7","F0","F1","F6","F5"]
   y-axis "Model-generated index" 0 --> 100
   bar [55.66,40.10,40.38,14.33,21.29,14.33,15.43,14.11,13.87,37.25]
 ```

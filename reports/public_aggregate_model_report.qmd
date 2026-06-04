@@ -1,0 +1,8 @@
+---
+title: "GTPCNZ Public Aggregate Model Report"
+format: html
+---
+
+# GTPCNZ Public Aggregate Model Report
+
+This report is generated from public-source snapshots and public-model registries. It preserves the benchmark claim boundary unless calibration gates pass.

@@ -97,3 +97,8 @@ If GitHub Actions jobs fail before a runner starts, use `docs/operations/github-
 ## License And Citation
 
 See `LICENSE` for the mixed code/content licensing terms and `CITATION.cff` for citation metadata.
+
+
+## Public calibrated-model programme
+
+The current public runtime remains a public-data anchored benchmark and educational explainer. The new public calibrated-model programme separates public registries, source snapshots, calibration targets, structural uncertainty, VOI, cockpit, and release gates from future/private templates. Until the public aggregate calibration and validation gates pass, unsupported claims remain out of bounds: precise fiscal savings, ED reductions, hospital-demand reductions, workforce effects, implementation impacts, and causal effects.

@@ -12,7 +12,7 @@ Primary care is usually the cheaper, earlier and more human part of the system. 
 
 ![Conceptual flow diagram showing patients moving from primary care to urgent care, ambulance, emergency department and hospital services when upstream access is constrained.](../figures/pcf-v172-01-upstream-pressure-map.png)
 
-*Figure 1. Whole-system flow. Read this as a pressure map: constrained primary care pushes more patients toward urgent and hospital settings.*
+*Figure 1. Whole-system flow. Read this as a pressure map: constrained primary care pushes more patients toward urgent and hospital settings. Key: blue = patient need, green = primary care, amber = unmet need and pressure, red = hospital escalation, purple = upstream funding controls.*
 
 A caution: Current reforms may already improve this problem, it’s just that the policy isn’t particularly transparent. This post is not saying nothing is happening. Nor am I using it as a platform to address NZ’s extensive Duty of Candour problem. It asks whether the reforms change the upstream supply game enough, or whether hospital demand still becomes the visible pressure valve. Also, just because change has occurred, 1) doesn’t mean it’s the right/effective change, and 2) doesn’t mean it’s occured for the correct reasons.
 

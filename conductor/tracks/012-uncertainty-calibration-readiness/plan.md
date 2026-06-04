@@ -9,3 +9,8 @@
 7. Write policy brief 07.
 8. Update audit dossier, changelog and version files.
 9. Package release.
+
+## Closeout (2026-05-31)
+
+- All plan items were completed as reflected in the current public-data benchmark deliverables.
+- Evidence boundaries remain explicit: outputs are scenario benchmarks, not linked-data calibrated forecasts.

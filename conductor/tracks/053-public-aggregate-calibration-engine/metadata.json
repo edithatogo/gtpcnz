@@ -1,0 +1,45 @@
+{
+  "id": "053-public-aggregate-calibration-engine",
+  "title": "Public aggregate empirical calibration engine",
+  "status": "active",
+  "created": "2026-06-03",
+  "updated": "2026-06-03",
+  "owner": "codex",
+  "contract": "CON-CAL-001",
+  "claim_boundary": "Public-data anchored benchmark by default; no unsupported calibrated or causal claims.",
+  "execution_wave": 2,
+  "depends_on": [
+    "050-public-only-registry-purification",
+    "051-parameter-ontology-and-distributions",
+    "052-public-source-ingestion-and-snapshots"
+  ],
+  "blocks": [
+    "056-streamlit-policy-cockpit-and-visual-grammar",
+    "057-quarto-scientific-report-rebuild",
+    "059-release-engineering-and-model-cards"
+  ],
+  "can_run_parallel_with": [
+    "054-structural-uncertainty-ensemble",
+    "055-full-value-of-information-engine",
+    "060-self-learning-public-evidence-monitor"
+  ],
+  "allowed_file_globs": [
+    "models/primarycare_model/calibration/**",
+    "models/primarycare_model/contracts/calibration_targets.py",
+    "models/primarycare_model/registries/public/calibration_targets.public.v1.yaml",
+    "scripts/run_public_aggregate_calibration.py",
+    "docs/calibration/public-aggregate-calibration-methods-v1.md",
+    "models/tests/test_public_aggregate_calibration.py"
+  ],
+  "forbidden_file_globs": [
+    "data/linked-nz/**",
+    "data/evidence/**",
+    "models/primarycare_model/app.py"
+  ],
+  "required_gates": [
+    "python scripts/run_public_aggregate_calibration.py --check-only",
+    "python -m pytest -q models/tests/test_public_aggregate_calibration.py"
+  ],
+  "max_agent_depth": 2,
+  "parallelism_note": "Safe for Cline/deepseek execution only within declared file ownership and dependency wave."
+}

@@ -7,7 +7,7 @@ This repo now has a dedicated quality lane for strict typing, dependency mainten
 The target posture is:
 
 - `basedpyright` as the blocking strict type gate;
-- `mypy --strict` as a secondary compatibility gate while the typed surface stabilises;
+- `mypy --strict` as a blocking CI compatibility gate across contract, validation, and engine layers;
 - `ty check` as a non-blocking canary until it is mature enough to promote.
 
 ## Dependency Automation

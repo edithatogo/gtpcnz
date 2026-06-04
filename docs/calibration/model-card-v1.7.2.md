@@ -156,3 +156,7 @@ The model executes in one of four calculation modes. Every public output carries
 
 ## Interpretation rule
 Use the model to ask better questions and prioritise validation. Do not use it to claim final effect sizes.
+
+## Public aggregate calibration programme
+
+This model card remains bounded as public benchmark material unless generated release model cards and public aggregate validation gates pass.

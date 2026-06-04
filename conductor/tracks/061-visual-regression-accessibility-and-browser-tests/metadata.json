@@ -1,0 +1,35 @@
+{
+  "id": "061-visual-regression-accessibility-and-browser-tests",
+  "title": "Visual regression, accessibility, and browser tests",
+  "status": "active",
+  "created": "2026-06-03",
+  "updated": "2026-06-03",
+  "owner": "codex",
+  "contract": "CON-VIS-001",
+  "claim_boundary": "Public-data anchored benchmark by default; no unsupported calibrated or causal claims.",
+  "execution_wave": 3,
+  "depends_on": [
+    "056-streamlit-policy-cockpit-and-visual-grammar"
+  ],
+  "blocks": [
+    "059-release-engineering-and-model-cards"
+  ],
+  "can_run_parallel_with": [
+    "057-quarto-scientific-report-rebuild"
+  ],
+  "allowed_file_globs": [
+    "tests/browser/**",
+    "scripts/run_visual_regression.py",
+    "scripts/run_accessibility_audit.py",
+    "docs/testing/visual-regression-and-accessibility-v1.md"
+  ],
+  "forbidden_file_globs": [
+    "models/primarycare_model/registries/public/**"
+  ],
+  "required_gates": [
+    "python scripts/run_visual_regression.py --check-only",
+    "python scripts/run_accessibility_audit.py --check-only"
+  ],
+  "max_agent_depth": 2,
+  "parallelism_note": "Safe for Cline/deepseek execution only within declared file ownership and dependency wave."
+}

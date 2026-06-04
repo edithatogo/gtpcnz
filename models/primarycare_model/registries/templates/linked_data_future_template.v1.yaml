@@ -1,0 +1,8 @@
+template_status: excluded_from_public_runtime
+claim_boundary: Future linked-data template only. Not used by the public model path.
+forbidden_for_public_runtime: true
+examples:
+  - parameter_id: gp_supply_elasticity
+    sensitivity_class: sensitive
+    evidence_tier: linked_data
+    source: Linked administrative data would be required; excluded from public runtime.

@@ -1,0 +1,75 @@
+{
+  "claim_boundary": "Public/published aggregate source snapshot only; no private, confidential, or patient-level inputs.",
+  "created_at": "2026-06-03T12:40:11.899377+00:00",
+  "parameter_registry_sha256": "fdb642505004dc8f52e60f3c9ce94e61e982f7a6ab00845e66cc3f2bf87bff8b",
+  "snapshot_id": "public-snapshot-v1",
+  "source_registry_sha256": "898e12294a5e2d04135559d949720b38e3334b476eecba04e08d06f172093647",
+  "sources": [
+    {
+      "checksum": "pending-download",
+      "claim_boundary": "Public schedule reference; not private payment data.",
+      "label": "Health NZ capitation and PHO services schedules",
+      "licence_status": "public_reference",
+      "public_access_status": "public",
+      "retrieval_date": "2026-06-03",
+      "source_id": "src_hnz_capitation_schedule",
+      "transform_description": "Manual public-reference registry entry pending reproducible download.",
+      "url_or_reference": "https://www.tewhatuora.govt.nz/"
+    },
+    {
+      "checksum": "pending-download",
+      "claim_boundary": "Public schedule reference only.",
+      "label": "PHO Services Agreement public schedule",
+      "licence_status": "public_reference",
+      "public_access_status": "public",
+      "retrieval_date": "2026-06-03",
+      "source_id": "src_pho_services_agreement",
+      "transform_description": "Public schedule reference used for benchmark parameter bounds.",
+      "url_or_reference": "https://www.tewhatuora.govt.nz/"
+    },
+    {
+      "checksum": "pending-download",
+      "claim_boundary": "Aggregate denominator; no patient-level data.",
+      "label": "Primary care enrolment public data",
+      "licence_status": "public_reference",
+      "public_access_status": "public",
+      "retrieval_date": "2026-06-03",
+      "source_id": "src_hnz_enrolment",
+      "transform_description": "Public aggregate enrolment denominator.",
+      "url_or_reference": "https://www.tewhatuora.govt.nz/"
+    },
+    {
+      "checksum": "pending-download",
+      "claim_boundary": "Aggregate workforce source; no practitioner-level data.",
+      "label": "Medical Council workforce survey",
+      "licence_status": "public_reference",
+      "public_access_status": "public",
+      "retrieval_date": "2026-06-03",
+      "source_id": "src_mcnz_workforce",
+      "transform_description": "Published aggregate workforce prior.",
+      "url_or_reference": "https://www.mcnz.org.nz/"
+    },
+    {
+      "checksum": "pending-download",
+      "claim_boundary": "Public aggregate survey data only.",
+      "label": "New Zealand Health Survey public data explorer",
+      "licence_status": "public_reference",
+      "public_access_status": "public",
+      "retrieval_date": "2026-06-03",
+      "source_id": "src_nz_health_survey",
+      "transform_description": "Published aggregate survey target for cost-barrier calibration.",
+      "url_or_reference": "https://minhealthnz.shinyapps.io/nz-health-survey-2023-24-annual-data-explorer/"
+    },
+    {
+      "checksum": "pending-download",
+      "claim_boundary": "Aggregate denominator only.",
+      "label": "Stats NZ population estimates",
+      "licence_status": "public_reference",
+      "public_access_status": "public",
+      "retrieval_date": "2026-06-03",
+      "source_id": "src_statsnz_population",
+      "transform_description": "Public aggregate population denominator.",
+      "url_or_reference": "https://www.stats.govt.nz/"
+    }
+  ]
+}

@@ -47,3 +47,9 @@ primary care blended payment capitation fee for service review OECD WHO Commonwe
 - WHO
 - Commonwealth Fund
 - RACGP, ACRRM, RNZCGP, GenPro, GPNZ, RACMA
+
+## Search-result snapshots
+
+- `search-results-openalex-v1.1.0.json` provides the raw OpenAlex provenance.
+- `search-results-openalex-v1.1.0.md` and
+  `extraction-matrix-v1.1.0.csv` record the screened pilot extraction.

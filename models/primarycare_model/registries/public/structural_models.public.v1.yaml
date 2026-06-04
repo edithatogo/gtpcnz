@@ -1,0 +1,65 @@
+structural_models:
+  - structural_model_id: balanced
+    label: Balanced public benchmark
+    dag: access -> supply -> hospital_pressure; governance -> gaming_risk
+    active_edges: [access->supply, supply->hospital_pressure, governance->gaming_risk]
+    excluded_edges: []
+    plausibility_weight: 0.16
+    source_basis: [src_nz_health_survey, src_hnz_capitation_schedule]
+    claim_boundary: Structural sensitivity only; not causal proof.
+  - structural_model_id: supply_dominant
+    label: Supply dominant
+    dag: payment_signal -> supply -> access -> hospital_pressure
+    active_edges: [payment_signal->supply, supply->access, access->hospital_pressure]
+    excluded_edges: [equity->supply]
+    plausibility_weight: 0.13
+    source_basis: [src_mcnz_workforce]
+    claim_boundary: Alternative assumption set.
+  - structural_model_id: access_barrier_dominant
+    label: Access-barrier dominant
+    dag: cost_barriers -> access -> unmet_need
+    active_edges: [cost_barriers->access, access->unmet_need]
+    excluded_edges: [payment_signal->hospital_pressure]
+    plausibility_weight: 0.13
+    source_basis: [src_nz_health_survey]
+    claim_boundary: Alternative assumption set.
+  - structural_model_id: workforce_constrained
+    label: Workforce constrained
+    dag: workforce -> supply; supply -> access
+    active_edges: [workforce->supply, supply->access]
+    excluded_edges: [payment_signal->supply]
+    plausibility_weight: 0.12
+    source_basis: [src_mcnz_workforce]
+    claim_boundary: Alternative assumption set.
+  - structural_model_id: gaming_dominant
+    label: Gaming dominant
+    dag: payment_signal -> gaming_risk -> fiscal_risk
+    active_edges: [payment_signal->gaming_risk, gaming_risk->fiscal_risk]
+    excluded_edges: [governance->gaming_risk]
+    plausibility_weight: 0.11
+    source_basis: [src_pho_services_agreement]
+    claim_boundary: Alternative assumption set.
+  - structural_model_id: equity_protection_dominant
+    label: Equity-protection dominant
+    dag: equity_protection -> access -> unmet_need
+    active_edges: [equity_protection->access, access->unmet_need]
+    excluded_edges: [payment_signal->access]
+    plausibility_weight: 0.12
+    source_basis: [src_nz_health_survey]
+    claim_boundary: Alternative assumption set.
+  - structural_model_id: hospital_deflection_dominant
+    label: Hospital-deflection dominant
+    dag: access -> ed_pressure -> hospital_pressure
+    active_edges: [access->ed_pressure, ed_pressure->hospital_pressure]
+    excluded_edges: [fiscal_risk->hospital_pressure]
+    plausibility_weight: 0.12
+    source_basis: [src_nz_health_survey]
+    claim_boundary: Alternative assumption set.
+  - structural_model_id: weak_substitution
+    label: Weak substitution
+    dag: scope -> substitution -> supply
+    active_edges: [scope->substitution, substitution->supply]
+    excluded_edges: [scope->hospital_pressure]
+    plausibility_weight: 0.09
+    source_basis: [src_mcnz_workforce]
+    claim_boundary: Alternative assumption set.

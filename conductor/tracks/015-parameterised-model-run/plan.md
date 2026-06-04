@@ -7,3 +7,8 @@
 5. Run hybrid-informed MCDA.
 6. Generate tables, plots, workbook and report.
 7. Add tests and versioned artefacts.
+
+## Closeout (2026-05-31)
+
+- Plan execution completed with public-data anchored benchmark outputs only.
+- Parameter-run, scenario updates, and reporting outputs have been delivered and versioned.

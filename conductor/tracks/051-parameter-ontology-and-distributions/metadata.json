@@ -1,0 +1,43 @@
+{
+  "id": "051-parameter-ontology-and-distributions",
+  "title": "Parameter ontology and uncertainty distributions",
+  "status": "active",
+  "created": "2026-06-03",
+  "updated": "2026-06-03",
+  "owner": "codex",
+  "contract": "CON-PARAM-001",
+  "claim_boundary": "Public-data anchored benchmark by default; no unsupported calibrated or causal claims.",
+  "execution_wave": 1,
+  "depends_on": [
+    "050-public-only-registry-purification"
+  ],
+  "blocks": [
+    "053-public-aggregate-calibration-engine",
+    "054-structural-uncertainty-ensemble",
+    "055-full-value-of-information-engine"
+  ],
+  "can_run_parallel_with": [
+    "052-public-source-ingestion-and-snapshots",
+    "058-australia-scope-decision",
+    "062-dependency-locking-and-reproducible-runtime"
+  ],
+  "allowed_file_globs": [
+    "models/primarycare_model/contracts/public_parameters.py",
+    "models/primarycare_model/validation/public_parameter_loader.py",
+    "models/primarycare_model/registries/public/parameters.public.v1.yaml",
+    "scripts/check_parameter_traceability.py",
+    "models/tests/test_parameter_traceability.py",
+    "docs/model/public-parameter-ontology-v1.md"
+  ],
+  "forbidden_file_globs": [
+    "models/primarycare_model/registries/parameters.v1.yaml",
+    "data/linked-nz/**",
+    "models/primarycare_model/app.py"
+  ],
+  "required_gates": [
+    "python scripts/check_parameter_traceability.py",
+    "python -m pytest -q models/tests/test_parameter_traceability.py"
+  ],
+  "max_agent_depth": 2,
+  "parallelism_note": "Safe for Cline/deepseek execution only within declared file ownership and dependency wave."
+}

@@ -55,3 +55,7 @@ This control file records the public Streamlit, GitHub Pages and strict-validati
 - REQ-040: Do not remove public compatibility aliases until public tests are migrated.
 - REQ-041: Do not treat optional Pandera absence as a production failure.
 - REQ-042: Do not reopen model expansion without evidence-base change.
+
+## Public-only calibrated model requirements
+
+Must-have requirements are traced to CON-PUBLIC-001, CON-PARAM-001, CON-CAL-001, CON-UNC-001, CON-VOI-001, CON-VIS-001, CON-REL-001, and CON-SELF-001.

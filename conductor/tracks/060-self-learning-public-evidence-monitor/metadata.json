@@ -1,0 +1,39 @@
+{
+  "id": "060-self-learning-public-evidence-monitor",
+  "title": "Self-learning public evidence monitor",
+  "status": "active",
+  "created": "2026-06-03",
+  "updated": "2026-06-03",
+  "owner": "codex",
+  "contract": "CON-SELF-001",
+  "claim_boundary": "Public-data anchored benchmark by default; no unsupported calibrated or causal claims.",
+  "execution_wave": 2,
+  "depends_on": [
+    "052-public-source-ingestion-and-snapshots"
+  ],
+  "blocks": [
+    "059-release-engineering-and-model-cards"
+  ],
+  "can_run_parallel_with": [
+    "053-public-aggregate-calibration-engine",
+    "054-structural-uncertainty-ensemble",
+    "055-full-value-of-information-engine"
+  ],
+  "allowed_file_globs": [
+    "models/primarycare_model/evidence/**",
+    "models/primarycare_model/contracts/evidence_candidates.py",
+    "scripts/monitor_public_evidence.py",
+    "docs/evidence/public-evidence-monitoring-v1.md",
+    "models/tests/test_public_evidence_monitor.py"
+  ],
+  "forbidden_file_globs": [
+    "models/primarycare_model/registries/public/parameters.public.v1.yaml",
+    "models/primarycare_model/app.py"
+  ],
+  "required_gates": [
+    "python scripts/monitor_public_evidence.py",
+    "python -m pytest -q models/tests/test_public_evidence_monitor.py"
+  ],
+  "max_agent_depth": 2,
+  "parallelism_note": "Safe for Cline/deepseek execution only within declared file ownership and dependency wave."
+}

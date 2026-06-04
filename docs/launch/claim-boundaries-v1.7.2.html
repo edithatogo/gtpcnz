@@ -273,14 +273,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="required-caveats" class="level2">
 <h2 class="anchored" data-anchor-id="required-caveats">Required caveats</h2>
 <ul>
-<li>This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.</li>
+<li>This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast.</li>
+<li>Where linked-data checks pass, outputs may be described as empirically supported where valid; otherwise claims remain benchmark-level only.</li>
+<li>It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts without a documented calibration upgrade.</li>
 <li>Current reforms are the comparator, not a straw man.</li>
 <li>Uncapped means uncapped at the global activity-envelope level, not uncontrolled billing.</li>
 <li>Place-based accountability is core to the proposal.</li>
 <li>Equity protections are core to the proposal.</li>
 <li>Accident Compensation Corporation is an analogy for rules-based treatment payments, not a wholesale template.</li>
 <li>Hospital growth has multiple causes; upstream access is a candidate driver, not the sole driver.</li>
-<li>Model outputs are public-data anchored benchmarks unless explicitly labelled as linked-data calibrated patient-level forecasts.</li>
+<li>Model outputs are public-data anchored benchmarks unless explicitly labelled as empirically supported where valid.</li>
 </ul>
 </section>
 <section id="game-theory-formula-boundary" class="level2">
@@ -426,7 +428,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    p50: <span class="bu">float</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    p95: <span class="bu">float</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    draws: <span class="bu">int</span> <span class="op">=</span> <span class="dv">0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>This is always <strong>demonstrative</strong> — the distribution shape is a public-data anchored benchmark, not a calibrated forecast.</p>
+<p>This is an index-only distribution surface by default, with core dimensions upgraded to <strong>empirically supported where valid</strong> when linked-data calibration checks pass.</p>
 </section>
 </section>
 <section id="architecture-layers-contract-registry-validation-engine" class="level2">
@@ -557,7 +559,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>All Pydantic model usage respects frozen/immutable constraints.</li>
 <li>Protocol implementations match the <code>EngineProtocol</code> signature.</li>
 </ul>
-<p>Currently the gate is <strong>prepared</strong> (contract layer typed, Protocol defined) but the full <code>--strict</code> enforcement across all engine modules is gated behind Track 043 completion. The <code>ruff</code> lint gate (import hygiene, code style) runs unconditionally.</p>
+<p>The gate is now enforced in CI as a blocking strict pass across the contract, validation and engine layers using <code>mypy --strict</code> after Track 043 stabilization.</p>
 </section>
 <section id="gate-pipeline-order" class="level3">
 <h3 class="anchored" data-anchor-id="gate-pipeline-order">Gate pipeline order</h3>
@@ -565,7 +567,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     Pytest["pytest model tests"]
     Boundary["check_concern_boundaries.py"]
     NoPatient["check_no_patient_data.py"]
-    Mypy["mypy --strict (prepared)"]
+    Mypy["mypy --strict (strict)"]
     Ruff["ruff check"]
     Deploy["Pages/Streamlit deployment"]
 
@@ -574,7 +576,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     NoPatient --&gt; Mypy
     Mypy --&gt; Ruff
     Ruff --&gt; Deploy</code></pre>
-<p><strong>Note</strong>: The mypy gate is prepared but not yet enforced at <code>--strict</code> level across all engines. The concern-boundary scanner and no-patient-data gates are enforced and blocking. Ruff linting runs unconditionally.</p>
+<p><strong>Note</strong>: The mypy gate is blocking and enforced at <code>--strict</code> level across contract, validation and engines. The concern-boundary scanner and no-patient-data gates are also blocking. Ruff linting runs unconditionally.</p>
 
 
 </section>

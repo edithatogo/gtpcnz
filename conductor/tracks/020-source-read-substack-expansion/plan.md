@@ -6,3 +6,7 @@
 4. Add place-based accountability and current-reform sufficiency games.
 5. Expand Substack posts and add explanatory diagrams.
 6. Package v1.4.0.
+
+## Closeout (2026-05-31)
+
+- Source-read audit and publication expansion plan completed with expanded posts, diagrams, and citation integration.

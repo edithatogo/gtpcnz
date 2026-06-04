@@ -1,0 +1,38 @@
+{
+  "id": "050-public-only-registry-purification",
+  "title": "Public-only registry purification",
+  "status": "active",
+  "created": "2026-06-03",
+  "updated": "2026-06-03",
+  "owner": "codex",
+  "contract": "CON-PUBLIC-001",
+  "claim_boundary": "Public-data anchored benchmark by default; no unsupported calibrated or causal claims.",
+  "execution_wave": 1,
+  "depends_on": [],
+  "blocks": [
+    "051-parameter-ontology-and-distributions",
+    "052-public-source-ingestion-and-snapshots",
+    "053-public-aggregate-calibration-engine",
+    "056-streamlit-policy-cockpit-and-visual-grammar"
+  ],
+  "can_run_parallel_with": [
+    "062-dependency-locking-and-reproducible-runtime"
+  ],
+  "allowed_file_globs": [
+    "models/primarycare_model/registries/public/**",
+    "models/primarycare_model/registries/templates/**",
+    "scripts/check_public_only_boundary.py",
+    "models/tests/test_public_only_boundary.py"
+  ],
+  "forbidden_file_globs": [
+    "data/linked-nz/**",
+    "data/evidence/**",
+    "models/primarycare_model/app.py"
+  ],
+  "required_gates": [
+    "python scripts/check_public_only_boundary.py",
+    "python -m pytest -q models/tests/test_public_only_boundary.py"
+  ],
+  "max_agent_depth": 2,
+  "parallelism_note": "Safe for Cline/deepseek execution only within declared file ownership and dependency wave."
+}

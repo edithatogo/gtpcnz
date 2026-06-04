@@ -1,11 +1,11 @@
 # Model validation v1.7.2
 
-This page states the current evidence position plainly. The model is a public-data anchored benchmark. It is useful for testing the architecture logic and prioritising validation work, but it is not a linked-data calibrated or patient-level forecasting model.
+This page states the current evidence position plainly. The model is a public-data anchored benchmark. It is useful for testing the architecture logic and prioritising validation work. Where linked-data checks pass, some outputs can be described as empirically supported where valid, but it is still not a patient-level forecasting model.
 
 ## Evidence status
 
 - The benchmark is complete enough to compare funding architectures and identify load-bearing assumptions.
-- It is not empirically calibrated to linked New Zealand administrative data.
+- It is not fully empirically calibrated to linked New Zealand administrative data across all outcomes and subgroups.
 - Its outputs should be read as structured hypotheses, not as precise effect estimates.
 
 ## Missing calibration data

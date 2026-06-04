@@ -1,0 +1,8 @@
+---
+title: "GTPCNZ Model Card"
+format: html
+---
+
+# GTPCNZ Model Card
+
+Claim level, calibration status, uncertainty status, source snapshot, and not-valid-for warnings are required for release.
