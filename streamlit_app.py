@@ -12,6 +12,7 @@ PUBLIC_CAVEAT = (
     "It should not be used to claim precise fiscal savings, hospital-demand reductions, "
     "workforce effects, or implementation impacts."
 )
+DEPLOYMENT_REBUILD_MARKER = "2026-06-04-streamlit-main-module-rebuild"
 
 
 def _render_startup_failure(exc: Exception) -> NoReturn:
