@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-
 PUBLIC_NOT_VALID_FOR = (
     "precise fiscal savings",
     "ED reductions",

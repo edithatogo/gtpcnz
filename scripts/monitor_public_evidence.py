@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from models.primarycare_model.evidence.public_evidence_monitor import detect_public_evidence_candidates
+from models.primarycare_model.evidence.public_evidence_monitor import detect_public_evidence_candidates  # noqa: E402
 
 
 def main() -> int:

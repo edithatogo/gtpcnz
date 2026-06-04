@@ -7,8 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from models.primarycare_model.validation.public_parameter_loader import load_public_parameters
-
+from models.primarycare_model.validation.public_parameter_loader import load_public_parameters  # noqa: E402
 
 REQUIRED = {
     "source_id", "unit", "distribution_type", "distribution_parameters", "bounds",

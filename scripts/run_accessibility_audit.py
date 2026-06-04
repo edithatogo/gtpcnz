@@ -8,8 +8,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from models.primarycare_model.ui.accessibility import validate_chart_payload
-from models.primarycare_model.ui.cockpit import build_policy_cockpit_payload
+from models.primarycare_model.ui.accessibility import validate_chart_payload  # noqa: E402
+from models.primarycare_model.ui.cockpit import build_policy_cockpit_payload  # noqa: E402
 
 
 def main() -> int:

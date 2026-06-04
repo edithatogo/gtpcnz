@@ -34,7 +34,7 @@ class PublicParameterDefinition(ParameterDefinition):
     formula_refs: tuple[str, ...] = ()
 
     @model_validator(mode="after")
-    def _public_only(self) -> "PublicParameterDefinition":
+    def _public_only(self) -> PublicParameterDefinition:
         if self.sensitivity_class not in {"public", "public_aggregate"}:
             raise ValueError("public parameter cannot be sensitive or confidential")
         if self.evidence_tier not in {"public_data", "assumption"}:

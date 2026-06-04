@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from models.primarycare_model.data.public_source_snapshot import build_snapshot
+from models.primarycare_model.data.public_source_snapshot import build_snapshot  # noqa: E402
 
 
 def main() -> int:
