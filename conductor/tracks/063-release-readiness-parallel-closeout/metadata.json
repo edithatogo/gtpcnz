@@ -1,0 +1,59 @@
+{
+  "id": "063-release-readiness-parallel-closeout",
+  "title": "Release readiness parallel closeout",
+  "status": "active",
+  "created": "2026-06-04",
+  "updated": "2026-06-04",
+  "owner": "codex",
+  "contract": "CON-REL-001",
+  "claim_boundary": "Public-data anchored benchmark by default; calibration remains readiness-only until public source and validation gates pass.",
+  "execution_wave": 5,
+  "depends_on": [
+    "050-public-only-registry-purification",
+    "051-parameter-ontology-and-distributions",
+    "052-public-source-ingestion-and-snapshots",
+    "053-public-aggregate-calibration-engine",
+    "054-structural-uncertainty-ensemble",
+    "055-full-value-of-information-engine",
+    "056-streamlit-policy-cockpit-and-visual-grammar",
+    "057-quarto-scientific-report-rebuild",
+    "058-australia-scope-decision",
+    "059-release-engineering-and-model-cards",
+    "060-self-learning-public-evidence-monitor",
+    "061-visual-regression-accessibility-and-browser-tests",
+    "062-dependency-locking-and-reproducible-runtime"
+  ],
+  "blocks": [],
+  "can_run_parallel_with": [],
+  "allowed_file_globs": [
+    "conductor/tracks/063-release-readiness-parallel-closeout/**",
+    "conductor/state.md",
+    "docs/release/**",
+    "docs/testing/**",
+    "docs/model/public-source-readiness-closeout-v1.md"
+  ],
+  "forbidden_file_globs": [
+    "models/primarycare_model/registries/public/parameters.public.v1.yaml",
+    "models/primarycare_model/registries/public/calibration_targets.public.v1.yaml",
+    "models/primarycare_model/app.py",
+    "data/linked-nz/**",
+    "data/evidence/**"
+  ],
+  "required_gates": [
+    "python scripts/check_conductor_parallel_tracks.py",
+    "python scripts/check_public_only_boundary.py",
+    "python scripts/check_parameter_traceability.py",
+    "python scripts/check_public_source_snapshot.py",
+    "python scripts/check_dependency_lock.py",
+    "python scripts/check_concern_boundaries.py",
+    "python scripts/run_public_aggregate_calibration.py --check-only",
+    "python scripts/run_voi.py --check-only",
+    "python scripts/run_accessibility_audit.py --check-only",
+    "python scripts/generate_release_model_card.py --check-only",
+    "python scripts/generate_release_manifest.py --check-only",
+    "python scripts/sync_public_mirror.py --check",
+    "python -m pytest -q models/tests/test_conductor_parallel_tracks.py models/tests/test_public_only_boundary.py models/tests/test_parameter_traceability.py models/tests/test_public_source_snapshot.py models/tests/test_public_aggregate_calibration.py models/tests/test_structural_ensemble.py models/tests/test_full_voi.py models/tests/test_streamlit_cockpit_contracts.py models/tests/test_report_artifacts.py models/tests/test_jurisdiction_claims.py models/tests/test_release_engineering.py models/tests/test_public_evidence_monitor.py models/tests/test_dependency_files.py"
+  ],
+  "max_agent_depth": 2,
+  "parallelism_note": "Use Cline with DeepSeek v4 Flash for shallow parallel work packages. Do not allow subagents to edit overlapping files or promote readiness-only outputs into calibrated claims."
+}

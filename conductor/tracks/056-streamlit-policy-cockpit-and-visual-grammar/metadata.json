@@ -1,0 +1,41 @@
+{
+  "id": "056-streamlit-policy-cockpit-and-visual-grammar",
+  "title": "Streamlit policy cockpit and visual grammar",
+  "status": "active",
+  "created": "2026-06-03",
+  "updated": "2026-06-03",
+  "owner": "codex",
+  "contract": "CON-VIS-001",
+  "claim_boundary": "Public-data anchored benchmark by default; no unsupported calibrated or causal claims.",
+  "execution_wave": 3,
+  "depends_on": [
+    "050-public-only-registry-purification",
+    "053-public-aggregate-calibration-engine",
+    "054-structural-uncertainty-ensemble",
+    "055-full-value-of-information-engine"
+  ],
+  "blocks": [
+    "061-visual-regression-accessibility-and-browser-tests",
+    "059-release-engineering-and-model-cards"
+  ],
+  "can_run_parallel_with": [
+    "057-quarto-scientific-report-rebuild"
+  ],
+  "allowed_file_globs": [
+    "models/primarycare_model/ui/**",
+    "models/primarycare_model/app.py",
+    "docs/visualisation/visual-grammar-contract-v1.md",
+    "models/tests/test_streamlit_cockpit_contracts.py",
+    "models/tests/test_app.py"
+  ],
+  "forbidden_file_globs": [
+    "models/primarycare_model/registries/templates/**",
+    "data/linked-nz/**"
+  ],
+  "required_gates": [
+    "python scripts/run_accessibility_audit.py --check-only",
+    "python -m pytest -q models/tests/test_streamlit_cockpit_contracts.py models/tests/test_app.py::test_app_expander_exists"
+  ],
+  "max_agent_depth": 2,
+  "parallelism_note": "Safe for Cline/deepseek execution only within declared file ownership and dependency wave."
+}

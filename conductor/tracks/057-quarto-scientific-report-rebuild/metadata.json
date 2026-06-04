@@ -1,0 +1,40 @@
+{
+  "id": "057-quarto-scientific-report-rebuild",
+  "title": "Quarto scientific report rebuild",
+  "status": "active",
+  "created": "2026-06-03",
+  "updated": "2026-06-03",
+  "owner": "codex",
+  "contract": "CON-REL-001",
+  "claim_boundary": "Public-data anchored benchmark by default; no unsupported calibrated or causal claims.",
+  "execution_wave": 3,
+  "depends_on": [
+    "052-public-source-ingestion-and-snapshots",
+    "053-public-aggregate-calibration-engine",
+    "054-structural-uncertainty-ensemble",
+    "055-full-value-of-information-engine"
+  ],
+  "blocks": [
+    "059-release-engineering-and-model-cards"
+  ],
+  "can_run_parallel_with": [
+    "056-streamlit-policy-cockpit-and-visual-grammar",
+    "061-visual-regression-accessibility-and-browser-tests"
+  ],
+  "allowed_file_globs": [
+    "reports/public_aggregate_model_report.qmd",
+    "docs/release/model-card-template.qmd",
+    "scripts/render_public_model_report.py",
+    "models/tests/test_report_artifacts.py"
+  ],
+  "forbidden_file_globs": [
+    "docs/substack-ready/**",
+    "data/linked-nz/**"
+  ],
+  "required_gates": [
+    "python scripts/render_public_model_report.py",
+    "python -m pytest -q models/tests/test_report_artifacts.py"
+  ],
+  "max_agent_depth": 2,
+  "parallelism_note": "Safe for Cline/deepseek execution only within declared file ownership and dependency wave."
+}

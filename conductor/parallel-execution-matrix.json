@@ -1,0 +1,461 @@
+{
+  "execution_model": "Cline with DeepSeek v4 Flash: maximize breadth inside dependency waves, keep depth shallow per subagent.",
+  "rules": {
+    "max_parallelism": "All tracks in the same wave may run concurrently only when their allowed file globs do not overlap.",
+    "max_levels": "Use at most coordinator -> track lead -> work-package agent. Do not create deeper chains unless a work package discovers a separately gated subproblem.",
+    "handoff_required": "Every subagent writes changed files, gates run, residual blockers, and claim-boundary status into implementation-log.md."
+  },
+  "tracks": {
+    "050-public-only-registry-purification": {
+      "wave": 1,
+      "depends_on": [],
+      "blocks": [
+        "051-parameter-ontology-and-distributions",
+        "052-public-source-ingestion-and-snapshots",
+        "053-public-aggregate-calibration-engine",
+        "056-streamlit-policy-cockpit-and-visual-grammar"
+      ],
+      "can_run_parallel_with": [
+        "062-dependency-locking-and-reproducible-runtime"
+      ],
+      "allowed_files": [
+        "models/primarycare_model/registries/public/**",
+        "models/primarycare_model/registries/templates/**",
+        "scripts/check_public_only_boundary.py",
+        "models/tests/test_public_only_boundary.py"
+      ],
+      "forbidden_files": [
+        "data/linked-nz/**",
+        "data/evidence/**",
+        "models/primarycare_model/app.py"
+      ],
+      "gates": [
+        "python scripts/check_public_only_boundary.py",
+        "python -m pytest -q models/tests/test_public_only_boundary.py"
+      ]
+    },
+    "051-parameter-ontology-and-distributions": {
+      "wave": 1,
+      "depends_on": [
+        "050-public-only-registry-purification"
+      ],
+      "blocks": [
+        "053-public-aggregate-calibration-engine",
+        "054-structural-uncertainty-ensemble",
+        "055-full-value-of-information-engine"
+      ],
+      "can_run_parallel_with": [
+        "052-public-source-ingestion-and-snapshots",
+        "058-australia-scope-decision",
+        "062-dependency-locking-and-reproducible-runtime"
+      ],
+      "allowed_files": [
+        "models/primarycare_model/contracts/public_parameters.py",
+        "models/primarycare_model/validation/public_parameter_loader.py",
+        "models/primarycare_model/registries/public/parameters.public.v1.yaml",
+        "scripts/check_parameter_traceability.py",
+        "models/tests/test_parameter_traceability.py",
+        "docs/model/public-parameter-ontology-v1.md"
+      ],
+      "forbidden_files": [
+        "models/primarycare_model/registries/parameters.v1.yaml",
+        "data/linked-nz/**",
+        "models/primarycare_model/app.py"
+      ],
+      "gates": [
+        "python scripts/check_parameter_traceability.py",
+        "python -m pytest -q models/tests/test_parameter_traceability.py"
+      ]
+    },
+    "052-public-source-ingestion-and-snapshots": {
+      "wave": 1,
+      "depends_on": [
+        "050-public-only-registry-purification"
+      ],
+      "blocks": [
+        "053-public-aggregate-calibration-engine",
+        "057-quarto-scientific-report-rebuild",
+        "059-release-engineering-and-model-cards"
+      ],
+      "can_run_parallel_with": [
+        "051-parameter-ontology-and-distributions",
+        "058-australia-scope-decision",
+        "062-dependency-locking-and-reproducible-runtime"
+      ],
+      "allowed_files": [
+        "models/primarycare_model/contracts/public_sources.py",
+        "models/primarycare_model/data/public_source_snapshot.py",
+        "models/primarycare_model/registries/public/sources.public.v1.yaml",
+        "data/public_raw/**",
+        "data/public_processed/**",
+        "data/snapshots/**",
+        "scripts/build_public_source_snapshot.py",
+        "scripts/check_public_source_snapshot.py",
+        "models/tests/test_public_source_snapshot.py"
+      ],
+      "forbidden_files": [
+        "data/linked-nz/**",
+        "data/evidence/oia_request_tracker.csv",
+        "models/primarycare_model/app.py"
+      ],
+      "gates": [
+        "python scripts/build_public_source_snapshot.py",
+        "python scripts/check_public_source_snapshot.py",
+        "python -m pytest -q models/tests/test_public_source_snapshot.py"
+      ]
+    },
+    "053-public-aggregate-calibration-engine": {
+      "wave": 2,
+      "depends_on": [
+        "050-public-only-registry-purification",
+        "051-parameter-ontology-and-distributions",
+        "052-public-source-ingestion-and-snapshots"
+      ],
+      "blocks": [
+        "056-streamlit-policy-cockpit-and-visual-grammar",
+        "057-quarto-scientific-report-rebuild",
+        "059-release-engineering-and-model-cards"
+      ],
+      "can_run_parallel_with": [
+        "054-structural-uncertainty-ensemble",
+        "055-full-value-of-information-engine",
+        "060-self-learning-public-evidence-monitor"
+      ],
+      "allowed_files": [
+        "models/primarycare_model/calibration/**",
+        "models/primarycare_model/contracts/calibration_targets.py",
+        "models/primarycare_model/registries/public/calibration_targets.public.v1.yaml",
+        "scripts/run_public_aggregate_calibration.py",
+        "docs/calibration/public-aggregate-calibration-methods-v1.md",
+        "models/tests/test_public_aggregate_calibration.py"
+      ],
+      "forbidden_files": [
+        "data/linked-nz/**",
+        "data/evidence/**",
+        "models/primarycare_model/app.py"
+      ],
+      "gates": [
+        "python scripts/run_public_aggregate_calibration.py --check-only",
+        "python -m pytest -q models/tests/test_public_aggregate_calibration.py"
+      ]
+    },
+    "054-structural-uncertainty-ensemble": {
+      "wave": 2,
+      "depends_on": [
+        "050-public-only-registry-purification",
+        "051-parameter-ontology-and-distributions"
+      ],
+      "blocks": [
+        "056-streamlit-policy-cockpit-and-visual-grammar",
+        "057-quarto-scientific-report-rebuild"
+      ],
+      "can_run_parallel_with": [
+        "053-public-aggregate-calibration-engine",
+        "055-full-value-of-information-engine",
+        "060-self-learning-public-evidence-monitor"
+      ],
+      "allowed_files": [
+        "models/primarycare_model/contracts/structural_models.py",
+        "models/primarycare_model/uncertainty/**",
+        "models/primarycare_model/registries/public/structural_models.public.v1.yaml",
+        "docs/model/structural-uncertainty-v1.md",
+        "docs/diagrams/structural-ensemble.mmd",
+        "models/tests/test_structural_ensemble.py"
+      ],
+      "forbidden_files": [
+        "data/linked-nz/**",
+        "models/primarycare_model/app.py"
+      ],
+      "gates": [
+        "python -m pytest -q models/tests/test_structural_ensemble.py"
+      ]
+    },
+    "055-full-value-of-information-engine": {
+      "wave": 2,
+      "depends_on": [
+        "050-public-only-registry-purification",
+        "051-parameter-ontology-and-distributions"
+      ],
+      "blocks": [
+        "056-streamlit-policy-cockpit-and-visual-grammar",
+        "057-quarto-scientific-report-rebuild"
+      ],
+      "can_run_parallel_with": [
+        "053-public-aggregate-calibration-engine",
+        "054-structural-uncertainty-ensemble",
+        "060-self-learning-public-evidence-monitor"
+      ],
+      "allowed_files": [
+        "models/primarycare_model/voi/**",
+        "models/primarycare_model/contracts/voi.py",
+        "models/primarycare_model/registries/public/voi_parameter_groups.public.v1.yaml",
+        "scripts/run_voi.py",
+        "docs/model/value-of-information-methods-v1.md",
+        "models/tests/test_full_voi.py"
+      ],
+      "forbidden_files": [
+        "docs/qualitative/**",
+        "data/templates/*stakeholder*",
+        "models/primarycare_model/app.py"
+      ],
+      "gates": [
+        "python scripts/run_voi.py --check-only",
+        "python -m pytest -q models/tests/test_full_voi.py"
+      ]
+    },
+    "056-streamlit-policy-cockpit-and-visual-grammar": {
+      "wave": 3,
+      "depends_on": [
+        "050-public-only-registry-purification",
+        "053-public-aggregate-calibration-engine",
+        "054-structural-uncertainty-ensemble",
+        "055-full-value-of-information-engine"
+      ],
+      "blocks": [
+        "061-visual-regression-accessibility-and-browser-tests",
+        "059-release-engineering-and-model-cards"
+      ],
+      "can_run_parallel_with": [
+        "057-quarto-scientific-report-rebuild"
+      ],
+      "allowed_files": [
+        "models/primarycare_model/ui/**",
+        "models/primarycare_model/app.py",
+        "docs/visualisation/visual-grammar-contract-v1.md",
+        "models/tests/test_streamlit_cockpit_contracts.py",
+        "models/tests/test_app.py"
+      ],
+      "forbidden_files": [
+        "models/primarycare_model/registries/templates/**",
+        "data/linked-nz/**"
+      ],
+      "gates": [
+        "python scripts/run_accessibility_audit.py --check-only",
+        "python -m pytest -q models/tests/test_streamlit_cockpit_contracts.py models/tests/test_app.py::test_app_expander_exists"
+      ]
+    },
+    "057-quarto-scientific-report-rebuild": {
+      "wave": 3,
+      "depends_on": [
+        "052-public-source-ingestion-and-snapshots",
+        "053-public-aggregate-calibration-engine",
+        "054-structural-uncertainty-ensemble",
+        "055-full-value-of-information-engine"
+      ],
+      "blocks": [
+        "059-release-engineering-and-model-cards"
+      ],
+      "can_run_parallel_with": [
+        "056-streamlit-policy-cockpit-and-visual-grammar",
+        "061-visual-regression-accessibility-and-browser-tests"
+      ],
+      "allowed_files": [
+        "reports/public_aggregate_model_report.qmd",
+        "docs/release/model-card-template.qmd",
+        "scripts/render_public_model_report.py",
+        "models/tests/test_report_artifacts.py"
+      ],
+      "forbidden_files": [
+        "docs/substack-ready/**",
+        "data/linked-nz/**"
+      ],
+      "gates": [
+        "python scripts/render_public_model_report.py",
+        "python -m pytest -q models/tests/test_report_artifacts.py"
+      ]
+    },
+    "058-australia-scope-decision": {
+      "wave": 1,
+      "depends_on": [],
+      "blocks": [
+        "056-streamlit-policy-cockpit-and-visual-grammar",
+        "057-quarto-scientific-report-rebuild"
+      ],
+      "can_run_parallel_with": [
+        "051-parameter-ontology-and-distributions",
+        "052-public-source-ingestion-and-snapshots",
+        "062-dependency-locking-and-reproducible-runtime"
+      ],
+      "allowed_files": [
+        "docs/decisions/australia-scope-decision-v1.md",
+        "models/primarycare_model/registries/public/jurisdictions.public.v1.yaml",
+        "models/tests/test_jurisdiction_claims.py",
+        "README.md"
+      ],
+      "forbidden_files": [
+        "models/primarycare_model/registries/public/calibration_targets.public.v1.yaml"
+      ],
+      "gates": [
+        "python -m pytest -q models/tests/test_jurisdiction_claims.py"
+      ]
+    },
+    "059-release-engineering-and-model-cards": {
+      "wave": 4,
+      "depends_on": [
+        "052-public-source-ingestion-and-snapshots",
+        "056-streamlit-policy-cockpit-and-visual-grammar",
+        "057-quarto-scientific-report-rebuild",
+        "061-visual-regression-accessibility-and-browser-tests",
+        "062-dependency-locking-and-reproducible-runtime"
+      ],
+      "blocks": [],
+      "can_run_parallel_with": [],
+      "allowed_files": [
+        "VERSION",
+        "pyproject.toml",
+        "models/primarycare_model/version.py",
+        "scripts/check_version_consistency.py",
+        "scripts/generate_release_model_card.py",
+        "scripts/generate_release_manifest.py",
+        "docs/release/**",
+        "models/tests/test_release_engineering.py",
+        ".github/workflows/**"
+      ],
+      "forbidden_files": [
+        "models/primarycare_model/registries/templates/**",
+        "data/linked-nz/**"
+      ],
+      "gates": [
+        "python scripts/check_version_consistency.py",
+        "python scripts/generate_release_model_card.py --check-only",
+        "python scripts/generate_release_manifest.py --check-only",
+        "python -m pytest -q models/tests/test_release_engineering.py"
+      ]
+    },
+    "060-self-learning-public-evidence-monitor": {
+      "wave": 2,
+      "depends_on": [
+        "052-public-source-ingestion-and-snapshots"
+      ],
+      "blocks": [
+        "059-release-engineering-and-model-cards"
+      ],
+      "can_run_parallel_with": [
+        "053-public-aggregate-calibration-engine",
+        "054-structural-uncertainty-ensemble",
+        "055-full-value-of-information-engine"
+      ],
+      "allowed_files": [
+        "models/primarycare_model/evidence/**",
+        "models/primarycare_model/contracts/evidence_candidates.py",
+        "scripts/monitor_public_evidence.py",
+        "docs/evidence/public-evidence-monitoring-v1.md",
+        "models/tests/test_public_evidence_monitor.py"
+      ],
+      "forbidden_files": [
+        "models/primarycare_model/registries/public/parameters.public.v1.yaml",
+        "models/primarycare_model/app.py"
+      ],
+      "gates": [
+        "python scripts/monitor_public_evidence.py",
+        "python -m pytest -q models/tests/test_public_evidence_monitor.py"
+      ]
+    },
+    "061-visual-regression-accessibility-and-browser-tests": {
+      "wave": 3,
+      "depends_on": [
+        "056-streamlit-policy-cockpit-and-visual-grammar"
+      ],
+      "blocks": [
+        "059-release-engineering-and-model-cards"
+      ],
+      "can_run_parallel_with": [
+        "057-quarto-scientific-report-rebuild"
+      ],
+      "allowed_files": [
+        "tests/browser/**",
+        "scripts/run_visual_regression.py",
+        "scripts/run_accessibility_audit.py",
+        "docs/testing/visual-regression-and-accessibility-v1.md"
+      ],
+      "forbidden_files": [
+        "models/primarycare_model/registries/public/**"
+      ],
+      "gates": [
+        "python scripts/run_visual_regression.py --check-only",
+        "python scripts/run_accessibility_audit.py --check-only"
+      ]
+    },
+    "062-dependency-locking-and-reproducible-runtime": {
+      "wave": 1,
+      "depends_on": [],
+      "blocks": [
+        "059-release-engineering-and-model-cards"
+      ],
+      "can_run_parallel_with": [
+        "050-public-only-registry-purification",
+        "051-parameter-ontology-and-distributions",
+        "052-public-source-ingestion-and-snapshots",
+        "058-australia-scope-decision"
+      ],
+      "allowed_files": [
+        "uv.lock",
+        "requirements.txt",
+        "requirements-dev.txt",
+        "requirements-edge.txt",
+        "Dockerfile",
+        ".devcontainer/devcontainer.json",
+        "scripts/check_dependency_lock.py",
+        "models/tests/test_dependency_files.py",
+        ".github/workflows/dependency-edge.yml"
+      ],
+      "forbidden_files": [
+        "models/primarycare_model/registries/public/**",
+        "models/primarycare_model/app.py"
+      ],
+      "gates": [
+        "python scripts/check_dependency_lock.py",
+        "python -m pytest -q models/tests/test_dependency_files.py"
+      ]
+    },
+    "063-release-readiness-parallel-closeout": {
+      "wave": 5,
+      "depends_on": [
+        "050-public-only-registry-purification",
+        "051-parameter-ontology-and-distributions",
+        "052-public-source-ingestion-and-snapshots",
+        "053-public-aggregate-calibration-engine",
+        "054-structural-uncertainty-ensemble",
+        "055-full-value-of-information-engine",
+        "056-streamlit-policy-cockpit-and-visual-grammar",
+        "057-quarto-scientific-report-rebuild",
+        "058-australia-scope-decision",
+        "059-release-engineering-and-model-cards",
+        "060-self-learning-public-evidence-monitor",
+        "061-visual-regression-accessibility-and-browser-tests",
+        "062-dependency-locking-and-reproducible-runtime"
+      ],
+      "blocks": [],
+      "can_run_parallel_with": [],
+      "allowed_files": [
+        "conductor/tracks/063-release-readiness-parallel-closeout/**",
+        "conductor/state.md",
+        "docs/release/**",
+        "docs/testing/**",
+        "docs/model/public-source-readiness-closeout-v1.md"
+      ],
+      "forbidden_files": [
+        "models/primarycare_model/registries/public/parameters.public.v1.yaml",
+        "models/primarycare_model/registries/public/calibration_targets.public.v1.yaml",
+        "models/primarycare_model/app.py",
+        "data/linked-nz/**",
+        "data/evidence/**"
+      ],
+      "gates": [
+        "python scripts/check_conductor_parallel_tracks.py",
+        "python scripts/check_public_only_boundary.py",
+        "python scripts/check_parameter_traceability.py",
+        "python scripts/check_public_source_snapshot.py",
+        "python scripts/check_dependency_lock.py",
+        "python scripts/check_concern_boundaries.py",
+        "python scripts/run_public_aggregate_calibration.py --check-only",
+        "python scripts/run_voi.py --check-only",
+        "python scripts/run_accessibility_audit.py --check-only",
+        "python scripts/generate_release_model_card.py --check-only",
+        "python scripts/generate_release_manifest.py --check-only",
+        "python scripts/sync_public_mirror.py --check",
+        "python -m pytest -q models/tests/test_conductor_parallel_tracks.py models/tests/test_public_only_boundary.py models/tests/test_parameter_traceability.py models/tests/test_public_source_snapshot.py models/tests/test_public_aggregate_calibration.py models/tests/test_structural_ensemble.py models/tests/test_full_voi.py models/tests/test_streamlit_cockpit_contracts.py models/tests/test_report_artifacts.py models/tests/test_jurisdiction_claims.py models/tests/test_release_engineering.py models/tests/test_public_evidence_monitor.py models/tests/test_dependency_files.py"
+      ]
+    }
+  }
+}

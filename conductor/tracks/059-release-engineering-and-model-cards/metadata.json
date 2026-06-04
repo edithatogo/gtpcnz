@@ -1,0 +1,43 @@
+{
+  "id": "059-release-engineering-and-model-cards",
+  "title": "Release engineering and model cards",
+  "status": "active",
+  "created": "2026-06-03",
+  "updated": "2026-06-03",
+  "owner": "codex",
+  "contract": "CON-REL-001",
+  "claim_boundary": "Public-data anchored benchmark by default; no unsupported calibrated or causal claims.",
+  "execution_wave": 4,
+  "depends_on": [
+    "052-public-source-ingestion-and-snapshots",
+    "056-streamlit-policy-cockpit-and-visual-grammar",
+    "057-quarto-scientific-report-rebuild",
+    "061-visual-regression-accessibility-and-browser-tests",
+    "062-dependency-locking-and-reproducible-runtime"
+  ],
+  "blocks": [],
+  "can_run_parallel_with": [],
+  "allowed_file_globs": [
+    "VERSION",
+    "pyproject.toml",
+    "models/primarycare_model/version.py",
+    "scripts/check_version_consistency.py",
+    "scripts/generate_release_model_card.py",
+    "scripts/generate_release_manifest.py",
+    "docs/release/**",
+    "models/tests/test_release_engineering.py",
+    ".github/workflows/**"
+  ],
+  "forbidden_file_globs": [
+    "models/primarycare_model/registries/templates/**",
+    "data/linked-nz/**"
+  ],
+  "required_gates": [
+    "python scripts/check_version_consistency.py",
+    "python scripts/generate_release_model_card.py --check-only",
+    "python scripts/generate_release_manifest.py --check-only",
+    "python -m pytest -q models/tests/test_release_engineering.py"
+  ],
+  "max_agent_depth": 2,
+  "parallelism_note": "Safe for Cline/deepseek execution only within declared file ownership and dependency wave."
+}
