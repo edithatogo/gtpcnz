@@ -68,6 +68,7 @@ from models.primarycare_model.scenario_service import (
     score_educational_settings,
     summarise_reference_results,
 )
+from models.primarycare_model.ui.cockpit import build_policy_cockpit_payload
 
 APP_VERSION = "1.8.1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -2936,6 +2937,7 @@ def render_app() -> None:
         "Explainer",
         "Evidence/OIA",
         "Calibration",
+        "Public cockpit",
         "Glossary",
     ]
     tabs = st.tabs(tab_names)
@@ -3173,6 +3175,51 @@ def render_app() -> None:
         )
 
     with tabs[11]:
+        st.subheader("Public model cockpit")
+        cockpit = build_policy_cockpit_payload()
+        st.warning(FULL_PUBLIC_CAVEAT)
+        st.markdown("### Executive policy cockpit")
+        st.markdown("### Scenario frontier")
+        st.markdown("### Interactive causal architecture")
+        st.markdown("### Policy topology/manifold")
+        st.markdown("### Public aggregate calibration diagnostics")
+        st.markdown("### Parameter and structural uncertainty")
+        st.markdown("### Value of information")
+        st.markdown("### Equity and subgroup small multiples where public data permit")
+        st.markdown("### Public source provenance and freshness")
+        st.markdown("### Release audit panel")
+        st.markdown("### Scenario report-card downloads")
+        st.json(
+            {
+                "sections": cockpit["sections"],
+                "calibration_status": cockpit["calibration"]["calibration_status"],
+                "chart_count": len(cockpit["charts"]),
+            }
+        )
+        for chart in cockpit["charts"]:
+            st.markdown(f"#### {chart['title']}")
+            st.caption(
+                " | ".join(
+                    [
+                        f"Unit: {chart['unit']}",
+                        f"Claim level: {chart['claim_level']}",
+                        f"Calibration: {chart['calibration_status']}",
+                        f"Uncertainty: {chart['uncertainty_type']}",
+                        f"Source snapshot: {chart['source_snapshot_id']}",
+                    ]
+                )
+            )
+            st.info(str(chart["interpretation_note"]))
+            st.warning(str(chart["not_valid_for_warning"]))
+            st.download_button(
+                f"Download data - {chart['title']}",
+                data=pd.DataFrame(chart["downloadable_data"]).to_csv(index=False).encode("utf-8"),
+                file_name=f"{str(chart['title']).lower().replace(' ', '-')}.csv",
+                mime="text/csv",
+            )
+            st.dataframe(pd.DataFrame(chart["table_fallback"]), hide_index=True, width="stretch")
+
+    with tabs[12]:
         st.subheader("📖 Plain-English glossary")
         st.markdown(
             """

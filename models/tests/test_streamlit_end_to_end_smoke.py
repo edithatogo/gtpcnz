@@ -34,6 +34,7 @@ def test_streamlit_entrypoint_renders_all_public_tabs_with_app_test() -> None:
         "Explainer",
         "Evidence/OIA",
         "Calibration",
+        "Public cockpit",
         "Glossary",
     ]
     page_text = "\n".join(
@@ -50,6 +51,8 @@ def test_streamlit_entrypoint_renders_all_public_tabs_with_app_test() -> None:
         "Value of information",
         "Distribution-based calibration",
         "Budget impact",
+        "Public model cockpit",
+        "Release audit panel",
     ]:
         assert required in page_text
 
