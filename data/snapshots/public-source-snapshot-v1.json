@@ -1,9 +1,9 @@
 {
   "claim_boundary": "Public/published aggregate source snapshot only; no private, confidential, or patient-level inputs.",
-  "created_at": "2026-06-03T12:40:11.899377+00:00",
+  "created_at": "2026-06-04T15:30:25.959718+00:00",
   "parameter_registry_sha256": "fdb642505004dc8f52e60f3c9ce94e61e982f7a6ab00845e66cc3f2bf87bff8b",
   "snapshot_id": "public-snapshot-v1",
-  "source_registry_sha256": "898e12294a5e2d04135559d949720b38e3334b476eecba04e08d06f172093647",
+  "source_registry_sha256": "f76b0b11316464f61069435ca92624a5ee1a04f111077d7af677986a106e94c3",
   "sources": [
     {
       "checksum": "pending-download",
@@ -14,7 +14,7 @@
       "retrieval_date": "2026-06-03",
       "source_id": "src_hnz_capitation_schedule",
       "transform_description": "Manual public-reference registry entry pending reproducible download.",
-      "url_or_reference": "https://www.tewhatuora.govt.nz/"
+      "url_or_reference": "https://www.tewhatuora.govt.nz/for-health-providers/primary-care-sector/capitation-rates"
     },
     {
       "checksum": "pending-download",
@@ -25,7 +25,7 @@
       "retrieval_date": "2026-06-03",
       "source_id": "src_pho_services_agreement",
       "transform_description": "Public schedule reference used for benchmark parameter bounds.",
-      "url_or_reference": "https://www.tewhatuora.govt.nz/"
+      "url_or_reference": "https://www.tewhatuora.govt.nz/for-health-providers/primary-care-sector/primary-health-organisation-services-agreement"
     },
     {
       "checksum": "pending-download",
@@ -36,7 +36,7 @@
       "retrieval_date": "2026-06-03",
       "source_id": "src_hnz_enrolment",
       "transform_description": "Public aggregate enrolment denominator.",
-      "url_or_reference": "https://www.tewhatuora.govt.nz/"
+      "url_or_reference": "https://www.tewhatuora.govt.nz/for-health-professionals/data-and-statistics/primary-care"
     },
     {
       "checksum": "pending-download",
@@ -47,7 +47,7 @@
       "retrieval_date": "2026-06-03",
       "source_id": "src_mcnz_workforce",
       "transform_description": "Published aggregate workforce prior.",
-      "url_or_reference": "https://www.mcnz.org.nz/"
+      "url_or_reference": "https://www.mcnz.org.nz/about-us/what-we-do/workforce-survey/"
     },
     {
       "checksum": "pending-download",
@@ -69,7 +69,7 @@
       "retrieval_date": "2026-06-03",
       "source_id": "src_statsnz_population",
       "transform_description": "Public aggregate population denominator.",
-      "url_or_reference": "https://www.stats.govt.nz/"
+      "url_or_reference": "https://www.stats.govt.nz/indicators/population-of-nz/"
     }
   ]
 }
