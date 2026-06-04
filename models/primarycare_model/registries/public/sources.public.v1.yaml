@@ -28,7 +28,7 @@ sources:
     claim_boundary: Aggregate denominator; no patient-level data.
   - source_id: src_mcnz_workforce
     label: Medical Council workforce survey
-    url_or_reference: https://www.mcnz.org.nz/about-us/what-we-do/workforce-survey/
+    url_or_reference: https://www.mcnz.org.nz/about-us/publications/workforce-survey/
     retrieval_date: 2026-06-03
     licence_status: public_reference
     public_access_status: public

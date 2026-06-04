@@ -1,9 +1,9 @@
 {
   "claim_boundary": "Public/published aggregate source snapshot only; no private, confidential, or patient-level inputs.",
-  "created_at": "2026-06-04T15:30:25.959718+00:00",
+  "created_at": "2026-06-04T23:21:30.747044+00:00",
   "parameter_registry_sha256": "fdb642505004dc8f52e60f3c9ce94e61e982f7a6ab00845e66cc3f2bf87bff8b",
   "snapshot_id": "public-snapshot-v1",
-  "source_registry_sha256": "f76b0b11316464f61069435ca92624a5ee1a04f111077d7af677986a106e94c3",
+  "source_registry_sha256": "ad058ee5e125e5b0fb3f8a62cb604bc0ebc86c28b9eb9b53986836b1f688881c",
   "sources": [
     {
       "checksum": "pending-download",
@@ -47,7 +47,7 @@
       "retrieval_date": "2026-06-03",
       "source_id": "src_mcnz_workforce",
       "transform_description": "Published aggregate workforce prior.",
-      "url_or_reference": "https://www.mcnz.org.nz/about-us/what-we-do/workforce-survey/"
+      "url_or_reference": "https://www.mcnz.org.nz/about-us/publications/workforce-survey/"
     },
     {
       "checksum": "pending-download",
