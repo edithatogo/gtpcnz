@@ -18,6 +18,7 @@ pytest-cache-files-*/
 codex-tmp/
 docs/figures/public-proof/browser-audit-*/
 .venv/
+/.venv-*/
 .env
 .streamlit/secrets.toml
 .serena/
