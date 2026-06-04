@@ -31,6 +31,14 @@ docs/figures/public-proof/browser-audit-*/
 
 /qa/
 
+# Local/non-public work products that must not enter the public release path.
+/data/linked-nz/
+/docs/review/extraction-matrix-v1.1.0.csv
+/docs/review/search-results-openalex-v1.1.0.json
+/docs/review/search-results-openalex-v1.1.0.md
+/docs/skills/streamlit-apptest/
+/docs/skills/streamlit-dashboard/
+
 # Quarto render output; keep the source .qmd tracked.
 /.quarto/
 /_site/
