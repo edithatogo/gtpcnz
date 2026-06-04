@@ -1,0 +1,8 @@
+template_status: excluded_from_public_runtime
+claim_boundary: Confidential/OIA/private inputs are quarantined here and are not public model inputs.
+forbidden_for_public_runtime: true
+examples:
+  - dataset_id: practice_cost_survey
+    sensitivity_class: confidential
+    evidence_tier: private_admin
+    source: Confidential practice cost material; excluded from public runtime.

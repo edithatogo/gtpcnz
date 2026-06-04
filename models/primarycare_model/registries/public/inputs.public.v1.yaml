@@ -1,0 +1,25 @@
+datasets:
+  - dataset_id: population_denominators_public
+    label: Public population denominators
+    source_id: src_statsnz_population
+    source: Stats NZ estimated resident population public tables.
+    sensitivity_class: public_aggregate
+    public_access_status: public
+    licence_status: open_or_public_reference
+    claim_boundary: Aggregate denominator only; no patient-level records.
+    fields:
+      - {field_name: jurisdiction, data_type: string, unit: code, required: true, description: Jurisdiction code.}
+      - {field_name: year, data_type: integer, unit: calendar year, required: true, description: Public reporting year.}
+      - {field_name: population_count, data_type: integer, unit: persons, required: true, description: Aggregate population count.}
+  - dataset_id: primary_care_access_public
+    label: Public primary care access indicators
+    source_id: src_nz_health_survey
+    source: New Zealand Health Survey public data explorer.
+    sensitivity_class: public_aggregate
+    public_access_status: public
+    licence_status: public_reference
+    claim_boundary: Published aggregate survey indicators only.
+    fields:
+      - {field_name: indicator_id, data_type: string, unit: code, required: true, description: Indicator code.}
+      - {field_name: year, data_type: integer, unit: calendar year, required: true, description: Public reporting year.}
+      - {field_name: value, data_type: number, unit: varies, required: true, description: Published aggregate value.}

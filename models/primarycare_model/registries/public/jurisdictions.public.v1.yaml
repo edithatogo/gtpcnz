@@ -1,0 +1,7 @@
+jurisdictions:
+  - jurisdiction: NZ
+    first_class_model: true
+    claim_boundary: Public aggregate benchmark jurisdiction.
+  - jurisdiction: AU
+    first_class_model: false
+    claim_boundary: Comparative policy context only; no unsupported AU model claims.

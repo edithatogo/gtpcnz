@@ -1,0 +1,28 @@
+targets:
+  - target_id: nz_population_denominator_2024
+    target_family: population_denominators
+    label: NZ population denominator
+    source_id: src_statsnz_population
+    observed_value: 5200000.0
+    unit: persons
+    tolerance: 0.15
+    public_access_status: public
+    claim_boundary: Public aggregate denominator target.
+  - target_id: nz_cost_barrier_gp_2024
+    target_family: unmet_need_cost_barriers
+    label: Cost barrier to GP visit
+    source_id: src_nz_health_survey
+    observed_value: 0.15
+    unit: fraction
+    tolerance: 0.1
+    public_access_status: public
+    claim_boundary: Public aggregate survey target.
+  - target_id: nz_workforce_participation_public
+    target_family: workforce_supply
+    label: Workforce participation public prior
+    source_id: src_mcnz_workforce
+    observed_value: 0.72
+    unit: fraction
+    tolerance: 0.12
+    public_access_status: public
+    claim_boundary: Public aggregate workforce target.
