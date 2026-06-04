@@ -16,3 +16,16 @@
   Claim-boundary status: public_benchmark (snapshot readiness; no source_ready flag promoted).
   Residual blockers: None. All sources have URL/reference, retrieval date, licence status, checksum entries.
   Follow-on owner: coordinator (052 complete; 053, 057, 059 unblocked).
+
+2026-06-05: Strict public-source readiness flags implemented.
+  Work packages: WP-052-C (checksum-readiness), WP-052-D (processed-schema).
+  Files changed: models/primarycare_model/data/public_source_snapshot.py, scripts/check_public_source_snapshot.py, models/tests/test_public_source_snapshot.py, docs/model/public-source-readiness-closeout-v1.md, conductor/tracks/052-public-source-ingestion-and-snapshots/implementation-log.md.
+  Gates run:
+    - python -m pytest -q models/tests/test_public_source_snapshot.py -> PASSED (4 passed)
+    - python scripts/check_public_source_snapshot.py -> PASSED
+    - python scripts/check_public_source_snapshot.py --verify-licences -> PASSED
+    - python scripts/check_public_source_snapshot.py --verify-files --verify-checksums --verify-processed -> FAILED AS EXPECTED because all six registered public sources still have no raw files, checksum: pending-download, and no processed outputs.
+  Result: Default readiness-only snapshot gate remains CI-compatible. Strict opt-in gates now make public-source retrieval, checksum replacement, and processed-output creation machine-checkable.
+  Claim-boundary status: public_benchmark / calibration_readiness_only preserved. No source was promoted to source_ready=true.
+  Residual blockers: All six public sources still require reproducible download, checksum replacement, transformation, and processed-output hash manifests.
+  Follow-on owner: coordinator (next public-source retrieval work).

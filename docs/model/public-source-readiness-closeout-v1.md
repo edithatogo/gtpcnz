@@ -10,7 +10,7 @@
 | Source checksums | 6 of 6 sources have `checksum: pending-download` |
 | Calibration targets with `source_ready=false` | 3 of 3 targets |
 | Track 053 gates | Both pass (calibration stays readiness-only because sources not ready) |
-| Track 052 gates | All pass (snapshot infrastructure exists, but no actual source files downloaded) |
+| Track 052 gates | All pass (snapshot infrastructure and strict source-readiness flags exist, but no actual source files downloaded) |
 
 All 6 registered public sources in `models/primarycare_model/registries/public/sources.public.v1.yaml` have `checksum: pending-download`. The calibration engine (`models/primarycare_model/calibration/public_aggregate_calibration.py`) gates all targets on `source.checksum != "pending-download"`, so every target currently reports `source_ready=false`.
 
@@ -130,13 +130,13 @@ All 6 sources: `checksum: pending-download`.
 
 ### 4.3 Future drift detection
 
-Once checksums are recorded, a recurring check should detect drift:
+Strict checksum drift detection is implemented as an opt-in readiness gate:
 
 ```
 python scripts/check_public_source_snapshot.py --verify-checksums
 ```
 
-This script must recompute checksums of files in `data/public_raw/` and compare against `sources.public.v1.yaml`. Any mismatch triggers a `source_ready=false` downgrade.
+This script recomputes checksums of files in `data/public_raw/` and compares against `sources.public.v1.yaml`. With the current pending-download registry, it intentionally fails and keeps calibration at `calibration_readiness_only`.
 
 ---
 
@@ -286,5 +286,5 @@ All public-source readiness gates must reject any file that falls into the above
 | Licence/access metadata | Placeholder values | Verified per-source with `licence_url` | Post-063 work packages |
 | Checksums | `pending-download` on all 6 | SHA-256 hash on all 6 | Post-063 work packages |
 | Transformation | No scripts exist | 6 transformation scripts + schema validation | Post-063 work packages |
-| Validation gates | Snapshot checker exists, no checksum verification | Extended checker with `--verify-checksums`, `--verify-processed`, `--verify-licences` | Post-063 work packages |
+| Validation gates | Default snapshot checker passes; strict `--verify-files`, `--verify-checksums`, `--verify-processed`, and `--verify-licences` gates exist and currently expose missing source files | Strict gates pass after public downloads and transforms | Post-063 work packages |
 | Calibration upgrade | `calibration_readiness_only` | `public_aggregate_validated` only after all gates pass | Post-063 work packages |
