@@ -39,3 +39,12 @@
     - python scripts/check_public_source_snapshot.py -> PASSED
   Result: Public source records now use concrete public reference pages rather than generic organisation home pages. Checksums remain pending-download.
   Claim-boundary status: public_benchmark / calibration_readiness_only preserved. No source was promoted to source_ready=true.
+
+2026-06-05: Public source retrieval-plan registry and checker added.
+  Work package: WP-052-A (source-contracts), WP-052-C (checksum-readiness).
+  Files changed: models/primarycare_model/contracts/public_sources.py, models/primarycare_model/data/public_source_retrieval.py, models/primarycare_model/registries/public/source_retrieval.public.v1.yaml, scripts/check_public_source_retrieval_plan.py, models/tests/test_public_source_retrieval_plan.py, docs/model/public-source-readiness-closeout-v1.md, conductor/tracks/052-public-source-ingestion-and-snapshots/implementation-log.md.
+  Gates run:
+    - python scripts/check_public_source_retrieval_plan.py -> PASSED
+    - python -m pytest -q models/tests/test_public_source_retrieval_plan.py -> PASSED
+  Result: Every public source now has a typed retrieval plan with source_id, public reference URL, expected raw path, retrieval method, transform script, expected processed output, and pending-download status.
+  Claim-boundary status: public_benchmark / calibration_readiness_only preserved. Retrieval plans are references only and do not promote source_ready=true.

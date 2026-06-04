@@ -10,7 +10,7 @@
 | Source checksums | 6 of 6 sources have `checksum: pending-download` |
 | Calibration targets with `source_ready=false` | 3 of 3 targets |
 | Track 053 gates | Both pass (calibration stays readiness-only because sources not ready) |
-| Track 052 gates | All pass (snapshot infrastructure and strict source-readiness flags exist, but no actual source files downloaded) |
+| Track 052 gates | All pass (snapshot infrastructure, retrieval-plan registry, and strict source-readiness flags exist, but no actual source files downloaded) |
 
 All 6 registered public sources in `models/primarycare_model/registries/public/sources.public.v1.yaml` have `checksum: pending-download`. The calibration engine (`models/primarycare_model/calibration/public_aggregate_calibration.py`) gates all targets on `source.checksum != "pending-download"`, so every target currently reports `source_ready=false`.
 
@@ -20,15 +20,21 @@ The `data/public_raw/` and `data/public_processed/` directories exist but are em
 
 ## 2. Public Source Retrieval Tasks
 
-Each of the 6 registered sources needs a reproducible download procedure. Below is the task list with exact URLs, expected file descriptions, and proposed download script IDs.
+Each of the 6 registered sources has a machine-readable retrieval plan in `models/primarycare_model/registries/public/source_retrieval.public.v1.yaml`. The plan is checked by:
+
+```
+python scripts/check_public_source_retrieval_plan.py
+```
+
+The current retrieval status for every source is `reference_pinned_pending_download`: public reference pages are pinned, but raw files and processed outputs have not been created.
 
 ### 2.1 `src_hnz_capitation_schedule` — Health NZ Capitation and PHO Services Schedules
 
 | Property | Value |
 |---|---|
-| URL | `https://www.tewhatuora.govt.nz/` (root — specific schedule page TBC) |
+| URL | `https://www.tewhatuora.govt.nz/for-health-providers/primary-care-sector/capitation-rates` |
 | Expected content | Published capitation funding rates by age/sex/ethnicity group; PHO services schedule values |
-| Proposed raw file | `data/public_raw/hnz_capitation_schedule/` (multi-page reference — PDF or HTML table) |
+| Proposed raw file | `data/public_raw/src_hnz_capitation_schedule/capitation-rates.html` |
 | Retrieval script | `scripts/fetch_hnz_capitation_schedule.py` |
 | Task | Identify the exact schedule publication page, download the published PDF or CSV, place in `data/public_raw/` |
 
@@ -36,9 +42,9 @@ Each of the 6 registered sources needs a reproducible download procedure. Below 
 
 | Property | Value |
 |---|---|
-| URL | `https://www.tewhatuora.govt.nz/` (root — specific page TBC) |
+| URL | `https://www.tewhatuora.govt.nz/for-health-providers/primary-care-sector/primary-health-organisation-services-agreement` |
 | Expected content | Public schedule of consultation values, service fees, and funding formulae |
-| Proposed raw file | `data/public_raw/pho_services_agreement/` (PDF or HTML) |
+| Proposed raw file | `data/public_raw/src_pho_services_agreement/master-pho-services-agreement.pdf` |
 | Retrieval script | `scripts/fetch_pho_services_agreement.py` |
 | Task | Locate the PHO Services Agreement schedule, download published document(s), place in `data/public_raw/` |
 
@@ -46,9 +52,9 @@ Each of the 6 registered sources needs a reproducible download procedure. Below 
 
 | Property | Value |
 |---|---|
-| URL | `https://www.tewhatuora.govt.nz/` (root — specific enrolment data page TBC) |
+| URL | `https://www.tewhatuora.govt.nz/for-health-professionals/data-and-statistics/primary-care` |
 | Expected content | Aggregate enrolled population counts by DHB/region, age, sex |
-| Proposed raw file | `data/public_raw/hnz_enrolment/` (CSV or Excel from public reporting dashboard) |
+| Proposed raw file | `data/public_raw/src_hnz_enrolment/primary-care-enrolment-public-data.html` |
 | Retrieval script | `scripts/fetch_hnz_enrolment.py` |
 | Task | Access the public enrolment dashboard or published tables, download aggregate counts, place in `data/public_raw/` |
 
@@ -56,9 +62,9 @@ Each of the 6 registered sources needs a reproducible download procedure. Below 
 
 | Property | Value |
 |---|---|
-| URL | `https://www.mcnz.org.nz/` |
+| URL | `https://www.mcnz.org.nz/about-us/publications/workforce-survey/` |
 | Expected content | Published aggregate workforce participation rates, FTE counts, demographics |
-| Proposed raw file | `data/public_raw/mcnz_workforce/` (published report PDF or CSV tables) |
+| Proposed raw file | `data/public_raw/src_mcnz_workforce/workforce-survey-report-2025.pdf` |
 | Retrieval script | `scripts/fetch_mcnz_workforce.py` |
 | Task | Access the Medical Council publications page, download the most recent workforce survey report, place in `data/public_raw/` |
 
@@ -68,7 +74,7 @@ Each of the 6 registered sources needs a reproducible download procedure. Below 
 |---|---|
 | URL | `https://minhealthnz.shinyapps.io/nz-health-survey-2023-24-annual-data-explorer/` |
 | Expected content | Published aggregate survey output: cost barrier to GP access by demographic group |
-| Proposed raw file | `data/public_raw/nz_health_survey/` (CSV export from data explorer or published tables) |
+| Proposed raw file | `data/public_raw/src_nz_health_survey/nz-health-survey-2023-24-cost-barrier-export.csv` |
 | Retrieval script | `scripts/fetch_nz_health_survey.py` |
 | Task | Use the public data explorer to export or extract the cost-barrier indicator table, place in `data/public_raw/` |
 
@@ -76,9 +82,9 @@ Each of the 6 registered sources needs a reproducible download procedure. Below 
 
 | Property | Value |
 |---|---|
-| URL | `https://www.stats.govt.nz/` |
+| URL | `https://www.stats.govt.nz/indicators/population-of-nz/` |
 | Expected content | Estimated resident population (ERP) by DHB/region, age, sex — public tables |
-| Proposed raw file | `data/public_raw/statsnz_population/` (CSV from NZ.Stat or Infoshare) |
+| Proposed raw file | `data/public_raw/src_statsnz_population/population-of-nz-indicator.html` |
 | Retrieval script | `scripts/fetch_statsnz_population.py` |
 | Task | Download the most recent estimated resident population tables from Stats NZ public database, place in `data/public_raw/` |
 
@@ -92,7 +98,7 @@ Each source currently has `licence_status: public_reference` and `public_access_
 
 | Field | Current value | Required post-retrieval |
 |---|---|---|
-| `url_or_reference` | Root URL only | Must resolve to the **exact page/document URL** used in retrieval |
+| `url_or_reference` | Concrete public reference page | Must resolve to the exact page/document URL used in retrieval |
 | `retrieval_date` | `2026-06-03` (placeholder) | Must be the actual date the file was downloaded |
 | `licence_status` | `public_reference` | Must be confirmed as one of: `open_government`, `cc_by`, `public_domain`, `public_reference`, or equivalent known licence |
 | `public_access_status` | `public` | Must be `public` — reject any source that requires authenticated access or has use restrictions |
@@ -282,7 +288,7 @@ All public-source readiness gates must reject any file that falls into the above
 
 | Layer | Current state | Target state | Owner |
 |---|---|---|---|
-| Source retrieval | 0/6 files downloaded | 6/6 files in `data/public_raw/` | Post-063 work packages |
+| Source retrieval | 0/6 files downloaded; 6/6 retrieval plans pinned | 6/6 files in `data/public_raw/` | Post-063 work packages |
 | Licence/access metadata | Placeholder values | Verified per-source with `licence_url` | Post-063 work packages |
 | Checksums | `pending-download` on all 6 | SHA-256 hash on all 6 | Post-063 work packages |
 | Transformation | No scripts exist | 6 transformation scripts + schema validation | Post-063 work packages |
