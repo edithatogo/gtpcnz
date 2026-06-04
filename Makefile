@@ -1,7 +1,12 @@
 .PHONY: test
 
 test:
-	pytest -q
+	python scripts/run_pytest.py
+
+
+.PHONY: streamlit-e2e-smoke
+streamlit-e2e-smoke:
+	python scripts/run_streamlit_e2e_smoke.py
 
 
 .PHONY: reproduce-public-release
@@ -15,6 +20,7 @@ reproduce-public-release:
 	python scripts/render_public_model_report.py
 	python scripts/run_visual_regression.py --check-only
 	python scripts/run_accessibility_audit.py --check-only
+	python scripts/run_streamlit_e2e_smoke.py
 	python scripts/generate_release_model_card.py --check-only
 	python scripts/generate_release_manifest.py --check-only
 
