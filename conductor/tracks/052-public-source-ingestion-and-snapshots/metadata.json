@@ -1,9 +1,9 @@
 {
   "id": "052-public-source-ingestion-and-snapshots",
   "title": "Public-source ingestion and reproducible snapshots",
-  "status": "active",
+  "status": "complete_readiness_only",
   "created": "2026-06-03",
-  "updated": "2026-06-03",
+  "updated": "2026-06-05",
   "owner": "codex",
   "contract": "CON-PUBLIC-001",
   "claim_boundary": "Public-data anchored benchmark by default; no unsupported calibrated or causal claims.",

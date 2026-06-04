@@ -5,22 +5,29 @@ It is not linked-data calibrated in the public runtime path. Do not claim precis
 ED reductions, hospital-demand reductions, workforce effects, implementation impacts, or causal effects
 unless the relevant public-data calibration and validation gates pass.
 
-Current active tracks:
+Tracks 050-063 are complete for the v1.8.1 readiness-only release:
 
 - `050-public-only-registry-purification`: public-only registry purification.
 - `051-parameter-ontology-and-distributions`: parameter ontology and uncertainty distributions.
 - `052-public-source-ingestion-and-snapshots`: public-source ingestion and reproducible snapshots.
-- `053-public-aggregate-calibration-engine`: public aggregate empirical calibration engine.
+- `053-public-aggregate-calibration-engine`: public aggregate empirical calibration readiness. Calibration remains `calibration_readiness_only` until public source retrieval, checksum, transformation, and validation gates pass.
 - `054-structural-uncertainty-ensemble`: structural uncertainty and DAG ensemble.
-- `055-full-value-of-information-engine`: full VOI engine.
+- `055-full-value-of-information-engine`: full VOI engine, labelled as decision-uncertainty analysis rather than forecast.
 - `056-streamlit-policy-cockpit-and-visual-grammar`: Streamlit policy cockpit and visual grammar.
 - `057-quarto-scientific-report-rebuild`: Quarto scientific report rebuild.
-- `058-australia-scope-decision`: Australia scope decision.
+- `058-australia-scope-decision`: Australia is comparative context only unless AU-specific public artefacts are later created.
 - `059-release-engineering-and-model-cards`: release engineering and model cards.
 - `060-self-learning-public-evidence-monitor`: review-only public evidence monitor.
 - `061-visual-regression-accessibility-and-browser-tests`: visual, accessibility, and browser tests.
 - `062-dependency-locking-and-reproducible-runtime`: dependency locking and reproducible runtime.
-- `063-release-readiness-parallel-closeout`: post-050-062 diff audit, environment blocker classification, release gate rerun, commit packaging, and public-source readiness closeout.
+- `063-release-readiness-parallel-closeout`: post-050-062 diff audit, environment blocker classification, release gate rerun, commit packaging, public-source readiness closeout, PR merge, and remote CI verification.
+
+Next implementation frontier:
+
+- Public source retrieval and transformation described in `docs/model/public-source-readiness-closeout-v1.md`.
+- Replacement of `checksum: pending-download` entries with verified SHA-256 checksums after reproducible public downloads.
+- Calibration target promotion from `source_ready=false` to `source_ready=true` only after source, licence, checksum, processed-schema, and mirror gates pass.
+- No upgrade from `public_benchmark` / `calibration_readiness_only` until those gates pass.
 
 Parallel execution controls:
 

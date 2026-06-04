@@ -1,9 +1,9 @@
 {
   "id": "061-visual-regression-accessibility-and-browser-tests",
   "title": "Visual regression, accessibility, and browser tests",
-  "status": "active",
+  "status": "complete_readiness_only",
   "created": "2026-06-03",
-  "updated": "2026-06-03",
+  "updated": "2026-06-05",
   "owner": "codex",
   "contract": "CON-VIS-001",
   "claim_boundary": "Public-data anchored benchmark by default; no unsupported calibrated or causal claims.",

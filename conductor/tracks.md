@@ -59,33 +59,30 @@
 | 052 | Dashboard lab enhancements: deep-dive clarifications | Complete | How this works expanders for all 7 labs, combined analyses, clustering, row highlighting and linked cross-references |
 | — | Interactive Reporting and Visualization Suite | Complete | Interactive reporting and visualization suite (non-numeric companion track) |
 
-| 050 | Public-only registry purification | Active | Separate public model registries from template/future/linked-data/confidential registries. |
-| 051 | Parameter ontology and uncertainty distributions | Active | Fully parameterise every public-model assumption, coefficient, bound, and mapping. |
-| 052 | Public-source ingestion and reproducible snapshots | Active | Create reproducible public-source processing and snapshot manifests. |
-| 053 | Public aggregate empirical calibration engine | Active | Implement public-only empirical calibration against published aggregate targets. |
-| 054 | Structural uncertainty and DAG ensemble | Active | Represent alternative public causal assumptions and structural uncertainty. |
-| 055 | Full VOI engine | Active | Implement reproducible EVPI, EVPPI, EVSI, ENBS, decision-error probability, and evidence ranking. |
-| 056 | Streamlit policy cockpit and visual grammar | Active | Convert the app into a claim-gated cockpit and evidence laboratory. |
-| 057 | Quarto scientific report rebuild | Active | Generate a reproducible scientific report from public snapshots and model artefacts. |
-| 058 | Australia first-class implementation or scope narrowing | Active | Resolve whether Australia is first-class or comparative context only. |
-| 059 | Release engineering and model cards | Active | Make releases auditable, reproducible, version-consistent, and claim-gated. |
-| 060 | Self-learning public evidence monitor | Active | Monitor public evidence candidates without automatic model mutation. |
-| 061 | Visual regression, accessibility, and browser tests | Active | Add browser-level confidence for the cockpit and visual layer. |
-| 062 | Dependency locking and reproducible runtime | Active | Make local, CI, and deployment environments reproducible. |
-| 063 | Release readiness parallel closeout | Active | Audit the 050-062 working tree, classify environment blockers, rerun release gates, package commits, and keep calibration readiness-only until source gates pass. |
+| 050 | Public-only registry purification | Complete for readiness-only release | Separate public model registries from template/future/linked-data/confidential registries. |
+| 051 | Parameter ontology and uncertainty distributions | Complete for readiness-only release | Fully parameterise every public-model assumption, coefficient, bound, and mapping. |
+| 052 | Public-source ingestion and reproducible snapshots | Complete for readiness-only release | Create reproducible public-source processing and snapshot manifests. |
+| 053 | Public aggregate empirical calibration engine | Complete for readiness-only release | Implement public-only empirical calibration readiness against published aggregate targets; calibration remains `calibration_readiness_only` until source gates pass. |
+| 054 | Structural uncertainty and DAG ensemble | Complete for readiness-only release | Represent alternative public causal assumptions and structural uncertainty. |
+| 055 | Full VOI engine | Complete for readiness-only release | Implement reproducible EVPI, EVPPI, EVSI, ENBS, decision-error probability, and evidence ranking as decision-uncertainty analysis, not forecasts. |
+| 056 | Streamlit policy cockpit and visual grammar | Complete for readiness-only release | Convert the app into a claim-gated cockpit and evidence laboratory. |
+| 057 | Quarto scientific report rebuild | Complete for readiness-only release | Generate a reproducible scientific report from public snapshots and model artefacts. |
+| 058 | Australia first-class implementation or scope narrowing | Complete for readiness-only release | Resolve Australia as comparative context only unless AU-specific public artefacts are later created. |
+| 059 | Release engineering and model cards | Complete for readiness-only release | Make releases auditable, reproducible, version-consistent, and claim-gated. |
+| 060 | Self-learning public evidence monitor | Complete for readiness-only release | Monitor public evidence candidates without automatic model mutation. |
+| 061 | Visual regression, accessibility, and browser tests | Complete for readiness-only release | Add browser-level confidence for the cockpit and visual layer. |
+| 062 | Dependency locking and reproducible runtime | Complete for readiness-only release | Make local, CI, and deployment environments reproducible. |
+| 063 | Release readiness parallel closeout | Complete for readiness-only release | Audit the 050-062 working tree, classify environment blockers, rerun release gates, package commits, merge the release branch, and keep calibration readiness-only until source gates pass. |
 
 ## Current priority
 
 1. Keep the public model path public/published-data-only and claim-gated.
-2. Implement the public aggregate calibration, uncertainty, VOI, cockpit, and release gates without using private, confidential, patient-level, stakeholder, or unpublished expert-elicitation inputs.
-3. Preserve the prior publication claim boundary until empirical gates pass.
-4. Close out Track 063 with Cline/DeepSeek shallow parallel subagents before claiming release readiness.
-5. Separate intended 050-062 implementation changes from transient/generated files and unrelated edits before commit.
-6. Resolve or document Windows/OneDrive blockers for full pytest, py_compile, Quarto render, repo-health and nested public mirror status.
-7. Keep Track 053 at `calibration_readiness_only` until public source retrieval, checksum, transform and validation gates pass.
-8. Publish the landing page and first six short-form Substack posts only after release-readiness gates are clean or explicitly blocked.
-9. Use the v1.7.2 model card, claim-boundary note, parameter tiering and identifiability map when explaining the model.
-10. Freeze model expansion until public evidence, OIA/public data access, or validation status changes the evidence base.
+2. Treat tracks 050-063 as complete for the v1.8.1 readiness-only release; do not describe them as empirically calibrated public-source passes.
+3. Keep Track 053 at `calibration_readiness_only` until public source retrieval, checksum, transform and validation gates pass.
+4. Use `docs/model/public-source-readiness-closeout-v1.md` as the next implementation map for source retrieval and calibration upgrade work.
+5. Preserve the public claim boundary until empirical gates pass.
+6. Use the v1.8.1 model card, claim-boundary note, parameter tiering and identifiability map when explaining the model.
+7. Freeze model expansion until public evidence, public source access, or validation status changes the evidence base.
 
 ## Notes
 

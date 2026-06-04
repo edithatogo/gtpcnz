@@ -1,9 +1,9 @@
 {
   "id": "060-self-learning-public-evidence-monitor",
   "title": "Self-learning public evidence monitor",
-  "status": "active",
+  "status": "complete_readiness_only",
   "created": "2026-06-03",
-  "updated": "2026-06-03",
+  "updated": "2026-06-05",
   "owner": "codex",
   "contract": "CON-SELF-001",
   "claim_boundary": "Public-data anchored benchmark by default; no unsupported calibrated or causal claims.",

@@ -1,9 +1,9 @@
 {
   "id": "063-release-readiness-parallel-closeout",
   "title": "Release readiness parallel closeout",
-  "status": "active",
+  "status": "complete_readiness_only",
   "created": "2026-06-04",
-  "updated": "2026-06-04",
+  "updated": "2026-06-05",
   "owner": "codex",
   "contract": "CON-REL-001",
   "claim_boundary": "Public-data anchored benchmark by default; calibration remains readiness-only until public source and validation gates pass.",
