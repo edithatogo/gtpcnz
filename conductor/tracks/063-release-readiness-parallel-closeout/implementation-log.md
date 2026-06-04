@@ -157,6 +157,97 @@ Created `docs/model/public-source-readiness-closeout-v1.md` covering:
 
 **follow-on owner:** coordinator
 
+## 2026-06-05 — Coordinator Cockpit Delta Closeout
+
+**work package id:** WP-063-A/B/C delta
+
+**subagent role:** coordinator
+
+**files read:**
+- `conductor/state.md`
+- `conductor/tracks/056-streamlit-policy-cockpit-and-visual-grammar/plan.md`
+- `conductor/tracks/056-streamlit-policy-cockpit-and-visual-grammar/acceptance.md`
+- `conductor/tracks/056-streamlit-policy-cockpit-and-visual-grammar/implementation-log.md`
+- `conductor/tracks/063-release-readiness-parallel-closeout/plan.md`
+- `conductor/tracks/063-release-readiness-parallel-closeout/acceptance.md`
+- `conductor/tracks/063-release-readiness-parallel-closeout/implementation-log.md`
+
+**files changed:**
+- `models/primarycare_model/app.py`
+- `models/primarycare_model/ui/cockpit.py`
+- `models/tests/test_streamlit_cockpit_contracts.py`
+- `models/tests/test_streamlit_end_to_end_smoke.py`
+- `public/gtpcnz/**` via `python scripts/sync_public_mirror.py`
+- `conductor/tracks/056-streamlit-policy-cockpit-and-visual-grammar/implementation-log.md`
+- `conductor/tracks/063-release-readiness-parallel-closeout/implementation-log.md`
+
+**diff classification:**
+- Parent repo dirty files are the four intended cockpit/test files plus Conductor log updates.
+- Nested public mirror `public/gtpcnz` is dirty because the mirror sync copied the current public runtime surface, including the cockpit delta and prior 050-062 public files.
+- No generated pytest artefacts are currently present in the parent git status.
+
+**commands run:**
+- `git status --short` -> parent repo dirty with intended cockpit/test files before this log append.
+- `git -C public\gtpcnz status --short` -> nested public mirror dirty with expected mirror-sync files.
+- `python scripts/run_accessibility_audit.py --check-only` -> PASSED.
+- `python -m pytest -q models/tests/test_streamlit_cockpit_contracts.py models/tests/test_app.py` -> PASSED (`6 passed`), with post-exit Windows temp cleanup traceback.
+- `python -m pytest -q models/tests/test_streamlit_end_to_end_smoke.py::test_streamlit_entrypoint_renders_all_public_tabs_with_app_test` -> PASSED (`1 passed`), with post-exit Windows temp cleanup traceback.
+- `python scripts/check_conductor_parallel_tracks.py` -> PASSED.
+- `python scripts/sync_public_mirror.py --check` -> FAILED before sync (`10 drift items`).
+- `python scripts/sync_public_mirror.py` -> PASSED.
+- `python scripts/sync_public_mirror.py --check` -> PASSED (`0 drift items`).
+
+**result:**
+Track 056 cockpit delta is implemented, focused-gated and mirrored. Track 063 remains the active packaging lane because the parent and nested public mirror worktrees still need explicit review/staging.
+
+**blocker classification:**
+- Known Windows/AppTest temp cleanup `WinError 5` after successful tests.
+- No code gate failure in the focused cockpit delta.
+- Public mirror drift was resolved by sync, but the nested mirror remains dirty and must be committed or reviewed separately.
+
+**claim-boundary status:**
+- Public benchmark and calibration-readiness only.
+- No public claim upgrade.
+
+**follow-on owner:** coordinator.
+
+## 2026-06-05 — Coordinator Deterministic Gate Sweep After Cockpit Delta
+
+**work package id:** WP-063-C delta
+
+**subagent role:** gate-runner, completed by coordinator
+
+**files changed:**
+- `conductor/tracks/063-release-readiness-parallel-closeout/implementation-log.md`
+
+**commands run:**
+- `python scripts/check_public_only_boundary.py` -> PASSED (`public-only boundary passed`)
+- `python scripts/check_parameter_traceability.py` -> PASSED (`parameter traceability passed`)
+- `python scripts/check_public_source_snapshot.py` -> PASSED (`public source snapshot contract passed`)
+- `python scripts/check_dependency_lock.py` -> PASSED (`dependency lock surface passed`)
+- `python scripts/check_concern_boundaries.py` -> PASSED (`5 passed, 0 failed`)
+- `python scripts/run_public_aggregate_calibration.py --check-only` -> PASSED with `calibration_status=calibration_readiness_only`, `claim_level=public_benchmark`, and all calibration targets `source_ready=false`
+- `python scripts/run_voi.py --check-only` -> PASSED with fixed seed `260603`, EVPI/EVPPI/EVSI/ENBS outputs and label `decision-uncertainty analysis, not a forecast`
+- `python scripts/generate_release_model_card.py --check-only` -> PASSED for v1.8.1, public benchmark, calibration readiness, public/published aggregate inputs only
+- `python scripts/generate_release_manifest.py --check-only` -> PASSED for v1.8.1 with source, parameter, model and output hashes
+- `python scripts/check_version_consistency.py` -> PASSED (`version consistency passed: 1.8.1`)
+- `python scripts/sync_public_mirror.py --check` -> PASSED (`0 drift items`)
+- `python -m pytest -q models/tests/test_conductor_parallel_tracks.py models/tests/test_public_only_boundary.py models/tests/test_parameter_traceability.py models/tests/test_public_source_snapshot.py models/tests/test_public_aggregate_calibration.py models/tests/test_structural_ensemble.py models/tests/test_full_voi.py models/tests/test_streamlit_cockpit_contracts.py models/tests/test_report_artifacts.py models/tests/test_jurisdiction_claims.py models/tests/test_release_engineering.py models/tests/test_public_evidence_monitor.py models/tests/test_dependency_files.py` -> PASSED (`15 passed in 2.92s`)
+
+**result:**
+All deterministic Track 063 gates rerun after the public cockpit delta passed. Public mirror drift is resolved.
+
+**blocker classification:**
+- No deterministic gate failures.
+- Focused Streamlit/AppTest gates from the preceding 056 delta passed but continued to emit the known post-exit Windows temp cleanup `WinError 5` traceback. This remains environment teardown noise, not a failed gate.
+- Full `python -m pytest -q` remains deferred to a clean temp-capable environment because prior attempts in this session failed at pytest temp setup/cleanup rather than model assertions.
+
+**claim-boundary status:**
+- Public benchmark and calibration-readiness only.
+- No precise fiscal savings, ED reductions, hospital-demand reductions, workforce effects, implementation impacts or causal effects claimed.
+
+**follow-on owner:** coordinator for staging/commit packaging across parent repo and nested public mirror.
+
 ## Coordinator update - 2026-06-04 live dashboard QA and remaining map
 
 **work package id:** WP-063-F
