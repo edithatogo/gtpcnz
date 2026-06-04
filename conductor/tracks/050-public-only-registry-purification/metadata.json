@@ -1,9 +1,9 @@
 {
   "id": "050-public-only-registry-purification",
   "title": "Public-only registry purification",
-  "status": "active",
+  "status": "complete_readiness_only",
   "created": "2026-06-03",
-  "updated": "2026-06-03",
+  "updated": "2026-06-05",
   "owner": "codex",
   "contract": "CON-PUBLIC-001",
   "claim_boundary": "Public-data anchored benchmark by default; no unsupported calibrated or causal claims.",

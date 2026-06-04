@@ -1,9 +1,9 @@
 {
   "id": "053-public-aggregate-calibration-engine",
   "title": "Public aggregate empirical calibration engine",
-  "status": "active",
+  "status": "complete_readiness_only",
   "created": "2026-06-03",
-  "updated": "2026-06-03",
+  "updated": "2026-06-05",
   "owner": "codex",
   "contract": "CON-CAL-001",
   "claim_boundary": "Public-data anchored benchmark by default; no unsupported calibrated or causal claims.",

@@ -1,9 +1,9 @@
 {
   "id": "062-dependency-locking-and-reproducible-runtime",
   "title": "Dependency locking and reproducible runtime",
-  "status": "active",
+  "status": "complete_readiness_only",
   "created": "2026-06-03",
-  "updated": "2026-06-03",
+  "updated": "2026-06-05",
   "owner": "codex",
   "contract": "CON-REL-001",
   "claim_boundary": "Public-data anchored benchmark by default; no unsupported calibrated or causal claims.",

@@ -157,6 +157,44 @@ Created `docs/model/public-source-readiness-closeout-v1.md` covering:
 
 **follow-on owner:** coordinator
 
+## 2026-06-05 — Coordinator Governance State Reconciliation
+
+**work package id:** WP-063-governance-reconciliation
+
+**subagent role:** coordinator
+
+**files changed:**
+- `conductor/tracks.md`
+- `conductor/state.md`
+- `conductor/tracks/050-public-only-registry-purification/metadata.json`
+- `conductor/tracks/051-parameter-ontology-and-distributions/metadata.json`
+- `conductor/tracks/052-public-source-ingestion-and-snapshots/metadata.json`
+- `conductor/tracks/053-public-aggregate-calibration-engine/metadata.json`
+- `conductor/tracks/054-structural-uncertainty-ensemble/metadata.json`
+- `conductor/tracks/055-full-value-of-information-engine/metadata.json`
+- `conductor/tracks/056-streamlit-policy-cockpit-and-visual-grammar/metadata.json`
+- `conductor/tracks/057-quarto-scientific-report-rebuild/metadata.json`
+- `conductor/tracks/058-australia-scope-decision/metadata.json`
+- `conductor/tracks/059-release-engineering-and-model-cards/metadata.json`
+- `conductor/tracks/060-self-learning-public-evidence-monitor/metadata.json`
+- `conductor/tracks/061-visual-regression-accessibility-and-browser-tests/metadata.json`
+- `conductor/tracks/062-dependency-locking-and-reproducible-runtime/metadata.json`
+- `conductor/tracks/063-release-readiness-parallel-closeout/metadata.json`
+
+**commands run:**
+- `python scripts/check_conductor_parallel_tracks.py` -> PASSED.
+
+**result:**
+Reconciled Conductor status after the merged v1.8.1 readiness-only release. Tracks 050-063 are no longer listed as active implementation lanes; they are marked complete for readiness-only release. The next implementation frontier is explicitly public source retrieval, checksum replacement, transformation, and calibration target promotion under `docs/model/public-source-readiness-closeout-v1.md`.
+
+**blocker classification:**
+No Conductor contract blocker. This reconciliation does not change runtime code, public registries, model outputs, or public mirror files.
+
+**claim-boundary status:**
+Public benchmark and calibration-readiness only. Track 053 remains locked at `calibration_readiness_only` until public source gates pass.
+
+**follow-on owner:** coordinator for commit/PR packaging if this governance-only delta is to be published.
+
 ## 2026-06-05 — Coordinator Cockpit Delta Closeout
 
 **work package id:** WP-063-A/B/C delta

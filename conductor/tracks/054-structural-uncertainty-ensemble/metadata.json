@@ -1,9 +1,9 @@
 {
   "id": "054-structural-uncertainty-ensemble",
   "title": "Structural uncertainty and DAG ensemble",
-  "status": "active",
+  "status": "complete_readiness_only",
   "created": "2026-06-03",
-  "updated": "2026-06-03",
+  "updated": "2026-06-05",
   "owner": "codex",
   "contract": "CON-UNC-001",
   "claim_boundary": "Public-data anchored benchmark by default; no unsupported calibrated or causal claims.",
