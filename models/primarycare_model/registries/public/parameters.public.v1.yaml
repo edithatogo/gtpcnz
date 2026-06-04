@@ -1,0 +1,121 @@
+parameters:
+  - parameter_id: base_capitation_rate
+    label: Base per-capita annual capitation rate
+    value_type: number
+    unit: NZD per person per year
+    default_value: 195.0
+    lower_bound: 100.0
+    upper_bound: 500.0
+    category_values: []
+    description: Annual capitation amount paid per enrolled person before weighting.
+    source_id: src_hnz_capitation_schedule
+    source: Health New Zealand public capitation and PHO services schedules.
+    sensitivity_class: public_aggregate
+    evidence_tier: public_data
+    distribution_type: triangular
+    distribution_parameters: {low: 100.0, mode: 195.0, high: 500.0}
+    bounds: {lower: 100.0, upper: 500.0}
+    evidence_quality: medium
+    transferability_score: 0.82
+    sensitivity_priority: high
+    calibration_role: baseline
+    update_cadence: annual
+    claim_boundary: Public benchmark input; not linked-data calibrated.
+    formula_refs: [capitation_component]
+    tags: [capitation, funding]
+  - parameter_id: standard_consultation_fee
+    label: Standard consultation schedule value
+    value_type: number
+    unit: NZD
+    default_value: 45.0
+    lower_bound: 20.0
+    upper_bound: 120.0
+    category_values: []
+    description: Public schedule value used for eligible standard consultation activity.
+    source_id: src_pho_services_agreement
+    source: PHO Services Agreement public schedule.
+    sensitivity_class: public_aggregate
+    evidence_tier: public_data
+    distribution_type: triangular
+    distribution_parameters: {low: 20.0, mode: 45.0, high: 120.0}
+    bounds: {lower: 20.0, upper: 120.0}
+    evidence_quality: medium
+    transferability_score: 0.78
+    sensitivity_priority: high
+    calibration_role: scaling
+    update_cadence: annual
+    claim_boundary: Public benchmark input; not a realised fiscal-saving estimate.
+    formula_refs: [scheduled_activity_component]
+    tags: [ffs, consultation]
+  - parameter_id: enrolled_population_count
+    label: Total enrolled population count
+    value_type: integer
+    unit: persons
+    default_value: 4500000
+    lower_bound: 1000000.0
+    upper_bound: 6000000.0
+    category_values: []
+    description: Public aggregate enrolled population denominator.
+    source_id: src_hnz_enrolment
+    source: Health New Zealand public primary care enrolment data.
+    sensitivity_class: public_aggregate
+    evidence_tier: public_data
+    distribution_type: normal
+    distribution_parameters: {mean: 4500000.0, sd: 150000.0}
+    bounds: {lower: 1000000.0, upper: 6000000.0}
+    evidence_quality: high
+    transferability_score: 0.92
+    sensitivity_priority: high
+    calibration_role: denominator
+    update_cadence: quarterly
+    claim_boundary: Public aggregate denominator only.
+    formula_refs: [population_denominator]
+    tags: [population, enrolment]
+  - parameter_id: workforce_participation_rate
+    label: GP workforce participation rate
+    value_type: number
+    unit: fraction
+    default_value: 0.72
+    lower_bound: 0.5
+    upper_bound: 0.95
+    category_values: []
+    description: Published aggregate participation rate used as a public workforce prior.
+    source_id: src_mcnz_workforce
+    source: Medical Council of New Zealand workforce survey.
+    sensitivity_class: public_aggregate
+    evidence_tier: public_data
+    distribution_type: beta
+    distribution_parameters: {alpha: 32.0, beta: 12.0}
+    bounds: {lower: 0.5, upper: 0.95}
+    evidence_quality: medium
+    transferability_score: 0.74
+    sensitivity_priority: medium
+    calibration_role: validation_target
+    update_cadence: annual
+    claim_boundary: Public aggregate workforce prior; not an implementation workforce forecast.
+    formula_refs: [workforce_supply_component]
+    tags: [workforce, participation]
+  - parameter_id: access_cost_barrier_rate
+    label: Cost barrier to GP access
+    value_type: number
+    unit: fraction
+    default_value: 0.15
+    lower_bound: 0.0
+    upper_bound: 0.5
+    category_values: []
+    description: Public survey-based access barrier rate used for calibration-readiness checks.
+    source_id: src_nz_health_survey
+    source: New Zealand Health Survey public annual data explorer.
+    sensitivity_class: public_aggregate
+    evidence_tier: public_data
+    distribution_type: beta
+    distribution_parameters: {alpha: 18.0, beta: 102.0}
+    bounds: {lower: 0.0, upper: 0.5}
+    evidence_quality: medium
+    transferability_score: 0.86
+    sensitivity_priority: high
+    calibration_role: calibration_target
+    update_cadence: annual
+    claim_boundary: Public aggregate survey target only.
+    formula_refs: [access_component]
+    tags: [access, equity]

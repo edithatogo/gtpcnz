@@ -1,0 +1,171 @@
+scenarios:
+  - scenario_id: F0
+    scenario_name: Current reform pathway
+    description: Current reform without uncapped primary medical FFS.
+    activity_signal: 18
+    capitation: 70
+    place_accountability: 42
+    scope_capacity: 36
+    urgent_ambulance: 58
+    data_visibility: 48
+    governance: 55
+    equity_protection: 46
+    copayment_burden: 58
+    budget_tightness: 76
+    hospital_salience: 88
+    complexity: 45
+    source: Track 043 extracted runtime scenario registry
+    claim_boundary: Public-data anchored demonstrative scenario, not linked-data calibrated.
+  - scenario_id: F1
+    scenario_name: Capitation reweighting only
+    description: Formula improves allocation but marginal activity remains weakly funded.
+    activity_signal: 20
+    capitation: 78
+    place_accountability: 42
+    scope_capacity: 36
+    urgent_ambulance: 55
+    data_visibility: 50
+    governance: 53
+    equity_protection: 48
+    copayment_burden: 55
+    budget_tightness: 76
+    hospital_salience: 86
+    complexity: 44
+    source: Track 043 extracted runtime scenario registry
+    claim_boundary: Public-data anchored demonstrative scenario, not linked-data calibrated.
+  - scenario_id: F2
+    scenario_name: Uncapped scheduled medical FFS
+    description: Demand-led eligible activity, weaker place accountability.
+    activity_signal: 78
+    capitation: 70
+    place_accountability: 38
+    scope_capacity: 48
+    urgent_ambulance: 58
+    data_visibility: 60
+    governance: 63
+    equity_protection: 55
+    copayment_burden: 45
+    budget_tightness: 60
+    hospital_salience: 76
+    complexity: 62
+    source: Track 043 extracted runtime scenario registry
+    claim_boundary: Public-data anchored demonstrative scenario, not linked-data calibrated.
+  - scenario_id: F3
+    scenario_name: Uncapped medical FFS + place accountability
+    description: Demand-led eligible activity plus explicit population responsibility.
+    activity_signal: 76
+    capitation: 78
+    place_accountability: 78
+    scope_capacity: 52
+    urgent_ambulance: 60
+    data_visibility: 70
+    governance: 70
+    equity_protection: 70
+    copayment_burden: 40
+    budget_tightness: 58
+    hospital_salience: 72
+    complexity: 64
+    source: Track 043 extracted runtime scenario registry
+    claim_boundary: Public-data anchored demonstrative scenario, not linked-data calibrated.
+  - scenario_id: F4
+    scenario_name: Full hybrid upstream architecture
+    description: Capitation plus scheduled FFS, place accountability, urgent alternatives, scope, data and audit.
+    activity_signal: 78
+    capitation: 82
+    place_accountability: 82
+    scope_capacity: 68
+    urgent_ambulance: 74
+    data_visibility: 82
+    governance: 82
+    equity_protection: 78
+    copayment_burden: 35
+    budget_tightness: 55
+    hospital_salience: 65
+    complexity: 72
+    source: Track 043 extracted runtime scenario registry
+    claim_boundary: Public-data anchored demonstrative scenario, not linked-data calibrated.
+  - scenario_id: F5
+    scenario_name: Uncapped weak-control model
+    description: Demand-led activity with weak controls, place accountability and equity protections.
+    activity_signal: 82
+    capitation: 60
+    place_accountability: 20
+    scope_capacity: 70
+    urgent_ambulance: 62
+    data_visibility: 45
+    governance: 22
+    equity_protection: 30
+    copayment_burden: 65
+    budget_tightness: 80
+    hospital_salience: 70
+    complexity: 76
+    source: Track 043 extracted runtime scenario registry
+    claim_boundary: Public-data anchored demonstrative scenario, not linked-data calibrated.
+  - scenario_id: F6
+    scenario_name: ACC activity constraint shock
+    description: ACC activity payments constrained without compensating upstream supply.
+    activity_signal: 12
+    capitation: 70
+    place_accountability: 42
+    scope_capacity: 32
+    urgent_ambulance: 50
+    data_visibility: 48
+    governance: 52
+    equity_protection: 44
+    copayment_burden: 58
+    budget_tightness: 86
+    hospital_salience: 90
+    complexity: 48
+    source: Track 043 extracted runtime scenario registry
+    claim_boundary: Public-data anchored demonstrative scenario, not linked-data calibrated.
+  - scenario_id: F7
+    scenario_name: Ambulance and urgent alternatives only
+    description: Urgent and ambulance alternatives strengthened while primary marginal payment remains weak.
+    activity_signal: 18
+    capitation: 70
+    place_accountability: 44
+    scope_capacity: 38
+    urgent_ambulance: 74
+    data_visibility: 68
+    governance: 55
+    equity_protection: 46
+    copayment_burden: 55
+    budget_tightness: 70
+    hospital_salience: 76
+    complexity: 52
+    source: Track 043 extracted runtime scenario registry
+    claim_boundary: Public-data anchored demonstrative scenario, not linked-data calibrated.
+  - scenario_id: F8
+    scenario_name: Scope-enabled supply only
+    description: Broader providers can generate activity, but payment and place accountability remain incomplete.
+    activity_signal: 35
+    capitation: 70
+    place_accountability: 42
+    scope_capacity: 68
+    urgent_ambulance: 56
+    data_visibility: 55
+    governance: 58
+    equity_protection: 46
+    copayment_burden: 54
+    budget_tightness: 68
+    hospital_salience: 78
+    complexity: 58
+    source: Track 043 extracted runtime scenario registry
+    claim_boundary: Public-data anchored demonstrative scenario, not linked-data calibrated.
+  - scenario_id: F9
+    scenario_name: Place-based commissioning only
+    description: Population accountability improves without materially uncapping marginal activity funding.
+    activity_signal: 18
+    capitation: 72
+    place_accountability: 78
+    scope_capacity: 38
+    urgent_ambulance: 55
+    data_visibility: 58
+    governance: 55
+    equity_protection: 74
+    copayment_burden: 50
+    budget_tightness: 72
+    hospital_salience: 78
+    complexity: 54
+    source: Track 043 extracted runtime scenario registry
+    claim_boundary: Public-data anchored demonstrative scenario, not linked-data calibrated.

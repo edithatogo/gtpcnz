@@ -1,0 +1,83 @@
+entries:
+- chart_or_table: Educational slider scores; reference scenario comparison
+  component_path: scenario_service.py
+  component_type: input
+  impact_description: Would replace public assumptions about access and waiting-time
+    with observed encounter counts.
+  oia_id: OIA-001
+  topic: Primary care appointments and encounter data
+- chart_or_table: Educational funding comparison chart; capitation budget lab
+  component_path: registries/parameters.v1.yaml
+  component_type: parameter
+  impact_description: Would let the model use real funding-formula parameters instead
+    of illustrative ranges.
+  oia_id: OIA-002
+  topic: Capitation payment rules and rate tables
+- chart_or_table: Microeconomics lab 4 - co-payment / access barrier mix
+  component_path: runtime_lab.py
+  component_type: input
+  impact_description: Would replace illustrative price-barrier assumptions with observed
+    practice fee schedules.
+  oia_id: OIA-003
+  topic: Co-payment and patient out-of-pocket costs
+- chart_or_table: Reference scenario scatter; stock-flow trace
+  component_path: runtime_lab.py
+  component_type: engine
+  impact_description: Would calibrate the hospital-deflection index using real hear-and-treat
+    and convey rates.
+  oia_id: OIA-004
+  topic: Ambulance pathway and conveyance data
+- chart_or_table: Reference scenario comparison; live model lab
+  component_path: registries/parameters.v1.yaml
+  component_type: parameter
+  impact_description: Would allow the model to reflect cross-funder supply effects.
+  oia_id: OIA-005
+  topic: ACC treatment payment contracts and claims
+- chart_or_table: Hospital pressure index; stock-flow hospital pressure trace
+  component_path: runtime_lab.py
+  component_type: result
+  impact_description: Would replace model-derived hospital-pressure estimates with
+    observed admission trends.
+  oia_id: OIA-006
+  topic: ED attendance and hospital admission data
+- chart_or_table: Microeconomics lab 1 - marginal supply; educational scope slider
+  component_path: registries/parameters.v1.yaml
+  component_type: parameter
+  impact_description: Would let the model use measured workforce elasticities instead
+    of illustrative curves.
+  oia_id: OIA-007
+  topic: Workforce composition and scope data
+- chart_or_table: Equity legitimacy index; educational equity score
+  component_path: scenario_service.py
+  component_type: input
+  impact_description: Would allow equity assumptions to be tested against actual access
+    gaps.
+  oia_id: OIA-008
+  topic: Equity-stratified utilisation data
+- chart_or_table: Game theory labs 1-3; educational incentive games
+  component_path: app.py
+  component_type: engine
+  impact_description: Would move strategic-response curves toward stakeholder-informed
+    functions.
+  oia_id: OIA-009
+  topic: Stakeholder game-validation weightings
+- chart_or_table: Reference scenario summary; calibration readiness table
+  component_path: data_layer.py
+  component_type: input
+  impact_description: Would provide foundational public dataset for access and supply
+    calibration.
+  oia_id: OIA-010
+  topic: NPCD booking and appointment fields
+- chart_or_table: All indices and calibration readiness
+  component_path: runtime_lab.py
+  component_type: engine
+  impact_description: Would enable linked-data calibrated model from public-data anchored
+    benchmark.
+  oia_id: gap-001
+  topic: Linked patient-level primary-secondary care data
+- chart_or_table: Fiscal risk index; scheduled payment lab
+  component_path: contracts/results.py
+  component_type: result
+  impact_description: Would replace illustrative NZD values with observed cost benchmarks.
+  oia_id: gap-002
+  topic: Real funding-architecture implementation costs

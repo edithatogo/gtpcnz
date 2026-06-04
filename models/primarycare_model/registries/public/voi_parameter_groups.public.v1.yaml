@@ -1,0 +1,10 @@
+parameter_groups:
+  - group_id: access
+    parameter_ids: [access_cost_barrier_rate]
+    outcome_domain: access
+  - group_id: supply
+    parameter_ids: [workforce_participation_rate, standard_consultation_fee]
+    outcome_domain: supply
+  - group_id: fiscal_risk
+    parameter_ids: [base_capitation_rate, standard_consultation_fee, enrolled_population_count]
+    outcome_domain: fiscal risk

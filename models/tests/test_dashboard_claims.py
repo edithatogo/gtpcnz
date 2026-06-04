@@ -23,16 +23,16 @@ def test_dashboard_uses_explainer_and_not_forecast_language():
     assert "funding architecture explainer" in text
     assert "not linked-data calibrated" in text
     assert "not a patient-level forecast" in text
-    assert "toy" in text.lower()
+    assert "toy" not in text.lower()
     assert "not a calibrated prediction" in text.lower()
     assert "use_container_width" not in text
     assert "How to read this dashboard" in text
     assert "Interpretation rules" in text
     assert "What the reference scenarios mean" in text
-    assert "What the toy sliders are for" in text
-    assert "Toy parameter dictionary" in text
+    assert "What the educational sliders are for" in text
+    assert "Educational parameter dictionary" in text
     assert "0 means absent/weak; 100 means strong/reliably implemented" in text
-    assert "qualitative teaching levers, not estimated structural parameters" in text
+    assert "policy-strength levers, not estimated parameters" in text
     assert "Payment for extra primary care activity" in text
     assert "Stable population-based base funding" in text
     assert "Whole-population local accountability" in text
@@ -143,4 +143,4 @@ def test_streamlit_dashboard_contract_and_audit_are_explicit():
     assert "selected scenario radar/profile chart" in contract
     assert "Dynamic scenario score heatmap exists" in audit
     assert "Dynamic selected scenario radar/profile chart exists" in audit
-    assert "Toy parameter dictionary exists" in audit
+    assert "Educational parameter dictionary exists" in audit

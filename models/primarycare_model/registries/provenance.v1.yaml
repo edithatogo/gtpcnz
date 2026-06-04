@@ -1,0 +1,190 @@
+# ─────────────────────────────────────────────────────────────────────────
+# GTPCNZ Input Provenance Registry  v1
+# ─────────────────────────────────────────────────────────────────────────
+# Each entry documents one public input source or derived dataset: its
+# origin, retrieval date, transform pipeline, confidence status and claim
+# boundary.  This registry is loaded through ProvenanceEntry contracts at
+# import time and is exposed via build_provenance_summary() for dashboard
+# display.
+#
+# status values: confirmed | estimated | placeholder | gap
+# ─────────────────────────────────────────────────────────────────────────
+
+provenance:
+  # ── 1. Population data ────────────────────────────────────────────────
+  - source_id: census_nzdep_population
+    label: NZ Census and NZDep combined population estimates
+    source_url_or_reference: https://www.stats.govt.nz/2023-census/ and https://www.otago.ac.nz/nzdep
+    retrieval_date: "2025-01-15"
+    transform_description: >
+      Age/sex/deprivation-stratified population counts extracted from Census 2023
+      meshblock data, merged with NZDep2021 quintile boundaries at SA2 level.
+      Enrolment and unenrolled estimates sourced from MOH enrolment register.
+    status: confirmed
+    claim_boundary: >
+      Aggregated Statistics NZ and MOH enrolment data; small-cell suppression
+      applied below 5. Not patient-level. Changes between census cycles may
+      shift deprivation distributions.
+
+  # ── 2. Funding pool allocations ───────────────────────────────────────
+  - source_id: moh_funding_pools
+    label: Primary care funding pool allocations by PHO
+    source_url_or_reference: https://www.tewhatuora.govt.nz/primary-care-funding-returns/
+    retrieval_date: "2025-02-10"
+    transform_description: >
+      Capitation, FFS schedule, targeted programme and after-hours funding
+      totals extracted from published MOH annual returns per PHO. Fields
+      normalised to NZD and FY labels mapped to calendar-year boundaries.
+    status: confirmed
+    claim_boundary: >
+      Publicly reported aggregate PHO funding; not patient-level. Some programme
+      funding lines may be incomplete due to variable reporting cycles.
+
+
+
+  # ── 3. Activity benchmarks ────────────────────────────────────────────
+  - source_id: pho_activity_benchmarks
+    label: PHO activity and service utilisation benchmarks
+    source_url_or_reference: https://www.tewhatuora.govt.nz/primary-care-claims-data/
+    retrieval_date: "2025-02-10"
+    transform_description: >
+      Claims-based consultation counts stratified by consultation type, provider
+      type, patient age group and deprivation quintile. Aggregated to PHO-month
+      level; small-cell suppression applied.
+    status: confirmed
+    claim_boundary: >
+      PHO-level aggregated claims data; no individual patient identifiers.
+      Small-cell suppression applied. Does not include non-claimable activity.
+
+  # ── 4. Workforce supply ───────────────────────────────────────────────
+  - source_id: workforce_survey
+    label: Primary care workforce supply and composition
+    source_url_or_reference: https://www.mcnz.org.nz/workforce-survey/ and https://www.nursingcouncil.org.nz/Workforce-Statistics/
+    retrieval_date: "2025-01-20"
+    transform_description: >
+      FTE and head counts by provider type, age band and region from Medical
+      Council and Nursing Council workforce surveys. Participation rates
+      estimated from active practising certificates data.
+    status: confirmed
+    claim_boundary: >
+      Published workforce survey data at DHB/region level; no individual
+      practitioner data. Survey response rates vary by region and year.
+
+  # ── 5. Equity indicators ──────────────────────────────────────────────
+  - source_id: equity_data_pack
+    label: Equity indicators for access and outcomes by population group
+    source_url_or_reference: https://www.tewhatuora.govt.nz/equity-data-pack/ and https://www.hqsc.govt.nz/indicators/
+    retrieval_date: "2025-02-05"
+    transform_description: >
+      Unmet need, avoidable hospitalisation and immunisation coverage rates
+      extracted from MOH equity data pack and HQSC indicator reports.
+      Stratified by population group (Māori, Pacific, Asian, European/Other)
+      and deprivation quintile. Small-cell suppression applied.
+    status: confirmed
+    claim_boundary: >
+      Published equity indicators at national and DHB level; small-cell
+      suppression applied. Not all indicators are available for every subgroup
+      annually.
+
+  # ── 6. Cost and price schedule ────────────────────────────────────────
+  - source_id: price_schedule
+    label: PHO Services Agreement price schedule and practice cost surveys
+    source_url_or_reference: https://www.tewhatuora.govt.nz/pho-services-agreement/
+    retrieval_date: "2025-01-30"
+    transform_description: >
+      Schedule prices, copayment rules and typical cost estimates extracted
+      from the published PHO Services Agreement and anonymised practice cost
+      survey results. Values adjusted to constant FY2024 NZD.
+    status: confirmed
+    claim_boundary: >
+      Published schedule prices and anonymised cost survey averages; no
+      practice-identifiable data. Typical costs are survey-based estimates
+      and may not reflect individual practice experience.
+
+  # ── 7. Governance and audit metrics ───────────────────────────────────
+  - source_id: governance_metrics
+    label: Governance, audit and data transparency metrics
+    source_url_or_reference: https://www.hqsc.govt.nz/performance-reports/
+    retrieval_date: "2025-02-01"
+    transform_description: >
+      PHO-level performance scores across audit, data visibility,
+      accountability and equity-enforcement domains. Sourced from HQSC
+      performance reports and PHO annual accountability documents.
+    status: estimated
+    claim_boundary: >
+      Aggregated PHO-level performance indicators; not individual practice or
+      patient data. Governance scoring frameworks are evolving and inter-period
+      comparisons require careful treatment.
+
+  # ── 8. OIA status (calibration readiness) ─────────────────────────────
+  - source_id: oia_status_summary
+    label: Official Information Act data availability and release status
+    source_url_or_reference: https://www.tewhatuora.govt.nz/oia-responses/
+    retrieval_date: "2025-03-01"
+    transform_description: >
+      Tracking table of OIA requests submitted for calibration-relevant
+      datasets (ED wait-times, ambulance pathways, ACC treatment payments).
+      Captures response status, data received, and any restrictions on use.
+    status: placeholder
+    claim_boundary: >
+      Summary of what data has been requested and received under the OIA;
+      does not constitute a complete dataset. Many requests are still pending.
+
+  # ── 9. Calibration readiness (appointments) ───────────────────────────
+  - source_id: calibration_appointments
+    label: Primary care appointment and encounter data (NPCD)
+    source_url_or_reference: https://www.tewhatuora.govt.nz/npcd/
+    retrieval_date: "2025-03-01"
+    transform_description: >
+      Booking and encounter fields from the National Primary Care Data
+      collection. Required for access and waiting-time calibration of the
+      model. Data dictionary mapped to model input schema.
+    status: gap
+    claim_boundary: >
+      NPCD is not yet consistently available across all PHOs. This is a
+      known data gap that limits waiting-time and access calibration.
+
+  # ── 10. Calibration readiness (hospital pathways) ─────────────────────
+  - source_id: calibration_hospital_pathways
+    label: Hospital deflection data — ED, NNPAC/NMDS and ambulance
+    source_url_or_reference: https://www.tewhatuora.govt.nz/national-datasets/
+    retrieval_date: "2025-03-01"
+    transform_description: >
+      Linked hospital datasets (NNPAC/NMDS) and ambulance conveyance data
+      needed for downstream hospital-pressure validation. Schemas mapped
+      but data access agreements are in progress.
+    status: gap
+    claim_boundary: >
+      Hospital pathway data requires multi-agency data access agreements.
+      Current model uses public benchmark aggregates until linked data is
+      available.
+
+  # ── 11. ACC treatment payments ────────────────────────────────────────
+  - source_id: acc_treatment_payments
+    label: ACC Cost of Treatment Regulations and payment data
+    source_url_or_reference: https://www.acc.co.nz/for-providers/treatment-costs/
+    retrieval_date: "2025-02-15"
+    transform_description: >
+      ACC treatment payment schedules and claims volumes extracted from
+      published regulations and annual reports. Used for cross-funder and
+      supply-stabilisation effects in the model.
+    status: estimated
+    claim_boundary: >
+      Published ACC fee schedules and aggregate claims volumes; individual
+      claims data is not available. Cross-funder effects are modelled from
+      public aggregates only.
+
+  # ── 12. Stakeholder / MCDA inputs ─────────────────────────────────────
+  - source_id: stakeholder_mcda
+    label: Structured stakeholder game validation and MCDA weights
+    source_url_or_reference: GTPCNZ workshop and validation records (internal)
+    retrieval_date: "2025-02-20"
+    transform_description: >
+      Structured workshop outputs and multi-criteria decision analysis
+      weights collected from stakeholder engagement sessions. Used for
+      decision-support and face-validity checking of scenario rankings.
+    status: placeholder
+    claim_boundary: >
+      Stakeholder inputs reflect participant views at the time of engagement
+      and are not statistically representative. Results are used for
+      educational and decision-support purposes only.

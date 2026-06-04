@@ -44,7 +44,7 @@ def test_post_guide_and_reading_map_are_defined_in_source():
     assert "What I mean by uncapping primary care funding" in text
     assert "F0` is the current reform pathway used as the baseline" in text
     assert "model-generated indices" in text
-    assert "toy teaching simulations" in text
+    assert "educational teaching simulations" in text
     assert "Microeconomics lab" in text
     assert "Game theory lab" in text
 
@@ -83,7 +83,7 @@ def test_game_theory_lab_sliders_are_defined_in_source():
     assert "Game theory lab 1: formulas do not solve games" in text
     assert "Game theory lab 2: payoff and best-response" in text
     assert "Game theory lab 3: controls and gaming-risk frontier" in text
-    assert "guided toy incentive simulations" in text
+    assert "guided educational incentive simulations" in text
     assert "Marginal gain from extra claims" in text
     assert "Audit cost / penalty strength" in text
     assert "Claim rule clarity" in text

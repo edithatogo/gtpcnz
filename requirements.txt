@@ -4,7 +4,10 @@ networkx
 streamlit
 matplotlib
 plotly
+scikit-learn
 jupyter
 pyyaml
+pydantic>=2,<3
 pytest
 pytest-mock
+hypothesis
