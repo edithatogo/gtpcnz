@@ -29,3 +29,13 @@
   Claim-boundary status: public_benchmark / calibration_readiness_only preserved. No source was promoted to source_ready=true.
   Residual blockers: All six public sources still require reproducible download, checksum replacement, transformation, and processed-output hash manifests.
   Follow-on owner: coordinator (next public-source retrieval work).
+
+2026-06-05: Public source registry references narrowed from home pages to concrete public source pages.
+  Work package: WP-052-A (source-contracts), WP-052-B (snapshot-builder).
+  Files changed: models/primarycare_model/registries/public/sources.public.v1.yaml, data/snapshots/public-source-snapshot-v1.json, conductor/tracks/052-public-source-ingestion-and-snapshots/implementation-log.md, public/gtpcnz mirror files.
+  Evidence used: official public pages for Health NZ capitation rates, PHO Services Agreement, Health NZ primary-care data/statistics, MCNZ workforce survey, NZ Health Survey explorer, and Stats NZ estimated population indicator.
+  Gates run:
+    - python scripts/build_public_source_snapshot.py -> PASSED
+    - python scripts/check_public_source_snapshot.py -> PASSED
+  Result: Public source records now use concrete public reference pages rather than generic organisation home pages. Checksums remain pending-download.
+  Claim-boundary status: public_benchmark / calibration_readiness_only preserved. No source was promoted to source_ready=true.

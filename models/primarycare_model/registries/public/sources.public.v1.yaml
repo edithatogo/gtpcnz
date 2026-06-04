@@ -1,7 +1,7 @@
 sources:
   - source_id: src_hnz_capitation_schedule
     label: Health NZ capitation and PHO services schedules
-    url_or_reference: https://www.tewhatuora.govt.nz/
+    url_or_reference: https://www.tewhatuora.govt.nz/for-health-providers/primary-care-sector/capitation-rates
     retrieval_date: 2026-06-03
     licence_status: public_reference
     public_access_status: public
@@ -10,7 +10,7 @@ sources:
     claim_boundary: Public schedule reference; not private payment data.
   - source_id: src_pho_services_agreement
     label: PHO Services Agreement public schedule
-    url_or_reference: https://www.tewhatuora.govt.nz/
+    url_or_reference: https://www.tewhatuora.govt.nz/for-health-providers/primary-care-sector/primary-health-organisation-services-agreement
     retrieval_date: 2026-06-03
     licence_status: public_reference
     public_access_status: public
@@ -19,7 +19,7 @@ sources:
     claim_boundary: Public schedule reference only.
   - source_id: src_hnz_enrolment
     label: Primary care enrolment public data
-    url_or_reference: https://www.tewhatuora.govt.nz/
+    url_or_reference: https://www.tewhatuora.govt.nz/for-health-professionals/data-and-statistics/primary-care
     retrieval_date: 2026-06-03
     licence_status: public_reference
     public_access_status: public
@@ -28,7 +28,7 @@ sources:
     claim_boundary: Aggregate denominator; no patient-level data.
   - source_id: src_mcnz_workforce
     label: Medical Council workforce survey
-    url_or_reference: https://www.mcnz.org.nz/
+    url_or_reference: https://www.mcnz.org.nz/about-us/what-we-do/workforce-survey/
     retrieval_date: 2026-06-03
     licence_status: public_reference
     public_access_status: public
@@ -46,7 +46,7 @@ sources:
     claim_boundary: Public aggregate survey data only.
   - source_id: src_statsnz_population
     label: Stats NZ population estimates
-    url_or_reference: https://www.stats.govt.nz/
+    url_or_reference: https://www.stats.govt.nz/indicators/population-of-nz/
     retrieval_date: 2026-06-03
     licence_status: public_reference
     public_access_status: public
