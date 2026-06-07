@@ -147,6 +147,7 @@ def check_ci() -> tuple[bool, str]:
     required_ci = [
         "python scripts/check_repo_health.py",
         "python scripts/check_concern_boundaries.py",
+        "python scripts/check_public_source_retrieval_plan.py",
         "pytest -q",
         "quarto render --to html",
         "py_compile streamlit_app.py models/primarycare_model/app.py",

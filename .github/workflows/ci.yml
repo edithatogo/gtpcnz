@@ -42,6 +42,9 @@ jobs:
       - name: Check public source snapshot
         run: python scripts/check_public_source_snapshot.py
 
+      - name: Check public source retrieval plan
+        run: python scripts/check_public_source_retrieval_plan.py
+
       - name: Check version consistency
         run: python scripts/check_version_consistency.py
 
