@@ -15,3 +15,13 @@
   Claim-boundary status: calibration_readiness_only (not_valid_for: precise fiscal savings, ED reductions, hospital-demand reductions, workforce effects, implementation impacts, causal effects).
   Residual blockers: All 3 calibration targets have source_ready=false; pending public data download/checksum verification.
   Follow-on owner: coordinator (053 complete; 056, 057, 059 unblocked).
+
+2026-06-07: Calibration target readiness matrix gate added.
+  Work package: WP-053-B (calibration-runner), WP-053-D (claim-downgrade), linked to Track 052 source readiness.
+  Files changed: models/primarycare_model/calibration/calibration_target_readiness.py, scripts/check_calibration_target_readiness.py, models/tests/test_calibration_target_readiness.py, release gate wiring, docs/calibration/public-aggregate-calibration-methods-v1.md, docs/model/public-source-readiness-closeout-v1.md, conductor/state.md.
+  Gates run:
+    - python scripts/check_calibration_target_readiness.py -> PASSED (readiness-compatible default matrix)
+    - python scripts/check_calibration_target_readiness.py --strict -> FAILED AS EXPECTED because linked public sources are not source_ready.
+    - python -m pytest -q models/tests/test_calibration_target_readiness.py models/tests/test_public_aggregate_calibration.py models/tests/test_release_engineering.py -> PASSED
+  Result: Public aggregate calibration now exposes target-level blockers joined to source readiness, relative error tolerance, and not-valid-for claim boundaries.
+  Claim-boundary status: public_benchmark / calibration_readiness_only preserved. No target or calibration claim was promoted.

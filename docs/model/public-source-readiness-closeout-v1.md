@@ -291,7 +291,7 @@ The strict gate currently reports the missing Stats NZ population and NZ Health 
 | Gate | Check | Script |
 |---|---|---|
 | C1 | All 6 sources pass G1–G8 | See above |
-| C2 | All 3 calibration targets have `source_ready=true` | `python scripts/run_public_aggregate_calibration.py --check-only` |
+| C2 | All 3 calibration targets have `source_ready=true` and target-level blocker matrix is clear | `python scripts/check_calibration_target_readiness.py --strict` and `python scripts/run_public_aggregate_calibration.py --check-only` |
 | C3 | Calibration run with real source data does not inflate claims | `python scripts/run_public_aggregate_calibration.py` (full run) |
 | C4 | Precision claims still prohibited | Assert `not_valid_for` list preserved |
 | C5 | Public mirror drift check | `python scripts/sync_public_mirror.py --check` |
@@ -337,7 +337,7 @@ All public-source readiness gates must reject any file that falls into the above
 > 3. All sources pass `scripts/check_public_source_snapshot.py` with exit code 0 and no warnings.
 > 4. Transformation scripts exist and produce validated output in `data/public_processed/`.
 > 5. Processed files pass schema validation against the contracts in `inputs.public.v1.yaml`.
-> 6. All 3 calibration targets have `source_ready=true` when `python scripts/run_public_aggregate_calibration.py --check-only` runs.
+> 6. All 3 calibration targets have `source_ready=true` when `python scripts/check_calibration_target_readiness.py --strict` and `python scripts/run_public_aggregate_calibration.py --check-only` run.
 > 7. The `not_valid_for` precision-claim list remains intact and cannot be bypassed.
 > 8. The public mirror (`public/gtpcnz`) drift check passes.
 >

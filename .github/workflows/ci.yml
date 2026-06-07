@@ -63,6 +63,9 @@ jobs:
       - name: Check dependency lock
         run: python scripts/check_dependency_lock.py
 
+      - name: Check calibration target readiness
+        run: python scripts/check_calibration_target_readiness.py
+
       - name: Run public aggregate calibration gate
         run: python scripts/run_public_aggregate_calibration.py --check-only
 
