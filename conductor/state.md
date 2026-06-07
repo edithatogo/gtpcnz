@@ -27,6 +27,7 @@ Next implementation frontier:
 - Public source retrieval and transformation described in `docs/model/public-source-readiness-closeout-v1.md`.
 - Cross-stage public source readiness matrix: `python scripts/check_public_source_readiness_matrix.py` passes in readiness mode; `--strict` remains the calibration-upgrade blocker until raw, checksum, and processed artifacts exist.
 - Replacement of `checksum: pending-download` entries with verified SHA-256 checksums after reproducible public downloads.
+- Calibration target readiness matrix: `python scripts/check_calibration_target_readiness.py` passes in readiness mode; `--strict` remains blocked until every linked source is ready and every target is within public tolerance.
 - Calibration target promotion from `source_ready=false` to `source_ready=true` only after source, licence, checksum, processed-schema, and mirror gates pass.
 - No upgrade from `public_benchmark` / `calibration_readiness_only` until those gates pass.
 
@@ -58,6 +59,7 @@ Current public gates:
 - `python scripts/check_dependency_lock.py`
 - `python scripts/check_concern_boundaries.py`
 - `python scripts/check_repo_health.py`
+- `python scripts/check_calibration_target_readiness.py`
 - `python scripts/run_public_aggregate_calibration.py --check-only`
 - `python scripts/run_voi.py --check-only`
 - `python -m pytest -q`
