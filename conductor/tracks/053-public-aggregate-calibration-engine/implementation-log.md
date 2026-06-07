@@ -25,3 +25,12 @@
     - python -m pytest -q models/tests/test_calibration_target_readiness.py models/tests/test_public_aggregate_calibration.py models/tests/test_release_engineering.py -> PASSED
   Result: Public aggregate calibration now exposes target-level blockers joined to source readiness, relative error tolerance, and not-valid-for claim boundaries.
   Claim-boundary status: public_benchmark / calibration_readiness_only preserved. No target or calibration claim was promoted.
+2026-06-07: Calibration validation gate matrix added.
+  Work package: WP-053-C (ppc-and-holdouts), WP-053-D (claim-downgrade).
+  Files changed: models/primarycare_model/calibration/calibration_validation_gates.py, scripts/check_calibration_validation_gates.py, models/tests/test_calibration_validation_gates.py, release gate wiring, docs/calibration/public-aggregate-calibration-methods-v1.md, docs/model/public-source-readiness-closeout-v1.md, conductor/state.md.
+  Gates run:
+    - python scripts/check_calibration_validation_gates.py -> PASSED (readiness-compatible default matrix)
+    - python scripts/check_calibration_validation_gates.py --strict -> FAILED AS EXPECTED because baseline targets and public holdout/PPC datasets are not ready.
+    - python -m pytest -q models/tests/test_calibration_validation_gates.py models/tests/test_calibration_target_readiness.py models/tests/test_public_aggregate_calibration.py models/tests/test_release_engineering.py -> PASSED
+  Result: Public aggregate calibration now exposes baseline, temporal, geographic, subgroup, policy-shock, posterior-predictive, and claim-downgrade gate statuses without promoting claims.
+  Claim-boundary status: public_benchmark / calibration_readiness_only preserved. No validation gate upgraded empirical claim status.
