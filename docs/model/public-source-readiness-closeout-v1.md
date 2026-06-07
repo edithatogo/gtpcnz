@@ -26,7 +26,17 @@ Each of the 6 registered sources has a machine-readable retrieval plan in `model
 python scripts/check_public_source_retrieval_plan.py
 ```
 
-The current retrieval status for every source is `reference_pinned_pending_download`: public reference pages are pinned, fetch entrypoints are source-pinned, but raw files and processed outputs have not been created.
+The current retrieval status for every source is `reference_pinned_pending_download`: public reference pages are pinned, fetch entrypoints are source-pinned, but raw files and processed outputs have not been created. A single cross-stage readiness matrix is checked by:
+
+```sh
+python scripts/check_public_source_readiness_matrix.py
+```
+
+The strict matrix gate intentionally fails until raw files, verified checksums, and processed artifacts exist:
+
+```sh
+python scripts/check_public_source_readiness_matrix.py --strict
+```
 
 ### 2.1 `src_hnz_capitation_schedule` — Health NZ Capitation and PHO Services Schedules
 
@@ -191,12 +201,12 @@ data/public_raw/          data/public_processed/       models/primarycare_model/
 
 | Script | Purpose | Input | Output |
 |---|---|---|---|
-| `scripts/transform_hnz_capitation.py` | Parse capitation schedule into structured parameter values | `data/public_raw/hnz_capitation_schedule/*` | Validated schema -> registry updates |
-| `scripts/transform_pho_agreement.py` | Extract consultation fee schedule values | `data/public_raw/pho_services_agreement/*` | Validated schema -> registry updates |
-| `scripts/transform_hnz_enrolment.py` | Extract aggregate enrolment counts | `data/public_raw/hnz_enrolment/*` | Validated schema -> registry updates |
-| `scripts/transform_mcnz_workforce.py` | Extract workforce participation rates | `data/public_raw/mcnz_workforce/*` | Validated schema -> registry updates |
-| `scripts/transform_nz_health_survey.py` | Extract cost-barrier access indicators | `data/public_raw/nz_health_survey/*` | Validated schema -> registry updates |
-| `scripts/transform_statsnz_population.py` | Extract population estimates for calibration | `data/public_raw/statsnz_population/*` | Validated schema -> registry updates |
+| `scripts/transform_hnz_capitation.py` | Parse capitation schedule into structured parameter values | `data/public_raw/src_hnz_capitation_schedule/*` | Validated schema -> registry updates |
+| `scripts/transform_pho_agreement.py` | Extract consultation fee schedule values | `data/public_raw/src_pho_services_agreement/*` | Validated schema -> registry updates |
+| `scripts/transform_hnz_enrolment.py` | Extract aggregate enrolment counts | `data/public_raw/src_hnz_enrolment/*` | Validated schema -> registry updates |
+| `scripts/transform_mcnz_workforce.py` | Extract workforce participation rates | `data/public_raw/src_mcnz_workforce/*` | Validated schema -> registry updates |
+| `scripts/transform_nz_health_survey.py` | Extract cost-barrier access indicators | `data/public_raw/src_nz_health_survey/*` | Validated schema -> registry updates |
+| `scripts/transform_statsnz_population.py` | Extract population estimates for calibration | `data/public_raw/src_statsnz_population/*` | Validated schema -> registry updates |
 
 ### 5.4 Transform script contract gate
 
@@ -274,6 +284,7 @@ The strict gate currently reports the missing Stats NZ population and NZ Health 
 | G6 | Transformed file exists at `data/public_processed/{source_id}/` | `scripts/check_public_source_snapshot.py --verify-processed` |
 | G7 | Transformed file passes schema validation | `python scripts/check_transformed_schemas.py --require-processed` and `python -m pytest -q models/tests/test_transformed_schemas.py` |
 | G8 | Processed checksum matches companion `.hash` file | `scripts/check_public_source_snapshot.py --verify-processed` |
+| G9 | Cross-stage source readiness matrix shows the same raw, checksum, processed, and claim status | `python scripts/check_public_source_readiness_matrix.py --strict` |
 
 ### 6.2 Calibration-level gates (must pass for calibration to upgrade from `calibration_readiness_only`)
 
@@ -354,5 +365,5 @@ All public-source readiness gates must reject any file that falls into the above
 | Licence/access metadata | Placeholder values | Verified per-source with `licence_url` | Post-063 work packages |
 | Checksums | `pending-download` on all 6 | SHA-256 hash on all 6 | Post-063 work packages |
 | Transformation | Source-specific transform entrypoints and transform-script gate exist; source-specific parsers await raw files | 6 transformation scripts plus validated processed CSV/metadata outputs | Post-063 work packages |
-| Validation gates | Default snapshot and transformed-schema checkers pass; strict `--verify-files`, `--verify-checksums`, `--verify-processed`, `--verify-licences`, `check_public_source_fetch_scripts.py --require-raw`, `check_public_source_transform_scripts.py --require-raw`, and `check_transformed_schemas.py --require-processed` gates exist and currently expose missing source files/processed artifacts | Strict gates pass after public downloads and transforms | Post-063 work packages |
+| Validation gates | Default snapshot, retrieval, fetch, transform, readiness-matrix, and transformed-schema checkers pass; strict `--verify-files`, `--verify-checksums`, `--verify-processed`, `--verify-licences`, `check_public_source_fetch_scripts.py --require-raw`, `check_public_source_transform_scripts.py --require-raw`, `check_public_source_readiness_matrix.py --strict`, and `check_transformed_schemas.py --require-processed` gates exist and currently expose missing source files/processed artifacts | Strict gates pass after public downloads and transforms | Post-063 work packages |
 | Calibration upgrade | `calibration_readiness_only` | `public_aggregate_validated` only after all gates pass | Post-063 work packages |
