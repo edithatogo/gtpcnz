@@ -9,7 +9,7 @@ from models.primarycare_model.calibration.calibration_target_readiness import (
     readiness_matrix_as_json,
     strict_calibration_target_issues,
 )
-from models.primarycare_model.calibration.public_aggregate_calibration import load_calibration_targets
+from models.primarycare_model.calibration.public_aggregate_targets import load_calibration_targets
 
 
 def test_calibration_target_readiness_has_one_row_per_target() -> None:
