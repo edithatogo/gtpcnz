@@ -154,6 +154,7 @@ def check_ci() -> tuple[bool, str]:
         "python scripts/check_transformed_schemas.py",
         "python scripts/check_calibration_target_readiness.py",
         "python scripts/check_calibration_validation_gates.py",
+        "python scripts/check_posterior_predictive_checks.py",
         "pytest -q",
         "quarto render --to html",
         "py_compile streamlit_app.py models/primarycare_model/app.py",

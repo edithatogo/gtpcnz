@@ -69,3 +69,11 @@ def test_calibration_validation_gate_passes() -> None:
         capture_output=True,
     )
     assert result.returncode == 0, result.stdout + result.stderr
+
+def test_posterior_predictive_check_gate_passes() -> None:
+    result = subprocess.run(
+        [sys.executable, "scripts/check_posterior_predictive_checks.py"],
+        text=True,
+        capture_output=True,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr

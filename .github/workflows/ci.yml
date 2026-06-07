@@ -69,6 +69,9 @@ jobs:
       - name: Check calibration validation gates
         run: python scripts/check_calibration_validation_gates.py
 
+      - name: Check posterior predictive readiness
+        run: python scripts/check_posterior_predictive_checks.py
+
       - name: Run public aggregate calibration gate
         run: python scripts/run_public_aggregate_calibration.py --check-only
 

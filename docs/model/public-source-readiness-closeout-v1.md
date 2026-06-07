@@ -338,7 +338,7 @@ All public-source readiness gates must reject any file that falls into the above
 > 4. Transformation scripts exist and produce validated output in `data/public_processed/`.
 > 5. Processed files pass schema validation against the contracts in `inputs.public.v1.yaml`.
 > 6. All 3 calibration targets have `source_ready=true` when `python scripts/check_calibration_target_readiness.py --strict` and `python scripts/run_public_aggregate_calibration.py --check-only` run.
-> 7. `python scripts/check_calibration_validation_gates.py --strict` passes for baseline, public holdout, posterior predictive, and claim-downgrade gates.
+> 7. `python scripts/check_calibration_validation_gates.py --strict` and `python scripts/check_posterior_predictive_checks.py --strict` pass for baseline, public holdout, posterior predictive, and claim-downgrade gates.
 > 8. The `not_valid_for` precision-claim list remains intact and cannot be bypassed.
 > 9. The public mirror (`public/gtpcnz`) drift check passes.
 >
