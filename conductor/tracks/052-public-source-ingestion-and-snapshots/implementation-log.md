@@ -58,3 +58,14 @@
     - python -m pytest -q models/tests/test_transformed_schemas.py models/tests/test_release_engineering.py -> PASSED
   Result: Processed public inputs are now schema-gated for required fields, primitive types, metadata presence, and forbidden person-level columns before calibration can be promoted.
   Claim-boundary status: public_benchmark / calibration_readiness_only preserved. No processed artifact was generated and no source was promoted to source_ready=true.
+
+2026-06-07: Public source transform entrypoint gate added.
+  Work package: WP-052-D (processed-schema) and post-063 transformation closeout.
+  Files changed: models/primarycare_model/data/public_source_transforms.py, scripts/check_public_source_transform_scripts.py, scripts/transform_*.py, models/tests/test_public_source_transforms.py, release gate wiring, docs/model/public-source-readiness-closeout-v1.md, conductor/state.md.
+  Gates run:
+    - python scripts/check_public_source_transform_scripts.py -> PASSED (all registry-named transform scripts exist and are source-pinned)
+    - python scripts/check_public_source_transform_scripts.py --require-raw -> FAILED AS EXPECTED because raw public source files are not yet present.
+    - python scripts/transform_statsnz_population.py --check-only -> PASSED (readiness-compatible, no outputs written)
+    - python -m pytest -q models/tests/test_public_source_transforms.py models/tests/test_public_source_retrieval_plan.py -> PASSED
+  Result: Public source transform entrypoints are now executable and registry-gated without fabricating processed data.
+  Claim-boundary status: public_benchmark / calibration_readiness_only preserved. No raw file, checksum, processed output, or source_ready flag was promoted.
