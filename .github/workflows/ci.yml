@@ -45,6 +45,9 @@ jobs:
       - name: Check public source retrieval plan
         run: python scripts/check_public_source_retrieval_plan.py
 
+      - name: Check transformed public input schemas
+        run: python scripts/check_transformed_schemas.py
+
       - name: Check version consistency
         run: python scripts/check_version_consistency.py
 

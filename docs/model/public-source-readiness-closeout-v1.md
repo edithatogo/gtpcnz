@@ -150,7 +150,7 @@ This script recomputes checksums of files in `data/public_raw/` and compares aga
 
 ### 5.1 Current state
 
-`data/public_processed/` is empty. No ETL scripts exist between raw and processed.
+`data/public_processed/` is empty. Source-specific ETL scripts still do not exist; the processed-schema validation gate now exists and remains readiness-compatible until transformed artifacts are created.
 
 ### 5.2 Required pipeline stages
 
@@ -196,6 +196,22 @@ Transformed files land in `data/public_processed/` with:
   - Row count, column list, null counts
   - Schema version
 
+### 5.6 Processed schema validation gate
+
+The processed-input schema validator is implemented as:
+
+```
+python scripts/check_transformed_schemas.py
+```
+
+The default mode is readiness-compatible and passes while processed artifacts are absent. The calibration-upgrade gate is strict and must fail until the expected transformed CSV and `_metadata.yaml` files exist for registry-backed public input datasets:
+
+```
+python scripts/check_transformed_schemas.py --require-processed
+```
+
+The strict gate currently reports the missing Stats NZ population and NZ Health Survey processed artifacts and does not alter claim status.
+
 ---
 
 ## 6. Validation Gate Requirements
@@ -210,7 +226,7 @@ Transformed files land in `data/public_processed/` with:
 | G4 | Public access status is `public` | `scripts/check_public_source_snapshot.py` (existing check) |
 | G5 | No patient-level or practitioner-level fields | `scripts/check_no_patient_data.py` (extended for raw data) |
 | G6 | Transformed file exists at `data/public_processed/{source_id}/` | `scripts/check_public_source_snapshot.py --verify-processed` |
-| G7 | Transformed file passes schema validation | `python -m pytest -q models/tests/test_transformed_schemas.py` |
+| G7 | Transformed file passes schema validation | `python scripts/check_transformed_schemas.py --require-processed` and `python -m pytest -q models/tests/test_transformed_schemas.py` |
 | G8 | Processed checksum matches companion `.hash` file | `scripts/check_public_source_snapshot.py --verify-processed` |
 
 ### 6.2 Calibration-level gates (must pass for calibration to upgrade from `calibration_readiness_only`)
@@ -291,6 +307,6 @@ All public-source readiness gates must reject any file that falls into the above
 | Source retrieval | 0/6 files downloaded; 6/6 retrieval plans pinned | 6/6 files in `data/public_raw/` | Post-063 work packages |
 | Licence/access metadata | Placeholder values | Verified per-source with `licence_url` | Post-063 work packages |
 | Checksums | `pending-download` on all 6 | SHA-256 hash on all 6 | Post-063 work packages |
-| Transformation | No scripts exist | 6 transformation scripts + schema validation | Post-063 work packages |
-| Validation gates | Default snapshot checker passes; strict `--verify-files`, `--verify-checksums`, `--verify-processed`, and `--verify-licences` gates exist and currently expose missing source files | Strict gates pass after public downloads and transforms | Post-063 work packages |
+| Transformation | Source-specific ETL scripts do not yet exist; processed-schema gate exists | 6 transformation scripts plus validated processed CSV/metadata outputs | Post-063 work packages |
+| Validation gates | Default snapshot and transformed-schema checkers pass; strict `--verify-files`, `--verify-checksums`, `--verify-processed`, `--verify-licences`, and `check_transformed_schemas.py --require-processed` gates exist and currently expose missing source files/processed artifacts | Strict gates pass after public downloads and transforms | Post-063 work packages |
 | Calibration upgrade | `calibration_readiness_only` | `public_aggregate_validated` only after all gates pass | Post-063 work packages |
