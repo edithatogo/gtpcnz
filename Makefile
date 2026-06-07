@@ -14,6 +14,7 @@ reproduce-public-release:
 	python scripts/check_public_only_boundary.py
 	python scripts/build_public_source_snapshot.py
 	python scripts/check_public_source_snapshot.py
+	python scripts/check_public_source_retrieval_plan.py
 	python scripts/check_parameter_traceability.py
 	python scripts/run_public_aggregate_calibration.py --check-only
 	python scripts/run_voi.py --check-only
