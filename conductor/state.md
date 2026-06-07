@@ -30,6 +30,7 @@ Next implementation frontier:
 - Calibration target readiness matrix: `python scripts/check_calibration_target_readiness.py` passes in readiness mode; `--strict` remains blocked until every linked source is ready and every target is within public tolerance.
 - Calibration validation gate matrix: `python scripts/check_calibration_validation_gates.py` passes in readiness mode; `--strict` remains blocked until baseline, holdout, PPC, and claim-downgrade gates pass where public data permit.
 - Posterior predictive readiness: `python scripts/check_posterior_predictive_checks.py` passes in readiness mode; `--strict` remains blocked until CAL-G-006 can pass from verified public aggregate inputs.
+- Public aggregate calibration output now embeds validation-gate and posterior-predictive readiness summaries for report/model-card consumption; the output still remains `public_benchmark` / `calibration_readiness_only`.
 - Calibration target promotion from `source_ready=false` to `source_ready=true` only after source, licence, checksum, processed-schema, and mirror gates pass.
 - No upgrade from `public_benchmark` / `calibration_readiness_only` until those gates pass.
 

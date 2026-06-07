@@ -40,6 +40,13 @@ def predicted_public_value(target: CalibrationTarget) -> float:
 
 
 def run_public_aggregate_calibration() -> dict[str, object]:
+    from models.primarycare_model.calibration.calibration_validation_gates import (
+        build_calibration_validation_gate_matrix,
+    )
+    from models.primarycare_model.calibration.posterior_predictive_checks import (
+        posterior_predictive_checks,
+    )
+
     checks = []
     sources = {source.source_id: source for source in load_public_sources()}
     for target in load_calibration_targets():
@@ -61,10 +68,18 @@ def run_public_aggregate_calibration() -> dict[str, object]:
             "claim_boundary": target.claim_boundary,
         })
     all_passed = all(item["passed"] for item in checks)
+    validation_gates = [row.to_json_dict() for row in build_calibration_validation_gate_matrix(strict=False)]
+    posterior_predictive = posterior_predictive_checks(strict=False)
     return {
         "calibration_status": "public_aggregate_validated" if all_passed else "calibration_readiness_only",
         "claim_level": "empirically_supported_if_gated" if all_passed else "public_benchmark",
         "checks": checks,
+        "validation_gates": validation_gates,
+        "posterior_predictive_checks": posterior_predictive,
+        "interpretation_note": (
+            "Public aggregate calibration remains readiness-only until source-ready public targets, "
+            "validation gates, and posterior predictive checks pass."
+        ),
         "not_valid_for": [
             "precise fiscal savings",
             "ED reductions",

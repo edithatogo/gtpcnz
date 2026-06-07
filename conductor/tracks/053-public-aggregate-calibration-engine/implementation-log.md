@@ -43,3 +43,12 @@
     - python -m pytest -q models/tests/test_posterior_predictive_checks.py models/tests/test_calibration_validation_gates.py models/tests/test_calibration_target_readiness.py models/tests/test_release_engineering.py -> PASSED
   Result: Posterior predictive checks now expose target-level readiness, CAL-G-006 status, failed targets, blockers, and not-valid-for boundaries without promoting claims.
   Claim-boundary status: public_benchmark / calibration_readiness_only preserved. No PPC gate upgraded empirical claim status.
+2026-06-07: Public aggregate calibration output contract expanded.
+  Work package: WP-053-C (ppc-and-holdouts), WP-053-D (claim-downgrade).
+  Files changed: models/primarycare_model/calibration/public_aggregate_calibration.py, models/tests/test_public_aggregate_calibration.py, docs/calibration/public-aggregate-calibration-methods-v1.md, conductor/state.md, conductor/tracks/053-public-aggregate-calibration-engine/implementation-log.md.
+  Gates run:
+    - python scripts/run_public_aggregate_calibration.py --check-only -> PASSED with embedded validation_gates and posterior_predictive_checks sections; claim_level=public_benchmark.
+    - python -m pytest -q models/tests/test_public_aggregate_calibration.py models/tests/test_posterior_predictive_checks.py models/tests/test_calibration_validation_gates.py -> PASSED
+    - ruff check models/primarycare_model/calibration/public_aggregate_calibration.py models/tests/test_public_aggregate_calibration.py -> PASSED
+  Result: The public aggregate calibration JSON can now feed Quarto/model-card/report surfaces with CAL-G-001..CAL-G-007 and CAL-G-006 PPC readiness without separate ad hoc joins.
+  Claim-boundary status: public_benchmark / calibration_readiness_only preserved. No validation or posterior predictive summary promoted empirical calibration.
