@@ -20,7 +20,7 @@ class EngineProtocol(Protocol[InputT, OutputT]):
 
     def run(self, inputs: InputT) -> OutputT:
         """Run a deterministic calculation for the supplied validated inputs."""
-        ...  # pyright: ignore[reportReturnType]
+        raise NotImplementedError
 
 
 class EngineInput(StrictContract):
