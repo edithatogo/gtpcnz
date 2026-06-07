@@ -79,3 +79,13 @@
     - python -m pytest -q models/tests/test_public_source_fetch.py models/tests/test_public_source_retrieval_plan.py -> PASSED
   Result: Public source fetch entrypoints are now executable and registry-gated without downloading or fabricating raw data.
   Claim-boundary status: public_benchmark / calibration_readiness_only preserved. No raw file, checksum, processed output, or source_ready flag was promoted.
+
+2026-06-07: Public source readiness matrix gate added.
+  Work package: WP-052-C (checksum-readiness), WP-052-D (processed-schema), and post-063 source readiness closeout.
+  Files changed: models/primarycare_model/data/public_source_readiness_matrix.py, scripts/check_public_source_readiness_matrix.py, models/tests/test_public_source_readiness_matrix.py, release gate wiring, docs/model/public-source-readiness-closeout-v1.md, conductor/state.md.
+  Gates run:
+    - python scripts/check_public_source_readiness_matrix.py -> PASSED (readiness-compatible default matrix)
+    - python scripts/check_public_source_readiness_matrix.py --strict -> FAILED AS EXPECTED because raw public source files, verified checksums, and processed outputs are not yet present.
+    - python -m pytest -q models/tests/test_public_source_readiness_matrix.py models/tests/test_release_engineering.py -> PASSED
+  Result: Public source readiness now has a single cross-stage status matrix covering retrieval, fetch, transform, raw artifact, checksum, processed artifact, source_ready, and claim status.
+  Claim-boundary status: public_benchmark / calibration_readiness_only preserved. The matrix reports blockers only and does not promote any source_ready flag.

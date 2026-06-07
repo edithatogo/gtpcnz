@@ -51,6 +51,9 @@ jobs:
       - name: Check public source transform scripts
         run: python scripts/check_public_source_transform_scripts.py
 
+      - name: Check public source readiness matrix
+        run: python scripts/check_public_source_readiness_matrix.py
+
       - name: Check transformed public input schemas
         run: python scripts/check_transformed_schemas.py
 

@@ -17,6 +17,7 @@ reproduce-public-release:
 	python scripts/check_public_source_retrieval_plan.py
 	python scripts/check_public_source_fetch_scripts.py
 	python scripts/check_public_source_transform_scripts.py
+	python scripts/check_public_source_readiness_matrix.py
 	python scripts/check_transformed_schemas.py
 	python scripts/check_parameter_traceability.py
 	python scripts/run_public_aggregate_calibration.py --check-only

@@ -150,6 +150,7 @@ def check_ci() -> tuple[bool, str]:
         "python scripts/check_public_source_retrieval_plan.py",
         "python scripts/check_public_source_fetch_scripts.py",
         "python scripts/check_public_source_transform_scripts.py",
+        "python scripts/check_public_source_readiness_matrix.py",
         "python scripts/check_transformed_schemas.py",
         "pytest -q",
         "quarto render --to html",
