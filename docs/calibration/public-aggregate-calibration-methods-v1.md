@@ -28,6 +28,16 @@ The gate keeps these claim boundaries attached to every target:
 - causal effects
 
 Current public status remains `calibration_readiness_only` because linked source rows have pending raw files, pending checksums, and pending processed outputs.
+
+The public aggregate calibration runner emits this target matrix together with `validation_gates` and
+`posterior_predictive_checks` sections:
+
+```sh
+python scripts/run_public_aggregate_calibration.py --check-only
+```
+
+Those nested sections are the report/model-card contract for calibration readiness. They must not be
+interpreted as empirical validation until all strict gates pass.
 ## Validation Gate Matrix
 
 The public aggregate validation gates are reported by:
