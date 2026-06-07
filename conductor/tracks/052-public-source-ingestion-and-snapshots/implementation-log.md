@@ -48,3 +48,13 @@
     - python -m pytest -q models/tests/test_public_source_retrieval_plan.py -> PASSED
   Result: Every public source now has a typed retrieval plan with source_id, public reference URL, expected raw path, retrieval method, transform script, expected processed output, and pending-download status.
   Claim-boundary status: public_benchmark / calibration_readiness_only preserved. Retrieval plans are references only and do not promote source_ready=true.
+
+2026-06-07: Processed public input schema gate added.
+  Work package: WP-052-D (processed-schema).
+  Files changed: models/primarycare_model/contracts/inputs.py, models/primarycare_model/data/public_processed_schema.py, scripts/check_transformed_schemas.py, models/tests/test_transformed_schemas.py, models/tests/test_release_engineering.py, CI/release gate wiring, docs/model/public-source-readiness-closeout-v1.md, conductor/state.md.
+  Gates run:
+    - python scripts/check_transformed_schemas.py -> PASSED (readiness-compatible default mode)
+    - python scripts/check_transformed_schemas.py --require-processed -> FAILED AS EXPECTED because registry-backed processed artifacts are not yet present.
+    - python -m pytest -q models/tests/test_transformed_schemas.py models/tests/test_release_engineering.py -> PASSED
+  Result: Processed public inputs are now schema-gated for required fields, primitive types, metadata presence, and forbidden person-level columns before calibration can be promoted.
+  Claim-boundary status: public_benchmark / calibration_readiness_only preserved. No processed artifact was generated and no source was promoted to source_ready=true.

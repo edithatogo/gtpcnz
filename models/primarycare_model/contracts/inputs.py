@@ -22,8 +22,11 @@ class InputField(StrictContract):
 class InputDataset(StrictContract):
     dataset_id: str = Field(min_length=1)
     label: str = Field(min_length=1)
+    source_id: str | None = None
     source: str = Field(min_length=1)
     sensitivity_class: InputSensitivity
+    public_access_status: str | None = None
+    licence_status: str | None = None
     fields: tuple[InputField, ...]
     claim_boundary: str = Field(min_length=1)
 

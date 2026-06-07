@@ -16,3 +16,12 @@ def test_public_source_retrieval_plan_gate_passes() -> None:
         capture_output=True,
     )
     assert result.returncode == 0, result.stdout + result.stderr
+
+
+def test_transformed_schema_gate_passes_in_readiness_mode() -> None:
+    result = subprocess.run(
+        [sys.executable, "scripts/check_transformed_schemas.py"],
+        text=True,
+        capture_output=True,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
