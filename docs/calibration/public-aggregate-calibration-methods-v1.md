@@ -53,3 +53,18 @@ The matrix covers:
 - CAL-G-007 claim-level downgrade when any gate fails or is unavailable
 
 Default mode is readiness-compatible and reports unavailable public holdout data without failing CI. Strict mode fails until source-ready public targets, processed artifacts, verified checksums, and public holdout/PPC data are available. Until then all public outputs remain `public_benchmark` / `calibration_readiness_only`.
+## Posterior Predictive Check Readiness
+
+Posterior predictive check readiness is reported by:
+
+```sh
+python scripts/check_posterior_predictive_checks.py
+```
+
+The strict PPC upgrade gate is:
+
+```sh
+python scripts/check_posterior_predictive_checks.py --strict
+```
+
+The PPC report is tied to CAL-G-006 in the validation gate matrix. Default mode reports failed/readiness-only targets and preserves not-valid-for claim boundaries. Strict mode fails until linked public targets are source-ready, validation gates pass, and reproducible predictive checks can be run from verified public aggregate inputs.

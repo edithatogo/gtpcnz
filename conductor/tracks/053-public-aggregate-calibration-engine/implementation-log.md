@@ -34,3 +34,12 @@
     - python -m pytest -q models/tests/test_calibration_validation_gates.py models/tests/test_calibration_target_readiness.py models/tests/test_public_aggregate_calibration.py models/tests/test_release_engineering.py -> PASSED
   Result: Public aggregate calibration now exposes baseline, temporal, geographic, subgroup, policy-shock, posterior-predictive, and claim-downgrade gate statuses without promoting claims.
   Claim-boundary status: public_benchmark / calibration_readiness_only preserved. No validation gate upgraded empirical claim status.
+2026-06-07: Posterior predictive readiness gate added.
+  Work package: WP-053-C (ppc-and-holdouts), linked to CAL-G-006.
+  Files changed: models/primarycare_model/calibration/posterior_predictive_checks.py, scripts/check_posterior_predictive_checks.py, models/tests/test_posterior_predictive_checks.py, release gate wiring, docs/calibration/public-aggregate-calibration-methods-v1.md, docs/model/public-source-readiness-closeout-v1.md, conductor/state.md.
+  Gates run:
+    - python scripts/check_posterior_predictive_checks.py -> PASSED (readiness-compatible PPC report)
+    - python scripts/check_posterior_predictive_checks.py --strict -> FAILED AS EXPECTED because CAL-G-006 and source-ready public targets are not yet passed.
+    - python -m pytest -q models/tests/test_posterior_predictive_checks.py models/tests/test_calibration_validation_gates.py models/tests/test_calibration_target_readiness.py models/tests/test_release_engineering.py -> PASSED
+  Result: Posterior predictive checks now expose target-level readiness, CAL-G-006 status, failed targets, blockers, and not-valid-for boundaries without promoting claims.
+  Claim-boundary status: public_benchmark / calibration_readiness_only preserved. No PPC gate upgraded empirical claim status.
