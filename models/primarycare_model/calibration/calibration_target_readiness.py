@@ -7,7 +7,7 @@ import json
 import sys
 from dataclasses import asdict, dataclass
 
-from models.primarycare_model.calibration.public_aggregate_calibration import (
+from models.primarycare_model.calibration.public_aggregate_targets import (
     load_calibration_targets,
     predicted_public_value,
 )
