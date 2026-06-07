@@ -41,6 +41,7 @@ class PublicSourceRetrievalPlan(StrictContract):
     expected_raw_dir: str = Field(min_length=1)
     expected_raw_artifact: str = Field(min_length=1)
     retrieval_method: str = Field(min_length=1)
+    fetch_script: str = Field(min_length=1)
     retrieval_status: RetrievalStatus
     licence_basis: LicenceStatus
     public_access_status: PublicAccessStatus

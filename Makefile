@@ -15,6 +15,7 @@ reproduce-public-release:
 	python scripts/build_public_source_snapshot.py
 	python scripts/check_public_source_snapshot.py
 	python scripts/check_public_source_retrieval_plan.py
+	python scripts/check_public_source_fetch_scripts.py
 	python scripts/check_public_source_transform_scripts.py
 	python scripts/check_transformed_schemas.py
 	python scripts/check_parameter_traceability.py

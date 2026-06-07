@@ -69,3 +69,13 @@
     - python -m pytest -q models/tests/test_public_source_transforms.py models/tests/test_public_source_retrieval_plan.py -> PASSED
   Result: Public source transform entrypoints are now executable and registry-gated without fabricating processed data.
   Claim-boundary status: public_benchmark / calibration_readiness_only preserved. No raw file, checksum, processed output, or source_ready flag was promoted.
+2026-06-07: Public source fetch entrypoint gate added.
+  Work package: WP-052-C (checksum-readiness) and post-063 source retrieval closeout.
+  Files changed: models/primarycare_model/contracts/public_sources.py, models/primarycare_model/data/public_source_fetch.py, models/primarycare_model/data/public_source_retrieval.py, models/primarycare_model/registries/public/source_retrieval.public.v1.yaml, scripts/check_public_source_fetch_scripts.py, scripts/fetch_*.py, models/tests/test_public_source_fetch.py, release gate wiring, docs/model/public-source-readiness-closeout-v1.md, conductor/state.md.
+  Gates run:
+    - python scripts/check_public_source_fetch_scripts.py -> PASSED (all registry-named fetch scripts exist and are source-pinned)
+    - python scripts/check_public_source_fetch_scripts.py --require-raw -> FAILED AS EXPECTED because raw public source files are not yet present.
+    - python scripts/fetch_statsnz_population.py --check-only -> PASSED (readiness-compatible, no network access or writes)
+    - python -m pytest -q models/tests/test_public_source_fetch.py models/tests/test_public_source_retrieval_plan.py -> PASSED
+  Result: Public source fetch entrypoints are now executable and registry-gated without downloading or fabricating raw data.
+  Claim-boundary status: public_benchmark / calibration_readiness_only preserved. No raw file, checksum, processed output, or source_ready flag was promoted.

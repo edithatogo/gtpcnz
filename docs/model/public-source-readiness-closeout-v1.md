@@ -26,7 +26,7 @@ Each of the 6 registered sources has a machine-readable retrieval plan in `model
 python scripts/check_public_source_retrieval_plan.py
 ```
 
-The current retrieval status for every source is `reference_pinned_pending_download`: public reference pages are pinned, but raw files and processed outputs have not been created.
+The current retrieval status for every source is `reference_pinned_pending_download`: public reference pages are pinned, fetch entrypoints are source-pinned, but raw files and processed outputs have not been created.
 
 ### 2.1 `src_hnz_capitation_schedule` — Health NZ Capitation and PHO Services Schedules
 
@@ -88,6 +88,32 @@ The current retrieval status for every source is `reference_pinned_pending_downl
 | Retrieval script | `scripts/fetch_statsnz_population.py` |
 | Task | Download the most recent estimated resident population tables from Stats NZ public database, place in `data/public_raw/` |
 
+### 2.7 Fetch script contract gate
+
+Every `fetch_script` named in `models/primarycare_model/registries/public/source_retrieval.public.v1.yaml` must exist and be pinned to its source ID. The readiness-compatible gate is:
+
+```
+python scripts/check_public_source_fetch_scripts.py
+```
+
+The strict calibration-upgrade gate is:
+
+```
+python scripts/check_public_source_fetch_scripts.py --require-raw
+```
+
+Strict mode currently fails for all six public sources because no raw public source files have been retrieved into `data/public_raw/{source_id}/`. Individual source entrypoints can also be checked without network access or writes, for example:
+
+```
+python scripts/fetch_statsnz_population.py --check-only
+```
+
+Actual download is explicit and non-default:
+
+```
+python scripts/fetch_statsnz_population.py --download
+```
+
 ---
 
 ## 3. Licence/Access Metadata Requirements
@@ -127,7 +153,7 @@ All 6 sources: `checksum: pending-download`.
 
 | # | Task | Script/File | Gate |
 |---|---|---|---|
-| 1 | Download each source file to `data/public_raw/{source_id}/` | `scripts/fetch_*.py` (6 new scripts) | File exists in expected path |
+| 1 | Download each source file to `data/public_raw/{source_id}/` | `scripts/fetch_*.py` (6 source-pinned scripts) and `python scripts/check_public_source_fetch_scripts.py --require-raw` | File exists in expected path |
 | 2 | Compute SHA-256 checksum of each downloaded raw file | `python -c "import hashlib; print(hashlib.sha256(open(f,'rb').read()).hexdigest())"` | Checksum is a 64-char hex string |
 | 3 | Update `checksum` field in `sources.public.v1.yaml` | Manual edit or update script | Value matches computed hash |
 | 4 | Rebuild snapshot manifest | `python scripts/build_public_source_snapshot.py` | Snapshot JSON reflects the new checksums |
@@ -240,7 +266,7 @@ The strict gate currently reports the missing Stats NZ population and NZ Health 
 
 | Gate | Check | Script |
 |---|---|---|
-| G1 | Raw file exists at expected `data/public_raw/{source_id}/` path | `scripts/check_public_source_snapshot.py --verify-files` and `python scripts/check_public_source_transform_scripts.py --require-raw` |
+| G1 | Raw file exists at expected `data/public_raw/{source_id}/` path | `scripts/check_public_source_snapshot.py --verify-files`, `python scripts/check_public_source_fetch_scripts.py --require-raw`, and `python scripts/check_public_source_transform_scripts.py --require-raw` |
 | G2 | SHA-256 checksum matches `sources.public.v1.yaml` entry | `scripts/check_public_source_snapshot.py --verify-checksums` |
 | G3 | Licence status is one of the allowed public licences | `scripts/check_public_source_snapshot.py --verify-licences` |
 | G4 | Public access status is `public` | `scripts/check_public_source_snapshot.py` (existing check) |
@@ -324,9 +350,9 @@ All public-source readiness gates must reject any file that falls into the above
 
 | Layer | Current state | Target state | Owner |
 |---|---|---|---|
-| Source retrieval | 0/6 files downloaded; 6/6 retrieval plans pinned | 6/6 files in `data/public_raw/` | Post-063 work packages |
+| Source retrieval | 0/6 files downloaded; 6/6 retrieval plans and fetch scripts pinned | 6/6 files in `data/public_raw/` with verified checksums | Post-063 work packages |
 | Licence/access metadata | Placeholder values | Verified per-source with `licence_url` | Post-063 work packages |
 | Checksums | `pending-download` on all 6 | SHA-256 hash on all 6 | Post-063 work packages |
 | Transformation | Source-specific transform entrypoints and transform-script gate exist; source-specific parsers await raw files | 6 transformation scripts plus validated processed CSV/metadata outputs | Post-063 work packages |
-| Validation gates | Default snapshot and transformed-schema checkers pass; strict `--verify-files`, `--verify-checksums`, `--verify-processed`, `--verify-licences`, `check_public_source_transform_scripts.py --require-raw`, and `check_transformed_schemas.py --require-processed` gates exist and currently expose missing source files/processed artifacts | Strict gates pass after public downloads and transforms | Post-063 work packages |
+| Validation gates | Default snapshot and transformed-schema checkers pass; strict `--verify-files`, `--verify-checksums`, `--verify-processed`, `--verify-licences`, `check_public_source_fetch_scripts.py --require-raw`, `check_public_source_transform_scripts.py --require-raw`, and `check_transformed_schemas.py --require-processed` gates exist and currently expose missing source files/processed artifacts | Strict gates pass after public downloads and transforms | Post-063 work packages |
 | Calibration upgrade | `calibration_readiness_only` | `public_aggregate_validated` only after all gates pass | Post-063 work packages |
