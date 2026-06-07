@@ -53,9 +53,18 @@ def test_public_source_readiness_matrix_gate_passes() -> None:
     )
     assert result.returncode == 0, result.stdout + result.stderr
 
+
 def test_calibration_target_readiness_gate_passes() -> None:
     result = subprocess.run(
         [sys.executable, "scripts/check_calibration_target_readiness.py"],
+        text=True,
+        capture_output=True,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+
+def test_calibration_validation_gate_passes() -> None:
+    result = subprocess.run(
+        [sys.executable, "scripts/check_calibration_validation_gates.py"],
         text=True,
         capture_output=True,
     )

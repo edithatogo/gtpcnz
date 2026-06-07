@@ -21,6 +21,7 @@ reproduce-public-release:
 	python scripts/check_transformed_schemas.py
 	python scripts/check_parameter_traceability.py
 	python scripts/check_calibration_target_readiness.py
+	python scripts/check_calibration_validation_gates.py
 	python scripts/run_public_aggregate_calibration.py --check-only
 	python scripts/run_voi.py --check-only
 	python scripts/render_public_model_report.py
