@@ -5,6 +5,7 @@ retrieval_plans:
     expected_raw_dir: data/public_raw/src_hnz_capitation_schedule
     expected_raw_artifact: capitation-rates.html
     retrieval_method: Capture the public Health NZ capitation rates page as versioned HTML, then extract published table values.
+    fetch_script: scripts/fetch_hnz_capitation_schedule.py
     retrieval_status: reference_pinned_pending_download
     licence_basis: public_reference
     public_access_status: public
@@ -17,6 +18,7 @@ retrieval_plans:
     expected_raw_dir: data/public_raw/src_pho_services_agreement
     expected_raw_artifact: master-pho-services-agreement.pdf
     retrieval_method: Download the public PHO Services Agreement PDF from Health NZ and extract schedule tables.
+    fetch_script: scripts/fetch_pho_services_agreement.py
     retrieval_status: reference_pinned_pending_download
     licence_basis: public_reference
     public_access_status: public
@@ -29,6 +31,7 @@ retrieval_plans:
     expected_raw_dir: data/public_raw/src_hnz_enrolment
     expected_raw_artifact: primary-care-enrolment-public-data.html
     retrieval_method: Capture public Health NZ primary-care enrolment data/statistics page and linked aggregate tables.
+    fetch_script: scripts/fetch_hnz_enrolment.py
     retrieval_status: reference_pinned_pending_download
     licence_basis: public_reference
     public_access_status: public
@@ -41,6 +44,7 @@ retrieval_plans:
     expected_raw_dir: data/public_raw/src_mcnz_workforce
     expected_raw_artifact: workforce-survey-report-2025.pdf
     retrieval_method: Download the public MCNZ workforce survey PDF and extract aggregate workforce tables.
+    fetch_script: scripts/fetch_mcnz_workforce.py
     retrieval_status: reference_pinned_pending_download
     licence_basis: public_reference
     public_access_status: public
@@ -53,6 +57,7 @@ retrieval_plans:
     expected_raw_dir: data/public_raw/src_nz_health_survey
     expected_raw_artifact: nz-health-survey-2023-24-cost-barrier-export.csv
     retrieval_method: Export public aggregate GP cost-barrier indicators from the NZ Health Survey data explorer.
+    fetch_script: scripts/fetch_nz_health_survey.py
     retrieval_status: reference_pinned_pending_download
     licence_basis: public_reference
     public_access_status: public
@@ -65,6 +70,7 @@ retrieval_plans:
     expected_raw_dir: data/public_raw/src_statsnz_population
     expected_raw_artifact: population-of-nz-indicator.html
     retrieval_method: Capture the public Stats NZ population indicator and linked national population estimate release.
+    fetch_script: scripts/fetch_statsnz_population.py
     retrieval_status: reference_pinned_pending_download
     licence_basis: public_reference
     public_access_status: public

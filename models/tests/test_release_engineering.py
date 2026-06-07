@@ -34,3 +34,12 @@ def test_public_source_transform_script_gate_passes() -> None:
         capture_output=True,
     )
     assert result.returncode == 0, result.stdout + result.stderr
+
+
+def test_public_source_fetch_script_gate_passes() -> None:
+    result = subprocess.run(
+        [sys.executable, "scripts/check_public_source_fetch_scripts.py"],
+        text=True,
+        capture_output=True,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr

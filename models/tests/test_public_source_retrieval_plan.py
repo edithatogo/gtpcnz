@@ -22,6 +22,7 @@ def test_public_source_retrieval_plan_is_pending_download_only() -> None:
 
     assert all(plan.retrieval_status == "reference_pinned_pending_download" for plan in plans)
     assert all(plan.expected_raw_dir == f"data/public_raw/{plan.source_id}" for plan in plans)
+    assert all(plan.fetch_script.startswith("scripts/fetch_") for plan in plans)
     assert all(plan.expected_processed_artifact.startswith(f"data/public_processed/{plan.source_id}/") for plan in plans)
     assert all("patient-level" not in plan.claim_boundary.lower() or "no patient-level" in plan.claim_boundary.lower() for plan in plans)
 
