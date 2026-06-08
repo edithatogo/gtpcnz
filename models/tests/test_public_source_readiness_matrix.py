@@ -16,23 +16,20 @@ def test_public_source_readiness_matrix_has_one_row_per_retrieval_plan() -> None
     rows = build_public_source_readiness_matrix()
     plans = load_public_source_retrieval_plans()
     assert {row.source_id for row in rows} == {plan.source_id for plan in plans}
-    assert all(row.calibration_claim_status == "calibration_readiness_only" for row in rows)
+    assert all(row.calibration_claim_status == "public_aggregate_source_ready" for row in rows)
 
 
 def test_public_source_readiness_matrix_default_mode_is_non_promotional() -> None:
     rows = build_public_source_readiness_matrix()
     assert rows
-    assert all(not row.source_ready for row in rows)
+    assert all(row.source_ready for row in rows)
     assert all(row.issues == () for row in rows)
-    assert {row.checksum_status for row in rows} == {"pending_download"}
+    assert {row.checksum_status for row in rows} == {"verified"}
+    assert {row.processed_artifact_status for row in rows} == {"expected_processed_artifact_present"}
 
 
 def test_public_source_readiness_matrix_strict_mode_reports_blockers() -> None:
-    issues = strict_readiness_issues()
-    assert any("source_ready=false" in issue for issue in issues)
-    assert any("checksum is pending-download" in issue for issue in issues)
-    assert any("no raw public source files" in issue for issue in issues)
-    assert any("no processed public source files" in issue for issue in issues)
+    assert strict_readiness_issues() == ()
 
 
 def test_public_source_readiness_matrix_json_has_claim_boundary() -> None:
@@ -48,14 +45,13 @@ def test_public_source_readiness_matrix_cli_passes_in_readiness_mode() -> None:
         capture_output=True,
     )
     assert result.returncode == 0, result.stdout + result.stderr
-    assert "calibration_readiness_only" in result.stdout
+    assert "public_aggregate_source_ready" in result.stdout
 
 
-def test_public_source_readiness_matrix_cli_strict_mode_fails_until_artifacts_exist() -> None:
+def test_public_source_readiness_matrix_cli_strict_mode_passes_after_processed_artifacts_exist() -> None:
     result = subprocess.run(
         [sys.executable, "scripts/check_public_source_readiness_matrix.py", "--strict"],
         text=True,
         capture_output=True,
     )
-    assert result.returncode == 1
-    assert "calibration remains calibration_readiness_only" in result.stderr
+    assert result.returncode == 0, result.stdout + result.stderr

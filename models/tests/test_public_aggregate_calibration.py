@@ -24,7 +24,7 @@ def test_public_aggregate_calibration_embeds_posterior_predictive_summary() -> N
     ppc = result["posterior_predictive_checks"]
 
     assert ppc["ppc_gate_id"] == "CAL-G-006"
-    assert ppc["ppc_status"] == "calibration_readiness_only"
-    assert ppc["failed_targets"]
+    assert ppc["ppc_status"] == "passed"
+    assert ppc["failed_targets"] == []
     assert "posterior predictive checks remain readiness-only" in ppc["interpretation_note"]
     assert "readiness-only" in result["interpretation_note"]

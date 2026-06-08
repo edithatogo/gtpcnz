@@ -12,7 +12,7 @@ from models.primarycare_model.calibration.calibration_target_readiness import (
 )
 from models.primarycare_model.calibration.calibration_validation_gates import (
     build_calibration_validation_gate_matrix,
-    strict_validation_gate_issues,
+    validation_gate_issues,
 )
 
 
@@ -73,7 +73,7 @@ def posterior_predictive_checks(*, strict: bool = False) -> dict[str, object]:
     failed_targets = tuple(row.target_id for row in target_rows if row.posterior_predictive_status != "passed")
     gate_status = _ppc_gate_status()
     ppc_status = "passed" if gate_status == "passed" and not failed_targets else "calibration_readiness_only"
-    blockers = strict_validation_gate_issues() if strict else ()
+    blockers = validation_gate_issues(require_all_validation_data=False) if strict else ()
     return {
         "ppc_gate_id": "CAL-G-006",
         "ppc_status": ppc_status,

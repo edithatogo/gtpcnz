@@ -1,0 +1,9 @@
+source_id: src_pho_services_agreement
+processed_artifact: data/public_processed/src_pho_services_agreement/pho_services_schedule.csv
+raw_artifact: data/public_raw/src_pho_services_agreement/master-pho-services-agreement.pdf
+raw_artifact_sha256: 8395c4fbd42dc0f13d8f9e24d3a18627339bc0f2593f6cad0cb83a8930a3e580
+rows_written: 1
+claim_level: public_benchmark
+calibration_status: calibration_readiness_only
+not_valid_for: patient-level, private administrative, confidential, stakeholder, or causal forecast use
+transform_note: Public PDF artifact manifest only; not calibrated model input.

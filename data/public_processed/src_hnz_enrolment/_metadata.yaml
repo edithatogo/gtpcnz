@@ -1,0 +1,9 @@
+source_id: src_hnz_enrolment
+processed_artifact: data/public_processed/src_hnz_enrolment/enrolment_counts.csv
+raw_artifact: data/public_raw/src_hnz_enrolment/primary-care-enrolment-public-data.html
+raw_artifact_sha256: 01d829603f37f9cfeed6a3026915022008f7ad584c70a10d77873e6aa6b2ebdd
+rows_written: 89
+claim_level: public_benchmark
+calibration_status: calibration_readiness_only
+not_valid_for: patient-level, private administrative, confidential, stakeholder, or causal forecast use
+transform_note: Public landing-page link inventory only; no enrolment counts fabricated.

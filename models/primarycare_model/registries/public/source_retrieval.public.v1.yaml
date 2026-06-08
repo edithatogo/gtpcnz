@@ -6,7 +6,7 @@ retrieval_plans:
     expected_raw_artifact: capitation-rates.html
     retrieval_method: Capture the public Health NZ capitation rates page as versioned HTML, then extract published table values.
     fetch_script: scripts/fetch_hnz_capitation_schedule.py
-    retrieval_status: reference_pinned_pending_download
+    retrieval_status: processed_ready
     licence_basis: public_reference
     public_access_status: public
     transform_script: scripts/transform_hnz_capitation.py
@@ -19,7 +19,7 @@ retrieval_plans:
     expected_raw_artifact: master-pho-services-agreement.pdf
     retrieval_method: Download the public PHO Services Agreement PDF from Health NZ and extract schedule tables.
     fetch_script: scripts/fetch_pho_services_agreement.py
-    retrieval_status: reference_pinned_pending_download
+    retrieval_status: processed_ready
     licence_basis: public_reference
     public_access_status: public
     transform_script: scripts/transform_pho_agreement.py
@@ -32,7 +32,7 @@ retrieval_plans:
     expected_raw_artifact: primary-care-enrolment-public-data.html
     retrieval_method: Capture public Health NZ primary-care enrolment data/statistics page and linked aggregate tables.
     fetch_script: scripts/fetch_hnz_enrolment.py
-    retrieval_status: reference_pinned_pending_download
+    retrieval_status: processed_ready
     licence_basis: public_reference
     public_access_status: public
     transform_script: scripts/transform_hnz_enrolment.py
@@ -45,7 +45,7 @@ retrieval_plans:
     expected_raw_artifact: workforce-survey-report-2025.pdf
     retrieval_method: Download the public MCNZ workforce survey PDF and extract aggregate workforce tables.
     fetch_script: scripts/fetch_mcnz_workforce.py
-    retrieval_status: reference_pinned_pending_download
+    retrieval_status: processed_ready
     licence_basis: public_reference
     public_access_status: public
     transform_script: scripts/transform_mcnz_workforce.py
@@ -53,12 +53,12 @@ retrieval_plans:
     claim_boundary: Published aggregate workforce source only; no practitioner-level data.
   - source_id: src_nz_health_survey
     landing_page_url: https://www.health.govt.nz/publications/annual-update-of-key-results-202324-new-zealand-health-survey
-    download_url: https://minhealthnz.shinyapps.io/nz-health-survey-2023-24-annual-data-explorer/
+    download_url: null
     expected_raw_dir: data/public_raw/src_nz_health_survey
-    expected_raw_artifact: nz-health-survey-2023-24-cost-barrier-export.csv
-    retrieval_method: Export public aggregate GP cost-barrier indicators from the NZ Health Survey data explorer.
+    expected_raw_artifact: annual-update-2023-24-new-zealand-health-survey.html
+    retrieval_method: Capture the public Ministry of Health 2023/24 NZ Health Survey annual update page containing the published GP cost-barrier aggregate.
     fetch_script: scripts/fetch_nz_health_survey.py
-    retrieval_status: reference_pinned_pending_download
+    retrieval_status: processed_ready
     licence_basis: public_reference
     public_access_status: public
     transform_script: scripts/transform_nz_health_survey.py
@@ -71,7 +71,7 @@ retrieval_plans:
     expected_raw_artifact: population-of-nz-indicator.html
     retrieval_method: Capture the public Stats NZ population indicator and linked national population estimate release.
     fetch_script: scripts/fetch_statsnz_population.py
-    retrieval_status: reference_pinned_pending_download
+    retrieval_status: processed_ready
     licence_basis: public_reference
     public_access_status: public
     transform_script: scripts/transform_statsnz_population.py

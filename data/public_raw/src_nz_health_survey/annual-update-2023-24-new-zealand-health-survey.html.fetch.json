@@ -1,0 +1,13 @@
+{
+  "claim_boundary": "Public aggregate survey output only; no person-level survey microdata.",
+  "download_url": null,
+  "expected_raw_artifact": "annual-update-2023-24-new-zealand-health-survey.html",
+  "landing_page_url": "https://www.health.govt.nz/publications/annual-update-of-key-results-202324-new-zealand-health-survey",
+  "licence_basis": "public_reference",
+  "not_valid_for": "private administrative, confidential, patient-level, stakeholder, or calibration-claim use",
+  "public_access_status": "public",
+  "retrieval_method": "Capture the public Ministry of Health 2023/24 NZ Health Survey annual update page containing the published GP cost-barrier aggregate.",
+  "retrieved_at": "2026-06-07T08:22:04.329173+00:00",
+  "source_id": "src_nz_health_survey",
+  "target_url": "https://www.health.govt.nz/publications/annual-update-of-key-results-202324-new-zealand-health-survey"
+}

@@ -1,0 +1,9 @@
+source_id: src_mcnz_workforce
+processed_artifact: data/public_processed/src_mcnz_workforce/workforce_summary.csv
+raw_artifact: data/public_raw/src_mcnz_workforce/workforce-survey-report-2025.pdf
+raw_artifact_sha256: 63d1412de980592ed67d71d7f196951cb4d5c0f7798b8a6b62e29dbd749ccae3
+rows_written: 1
+claim_level: public_benchmark
+calibration_status: calibration_readiness_only
+not_valid_for: patient-level, private administrative, confidential, stakeholder, or causal forecast use
+transform_note: Public PDF artifact manifest only; not calibrated model input.

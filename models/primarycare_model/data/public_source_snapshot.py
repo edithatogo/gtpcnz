@@ -60,7 +60,13 @@ def source_processed_dir(source_id: str) -> Path:
 def source_files(path: Path) -> tuple[Path, ...]:
     if not path.exists():
         return ()
-    return tuple(sorted(item for item in path.rglob("*") if item.is_file() and item.name != ".gitkeep"))
+    return tuple(
+        sorted(
+            item
+            for item in path.rglob("*")
+            if item.is_file() and item.name != ".gitkeep" and not item.name.endswith(".fetch.json")
+        )
+    )
 
 
 def sha256_many(paths: tuple[Path, ...]) -> str:

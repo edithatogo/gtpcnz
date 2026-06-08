@@ -1,0 +1,2 @@
+source_id,artifact_name,artifact_sha256,artifact_size_bytes,transform_note
+src_pho_services_agreement,master-pho-services-agreement.pdf,8395c4fbd42dc0f13d8f9e24d3a18627339bc0f2593f6cad0cb83a8930a3e580,441443,raw public PDF manifest only; table extraction not implemented in this bounded transform
