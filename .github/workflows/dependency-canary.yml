@@ -19,23 +19,25 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v6
 
-      - name: Set up Python
-        uses: actions/setup-python@v6
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
         with:
-          python-version: "3.11"
-          cache: pip
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.11
 
       - name: Install latest compatible dependencies
-        run: pip install --upgrade --upgrade-strategy eager -r requirements.txt
+        run: uv sync --upgrade --all-groups
 
       - name: Check repository health
-        run: python scripts/check_repo_health.py
+        run: uv run python scripts/check_repo_health.py
 
       - name: Check concern boundaries
-        run: python scripts/check_concern_boundaries.py
+        run: uv run python scripts/check_concern_boundaries.py
 
       - name: Run tests
-        run: pytest -q
+        run: uv run pytest -q
 
       - name: Install Quarto
         run: |
@@ -47,4 +49,4 @@ jobs:
         run: quarto render --to html
 
       - name: Verify Streamlit entrypoint imports
-        run: python -m py_compile streamlit_app.py models/primarycare_model/app.py
+        run: uv run python -m py_compile streamlit_app.py models/primarycare_model/app.py

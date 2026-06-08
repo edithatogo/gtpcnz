@@ -22,7 +22,7 @@ CHECKS = [
     Check([sys.executable, "scripts/check_concern_boundaries.py"]),
     Check([sys.executable, "scripts/check_no_patient_data.py"]),
     Check([sys.executable, "-m", "pytest", "-q", "--cov=models.primarycare_model", "--cov-report=term-missing", "--cov-fail-under=90"]),
-    Check([sys.executable, "-m", "pip_audit", "-r", "requirements.txt"]),
+    Check([sys.executable, "-m", "pip_audit"]),
     Check([sys.executable, "-m", "py_compile", "streamlit_app.py", "models/primarycare_model/app.py"]),
     Check([sys.executable, "-m", "ty", "check", "models/primarycare_model"], required=False),
 ]

@@ -875,6 +875,7 @@ name = "gtpcnz"
 version = "1.8.1"
 source = { virtual = "." }
 dependencies = [
+    { name = "altair" },
     { name = "jupyter" },
     { name = "matplotlib" },
     { name = "networkx" },
@@ -884,6 +885,7 @@ dependencies = [
     { name = "pydantic" },
     { name = "pyyaml" },
     { name = "scikit-learn" },
+    { name = "scipy" },
     { name = "streamlit" },
 ]
 
@@ -904,8 +906,29 @@ dev = [
     { name = "ty" },
 ]
 
+[package.dev-dependencies]
+dev = [
+    { name = "basedpyright" },
+    { name = "hypothesis" },
+    { name = "mutmut" },
+    { name = "mypy" },
+    { name = "pandera" },
+    { name = "pip-audit" },
+    { name = "pre-commit" },
+    { name = "pytest" },
+    { name = "pytest-cov" },
+    { name = "pytest-mock" },
+    { name = "ruff" },
+    { name = "scalene", marker = "sys_platform != 'win32'" },
+    { name = "ty" },
+]
+edge = [
+    { name = "pytest" },
+]
+
 [package.metadata]
 requires-dist = [
+    { name = "altair" },
     { name = "basedpyright", marker = "extra == 'dev'", specifier = ">=1.39,<2" },
     { name = "hypothesis", marker = "extra == 'dev'", specifier = ">=6,<7" },
     { name = "jupyter" },
@@ -927,10 +950,29 @@ requires-dist = [
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.15,<0.16" },
     { name = "scalene", marker = "sys_platform != 'win32' and extra == 'dev'", specifier = ">=2.3,<3" },
     { name = "scikit-learn" },
+    { name = "scipy" },
     { name = "streamlit" },
     { name = "ty", marker = "extra == 'dev'", specifier = ">=0.0.40,<0.1" },
 ]
 provides-extras = ["dev"]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "basedpyright", specifier = ">=1.39,<2" },
+    { name = "hypothesis", specifier = ">=6,<7" },
+    { name = "mutmut", specifier = ">=3.5,<4" },
+    { name = "mypy", specifier = ">=2,<3" },
+    { name = "pandera", specifier = ">=0.31,<0.32" },
+    { name = "pip-audit", specifier = ">=2.10,<3" },
+    { name = "pre-commit", specifier = ">=4,<5" },
+    { name = "pytest" },
+    { name = "pytest-cov", specifier = ">=7,<8" },
+    { name = "pytest-mock" },
+    { name = "ruff", specifier = ">=0.15,<0.16" },
+    { name = "scalene", marker = "sys_platform != 'win32'", specifier = ">=2.3,<3" },
+    { name = "ty", specifier = ">=0.0.40,<0.1" },
+]
+edge = [{ name = "pytest" }]
 
 [[package]]
 name = "h11"
@@ -3375,14 +3417,14 @@ name = "scalene"
 version = "2.3.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "cloudpickle" },
-    { name = "jinja2" },
-    { name = "numpy" },
-    { name = "nvidia-ml-py", marker = "sys_platform != 'darwin'" },
-    { name = "psutil" },
-    { name = "pydantic" },
-    { name = "pyyaml" },
-    { name = "rich" },
+    { name = "cloudpickle", marker = "sys_platform != 'win32'" },
+    { name = "jinja2", marker = "sys_platform != 'win32'" },
+    { name = "numpy", marker = "sys_platform != 'win32'" },
+    { name = "nvidia-ml-py", marker = "sys_platform != 'darwin' and sys_platform != 'win32'" },
+    { name = "psutil", marker = "sys_platform != 'win32'" },
+    { name = "pydantic", marker = "sys_platform != 'win32'" },
+    { name = "pyyaml", marker = "sys_platform != 'win32'" },
+    { name = "rich", marker = "sys_platform != 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/91/96/e2ea55e8d1d981fb2d0fe76c38c1d7ab7b91c2229176bbeed771b9da0f1f/scalene-2.3.0.tar.gz", hash = "sha256:57212ceeeeeef9891c344275592413f4b90fb407ecdec75b5b164f0eef2e6261", size = 9457857, upload-time = "2026-05-12T18:45:43.894Z" }
 wheels = [

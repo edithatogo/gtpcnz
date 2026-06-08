@@ -389,10 +389,8 @@
         "058-australia-scope-decision"
       ],
       "allowed_files": [
+        "pyproject.toml",
         "uv.lock",
-        "requirements.txt",
-        "requirements-dev.txt",
-        "requirements-edge.txt",
         "Dockerfile",
         ".devcontainer/devcontainer.json",
         "scripts/check_dependency_lock.py",

@@ -4,8 +4,10 @@ version = "1.8.1"
 description = "Quarto and Streamlit package for primary care funding architecture modelling"
 requires-python = ">=3.11"
 dependencies = [
+    "altair",
     "numpy",
     "pandas",
+    "scipy",
     "networkx",
     "streamlit",
     "matplotlib",
@@ -33,13 +35,34 @@ dev = [
     "ty>=0.0.40,<0.1",
 ]
 
+[dependency-groups]
+dev = [
+    "basedpyright>=1.39,<2",
+    "hypothesis>=6,<7",
+    "mutmut>=3.5,<4",
+    "mypy>=2,<3",
+    "pandera>=0.31,<0.32",
+    "pip-audit>=2.10,<3",
+    "pre-commit>=4,<5",
+    "pytest",
+    "pytest-cov>=7,<8",
+    "pytest-mock",
+    "ruff>=0.15,<0.16",
+    "scalene>=2.3,<3; platform_system != 'Windows'",
+    "ty>=0.0.40,<0.1",
+]
+edge = [
+    "pytest",
+]
+
 [tool.uv]
 package = false
 
 [tool.pytest.ini_options]
 pythonpath = ["models"]
-testpaths = ["models/tests"]
+testpaths = ["models/tests", "tests"]
 norecursedirs = ["codex-tmp", "public", "_site", ".hypothesis"]
+addopts = ["--import-mode=importlib"]
 
 [tool.coverage.run]
 source = ["models/primarycare_model"]
@@ -69,7 +92,7 @@ extend-exclude = [
 ]
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+select = ["E", "W", "F", "I", "UP", "B", "SIM", "RUF"]
 ignore = [
   "E501",
   # Public dashboard strings intentionally use mathematical glyphs and range dashes.

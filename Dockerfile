@@ -1,6 +1,7 @@
 FROM python:3.11-slim
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY pyproject.toml uv.lock ./
+RUN uv sync --frozen --no-dev
 COPY . .
-CMD ["streamlit", "run", "streamlit_app.py", "--server.headless=true"]
+CMD ["uv", "run", "streamlit", "run", "streamlit_app.py", "--server.headless=true"]

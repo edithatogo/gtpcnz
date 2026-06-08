@@ -1,5 +1,5 @@
 {
   "name": "gtpcnz",
-  "image": "mcr.microsoft.com/devcontainers/python:3.11",
-  "postCreateCommand": "pip install -r requirements.txt -r requirements-dev.txt"
+  "image": "ghcr.io/astral-sh/uv:python3.11-bookworm-slim",
+  "postCreateCommand": "uv sync --all-groups"
 }

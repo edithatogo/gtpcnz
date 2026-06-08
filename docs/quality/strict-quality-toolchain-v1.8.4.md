@@ -14,7 +14,7 @@ The target posture is:
 
 Dependabot remains configured. Renovate is configured through `renovate.json` and `.github/workflows/renovate.yml`. The workflow can run with `GITHUB_TOKEN`, but a `RENOVATE_TOKEN` repository secret is still preferred if Renovate needs to trigger follow-up workflows from its pull requests.
 
-Renovate is pinned to the current v43 action line, while `actions/checkout@v6`, `actions/setup-python@v6`, and `github/codeql-action@v5` keep the GitHub Actions runtime on the Node 24 / current CodeQL surface.
+Renovate is pinned to the current v43 action line, while `actions/checkout@v6`, `astral-sh/setup-uv@v5`, and `github/codeql-action@v5` keep the GitHub Actions runtime on the Node 24 / current CodeQL surface.
 
 ## Test Quality
 
@@ -38,7 +38,7 @@ Local verification on 2026-05-28:
 
 ## Profiling
 
-Scalene is configured through `requirements-dev.txt`, `.github/workflows/profiling.yml`, and `scripts/run_scalene_profile.py`.
+Scalene is configured through the uv dev dependency group, `.github/workflows/profiling.yml`, and `scripts/run_scalene_profile.py`.
 
 Manual command:
 

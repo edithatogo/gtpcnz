@@ -21,15 +21,15 @@ The repo needs to distinguish stable release confidence from experimental depend
 ## Required Checks
 
 ```powershell
-python scripts/check_repo_health.py
-python -m pytest -q -p no:cacheprovider models/tests
-python -m pip install --dry-run --pre -r requirements-edge.txt
-rg -n "requirements-edge|dependency-edge|bleeding-edge scorecard|three-lane" .github docs scripts requirements-edge.txt
+uv sync --upgrade --all-groups --prerelease allow
+uv run python scripts/check_repo_health.py
+uv run python -m pytest -q -p no:cacheprovider models/tests
+rg -n "dependency-edge|bleeding-edge scorecard|three-lane|prerelease" .github docs scripts pyproject.toml
 ```
 
 ## Acceptance Criteria
 
 - Stable and edge lanes are documented separately.
-- Preview/pre-release dependencies are isolated to edge manifests or edge workflows.
+- Preview/pre-release dependencies are isolated to edge workflows.
 - Stable app and model tests pass.
 - Any edge failure creates a triage item, not a silent downgrade.

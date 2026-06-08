@@ -10,7 +10,8 @@ ROOT = Path(__file__).resolve().parents[1]
 MIRROR = ROOT / "public" / "gtpcnz"
 COPY_MAP = [
     (ROOT / "streamlit_app.py", MIRROR / "streamlit_app.py"),
-    (ROOT / "requirements.txt", MIRROR / "requirements.txt"),
+    (ROOT / "pyproject.toml", MIRROR / "pyproject.toml"),
+    (ROOT / "uv.lock", MIRROR / "uv.lock"),
     (ROOT / "models" / "primarycare_model" / "app.py", MIRROR / "models" / "primarycare_model" / "app.py"),
     (ROOT / "models" / "primarycare_model" / "runtime_lab.py", MIRROR / "models" / "primarycare_model" / "runtime_lab.py"),
     (ROOT / "models" / "primarycare_model" / "scenario_service.py", MIRROR / "models" / "primarycare_model" / "scenario_service.py"),

@@ -13,7 +13,8 @@ CHECK_PATHS = [
     ROOT / "models" / "primarycare_model" / "registries" / "educational_levers.v1.yaml",
     ROOT / "models" / "primarycare_model" / "registries" / "scenarios.v1.yaml",
     ROOT / "models" / "primarycare_model" / "registries" / "provenance.v1.yaml",
-    ROOT / "requirements.txt",
+    ROOT / "pyproject.toml",
+    ROOT / "uv.lock",
 ]
 MAX_AGE_DAYS = 90
 def main() -> int:
