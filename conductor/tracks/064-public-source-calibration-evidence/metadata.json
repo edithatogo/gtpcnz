@@ -1,0 +1,31 @@
+{
+  "id": "064-public-source-calibration-evidence",
+  "title": "Public source acquisition and calibration evidence",
+  "status": "complete_readiness_only",
+  "created": "2026-06-08",
+  "updated": "2026-06-08",
+  "owner": "codex",
+  "contract": "CON-CAL-001",
+  "claim_boundary": "Public aggregate source evidence is verified; calibration remains readiness-only until holdout, subgroup, and policy-shock validation data are available.",
+  "depends_on": [
+    "052-public-source-ingestion-and-snapshots",
+    "053-public-aggregate-calibration-engine",
+    "063-release-readiness-parallel-closeout"
+  ],
+  "blocks": [],
+  "allowed_file_globs": [
+    "docs/model/public-source-readiness-closeout-v1.md",
+    "docs/model/public-source-calibration-evidence-v1.md",
+    "models/tests/test_public_source_calibration_evidence.py",
+    "conductor/state.md",
+    "conductor/tracks.md",
+    "conductor/tracks/064-public-source-calibration-evidence/**"
+  ],
+  "required_gates": [
+    "python scripts/check_public_source_snapshot.py --verify-files --verify-checksums --verify-licences --verify-processed",
+    "python scripts/check_public_source_readiness_matrix.py --strict",
+    "python scripts/check_transformed_schemas.py --require-processed",
+    "python scripts/run_public_aggregate_calibration.py --check-only",
+    "python -m pytest -q models/tests/test_public_source_calibration_evidence.py"
+  ]
+}
