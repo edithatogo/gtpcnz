@@ -12,10 +12,8 @@ Constraints:
 - Do not edit files outside the allowed ownership list without recording a handoff and running the affected track gates.
 
 Allowed files:
+- `pyproject.toml`
 - `uv.lock`
-- `requirements.txt`
-- `requirements-dev.txt`
-- `requirements-edge.txt`
 - `Dockerfile`
 - `.devcontainer/devcontainer.json`
 - `scripts/check_dependency_lock.py`

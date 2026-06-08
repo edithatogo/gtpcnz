@@ -27,18 +27,21 @@ jobs:
           sudo dpkg -i quarto.deb
           quarto --version
 
-      - name: Set up Python
-        uses: actions/setup-python@v6
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
         with:
-          python-version: "3.11"
+          enable-cache: true
 
-      - name: Install Python dependencies
-        run: pip install -r requirements.txt
+      - name: Set up Python
+        run: uv python install 3.11
+
+      - name: Install locked Python dependencies
+        run: uv sync --frozen --all-groups
 
       - name: Render Quarto website
         run: |
-          python scripts/build_public_source_snapshot.py
-          python scripts/generate_release_manifest.py
+          uv run python scripts/build_public_source_snapshot.py
+          uv run python scripts/generate_release_manifest.py
           quarto render --to html
 
       - name: Verify site artifact

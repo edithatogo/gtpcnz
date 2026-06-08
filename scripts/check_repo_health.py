@@ -145,6 +145,9 @@ def check_ci() -> tuple[bool, str]:
         return False, f"GitHub automation missing: {missing}"
     ci = read(".github/workflows/ci.yml")
     required_ci = [
+        "astral-sh/setup-uv",
+        "uv sync --frozen --all-groups",
+        "uv run ruff check .",
         "python scripts/check_repo_health.py",
         "python scripts/check_concern_boundaries.py",
         "python scripts/check_public_source_retrieval_plan.py",
@@ -163,8 +166,8 @@ def check_ci() -> tuple[bool, str]:
     if missing_ci:
         return False, f"CI missing gates: {missing_ci}"
     canary = read(".github/workflows/dependency-canary.yml")
-    if "--upgrade --upgrade-strategy eager -r requirements.txt" not in canary:
-        return False, "dependency canary does not run latest-compatible pip lane"
+    if "uv sync --upgrade --all-groups" not in canary:
+        return False, "dependency canary does not run latest-compatible uv lane"
     return True, "CI, Pages, Dependabot and dependency canary gates are configured"
 
 
@@ -181,7 +184,7 @@ def check_tests() -> tuple[bool, str]:
     if missing:
         return False, f"test surface missing: {missing}"
     pyproject = read("pyproject.toml")
-    if 'testpaths = ["models/tests"]' not in pyproject or '"public"' not in pyproject:
+    if 'testpaths = ["models/tests", "tests"]' not in pyproject or '"public"' not in pyproject:
         return False, "pytest collection guard is incomplete"
     return True, "focused model, dashboard, Conductor and registry tests are present"
 

@@ -21,71 +21,76 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v6
 
-      - name: Set up Python
-        uses: actions/setup-python@v6
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
         with:
-          python-version: "3.11"
-          cache: pip
+          enable-cache: true
 
-      - name: Install Python dependencies
-        run: pip install -r requirements.txt
+      - name: Set up Python
+        run: uv python install 3.11
+
+      - name: Install locked Python dependencies
+        run: uv sync --frozen --all-groups
+
+      - name: Ruff lint
+        run: uv run ruff check .
 
       - name: Check Conductor parallel contracts
-        run: python scripts/check_conductor_parallel_tracks.py
+        run: uv run python scripts/check_conductor_parallel_tracks.py
 
       - name: Check public-only boundary
-        run: python scripts/check_public_only_boundary.py
+        run: uv run python scripts/check_public_only_boundary.py
 
       - name: Check parameter traceability
-        run: python scripts/check_parameter_traceability.py
+        run: uv run python scripts/check_parameter_traceability.py
 
       - name: Check public source snapshot
-        run: python scripts/check_public_source_snapshot.py
+        run: uv run python scripts/check_public_source_snapshot.py
 
       - name: Check public source retrieval plan
-        run: python scripts/check_public_source_retrieval_plan.py
+        run: uv run python scripts/check_public_source_retrieval_plan.py
 
       - name: Check public source fetch scripts
-        run: python scripts/check_public_source_fetch_scripts.py
+        run: uv run python scripts/check_public_source_fetch_scripts.py
 
       - name: Check public source transform scripts
-        run: python scripts/check_public_source_transform_scripts.py
+        run: uv run python scripts/check_public_source_transform_scripts.py
 
       - name: Check public source readiness matrix
-        run: python scripts/check_public_source_readiness_matrix.py
+        run: uv run python scripts/check_public_source_readiness_matrix.py
 
       - name: Check transformed public input schemas
-        run: python scripts/check_transformed_schemas.py
+        run: uv run python scripts/check_transformed_schemas.py
 
       - name: Check version consistency
-        run: python scripts/check_version_consistency.py
+        run: uv run python scripts/check_version_consistency.py
 
       - name: Check dependency lock
-        run: python scripts/check_dependency_lock.py
+        run: uv run python scripts/check_dependency_lock.py
 
       - name: Check calibration target readiness
-        run: python scripts/check_calibration_target_readiness.py
+        run: uv run python scripts/check_calibration_target_readiness.py
 
       - name: Check calibration validation gates
-        run: python scripts/check_calibration_validation_gates.py
+        run: uv run python scripts/check_calibration_validation_gates.py
 
       - name: Check posterior predictive readiness
-        run: python scripts/check_posterior_predictive_checks.py
+        run: uv run python scripts/check_posterior_predictive_checks.py
 
       - name: Run public aggregate calibration gate
-        run: python scripts/run_public_aggregate_calibration.py --check-only
+        run: uv run python scripts/run_public_aggregate_calibration.py --check-only
 
       - name: Run VOI gate
-        run: python scripts/run_voi.py --check-only
+        run: uv run python scripts/run_voi.py --check-only
 
       - name: Check repository health
-        run: python scripts/check_repo_health.py
+        run: uv run python scripts/check_repo_health.py
 
       - name: Check concern boundaries
-        run: python scripts/check_concern_boundaries.py
+        run: uv run python scripts/check_concern_boundaries.py
 
       - name: Run tests
-        run: pytest -q
+        run: uv run pytest -q
 
       - name: Install Quarto
         run: |
@@ -97,16 +102,16 @@ jobs:
         run: quarto render --to html
 
       - name: Verify Streamlit entrypoint imports
-        run: python -m py_compile streamlit_app.py models/primarycare_model/app.py
+        run: uv run python -m py_compile streamlit_app.py models/primarycare_model/app.py
 
       - name: Run visual regression gate
-        run: python scripts/run_visual_regression.py --check-only
+        run: uv run python scripts/run_visual_regression.py --check-only
 
       - name: Run accessibility audit
-        run: python scripts/run_accessibility_audit.py --check-only
+        run: uv run python scripts/run_accessibility_audit.py --check-only
 
       - name: Check release model card
-        run: python scripts/generate_release_model_card.py --check-only
+        run: uv run python scripts/generate_release_model_card.py --check-only
 
       - name: Check release manifest
-        run: python scripts/generate_release_manifest.py --check-only
+        run: uv run python scripts/generate_release_manifest.py --check-only

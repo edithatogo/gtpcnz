@@ -31,13 +31,13 @@ quarto render reports/primary_care_architecture.qmd
 Ensure you have the dependencies installed:
 
 ```bash
-pip install -r requirements.txt
+uv sync --frozen --all-groups
 ```
 
 Then launch the dashboard:
 
 ```bash
-streamlit run streamlit_app.py
+uv run streamlit run streamlit_app.py
 ```
 
 ### Features

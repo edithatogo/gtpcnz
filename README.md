@@ -47,7 +47,7 @@ Short version:
 - Architecture/design diagrams: [docs/design/repo-github-streamlit-design-v1.8.3.md](docs/design/repo-github-streamlit-design-v1.8.3.md)
 - Repo/GitHub/Streamlit contracts: [docs/contracts/repo-github-streamlit-contracts-v1.8.3.md](docs/contracts/repo-github-streamlit-contracts-v1.8.3.md)
 - Dependency policy: [docs/dependency-policy-v1.8.3.md](docs/dependency-policy-v1.8.3.md)
-- Experimental edge lane: [requirements-edge.txt](requirements-edge.txt) and [.github/workflows/dependency-edge.yml](.github/workflows/dependency-edge.yml)
+- Experimental edge lane: [.github/workflows/dependency-edge.yml](.github/workflows/dependency-edge.yml), resolved through the uv dependency graph in [pyproject.toml](pyproject.toml)
 - Bleeding-edge scorecard: [docs/bleeding-edge-scorecard-v1.0.md](docs/bleeding-edge-scorecard-v1.0.md)
 - Release-note handling: [docs/release/bleeding-edge-sota-release-handling.md](docs/release/bleeding-edge-sota-release-handling.md)
 - Edge triage note: [docs/operations/dependency-edge-triage-v1.0.md](docs/operations/dependency-edge-triage-v1.0.md)
@@ -58,19 +58,19 @@ Short version:
 Install dependencies:
 
 ```bash
-pip install -r requirements.txt
+uv sync --frozen --all-groups
 ```
 
 Run tests:
 
 ```bash
-pytest -q
+uv run pytest -q
 ```
 
 Check the auditable repo-health score:
 
 ```bash
-python scripts/check_repo_health.py
+uv run python scripts/check_repo_health.py
 ```
 
 Render the Quarto website:
@@ -82,7 +82,7 @@ quarto render --to html
 Run the Streamlit dashboard:
 
 ```bash
-streamlit run streamlit_app.py
+uv run streamlit run streamlit_app.py
 ```
 
 ## Deploy

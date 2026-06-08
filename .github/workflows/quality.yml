@@ -21,41 +21,43 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v6
 
-      - name: Set up Python
-        uses: actions/setup-python@v6
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
         with:
-          python-version: "3.11"
-          cache: pip
+          enable-cache: true
 
-      - name: Install quality dependencies
-        run: pip install -r requirements-dev.txt
+      - name: Set up Python
+        run: uv python install 3.11
+
+      - name: Install locked quality dependencies
+        run: uv sync --frozen --all-groups
 
       - name: Ruff lint
-        run: ruff check .
+        run: uv run ruff check .
 
       - name: Basedpyright strict type gate
-        run: python -m basedpyright --pythonpath "$(python -c 'import sys; print(sys.executable)')"
+        run: uv run python -m basedpyright --pythonpath "$(uv run python -c 'import sys; print(sys.executable)')"
 
       - name: Mypy strict compatibility gate
-        run: python -m mypy --strict --no-incremental models/primarycare_model/contracts models/primarycare_model/validation/pandera_schemas.py models/primarycare_model/engines
+        run: uv run python -m mypy --strict --no-incremental models/primarycare_model/contracts models/primarycare_model/validation/pandera_schemas.py models/primarycare_model/engines
 
       - name: Concern boundary scan
-        run: python scripts/check_concern_boundaries.py
+        run: uv run python scripts/check_concern_boundaries.py
 
       - name: Patient-data scan
-        run: python scripts/check_no_patient_data.py
+        run: uv run python scripts/check_no_patient_data.py
 
       - name: Tests with coverage threshold
         run: >
-          pytest -q
+          uv run pytest -q
           models/tests/test_parameter_contracts.py
           --cov=models.primarycare_model.contracts.parameters
           --cov-report=term-missing
           --cov-fail-under=90
 
       - name: Dependency audit
-        run: pip-audit -r requirements.txt
+        run: uv run pip-audit
 
       - name: Ty canary
         continue-on-error: true
-        run: ty check models/primarycare_model
+        run: uv run ty check models/primarycare_model

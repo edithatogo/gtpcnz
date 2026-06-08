@@ -7,15 +7,15 @@ Keep the edge lane factual and separate from stable release confidence.
 ## Procedure
 
 ```powershell
-python scripts/check_repo_health.py
-python -m pytest -q -p no:cacheprovider models/tests
-python -m pip install --dry-run --pre -r requirements-edge.txt
+uv sync --upgrade --all-groups --prerelease allow
+uv run python scripts/check_repo_health.py
+uv run python -m pytest -q -p no:cacheprovider models/tests
 ```
 
 Review:
 
 ```powershell
-rg -n "actions/checkout@|actions/setup-python@|requirements-edge|dependency-edge|Dependabot|bleeding-edge" .github docs scripts requirements*.txt pyproject.toml
+rg -n "actions/checkout@|astral-sh/setup-uv@|dependency-edge|Dependabot|bleeding-edge|prerelease" .github docs scripts pyproject.toml
 ```
 
 ## Result Classes

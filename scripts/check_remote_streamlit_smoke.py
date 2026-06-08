@@ -58,7 +58,7 @@ def run_remote_smoke(url: str, settle_seconds: int, timeout_seconds: int) -> Smo
     except ImportError as exc:
         raise RuntimeError(
             "playwright is required for remote Streamlit smoke checks. "
-            "Install it with `pip install playwright` and `python -m playwright install chromium`."
+            "Install it with `uv run --with playwright python -m playwright install chromium`."
         ) from exc
 
     console_events: list[str] = []

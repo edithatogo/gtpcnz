@@ -3,10 +3,8 @@
 Primary contract: `CON-REL-001`.
 
 Allowed file ownership:
+- `pyproject.toml`
 - `uv.lock`
-- `requirements.txt`
-- `requirements-dev.txt`
-- `requirements-edge.txt`
 - `Dockerfile`
 - `.devcontainer/devcontainer.json`
 - `scripts/check_dependency_lock.py`

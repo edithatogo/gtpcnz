@@ -19,17 +19,16 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v6
 
-      - name: Set up Python
-        uses: actions/setup-python@v6
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
         with:
-          python-version: "3.11"
-          cache: pip
+          enable-cache: true
 
-      - name: Install quality dependencies
-        run: pip install -r requirements-dev.txt
+      - name: Set up Python
+        run: uv python install 3.11
 
-      - name: Upgrade scalene
-        run: pip install --upgrade scalene
+      - name: Install latest compatible profiling dependencies
+        run: uv sync --upgrade --all-groups
 
       - name: Run Scalene profile
-        run: python -m scalene --cli --reduced-profile --profile-all scripts/run_scalene_profile.py
+        run: uv run python -m scalene --cli --reduced-profile --profile-all scripts/run_scalene_profile.py

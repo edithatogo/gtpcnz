@@ -15,3 +15,17 @@
   Claim-boundary status: public_benchmark (runtime infrastructure only; no claims).
   Residual blockers: None. All dependency files present and consistent.
   Follow-on owner: coordinator (062 complete; 059 unblocked).
+
+2026-06-08: uv-only toolchain migration.
+  Work packages: WP-062-A/B/C/D reopened for modern uv dependency execution.
+  Files changed: pyproject.toml, uv.lock, Dockerfile, .devcontainer/devcontainer.json, scripts/check_dependency_lock.py, models/tests/test_dependency_files.py, .github/workflows/dependency-edge.yml, and dependent CI/docs references.
+  Gates planned:
+    - uv lock -> PASSED (197 packages resolved)
+    - uv run --frozen --all-groups python scripts/check_dependency_lock.py -> PASSED
+    - uv run --frozen --all-groups python -m pytest -q models/tests/test_dependency_files.py tests/test_app.py models/tests/test_app.py -> PASSED (9 passed)
+    - uv run --frozen --all-groups ruff check . -> PASSED after mechanical W292 newline fixes
+    - uv run --frozen --all-groups python scripts/check_repo_health.py -> PASSED (score 11/11; regression subprocess 234 passed)
+  Result: uv-only dependency contract verified locally.
+  Claim-boundary status: public_benchmark (dependency/runtime infrastructure only; no model-claim expansion).
+  Residual blockers: None.
+  Follow-on owner: coordinator.

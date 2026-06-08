@@ -18,7 +18,7 @@ The root entrypoint imports and runs `models.primarycare_model.app.render_app`.
 
 ## Required Files
 
-- `requirements.txt` declares Python dependencies.
+- `pyproject.toml` and `uv.lock` declare and lock Python dependencies.
 - `.streamlit/config.toml` stores public app configuration.
 - `.streamlit/secrets.toml.example` documents that no secrets are required.
 - `models/tests/test_app.py` uses `streamlit.testing.v1.AppTest` for headless dashboard checks.
@@ -26,9 +26,9 @@ The root entrypoint imports and runs `models.primarycare_model.app.render_app`.
 ## Local Verification
 
 ```bash
-pip install -r requirements.txt
-pytest -q models/tests/test_app.py
-streamlit run streamlit_app.py
+uv sync --frozen --all-groups
+uv run pytest -q models/tests/test_app.py tests/test_app.py
+uv run streamlit run streamlit_app.py
 ```
 
 ## Community Cloud Settings
