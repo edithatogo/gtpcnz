@@ -1,0 +1,2 @@
+source_id,artifact_name,artifact_sha256,artifact_size_bytes,transform_note
+src_mcnz_workforce,workforce-survey-report-2025.pdf,63d1412de980592ed67d71d7f196951cb4d5c0f7798b8a6b62e29dbd749ccae3,1722428,raw public PDF manifest only; table extraction not implemented in this bounded transform

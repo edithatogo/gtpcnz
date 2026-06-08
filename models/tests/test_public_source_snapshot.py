@@ -22,11 +22,8 @@ def test_default_public_source_readiness_allows_pending_downloads() -> None:
     assert verify_public_source_readiness() == ()
 
 
-def test_strict_public_source_readiness_reports_pending_files_and_checksums() -> None:
-    issues = verify_public_source_readiness(verify_files=True, verify_checksums=True, verify_processed=True)
-    assert any("no raw public source files" in issue for issue in issues)
-    assert any("checksum is pending-download" in issue for issue in issues)
-    assert any("no processed public source files" in issue for issue in issues)
+def test_strict_public_source_readiness_passes_with_downloaded_processed_artifacts() -> None:
+    assert verify_public_source_readiness(verify_files=True, verify_checksums=True, verify_processed=True) == ()
 
 
 def test_public_source_multi_file_checksum_is_deterministic() -> None:

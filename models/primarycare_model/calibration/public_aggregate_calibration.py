@@ -6,7 +6,7 @@ from models.primarycare_model.calibration.public_aggregate_targets import (
     load_calibration_targets,
     predicted_public_value,
 )
-from models.primarycare_model.data.public_source_snapshot import load_public_sources
+from models.primarycare_model.data.public_source_readiness_matrix import build_public_source_readiness_matrix
 
 
 def run_public_aggregate_calibration() -> dict[str, object]:
@@ -18,13 +18,13 @@ def run_public_aggregate_calibration() -> dict[str, object]:
     )
 
     checks = []
-    sources = {source.source_id: source for source in load_public_sources()}
+    source_rows = {row.source_id: row for row in build_public_source_readiness_matrix(strict=False)}
     for target in load_calibration_targets():
         predicted = predicted_public_value(target)
         denom = abs(target.observed_value) or 1.0
         relative_error = abs(predicted - target.observed_value) / denom
-        source = sources.get(target.source_id)
-        source_ready = source is not None and source.checksum != "pending-download"
+        source_row = source_rows.get(target.source_id)
+        source_ready = source_row is not None and source_row.source_ready
         passed = relative_error <= target.tolerance and source_ready
         checks.append({
             "target_id": target.target_id,
@@ -37,9 +37,11 @@ def run_public_aggregate_calibration() -> dict[str, object]:
             "passed": passed,
             "claim_boundary": target.claim_boundary,
         })
-    all_passed = all(item["passed"] for item in checks)
+    all_targets_passed = all(item["passed"] for item in checks)
     validation_gates = [row.to_json_dict() for row in build_calibration_validation_gate_matrix(strict=False)]
+    all_validation_gates_passed = all(row["status"] == "passed" for row in validation_gates)
     posterior_predictive = posterior_predictive_checks(strict=False)
+    all_passed = all_targets_passed and all_validation_gates_passed
     return {
         "calibration_status": "public_aggregate_validated" if all_passed else "calibration_readiness_only",
         "claim_level": "empirically_supported_if_gated" if all_passed else "public_benchmark",

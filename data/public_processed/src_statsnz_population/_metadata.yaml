@@ -1,0 +1,9 @@
+source_id: src_statsnz_population
+processed_artifact: data/public_processed/src_statsnz_population/population_estimates.csv
+raw_artifact: data/public_raw/src_statsnz_population/population-of-nz-indicator.html
+raw_artifact_sha256: 1ea688badd615450f55c628244026191e1c9b46a2360464f2ae3ff3998f14e9f
+rows_written: 1
+claim_level: public_benchmark
+calibration_status: calibration_readiness_only
+not_valid_for: patient-level, private administrative, confidential, stakeholder, or causal forecast use
+transform_note: Deterministic parse of the public Stats NZ national aggregate population estimate.

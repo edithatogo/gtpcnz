@@ -51,6 +51,7 @@ def build_calibration_validation_gate_matrix(*, strict: bool = False) -> tuple[C
     baseline_status: ValidationGateStatus = "passed" if not target_blockers else "calibration_readiness_only"
     ppc_status: ValidationGateStatus = baseline_status
     optional_holdout_blocker = "public aggregate holdout dataset not yet registered as source_ready"
+    claim_downgrade_status = "calibration_readiness_only"
 
     rows = [
         CalibrationValidationGateRow(
@@ -113,7 +114,7 @@ def build_calibration_validation_gate_matrix(*, strict: bool = False) -> tuple[C
             label="Claim-level downgrade if validation gates fail",
             public_data_requirement="Any failed or unavailable gate must keep outputs at public_benchmark.",
             status="passed",
-            claim_status="calibration_readiness_only" if target_blockers else "public_aggregate_validated",
+            claim_status=claim_downgrade_status,
             blockers=(),
         ),
     ]
@@ -121,8 +122,14 @@ def build_calibration_validation_gate_matrix(*, strict: bool = False) -> tuple[C
 
 
 def strict_validation_gate_issues() -> tuple[str, ...]:
+    return validation_gate_issues(require_all_validation_data=False)
+
+
+def validation_gate_issues(*, require_all_validation_data: bool) -> tuple[str, ...]:
     issues: list[str] = []
     for row in build_calibration_validation_gate_matrix(strict=True):
+        if row.status == "public_data_unavailable" and not require_all_validation_data:
+            continue
         if row.status != "passed" and row.gate_id != "CAL-G-007":
             issues.append(f"{row.gate_id}: {row.label} is not passed; claim remains calibration_readiness_only")
         issues.extend(row.blockers)
@@ -140,6 +147,11 @@ def validation_gate_matrix_as_json(*, strict: bool = False) -> str:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Report public aggregate calibration validation gates.")
     parser.add_argument("--strict", action="store_true", help="Fail until required calibration validation gates pass.")
+    parser.add_argument(
+        "--require-all-validation-data",
+        action="store_true",
+        help="Also fail documented public_data_unavailable holdout gates; use for empirical claim-upgrade releases.",
+    )
     parser.add_argument("--json", action="store_true", help="Print the validation gate matrix as JSON.")
     args = parser.parse_args(argv)
 
@@ -153,7 +165,7 @@ def main(argv: list[str] | None = None) -> int:
             )
 
     if args.strict:
-        issues = strict_validation_gate_issues()
+        issues = validation_gate_issues(require_all_validation_data=args.require_all_validation_data)
         if issues:
             print("\n".join(issues), file=sys.stderr)
             return 1

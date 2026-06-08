@@ -17,10 +17,18 @@ def test_public_source_retrieval_plan_covers_every_public_source() -> None:
     assert plans == sources
 
 
-def test_public_source_retrieval_plan_is_pending_download_only() -> None:
+def test_public_source_retrieval_plan_tracks_processed_public_sources() -> None:
     plans = load_public_source_retrieval_plans()
+    statuses = {plan.source_id: plan.retrieval_status for plan in plans}
 
-    assert all(plan.retrieval_status == "reference_pinned_pending_download" for plan in plans)
+    assert statuses == {
+        "src_hnz_capitation_schedule": "processed_ready",
+        "src_pho_services_agreement": "processed_ready",
+        "src_hnz_enrolment": "processed_ready",
+        "src_mcnz_workforce": "processed_ready",
+        "src_nz_health_survey": "processed_ready",
+        "src_statsnz_population": "processed_ready",
+    }
     assert all(plan.expected_raw_dir == f"data/public_raw/{plan.source_id}" for plan in plans)
     assert all(plan.fetch_script.startswith("scripts/fetch_") for plan in plans)
     assert all(plan.expected_processed_artifact.startswith(f"data/public_processed/{plan.source_id}/") for plan in plans)

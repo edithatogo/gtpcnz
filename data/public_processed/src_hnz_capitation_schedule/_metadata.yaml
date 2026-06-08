@@ -1,0 +1,9 @@
+source_id: src_hnz_capitation_schedule
+processed_artifact: data/public_processed/src_hnz_capitation_schedule/capitation_rates.csv
+raw_artifact: data/public_raw/src_hnz_capitation_schedule/capitation-rates.html
+raw_artifact_sha256: fdf1aa4fe61eb42baa6f1d6556bcefac3a1ec3eca744e809462aa99111e3cec7
+rows_written: 330
+claim_level: public_benchmark
+calibration_status: calibration_readiness_only
+not_valid_for: patient-level, private administrative, confidential, stakeholder, or causal forecast use
+transform_note: Public HTML table cell extraction only; not calibrated model input.
