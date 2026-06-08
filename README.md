@@ -36,19 +36,21 @@ Short version:
 
 - Quarto website: https://edithatogo.github.io/gtpcnz/
 - Streamlit dashboard and modelling views: https://gtpcnz.streamlit.app/
-- Quarto source report: `reports/primary_care_architecture.qmd`
-- Streamlit dashboard entrypoint: `streamlit_app.py`
-- Dashboard implementation: `models/primarycare_model/app.py`
-- Model card: `docs/calibration/model-card-v1.7.2.md`
-- Claim boundaries: `docs/launch/claim-boundaries-v1.7.2.md`
-- MoSCoW requirements: `docs/requirements-moscow-v1.8.3.md`
-- Architecture/design diagrams: `docs/design/repo-github-streamlit-design-v1.8.3.md`
-- Repo/GitHub/Streamlit contracts: `docs/contracts/repo-github-streamlit-contracts-v1.8.3.md`
-- Dependency policy: `docs/dependency-policy-v1.8.3.md`
-- Experimental edge lane: `requirements-edge.txt` and `.github/workflows/dependency-edge.yml`
-- Bleeding-edge scorecard: `docs/bleeding-edge-scorecard-v1.0.md`
-- Edge triage note: `docs/operations/dependency-edge-triage-v1.0.md`
-- GitHub Actions recovery runbook: `docs/operations/github-actions-recovery-v1.8.3.md`
+- Quarto source report: [reports/primary_care_architecture.qmd](reports/primary_care_architecture.qmd)
+- Streamlit dashboard entrypoint: [streamlit_app.py](streamlit_app.py)
+- Dashboard implementation: [models/primarycare_model/app.py](models/primarycare_model/app.py)
+- Model card: [docs/calibration/model-card-v1.7.2.md](docs/calibration/model-card-v1.7.2.md)
+- Claim boundaries: [docs/launch/claim-boundaries-v1.7.2.md](docs/launch/claim-boundaries-v1.7.2.md)
+- Evidence tracker: [docs/public-site/evidence-tracker-public-v1.8.1.md](docs/public-site/evidence-tracker-public-v1.8.1.md)
+- Calibration readiness: [docs/public-site/calibration-readiness-page-v1.8.1.md](docs/public-site/calibration-readiness-page-v1.8.1.md)
+- MoSCoW requirements: [docs/requirements-moscow-v1.8.3.md](docs/requirements-moscow-v1.8.3.md)
+- Architecture/design diagrams: [docs/design/repo-github-streamlit-design-v1.8.3.md](docs/design/repo-github-streamlit-design-v1.8.3.md)
+- Repo/GitHub/Streamlit contracts: [docs/contracts/repo-github-streamlit-contracts-v1.8.3.md](docs/contracts/repo-github-streamlit-contracts-v1.8.3.md)
+- Dependency policy: [docs/dependency-policy-v1.8.3.md](docs/dependency-policy-v1.8.3.md)
+- Experimental edge lane: [requirements-edge.txt](requirements-edge.txt) and [.github/workflows/dependency-edge.yml](.github/workflows/dependency-edge.yml)
+- Bleeding-edge scorecard: [docs/bleeding-edge-scorecard-v1.0.md](docs/bleeding-edge-scorecard-v1.0.md)
+- Edge triage note: [docs/operations/dependency-edge-triage-v1.0.md](docs/operations/dependency-edge-triage-v1.0.md)
+- GitHub Actions recovery runbook: [docs/operations/github-actions-recovery-v1.8.3.md](docs/operations/github-actions-recovery-v1.8.3.md)
 
 ## Run Locally
 
