@@ -22,17 +22,19 @@ Tracks 050-063 are complete for the v1.8.1 readiness-only release:
 - `062-dependency-locking-and-reproducible-runtime`: dependency locking and reproducible runtime.
 - `063-release-readiness-parallel-closeout`: post-050-062 diff audit, environment blocker classification, release gate rerun, commit packaging, public-source readiness closeout, PR merge, and remote CI verification.
 
+Track 064 is complete for the post-readiness public-source evidence slice:
+
+- `064-public-source-calibration-evidence`: public source files, SHA-256 checksums, processed artefacts, strict source readiness, baseline public aggregate reproduction, and PPC evidence are recorded. Calibration remains `calibration_readiness_only` because temporal, geographic/rural, subgroup-gradient, and policy-shock validation families still report public data unavailable.
+
 Next implementation frontier:
 
-- Public source retrieval and transformation described in `docs/model/public-source-readiness-closeout-v1.md`.
-- Cross-stage public source readiness matrix: `python scripts/check_public_source_readiness_matrix.py` passes in readiness mode; `--strict` remains the calibration-upgrade blocker until raw, checksum, and processed artifacts exist.
-- Replacement of `checksum: pending-download` entries with verified SHA-256 checksums after reproducible public downloads.
-- Calibration target readiness matrix: `python scripts/check_calibration_target_readiness.py` passes in readiness mode; `--strict` remains blocked until every linked source is ready and every target is within public tolerance.
-- Calibration validation gate matrix: `python scripts/check_calibration_validation_gates.py` passes in readiness mode; `--strict` remains blocked until baseline, holdout, PPC, and claim-downgrade gates pass where public data permit.
-- Posterior predictive readiness: `python scripts/check_posterior_predictive_checks.py` passes in readiness mode; `--strict` remains blocked until CAL-G-006 can pass from verified public aggregate inputs.
-- Public aggregate calibration output now embeds validation-gate and posterior-predictive readiness summaries for report/model-card consumption; the output still remains `public_benchmark` / `calibration_readiness_only`.
-- Calibration target promotion from `source_ready=false` to `source_ready=true` only after source, licence, checksum, processed-schema, and mirror gates pass.
-- No upgrade from `public_benchmark` / `calibration_readiness_only` until those gates pass.
+- Public source acquisition evidence is recorded in `docs/model/public-source-calibration-evidence-v1.md`.
+- Cross-stage public source readiness matrix passes in strict mode after raw, checksum, licence/access, processed-artifact, and schema checks.
+- Calibration target readiness now reports source-ready public aggregate targets within tolerance.
+- Baseline public aggregate reproduction and posterior predictive checks pass.
+- Calibration validation remains readiness-only because temporal holdout, geographic/rural holdout, subgroup gradient, and public policy-shock validation families still report public data unavailable.
+- Public aggregate calibration output embeds validation-gate and posterior-predictive summaries for report/model-card consumption; the output remains `public_benchmark` / `calibration_readiness_only`.
+- No upgrade from `public_benchmark` / `calibration_readiness_only` until the unavailable validation families have public source artefacts, verified checksums, processed outputs, and passing gates.
 
 Parallel execution controls:
 
