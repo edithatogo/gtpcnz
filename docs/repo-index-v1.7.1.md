@@ -3,7 +3,7 @@
 Start here:
 
 - README.md
-- RELEASE-NOTES-v1.7.1.md
+- docs/release/archive/RELEASE-NOTES-v1.7.1.md
 - docs/launch/launch-front-door-v1.7.1.md
 - docs/calibration/model-card-v1.7.1.md
 - docs/calibration/parameter-tiering-v1.7.1.md

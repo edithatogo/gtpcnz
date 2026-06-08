@@ -1,0 +1,37 @@
+changelog:
+  exclude:
+    labels:
+      - ignore-for-release
+      - skip-changelog
+    authors:
+      - dependabot
+  categories:
+    - title: Public-only SOTA and calibration gates
+      labels:
+        - public-only
+        - calibration
+        - sota
+        - bleeding-edge
+    - title: Model, uncertainty, and VOI
+      labels:
+        - model
+        - uncertainty
+        - voi
+    - title: Streamlit cockpit and visual grammar
+      labels:
+        - streamlit
+        - visualization
+        - accessibility
+    - title: Release engineering and reproducibility
+      labels:
+        - release
+        - reproducibility
+        - ci
+        - dependencies
+    - title: Documentation and claim boundaries
+      labels:
+        - docs
+        - claim-boundary
+    - title: Other changes
+      labels:
+        - "*"

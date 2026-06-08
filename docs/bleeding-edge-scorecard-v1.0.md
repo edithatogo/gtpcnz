@@ -76,3 +76,7 @@ python -m pytest -q models/tests
 ## Public-only SOTA gate
 
 SOTA/bleeding-edge status now requires public-only registry purity, parameter traceability, public aggregate calibration, structural uncertainty, full VOI, visual grammar, and release reproducibility gates.
+
+## Release-note gate
+
+Bleeding-edge/SOTA release notes are governed by [docs/release/bleeding-edge-sota-release-handling.md](release/bleeding-edge-sota-release-handling.md). Historical root release notes have been moved to [docs/release/archive/](release/archive/); new releases should use GitHub Releases, `CHANGELOG.md`, generated model cards, and release manifests.

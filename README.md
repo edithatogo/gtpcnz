@@ -49,6 +49,7 @@ Short version:
 - Dependency policy: [docs/dependency-policy-v1.8.3.md](docs/dependency-policy-v1.8.3.md)
 - Experimental edge lane: [requirements-edge.txt](requirements-edge.txt) and [.github/workflows/dependency-edge.yml](.github/workflows/dependency-edge.yml)
 - Bleeding-edge scorecard: [docs/bleeding-edge-scorecard-v1.0.md](docs/bleeding-edge-scorecard-v1.0.md)
+- Release-note handling: [docs/release/bleeding-edge-sota-release-handling.md](docs/release/bleeding-edge-sota-release-handling.md)
 - Edge triage note: [docs/operations/dependency-edge-triage-v1.0.md](docs/operations/dependency-edge-triage-v1.0.md)
 - GitHub Actions recovery runbook: [docs/operations/github-actions-recovery-v1.8.3.md](docs/operations/github-actions-recovery-v1.8.3.md)
 
