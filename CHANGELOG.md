@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Moved historical release notes from the repository root into `docs/release/archive/`.
+- Added bleeding-edge/SOTA release-note handling guidance under `docs/release/`.
+- Added GitHub generated-release-note categories in `.github/release.yml`.
+
 ## v1.8.1 — model/dashboard hardening
 
 - Added scenario-service layer to separate reference scenario outputs from toy slider scores.

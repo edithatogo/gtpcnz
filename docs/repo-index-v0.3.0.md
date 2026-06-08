@@ -22,7 +22,7 @@ owner: "Dylan A Mordaunt"
 - `README.md`
 - `VERSION.md`
 - `CHANGELOG.md`
-- `RELEASE-NOTES-v0.3.0.md`
+- `docs/release/archive/RELEASE-NOTES-v0.3.0.md`
 - `docs/source-notes-v0.3.0.md`
 
 ## Policy briefs
