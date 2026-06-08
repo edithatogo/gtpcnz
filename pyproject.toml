@@ -32,7 +32,7 @@ dev = [
     "pytest-mock",
     "ruff>=0.15,<0.16",
     "scalene>=2.3,<3; platform_system != 'Windows'",
-    "ty>=0.0.40,<0.1",
+    "ty>=0.0.44,<0.1",
 ]
 
 [dependency-groups]
@@ -49,7 +49,7 @@ dev = [
     "pytest-mock",
     "ruff>=0.15,<0.16",
     "scalene>=2.3,<3; platform_system != 'Windows'",
-    "ty>=0.0.40,<0.1",
+    "ty>=0.0.44,<0.1",
 ]
 edge = [
     "pytest",
