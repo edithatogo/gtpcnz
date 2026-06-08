@@ -20,8 +20,8 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-    "basedpyright>=1.39,<2",
-    "hypothesis>=6,<7",
+    "basedpyright>=1.39.7,<2",
+    "hypothesis>=6.155.2,<7",
     "mutmut>=3.6.0,<4",
     "mypy>=2,<3",
     "pandera>=0.31,<0.32",
@@ -32,13 +32,13 @@ dev = [
     "pytest-mock",
     "ruff>=0.15,<0.16",
     "scalene>=2.3,<3; platform_system != 'Windows'",
-    "ty>=0.0.40,<0.1",
+    "ty>=0.0.44,<0.1",
 ]
 
 [dependency-groups]
 dev = [
-    "basedpyright>=1.39,<2",
-    "hypothesis>=6,<7",
+    "basedpyright>=1.39.7,<2",
+    "hypothesis>=6.155.2,<7",
     "mutmut>=3.6.0,<4",
     "mypy>=2,<3",
     "pandera>=0.31,<0.32",
@@ -49,7 +49,7 @@ dev = [
     "pytest-mock",
     "ruff>=0.15,<0.16",
     "scalene>=2.3,<3; platform_system != 'Windows'",
-    "ty>=0.0.40,<0.1",
+    "ty>=0.0.44,<0.1",
 ]
 edge = [
     "pytest",
