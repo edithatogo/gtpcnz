@@ -81,6 +81,14 @@ def test_download_response_reader_rejects_oversized_payloads() -> None:
         public_source_fetch._read_bounded_response(BytesIO(b"abcd"), limit_bytes=3)
 
 
+def test_public_source_fetch_rejects_missing_target_url(monkeypatch: pytest.MonkeyPatch) -> None:
+    plan = load_public_source_retrieval_plans()[0].model_copy(update={"download_url": None, "landing_page_url": ""})
+    monkeypatch.setattr(public_source_fetch, "load_public_source_retrieval_plans", lambda: (plan,))
+
+    with pytest.raises(PublicSourceFetchError, match="missing public fetch target URL"):
+        public_source_fetch._validate_public_download_target(plan.source_id)
+
+
 def test_download_public_source_rejects_empty_responses(monkeypatch: pytest.MonkeyPatch) -> None:
     class EmptyResponse:
         def __enter__(self) -> EmptyResponse:

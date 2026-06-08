@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import csv
 import subprocess
 import sys
 
@@ -68,3 +69,6 @@ def test_statsnz_transform_writes_schema_valid_public_aggregate() -> None:
     assert output.artifact.exists()
     assert output.artifact.with_suffix(output.artifact.suffix + ".hash").exists()
     assert (output.artifact.parent / "_metadata.yaml").exists()
+    with output.artifact.open(encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    assert rows == [{"jurisdiction": "NZ", "year": "2026", "population_count": "5361300"}]

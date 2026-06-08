@@ -17,10 +17,20 @@ PUBLIC_REGISTRY = ROOT / "models" / "primarycare_model" / "registries" / "public
 PUBLIC_RAW = ROOT / "data" / "public_raw"
 PUBLIC_PROCESSED = ROOT / "data" / "public_processed"
 ALLOWED_LICENCE_STATUSES = {"open", "public_reference", "open_or_public_reference"}
+TEXT_STABLE_PROCESSED_SUFFIXES = {".csv", ".json", ".txt", ".yaml", ".yml"}
 
 
 def sha256_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def processed_artifact_sha256(path: Path) -> str:
+    """Hash processed text artifacts consistently across Windows and Linux checkouts."""
+
+    data = path.read_bytes()
+    if path.suffix.lower() in TEXT_STABLE_PROCESSED_SUFFIXES:
+        data = data.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return hashlib.sha256(data).hexdigest()
 
 
 def _lists_to_tuples(obj: Any) -> Any:
@@ -130,7 +140,7 @@ def verify_public_source_readiness(
                     issues.append(f"{source.source_id}: missing processed hash file for {data_file.relative_to(ROOT)}")
                     continue
                 expected = hash_file.read_text(encoding="utf-8").strip()
-                actual = sha256_file(data_file)
+                actual = processed_artifact_sha256(data_file)
                 if expected != actual:
                     issues.append(f"{source.source_id}: processed hash mismatch for {data_file.relative_to(ROOT)}")
             orphan_hashes = tuple(path for path in hash_files if not path.with_suffix("").exists())

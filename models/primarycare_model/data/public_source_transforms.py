@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import argparse
 import csv
-import hashlib
 import html
 import re
 import sys
@@ -14,7 +13,12 @@ from pathlib import Path
 
 from models.primarycare_model.contracts.public_sources import PublicSourceRetrievalPlan
 from models.primarycare_model.data.public_source_retrieval import load_public_source_retrieval_plans
-from models.primarycare_model.data.public_source_snapshot import ROOT, source_files
+from models.primarycare_model.data.public_source_snapshot import (
+    ROOT,
+    processed_artifact_sha256,
+    sha256_file,
+    source_files,
+)
 
 TRANSFORMABLE_STATUSES = {"downloaded_pending_transform", "processed_ready"}
 
@@ -93,7 +97,7 @@ def transform_script_path(script_path: str) -> Path:
 
 
 def _sha256(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    return sha256_file(path)
 
 
 def _clean_text(value: str) -> str:
@@ -110,7 +114,7 @@ def _write_csv(path: Path, rows: list[dict[str, object]], fieldnames: list[str])
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(rows)
-    path.with_suffix(path.suffix + ".hash").write_text(_sha256(path) + "\n", encoding="utf-8")
+    path.with_suffix(path.suffix + ".hash").write_text(processed_artifact_sha256(path) + "\n", encoding="utf-8")
 
 
 def _write_metadata(path: Path, *, source_id: str, raw_artifact: Path, rows_written: int, note: str) -> None:
@@ -130,7 +134,9 @@ def _write_metadata(path: Path, *, source_id: str, raw_artifact: Path, rows_writ
     )
     metadata_path = path.parent / "_metadata.yaml"
     metadata_path.write_text(metadata, encoding="utf-8")
-    metadata_path.with_suffix(metadata_path.suffix + ".hash").write_text(_sha256(metadata_path) + "\n", encoding="utf-8")
+    metadata_path.with_suffix(metadata_path.suffix + ".hash").write_text(
+        processed_artifact_sha256(metadata_path) + "\n", encoding="utf-8"
+    )
 
 
 def _parse_html(path: Path) -> _TableAndLinkParser:
@@ -153,27 +159,27 @@ def _select_raw_artifact(plan: PublicSourceRetrievalPlan) -> Path:
 def _transform_statsnz_population(
     plan: PublicSourceRetrievalPlan, raw_artifact: Path, output_path: Path
 ) -> TransformOutput:
-    text = raw_artifact.read_text(encoding="utf-8", errors="replace")
-    candidates = re.findall(
-        r"population of (?:Aotearoa )?New Zealand (?:at|was) .*?(\d{1,2} [A-Za-z]+ (\d{4})).*?was ([0-9,]+)",
+    text = html.unescape(raw_artifact.read_text(encoding="utf-8", errors="replace"))
+    indicator = re.search(
+        r'"Name":"Estimated population of NZ"[^{}]{0,1200}"Value":"([0-9,]+)"[^{}]{0,300}"Period":"(\d{1,2} [A-Za-z]+ (\d{4}))"',
         text,
         flags=re.IGNORECASE,
     )
-    if not candidates:
-        candidates = re.findall(
-            r"was ([0-9,]+) at (\d{1,2} [A-Za-z]+ (\d{4}))",
+    if not indicator:
+        indicator = re.search(
+            r"The (?:provisional )?estimated resident population of (?:Aotearoa )?New Zealand (?:at|was) "
+            r"(\d{1,2} [A-Za-z]+ (\d{4})) was ([0-9,]+)",
             text,
             flags=re.IGNORECASE,
         )
-        rows = [
-            {"jurisdiction": "NZ", "year": int(year), "population_count": int(count.replace(",", ""))}
-            for count, _date, year in candidates[:1]
-        ]
+        if indicator:
+            _date_text, year, count = indicator.groups()
+            rows = [{"jurisdiction": "NZ", "year": int(year), "population_count": int(count.replace(",", ""))}]
+        else:
+            rows = []
     else:
-        rows = [
-            {"jurisdiction": "NZ", "year": int(year), "population_count": int(count.replace(",", ""))}
-            for _date, year, count in candidates[:1]
-        ]
+        count, _date_text, year = indicator.groups()
+        rows = [{"jurisdiction": "NZ", "year": int(year), "population_count": int(count.replace(",", ""))}]
     if not rows:
         raise ValueError("src_statsnz_population: could not parse a national aggregate population estimate")
     _write_csv(output_path, rows, ["jurisdiction", "year", "population_count"])

@@ -76,6 +76,8 @@ def _validate_public_download_target(source_id: str) -> None:
     plans = {plan.source_id: plan for plan in load_public_source_retrieval_plans()}
     plan = plans[source_id]
     target_url = plan.download_url or plan.landing_page_url
+    if not target_url:
+        raise PublicSourceFetchError(f"{source_id}: missing public fetch target URL")
     parsed = urlparse(target_url)
     if parsed.scheme not in PUBLIC_URL_SCHEMES or not parsed.netloc:
         raise PublicSourceFetchError(f"{source_id}: fetch target must be an absolute public HTTP(S) URL")
@@ -125,6 +127,8 @@ def check_source_fetch_readiness(source_id: str, *, require_raw: bool = False) -
     issues.extend(script_issues)
 
     target_url = plan.download_url or plan.landing_page_url
+    if not target_url:
+        target_url = ""
     expected_path = ROOT / plan.expected_raw_dir / plan.expected_raw_artifact
     raw_files = source_files(source_raw_dir(source_id))
     if require_raw and not raw_files:
@@ -157,6 +161,8 @@ def download_public_source(source_id: str) -> Path:
     plan = plans[source_id]
     _validate_public_download_target(source_id)
     target_url = plan.download_url or plan.landing_page_url
+    if not target_url:
+        raise PublicSourceFetchError(f"{source_id}: missing public fetch target URL")
     output_path = ROOT / plan.expected_raw_dir / plan.expected_raw_artifact
     output_path.parent.mkdir(parents=True, exist_ok=True)
     request = urllib.request.Request(target_url, headers={"User-Agent": "gtpcnz-public-source-fetch/1.0"})
