@@ -24,8 +24,10 @@ Missing evidence at any stage is a blocker, not a reason to create placeholder d
 
 For `src_hnz_pho_access_timeseries`, the public raw source directory now contains:
 
-- `access-to-primary-care-stats-2025-q3.xlsx`
-- `access-to-primary-care-stats-2025-q4.xlsx`
+- `access-to-primary-care-stats-2025-q3.xlsx`, downloaded from `https://static.info.content.health.nz/docs/about-us/health-data/Primary%20care/access-to-primary-care-stats-2025-q3.xlsx`
+- `access-to-primary-care-stats-2025-q4.xlsx`, downloaded from `https://static.info.content.health.nz/docs/about-us/health-data/Primary%20care/access-to-primary-care-stats-2025-q4.xlsx`
+
+Both raw workbooks are checked into `data/public_raw/src_hnz_pho_access_timeseries/` so the temporal validation evidence is reproducible from the repository checkout.
 
 The deterministic transform processes all matching `access-to-primary-care-stats-*.xlsx` workbooks and derives the public reporting period from each filename. The processed numeric extract contains `2025-Q3` and `2025-Q4` rows, and `python scripts/check_public_temporal_period_acquisition.py --require-ready` passes.
 
