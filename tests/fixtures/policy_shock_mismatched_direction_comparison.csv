@@ -1,0 +1,2 @@
+shock_id,metric_id,pre_period,post_period,pre_value,post_value,observed_delta,observed_direction,modelled_direction,comparison_result
+shock-a,metric,2024Q1,2024Q2,1.25,1.50,0.25,decrease,increase,numeric_ready

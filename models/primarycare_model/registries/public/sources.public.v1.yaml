@@ -32,7 +32,7 @@ sources:
     retrieval_date: 2026-06-09
     licence_status: public_reference
     public_access_status: public
-    checksum: b464fcbd3150354582384c4529075b541b278172a7c0d49d7fbd43e69ea6f4ff
+    checksum: d9ca5eeeaba1e85cc97a8e960642c3593dbcfc53c5c0812b99697d9586c274b9
     transform_description: Public quarterly PHO access workbook downloaded and transformed to hashed validation-source metadata.
     claim_boundary: Public aggregate validation evidence only; no patient-level or passed-holdout claim.
   - source_id: src_mcnz_workforce

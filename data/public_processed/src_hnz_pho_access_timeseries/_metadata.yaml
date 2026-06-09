@@ -2,7 +2,9 @@ source_id: src_hnz_pho_access_timeseries
 processed_artifact: data/public_processed/src_hnz_pho_access_timeseries/pho_access_numeric_extract.csv
 raw_artifact: data/public_raw/src_hnz_pho_access_timeseries/access-to-primary-care-stats-2025-q4.xlsx
 raw_artifact_sha256: 0f71b778fc1e2b7675ffd3bbe9aef50e6c41629e2b244601a0fb599aa9e4cd71
-rows_written: 441
+raw_artifacts: data/public_raw/src_hnz_pho_access_timeseries/access-to-primary-care-stats-2025-q3.xlsx, data/public_raw/src_hnz_pho_access_timeseries/access-to-primary-care-stats-2025-q4.xlsx
+raw_artifacts_sha256: d9ca5eeeaba1e85cc97a8e960642c3593dbcfc53c5c0812b99697d9586c274b9
+rows_written: 882
 claim_level: public_benchmark
 calibration_status: calibration_readiness_only
 not_valid_for: patient-level, private administrative, confidential, stakeholder, or causal forecast use

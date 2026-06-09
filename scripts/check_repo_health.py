@@ -24,7 +24,8 @@ def run(command: list[str]) -> tuple[bool, str]:
     completed = subprocess.run(command, cwd=ROOT, text=True, capture_output=True)
     output = "\n".join(part for part in [completed.stdout, completed.stderr] if part).strip()
     if completed.returncode == 0:
-        return True, output.splitlines()[-1] if output else "passed"
+        stdout = completed.stdout.strip()
+        return True, stdout.splitlines()[-1] if stdout else "passed"
     return False, "\n".join(output.splitlines()[-20:])
 
 
@@ -155,8 +156,10 @@ def check_ci() -> tuple[bool, str]:
         "python scripts/check_public_source_transform_scripts.py",
         "python scripts/check_public_source_readiness_matrix.py",
         "python scripts/check_transformed_schemas.py",
+        "python scripts/check_public_temporal_period_acquisition.py",
         "python scripts/check_calibration_target_readiness.py",
         "python scripts/check_calibration_validation_gates.py",
+        "python scripts/check_public_policy_shock_plausibility.py",
         "python scripts/check_posterior_predictive_checks.py",
         "pytest -q",
         "quarto render --to html",
@@ -217,6 +220,14 @@ def check_concern_boundaries_execute() -> tuple[bool, str]:
     return run([sys.executable, "scripts/check_concern_boundaries.py"])
 
 
+def check_public_temporal_period_acquisition_execute() -> tuple[bool, str]:
+    return run([sys.executable, "scripts/check_public_temporal_period_acquisition.py"])
+
+
+def check_public_policy_shock_plausibility_execute() -> tuple[bool, str]:
+    return run([sys.executable, "scripts/check_public_policy_shock_plausibility.py"])
+
+
 def check_tests_execute() -> tuple[bool, str]:
     return run([sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider", "models/tests"])
 
@@ -232,6 +243,8 @@ CHECKS = [
     ("no_stub_modules", check_no_stub_modules),
     ("claim_boundaries", check_claim_boundaries),
     ("concern_boundaries_execute", check_concern_boundaries_execute),
+    ("public_temporal_period_acquisition_execute", check_public_temporal_period_acquisition_execute),
+    ("public_policy_shock_plausibility_execute", check_public_policy_shock_plausibility_execute),
     ("regression_tests_execute", check_tests_execute),
 ]
 

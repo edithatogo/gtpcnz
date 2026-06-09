@@ -23,6 +23,8 @@ Each registered shock row declares the required public comparison artifact colum
 - `modelled_direction`
 - `comparison_result`
 
-The checker validates a registered artifact strictly: the artifact must exist, include those columns, include rows for the registered `shock_id`, and provide numeric `pre_value` and `post_value` fields. The accepted machine statuses are `artifact_not_registered`, `artifact_missing`, `artifact_invalid`, `numeric_pre_post_ready`, `comparison_passed`, and `comparison_failed`.
+The checker validates a registered artifact strictly: the artifact must exist, include those columns, include rows for the registered `shock_id`, and provide non-empty `metric_id`, `pre_period`, and `post_period` fields. `pre_value`, `post_value`, and `observed_delta` must be numeric, and `observed_delta` must equal `post_value - pre_value`. `observed_direction` and `modelled_direction` must be one of `increase`, `decrease`, or `no_change`; `observed_direction` must match `observed_delta`; and `comparison_result=passed` requires the observed and modelled directions to agree. The accepted machine statuses are `artifact_not_registered`, `artifact_missing`, `artifact_invalid`, `numeric_pre_post_ready`, `comparison_passed`, and `comparison_failed`.
+
+Contract tests use synthetic CSV artifacts only. They are not public evidence and must not be registered as production comparison artifacts.
 
 As of this registry version, no public numeric pre/post policy-shock comparison artifact is registered. The lane therefore remains `public_validation_source_registered` / `calibration_readiness_only`. The checker exits successfully for evidence reporting and fails only when `--require-pass` is used.

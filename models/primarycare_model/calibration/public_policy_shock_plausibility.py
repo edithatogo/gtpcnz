@@ -46,6 +46,8 @@ REQUIRED_NUMERIC_COMPARISON_COLUMNS = (
     "comparison_result",
 )
 ALLOWED_COMPARISON_RESULTS = {"numeric_ready", "passed", "comparison_failed"}
+ALLOWED_DIRECTIONS = {"increase", "decrease", "no_change"}
+OBSERVED_DELTA_TOLERANCE = 1e-9
 
 
 @dataclass(frozen=True)
@@ -130,6 +132,21 @@ def _numeric_value(value: str | None) -> float | None:
         return None
 
 
+def _required_text(value: str | None) -> str | None:
+    if value is None:
+        return None
+    cleaned = value.strip()
+    return cleaned or None
+
+
+def _direction_from_delta(delta: float) -> str:
+    if delta > OBSERVED_DELTA_TOLERANCE:
+        return "increase"
+    if delta < -OBSERVED_DELTA_TOLERANCE:
+        return "decrease"
+    return "no_change"
+
+
 def _numeric_comparison_contract(row: dict[str, object]) -> NumericComparisonContract:
     raw_contract = row.get("numeric_comparison_contract")
     if not isinstance(raw_contract, dict):
@@ -195,15 +212,48 @@ def _numeric_comparison_readiness(
     passed = False
     failed = False
     for index, row in enumerate(rows, start=1):
+        metric_id = _required_text(row.get("metric_id"))
+        pre_period = _required_text(row.get("pre_period"))
+        post_period = _required_text(row.get("post_period"))
         pre_value = _numeric_value(row.get("pre_value"))
         post_value = _numeric_value(row.get("post_value"))
+        observed_delta = _numeric_value(row.get("observed_delta"))
+        observed_direction = (row.get("observed_direction") or "").strip()
+        modelled_direction = (row.get("modelled_direction") or "").strip()
         result = (row.get("comparison_result") or "").strip()
+        if metric_id is None:
+            issues.append(f"Row {index}: metric_id is required.")
+        if pre_period is None:
+            issues.append(f"Row {index}: pre_period is required.")
+        if post_period is None:
+            issues.append(f"Row {index}: post_period is required.")
         if pre_value is None:
             issues.append(f"Row {index}: pre_value is not numeric.")
         if post_value is None:
             issues.append(f"Row {index}: post_value is not numeric.")
+        if observed_delta is None:
+            issues.append(f"Row {index}: observed_delta is not numeric.")
+        if observed_direction not in ALLOWED_DIRECTIONS:
+            issues.append(f"Row {index}: observed_direction must be one of {sorted(ALLOWED_DIRECTIONS)}.")
+        if modelled_direction not in ALLOWED_DIRECTIONS:
+            issues.append(f"Row {index}: modelled_direction must be one of {sorted(ALLOWED_DIRECTIONS)}.")
+        if pre_value is not None and post_value is not None and observed_delta is not None:
+            expected_delta = post_value - pre_value
+            if abs(observed_delta - expected_delta) > OBSERVED_DELTA_TOLERANCE:
+                issues.append(
+                    f"Row {index}: observed_delta must equal post_value - pre_value "
+                    f"({expected_delta:g})."
+                )
+            expected_direction = _direction_from_delta(observed_delta)
+            if observed_direction in ALLOWED_DIRECTIONS and observed_direction != expected_direction:
+                issues.append(
+                    f"Row {index}: observed_direction must match observed_delta "
+                    f"({expected_direction})."
+                )
         if result not in ALLOWED_COMPARISON_RESULTS:
             issues.append(f"Row {index}: comparison_result must be one of {sorted(ALLOWED_COMPARISON_RESULTS)}.")
+        if result == "passed" and observed_direction != modelled_direction:
+            issues.append(f"Row {index}: comparison_result=passed requires observed_direction to match modelled_direction.")
         passed = passed or result == "passed"
         failed = failed or result == "comparison_failed"
 

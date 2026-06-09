@@ -19,9 +19,11 @@ reproduce-public-release:
 	python scripts/check_public_source_transform_scripts.py
 	python scripts/check_public_source_readiness_matrix.py
 	python scripts/check_transformed_schemas.py
+	python scripts/check_public_temporal_period_acquisition.py
 	python scripts/check_parameter_traceability.py
 	python scripts/check_calibration_target_readiness.py
 	python scripts/check_calibration_validation_gates.py
+	python scripts/check_public_policy_shock_plausibility.py
 	python scripts/check_posterior_predictive_checks.py
 	python scripts/run_public_aggregate_calibration.py --check-only
 	python scripts/run_voi.py --check-only
