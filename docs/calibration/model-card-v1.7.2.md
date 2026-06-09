@@ -6,6 +6,11 @@ Public-data anchored benchmark for primary care funding architecture in Aotearoa
 ## Version
 v1.7.2. This version incorporates red-team and devil's advocate findings into the model communication layer.
 
+This is a historical model card. The current release model card is
+`docs/release/model-card-v1.8.1.md`, which reports the registered public
+aggregate validation lane as `public_aggregate_validated` /
+`empirically_supported_if_gated` while preserving not-valid-for warnings.
+
 ## Intended use
 - Compare the relative logic of funding architectures.
 - Identify which assumptions are load-bearing.
@@ -43,7 +48,7 @@ The benchmark uses 70 parameters across demand, supply, funding, governance, amb
 - Scenario comparison and sensitivity outputs.
 
 ## Validation status
-This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
+Historical v1.7.2 status: public-data anchored benchmark and educational explainer. Current release status is documented in `docs/release/model-card-v1.8.1.md`: the registered aggregate validation lane is `public_aggregate_validated` / `empirically_supported_if_gated`, but the model is still not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, ED reductions, hospital-demand reductions, workforce effects, implementation impacts, or causal effects.
 
 ## Registry-backed parameters and scenarios
 

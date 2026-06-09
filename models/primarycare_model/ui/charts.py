@@ -15,8 +15,8 @@ class ChartContract:
     source_snapshot_id: str
     interpretation_note: str
     data: tuple[dict[str, Any], ...]
-    claim_level: str = "public_benchmark"
-    calibration_status: str = "calibration_readiness_only"
+    claim_level: str = "empirically_supported_if_gated"
+    calibration_status: str = "public_aggregate_validated"
     uncertainty_type: str = "parameter_and_structural"
 
     def as_payload(self) -> dict[str, Any]:

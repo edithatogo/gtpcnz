@@ -16,7 +16,7 @@ The strict calibration-upgrade gate is:
 python scripts/check_calibration_target_readiness.py --strict
 ```
 
-Strict mode must fail until every linked public source is `source_ready=true`, every target is within its public tolerance, raw source checksums are verified, and processed artifacts exist. The default mode reports target readiness without changing claim status.
+Strict mode fails unless every linked public source is `source_ready=true`, every target is within its public tolerance, raw source checksums are verified, and processed artifacts exist. In the current release, these strict source and target checks pass for the registered aggregate target set.
 
 The gate keeps these claim boundaries attached to every target:
 
@@ -27,7 +27,7 @@ The gate keeps these claim boundaries attached to every target:
 - implementation impacts
 - causal effects
 
-Current public status remains `calibration_readiness_only` because linked source rows have pending raw files, pending checksums, and pending processed outputs.
+Current public aggregate status is `public_aggregate_validated` / `empirically_supported_if_gated` for registered public aggregate gates only. This does not authorize precise fiscal, ED, hospital-demand, workforce, implementation-impact, or causal claims.
 
 The public aggregate calibration runner emits this target matrix together with `validation_gates` and
 `posterior_predictive_checks` sections:
@@ -36,8 +36,8 @@ The public aggregate calibration runner emits this target matrix together with `
 python scripts/run_public_aggregate_calibration.py --check-only
 ```
 
-Those nested sections are the report/model-card contract for calibration readiness. They must not be
-interpreted as empirical validation until all strict gates pass.
+Those nested sections are the report/model-card contract for aggregate validation status. They must not be
+interpreted as precision, implementation-impact, or causal validation.
 ## Validation Gate Matrix
 
 The public aggregate validation gates are reported by:
@@ -62,7 +62,7 @@ The matrix covers:
 - CAL-G-006 posterior predictive checks
 - CAL-G-007 claim-level downgrade when any gate fails or is unavailable
 
-Default mode is readiness-compatible and reports unavailable public holdout data without failing CI. Strict mode fails until source-ready public targets, processed artifacts, verified checksums, and public holdout/PPC data are available. Until then all public outputs remain `public_benchmark` / `calibration_readiness_only`.
+Default mode reports the current gate matrix without mutating claims. Strict mode fails if source-ready public targets, processed artifacts, verified checksums, or public holdout/PPC data are unavailable. In the current release, CAL-G-001 through CAL-G-007 pass for the registered aggregate validation lane, while claim-specific precision and causal boundaries remain excluded.
 ## Posterior Predictive Check Readiness
 
 Posterior predictive check readiness is reported by:
@@ -77,4 +77,4 @@ The strict PPC upgrade gate is:
 python scripts/check_posterior_predictive_checks.py --strict
 ```
 
-The PPC report is tied to CAL-G-006 in the validation gate matrix. Default mode reports failed/readiness-only targets and preserves not-valid-for claim boundaries. Strict mode fails until linked public targets are source-ready, validation gates pass, and reproducible predictive checks can be run from verified public aggregate inputs.
+The PPC report is tied to CAL-G-006 in the validation gate matrix. Default mode reports the current PPC status and preserves not-valid-for claim boundaries. Strict mode fails unless linked public targets are source-ready, validation gates pass, and reproducible predictive checks can be run from verified public aggregate inputs.

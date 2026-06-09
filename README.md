@@ -20,9 +20,9 @@ Website: https://edithatogo.github.io/gtpcnz/
 
 - It is not an endorsed policy position.
 - It is a public-data anchored benchmark, not a linked-data calibrated or patient-level forecast.
-- In repo-health terms, the benchmark is public-data anchored and remains bounded by the documented claim boundaries.
-- It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
-- Full caveat: This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
+- In repo-health terms, the aggregate validation lane is `public_aggregate_validated` / `empirically_supported_if_gated`, and remains bounded by the documented claim boundaries.
+- It should not be used to claim precise fiscal savings, ED reductions, hospital-demand reductions, workforce effects, implementation impacts, or causal effects.
+- Full caveat: This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, ED reductions, hospital-demand reductions, workforce effects, implementation impacts, or causal effects.
 
 ## Design Option Explored Here
 
@@ -39,7 +39,8 @@ Short version:
 - Quarto source report: [reports/primary_care_architecture.qmd](reports/primary_care_architecture.qmd)
 - Streamlit dashboard entrypoint: [streamlit_app.py](streamlit_app.py)
 - Dashboard implementation: [models/primarycare_model/app.py](models/primarycare_model/app.py)
-- Model card: [docs/calibration/model-card-v1.7.2.md](docs/calibration/model-card-v1.7.2.md)
+- Current release model card: [docs/release/model-card-v1.8.1.md](docs/release/model-card-v1.8.1.md)
+- Historical v1.7.2 model card: [docs/calibration/model-card-v1.7.2.md](docs/calibration/model-card-v1.7.2.md)
 - Claim boundaries: [docs/launch/claim-boundaries-v1.7.2.md](docs/launch/claim-boundaries-v1.7.2.md)
 - Evidence tracker: [docs/public-site/evidence-tracker-public-v1.8.1.md](docs/public-site/evidence-tracker-public-v1.8.1.md)
 - Calibration readiness: [docs/public-site/calibration-readiness-page-v1.8.1.md](docs/public-site/calibration-readiness-page-v1.8.1.md)
@@ -104,4 +105,4 @@ See `LICENSE` for the mixed code/content licensing terms and `CITATION.cff` for 
 
 ## Public calibrated-model programme
 
-The current public runtime remains a public-data anchored benchmark and educational explainer. The new public calibrated-model programme separates public registries, source snapshots, calibration targets, structural uncertainty, VOI, cockpit, and release gates from future/private templates. Until the public aggregate calibration and validation gates pass, unsupported claims remain out of bounds: precise fiscal savings, ED reductions, hospital-demand reductions, workforce effects, implementation impacts, and causal effects.
+The current public runtime remains a public-data anchored benchmark and educational explainer. The public aggregate lane now reports `public_aggregate_validated` / `empirically_supported_if_gated` for registered aggregate gates only. The programme separates public registries, source snapshots, calibration targets, structural uncertainty, VOI, cockpit, and release gates from future/private templates. Unsupported precision and causal claims remain out of bounds: precise fiscal savings, ED reductions, hospital-demand reductions, workforce effects, implementation impacts, and causal effects.
