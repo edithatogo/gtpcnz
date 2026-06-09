@@ -1,0 +1,7 @@
+{
+  "id": "073",
+  "slug": "independent-public-validation-expansion",
+  "title": "Independent public validation source expansion",
+  "status": "planned",
+  "claim_boundary": "aggregate_validation_only_until_claim_specific_gates"
+}

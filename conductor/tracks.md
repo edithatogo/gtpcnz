@@ -80,16 +80,20 @@
 | 068 | Public temporal and policy-shock validation evidence | Complete for readiness-only release | Register CAL-G-002 and CAL-G-005 public readiness lanes while preserving calibration_readiness_only until comparisons pass. |
 | 069 | Public validation acquisition readiness and diagnostics | Complete for readiness-only release | Add acquisition readiness for missing temporal/shock evidence and diagnostics for failed holdout comparisons without passing gates. |
 | 070 | Public evidence acquisition execution governance | Complete for readiness-only release | Define execution governance for future public evidence acquisition without acquiring evidence or upgrading calibration claims. |
+| 071 | Release site and report regeneration after aggregate validation | Planned | Regenerate public release/site/report artefacts from the validated aggregate lane while preserving precision and causal claim exclusions. |
+| 072 | PHO Services Agreement bounded table extraction | Planned | Extract bounded public PHO Services Agreement schedule tables, or document deterministic blockers, without moving beyond reference-only unless contracts pass. |
+| 073 | Independent public validation source expansion | Planned | Register and test additional independent public aggregate validation sources beyond current PHO access and capitation evidence. |
+| 074 | Aggregate validation claim-surface review | Planned | Review app/report/model-card/README wording after aggregate validation, keeping not-valid-for warnings visible. |
 
 ## Current priority
 
 1. Keep the public model path public/published-data-only and claim-gated.
-2. Treat tracks 050-063 as complete for the v1.8.1 readiness-only release; do not describe them as empirically calibrated public-source passes.
-3. Keep Track 053 at `calibration_readiness_only` until temporal holdout, geographic/rural holdout, subgroup-gradient, and policy-shock validation gates have public data and pass. Track 070 resolves CAL-G-002, CAL-G-003, and CAL-G-004 with passing public holdout comparisons; CAL-G-005 remains blocking. Readiness evidence, governance shells, and failed comparisons do not pass the remaining gate.
-4. Use `docs/model/public-source-calibration-evidence-v1.md` as the current evidence ledger for source acquisition and calibration status.
-5. Preserve the public claim boundary until empirical gates pass.
+2. Treat tracks 050-070 as complete for the public aggregate validation lane; do not describe aggregate validation as precision, implementation-impact, or causal validation.
+3. Use `docs/model/public-source-calibration-evidence-v1.md` as the current evidence ledger for source acquisition and calibration status.
+4. Preserve not-valid-for boundaries for precise fiscal savings, ED reductions, hospital-demand reductions, workforce effects, implementation impacts, and causal effects.
+5. Execute planned tracks 071-074 before broadening release surfaces, PHO evidence, independent validation sources, or public claim wording.
 6. Use the v1.8.1 model card, claim-boundary note, parameter tiering and identifiability map when explaining the model.
-7. Freeze model expansion until public evidence, public source access, or validation status changes the evidence base.
+7. Freeze precision/causal claim expansion until claim-specific public evidence gates pass.
 
 ## Notes
 

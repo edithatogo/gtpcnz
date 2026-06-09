@@ -1,0 +1,7 @@
+{
+  "id": "071",
+  "slug": "release-site-report-regeneration",
+  "title": "Release site and report regeneration after aggregate validation",
+  "status": "planned",
+  "claim_boundary": "public_aggregate_validated_not_precision_or_causal"
+}
