@@ -228,6 +228,10 @@ def check_public_policy_shock_plausibility_execute() -> tuple[bool, str]:
     return run([sys.executable, "scripts/check_public_policy_shock_plausibility.py"])
 
 
+def check_public_validation_source_candidates_execute() -> tuple[bool, str]:
+    return run([sys.executable, "scripts/check_public_validation_source_candidates.py"])
+
+
 def check_tests_execute() -> tuple[bool, str]:
     return run([sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider", "models/tests"])
 
@@ -245,6 +249,7 @@ CHECKS = [
     ("concern_boundaries_execute", check_concern_boundaries_execute),
     ("public_temporal_period_acquisition_execute", check_public_temporal_period_acquisition_execute),
     ("public_policy_shock_plausibility_execute", check_public_policy_shock_plausibility_execute),
+    ("public_validation_source_candidates_execute", check_public_validation_source_candidates_execute),
     ("regression_tests_execute", check_tests_execute),
 ]
 
