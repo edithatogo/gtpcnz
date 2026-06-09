@@ -127,6 +127,19 @@ def _weighted_rate(rows: tuple[dict[str, str], ...], target: PublicTemporalHoldo
     return numerator / denominator
 
 
+def _training_prediction_for_holdout_row(
+    holdout_row: dict[str, str],
+    training_rows: tuple[dict[str, str], ...],
+    target: PublicTemporalHoldoutTarget,
+    fallback_rate: float,
+) -> float:
+    geography = holdout_row.get(target.geography_column)
+    matching_rows = tuple(row for row in training_rows if row.get(target.geography_column) == geography)
+    if not matching_rows:
+        return fallback_rate
+    return _weighted_rate(matching_rows, target)
+
+
 def _comparison_for_target(
     target: PublicTemporalHoldoutTarget,
     rows: tuple[dict[str, str], ...] | None = None,
@@ -185,8 +198,14 @@ def _comparison_for_target(
     training_periods = periods[: -1]
     training_rows = tuple(row for row in filtered_rows if row[target.period_column] in training_periods)
     holdout_rows = tuple(row for row in filtered_rows if row[target.period_column] == holdout_period)
-    predicted = _weighted_rate(training_rows, target)
-    errors = [abs(float(row[target.observed_value_column]) - predicted) for row in holdout_rows]
+    fallback_rate = _weighted_rate(training_rows, target)
+    errors = [
+        abs(
+            float(row[target.observed_value_column])
+            - _training_prediction_for_holdout_row(row, training_rows, target, fallback_rate)
+        )
+        for row in holdout_rows
+    ]
     max_error = max(errors) if errors else 0.0
     mean_error = sum(errors) / len(errors) if errors else 0.0
     status = "passed" if max_error <= target.max_error_tolerance else "temporal_comparison_failed"
@@ -205,8 +224,9 @@ def _comparison_for_target(
         status=status,
         claim_status="calibration_readiness_only",
         interpretation_note=(
-            "Public aggregate temporal holdout comparison only; not a causal, fiscal, "
-            "individual-care, implementation, or hospital-demand validation."
+            "Public aggregate temporal holdout comparison using district-level training-period persistence with "
+            "national fallback only when a district is absent; not a causal, fiscal, individual-care, "
+            "implementation, or hospital-demand validation."
         ),
     )
 

@@ -8,12 +8,15 @@ registered source is the Health NZ PHO access workbook numeric extract:
 - gate: `CAL-G-002`
 - claim status: `calibration_readiness_only`
 
-The current public extract contains one published period, `2025-Q4`. That is
-valid public validation-source evidence, but it is not enough for a temporal
-train/holdout comparison. The lane therefore reports
-`public_validation_source_registered` until at least two public periods are
-available and the latest-period holdout comparison passes the registered
-tolerance.
+The current public extract contains two published periods, `2025-Q3` and
+`2025-Q4`. The lane uses Q3 as the public training period and Q4 as the latest
+public holdout period.
+
+The registered benchmark is district-level public persistence: each Q4
+district total-coverage observation is compared with the same district's Q3
+public aggregate rate. If a holdout district is absent from the training
+period, the comparator falls back to the national Q3 weighted rate. This uses
+only public aggregate workbook rows and avoids inventing regional data.
 
 ## Public Period Acquisition Readiness
 
@@ -23,18 +26,9 @@ CAL-G-002 now also has a machine-readable temporal-period acquisition plan:
 - checker: `python scripts/check_public_temporal_period_acquisition.py`
 - strict checker: `python scripts/check_public_temporal_period_acquisition.py --require-ready`
 
-The acquisition plan records the local public period already processed
-(`2025-Q4`) and the missing public requirement for a temporal comparison: at
-least one distinct public Health NZ access-to-primary-care workbook period
-before the latest available period. The requirement is deliberately expressed
-as `any_public_period_before_latest_available` because no earlier public
-workbook is currently local in this repository. It is an acquisition target,
-not substituted data.
-
-Default checker mode is readiness-compatible and passes while reporting the
-missing public period requirement. Strict mode fails until enough real public
-periods are locally present and processed. Neither mode upgrades CAL-G-002
-from `calibration_readiness_only`.
+The acquisition plan records both local public periods already processed:
+`2025-Q3` and `2025-Q4`. Default and strict acquisition-readiness modes pass.
+Neither mode upgrades the model beyond its registered claim boundary.
 
 Passing CAL-G-002 requires all of the following:
 

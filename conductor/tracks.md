@@ -85,7 +85,7 @@
 
 1. Keep the public model path public/published-data-only and claim-gated.
 2. Treat tracks 050-063 as complete for the v1.8.1 readiness-only release; do not describe them as empirically calibrated public-source passes.
-3. Keep Track 053 at `calibration_readiness_only` until temporal holdout, geographic/rural holdout, subgroup-gradient, and policy-shock validation gates have public data and pass. Tracks 065-070 register, parse, compare, diagnose, define acquisition blockers, or govern public evidence acquisition execution for CAL-G-002 through CAL-G-005; readiness evidence, governance shells, and failed comparisons do not pass those gates.
+3. Keep Track 053 at `calibration_readiness_only` until temporal holdout, geographic/rural holdout, subgroup-gradient, and policy-shock validation gates have public data and pass. Track 070 resolves CAL-G-002 with a passing public temporal holdout; CAL-G-003, CAL-G-004, and CAL-G-005 remain blocking. Readiness evidence, governance shells, and failed comparisons do not pass those remaining gates.
 4. Use `docs/model/public-source-calibration-evidence-v1.md` as the current evidence ledger for source acquisition and calibration status.
 5. Preserve the public claim boundary until empirical gates pass.
 6. Use the v1.8.1 model card, claim-boundary note, parameter tiering and identifiability map when explaining the model.

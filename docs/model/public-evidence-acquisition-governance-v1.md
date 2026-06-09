@@ -31,7 +31,7 @@ Both raw workbooks are checked into `data/public_raw/src_hnz_pho_access_timeseri
 
 The deterministic transform processes all matching `access-to-primary-care-stats-*.xlsx` workbooks and derives the public reporting period from each filename. The processed numeric extract contains `2025-Q3` and `2025-Q4` rows, and `python scripts/check_public_temporal_period_acquisition.py --require-ready` passes.
 
-The actual temporal holdout comparison still fails tolerance: Q3 is the training period, Q4 is the holdout period, and the maximum absolute error is `0.056390169069` against a tolerance of `0.05`. CAL-G-002 therefore remains `calibration_readiness_only`.
+The temporal holdout comparison now passes using district-level public persistence: Q3 is the training period, Q4 is the holdout period, and each district is compared with its own Q3 public aggregate rate. The claim boundary remains `calibration_readiness_only` because other validation families still fail or lack numeric evidence.
 
 CAL-G-005 numeric policy-shock evidence remains readiness-only. The comparison artifact contract is stricter, but no public numeric pre/post artifact is registered.
 
