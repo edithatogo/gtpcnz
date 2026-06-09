@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import sys
 from dataclasses import asdict, dataclass
@@ -18,6 +19,7 @@ ValidationGateStatus = Literal[
     "calibration_readiness_only",
     "public_data_unavailable",
     "public_validation_source_registered",
+    "public_validation_numeric_ready",
 ]
 
 
@@ -46,21 +48,21 @@ def _target_blockers() -> tuple[str, ...]:
     return tuple(dict.fromkeys(blockers))
 
 
-def _pho_access_workbook_metadata_rows() -> tuple[dict[str, str], ...]:
-    import csv
-
-    path = ROOT / "data" / "public_processed" / "src_hnz_pho_access_timeseries" / "pho_access_workbook_metadata.csv"
+def _pho_access_numeric_rows() -> tuple[dict[str, str], ...]:
+    path = ROOT / "data" / "public_processed" / "src_hnz_pho_access_timeseries" / "pho_access_numeric_extract.csv"
     if not path.exists():
         return ()
     with path.open("r", encoding="utf-8", newline="") as handle:
         return tuple(csv.DictReader(handle))
 
 
-def _has_pho_access_validation_source(*validation_uses: str) -> bool:
+def _has_pho_access_numeric_validation_extract(*validation_uses: str) -> bool:
     uses = set(validation_uses)
     return any(
-        row.get("validation_use") in uses and row.get("row_count", "0").isdigit() and int(row["row_count"]) > 0
-        for row in _pho_access_workbook_metadata_rows()
+        row.get("validation_use") in uses
+        and row.get("absolute_rate_difference") not in {None, ""}
+        and float(row["absolute_rate_difference"]) <= 1e-9
+        for row in _pho_access_numeric_rows()
     )
 
 
@@ -71,15 +73,15 @@ def build_calibration_validation_gate_matrix(*, strict: bool = False) -> tuple[C
     baseline_status: ValidationGateStatus = "passed" if not target_blockers else "calibration_readiness_only"
     ppc_status: ValidationGateStatus = baseline_status
     optional_holdout_blocker = "public aggregate holdout dataset not yet registered as source_ready"
-    source_registered_blocker = "public validation source is registered, but no numeric holdout comparison has passed"
+    numeric_ready_blocker = "public validation numeric extract is ready, but no model-vs-holdout comparison has passed"
     subgroup_status: ValidationGateStatus = (
-        "public_validation_source_registered"
-        if _has_pho_access_validation_source("subgroup_gradient_validation_candidate")
+        "public_validation_numeric_ready"
+        if _has_pho_access_numeric_validation_extract("subgroup_gradient_validation_candidate")
         else "public_data_unavailable"
     )
     geographic_status: ValidationGateStatus = (
-        "public_validation_source_registered"
-        if _pho_access_workbook_metadata_rows()
+        "public_validation_numeric_ready"
+        if _has_pho_access_numeric_validation_extract("subgroup_gradient_validation_candidate", "subgroup_descriptive_validation_candidate")
         else "public_data_unavailable"
     )
     claim_downgrade_status = "calibration_readiness_only"
@@ -110,7 +112,7 @@ def build_calibration_validation_gate_matrix(*, strict: bool = False) -> tuple[C
             public_data_requirement="Public regional or rurality aggregate extracts with held-out areas.",
             status=geographic_status,
             claim_status="calibration_readiness_only",
-            blockers=(f"CAL-G-003: {source_registered_blocker if geographic_status == 'public_validation_source_registered' else optional_holdout_blocker}",)
+            blockers=(f"CAL-G-003: {numeric_ready_blocker if geographic_status == 'public_validation_numeric_ready' else optional_holdout_blocker}",)
             if strict
             else (),
         ),
@@ -121,7 +123,7 @@ def build_calibration_validation_gate_matrix(*, strict: bool = False) -> tuple[C
             public_data_requirement="Public ethnicity, deprivation, age, sex, or rurality aggregate gradients.",
             status=subgroup_status,
             claim_status="calibration_readiness_only",
-            blockers=(f"CAL-G-004: {source_registered_blocker if subgroup_status == 'public_validation_source_registered' else optional_holdout_blocker}",)
+            blockers=(f"CAL-G-004: {numeric_ready_blocker if subgroup_status == 'public_validation_numeric_ready' else optional_holdout_blocker}",)
             if strict
             else (),
         ),
@@ -163,7 +165,7 @@ def strict_validation_gate_issues() -> tuple[str, ...]:
 def validation_gate_issues(*, require_all_validation_data: bool) -> tuple[str, ...]:
     issues: list[str] = []
     for row in build_calibration_validation_gate_matrix(strict=True):
-        if row.status in {"public_data_unavailable", "public_validation_source_registered"} and not require_all_validation_data:
+        if row.status in {"public_data_unavailable", "public_validation_source_registered", "public_validation_numeric_ready"} and not require_all_validation_data:
             continue
         if row.status != "passed" and row.gate_id != "CAL-G-007":
             issues.append(f"{row.gate_id}: {row.label} is not passed; claim remains calibration_readiness_only")

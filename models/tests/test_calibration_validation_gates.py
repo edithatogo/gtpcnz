@@ -28,7 +28,7 @@ def test_calibration_validation_gate_matrix_includes_required_gate_ids() -> None
 def test_calibration_validation_gate_matrix_default_mode_is_non_promotional() -> None:
     rows = build_calibration_validation_gate_matrix()
     assert any(row.status == "public_data_unavailable" for row in rows)
-    assert any(row.status == "public_validation_source_registered" for row in rows)
+    assert any(row.status == "public_validation_numeric_ready" for row in rows)
     assert all(row.blockers == () for row in rows)
     assert any(row.claim_status == "public_aggregate_validated" for row in rows)
     assert any(row.claim_status == "calibration_readiness_only" for row in rows)

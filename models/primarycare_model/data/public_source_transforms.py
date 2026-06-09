@@ -45,6 +45,9 @@ class TransformOutput:
     status: str
 
 
+XLSX_NS = {"main": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
+
+
 class _TableAndLinkParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
@@ -300,23 +303,70 @@ def _transform_artifact_manifest(
     return TransformOutput(plan.source_id, output_path, len(rows), "processed_reference_manifest")
 
 
+def _xlsx_shared_strings(archive: zipfile.ZipFile) -> list[str]:
+    root = ElementTree.fromstring(archive.read("xl/sharedStrings.xml"))
+    return [
+        "".join(text.text or "" for text in item.findall(".//main:t", XLSX_NS))
+        for item in root.findall("main:si", XLSX_NS)
+    ]
+
+
+def _cell_column(cell_ref: str) -> str:
+    return re.sub(r"\d+", "", cell_ref)
+
+
+def _column_index(column: str) -> int:
+    index = 0
+    for char in column:
+        index = index * 26 + ord(char.upper()) - ord("A") + 1
+    return index
+
+
+def _cell_value(cell: ElementTree.Element, shared_strings: list[str]) -> str:
+    value = cell.find("main:v", XLSX_NS)
+    if value is None or value.text is None:
+        return ""
+    raw = value.text
+    if cell.attrib.get("t") == "s":
+        return shared_strings[int(raw)]
+    return raw
+
+
+def _worksheet_rows(
+    archive: zipfile.ZipFile,
+    *,
+    sheet_index: int,
+    shared_strings: list[str],
+) -> list[dict[int, str]]:
+    worksheet = ElementTree.fromstring(archive.read(f"xl/worksheets/sheet{sheet_index}.xml"))
+    parsed_rows: list[dict[int, str]] = []
+    for sheet_row in worksheet.findall("main:sheetData/main:row", XLSX_NS):
+        row: dict[int, str] = {}
+        for cell in sheet_row.findall("main:c", XLSX_NS):
+            cell_ref = cell.attrib.get("r", "")
+            if not cell_ref:
+                continue
+            row[_column_index(_cell_column(cell_ref))] = _cell_value(cell, shared_strings)
+        parsed_rows.append(row)
+    return parsed_rows
+
+
 def _xlsx_sheet_metadata(raw_artifact: Path) -> list[dict[str, object]]:
-    namespaces = {"main": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
     with zipfile.ZipFile(raw_artifact) as archive:
         workbook = ElementTree.fromstring(archive.read("xl/workbook.xml"))
         sheet_names = [
             str(sheet.attrib["name"])
-            for sheet in workbook.findall("main:sheets/main:sheet", namespaces)
+            for sheet in workbook.findall("main:sheets/main:sheet", XLSX_NS)
         ]
         rows: list[dict[str, object]] = []
         for index, sheet_name in enumerate(sheet_names, start=1):
             worksheet_path = f"xl/worksheets/sheet{index}.xml"
             worksheet = ElementTree.fromstring(archive.read(worksheet_path))
-            dimension = worksheet.find("main:dimension", namespaces)
-            sheet_rows = worksheet.findall("main:sheetData/main:row", namespaces)
+            dimension = worksheet.find("main:dimension", XLSX_NS)
+            sheet_rows = worksheet.findall("main:sheetData/main:row", XLSX_NS)
             max_columns = 0
             for sheet_row in sheet_rows:
-                max_columns = max(max_columns, len(sheet_row.findall("main:c", namespaces)))
+                max_columns = max(max_columns, len(sheet_row.findall("main:c", XLSX_NS)))
             rows.append(
                 {
                     "source_id": "src_hnz_pho_access_timeseries",
@@ -333,6 +383,87 @@ def _xlsx_sheet_metadata(raw_artifact: Path) -> list[dict[str, object]]:
     return rows
 
 
+def _safe_float(value: str) -> float | None:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def _pho_group_columns(sheet_name: str) -> tuple[tuple[str, int, int, int], ...]:
+    if sheet_name == "Ethnicity":
+        return (
+            ("Total", 2, 3, 4),
+            ("Māori", 5, 6, 7),
+            ("Pacific", 8, 9, 10),
+            ("Asian", 11, 12, 13),
+            ("Other", 14, 15, 16),
+        )
+    if sheet_name == "Gender":
+        return (("Total", 2, 3, 4), ("Female", 5, 6, 7), ("Male", 8, 9, 10))
+    if sheet_name == "Age":
+        return (
+            ("Total", 2, 3, 4),
+            ("0 - 4 Year Olds", 5, 6, 7),
+            ("5 - 14 Year Olds", 8, 9, 10),
+            ("15 - 24 Year Olds", 11, 12, 13),
+            ("25 - 44 Year Olds", 14, 15, 16),
+            ("45 - 64 Year Olds", 17, 18, 19),
+            ("65+ Year Olds", 20, 21, 22),
+        )
+    if sheet_name == "Deprivation":
+        return (
+            ("Total", 2, 3, 4),
+            ("NZ Dep 1 - 2", 5, 6, 7),
+            ("NZ Dep 3 - 4", 8, 9, 10),
+            ("NZ Dep 5 - 6", 11, 12, 13),
+            ("NZ Dep 7 - 8", 14, 15, 16),
+            ("NZ Dep 9 - 10 (Highly Deprived)", 17, 18, 19),
+        )
+    return ()
+
+
+def _extract_pho_access_numeric_rows(raw_artifact: Path) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    raw_hash = _sha256(raw_artifact)
+    sheet_names = ("Ethnicity", "Gender", "Age", "Deprivation")
+    with zipfile.ZipFile(raw_artifact) as archive:
+        shared_strings = _xlsx_shared_strings(archive)
+        for sheet_index, sheet_name in enumerate(sheet_names, start=1):
+            worksheet_rows = _worksheet_rows(archive, sheet_index=sheet_index, shared_strings=shared_strings)
+            for worksheet_row in worksheet_rows[5:]:
+                district = worksheet_row.get(1, "").strip()
+                if not district:
+                    continue
+                for group_name, enrolled_col, population_col, rate_col in _pho_group_columns(sheet_name):
+                    enrolled = _safe_float(worksheet_row.get(enrolled_col, ""))
+                    population = _safe_float(worksheet_row.get(population_col, ""))
+                    reported_rate = _safe_float(worksheet_row.get(rate_col, ""))
+                    if enrolled is None or population is None or reported_rate is None or population <= 0:
+                        continue
+                    calculated_rate = enrolled / population
+                    rows.append(
+                        {
+                            "source_id": "src_hnz_pho_access_timeseries",
+                            "raw_artifact_sha256": raw_hash,
+                            "workbook_artifact": raw_artifact.name,
+                            "period": "2025-Q4",
+                            "sheet_name": sheet_name,
+                            "district": district,
+                            "stratifier": sheet_name.lower(),
+                            "group": group_name,
+                            "enrolled_count": round(enrolled, 6),
+                            "population_count": round(population, 6),
+                            "reported_coverage_rate": round(reported_rate, 12),
+                            "calculated_coverage_rate": round(calculated_rate, 12),
+                            "absolute_rate_difference": round(abs(calculated_rate - reported_rate), 12),
+                            "validation_use": _validation_use_for_sheet(sheet_name),
+                            "claim_boundary": "public numeric validation extract only; not a passed model validation result",
+                        }
+                    )
+    return rows
+
+
 def _validation_use_for_sheet(sheet_name: str) -> str:
     lower = sheet_name.lower()
     if "ethnicity" in lower or "deprivation" in lower:
@@ -345,10 +476,11 @@ def _validation_use_for_sheet(sheet_name: str) -> str:
 def _transform_hnz_pho_access_timeseries(
     plan: PublicSourceRetrievalPlan, raw_artifact: Path, output_path: Path
 ) -> TransformOutput:
-    rows = _xlsx_sheet_metadata(raw_artifact)
+    metadata_rows = _xlsx_sheet_metadata(raw_artifact)
+    metadata_path = output_path.parent / "pho_access_workbook_metadata.csv"
     _write_csv(
-        output_path,
-        rows,
+        metadata_path,
+        metadata_rows,
         [
             "source_id",
             "raw_artifact_sha256",
@@ -361,14 +493,36 @@ def _transform_hnz_pho_access_timeseries(
             "claim_boundary",
         ],
     )
+    rows = _extract_pho_access_numeric_rows(raw_artifact)
+    _write_csv(
+        output_path,
+        rows,
+        [
+            "source_id",
+            "raw_artifact_sha256",
+            "workbook_artifact",
+            "period",
+            "sheet_name",
+            "district",
+            "stratifier",
+            "group",
+            "enrolled_count",
+            "population_count",
+            "reported_coverage_rate",
+            "calculated_coverage_rate",
+            "absolute_rate_difference",
+            "validation_use",
+            "claim_boundary",
+        ],
+    )
     _write_metadata(
         output_path,
         source_id=plan.source_id,
         raw_artifact=raw_artifact,
         rows_written=len(rows),
-        note="Public Health NZ PHO access workbook metadata for validation evidence only; no model claim upgrade.",
+        note="Public Health NZ PHO access workbook numeric extract for validation evidence only; no model claim upgrade.",
     )
-    return TransformOutput(plan.source_id, output_path, len(rows), "processed_validation_source_metadata")
+    return TransformOutput(plan.source_id, output_path, len(rows), "processed_validation_numeric_extract")
 
 
 def _transform_nz_health_survey(
