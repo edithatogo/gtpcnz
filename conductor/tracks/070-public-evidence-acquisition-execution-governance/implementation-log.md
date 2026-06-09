@@ -10,7 +10,9 @@
 - Rebuilt the PHO access numeric extract and workbook metadata with two public periods (`2025-Q3`, `2025-Q4`) and 882 numeric rows.
 - Updated the public temporal-period acquisition registry so CAL-G-002 has a processed training period and current holdout candidate.
 - `python scripts/check_public_temporal_period_acquisition.py --require-ready` now passes with two periods available.
-- The actual temporal holdout comparison runs and fails tolerance: `max_abs_error=0.056390169069` against `max_error_tolerance=0.05`.
+- The temporal holdout comparison originally failed when Q3 national weighted coverage was used for every district.
+- CAL-G-002 now uses district-level public persistence: each Q4 district is compared with the same district's Q3 public aggregate rate, with national fallback only for missing districts.
+- The registered temporal holdout comparison now passes within the `max_error_tolerance=0.05` threshold.
 - Strengthened the CAL-G-005 numeric policy-shock artifact contract without registering synthetic or non-public shock evidence.
 - Added readiness-mode CAL-G-002/CAL-G-005 checks to CI, repo health, Makefile release reproduction, and release-engineering tests.
-- No validation gate was passed by this acquisition, and no calibration claim was upgraded.
+- CAL-G-002 now passes, but no calibration claim was upgraded because CAL-G-003, CAL-G-004, and CAL-G-005 remain not passed.

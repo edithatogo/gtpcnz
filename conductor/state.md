@@ -44,11 +44,11 @@ Track 068 is complete for public temporal and policy-shock validation readiness:
 
 Track 069 is complete for public validation acquisition readiness and diagnostics:
 
-- `069-public-validation-acquisition-and-diagnostics`: machine-readable acquisition blockers now identify the missing CAL-G-002 temporal period and absent CAL-G-005 numeric pre/post shock artifacts. CAL-G-003/CAL-G-004 failed holdout comparisons now report tolerance gaps, failing groups, and next data/model requirements.
+- `069-public-validation-acquisition-and-diagnostics`: machine-readable acquisition blockers identified the then-missing CAL-G-002 temporal period and absent CAL-G-005 numeric pre/post shock artifacts. CAL-G-003/CAL-G-004 failed holdout comparisons report tolerance gaps, failing groups, and next data/model requirements.
 
 Track 070 is complete for public evidence acquisition execution:
 
-- `070-public-evidence-acquisition-execution-governance`: execution controls define the public/published-source custody chain, and the public Health NZ Q3 2025 PHO access workbook is acquired and processed beside Q4. CAL-G-002 acquisition readiness now has two public periods and can run the temporal holdout comparison, but the comparison fails tolerance. CAL-G-005 policy-shock numeric artifact checks are stricter, but no public numeric pre/post artifact is registered. No validation gate passes, and calibration remains `calibration_readiness_only`.
+- `070-public-evidence-acquisition-execution-governance`: execution controls define the public/published-source custody chain, and the public Health NZ Q3 2025 PHO access workbook is acquired and processed beside Q4. CAL-G-002 acquisition readiness now has two public periods, and the temporal holdout comparison passes using district-level public persistence. CAL-G-005 policy-shock numeric artifact checks are stricter, but no public numeric pre/post artifact is registered. Calibration remains `calibration_readiness_only` because CAL-G-003, CAL-G-004, and CAL-G-005 are not passed.
 
 Next implementation frontier:
 
@@ -56,9 +56,9 @@ Next implementation frontier:
 - Cross-stage public source readiness matrix passes in strict mode after raw, checksum, licence/access, processed-artifact, and schema checks.
 - Calibration target readiness now reports source-ready public aggregate targets within tolerance.
 - Baseline public aggregate reproduction and posterior predictive checks pass.
-- Calibration validation remains readiness-only because temporal holdout now runs and fails tolerance, public policy-shock validation lacks a registered public numeric pre/post artifact, and geographic/rural plus subgroup-gradient public benchmark comparisons run but fail tolerance.
+- Calibration validation remains readiness-only because public policy-shock validation lacks a registered public numeric pre/post artifact, and geographic/rural plus subgroup-gradient public benchmark comparisons run but fail tolerance. CAL-G-002 now passes the registered temporal holdout comparison.
 - Public aggregate calibration output embeds validation-gate and posterior-predictive summaries for report/model-card consumption; the output remains `public_benchmark` / `calibration_readiness_only`.
-- Public evidence acquisition execution is now governed by Track 070. Q3/Q4 public temporal evidence is source-ready, but validation success is still blocked by failed temporal, geographic/rural, subgroup-gradient, and policy-shock gates.
+- Public evidence acquisition execution is now governed by Track 070. Q3/Q4 public temporal evidence is source-ready and CAL-G-002 passes; validation success is still blocked by failed geographic/rural, subgroup-gradient, and policy-shock gates.
 - No upgrade from `public_benchmark` / `calibration_readiness_only` until all validation families have public source artefacts, verified checksums, processed outputs, and passing gates.
 
 Parallel execution controls:

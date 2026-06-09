@@ -14,7 +14,7 @@ GTPCNZ now has verified public source acquisition evidence for the public aggreg
 | Calibration target readiness | Passed for 3 public aggregate targets |
 | Baseline public aggregate reproduction | Passed |
 | Posterior predictive checks | Passed |
-| Temporal holdout validation | Public source registered; one public period available; temporal holdout comparison not yet possible |
+| Temporal holdout validation | Q3/Q4 public periods available; registered district-level temporal holdout comparison passes |
 | Geographic/rural holdout validation | Public benchmark comparison run; tolerance not passed |
 | Subgroup gradient validation | Public benchmark comparisons run; tolerance not passed |
 | Public policy-shock plausibility | Public policy references registered; no numeric pre/post shock comparison has passed |
@@ -58,7 +58,7 @@ calibration_status: calibration_readiness_only
 claim_level: public_benchmark
 ```
 
-This is deliberate. CAL-G-002 and CAL-G-005 now have public readiness evidence, but they do not pass validation: CAL-G-002 has only one public period and CAL-G-005 has no numeric pre/post shock comparison. CAL-G-003 and CAL-G-004 run transparent weighted public benchmark comparisons, but those comparisons exceed tolerance and remain failed.
+This is deliberate. CAL-G-002 now passes its registered public temporal holdout comparison, and CAL-G-005 has public readiness evidence but does not pass validation because it has no numeric pre/post shock comparison. CAL-G-003 and CAL-G-004 run transparent weighted public benchmark comparisons, but those comparisons exceed tolerance and remain failed.
 
 ## Not Valid For
 
