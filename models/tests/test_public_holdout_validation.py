@@ -26,6 +26,9 @@ def test_public_holdout_gate_statuses_report_failed_comparisons() -> None:
     assert holdout_gate_status("CAL-G-004") == "public_holdout_comparison_failed"
     assert holdout_gate_blockers("CAL-G-003")
     assert holdout_gate_blockers("CAL-G-004")
+    assert "tolerance_gap=" in holdout_gate_blockers("CAL-G-003")[0]
+    assert "failing_groups=" in holdout_gate_blockers("CAL-G-004")[0]
+    assert "next_data_model_requirement=" in holdout_gate_blockers("CAL-G-004")[0]
 
 
 def test_public_holdout_comparison_json_has_claim_boundary() -> None:
@@ -33,6 +36,12 @@ def test_public_holdout_comparison_json_has_claim_boundary() -> None:
 
     assert "calibration_readiness_only" in payload["claim_boundary"]
     assert payload["rows"]
+    failed_rows = [row for row in payload["rows"] if row["status"] == "comparison_failed"]
+    assert failed_rows
+    assert all(row["tolerance_gap"] > 0 for row in failed_rows)
+    assert all(row["failing_groups"] for row in failed_rows)
+    assert all(row["failing_observations"] for row in failed_rows)
+    assert all(row["next_data_model_requirement"] for row in failed_rows)
 
 
 def test_public_holdout_cli_readiness_mode_passes() -> None:
@@ -44,6 +53,9 @@ def test_public_holdout_cli_readiness_mode_passes() -> None:
 
     assert result.returncode == 0, result.stdout + result.stderr
     assert "comparison_failed" in result.stdout
+    assert "tolerance_gap=" in result.stdout
+    assert "failing_groups=" in result.stdout
+    assert "next=" in result.stdout
 
 
 def test_public_holdout_cli_require_pass_fails() -> None:
@@ -55,3 +67,6 @@ def test_public_holdout_cli_require_pass_fails() -> None:
 
     assert result.returncode == 1
     assert "max_abs_error" in result.stderr
+    assert "tolerance_gap=" in result.stderr
+    assert "failing_groups=" in result.stderr
+    assert "next_data_model_requirement=" in result.stderr

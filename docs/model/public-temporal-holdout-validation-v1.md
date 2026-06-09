@@ -15,6 +15,27 @@ train/holdout comparison. The lane therefore reports
 available and the latest-period holdout comparison passes the registered
 tolerance.
 
+## Public Period Acquisition Readiness
+
+CAL-G-002 now also has a machine-readable temporal-period acquisition plan:
+
+- plan: `models/primarycare_model/registries/public/temporal_period_acquisition.public.v1.yaml`
+- checker: `python scripts/check_public_temporal_period_acquisition.py`
+- strict checker: `python scripts/check_public_temporal_period_acquisition.py --require-ready`
+
+The acquisition plan records the local public period already processed
+(`2025-Q4`) and the missing public requirement for a temporal comparison: at
+least one distinct public Health NZ access-to-primary-care workbook period
+before the latest available period. The requirement is deliberately expressed
+as `any_public_period_before_latest_available` because no earlier public
+workbook is currently local in this repository. It is an acquisition target,
+not substituted data.
+
+Default checker mode is readiness-compatible and passes while reporting the
+missing public period requirement. Strict mode fails until enough real public
+periods are locally present and processed. Neither mode upgrades CAL-G-002
+from `calibration_readiness_only`.
+
 Passing CAL-G-002 requires all of the following:
 
 1. The source remains public/published and checksum-backed.

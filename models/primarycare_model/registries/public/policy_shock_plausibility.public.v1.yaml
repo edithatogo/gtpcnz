@@ -8,6 +8,20 @@ policy_shock_evidence:
     shock_definition_status: public_reference_registered
     comparison_status: readiness_only
     comparison_artifact: null
+    numeric_comparison_contract:
+      required_columns:
+        - shock_id
+        - metric_id
+        - pre_period
+        - post_period
+        - pre_value
+        - post_value
+        - observed_delta
+        - observed_direction
+        - modelled_direction
+        - comparison_result
+      readiness_rule: Public numeric pre/post comparison requires a source-ready public artifact with numeric pre_value and post_value fields for this shock_id.
+      pass_rule: CAL-G-005 can pass only when comparison_result is passed for a public pre/post metric and the source is source_ready.
     observed_direction: null
     modelled_direction: null
     tolerance_note: No numeric pre/post shock comparison is registered.
@@ -21,6 +35,20 @@ policy_shock_evidence:
     shock_definition_status: public_reference_registered
     comparison_status: readiness_only
     comparison_artifact: null
+    numeric_comparison_contract:
+      required_columns:
+        - shock_id
+        - metric_id
+        - pre_period
+        - post_period
+        - pre_value
+        - post_value
+        - observed_delta
+        - observed_direction
+        - modelled_direction
+        - comparison_result
+      readiness_rule: Public numeric pre/post comparison requires a source-ready public artifact with numeric pre_value and post_value fields for this shock_id.
+      pass_rule: CAL-G-005 can pass only when comparison_result is passed for a public pre/post metric and the source is source_ready.
     observed_direction: null
     modelled_direction: null
     tolerance_note: No numeric pre/post shock comparison is registered.

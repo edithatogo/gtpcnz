@@ -78,12 +78,13 @@
 | 066 | Public validation numeric comparisons | Complete for readiness-only release | Parse Health NZ PHO access workbook into numeric public aggregate rows and mark CAL-G-003/004 numeric-ready without passing model validation. |
 | 067 | Public holdout comparison scaffold | Complete for readiness-only release | Run transparent public benchmark holdout comparisons and keep CAL-G-003/004 failed until tolerances pass. |
 | 068 | Public temporal and policy-shock validation evidence | Complete for readiness-only release | Register CAL-G-002 and CAL-G-005 public readiness lanes while preserving calibration_readiness_only until comparisons pass. |
+| 069 | Public validation acquisition readiness and diagnostics | Complete for readiness-only release | Add acquisition readiness for missing temporal/shock evidence and diagnostics for failed holdout comparisons without passing gates. |
 
 ## Current priority
 
 1. Keep the public model path public/published-data-only and claim-gated.
 2. Treat tracks 050-063 as complete for the v1.8.1 readiness-only release; do not describe them as empirically calibrated public-source passes.
-3. Keep Track 053 at `calibration_readiness_only` until temporal holdout, geographic/rural holdout, subgroup-gradient, and policy-shock validation gates have public data and pass. Tracks 065-068 register, parse, or compare public evidence for CAL-G-002 through CAL-G-005; readiness evidence and failed comparisons do not pass those gates.
+3. Keep Track 053 at `calibration_readiness_only` until temporal holdout, geographic/rural holdout, subgroup-gradient, and policy-shock validation gates have public data and pass. Tracks 065-069 register, parse, compare, diagnose, or define acquisition blockers for CAL-G-002 through CAL-G-005; readiness evidence and failed comparisons do not pass those gates.
 4. Use `docs/model/public-source-calibration-evidence-v1.md` as the current evidence ledger for source acquisition and calibration status.
 5. Preserve the public claim boundary until empirical gates pass.
 6. Use the v1.8.1 model card, claim-boundary note, parameter tiering and identifiability map when explaining the model.
