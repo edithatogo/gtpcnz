@@ -1,0 +1,9 @@
+{
+  "id": "067",
+  "slug": "public-holdout-comparison-scaffold",
+  "title": "Public holdout comparison scaffold",
+  "status": "complete_readiness_only",
+  "created": "2026-06-09",
+  "contracts": ["CON-CAL-001", "CON-PUBLIC-001"],
+  "claim_boundary": "Transparent public benchmark comparisons only; failed comparisons do not upgrade claims."
+}

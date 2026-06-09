@@ -54,8 +54,8 @@ def test_pho_access_source_is_ready_without_upgrading_validation_claims() -> Non
     assert readiness["src_hnz_pho_access_timeseries"].source_ready
 
     gate_statuses = {row.gate_id: row.status for row in build_calibration_validation_gate_matrix(strict=True)}
-    assert gate_statuses["CAL-G-003"] == "public_validation_numeric_ready"
-    assert gate_statuses["CAL-G-004"] == "public_validation_numeric_ready"
+    assert gate_statuses["CAL-G-003"] == "public_holdout_comparison_failed"
+    assert gate_statuses["CAL-G-004"] == "public_holdout_comparison_failed"
 
     issues = validation_gate_issues(require_all_validation_data=True)
     assert any(issue.startswith("CAL-G-003") for issue in issues)
