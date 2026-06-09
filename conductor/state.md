@@ -26,13 +26,17 @@ Track 064 is complete for the post-readiness public-source evidence slice:
 
 - `064-public-source-calibration-evidence`: public source files, SHA-256 checksums, processed artefacts, strict source readiness, baseline public aggregate reproduction, and PPC evidence are recorded. Calibration remains `calibration_readiness_only` because temporal, geographic/rural, subgroup-gradient, and policy-shock validation families still report public data unavailable.
 
+Track 065 is complete for public validation-source evidence:
+
+- `065-public-validation-source-evidence`: Health NZ PHO access workbook is pinned as public validation-source evidence for CAL-G-003 and CAL-G-004. These gates remain not passed until numeric holdout/gradient comparisons are implemented.
+
 Next implementation frontier:
 
 - Public source acquisition evidence is recorded in `docs/model/public-source-calibration-evidence-v1.md`.
 - Cross-stage public source readiness matrix passes in strict mode after raw, checksum, licence/access, processed-artifact, and schema checks.
 - Calibration target readiness now reports source-ready public aggregate targets within tolerance.
 - Baseline public aggregate reproduction and posterior predictive checks pass.
-- Calibration validation remains readiness-only because temporal holdout, geographic/rural holdout, subgroup gradient, and public policy-shock validation families still report public data unavailable.
+- Calibration validation remains readiness-only because temporal holdout and public policy-shock validation families still report public data unavailable, while geographic/rural and subgroup-gradient gates have source-registered evidence but no passed numeric validation comparison.
 - Public aggregate calibration output embeds validation-gate and posterior-predictive summaries for report/model-card consumption; the output remains `public_benchmark` / `calibration_readiness_only`.
 - No upgrade from `public_benchmark` / `calibration_readiness_only` until the unavailable validation families have public source artefacts, verified checksums, processed outputs, and passing gates.
 

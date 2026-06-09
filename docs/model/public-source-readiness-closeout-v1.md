@@ -6,9 +6,9 @@ Public source acquisition has moved from placeholder readiness into verified pub
 
 | Property | Value |
 |---|---|
-| Public source raw artefacts | 6 of 6 present |
-| Source checksums | 6 of 6 verified SHA-256 values in `sources.public.v1.yaml` |
-| Processed artefacts | 6 of 6 expected processed outputs present |
+| Public source raw artefacts | 7 of 7 present |
+| Source checksums | 7 of 7 verified SHA-256 values in `sources.public.v1.yaml` |
+| Processed artefacts | 7 of 7 expected processed outputs present |
 | Strict source readiness matrix | Passed |
 | Processed schema validation | Passed with `--require-processed` |
 | Calibration target readiness | Passed for three public aggregate targets |
@@ -26,6 +26,7 @@ The public runtime source path now has raw and processed evidence for:
 - Health NZ capitation rates public reference page.
 - Health NZ PHO Services Agreement public PDF.
 - Health NZ primary-care enrolment public data/statistics page.
+- Health NZ PHO access quarterly public workbook.
 - Medical Council workforce survey public report.
 - Ministry of Health New Zealand Health Survey annual update public page.
 - Stats NZ population indicator public page.
@@ -54,7 +55,7 @@ calibration_status: calibration_readiness_only
 claim_level: public_benchmark
 ```
 
-The remaining blocker is no longer source acquisition. The remaining blocker is validation breadth: the temporal holdout, geographic/rural holdout, subgroup gradient, and published policy-shock validation families still report `public_data_unavailable`.
+The remaining blocker is no longer source acquisition. CAL-G-003 and CAL-G-004 now have public validation-source evidence, but no numeric holdout or gradient comparison has passed. CAL-G-002 temporal holdout and CAL-G-005 published policy-shock validation still report `public_data_unavailable`.
 
 ## Claim Boundary
 

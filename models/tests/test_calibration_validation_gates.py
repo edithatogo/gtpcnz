@@ -7,6 +7,7 @@ import sys
 from models.primarycare_model.calibration.calibration_validation_gates import (
     build_calibration_validation_gate_matrix,
     strict_validation_gate_issues,
+    validation_gate_issues,
     validation_gate_matrix_as_json,
 )
 
@@ -27,6 +28,7 @@ def test_calibration_validation_gate_matrix_includes_required_gate_ids() -> None
 def test_calibration_validation_gate_matrix_default_mode_is_non_promotional() -> None:
     rows = build_calibration_validation_gate_matrix()
     assert any(row.status == "public_data_unavailable" for row in rows)
+    assert any(row.status == "public_validation_source_registered" for row in rows)
     assert all(row.blockers == () for row in rows)
     assert any(row.claim_status == "public_aggregate_validated" for row in rows)
     assert any(row.claim_status == "calibration_readiness_only" for row in rows)
@@ -35,6 +37,12 @@ def test_calibration_validation_gate_matrix_default_mode_is_non_promotional() ->
 
 def test_calibration_validation_gate_strict_mode_allows_documented_unavailable_holdouts() -> None:
     assert strict_validation_gate_issues() == ()
+
+
+def test_calibration_validation_gate_require_all_validation_data_blocks_source_registered_gates() -> None:
+    issues = validation_gate_issues(require_all_validation_data=True)
+    assert any("CAL-G-003" in issue for issue in issues)
+    assert any("CAL-G-004" in issue for issue in issues)
 
 
 def test_calibration_validation_gate_json_has_claim_boundary() -> None:
@@ -75,4 +83,4 @@ def test_calibration_validation_gate_cli_empirical_upgrade_mode_fails_until_hold
         capture_output=True,
     )
     assert result.returncode == 1
-    assert "public aggregate holdout dataset" in result.stderr
+    assert "claim remains calibration_readiness_only" in result.stderr

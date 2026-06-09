@@ -1,9 +1,9 @@
 {
   "claim_boundary": "Public/published aggregate source snapshot only; no private, confidential, or patient-level inputs.",
-  "created_at": "2026-06-08T05:35:00.765453+00:00",
+  "created_at": "2026-06-09T04:59:51.222303+00:00",
   "parameter_registry_sha256": "fdb642505004dc8f52e60f3c9ce94e61e982f7a6ab00845e66cc3f2bf87bff8b",
   "snapshot_id": "public-snapshot-v1",
-  "source_registry_sha256": "48123263e2fe988c5bb7bdaa7a5dc3e90dd6d22aee220f1f6d21e2cf73f9a2f6",
+  "source_registry_sha256": "71d5e09a85e9ec94c300eb9cb6905b5d0c28db3692e21737c5fd9d88a196140d",
   "sources": [
     {
       "checksum": "619092f5e14247bd24428720789d12bac0ea9695864817db5d12828f54710170",
@@ -37,6 +37,17 @@
       "source_id": "src_hnz_enrolment",
       "transform_description": "Public primary-care data page downloaded and transformed to a hashed public link/reference extract.",
       "url_or_reference": "https://www.tewhatuora.govt.nz/for-health-professionals/data-and-statistics/primary-care"
+    },
+    {
+      "checksum": "b464fcbd3150354582384c4529075b541b278172a7c0d49d7fbd43e69ea6f4ff",
+      "claim_boundary": "Public aggregate validation evidence only; no patient-level or passed-holdout claim.",
+      "label": "Health NZ PHO enrolment and access quarterly workbook",
+      "licence_status": "public_reference",
+      "public_access_status": "public",
+      "retrieval_date": "2026-06-09",
+      "source_id": "src_hnz_pho_access_timeseries",
+      "transform_description": "Public quarterly PHO access workbook downloaded and transformed to hashed validation-source metadata.",
+      "url_or_reference": "https://www.healthnz.govt.nz/about-us/health-data/data-sets-and-collections/primary-care-data-and-statistics/enrolment-with-a-general-practice-and-primary-health-organisation"
     },
     {
       "checksum": "debfb40a22761bc65695724d84534e926bbdd5bb9e6884d98bb3d5e4dbf17100",

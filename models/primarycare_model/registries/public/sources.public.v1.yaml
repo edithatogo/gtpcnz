@@ -26,6 +26,15 @@ sources:
     checksum: e771fdbc5c1e0721002a4dc8a9416d6a684cfc55389f9ffc3531934f5f1b25c1
     transform_description: Public primary-care data page downloaded and transformed to a hashed public link/reference extract.
     claim_boundary: Aggregate denominator; no patient-level data.
+  - source_id: src_hnz_pho_access_timeseries
+    label: Health NZ PHO enrolment and access quarterly workbook
+    url_or_reference: https://www.healthnz.govt.nz/about-us/health-data/data-sets-and-collections/primary-care-data-and-statistics/enrolment-with-a-general-practice-and-primary-health-organisation
+    retrieval_date: 2026-06-09
+    licence_status: public_reference
+    public_access_status: public
+    checksum: b464fcbd3150354582384c4529075b541b278172a7c0d49d7fbd43e69ea6f4ff
+    transform_description: Public quarterly PHO access workbook downloaded and transformed to hashed validation-source metadata.
+    claim_boundary: Public aggregate validation evidence only; no patient-level or passed-holdout claim.
   - source_id: src_mcnz_workforce
     label: Medical Council workforce survey
     url_or_reference: https://www.mcnz.org.nz/about-us/publications/workforce-survey/
