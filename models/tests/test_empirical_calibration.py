@@ -1,7 +1,6 @@
-from pathlib import Path
-
 import pandas as pd
 
+from models.primarycare_model import empirical_calibration
 from models.primarycare_model.calibration_v150 import DEFAULT_BASELINE, CalibrationParameters, simulate_months
 from models.primarycare_model.empirical_calibration import (
     LinkedCalibrationSummary,
@@ -11,7 +10,7 @@ from models.primarycare_model.empirical_calibration import (
 )
 
 
-def _write_synthetic_linked_inputs(base_dir: Path) -> None:
+def _synthetic_linked_inputs() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     params = CalibrationParameters(
         marginal_supply_response=0.30,
         unmet_need_to_ed_rate=0.25,
@@ -21,9 +20,7 @@ def _write_synthetic_linked_inputs(base_dir: Path) -> None:
         scope_supply_multiplier=0.20,
     )
     monthly = simulate_months(params, DEFAULT_BASELINE, months=30)
-    monthly.to_csv(base_dir / "linked-nz-monthly-observations.csv", index=False)
-
-    pd.DataFrame(
+    geographic = pd.DataFrame(
         {
             "month": [1, 1, 2, 2],
             "locality": ["A", "B", "A", "B"],
@@ -33,9 +30,8 @@ def _write_synthetic_linked_inputs(base_dir: Path) -> None:
             "ambulance_conveyances": [50.0, 62.0, 49.0, 61.0],
             "public_cost": [1_000_000.0, 1_060_000.0, 1_005_000.0, 1_058_000.0],
         }
-    ).to_csv(base_dir / "linked-nz-geographic-observations.csv", index=False)
-
-    pd.DataFrame(
+    )
+    equity = pd.DataFrame(
         {
             "month": [1, 1, 2, 2],
             "equity_group": ["least_deprived", "most_deprived", "least_deprived", "most_deprived"],
@@ -45,9 +41,8 @@ def _write_synthetic_linked_inputs(base_dir: Path) -> None:
             "ambulance_conveyances": [45.0, 70.0, 46.0, 71.0],
             "public_cost": [990_000.0, 1_120_000.0, 995_000.0, 1_130_000.0],
         }
-    ).to_csv(base_dir / "linked-nz-equity-observations.csv", index=False)
-
-    pd.DataFrame(
+    )
+    shocks = pd.DataFrame(
         {
             "shock_month": [15],
             "shock_type": ["scope"],
@@ -55,7 +50,8 @@ def _write_synthetic_linked_inputs(base_dir: Path) -> None:
             "shock_delta": [0.10],
             "expected_direction": [1],
         }
-    ).to_csv(base_dir / "linked-nz-known-shocks.csv", index=False)
+    )
+    return monthly, geographic, equity, shocks
 
 
 def _unsupported_summary(supported_where_valid: bool, available: bool = True) -> LinkedCalibrationSummary:
@@ -78,9 +74,9 @@ def test_load_linked_inputs_returns_empty_for_missing_dir():
     assert shocks.empty
 
 
-def test_empirical_calibration_pipeline_runs_on_synthetic_linked_data(tmp_path: Path):
-    _write_synthetic_linked_inputs(tmp_path)
-    summary = run_empirical_calibration_pipeline(linked_dir=tmp_path)
+def test_empirical_calibration_pipeline_runs_on_synthetic_linked_data(monkeypatch):
+    monkeypatch.setattr(empirical_calibration, "load_linked_inputs", lambda linked_dir=None: _synthetic_linked_inputs())
+    summary = run_empirical_calibration_pipeline(linked_dir="synthetic-linked-fixture")
 
     assert summary.available is True
     assert isinstance(summary.in_sample_score, float)

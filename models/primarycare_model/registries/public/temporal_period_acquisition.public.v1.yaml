@@ -11,17 +11,14 @@ temporal_period_acquisition_plans:
     minimum_distinct_periods: 2
     required_holdout_strategy: latest_public_period
     acquired_public_periods:
+      - period: 2025-Q3
+        role: training
+        raw_artifact: access-to-primary-care-stats-2025-q3.xlsx
+        status: processed_ready
       - period: 2025-Q4
         role: current_holdout_candidate
         raw_artifact: access-to-primary-care-stats-2025-q4.xlsx
         status: processed_ready
-    missing_public_period_requirements:
-      - requirement_id: cal_g_002_training_period_1
-        role: training
-        period_selector: any_public_period_before_latest_available
-        latest_available_period: 2025-Q4
-        expected_raw_artifact_pattern: access-to-primary-care-stats-*.xlsx
-        status: missing_public_file
-        acquisition_method: Acquire a public Health NZ access-to-primary-care workbook for a reporting period earlier than 2025-Q4 from the registered landing page or its public file archive, then rerun the existing source transform.
-    readiness_status: acquisition_plan_ready_missing_public_periods
-    claim_boundary: Machine-readable acquisition plan only; CAL-G-002 remains calibration_readiness_only until at least two public periods are locally processed and the registered temporal holdout comparison passes.
+    missing_public_period_requirements: []
+    readiness_status: ready_for_temporal_holdout
+    claim_boundary: Machine-readable acquisition record only; CAL-G-002 remains calibration_readiness_only until the registered temporal holdout comparison passes.

@@ -62,6 +62,16 @@ def test_calibration_target_readiness_gate_passes() -> None:
     )
     assert result.returncode == 0, result.stdout + result.stderr
 
+
+def test_public_temporal_period_acquisition_gate_passes_in_readiness_mode() -> None:
+    result = subprocess.run(
+        [sys.executable, "scripts/check_public_temporal_period_acquisition.py"],
+        text=True,
+        capture_output=True,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+
+
 def test_calibration_validation_gate_passes() -> None:
     result = subprocess.run(
         [sys.executable, "scripts/check_calibration_validation_gates.py"],
@@ -69,6 +79,16 @@ def test_calibration_validation_gate_passes() -> None:
         capture_output=True,
     )
     assert result.returncode == 0, result.stdout + result.stderr
+
+
+def test_public_policy_shock_plausibility_gate_passes_in_readiness_mode() -> None:
+    result = subprocess.run(
+        [sys.executable, "scripts/check_public_policy_shock_plausibility.py"],
+        text=True,
+        capture_output=True,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+
 
 def test_posterior_predictive_check_gate_passes() -> None:
     result = subprocess.run(

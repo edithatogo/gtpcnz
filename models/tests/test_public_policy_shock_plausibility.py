@@ -107,3 +107,51 @@ def test_numeric_comparison_artifact_can_be_numeric_ready() -> None:
     assert readiness.status == "numeric_pre_post_ready"
     assert readiness.rows_checked == 1
     assert readiness.issues == ()
+
+
+def test_numeric_comparison_artifact_requires_delta_to_match_values() -> None:
+    readiness = _numeric_comparison_readiness(
+        shock_id="shock-a",
+        comparison_artifact="tests/fixtures/policy_shock_mismatched_delta_comparison.csv",
+        contract=NumericComparisonContract(
+            required_columns=REQUIRED_NUMERIC_COMPARISON_COLUMNS,
+            readiness_rule="test readiness",
+            pass_rule="test pass",
+        ),
+    )
+
+    assert readiness.status == "artifact_invalid"
+    assert readiness.rows_checked == 1
+    assert any("observed_delta must equal post_value - pre_value" in issue for issue in readiness.issues)
+
+
+def test_numeric_comparison_artifact_requires_direction_to_match_delta() -> None:
+    readiness = _numeric_comparison_readiness(
+        shock_id="shock-a",
+        comparison_artifact="tests/fixtures/policy_shock_mismatched_direction_comparison.csv",
+        contract=NumericComparisonContract(
+            required_columns=REQUIRED_NUMERIC_COMPARISON_COLUMNS,
+            readiness_rule="test readiness",
+            pass_rule="test pass",
+        ),
+    )
+
+    assert readiness.status == "artifact_invalid"
+    assert readiness.rows_checked == 1
+    assert any("observed_direction must match observed_delta" in issue for issue in readiness.issues)
+
+
+def test_passed_numeric_comparison_requires_direction_agreement() -> None:
+    readiness = _numeric_comparison_readiness(
+        shock_id="shock-a",
+        comparison_artifact="tests/fixtures/policy_shock_passed_direction_disagreement_comparison.csv",
+        contract=NumericComparisonContract(
+            required_columns=REQUIRED_NUMERIC_COMPARISON_COLUMNS,
+            readiness_rule="test readiness",
+            pass_rule="test pass",
+        ),
+    )
+
+    assert readiness.status == "artifact_invalid"
+    assert readiness.rows_checked == 1
+    assert any("comparison_result=passed requires observed_direction to match modelled_direction" in issue for issue in readiness.issues)

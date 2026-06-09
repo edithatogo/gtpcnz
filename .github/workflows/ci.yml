@@ -62,6 +62,9 @@ jobs:
       - name: Check transformed public input schemas
         run: uv run python scripts/check_transformed_schemas.py
 
+      - name: Check public temporal period acquisition readiness
+        run: uv run python scripts/check_public_temporal_period_acquisition.py
+
       - name: Check version consistency
         run: uv run python scripts/check_version_consistency.py
 
@@ -73,6 +76,9 @@ jobs:
 
       - name: Check calibration validation gates
         run: uv run python scripts/check_calibration_validation_gates.py
+
+      - name: Check public policy-shock plausibility readiness
+        run: uv run python scripts/check_public_policy_shock_plausibility.py
 
       - name: Check posterior predictive readiness
         run: uv run python scripts/check_posterior_predictive_checks.py

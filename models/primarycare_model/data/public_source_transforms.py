@@ -19,6 +19,7 @@ from models.primarycare_model.data.public_source_snapshot import (
     ROOT,
     processed_artifact_sha256,
     sha256_file,
+    sha256_many,
     source_files,
 )
 
@@ -122,13 +123,29 @@ def _write_csv(path: Path, rows: list[dict[str, object]], fieldnames: list[str])
     path.with_suffix(path.suffix + ".hash").write_text(processed_artifact_sha256(path) + "\n", encoding="utf-8")
 
 
-def _write_metadata(path: Path, *, source_id: str, raw_artifact: Path, rows_written: int, note: str) -> None:
+def _write_metadata(
+    path: Path,
+    *,
+    source_id: str,
+    raw_artifact: Path,
+    rows_written: int,
+    note: str,
+    raw_artifacts: tuple[Path, ...] | None = None,
+) -> None:
+    artifact_set = raw_artifacts or (raw_artifact,)
+    artifact_lines: tuple[str, ...] = ()
+    if len(artifact_set) > 1:
+        artifact_lines = (
+            f"raw_artifacts: {', '.join(_relative(artifact) for artifact in artifact_set)}",
+            f"raw_artifacts_sha256: {sha256_many(artifact_set)}",
+        )
     metadata = "\n".join(
         (
             f"source_id: {source_id}",
             f"processed_artifact: {_relative(path)}",
             f"raw_artifact: {_relative(raw_artifact)}",
             f"raw_artifact_sha256: {_sha256(raw_artifact)}",
+            *artifact_lines,
             f"rows_written: {rows_written}",
             "claim_level: public_benchmark",
             "calibration_status: calibration_readiness_only",
@@ -159,6 +176,27 @@ def _select_raw_artifact(plan: PublicSourceRetrievalPlan) -> Path:
     if not files:
         raise FileNotFoundError(f"{plan.source_id}: no raw public source files under {plan.expected_raw_dir}")
     return files[0]
+
+
+def _pho_access_period_from_artifact(raw_artifact: Path) -> str:
+    match = re.search(r"access-to-primary-care-stats-(?P<year>\d{4})-q(?P<quarter>[1-4])", raw_artifact.stem.lower())
+    if not match:
+        raise ValueError(
+            f"src_hnz_pho_access_timeseries: cannot derive public period from workbook name {raw_artifact.name}"
+        )
+    return f"{match.group('year')}-Q{match.group('quarter')}"
+
+
+def _select_pho_access_workbooks(plan: PublicSourceRetrievalPlan, raw_artifact: Path) -> tuple[Path, ...]:
+    raw_dir = ROOT / plan.expected_raw_dir
+    workbooks = tuple(
+        path
+        for path in source_files(raw_dir)
+        if path.suffix.lower() == ".xlsx" and path.stem.lower().startswith("access-to-primary-care-stats-")
+    )
+    if not workbooks:
+        workbooks = (raw_artifact,)
+    return tuple(sorted(workbooks, key=lambda path: (_pho_access_period_from_artifact(path), path.name)))
 
 
 def _transform_statsnz_population(
@@ -351,7 +389,7 @@ def _worksheet_rows(
     return parsed_rows
 
 
-def _xlsx_sheet_metadata(raw_artifact: Path) -> list[dict[str, object]]:
+def _xlsx_sheet_metadata(raw_artifact: Path, *, period: str | None = None) -> list[dict[str, object]]:
     with zipfile.ZipFile(raw_artifact) as archive:
         workbook = ElementTree.fromstring(archive.read("xl/workbook.xml"))
         sheet_names = [
@@ -372,6 +410,7 @@ def _xlsx_sheet_metadata(raw_artifact: Path) -> list[dict[str, object]]:
                     "source_id": "src_hnz_pho_access_timeseries",
                     "raw_artifact_sha256": _sha256(raw_artifact),
                     "workbook_artifact": raw_artifact.name,
+                    "period": period or "",
                     "sheet_name": sheet_name,
                     "dimension": dimension.attrib.get("ref", "") if dimension is not None else "",
                     "row_count": len(sheet_rows),
@@ -423,9 +462,10 @@ def _pho_group_columns(sheet_name: str) -> tuple[tuple[str, int, int, int], ...]
     return ()
 
 
-def _extract_pho_access_numeric_rows(raw_artifact: Path) -> list[dict[str, object]]:
+def _extract_pho_access_numeric_rows(raw_artifact: Path, *, period: str | None = None) -> list[dict[str, object]]:
     rows: list[dict[str, object]] = []
     raw_hash = _sha256(raw_artifact)
+    workbook_period = period or _pho_access_period_from_artifact(raw_artifact)
     sheet_names = ("Ethnicity", "Gender", "Age", "Deprivation")
     with zipfile.ZipFile(raw_artifact) as archive:
         shared_strings = _xlsx_shared_strings(archive)
@@ -447,7 +487,7 @@ def _extract_pho_access_numeric_rows(raw_artifact: Path) -> list[dict[str, objec
                             "source_id": "src_hnz_pho_access_timeseries",
                             "raw_artifact_sha256": raw_hash,
                             "workbook_artifact": raw_artifact.name,
-                            "period": "2025-Q4",
+                            "period": workbook_period,
                             "sheet_name": sheet_name,
                             "district": district,
                             "stratifier": sheet_name.lower(),
@@ -476,7 +516,13 @@ def _validation_use_for_sheet(sheet_name: str) -> str:
 def _transform_hnz_pho_access_timeseries(
     plan: PublicSourceRetrievalPlan, raw_artifact: Path, output_path: Path
 ) -> TransformOutput:
-    metadata_rows = _xlsx_sheet_metadata(raw_artifact)
+    workbooks = _select_pho_access_workbooks(plan, raw_artifact)
+    metadata_rows: list[dict[str, object]] = []
+    rows: list[dict[str, object]] = []
+    for workbook in workbooks:
+        period = _pho_access_period_from_artifact(workbook)
+        metadata_rows.extend(_xlsx_sheet_metadata(workbook, period=period))
+        rows.extend(_extract_pho_access_numeric_rows(workbook, period=period))
     metadata_path = output_path.parent / "pho_access_workbook_metadata.csv"
     _write_csv(
         metadata_path,
@@ -485,6 +531,7 @@ def _transform_hnz_pho_access_timeseries(
             "source_id",
             "raw_artifact_sha256",
             "workbook_artifact",
+            "period",
             "sheet_name",
             "dimension",
             "row_count",
@@ -493,7 +540,6 @@ def _transform_hnz_pho_access_timeseries(
             "claim_boundary",
         ],
     )
-    rows = _extract_pho_access_numeric_rows(raw_artifact)
     _write_csv(
         output_path,
         rows,
@@ -520,6 +566,7 @@ def _transform_hnz_pho_access_timeseries(
         source_id=plan.source_id,
         raw_artifact=raw_artifact,
         rows_written=len(rows),
+        raw_artifacts=workbooks,
         note="Public Health NZ PHO access workbook numeric extract for validation evidence only; no model claim upgrade.",
     )
     return TransformOutput(plan.source_id, output_path, len(rows), "processed_validation_numeric_extract")

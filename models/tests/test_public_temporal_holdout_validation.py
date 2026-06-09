@@ -57,18 +57,20 @@ def test_current_public_temporal_holdout_is_registered_but_not_passed() -> None:
     assert len(comparisons) == 1
     comparison = comparisons[0]
     assert comparison.gate_id == "CAL-G-002"
-    assert comparison.status == "public_validation_source_registered"
-    assert comparison.periods_available == ("2025-Q4",)
-    assert comparison.holdout_period is None
+    assert comparison.status == "temporal_comparison_failed"
+    assert comparison.periods_available == ("2025-Q3", "2025-Q4")
+    assert comparison.training_periods == ("2025-Q3",)
+    assert comparison.holdout_period == "2025-Q4"
+    assert comparison.max_absolute_error > comparison.max_error_tolerance
     assert comparison.claim_status == "calibration_readiness_only"
 
 
 def test_temporal_holdout_gate_matrix_wires_cal_g_002_status() -> None:
     rows = {row.gate_id: row for row in build_calibration_validation_gate_matrix(strict=True)}
 
-    assert rows["CAL-G-002"].status == "public_validation_source_registered"
+    assert rows["CAL-G-002"].status == "public_holdout_comparison_failed"
     assert rows["CAL-G-002"].claim_status == "calibration_readiness_only"
-    assert temporal_holdout_gate_status("CAL-G-002") == "public_validation_source_registered"
+    assert temporal_holdout_gate_status("CAL-G-002") == "public_holdout_comparison_failed"
     assert temporal_holdout_gate_blockers("CAL-G-002")
 
 
@@ -99,7 +101,7 @@ def test_public_temporal_holdout_cli_readiness_mode_passes() -> None:
 
     assert result.returncode == 0, result.stdout + result.stderr
     assert "CAL-G-002" in result.stdout
-    assert "public_validation_source_registered" in result.stdout
+    assert "temporal_comparison_failed" in result.stdout
 
 
 def test_public_temporal_holdout_cli_require_pass_fails() -> None:
@@ -110,4 +112,4 @@ def test_public_temporal_holdout_cli_require_pass_fails() -> None:
     )
 
     assert result.returncode == 1
-    assert "at least 2 are required" in result.stderr
+    assert "max_abs_error" in result.stderr
