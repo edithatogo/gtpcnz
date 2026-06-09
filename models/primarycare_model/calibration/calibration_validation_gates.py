@@ -7,7 +7,7 @@ import csv
 import json
 import sys
 from dataclasses import asdict, dataclass
-from typing import Literal
+from typing import Literal, cast
 
 from models.primarycare_model.calibration.calibration_target_readiness import (
     build_calibration_target_readiness_matrix,
@@ -15,6 +15,14 @@ from models.primarycare_model.calibration.calibration_target_readiness import (
 from models.primarycare_model.calibration.public_holdout_validation import (
     holdout_gate_blockers,
     holdout_gate_status,
+)
+from models.primarycare_model.calibration.public_policy_shock_plausibility import (
+    policy_shock_gate_blockers,
+    policy_shock_gate_status,
+)
+from models.primarycare_model.calibration.public_temporal_holdout_validation import (
+    temporal_holdout_gate_blockers,
+    temporal_holdout_gate_status,
 )
 from models.primarycare_model.data.public_source_snapshot import ROOT
 
@@ -86,6 +94,7 @@ def build_calibration_validation_gate_matrix(*, strict: bool = False) -> tuple[C
     baseline_status: ValidationGateStatus = "passed" if not target_blockers else "calibration_readiness_only"
     ppc_status: ValidationGateStatus = baseline_status
     optional_holdout_blocker = "public aggregate holdout dataset not yet registered as source_ready"
+    temporal_status = cast(ValidationGateStatus, temporal_holdout_gate_status("CAL-G-002"))
     subgroup_status: ValidationGateStatus = (
         holdout_gate_status("CAL-G-004")
         if _has_pho_access_numeric_validation_extract("subgroup_gradient_validation_candidate")
@@ -116,9 +125,9 @@ def build_calibration_validation_gate_matrix(*, strict: bool = False) -> tuple[C
             gate_family="temporal_holdout_validation",
             label="Temporal holdout validation where public time series permit",
             public_data_requirement="Public time-series extracts with held-out periods and verified checksums.",
-            status="public_data_unavailable",
+            status=temporal_status,
             claim_status="calibration_readiness_only",
-            blockers=(f"CAL-G-002: {optional_holdout_blocker}",) if strict else (),
+            blockers=temporal_holdout_gate_blockers("CAL-G-002") if strict else (),
         ),
         CalibrationValidationGateRow(
             gate_id="CAL-G-003",
@@ -143,9 +152,9 @@ def build_calibration_validation_gate_matrix(*, strict: bool = False) -> tuple[C
             gate_family="public_policy_shock_plausibility",
             label="Known public policy shock plausibility where published shock data permit",
             public_data_requirement="Published aggregate pre/post policy-shock data and documented shock definition.",
-            status="public_data_unavailable",
+            status=policy_shock_gate_status(),
             claim_status="calibration_readiness_only",
-            blockers=(f"CAL-G-005: {optional_holdout_blocker}",) if strict else (),
+            blockers=policy_shock_gate_blockers() if strict else (),
         ),
         CalibrationValidationGateRow(
             gate_id="CAL-G-006",

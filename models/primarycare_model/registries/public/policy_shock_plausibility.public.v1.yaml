@@ -1,0 +1,27 @@
+policy_shock_evidence:
+  - shock_id: public_capitation_schedule_update_reference
+    gate_id: CAL-G-005
+    source_id: src_hnz_capitation_schedule
+    label: Published capitation schedule update reference
+    published_policy_reference: Health NZ public capitation rates page
+    public_access_status: public
+    shock_definition_status: public_reference_registered
+    comparison_status: readiness_only
+    comparison_artifact: null
+    observed_direction: null
+    modelled_direction: null
+    tolerance_note: No numeric pre/post shock comparison is registered.
+    claim_boundary: Public policy-shock plausibility evidence only; no causal, effect-size, fiscal, hospital-demand, or implementation-impact claim.
+  - shock_id: public_pho_services_agreement_schedule_reference
+    gate_id: CAL-G-005
+    source_id: src_pho_services_agreement
+    label: Published PHO Services Agreement schedule reference
+    published_policy_reference: Public PHO Services Agreement schedule
+    public_access_status: public
+    shock_definition_status: public_reference_registered
+    comparison_status: readiness_only
+    comparison_artifact: null
+    observed_direction: null
+    modelled_direction: null
+    tolerance_note: No numeric pre/post shock comparison is registered.
+    claim_boundary: Public policy-shock plausibility evidence only; no causal, effect-size, fiscal, hospital-demand, or implementation-impact claim.

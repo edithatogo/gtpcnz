@@ -24,7 +24,7 @@ Tracks 050-063 are complete for the v1.8.1 readiness-only release:
 
 Track 064 is complete for the post-readiness public-source evidence slice:
 
-- `064-public-source-calibration-evidence`: public source files, SHA-256 checksums, processed artefacts, strict source readiness, baseline public aggregate reproduction, and PPC evidence are recorded. Calibration remains `calibration_readiness_only` because temporal, geographic/rural, subgroup-gradient, and policy-shock validation families still report public data unavailable.
+- `064-public-source-calibration-evidence`: public source files, SHA-256 checksums, processed artefacts, strict source readiness, baseline public aggregate reproduction, and PPC evidence are recorded. Calibration remains `calibration_readiness_only` because temporal, geographic/rural, subgroup-gradient, and policy-shock validation families do not all have passing public validation comparisons.
 
 Track 065 is complete for public validation-source evidence:
 
@@ -44,9 +44,9 @@ Next implementation frontier:
 - Cross-stage public source readiness matrix passes in strict mode after raw, checksum, licence/access, processed-artifact, and schema checks.
 - Calibration target readiness now reports source-ready public aggregate targets within tolerance.
 - Baseline public aggregate reproduction and posterior predictive checks pass.
-- Calibration validation remains readiness-only because temporal holdout and public policy-shock validation families still report public data unavailable, while geographic/rural and subgroup-gradient public benchmark comparisons run but fail tolerance.
+- Calibration validation remains readiness-only because temporal holdout and public policy-shock validation families are registered as public readiness evidence without passing comparisons, while geographic/rural and subgroup-gradient public benchmark comparisons run but fail tolerance.
 - Public aggregate calibration output embeds validation-gate and posterior-predictive summaries for report/model-card consumption; the output remains `public_benchmark` / `calibration_readiness_only`.
-- No upgrade from `public_benchmark` / `calibration_readiness_only` until the unavailable validation families have public source artefacts, verified checksums, processed outputs, and passing gates.
+- No upgrade from `public_benchmark` / `calibration_readiness_only` until all validation families have public source artefacts, verified checksums, processed outputs, and passing gates.
 
 Parallel execution controls:
 
