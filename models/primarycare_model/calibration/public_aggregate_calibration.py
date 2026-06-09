@@ -42,16 +42,23 @@ def run_public_aggregate_calibration() -> dict[str, object]:
     all_validation_gates_passed = all(row["status"] == "passed" for row in validation_gates)
     posterior_predictive = posterior_predictive_checks(strict=False)
     all_passed = all_targets_passed and all_validation_gates_passed
+    interpretation_note = (
+        "Public aggregate calibration passed registered public target and validation gates; "
+        "not-valid-for warnings still exclude precise fiscal, ED, hospital-demand, workforce, "
+        "implementation-impact, and causal claims."
+        if all_passed
+        else (
+            "Public aggregate calibration remains readiness-only until source-ready public targets, "
+            "validation gates, and posterior predictive checks pass."
+        )
+    )
     return {
         "calibration_status": "public_aggregate_validated" if all_passed else "calibration_readiness_only",
         "claim_level": "empirically_supported_if_gated" if all_passed else "public_benchmark",
         "checks": checks,
         "validation_gates": validation_gates,
         "posterior_predictive_checks": posterior_predictive,
-        "interpretation_note": (
-            "Public aggregate calibration remains readiness-only until source-ready public targets, "
-            "validation gates, and posterior predictive checks pass."
-        ),
+        "interpretation_note": interpretation_note,
         "not_valid_for": [
             "precise fiscal savings",
             "ED reductions",

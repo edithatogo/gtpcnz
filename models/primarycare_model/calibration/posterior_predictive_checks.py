@@ -74,6 +74,16 @@ def posterior_predictive_checks(*, strict: bool = False) -> dict[str, object]:
     gate_status = _ppc_gate_status()
     ppc_status = "passed" if gate_status == "passed" and not failed_targets else "calibration_readiness_only"
     blockers = validation_gate_issues(require_all_validation_data=False) if strict else ()
+    interpretation_note = (
+        "Public aggregate posterior predictive checks passed for registered public targets; "
+        "not-valid-for warnings still exclude precise fiscal, ED, hospital-demand, workforce, "
+        "implementation-impact, and causal claims."
+        if ppc_status == "passed"
+        else (
+            "Public aggregate posterior predictive checks remain readiness-only until source-ready "
+            "public targets and reproducible predictive draws pass validation gates."
+        )
+    )
     return {
         "ppc_gate_id": "CAL-G-006",
         "ppc_status": ppc_status,
@@ -82,10 +92,7 @@ def posterior_predictive_checks(*, strict: bool = False) -> dict[str, object]:
         "target_rows": [row.to_json_dict() for row in target_rows],
         "not_valid_for": list(NOT_VALID_FOR),
         "blockers": list(blockers),
-        "interpretation_note": (
-            "Public aggregate posterior predictive checks remain readiness-only until source-ready "
-            "public targets and reproducible predictive draws pass validation gates."
-        ),
+        "interpretation_note": interpretation_note,
     }
 
 

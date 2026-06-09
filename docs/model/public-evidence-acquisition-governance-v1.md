@@ -31,12 +31,12 @@ Both raw workbooks are checked into `data/public_raw/src_hnz_pho_access_timeseri
 
 The deterministic transform processes all matching `access-to-primary-care-stats-*.xlsx` workbooks and derives the public reporting period from each filename. The processed numeric extract contains `2025-Q3` and `2025-Q4` rows, and `python scripts/check_public_temporal_period_acquisition.py --require-ready` passes.
 
-The temporal holdout comparison now passes using district-level public persistence: Q3 is the training period, Q4 is the holdout period, and each district is compared with its own Q3 public aggregate rate. The claim boundary remains `calibration_readiness_only` because other validation families still fail or lack numeric evidence.
+The temporal holdout comparison now passes using district-level public persistence: Q3 is the training period, Q4 is the holdout period, and each district is compared with its own Q3 public aggregate rate.
 
-CAL-G-005 numeric policy-shock evidence remains readiness-only. The comparison artifact contract is stricter, but no public numeric pre/post artifact is registered.
+CAL-G-003 and CAL-G-004 now pass using the same public Q3/Q4 workbook family at district and district-subgroup grain. CAL-G-005 now passes a bounded directional public policy-condition comparison derived from the checked-in Health NZ capitation schedule extract. The PHO Services Agreement PDF remains registered as public `reference_only` evidence until bounded table extraction is implemented.
 
 ## Claim Boundary
 
-The current public model remains `public_benchmark` / `calibration_readiness_only`. Track 070 does not change that status.
+The current public aggregate calibration lane now reports `public_aggregate_validated` / `empirically_supported_if_gated` because all registered public validation gates pass. Track 070 does not support precise impact claims.
 
-Any future upgrade requires public source artefacts, verified checksums, processed outputs, schema-valid rows, and passing validation gates for the relevant validation families. Readiness evidence, acquisition governance, or failed comparisons do not support claims of precise fiscal savings, ED reductions, hospital-demand reductions, workforce effects, implementation impacts, or causal effects.
+Any future upgrade beyond aggregate validation requires claim-specific public source artefacts, verified checksums, processed outputs, schema-valid rows, and passing validation gates for the relevant claim families. Readiness evidence, acquisition governance, or aggregate validation alone do not support claims of precise fiscal savings, ED reductions, hospital-demand reductions, workforce effects, implementation impacts, or causal effects.

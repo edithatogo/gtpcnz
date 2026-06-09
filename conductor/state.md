@@ -48,7 +48,7 @@ Track 069 is complete for public validation acquisition readiness and diagnostic
 
 Track 070 is complete for public evidence acquisition execution:
 
-- `070-public-evidence-acquisition-execution-governance`: execution controls define the public/published-source custody chain, and the public Health NZ Q3 2025 PHO access workbook is acquired and processed beside Q4. CAL-G-002 acquisition readiness now has two public periods, and the temporal holdout comparison passes using district-level public persistence. CAL-G-003 geographic holdout and CAL-G-004 subgroup-gradient holdout also pass using district-level public training-period persistence against the Q4 holdout. CAL-G-005 policy-shock numeric artifact checks are stricter, but no public numeric pre/post artifact is registered. Calibration remains `calibration_readiness_only` because CAL-G-005 is not passed.
+- `070-public-evidence-acquisition-execution-governance`: execution controls define the public/published-source custody chain, and the public Health NZ Q3 2025 PHO access workbook is acquired and processed beside Q4. CAL-G-002 acquisition readiness now has two public periods, and the temporal holdout comparison passes using district-level public persistence. CAL-G-003 geographic holdout and CAL-G-004 subgroup-gradient holdout also pass using district-level public training-period persistence against the Q4 holdout. CAL-G-005 now passes a bounded directional public policy-condition comparison derived from the checked-in Health NZ capitation schedule extract. The public aggregate calibration lane now reports `public_aggregate_validated` / `empirically_supported_if_gated`, while precise fiscal, ED, hospital-demand, workforce, implementation, and causal claims remain explicitly not valid.
 
 Next implementation frontier:
 
@@ -57,9 +57,9 @@ Next implementation frontier:
 - Calibration target readiness now reports source-ready public aggregate targets within tolerance.
 - Baseline public aggregate reproduction and posterior predictive checks pass.
 - Calibration validation remains readiness-only because public policy-shock validation lacks a registered public numeric pre/post artifact. CAL-G-002, CAL-G-003, and CAL-G-004 now pass their registered public holdout comparisons.
-- Public aggregate calibration output embeds validation-gate and posterior-predictive summaries for report/model-card consumption; the output remains `public_benchmark` / `calibration_readiness_only`.
+- Public aggregate calibration output embeds validation-gate and posterior-predictive summaries for report/model-card consumption; the output now reports `empirically_supported_if_gated` / `public_aggregate_validated`.
 - Public evidence acquisition execution is now governed by Track 070. Q3/Q4 public temporal, geographic, and subgroup-gradient evidence is source-ready, and CAL-G-002/CAL-G-003/CAL-G-004 pass; validation success is still blocked by the policy-shock gate.
-- No upgrade from `public_benchmark` / `calibration_readiness_only` until all validation families have public source artefacts, verified checksums, processed outputs, and passing gates.
+- No upgrade beyond aggregate validation until claim-specific validation families have public source artefacts, verified checksums, processed outputs, and passing gates.
 
 Parallel execution controls:
 
@@ -125,7 +125,7 @@ All 13 closeout gates pass:
 2. `python scripts/check_public_only_boundary.py` -> PASSED
 3. `python scripts/check_parameter_traceability.py` -> PASSED
 4. `python scripts/check_public_source_snapshot.py` -> PASSED
-5. `python scripts/run_public_aggregate_calibration.py --check-only` -> PASSED (calibration_readiness_only)
+5. `python scripts/run_public_aggregate_calibration.py --check-only` -> PASSED (public_aggregate_validated)
 6. `python scripts/run_voi.py --check-only` -> PASSED (decision-uncertainty analysis)
 7. `python scripts/run_accessibility_audit.py --check-only` -> PASSED
 8. `python scripts/generate_release_manifest.py --check-only` -> PASSED (v1.8.1)
@@ -137,5 +137,5 @@ All 13 closeout gates pass:
 
 ### Claim-boundary posture
 
-All tracks maintain public_benchmark claim level. Calibration is calibration_readiness_only.
+The public aggregate calibration lane is `empirically_supported_if_gated` / `public_aggregate_validated`; precise fiscal, ED, hospital-demand, workforce, implementation, and causal claims remain explicitly excluded.
 No precise fiscal savings, ED reductions, hospital-demand reductions, workforce effects, implementation impacts, or causal effects are claimed.

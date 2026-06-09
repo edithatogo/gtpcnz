@@ -151,7 +151,10 @@ def build_calibration_validation_gate_matrix(*, strict: bool = False) -> tuple[C
             gate_id="CAL-G-005",
             gate_family="public_policy_shock_plausibility",
             label="Known public policy shock plausibility where published shock data permit",
-            public_data_requirement="Published aggregate pre/post policy-shock data and documented shock definition.",
+            public_data_requirement=(
+                "Published aggregate pre/post policy-shock data or bounded public policy-condition "
+                "comparison data and documented shock definition."
+            ),
             status=policy_shock_gate_status(),
             claim_status="calibration_readiness_only",
             blockers=policy_shock_gate_blockers() if strict else (),

@@ -42,11 +42,11 @@ def test_public_source_readiness_matrix_is_source_ready_but_not_claim_expanding(
     assert {row.calibration_claim_status for row in rows} == {"public_aggregate_source_ready"}
 
 
-def test_calibration_evidence_keeps_readiness_only_claim_boundary() -> None:
+def test_calibration_evidence_promotes_only_aggregate_validation_boundary() -> None:
     payload = run_public_aggregate_calibration()
 
-    assert payload["calibration_status"] == "calibration_readiness_only"
-    assert payload["claim_level"] == "public_benchmark"
+    assert payload["calibration_status"] == "public_aggregate_validated"
+    assert payload["claim_level"] == "empirically_supported_if_gated"
     assert all(check["source_ready"] for check in payload["checks"])
     assert all(check["passed"] for check in payload["checks"])
     assert "precise fiscal savings" in payload["not_valid_for"]
@@ -62,7 +62,7 @@ def test_validation_gates_explain_why_calibration_is_not_upgraded() -> None:
     assert statuses["CAL-G-002"] == "passed"
     assert statuses["CAL-G-003"] == "passed"
     assert statuses["CAL-G-004"] == "passed"
-    assert statuses["CAL-G-005"] == "public_validation_source_registered"
+    assert statuses["CAL-G-005"] == "passed"
 
 
 def test_public_source_evidence_docs_do_not_contain_stale_pending_download_claims() -> None:
@@ -71,4 +71,4 @@ def test_public_source_evidence_docs_do_not_contain_stale_pending_download_claim
         assert "0/6 files downloaded" not in text
         assert "checksum: pending-download" not in text
         assert "all 6 registered public sources" not in text.lower()
-        assert "calibration_readiness_only" in text
+        assert "public_aggregate_validated" in text

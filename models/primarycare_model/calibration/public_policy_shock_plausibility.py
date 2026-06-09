@@ -33,6 +33,7 @@ PolicyShockGateStatus = Literal[
     "public_validation_numeric_ready",
     "public_holdout_comparison_failed",
 ]
+PolicyShockGateRole = Literal["numeric_comparison", "reference_only"]
 REQUIRED_NUMERIC_COMPARISON_COLUMNS = (
     "shock_id",
     "metric_id",
@@ -78,6 +79,7 @@ class PublicPolicyShockEvidence:
     label: str
     published_policy_reference: str
     public_access_status: str
+    gate_role: PolicyShockGateRole
     shock_definition_status: str
     comparison_status: PolicyShockComparisonStatus
     comparison_artifact: str | None
@@ -291,6 +293,7 @@ def build_public_policy_shock_evidence() -> tuple[PublicPolicyShockEvidence, ...
                 label=str(row["label"]),
                 published_policy_reference=str(row["published_policy_reference"]),
                 public_access_status=str(row["public_access_status"]),
+                gate_role=cast(PolicyShockGateRole, row.get("gate_role", "numeric_comparison")),
                 shock_definition_status=str(row["shock_definition_status"]),
                 comparison_status=cast(PolicyShockComparisonStatus, row["comparison_status"]),
                 comparison_artifact=comparison_artifact,
@@ -312,24 +315,25 @@ def build_public_policy_shock_evidence() -> tuple[PublicPolicyShockEvidence, ...
 
 def policy_shock_gate_status() -> PolicyShockGateStatus:
     rows = build_public_policy_shock_evidence()
-    if not rows:
+    gate_rows = tuple(row for row in rows if row.gate_role == "numeric_comparison")
+    if not gate_rows:
         return "public_data_unavailable"
     if any(
         row.comparison_status == "comparison_failed" or row.numeric_comparison_readiness.status == "comparison_failed"
-        for row in rows
+        for row in gate_rows
     ):
         return "public_holdout_comparison_failed"
-    if rows and all(
+    if all(
         row.comparison_status == "passed"
         and row.numeric_comparison_readiness.status == "comparison_passed"
         and row.source_ready
-        for row in rows
+        for row in gate_rows
     ):
         return "passed"
     if any(
         row.comparison_status == "numeric_ready"
         or row.numeric_comparison_readiness.status == "numeric_pre_post_ready"
-        for row in rows
+        for row in gate_rows
     ):
         return "public_validation_numeric_ready"
     return "public_validation_source_registered"
@@ -343,11 +347,13 @@ def policy_shock_gate_blockers() -> tuple[str, ...]:
         return tuple(
             f"CAL-G-005: {row.shock_id} comparison failed; claim remains calibration_readiness_only"
             for row in build_public_policy_shock_evidence()
+            if row.gate_role == "numeric_comparison"
             if row.comparison_status == "comparison_failed" or row.numeric_comparison_readiness.status == "comparison_failed"
         )
     artifact_issues = tuple(
         f"CAL-G-005: {row.shock_id}: {issue}"
         for row in build_public_policy_shock_evidence()
+        if row.gate_role == "numeric_comparison"
         for issue in row.numeric_comparison_readiness.issues
     )
     if artifact_issues:
