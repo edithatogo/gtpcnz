@@ -18,15 +18,15 @@ def test_public_holdout_comparisons_run_without_promoting_claims() -> None:
     assert comparisons
     assert {row.gate_id for row in comparisons} == {"CAL-G-003", "CAL-G-004"}
     assert any(row.status == "comparison_failed" for row in comparisons)
+    assert next(row for row in comparisons if row.gate_id == "CAL-G-003").status == "passed"
     assert {row.claim_status for row in comparisons} == {"calibration_readiness_only"}
 
 
-def test_public_holdout_gate_statuses_report_failed_comparisons() -> None:
-    assert holdout_gate_status("CAL-G-003") == "public_holdout_comparison_failed"
+def test_public_holdout_gate_statuses_report_cal_g_003_passed_and_cal_g_004_failed() -> None:
+    assert holdout_gate_status("CAL-G-003") == "passed"
     assert holdout_gate_status("CAL-G-004") == "public_holdout_comparison_failed"
-    assert holdout_gate_blockers("CAL-G-003")
+    assert holdout_gate_blockers("CAL-G-003") == ()
     assert holdout_gate_blockers("CAL-G-004")
-    assert "tolerance_gap=" in holdout_gate_blockers("CAL-G-003")[0]
     assert "failing_groups=" in holdout_gate_blockers("CAL-G-004")[0]
     assert "next_data_model_requirement=" in holdout_gate_blockers("CAL-G-004")[0]
 
@@ -52,6 +52,7 @@ def test_public_holdout_cli_readiness_mode_passes() -> None:
     )
 
     assert result.returncode == 0, result.stdout + result.stderr
+    assert "CAL-G-003: district/total_coverage; status=passed" in result.stdout
     assert "comparison_failed" in result.stdout
     assert "tolerance_gap=" in result.stdout
     assert "failing_groups=" in result.stdout
@@ -70,3 +71,4 @@ def test_public_holdout_cli_require_pass_fails() -> None:
     assert "tolerance_gap=" in result.stderr
     assert "failing_groups=" in result.stderr
     assert "next_data_model_requirement=" in result.stderr
+    assert "CAL-G-003" not in result.stderr

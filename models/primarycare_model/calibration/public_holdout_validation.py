@@ -1,7 +1,7 @@
 """Public aggregate holdout comparison helpers.
 
 These comparisons are deliberately benchmark-only. They compare public PHO
-access workbook rows with transparent weighted-rate baselines and do not
+access workbook rows with transparent public aggregate baselines and do not
 promote the model to empirically calibrated status.
 """
 
@@ -159,22 +159,98 @@ def _comparison_for_rows(
     )
 
 
+def _training_prediction_for_holdout_row(
+    holdout_row: dict[str, str],
+    training_rows: tuple[dict[str, str], ...],
+    fallback_rate: float,
+) -> float:
+    district = holdout_row.get("district")
+    matching_rows = tuple(row for row in training_rows if row.get("district") == district)
+    if not matching_rows:
+        return fallback_rate
+    return _weighted_rate(matching_rows)
+
+
+def _geographic_comparison_for_rows(
+    *,
+    rows: tuple[dict[str, str], ...],
+    max_error_tolerance: float,
+) -> PublicHoldoutComparison:
+    periods = tuple(sorted({row["period"] for row in rows if row.get("period")}))
+    if len(periods) < 2:
+        return _comparison_for_rows(
+            gate_id="CAL-G-003",
+            validation_family="geographic_holdout_validation",
+            stratifier="district",
+            group="total_coverage",
+            rows=rows,
+            max_error_tolerance=max_error_tolerance,
+        )
+
+    holdout_period = periods[-1]
+    training_periods = periods[:-1]
+    training_rows = tuple(row for row in rows if row["period"] in training_periods)
+    holdout_rows = tuple(row for row in rows if row["period"] == holdout_period)
+    fallback_rate = _weighted_rate(training_rows)
+    observations = []
+    for row in holdout_rows:
+        predicted = _training_prediction_for_holdout_row(row, training_rows, fallback_rate)
+        absolute_error = abs(_coverage_rate(row) - predicted)
+        observations.append(
+            PublicHoldoutObservation(
+            district=row["district"],
+            stratifier="district",
+            group="total_coverage",
+            observed_coverage_rate=round(_coverage_rate(row), 12),
+                predicted_coverage_rate=round(predicted, 12),
+                absolute_error=round(absolute_error, 12),
+                tolerance_gap=round(max(0.0, absolute_error - max_error_tolerance), 12),
+            )
+        )
+    max_error = max(observation.absolute_error for observation in observations)
+    mean_error = sum(observation.absolute_error for observation in observations) / len(observations)
+    failed_observations = tuple(
+        sorted(
+            (observation for observation in observations if observation.absolute_error > max_error_tolerance),
+            key=lambda observation: (-observation.absolute_error, observation.district),
+        )
+    )
+    status: HoldoutComparisonStatus = "passed" if max_error <= max_error_tolerance else "comparison_failed"
+    return PublicHoldoutComparison(
+        gate_id="CAL-G-003",
+        validation_family="geographic_holdout_validation",
+        predictor_id="district_public_training_period_rate",
+        stratifier="district",
+        group="total_coverage",
+        observations=len(observations),
+        mean_absolute_error=round(mean_error, 12),
+        max_absolute_error=round(max_error, 12),
+        max_error_tolerance=max_error_tolerance,
+        tolerance_gap=round(max(0.0, max_error - max_error_tolerance), 12),
+        failing_groups=tuple(_failure_label(observation) for observation in failed_observations),
+        failing_observations=failed_observations,
+        status=status,
+        claim_status="calibration_readiness_only",
+        interpretation_note=(
+            "Public aggregate geographic holdout comparison using district-level training-period "
+            "persistence with national fallback only when a district is absent; not a causal, fiscal, "
+            "or individual-care prediction validation."
+        ),
+        next_data_model_requirement=(
+            _next_data_model_requirement("CAL-G-003", "geographic_holdout_validation")
+            if failed_observations
+            else "No district-level tolerance gap; gate remains readiness-only until all sibling comparisons pass."
+        ),
+    )
+
+
 def build_public_holdout_comparisons() -> tuple[PublicHoldoutComparison, ...]:
     rows = load_pho_access_numeric_rows()
     comparisons: list[PublicHoldoutComparison] = []
 
     geographic_rows = tuple(row for row in rows if row["stratifier"] == "ethnicity" and row["group"] == "Total")
     if geographic_rows:
-        comparisons.append(
-            _comparison_for_rows(
-                gate_id="CAL-G-003",
-                validation_family="geographic_holdout_validation",
-                stratifier="district",
-                group="total_coverage",
-                rows=geographic_rows,
-                max_error_tolerance=0.05,
-            )
-        )
+        comparisons.append(_geographic_comparison_for_rows(rows=geographic_rows, max_error_tolerance=0.05))
 
     subgroup_rows = tuple(
         row

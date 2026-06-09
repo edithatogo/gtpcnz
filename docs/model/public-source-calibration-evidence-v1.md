@@ -58,7 +58,7 @@ calibration_status: calibration_readiness_only
 claim_level: public_benchmark
 ```
 
-This is deliberate. CAL-G-002 now passes its registered public temporal holdout comparison, and CAL-G-005 has public readiness evidence but does not pass validation because it has no numeric pre/post shock comparison. CAL-G-003 and CAL-G-004 run transparent weighted public benchmark comparisons, but those comparisons exceed tolerance and remain failed.
+This is deliberate. CAL-G-002 now passes its registered public temporal holdout comparison, and CAL-G-003 passes a district-level public geographic holdout using Q3 training-period persistence against the Q4 holdout. CAL-G-005 has public readiness evidence but does not pass validation because it has no numeric pre/post shock comparison. CAL-G-004 runs transparent weighted public subgroup-gradient comparisons, but those comparisons exceed tolerance and remain failed.
 
 ## Not Valid For
 
