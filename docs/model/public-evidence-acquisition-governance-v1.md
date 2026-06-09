@@ -33,7 +33,7 @@ The deterministic transform processes all matching `access-to-primary-care-stats
 
 The temporal holdout comparison now passes using district-level public persistence: Q3 is the training period, Q4 is the holdout period, and each district is compared with its own Q3 public aggregate rate.
 
-CAL-G-003 and CAL-G-004 now pass using the same public Q3/Q4 workbook family at district and district-subgroup grain. CAL-G-005 now passes a bounded directional public policy-condition comparison derived from the checked-in Health NZ capitation schedule extract. The PHO Services Agreement PDF remains registered as public `reference_only` evidence until bounded table extraction is implemented.
+CAL-G-003 and CAL-G-004 now pass using the same public Q3/Q4 workbook family at district and district-subgroup grain. CAL-G-005 now passes a bounded directional public policy-condition comparison derived from the checked-in Health NZ capitation schedule extract. Track 072 found the current PHO Services Agreement public URL returns HTML under the expected PDF filename, so it remains public `reference_only` evidence with a machine-readable extraction blocker.
 
 ## Claim Boundary
 

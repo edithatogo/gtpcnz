@@ -341,6 +341,108 @@ def _transform_artifact_manifest(
     return TransformOutput(plan.source_id, output_path, len(rows), "processed_reference_manifest")
 
 
+def _artifact_media_type(raw_artifact: Path) -> str:
+    prefix = raw_artifact.read_bytes()[:64].lstrip()
+    if prefix.startswith(b"%PDF"):
+        return "application/pdf"
+    if prefix.lower().startswith((b"<!doctype html", b"<html")):
+        return "text/html"
+    return "application/octet-stream"
+
+
+def _transform_pho_services_agreement(
+    plan: PublicSourceRetrievalPlan, raw_artifact: Path, output_path: Path
+) -> TransformOutput:
+    media_type = _artifact_media_type(raw_artifact)
+    raw_hash = _sha256(raw_artifact)
+    claim_boundary = (
+        "Public PHO Services Agreement reference only; no causal, effect-size, fiscal, "
+        "hospital-demand, workforce, implementation-impact, pass-through, or transaction-cost claim."
+    )
+    if media_type != "application/pdf":
+        rows = [
+            {
+                "source_id": plan.source_id,
+                "raw_artifact_sha256": raw_hash,
+                "artifact_name": raw_artifact.name,
+                "artifact_size_bytes": raw_artifact.stat().st_size,
+                "artifact_media_type": media_type,
+                "extraction_status": "extraction_blocked",
+                "blocker_reason": (
+                    "Current registry-pinned public download returned HTML content where the "
+                    "bounded extractor expected PDF bytes; no schedule table cells were extracted."
+                ),
+                "page_number": 0,
+                "table_index": 0,
+                "row_index": 0,
+                "column_index": 0,
+                "column_label": "no_table_extracted",
+                "cell_value": "",
+                "claim_boundary": claim_boundary,
+            }
+        ]
+        status = "processed_reference_blocker"
+        note = (
+            "Public PHO Services Agreement bounded extraction blocker: checked-in artifact is not a valid PDF. "
+            "Reference-only CAL-G-005 evidence remains non-blocking."
+        )
+    else:
+        rows = [
+            {
+                "source_id": plan.source_id,
+                "raw_artifact_sha256": raw_hash,
+                "artifact_name": raw_artifact.name,
+                "artifact_size_bytes": raw_artifact.stat().st_size,
+                "artifact_media_type": media_type,
+                "extraction_status": "pdf_present_pending_table_parser",
+                "blocker_reason": (
+                    "Valid PDF bytes are present, but no deterministic table cell parser is registered for "
+                    "the PHO Services Agreement schedule in this bounded transform."
+                ),
+                "page_number": 0,
+                "table_index": 0,
+                "row_index": 0,
+                "column_index": 0,
+                "column_label": "pdf_present_pending_table_parser",
+                "cell_value": "",
+                "claim_boundary": claim_boundary,
+            }
+        ]
+        status = "processed_reference_blocker"
+        note = (
+            "Public PHO Services Agreement PDF custody verified; deterministic schedule table parser remains "
+            "blocked until table anchors are specified."
+        )
+    _write_csv(
+        output_path,
+        rows,
+        [
+            "source_id",
+            "raw_artifact_sha256",
+            "artifact_name",
+            "artifact_size_bytes",
+            "artifact_media_type",
+            "extraction_status",
+            "blocker_reason",
+            "page_number",
+            "table_index",
+            "row_index",
+            "column_index",
+            "column_label",
+            "cell_value",
+            "claim_boundary",
+        ],
+    )
+    _write_metadata(
+        output_path,
+        source_id=plan.source_id,
+        raw_artifact=raw_artifact,
+        rows_written=len(rows),
+        note=note,
+    )
+    return TransformOutput(plan.source_id, output_path, len(rows), status)
+
+
 def _xlsx_shared_strings(archive: zipfile.ZipFile) -> list[str]:
     root = ElementTree.fromstring(archive.read("xl/sharedStrings.xml"))
     return [
@@ -620,7 +722,9 @@ def transform_public_source(source_id: str) -> TransformOutput:
         return _transform_hnz_pho_access_timeseries(plan, raw_artifact, output_path)
     if source_id == "src_nz_health_survey":
         return _transform_nz_health_survey(plan, raw_artifact, output_path)
-    if source_id in {"src_mcnz_workforce", "src_pho_services_agreement"}:
+    if source_id == "src_pho_services_agreement":
+        return _transform_pho_services_agreement(plan, raw_artifact, output_path)
+    if source_id == "src_mcnz_workforce":
         return _transform_artifact_manifest(plan, raw_artifact, output_path)
     raise ValueError(f"{source_id}: no bounded public transform is implemented")
 

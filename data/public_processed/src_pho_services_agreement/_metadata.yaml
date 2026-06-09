@@ -1,9 +1,9 @@
 source_id: src_pho_services_agreement
 processed_artifact: data/public_processed/src_pho_services_agreement/pho_services_schedule.csv
 raw_artifact: data/public_raw/src_pho_services_agreement/master-pho-services-agreement.pdf
-raw_artifact_sha256: 8395c4fbd42dc0f13d8f9e24d3a18627339bc0f2593f6cad0cb83a8930a3e580
+raw_artifact_sha256: 3a97d83f89ae1328ef2266b2a8c81519d9533b8f2a3fa15c28f39f37d09bf5f0
 rows_written: 1
 claim_level: public_benchmark
 calibration_status: calibration_readiness_only
 not_valid_for: patient-level, private administrative, confidential, stakeholder, or causal forecast use
-transform_note: Public PDF artifact manifest only; not calibrated model input.
+transform_note: Public PHO Services Agreement bounded extraction blocker: checked-in artifact is not a valid PDF. Reference-only CAL-G-005 evidence remains non-blocking.

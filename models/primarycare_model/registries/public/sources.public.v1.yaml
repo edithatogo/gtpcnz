@@ -11,12 +11,12 @@ sources:
   - source_id: src_pho_services_agreement
     label: PHO Services Agreement public schedule
     url_or_reference: https://www.tewhatuora.govt.nz/for-health-providers/primary-care-sector/primary-health-organisation-services-agreement
-    retrieval_date: 2026-06-03
+    retrieval_date: 2026-06-10
     licence_status: public_reference
     public_access_status: public
-    checksum: aac3d4714fc1735bb7d6ddc68a27d3e0cc87ba412cd1c03209e9680da3a093c1
-    transform_description: Public PHO Services Agreement PDF downloaded and transformed to a hashed public reference manifest.
-    claim_boundary: Public schedule reference only.
+    checksum: e31d0f3ad39af249003d80a4319046d9eada428758210c7ae6a33111bcdce859
+    transform_description: Public PHO Services Agreement URL downloaded; current response is HTML under the expected PDF filename, so bounded table extraction is recorded as a hashed blocker artifact.
+    claim_boundary: Public schedule reference only; no pass-through, transaction-cost, fiscal, workforce, hospital-demand, implementation-impact, or causal claim.
   - source_id: src_hnz_enrolment
     label: Primary care enrolment public data
     url_or_reference: https://www.tewhatuora.govt.nz/for-health-professionals/data-and-statistics/primary-care

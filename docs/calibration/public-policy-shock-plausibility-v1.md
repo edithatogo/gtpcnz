@@ -48,6 +48,9 @@ non-access-practice condition for those metrics. This does not estimate patient
 access, utilisation, fiscal savings, hospital-demand change, workforce effects,
 implementation effects, or causal effects.
 
-The PHO Services Agreement PDF remains registered as public reference evidence
-with `gate_role: reference_only`; it is not counted as a required numeric
-comparison until a bounded public table extraction is implemented.
+The PHO Services Agreement public reference remains registered with
+`gate_role: reference_only`. Track 072 re-fetched the registry-pinned public URL
+and found it currently returns HTML under the expected PDF filename, so the
+processed artifact records `extraction_blocked`. It is not counted as a required
+numeric comparison unless a replacement public PDF or machine-readable table
+source is registered and satisfies the numeric comparison contract.

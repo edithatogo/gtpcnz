@@ -26,7 +26,7 @@ GTPCNZ now has verified public source acquisition evidence and passing public ag
 The public source registry records seven public/published aggregate source families:
 
 - `src_hnz_capitation_schedule`: Health NZ capitation rates public reference page. The processed capitation extract now also supplies the CAL-G-005 directional public policy-condition comparison artifact for selected access-practice versus non-access-practice published rates.
-- `src_pho_services_agreement`: Health NZ PHO Services Agreement public PDF.
+- `src_pho_services_agreement`: Health NZ PHO Services Agreement public reference. Track 072 re-fetched the registry-pinned public URL and found it currently returns HTML saved under the expected PDF filename; bounded table extraction is therefore recorded as `extraction_blocked` in `docs/model/pho-services-agreement-bounded-extraction-v1.md`.
 - `src_hnz_enrolment`: Health NZ primary-care public data/statistics page.
 - `src_hnz_pho_access_timeseries`: Health NZ quarterly PHO access workbook with public district, ethnicity, gender, age, and deprivation aggregate rows.
 - `src_mcnz_workforce`: Medical Council workforce survey public report.
