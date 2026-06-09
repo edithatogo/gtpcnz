@@ -50,9 +50,12 @@ Track 070 is complete for public evidence acquisition execution:
 
 - `070-public-evidence-acquisition-execution-governance`: execution controls define the public/published-source custody chain, and the public Health NZ Q3 2025 PHO access workbook is acquired and processed beside Q4. CAL-G-002 acquisition readiness now has two public periods, and the temporal holdout comparison passes using district-level public persistence. CAL-G-003 geographic holdout and CAL-G-004 subgroup-gradient holdout also pass using district-level public training-period persistence against the Q4 holdout. CAL-G-005 now passes a bounded directional public policy-condition comparison derived from the checked-in Health NZ capitation schedule extract. The public aggregate calibration lane now reports `public_aggregate_validated` / `empirically_supported_if_gated`, while precise fiscal, ED, hospital-demand, workforce, implementation, and causal claims remain explicitly not valid.
 
-Tracks 071-074 are planned for the broader post-aggregate-validation programme:
+Track 071 is complete with a local Quarto render blocker:
 
-- `071-release-site-report-regeneration`: regenerate and verify public site/report/release artefacts from the aggregate validation lane without precision or causal claim expansion.
+- `071-release-site-report-regeneration`: generated release model card and release manifest now report `empirically_supported_if_gated` / `public_aggregate_validated`, with not-valid-for warnings preserved for precise fiscal, ED, hospital-demand, workforce, implementation, and causal claims. Homepage, report source, site-map source, and Quarto render set now expose the regenerated release artifacts. Local Quarto render is blocked by Windows/OneDrive generated-output locks in the worktree and Quarto Sass compiler `cmd.exe` spawn failure in a temp render probe; details are recorded in `docs/release/track-071-release-regeneration-v1.md`.
+
+Tracks 072-074 are planned for the broader post-aggregate-validation programme:
+
 - `072-pho-services-agreement-table-extraction`: attempt bounded deterministic extraction from the public PHO Services Agreement PDF, keeping the source `reference_only` unless comparison contracts pass.
 - `073-independent-public-validation-expansion`: identify, register, and test additional independent public aggregate validation sources beyond current PHO access and capitation evidence.
 - `074-aggregate-validation-claim-surface-review`: review app, report, model-card, README, and release wording so aggregate validation is visible without implying excluded claims.
@@ -66,6 +69,7 @@ Next implementation frontier:
 - CAL-G-001 through CAL-G-007 now pass their registered public validation gates.
 - Public aggregate calibration output embeds validation-gate and posterior-predictive summaries for report/model-card consumption; the output now reports `empirically_supported_if_gated` / `public_aggregate_validated`.
 - Public evidence acquisition execution is now governed by Track 070. Q3/Q4 public temporal, geographic, and subgroup-gradient evidence is source-ready, and CAL-G-002/CAL-G-003/CAL-G-004 pass. CAL-G-005 passes through the bounded capitation schedule policy-condition comparison.
+- Release site/report regeneration is source-complete for Track 071. Quarto render remains a local environment blocker until generated output locks and Quarto Sass spawn behavior are cleared.
 - No upgrade beyond aggregate validation until claim-specific validation families have public source artefacts, verified checksums, processed outputs, and passing gates.
 
 Parallel execution controls:
