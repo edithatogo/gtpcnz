@@ -1,0 +1,154 @@
+---
+title: "Can primary care funding grow before hospitals have to?"
+subtitle: "A public aggregate validation model of New Zealand primary care funding architecture"
+author:
+  - name: "Dylan Mordaunt"
+date: "2026-06-10"
+format:
+  html:
+    toc: true
+    number-sections: true
+  docx: default
+bibliography: ../references.bib
+---
+
+> **Submission status:** draft for Policy Quarterly editorial review. Final formatting should be checked against the journal's current author instructions before submission.
+
+## Abstract
+
+New Zealand primary care funding debates often separate capitation, fee-for-service, urgent care, ambulance pressure, workforce scope and hospital demand into different policy conversations. This paper presents a public-data anchored modelling framework that treats them as a single funding architecture problem. The model combines a game-theoretic map, public/published source registries, parameterised assumptions, public aggregate calibration targets, holdout checks, posterior predictive checks, structural uncertainty and value-of-information outputs. The current release reports `public_aggregate_validated` / `empirically_supported_if_gated` for registered public aggregate validation gates only. It does not support precise fiscal savings, emergency department reductions, hospital-demand reductions, workforce effects, implementation impacts or causal claims. The central policy result is structural: capitation reweighting improves allocation, but by itself does not necessarily remove the marginal supply constraint; activity-sensitive scheduled payments can improve supply signals, but require place accountability, co-payment protection, scope governance and audit. The practical contribution is not a forecast. It is a transparent decision-support architecture for deciding which public evidence should change policy confidence.
+
+## Keywords
+
+Primary care; capitation; fee-for-service; health policy; public aggregate validation; New Zealand; game theory; value of information.
+
+## 1. Introduction
+
+New Zealand's primary care funding problem is often framed as a choice between capitation and fee-for-service. That framing is too small. Capitation can support enrolment, continuity and population responsibility, but it can also make marginal activity financially unattractive when practices are capacity constrained. Fee-for-service can make additional activity viable, but poorly designed activity payment can create gaming, fragmentation and inequity. Urgent care, ambulance and hospital pressure are usually treated as downstream consequences; in practice they are also part of the upstream access architecture.
+
+The question for policy is therefore not whether capitation or fee-for-service is better in the abstract. The question is whether New Zealand can design a primary care funding architecture that allows lower-cost upstream care to grow safely before need becomes hospital demand.
+
+This paper reports the current state of GTPCNZ, a public-data anchored policy model built to test that question. The model is deliberately transparent. It uses public or published aggregate inputs, typed registries, reproducible source snapshots and explicit claim boundaries. It is not linked-data calibrated and not a patient-level forecast.
+
+## 2. Policy problem
+
+The model starts from four policy observations.
+
+First, current reform is not a straw man. Capitation reweighting, access targets, digital access, urgent-care investment, a National Primary Care Dataset and stronger accountability are all material changes. A credible alternative architecture must compare itself against this pathway, not against a blank slate.
+
+Second, capitation reweighting addresses allocation but may not solve marginal supply. A practice can receive a fairer population-weighted payment and still have weak financial capacity to add eligible contacts when demand exceeds workforce and room capacity.
+
+Third, uncapped does not mean uncontrolled. The relevant design option is not open-ended billing. It is scheduled, rules-based, audited and place-accountable funding for eligible primary medical activity.
+
+Fourth, primary care access, urgent care, ambulance and hospitals form a strategic system. If upstream care cannot expand, downstream services become the politically salient rescue layer. Funding rules therefore shape not only provider income but also system behaviour.
+
+## 3. Model architecture
+
+GTPCNZ combines six layers.
+
+1. **Public source layer.** Runtime public sources are registered under `models/primarycare_model/registries/public/` and must be public or published. Private administrative data, patient-level data, confidential OIA responses, stakeholder analysis and unpublished expert elicitation are excluded from the public model path.
+
+2. **Parameter layer.** Public assumptions are registered, bounded and traceable. Parameters carry source, unit, distribution, evidence-quality, transferability and claim-boundary metadata.
+
+3. **Calibration layer.** Public aggregate targets cover population denominators, unmet need/cost barriers and workforce participation. Validation gates cover baseline reproduction, temporal holdout, geographic holdout, subgroup-gradient holdout, bounded public policy-shock plausibility, posterior predictive checks and claim-level downgrade.
+
+4. **Structural uncertainty layer.** Alternative public causal structures represent balanced, supply-dominant, access-barrier-dominant, workforce-constrained, gaming-dominant, equity-protection-dominant, hospital-deflection-dominant and weak-substitution assumptions.
+
+5. **Value-of-information layer.** Decision-uncertainty outputs include EVPI, EVPPI, EVSI, ENBS, decision-error probability and evidence-priority rankings. These are decision-support outputs, not forecasts.
+
+6. **Claim surface.** Streamlit, Quarto, release model cards and downloadable report cards carry claim level, calibration status, uncertainty status, source snapshot, interpretation notes and not-valid-for warnings.
+
+## 4. Public aggregate validation status
+
+The current public release reports:
+
+| Field | Current value |
+|---|---|
+| Claim level | `empirically_supported_if_gated` |
+| Calibration status | `public_aggregate_validated` |
+| Source boundary | public/published aggregate inputs only |
+| Runtime exclusion | no private administrative, patient-level, confidential OIA, stakeholder or unpublished expert-elicitation inputs |
+| Not valid for | precise fiscal savings; ED reductions; hospital-demand reductions; workforce effects; implementation impacts; causal effects |
+
+The validation gates currently pass for the registered aggregate lane:
+
+| Gate | Family | Current status | Claim implication |
+|---|---|---|---|
+| CAL-G-001 | baseline public aggregate reproduction | passed | supports aggregate validation |
+| CAL-G-002 | temporal holdout validation | passed | supports aggregate plausibility only |
+| CAL-G-003 | geographic holdout validation | passed | supports aggregate plausibility only |
+| CAL-G-004 | subgroup-gradient validation | passed | supports aggregate plausibility only |
+| CAL-G-005 | public policy-shock plausibility | passed | directional public-policy plausibility only |
+| CAL-G-006 | posterior predictive checks | passed | supports aggregate validation |
+| CAL-G-007 | claim-level downgrade | passed | prevents overclaiming |
+
+The most important interpretation is negative as well as positive. The model has moved beyond a purely readiness-only scaffold for registered public aggregate gates. It still has not become a patient-level, linked-data, fiscal, hospital-demand, workforce-impact or causal model.
+
+## 5. Results
+
+The model's results are best read as architecture-level findings.
+
+### 5.1 Capitation reweighting is necessary but incomplete
+
+The current reform pathway remains the comparator. Capitation reweighting can improve equity and allocation. The model does not treat capitation as obsolete. The structural result is narrower: capitation reweighting does not necessarily create a strong marginal supply signal when the system needs additional eligible contacts.
+
+### 5.2 Activity-sensitive payment needs controls
+
+An uncapped eligible medical fee-for-service stream improves the marginal activity signal in the model, but only under rules: item schedules, clinical necessity, documentation, provider qualification, audit, pre-approval where needed and place accountability. Loose activity payment without controls performs poorly because gaming and equity risk rise.
+
+### 5.3 The strongest architecture is hybrid
+
+The strongest policy architecture in the model combines:
+
+- retained and reweighted capitation;
+- scheduled eligible medical activity payment;
+- place-based accountability;
+- urgent care and ambulance alternatives;
+- scope-enabled providers;
+- co-payment protections;
+- data and audit;
+- top-tier primary care accountability.
+
+The model's main result is therefore not that one payment type wins. It is that no single lever is enough.
+
+### 5.4 Evidence priority is part of the result
+
+The value-of-information layer ranks evidence improvements by expected decision value. In practical terms, the next evidence priorities are not broad claims about savings. They are public and published checks on:
+
+- whether access improvements are sustained across districts and subgroups;
+- whether activity-sensitive funding changes upstream contact availability without increasing gaming;
+- whether place accountability protects high-need populations;
+- whether urgent care, ambulance alternatives and primary care access move together in public aggregate time series;
+- whether PHO and intermediary functions add value or transaction cost.
+
+## 6. Policy implications
+
+The model supports five policy implications.
+
+First, keep capitation, but do not ask it to do every job. Capitation remains essential for population responsibility and baseline viability.
+
+Second, test scheduled activity payment where the system wants more eligible upstream care. The design should be bounded, auditable and tied to clinical value.
+
+Third, make place accountability non-negotiable. Activity growth without local responsibility risks cherry-picking and digital exclusion.
+
+Fourth, treat urgent care and ambulance as access infrastructure, not side issues. Upstream access policy should measure alternative disposition, handover delay, non-conveyance and connection back to primary care.
+
+Fifth, publish enough aggregate data to make policy learning possible. The model's evidence monitor and candidate validation registry identify additional public sources, but candidate records do not change model parameters or claims until later release gates pass.
+
+## 7. Limitations
+
+This paper reports a public aggregate validation model, not a full empirical impact evaluation. The model does not estimate exact fiscal savings, ED reductions, hospital-demand reductions, workforce effects, implementation impacts or causal effects. It does not use private administrative or patient-level data. It does not replace Māori, Pacific, rural, disability, provider, patient or operational review. It does not resolve the political question of who should hold commissioning authority.
+
+The PHO Services Agreement source remains reference-only because the current public URL returned HTML under the expected PDF filename during bounded extraction. The current CAL-G-005 pass comes from a public capitation schedule comparison lane, not from PHO Services Agreement table extraction.
+
+## 8. Conclusion
+
+The public aggregate model has now passed its registered aggregate validation gates while preserving strict claim boundaries. The result is not a prediction that any specific reform will save money or reduce hospital demand. It is a disciplined policy finding: New Zealand should evaluate primary care funding as an architecture problem, not as a capitation-versus-fee-for-service slogan. A credible architecture retains capitation, adds controlled activity-sensitive funding where more upstream care is needed, protects equity through place accountability and co-payment safeguards, and treats evidence generation as part of policy design.
+
+## Submission checklist
+
+- Draft article complete for editorial review.
+- Public claim boundary visible.
+- Current validation status included.
+- Not-valid-for warnings included.
+- Final Policy Quarterly author-instruction check still required before submission.
