@@ -37,7 +37,6 @@ def test_calibration_validation_gate_matrix_includes_required_gate_ids() -> None
 def test_calibration_validation_gate_matrix_default_mode_is_non_promotional() -> None:
     rows = build_calibration_validation_gate_matrix()
     assert any(row.status == "public_validation_source_registered" for row in rows)
-    assert any(row.status == "public_holdout_comparison_failed" for row in rows)
     assert all(row.blockers == () for row in rows)
     assert any(row.claim_status == "public_aggregate_validated" for row in rows)
     assert any(row.claim_status == "calibration_readiness_only" for row in rows)
@@ -53,7 +52,7 @@ def test_calibration_validation_gate_require_all_validation_data_blocks_source_r
     issues = validation_gate_issues(require_all_validation_data=True)
     assert not any("CAL-G-002" in issue for issue in issues)
     assert not any("CAL-G-003" in issue for issue in issues)
-    assert any("CAL-G-004" in issue for issue in issues)
+    assert not any("CAL-G-004" in issue for issue in issues)
     assert any("CAL-G-005" in issue for issue in issues)
 
 

@@ -55,7 +55,7 @@ calibration_status: calibration_readiness_only
 claim_level: public_benchmark
 ```
 
-The remaining blocker is no longer source acquisition. CAL-G-002 now has Q3/Q4 public temporal evidence and passes its registered district-level temporal holdout comparison. CAL-G-003 also passes a district-level public geographic holdout using Q3 training-period persistence against the Q4 holdout. CAL-G-005 has public readiness evidence but does not pass validation because it has no numeric pre/post shock comparison. CAL-G-004 runs public subgroup-gradient benchmark comparisons, but those comparisons exceed tolerance and therefore do not pass.
+The remaining blocker is no longer source acquisition. CAL-G-002 now has Q3/Q4 public temporal evidence and passes its registered district-level temporal holdout comparison. CAL-G-003 also passes a district-level public geographic holdout using Q3 training-period persistence against the Q4 holdout. CAL-G-004 passes district-subgroup public subgroup-gradient holdouts at ethnicity/deprivation grain. CAL-G-005 has public readiness evidence but does not pass validation because it has no numeric pre/post shock comparison.
 
 ## Claim Boundary
 
@@ -74,8 +74,8 @@ No private administrative data, patient-level data, confidential OIA responses, 
 
 The next substantive step is to locate and register public aggregate validation datasets for:
 
-1. Improved subgroup-gradient comparison performance.
-2. Published numeric pre/post policy-shock comparison evidence for CAL-G-005.
-3. Additional independent regional or rurality-grain public validation targets beyond the current district-level PHO access holdout, where public data permit.
+1. Published numeric pre/post policy-shock comparison evidence for CAL-G-005.
+2. Additional independent regional, rurality-grain, or subgroup-gradient public validation targets beyond the current PHO access holdouts, where public data permit.
+3. Release-gate review once CAL-G-005 has a registered public numeric comparison and all calibration validation gates pass together.
 
 Only after those validation families have public source artefacts, verified checksums, processed outputs, and passing gates should the calibration status be considered for upgrade.
