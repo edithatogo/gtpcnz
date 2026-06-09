@@ -23,20 +23,26 @@ datasets:
       - {field_name: indicator_id, data_type: string, unit: code, required: true, description: Indicator code.}
       - {field_name: year, data_type: integer, unit: calendar year, required: true, description: Public reporting year.}
       - {field_name: value, data_type: number, unit: varies, required: true, description: Published aggregate value.}
-  - dataset_id: pho_access_validation_source_metadata_public
-    label: Public PHO access validation source metadata
+  - dataset_id: pho_access_validation_numeric_extract_public
+    label: Public PHO access validation numeric extract
     source_id: src_hnz_pho_access_timeseries
     source: Health NZ access to primary care quarterly workbook.
     sensitivity_class: public_aggregate
     public_access_status: public
     licence_status: public_reference
-    claim_boundary: Workbook metadata establishes public validation-source availability only; it is not a passed holdout validation result.
+    claim_boundary: Numeric public aggregate extract supports validation readiness only; it is not a passed holdout validation result.
     fields:
       - {field_name: source_id, data_type: string, unit: code, required: true, description: Source identifier.}
       - {field_name: raw_artifact_sha256, data_type: string, unit: sha256, required: true, description: Hash of the raw public workbook.}
       - {field_name: workbook_artifact, data_type: string, unit: filename, required: true, description: Raw workbook artifact filename.}
+      - {field_name: period, data_type: string, unit: quarter, required: true, description: Public reporting period.}
       - {field_name: sheet_name, data_type: string, unit: label, required: true, description: Workbook sheet name.}
-      - {field_name: dimension, data_type: string, unit: Excel range, required: true, description: Sheet dimension range.}
-      - {field_name: row_count, data_type: integer, unit: rows, required: true, description: Number of XML rows in the sheet.}
-      - {field_name: max_observed_columns, data_type: integer, unit: columns, required: true, description: Maximum observed XML cell count across rows.}
+      - {field_name: district, data_type: string, unit: label, required: true, description: District of domicile.}
+      - {field_name: stratifier, data_type: string, unit: code, required: true, description: Public subgroup dimension.}
+      - {field_name: group, data_type: string, unit: label, required: true, description: Public subgroup category.}
+      - {field_name: enrolled_count, data_type: number, unit: persons, required: true, description: Public aggregate enrolled count.}
+      - {field_name: population_count, data_type: number, unit: persons, required: true, description: Public aggregate denominator.}
+      - {field_name: reported_coverage_rate, data_type: number, unit: fraction, required: true, description: Coverage rate reported in workbook.}
+      - {field_name: calculated_coverage_rate, data_type: number, unit: fraction, required: true, description: Recalculated enrolled divided by population rate.}
+      - {field_name: absolute_rate_difference, data_type: number, unit: fraction, required: true, description: Absolute difference between reported and recalculated rate.}
       - {field_name: validation_use, data_type: string, unit: code, required: true, description: Validation family this sheet can support.}

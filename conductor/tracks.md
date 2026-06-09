@@ -75,12 +75,13 @@
 | 063 | Release readiness parallel closeout | Complete for readiness-only release | Audit the 050-062 working tree, classify environment blockers, rerun release gates, package commits, merge the release branch, and keep calibration readiness-only until source gates pass. |
 | 064 | Public source acquisition and calibration evidence | Complete for readiness-only release | Record verified public source files, checksums, processed artefacts, baseline/PPC calibration evidence, and remaining validation-data blockers. |
 | 065 | Public validation source evidence | Complete for readiness-only release | Register Health NZ PHO access workbook as public validation-source evidence while preserving readiness-only calibration claims. |
+| 066 | Public validation numeric comparisons | Complete for readiness-only release | Parse Health NZ PHO access workbook into numeric public aggregate rows and mark CAL-G-003/004 numeric-ready without passing model validation. |
 
 ## Current priority
 
 1. Keep the public model path public/published-data-only and claim-gated.
 2. Treat tracks 050-063 as complete for the v1.8.1 readiness-only release; do not describe them as empirically calibrated public-source passes.
-3. Keep Track 053 at `calibration_readiness_only` until temporal holdout, geographic/rural holdout, subgroup-gradient, and policy-shock validation gates have public data and pass. Track 065 only registers source evidence for CAL-G-003 and CAL-G-004; it does not pass those gates.
+3. Keep Track 053 at `calibration_readiness_only` until temporal holdout, geographic/rural holdout, subgroup-gradient, and policy-shock validation gates have public data and pass. Tracks 065-066 register and parse public evidence for CAL-G-003 and CAL-G-004; they do not pass those gates.
 4. Use `docs/model/public-source-calibration-evidence-v1.md` as the current evidence ledger for source acquisition and calibration status.
 5. Preserve the public claim boundary until empirical gates pass.
 6. Use the v1.8.1 model card, claim-boundary note, parameter tiering and identifiability map when explaining the model.

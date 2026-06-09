@@ -49,7 +49,7 @@ retrieval_plans:
     licence_basis: public_reference
     public_access_status: public
     transform_script: scripts/transform_hnz_pho_access_timeseries.py
-    expected_processed_artifact: data/public_processed/src_hnz_pho_access_timeseries/pho_access_workbook_metadata.csv
+    expected_processed_artifact: data/public_processed/src_hnz_pho_access_timeseries/pho_access_numeric_extract.csv
     claim_boundary: Public aggregate validation evidence only; no patient-level or passed-holdout claim.
   - source_id: src_mcnz_workforce
     landing_page_url: https://www.mcnz.org.nz/about-us/publications/workforce-survey/

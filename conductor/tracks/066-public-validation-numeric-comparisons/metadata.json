@@ -1,0 +1,9 @@
+{
+  "id": "066",
+  "slug": "public-validation-numeric-comparisons",
+  "title": "Public validation numeric comparisons",
+  "status": "complete_readiness_only",
+  "created": "2026-06-09",
+  "contracts": ["CON-PUBLIC-001", "CON-CAL-001"],
+  "claim_boundary": "Public numeric validation extract only; no empirical model-validation pass."
+}
