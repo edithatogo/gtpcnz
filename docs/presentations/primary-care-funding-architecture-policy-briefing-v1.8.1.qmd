@@ -1,0 +1,132 @@
+---
+title: "Can primary care funding grow before hospitals have to?"
+subtitle: "GTPCNZ public aggregate validation briefing"
+author: "Dylan Mordaunt"
+date: "2026-06-10"
+format:
+  revealjs:
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    theme: simple
+---
+
+## The question
+
+Can New Zealand design primary care funding so lower-cost upstream care can grow before need becomes hospital demand?
+
+**Boundary:** public aggregate validation only. Not a patient-level forecast. Not linked-data calibrated.
+
+## What changed in v1.8.1
+
+- Public-only runtime source path.
+- Registered public source snapshots and hashes.
+- Parameter traceability.
+- Public aggregate calibration.
+- CAL-G-001 through CAL-G-007 gate reporting.
+- Structural uncertainty and VOI surfaces.
+- Claim-gated Streamlit cockpit and release model card.
+
+## Current validation status
+
+| Field | Status |
+|---|---|
+| Claim level | `empirically_supported_if_gated` |
+| Calibration status | `public_aggregate_validated` |
+| Scope | registered public aggregate gates |
+| Still excluded | fiscal, ED, hospital-demand, workforce, implementation, causal claims |
+
+## The policy architecture result
+
+The model does **not** say "fee-for-service wins".
+
+It says:
+
+> Capitation reweighting improves allocation, but does not necessarily remove the marginal supply constraint.
+
+## Why one lever is not enough
+
+| Lever | Helps | Risk if isolated |
+|---|---|---|
+| Capitation | enrolment, continuity, population responsibility | weak marginal activity signal |
+| Scheduled activity payment | eligible contact growth | gaming, fragmentation |
+| Place accountability | equity and hard-to-reach populations | local governance complexity |
+| Co-payment protection | access and legitimacy | fiscal exposure if unmanaged |
+| Audit/data | control and learning | compliance burden |
+
+## Strongest design pattern
+
+Retain and reweight capitation.
+
+Add controlled scheduled eligible medical activity payments.
+
+Tie activity growth to:
+
+- place accountability;
+- urgent and ambulance alternatives;
+- scope-enabled providers;
+- co-payment protection;
+- audit and data visibility.
+
+## Public validation gates
+
+| Gate | Family | Status |
+|---|---|---|
+| CAL-G-001 | baseline aggregate reproduction | passed |
+| CAL-G-002 | temporal holdout | passed |
+| CAL-G-003 | geographic holdout | passed |
+| CAL-G-004 | subgroup gradient holdout | passed |
+| CAL-G-005 | public policy-shock plausibility | passed |
+| CAL-G-006 | posterior predictive checks | passed |
+| CAL-G-007 | claim downgrade | passed |
+
+## What the model cannot claim
+
+Do not use it to claim:
+
+- precise fiscal savings;
+- ED reductions;
+- hospital-demand reductions;
+- workforce effects;
+- implementation impacts;
+- causal effects.
+
+## Evidence priorities
+
+The next evidence value is in:
+
+- district and subgroup persistence checks;
+- access and urgent/ambulance public time series;
+- activity-sensitive funding without gaming;
+- place-accountability effects;
+- PHO function versus transaction-cost evidence.
+
+## Practical policy implication
+
+Treat primary care funding as an architecture.
+
+Do not ask capitation to do every job.
+
+Do not add uncapped activity payment without controls.
+
+Do not treat urgent care and ambulance as separate from primary care access.
+
+## Recommendation
+
+Use the model as a transparent decision-support and evidence-prioritisation tool.
+
+Run policy design as a staged public-learning programme:
+
+1. Keep capitation and reweight it.
+2. Test controlled eligible activity payment.
+3. Require place accountability.
+4. Protect patients from co-payment harm.
+5. Publish enough aggregate data to learn.
+
+## Closing line
+
+The result is not a forecast.
+
+It is a disciplined warning:
+
+> A primary care system that cannot grow upstream will keep buying rescue downstream.
