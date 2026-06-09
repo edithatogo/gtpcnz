@@ -11,9 +11,9 @@
     "implementation impacts",
     "causal effects"
   ],
-  "output_hash": "f72ee1445434087580209adde3993d58fa6700e63aea3761c3a665233d0c092c",
+  "output_hash": "3ad66612f6d6a148af2a442a8282ab34016a6e618c2e201a2b4beb749dbc28a3",
   "parameter_hash": "fdb642505004dc8f52e60f3c9ce94e61e982f7a6ab00845e66cc3f2bf87bff8b",
-  "source_snapshot_hash": "e2c31eadd51e56f3ba9f799470e2fe6d26cfba8939ed7c737395f216854e8b4b",
+  "source_snapshot_hash": "f3a2d0310d69cd90c4a72fc8104874c464c546f0a8fdae2325d747d874e4d3c9",
   "test_status": "not-run-by-manifest-generator",
   "version": "1.8.1",
   "visual_regression_status": "gate-present"

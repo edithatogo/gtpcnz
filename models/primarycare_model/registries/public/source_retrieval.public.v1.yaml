@@ -17,14 +17,14 @@ retrieval_plans:
     download_url: https://www.tewhatuora.govt.nz/assets/For-health-providers/Primary-care-sector/Master-PHO-Services-Agreement-.pdf
     expected_raw_dir: data/public_raw/src_pho_services_agreement
     expected_raw_artifact: master-pho-services-agreement.pdf
-    retrieval_method: Download the public PHO Services Agreement PDF from Health NZ and extract schedule tables.
+    retrieval_method: Download the public PHO Services Agreement URL from Health NZ; extract schedule tables only if valid PDF or machine-readable table bytes are returned, otherwise write a bounded extraction-blocker artifact.
     fetch_script: scripts/fetch_pho_services_agreement.py
     retrieval_status: processed_ready
     licence_basis: public_reference
     public_access_status: public
     transform_script: scripts/transform_pho_agreement.py
     expected_processed_artifact: data/public_processed/src_pho_services_agreement/pho_services_schedule.csv
-    claim_boundary: Public schedule reference only; not contract-level private payment data.
+    claim_boundary: Public schedule reference only; not contract-level private payment data and not pass-through, transaction-cost, fiscal, workforce, hospital-demand, implementation-impact, or causal evidence.
   - source_id: src_hnz_enrolment
     landing_page_url: https://www.tewhatuora.govt.nz/for-health-professionals/data-and-statistics/primary-care
     download_url: null

@@ -38,7 +38,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     
-    <script nonce="3DlEpNMDKsRHYFGq">
+    <script nonce="jvCq16VmoQPE0Hd2">
         const servicesLastUpdated = '';
         const pageLink = '';
         const mapboxgl_token = 'REDACTED_PUBLIC_SITE_MAPBOX_TOKEN';
@@ -174,7 +174,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         
                             
                                 <li class="nav-item dropdown has-megamenu flex-grow-0">
-                                    <button class="nav-link dropdown-toggle section" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Guidance and standards</button>
+                                    <button class="nav-link dropdown-toggle link" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Guidance and standards</button>
                                     <div class="dropdown-menu megamenu megamenu--health-professionals bg-transparent p-0 border-0" role="menu">
                                         <div class="megamenu-container megamenu-container--health-professionals container-xl overflow-hidden bg-white p-0">
                                             <div class="row">
@@ -5703,29 +5703,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/volunteers" class="mobile-menu__link">
-                                Volunteers
-                                
-                            </a>
-                        </li>
-                    
-                        <li class="mobile-menu__link-item">
-                            <a href="/careers/corporate-and-support" class="mobile-menu__link">
-                                Corporate and support careers
-                                
-                            </a>
-                        </li>
-                    
-                        <li class="mobile-menu__link-item">
                             <a href="/careers/roles" class="mobile-menu__link">
-                                Roles with Health New Zealand
-                                
-                            </a>
-                        </li>
-                    
-                        <li class="mobile-menu__link-item">
-                            <a href="/careers/privacy" class="mobile-menu__link">
-                                Privacy — Job applications, registrations and expressions of interest
+                                Roles
                                 
                             </a>
                         </li>
@@ -5981,15 +5960,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/working-health-new-zealand/testimonials" class="mobile-menu__link">
-                                Testimonials from our workforce
+                            <a href="/careers/working-health-new-zealand/international-events" class="mobile-menu__link">
+                                International events
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/working-health-new-zealand/international-events" class="mobile-menu__link">
-                                International events
+                            <a href="/careers/working-health-new-zealand/testimonials" class="mobile-menu__link">
+                                Testimonials from our workforce
                                 
                             </a>
                         </li>
@@ -6237,7 +6216,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         
                             <img class="mobile-menu__title-icon" width="30" height="30" src="/assets/icons/Temp-nav-icons-1.svg" alt=""/>
                         
-                        <span>Roles with Health New Zealand</span>
+                        <span>Roles</span>
                     </a>
                 </h2>
 
@@ -6299,14 +6278,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/corporate-and-support/procurement" class="mobile-menu__link">
+                            <a href="/careers/roles/corporate-and-support/procurement" class="mobile-menu__link">
                                 Procurement roles
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/corporate-and-support/hauora-maori-service" class="mobile-menu__link">
+                            <a href="/careers/roles/corporate-and-support/hauora-maori-service" class="mobile-menu__link">
                                 Hauora Māori Service roles
                                 
                             </a>
@@ -6334,7 +6313,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/volunteers" class="mobile-menu__link">
+                            <a href="/careers/roles/volunteers" class="mobile-menu__link">
                                 Volunteers
                                 
                             </a>
@@ -6380,7 +6359,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                         </button>
 
                                         <h2 class="mobile-menu__title-wrapper">
-                                            <a class="mobile-menu__title" href="https://www.healthnz.govt.nz/careers/roles/2027-residents-registrars">
+                                            <a class="mobile-menu__title" href="https://www.healthnz.govt.nz/careers/roles/clinical/resident-medical-officers">
                                                 
                                                 <span>Resident Medical Officers (Junior Medical Officers)</span>
                                             </a>
@@ -6398,15 +6377,43 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/2027-residents-registrars#houseofficers" class="mobile-menu__link">
-                                2027 House Officer positions
+                            <a href="/careers/roles/clinical/resident-medical-officers#house-officers-pgy1-26371" class="mobile-menu__link">
+                                PGY1 House Officers (NZREX, PLAB)
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/2027-residents-registrars#registrars" class="mobile-menu__link">
-                                2027 Registrar positions
+                            <a href="/careers/roles/clinical/resident-medical-officers#house-officers-pgy1-26371" class="mobile-menu__link">
+                                PGY1 House Officers (NZ and Australia Graduates)
+                                
+                            </a>
+                        </li>
+                    
+                        <li class="mobile-menu__link-item">
+                            <a href="/careers/roles/clinical/resident-medical-officers#apply-for-resident-medical-officer-roles-in-new-zealand-26372" class="mobile-menu__link">
+                                PGY2+ House Officers
+                                
+                            </a>
+                        </li>
+                    
+                        <li class="mobile-menu__link-item">
+                            <a href="/careers/roles/clinical/resident-medical-officers#apply-for-resident-medical-officer-roles-in-new-zealand-26372" class="mobile-menu__link">
+                                PGY3+ Senior House Officers
+                                
+                            </a>
+                        </li>
+                    
+                        <li class="mobile-menu__link-item">
+                            <a href="/careers/roles/clinical/resident-medical-officers#apply-for-resident-medical-officer-roles-in-new-zealand-26372" class="mobile-menu__link">
+                                Registrars
+                                
+                            </a>
+                        </li>
+                    
+                        <li class="mobile-menu__link-item">
+                            <a href="/careers/roles/clinical/resident-medical-officers#apply-for-resident-medical-officer-roles-in-new-zealand-26372" class="mobile-menu__link">
+                                Fellows
                                 
                             </a>
                         </li>
@@ -6422,34 +6429,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             
             <ul class="mobile-menu__links list-unstyled">
                 
-                    
-                        <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/2027-residents-registrars#PGY1" class="mobile-menu__link">
-                                PGY1 roles
-                                
-                            </a>
-                        </li>
-                    
-                        <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/2027-residents-registrars#PGY2" class="mobile-menu__link">
-                                Immediate start PGY2 roles
-                                
-                            </a>
-                        </li>
-                    
-                        <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/2027-residents-registrars#SHO" class="mobile-menu__link">
-                                Immediate start SHO and Registrar roles
-                                
-                            </a>
-                        </li>
-                    
-                        <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/2027-residents-registrars#fellows" class="mobile-menu__link">
-                                Fellow roles
-                                
-                            </a>
-                        </li>
                     
                 
             </ul>
@@ -6500,7 +6479,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                         </button>
 
                                         <h2 class="mobile-menu__title-wrapper">
-                                            <a class="mobile-menu__title" href="https://www.healthnz.govt.nz/careers/roles/senior-medical-officers">
+                                            <a class="mobile-menu__title" href="https://www.healthnz.govt.nz/careers/roles/clinical/senior-medical-officers">
                                                 
                                                 <span>Senior Medical Officers (Physicians and Consultants)</span>
                                             </a>
@@ -6518,70 +6497,70 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/anaesthetists" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/anaesthetists" class="mobile-menu__link">
                                 Anaesthetists
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/internal-medicine-specialists/cardiologists" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/internal-medicine-specialists/cardiologists" class="mobile-menu__link">
                                 Cardiologists
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/surgical-specialists/cardiothoracic-surgeons" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/surgical-specialists/cardiothoracic-surgeons" class="mobile-menu__link">
                                 Cardiothoracic Surgeons
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/dermatologists" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/dermatologists" class="mobile-menu__link">
                                 Dermatologists
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/emergency-medicine-specialists" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/emergency-medicine-specialists" class="mobile-menu__link">
                                 Emergency Medicine Specialists
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/internal-medicine-specialists/gastroenterologists" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/internal-medicine-specialists/gastroenterologists" class="mobile-menu__link">
                                 Gastroenterologists
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/general-practitioners" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/general-practitioners" class="mobile-menu__link">
                                 General Practitioners
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/surgical-specialists/general-surgeons" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/surgical-specialists/general-surgeons" class="mobile-menu__link">
                                 General Surgeons
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/internal-medicine-specialists/haematologists" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/internal-medicine-specialists/haematologists" class="mobile-menu__link">
                                 Haematologists
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/internal-medicine-specialists" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/internal-medicine-specialists" class="mobile-menu__link">
                                 Internal (General) Medicine Specialists
                                 
                             </a>
@@ -6600,63 +6579,63 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/internal-medicine-specialists" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/internal-medicine-specialists" class="mobile-menu__link">
                                 Internal (General) Medicine Specialists
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/neurosurgeons" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/neurosurgeons" class="mobile-menu__link">
                                 Neurosurgeons
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/obstetricians-and-gynaecologists" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/obstetricians-and-gynaecologists" class="mobile-menu__link">
                                 Obstetricians and Gynaecologists
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/oncologists" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/oncologists" class="mobile-menu__link">
                                 Oncologists
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/surgical-specialists/oral-and-maxillofacial-surgeons" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/surgical-specialists/oral-and-maxillofacial-surgeons" class="mobile-menu__link">
                                 Oral and Maxillofacial Surgeons
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/surgical-specialists#orthopaedic-surgeons-15498" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/surgical-specialists#orthopaedic-surgeons-15498" class="mobile-menu__link">
                                 Orthopaedic Surgeons
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/surgical-specialists#otolaryngology-head-and-neck-surgeons-15501" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/surgical-specialists#otolaryngology-head-and-neck-surgeons-15501" class="mobile-menu__link">
                                 Otolaryngology, Head &amp; Neck Surgeons (ENT)
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/surgical-specialists#paediatric-surgeons-15523" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/surgical-specialists#paediatric-surgeons-15523" class="mobile-menu__link">
                                 Paediatric Surgeons
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/paediatricians" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/paediatricians" class="mobile-menu__link">
                                 Paediatricians
                                 
                             </a>
@@ -6675,63 +6654,63 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/pain-medicine-specialists" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/pain-medicine-specialists" class="mobile-menu__link">
                                 Pain Medicine Specialists
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/pathologists" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/pathologists" class="mobile-menu__link">
                                 Pathologists
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/surgical-specialists#plastic-and-reconstructive-surgeons-15525" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/surgical-specialists#plastic-and-reconstructive-surgeons-15525" class="mobile-menu__link">
                                 Plastic and Reconstructive Surgeons
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/psychiatrists" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/psychiatrists" class="mobile-menu__link">
                                 Psychiatrists
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/radiologists" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/radiologists" class="mobile-menu__link">
                                 Radiologists
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/rural-hospital-doctors" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/rural-hospital-doctors" class="mobile-menu__link">
                                 Rural Hospital Doctors
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/surgical-specialists#urologists-16835" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/surgical-specialists#urologists-16835" class="mobile-menu__link">
                                 Urologists
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers/surgical-specialists#vascular-surgeons-15532" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers/surgical-specialists#vascular-surgeons-15532" class="mobile-menu__link">
                                 Vascular Surgeons
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/senior-medical-officers" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/senior-medical-officers" class="mobile-menu__link">
                                 All other areas of practice
                                 
                             </a>
@@ -6774,7 +6753,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                         </button>
 
                                         <h2 class="mobile-menu__title-wrapper">
-                                            <a class="mobile-menu__title" href="https://www.healthnz.govt.nz/careers/roles/allied-health-science-technical">
+                                            <a class="mobile-menu__title" href="https://www.healthnz.govt.nz/careers/roles/clinical/allied-health-science-technical">
                                                 
                                                 <span>Allied Health, Scientific and Technical</span>
                                             </a>
@@ -6792,70 +6771,70 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/allied-health-science-technical/anaesthetic-technicians" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/allied-health-science-technical/anaesthetic-technicians" class="mobile-menu__link">
                                 Anaesthetic Technicians
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/allied-health-science-technical/cardiac-sonographers" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/allied-health-science-technical/cardiac-sonographers" class="mobile-menu__link">
                                 Cardiac Sonographers
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/allied-health-science-technical/clinical-psychologists" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/allied-health-science-technical/clinical-psychologists" class="mobile-menu__link">
                                 Clinical Psychologists
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/allied-health-science-technical/medical-imaging-technologists" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/allied-health-science-technical/medical-imaging-technologists" class="mobile-menu__link">
                                 Medical Imaging Technologists
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/allied-health-science-technical/occupational-therapists" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/allied-health-science-technical/occupational-therapists" class="mobile-menu__link">
                                 Occupational Therapists
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/allied-health-science-technical/oral-health-therapists" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/allied-health-science-technical/oral-health-therapists" class="mobile-menu__link">
                                 Oral Health Therapists
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/allied-health-science-technical/pharmacists" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/allied-health-science-technical/pharmacists" class="mobile-menu__link">
                                 Pharmacists
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/allied-health-science-technical/physiotherapists" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/allied-health-science-technical/physiotherapists" class="mobile-menu__link">
                                 Physiotherapists
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/allied-health-science-technical/radiation-therapists" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/allied-health-science-technical/radiation-therapists" class="mobile-menu__link">
                                 Radiation Therapists
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/allied-health-science-technical/sonographers" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/allied-health-science-technical/sonographers" class="mobile-menu__link">
                                 Sonographers
                                 
                             </a>
@@ -6874,14 +6853,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/allied-health-science-technical/sonographers" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/allied-health-science-technical/sonographers" class="mobile-menu__link">
                                 Sonographers
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/allied-health-science-technical" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/allied-health-science-technical" class="mobile-menu__link">
                                 All other areas of practice
                                 
                             </a>
@@ -6945,14 +6924,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/nurses" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/nurses" class="mobile-menu__link">
                                 Nurses
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/nurses/graduate-registered-nurses" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/nurses/graduate-registered-nurses" class="mobile-menu__link">
                                 Graduate Registered Nurses
                                 
                             </a>
@@ -6971,7 +6950,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/midwives" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/midwives" class="mobile-menu__link">
                                 Midwives
                                 
                             </a>
@@ -7017,7 +6996,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                         </button>
 
                                         <h2 class="mobile-menu__title-wrapper">
-                                            <a class="mobile-menu__title" href="https://www.healthnz.govt.nz/careers/roles/specialised-teams">
+                                            <a class="mobile-menu__title" href="https://www.healthnz.govt.nz/careers/roles/clinical/specialised-teams">
                                                 
                                                 <span>Medical teams</span>
                                             </a>
@@ -7035,42 +7014,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/specialised-teams/cancer-care" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/specialised-teams/cancer-care" class="mobile-menu__link">
                                 Cancer Care teams
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/specialised-teams/critical-care" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/specialised-teams/critical-care" class="mobile-menu__link">
                                 Critical Care teams
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/specialised-teams/medical-imaging" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/specialised-teams/medical-imaging" class="mobile-menu__link">
                                 Medical Imaging teams
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/specialised-teams/mental-health-and-addiction" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/specialised-teams/mental-health-and-addiction" class="mobile-menu__link">
                                 Mental Health and Addiction teams
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/specialised-teams/paediatrics" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/specialised-teams/paediatrics" class="mobile-menu__link">
                                 Paediatrics
                                 
                             </a>
                         </li>
                     
                         <li class="mobile-menu__link-item">
-                            <a href="/careers/roles/specialised-teams/assisted-dying-service-roles" class="mobile-menu__link">
+                            <a href="/careers/roles/clinical/specialised-teams/assisted-dying-service-roles" class="mobile-menu__link">
                                 Assisted Dying Service roles
                                 
                             </a>
@@ -8122,7 +8101,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <ul class="list-unstyled footer-list footer-nav">
                     
                         <li class="nav-item">
-                            <a href="/careers" class="footer-nav-link link">Careers</a>
+                            <a href="/careers" class="footer-nav-link section">Careers</a>
                         </li>
                     
                         <li class="nav-item">

@@ -2,6 +2,6 @@
   "id": "072",
   "slug": "pho-services-agreement-table-extraction",
   "title": "PHO Services Agreement bounded table extraction",
-  "status": "planned",
+  "status": "complete_with_extraction_blocker",
   "claim_boundary": "reference_only_until_public_tables_extract"
 }

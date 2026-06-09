@@ -1,9 +1,9 @@
 {
   "claim_boundary": "Public/published aggregate source snapshot only; no private, confidential, or patient-level inputs.",
-  "created_at": "2026-06-09T04:59:51.222303+00:00",
+  "created_at": "2026-06-09T17:19:31.315482+00:00",
   "parameter_registry_sha256": "fdb642505004dc8f52e60f3c9ce94e61e982f7a6ab00845e66cc3f2bf87bff8b",
   "snapshot_id": "public-snapshot-v1",
-  "source_registry_sha256": "71d5e09a85e9ec94c300eb9cb6905b5d0c28db3692e21737c5fd9d88a196140d",
+  "source_registry_sha256": "f3a2d0310d69cd90c4a72fc8104874c464c546f0a8fdae2325d747d874e4d3c9",
   "sources": [
     {
       "checksum": "619092f5e14247bd24428720789d12bac0ea9695864817db5d12828f54710170",
@@ -17,14 +17,14 @@
       "url_or_reference": "https://www.tewhatuora.govt.nz/for-health-providers/primary-care-sector/capitation-rates"
     },
     {
-      "checksum": "aac3d4714fc1735bb7d6ddc68a27d3e0cc87ba412cd1c03209e9680da3a093c1",
-      "claim_boundary": "Public schedule reference only.",
+      "checksum": "e31d0f3ad39af249003d80a4319046d9eada428758210c7ae6a33111bcdce859",
+      "claim_boundary": "Public schedule reference only; no pass-through, transaction-cost, fiscal, workforce, hospital-demand, implementation-impact, or causal claim.",
       "label": "PHO Services Agreement public schedule",
       "licence_status": "public_reference",
       "public_access_status": "public",
-      "retrieval_date": "2026-06-03",
+      "retrieval_date": "2026-06-10",
       "source_id": "src_pho_services_agreement",
-      "transform_description": "Public PHO Services Agreement PDF downloaded and transformed to a hashed public reference manifest.",
+      "transform_description": "Public PHO Services Agreement URL downloaded; current response is HTML under the expected PDF filename, so bounded table extraction is recorded as a hashed blocker artifact.",
       "url_or_reference": "https://www.tewhatuora.govt.nz/for-health-providers/primary-care-sector/primary-health-organisation-services-agreement"
     },
     {
@@ -39,7 +39,7 @@
       "url_or_reference": "https://www.tewhatuora.govt.nz/for-health-professionals/data-and-statistics/primary-care"
     },
     {
-      "checksum": "b464fcbd3150354582384c4529075b541b278172a7c0d49d7fbd43e69ea6f4ff",
+      "checksum": "d9ca5eeeaba1e85cc97a8e960642c3593dbcfc53c5c0812b99697d9586c274b9",
       "claim_boundary": "Public aggregate validation evidence only; no patient-level or passed-holdout claim.",
       "label": "Health NZ PHO enrolment and access quarterly workbook",
       "licence_status": "public_reference",

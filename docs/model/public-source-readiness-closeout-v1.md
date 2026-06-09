@@ -24,7 +24,7 @@ Detailed evidence is recorded in `docs/model/public-source-calibration-evidence-
 The public runtime source path now has raw and processed evidence for:
 
 - Health NZ capitation rates public reference page, including the bounded CAL-G-005 directional comparison artifact derived from the checked-in public table extract.
-- Health NZ PHO Services Agreement public PDF.
+- Health NZ PHO Services Agreement public reference. Track 072 found the current registry-pinned public URL returns HTML under the expected PDF filename, so schedule table extraction is blocked and recorded as reference-only.
 - Health NZ primary-care enrolment public data/statistics page.
 - Health NZ PHO access quarterly public workbook.
 - Medical Council workforce survey public report.
@@ -76,6 +76,6 @@ The next substantive step is to harden release-facing claim governance around th
 
 1. Release-gate review now that all registered CAL-G validation gates pass together.
 2. Additional independent regional, rurality-grain, subgroup-gradient, or policy-shock public validation targets where public data permit.
-3. Bounded PHO Services Agreement table extraction if it is to move from `reference_only` to a numeric comparison lane.
+3. Replacement public PHO Services Agreement PDF/table URL if it is ever to move from `reference_only` to a numeric comparison lane; the current pinned URL returns HTML and is recorded as an extraction blocker.
 
 Even after the aggregate validation upgrade, the model remains not valid for precise fiscal savings, ED reductions, hospital-demand reductions, workforce effects, implementation impacts, or causal effects unless separate claim-specific evidence gates pass.

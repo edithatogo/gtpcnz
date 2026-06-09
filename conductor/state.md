@@ -54,9 +54,12 @@ Track 071 is complete with a local Quarto render blocker:
 
 - `071-release-site-report-regeneration`: generated release model card and release manifest now report `empirically_supported_if_gated` / `public_aggregate_validated`, with not-valid-for warnings preserved for precise fiscal, ED, hospital-demand, workforce, implementation, and causal claims. Homepage, report source, site-map source, and Quarto render set now expose the regenerated release artifacts. Local Quarto render is blocked by Windows/OneDrive generated-output locks in the worktree and Quarto Sass compiler `cmd.exe` spawn failure in a temp render probe; details are recorded in `docs/release/track-071-release-regeneration-v1.md`.
 
-Tracks 072-074 are planned for the broader post-aggregate-validation programme:
+Track 072 is complete with a deterministic extraction blocker:
 
-- `072-pho-services-agreement-table-extraction`: attempt bounded deterministic extraction from the public PHO Services Agreement PDF, keeping the source `reference_only` unless comparison contracts pass.
+- `072-pho-services-agreement-table-extraction`: the registry-pinned public PHO Services Agreement URL was re-fetched and currently returns HTML under the expected PDF filename. The bounded transform records `extraction_blocked` in `data/public_processed/src_pho_services_agreement/pho_services_schedule.csv`; documentation is in `docs/model/pho-services-agreement-bounded-extraction-v1.md`. PHO Services Agreement evidence remains `reference_only`, and CAL-G-005 remains passed only through the capitation schedule numeric comparison lane.
+
+Tracks 073-074 are planned for the broader post-aggregate-validation programme:
+
 - `073-independent-public-validation-expansion`: identify, register, and test additional independent public aggregate validation sources beyond current PHO access and capitation evidence.
 - `074-aggregate-validation-claim-surface-review`: review app, report, model-card, README, and release wording so aggregate validation is visible without implying excluded claims.
 
@@ -70,6 +73,7 @@ Next implementation frontier:
 - Public aggregate calibration output embeds validation-gate and posterior-predictive summaries for report/model-card consumption; the output now reports `empirically_supported_if_gated` / `public_aggregate_validated`.
 - Public evidence acquisition execution is now governed by Track 070. Q3/Q4 public temporal, geographic, and subgroup-gradient evidence is source-ready, and CAL-G-002/CAL-G-003/CAL-G-004 pass. CAL-G-005 passes through the bounded capitation schedule policy-condition comparison.
 - Release site/report regeneration is source-complete for Track 071. Quarto render remains a local environment blocker until generated output locks and Quarto Sass spawn behavior are cleared.
+- PHO Services Agreement bounded table extraction is blocked by the current public URL returning HTML rather than PDF bytes. The blocker is now machine-readable and does not change CAL-G-005.
 - No upgrade beyond aggregate validation until claim-specific validation families have public source artefacts, verified checksums, processed outputs, and passing gates.
 
 Parallel execution controls:
