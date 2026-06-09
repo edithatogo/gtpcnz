@@ -38,6 +38,19 @@ retrieval_plans:
     transform_script: scripts/transform_hnz_enrolment.py
     expected_processed_artifact: data/public_processed/src_hnz_enrolment/enrolment_counts.csv
     claim_boundary: Aggregate enrolment denominator only; no patient-level data.
+  - source_id: src_hnz_pho_access_timeseries
+    landing_page_url: https://www.healthnz.govt.nz/about-us/health-data/data-sets-and-collections/primary-care-data-and-statistics/enrolment-with-a-general-practice-and-primary-health-organisation
+    download_url: https://static.info.content.health.nz/docs/about-us/health-data/Primary%20care/access-to-primary-care-stats-2025-q4.xlsx
+    expected_raw_dir: data/public_raw/src_hnz_pho_access_timeseries
+    expected_raw_artifact: access-to-primary-care-stats-2025-q4.xlsx
+    retrieval_method: Download the public Health NZ quarterly access-to-primary-care workbook and record workbook metadata for validation-source evidence.
+    fetch_script: scripts/fetch_hnz_pho_access_timeseries.py
+    retrieval_status: processed_ready
+    licence_basis: public_reference
+    public_access_status: public
+    transform_script: scripts/transform_hnz_pho_access_timeseries.py
+    expected_processed_artifact: data/public_processed/src_hnz_pho_access_timeseries/pho_access_workbook_metadata.csv
+    claim_boundary: Public aggregate validation evidence only; no patient-level or passed-holdout claim.
   - source_id: src_mcnz_workforce
     landing_page_url: https://www.mcnz.org.nz/about-us/publications/workforce-survey/
     download_url: https://www.mcnz.org.nz/assets/Publications/Workforce-Survey/Workforce-Survey-Report-2025.pdf

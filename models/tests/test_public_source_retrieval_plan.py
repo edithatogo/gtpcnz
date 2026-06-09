@@ -25,6 +25,7 @@ def test_public_source_retrieval_plan_tracks_processed_public_sources() -> None:
         "src_hnz_capitation_schedule": "processed_ready",
         "src_pho_services_agreement": "processed_ready",
         "src_hnz_enrolment": "processed_ready",
+        "src_hnz_pho_access_timeseries": "processed_ready",
         "src_mcnz_workforce": "processed_ready",
         "src_nz_health_survey": "processed_ready",
         "src_statsnz_population": "processed_ready",

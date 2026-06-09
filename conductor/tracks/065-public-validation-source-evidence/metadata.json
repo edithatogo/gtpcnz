@@ -1,0 +1,9 @@
+{
+  "id": "065",
+  "slug": "public-validation-source-evidence",
+  "title": "Public validation source evidence",
+  "status": "complete_readiness_only",
+  "created": "2026-06-09",
+  "contracts": ["CON-PUBLIC-001", "CON-CAL-001"],
+  "claim_boundary": "Public validation-source evidence only; no empirical claim upgrade."
+}

@@ -6,28 +6,29 @@ GTPCNZ now has verified public source acquisition evidence for the public aggreg
 
 | Layer | Status |
 |---|---|
-| Public source files | 6 of 6 raw public artefacts present |
-| Source checksums | 6 of 6 source registry checksums are verified SHA-256 values |
+| Public source files | 7 of 7 raw public artefacts present |
+| Source checksums | 7 of 7 source registry checksums are verified SHA-256 values |
 | Licence/access gate | Passed; sources remain public references with public access |
-| Processed artefacts | 6 of 6 expected processed artefacts present |
+| Processed artefacts | 7 of 7 expected processed artefacts present |
 | Processed schema gate | Passed in `--require-processed` mode |
 | Calibration target readiness | Passed for 3 public aggregate targets |
 | Baseline public aggregate reproduction | Passed |
 | Posterior predictive checks | Passed |
 | Temporal holdout validation | Public data unavailable |
-| Geographic/rural holdout validation | Public data unavailable |
-| Subgroup gradient validation | Public data unavailable |
+| Geographic/rural holdout validation | Public validation source registered; numeric holdout comparison not passed |
+| Subgroup gradient validation | Public validation source registered; numeric gradient comparison not passed |
 | Public policy-shock plausibility | Public data unavailable |
 | Calibration status | `calibration_readiness_only` |
 | Claim level | `public_benchmark` |
 
 ## Verified Source Evidence
 
-The public source registry records six public/published aggregate source families:
+The public source registry records seven public/published aggregate source families:
 
 - `src_hnz_capitation_schedule`: Health NZ capitation rates public reference page.
 - `src_pho_services_agreement`: Health NZ PHO Services Agreement public PDF.
 - `src_hnz_enrolment`: Health NZ primary-care public data/statistics page.
+- `src_hnz_pho_access_timeseries`: Health NZ quarterly PHO access workbook with public ethnicity, gender, age, and deprivation tabs.
 - `src_mcnz_workforce`: Medical Council workforce survey public report.
 - `src_nz_health_survey`: Ministry of Health New Zealand Health Survey annual update public page.
 - `src_statsnz_population`: Stats NZ population indicator public page.
@@ -57,7 +58,7 @@ calibration_status: calibration_readiness_only
 claim_level: public_benchmark
 ```
 
-This is deliberate. Several validation families remain `public_data_unavailable`, including temporal holdout, geographic/rural holdout, subgroup gradient, and public policy-shock plausibility checks.
+This is deliberate. CAL-G-003 and CAL-G-004 now have a registered public validation source, but no numeric holdout or gradient comparison has passed. CAL-G-002 and CAL-G-005 remain `public_data_unavailable`.
 
 ## Not Valid For
 

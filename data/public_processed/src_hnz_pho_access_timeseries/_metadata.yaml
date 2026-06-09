@@ -1,0 +1,9 @@
+source_id: src_hnz_pho_access_timeseries
+processed_artifact: data/public_processed/src_hnz_pho_access_timeseries/pho_access_workbook_metadata.csv
+raw_artifact: data/public_raw/src_hnz_pho_access_timeseries/access-to-primary-care-stats-2025-q4.xlsx
+raw_artifact_sha256: 0f71b778fc1e2b7675ffd3bbe9aef50e6c41629e2b244601a0fb599aa9e4cd71
+rows_written: 4
+claim_level: public_benchmark
+calibration_status: calibration_readiness_only
+not_valid_for: patient-level, private administrative, confidential, stakeholder, or causal forecast use
+transform_note: Public Health NZ PHO access workbook metadata for validation evidence only; no model claim upgrade.

@@ -7,9 +7,11 @@ import csv
 import html
 import re
 import sys
+import zipfile
 from dataclasses import dataclass
 from html.parser import HTMLParser
 from pathlib import Path
+from xml.etree import ElementTree
 
 from models.primarycare_model.contracts.public_sources import PublicSourceRetrievalPlan
 from models.primarycare_model.data.public_source_retrieval import load_public_source_retrieval_plans
@@ -298,6 +300,77 @@ def _transform_artifact_manifest(
     return TransformOutput(plan.source_id, output_path, len(rows), "processed_reference_manifest")
 
 
+def _xlsx_sheet_metadata(raw_artifact: Path) -> list[dict[str, object]]:
+    namespaces = {"main": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
+    with zipfile.ZipFile(raw_artifact) as archive:
+        workbook = ElementTree.fromstring(archive.read("xl/workbook.xml"))
+        sheet_names = [
+            str(sheet.attrib["name"])
+            for sheet in workbook.findall("main:sheets/main:sheet", namespaces)
+        ]
+        rows: list[dict[str, object]] = []
+        for index, sheet_name in enumerate(sheet_names, start=1):
+            worksheet_path = f"xl/worksheets/sheet{index}.xml"
+            worksheet = ElementTree.fromstring(archive.read(worksheet_path))
+            dimension = worksheet.find("main:dimension", namespaces)
+            sheet_rows = worksheet.findall("main:sheetData/main:row", namespaces)
+            max_columns = 0
+            for sheet_row in sheet_rows:
+                max_columns = max(max_columns, len(sheet_row.findall("main:c", namespaces)))
+            rows.append(
+                {
+                    "source_id": "src_hnz_pho_access_timeseries",
+                    "raw_artifact_sha256": _sha256(raw_artifact),
+                    "workbook_artifact": raw_artifact.name,
+                    "sheet_name": sheet_name,
+                    "dimension": dimension.attrib.get("ref", "") if dimension is not None else "",
+                    "row_count": len(sheet_rows),
+                    "max_observed_columns": max_columns,
+                    "validation_use": _validation_use_for_sheet(sheet_name),
+                    "claim_boundary": "public validation-source evidence only; not a passed holdout validation result",
+                }
+            )
+    return rows
+
+
+def _validation_use_for_sheet(sheet_name: str) -> str:
+    lower = sheet_name.lower()
+    if "ethnicity" in lower or "deprivation" in lower:
+        return "subgroup_gradient_validation_candidate"
+    if "age" in lower or "gender" in lower:
+        return "subgroup_descriptive_validation_candidate"
+    return "public_validation_candidate"
+
+
+def _transform_hnz_pho_access_timeseries(
+    plan: PublicSourceRetrievalPlan, raw_artifact: Path, output_path: Path
+) -> TransformOutput:
+    rows = _xlsx_sheet_metadata(raw_artifact)
+    _write_csv(
+        output_path,
+        rows,
+        [
+            "source_id",
+            "raw_artifact_sha256",
+            "workbook_artifact",
+            "sheet_name",
+            "dimension",
+            "row_count",
+            "max_observed_columns",
+            "validation_use",
+            "claim_boundary",
+        ],
+    )
+    _write_metadata(
+        output_path,
+        source_id=plan.source_id,
+        raw_artifact=raw_artifact,
+        rows_written=len(rows),
+        note="Public Health NZ PHO access workbook metadata for validation evidence only; no model claim upgrade.",
+    )
+    return TransformOutput(plan.source_id, output_path, len(rows), "processed_validation_source_metadata")
+
+
 def _transform_nz_health_survey(
     plan: PublicSourceRetrievalPlan, raw_artifact: Path, output_path: Path
 ) -> TransformOutput:
@@ -342,6 +415,8 @@ def transform_public_source(source_id: str) -> TransformOutput:
         return _transform_html_tables(plan, raw_artifact, output_path)
     if source_id == "src_hnz_enrolment":
         return _transform_link_inventory(plan, raw_artifact, output_path)
+    if source_id == "src_hnz_pho_access_timeseries":
+        return _transform_hnz_pho_access_timeseries(plan, raw_artifact, output_path)
     if source_id == "src_nz_health_survey":
         return _transform_nz_health_survey(plan, raw_artifact, output_path)
     if source_id in {"src_mcnz_workforce", "src_pho_services_agreement"}:

@@ -29,7 +29,11 @@ def workspace_tmp_dir() -> Iterator[Path]:
 def test_processed_dataset_expectations_are_registry_driven() -> None:
     expectations = processed_dataset_expectations(registry_root=REGISTRY)
     ids = {expectation.dataset.dataset_id for expectation in expectations}
-    assert ids == {"population_denominators_public", "primary_care_access_public"}
+    assert ids == {
+        "pho_access_validation_source_metadata_public",
+        "population_denominators_public",
+        "primary_care_access_public",
+    }
     assert all(str(expectation.artifact).endswith(".csv") for expectation in expectations)
 
 
@@ -47,6 +51,23 @@ def test_processed_schema_strict_reports_missing_artifacts() -> None:
         )
     assert any("population_denominators_public: missing processed artifact" in issue for issue in issues)
     assert any("primary_care_access_public: missing processed artifact" in issue for issue in issues)
+    assert any("pho_access_validation_source_metadata_public: missing processed artifact" in issue for issue in issues)
+
+
+def _write_valid_pho_access_metadata(processed_root: Path) -> None:
+    pho_dir = processed_root / "src_hnz_pho_access_timeseries"
+    pho_dir.mkdir(parents=True)
+    (pho_dir / "pho_access_workbook_metadata.csv").write_text(
+        "\n".join(
+            (
+                "source_id,raw_artifact_sha256,workbook_artifact,sheet_name,dimension,row_count,max_observed_columns,validation_use",
+                "src_hnz_pho_access_timeseries,abc123,workbook.xlsx,Ethnicity,A1:P34,30,16,subgroup_gradient_validation_candidate",
+                "",
+            )
+        ),
+        encoding="utf-8",
+    )
+    (pho_dir / "_metadata.yaml").write_text("source_id: src_hnz_pho_access_timeseries\n", encoding="utf-8")
 
 
 def test_processed_schema_accepts_valid_public_aggregate_csv() -> None:
@@ -65,6 +86,7 @@ def test_processed_schema_accepts_valid_public_aggregate_csv() -> None:
             encoding="utf-8",
         )
         (access_dir / "_metadata.yaml").write_text("source_id: src_nz_health_survey\n", encoding="utf-8")
+        _write_valid_pho_access_metadata(processed_root)
 
         assert validate_processed_input_schemas(registry_root=REGISTRY, processed_root=processed_root, require_processed=True) == ()
 

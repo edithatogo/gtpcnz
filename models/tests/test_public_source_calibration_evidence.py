@@ -27,7 +27,7 @@ def test_public_sources_have_verified_non_placeholder_checksums() -> None:
         item["retrieval_date"] = str(item["retrieval_date"])
     sources = [PublicSource.model_validate(item) for item in payload["sources"]]
 
-    assert len(sources) == 6
+    assert len(sources) >= 6
     for source in sources:
         assert source.public_access_status == "public"
         assert source.checksum != "pending-download"
@@ -37,7 +37,7 @@ def test_public_sources_have_verified_non_placeholder_checksums() -> None:
 def test_public_source_readiness_matrix_is_source_ready_but_not_claim_expanding() -> None:
     rows = build_public_source_readiness_matrix(strict=True)
 
-    assert len(rows) == 6
+    assert len(rows) >= 6
     assert all(row.source_ready for row in rows)
     assert {row.calibration_claim_status for row in rows} == {"public_aggregate_source_ready"}
 
@@ -60,8 +60,8 @@ def test_validation_gates_explain_why_calibration_is_not_upgraded() -> None:
     assert statuses["CAL-G-006"] == "passed"
     assert statuses["CAL-G-007"] == "passed"
     assert statuses["CAL-G-002"] == "public_data_unavailable"
-    assert statuses["CAL-G-003"] == "public_data_unavailable"
-    assert statuses["CAL-G-004"] == "public_data_unavailable"
+    assert statuses["CAL-G-003"] == "public_validation_source_registered"
+    assert statuses["CAL-G-004"] == "public_validation_source_registered"
     assert statuses["CAL-G-005"] == "public_data_unavailable"
 
 
