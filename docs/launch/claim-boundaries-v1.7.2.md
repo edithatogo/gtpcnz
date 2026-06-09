@@ -13,15 +13,15 @@
 ## Required caveats
 
 - This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast.
-- Where linked-data checks pass, outputs may be described as empirically supported where valid; otherwise claims remain benchmark-level only.
-- It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts without a documented calibration upgrade.
+- Current release status: the registered public aggregate validation lane is `public_aggregate_validated` / `empirically_supported_if_gated` only for aggregate public gates.
+- It should not be used to claim precise fiscal savings, ED reductions, hospital-demand reductions, workforce effects, implementation impacts, or causal effects without claim-specific public validation gates.
 - Current reforms are the comparator, not a straw man.
 - Uncapped means uncapped at the global activity-envelope level, not uncontrolled billing.
 - Place-based accountability is core to the proposal.
 - Equity protections are core to the proposal.
 - Accident Compensation Corporation is an analogy for rules-based treatment payments, not a wholesale template.
 - Hospital growth has multiple causes; upstream access is a candidate driver, not the sole driver.
-- Model outputs are public-data anchored benchmarks unless explicitly labelled as empirically supported where valid.
+- Model outputs are public-data anchored benchmarks unless explicitly labelled as empirically supported where valid; the current empirical label is bounded to the aggregate validation lane.
 
 ## Game-theory formula boundary
 

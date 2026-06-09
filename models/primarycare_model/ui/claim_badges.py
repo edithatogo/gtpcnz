@@ -12,7 +12,11 @@ PUBLIC_NOT_VALID_FOR = (
 )
 
 
-def claim_badge_payload(claim_level: str = "public_benchmark", calibration_status: str = "calibration_readiness_only", uncertainty_type: str = "parameter_and_structural") -> dict[str, str]:
+def claim_badge_payload(
+    claim_level: str = "empirically_supported_if_gated",
+    calibration_status: str = "public_aggregate_validated",
+    uncertainty_type: str = "parameter_and_structural",
+) -> dict[str, str]:
     return {
         "claim_level": claim_level,
         "calibration_status": calibration_status,

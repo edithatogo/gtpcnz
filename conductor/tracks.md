@@ -83,7 +83,7 @@
 | 071 | Release site and report regeneration after aggregate validation | Complete with local Quarto render blocker | Regenerated release model card/manifest and public source surfaces from the validated aggregate lane while preserving precision and causal claim exclusions; local Quarto render is blocked by Windows/OneDrive generated-output locks and Quarto Sass spawn failure. |
 | 072 | PHO Services Agreement bounded table extraction | Complete with extraction blocker | Re-fetched the public URL, detected HTML content under the expected PDF filename, wrote a deterministic extraction-blocker artifact, and kept PHO Services Agreement evidence reference-only. |
 | 073 | Independent public validation source expansion | Complete for candidate registry | Added a typed public validation-source candidate registry, registered the Ministry planning/performance source as a retrieval-plan candidate, kept HQSC Atlas pending locator review, and rejected NZHS regional release for independent-validation counting where it overlaps existing NZHS calibration evidence. |
-| 074 | Aggregate validation claim-surface review | Planned | Review app/report/model-card/README wording after aggregate validation, keeping not-valid-for warnings visible. |
+| 074 | Aggregate validation claim-surface review | Complete for claim-surface review | Updated UI/report-card defaults, README, model-card pointers, calibration docs, and tests so aggregate validation is visible while precision and causal warnings remain in force. |
 
 ## Current priority
 
@@ -91,7 +91,7 @@
 2. Treat tracks 050-070 as complete for the public aggregate validation lane; do not describe aggregate validation as precision, implementation-impact, or causal validation.
 3. Use `docs/model/public-source-calibration-evidence-v1.md` as the current evidence ledger for source acquisition and calibration status.
 4. Preserve not-valid-for boundaries for precise fiscal savings, ED reductions, hospital-demand reductions, workforce effects, implementation impacts, and causal effects.
-5. Execute planned track 074 before broadening public claim wording; Track 073 candidate sources still require later raw acquisition, checksums, transforms, and comparison gates before runtime use.
+5. Do not broaden public claim wording beyond the aggregate validation lane; Track 073 candidate sources still require later raw acquisition, checksums, transforms, and comparison gates before runtime use.
 6. Use the generated v1.8.1 release model card, claim-boundary note, parameter tiering and identifiability map when explaining the model.
 7. Freeze precision/causal claim expansion until claim-specific public evidence gates pass.
 

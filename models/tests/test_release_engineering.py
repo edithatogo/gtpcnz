@@ -141,3 +141,30 @@ def test_release_site_sources_expose_aggregate_validation_boundary() -> None:
     assert "empirically_supported_if_gated" in report
     assert "precise fiscal savings" in report
     assert "causal effects" in site_map
+
+
+def test_current_claim_surfaces_do_not_revert_to_readiness_only_status() -> None:
+    surfaces = {
+        "README.md": (ROOT / "README.md").read_text(encoding="utf-8"),
+        "docs/calibration/public-aggregate-calibration-methods-v1.md": (
+            ROOT / "docs" / "calibration" / "public-aggregate-calibration-methods-v1.md"
+        ).read_text(encoding="utf-8"),
+        "docs/release/model-card-v1.8.1.md": (ROOT / "docs" / "release" / "model-card-v1.8.1.md").read_text(
+            encoding="utf-8"
+        ),
+    }
+
+    readiness_status = "`calibration" + "_readiness_only`"
+    benchmark_pair = "`public_benchmark` / " + readiness_status
+    forbidden_current_phrases = (
+        "Current public status " + "remains " + readiness_status,
+        "Until the public aggregate calibration and validation gates " + "pass",
+        "all public outputs " + "remain " + benchmark_pair,
+    )
+    for path, text in surfaces.items():
+        assert "public_aggregate_validated" in text, path
+        assert "empirically_supported_if_gated" in text, path
+        assert "precise fiscal savings" in text, path
+        assert "causal effects" in text, path
+        for phrase in forbidden_current_phrases:
+            assert phrase not in text, path

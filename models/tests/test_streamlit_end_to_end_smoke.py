@@ -168,11 +168,8 @@ def test_policy_cockpit_payload_covers_every_section_chart_and_download_contract
     payload = build_policy_cockpit_payload()
 
     assert tuple(payload["sections"]) == REQUIRED_SECTIONS
-    assert payload["calibration"]["calibration_status"] in {
-        "not_ready",
-        "calibration_readiness_only",
-        "public_aggregate_validated",
-    }
+    assert payload["calibration"]["calibration_status"] == "public_aggregate_validated"
+    assert payload["calibration"]["claim_level"] == "empirically_supported_if_gated"
     assert payload["structural_uncertainty"]["structural_uncertainty_interval"]
     assert payload["voi"]["label"] in {
         "decision-uncertainty analysis; not a forecast",
@@ -183,8 +180,13 @@ def test_policy_cockpit_payload_covers_every_section_chart_and_download_contract
     assert charts
     for chart in charts:
         assert validate_chart_payload(chart) == []
+        assert chart["calibration_status"] == "public_aggregate_validated"
+        assert chart["claim_level"] == "empirically_supported_if_gated"
         assert chart["downloadable_data"] == chart["table_fallback"]
         assert chart["not_valid_for_warning"]
 
     report_card = scenario_report_card(payload)
-    assert json.loads(report_card)["sections"] == list(REQUIRED_SECTIONS)
+    report_payload = json.loads(report_card)
+    assert report_payload["sections"] == list(REQUIRED_SECTIONS)
+    assert report_payload["calibration"]["calibration_status"] == "public_aggregate_validated"
+    assert "precise fiscal savings" in report_payload["calibration"]["not_valid_for"]

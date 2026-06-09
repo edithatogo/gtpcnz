@@ -62,9 +62,9 @@ Track 073 is complete for independent validation-source candidate governance:
 
 - `073-independent-public-validation-expansion`: added a typed public validation-source candidate registry outside the runtime source snapshot. Ministry planning/performance historical measures are registered as a retrieval-plan candidate for hospital-pressure and avoidable-admission validation families; HQSC Atlas PHO analyses remain candidate-pending-locator; NZHS regional release is rejected for independent-validation counting where the same survey family already supports a calibration target.
 
-Track 074 is planned for the broader post-aggregate-validation programme:
+Track 074 is complete for aggregate validation claim-surface review:
 
-- `074-aggregate-validation-claim-surface-review`: review app, report, model-card, README, and release wording so aggregate validation is visible without implying excluded claims.
+- `074-aggregate-validation-claim-surface-review`: UI/report-card defaults, README, model-card pointers, calibration docs, and release-surface tests now expose `public_aggregate_validated` / `empirically_supported_if_gated` for the registered aggregate lane while preserving not-valid-for warnings for precise fiscal, ED, hospital-demand, workforce, implementation-impact, and causal claims.
 
 Next implementation frontier:
 
@@ -77,7 +77,7 @@ Next implementation frontier:
 - Public evidence acquisition execution is now governed by Track 070. Q3/Q4 public temporal, geographic, and subgroup-gradient evidence is source-ready, and CAL-G-002/CAL-G-003/CAL-G-004 pass. CAL-G-005 passes through the bounded capitation schedule policy-condition comparison.
 - Release site/report regeneration is source-complete for Track 071. Quarto render remains a local environment blocker until generated output locks and Quarto Sass spawn behavior are cleared.
 - PHO Services Agreement bounded table extraction is blocked by the current public URL returning HTML rather than PDF bytes. The blocker is now machine-readable and does not change CAL-G-005.
-- No upgrade beyond aggregate validation until claim-specific validation families have public source artefacts, verified checksums, processed outputs, and passing gates. Track 073 candidates are governance records only and are not runtime inputs.
+- No upgrade beyond aggregate validation until claim-specific validation families have public source artefacts, verified checksums, processed outputs, and passing gates. Track 073 candidates are governance records only and are not runtime inputs; Track 074 does not add evidence or broaden claims.
 
 Parallel execution controls:
 

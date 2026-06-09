@@ -3,7 +3,8 @@
 This lane registers published public-policy shock references that may later support a public numeric pre/post plausibility comparison.
 
 Current status: CAL-G-005 directional plausibility passed for the registered
-numeric comparison lane, while calibration claims remain readiness-only.
+numeric comparison lane. This contributes to the bounded aggregate validation
+surface, not to precision, implementation-impact, or causal claims.
 
 Claim boundary: the registered evidence does not support causal claims, effect-size claims, fiscal savings, hospital-demand reductions, workforce effects, or implementation-impact claims. CAL-G-005 is a directional public-policy plausibility check only.
 
