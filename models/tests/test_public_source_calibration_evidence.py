@@ -59,10 +59,10 @@ def test_validation_gates_explain_why_calibration_is_not_upgraded() -> None:
     assert statuses["CAL-G-001"] == "passed"
     assert statuses["CAL-G-006"] == "passed"
     assert statuses["CAL-G-007"] == "passed"
-    assert statuses["CAL-G-002"] == "public_data_unavailable"
+    assert statuses["CAL-G-002"] == "public_validation_source_registered"
     assert statuses["CAL-G-003"] == "public_holdout_comparison_failed"
     assert statuses["CAL-G-004"] == "public_holdout_comparison_failed"
-    assert statuses["CAL-G-005"] == "public_data_unavailable"
+    assert statuses["CAL-G-005"] == "public_validation_source_registered"
 
 
 def test_public_source_evidence_docs_do_not_contain_stale_pending_download_claims() -> None:

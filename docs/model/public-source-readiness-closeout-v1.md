@@ -55,7 +55,7 @@ calibration_status: calibration_readiness_only
 claim_level: public_benchmark
 ```
 
-The remaining blocker is no longer source acquisition. CAL-G-003 and CAL-G-004 now run public benchmark comparisons, but those comparisons exceed tolerance and therefore do not pass. CAL-G-002 temporal holdout and CAL-G-005 published policy-shock validation still report `public_data_unavailable`.
+The remaining blocker is no longer source acquisition. CAL-G-002 and CAL-G-005 now have public readiness evidence, but they do not pass validation: CAL-G-002 has only one public period and CAL-G-005 has no numeric pre/post shock comparison. CAL-G-003 and CAL-G-004 run public benchmark comparisons, but those comparisons exceed tolerance and therefore do not pass.
 
 ## Claim Boundary
 
@@ -74,9 +74,9 @@ No private administrative data, patient-level data, confidential OIA responses, 
 
 The next substantive step is to locate and register public aggregate validation datasets for:
 
-1. Temporal holdout validation.
-2. Geographic or rural holdout validation.
-3. Subgroup gradient validation.
-4. Published policy-shock plausibility validation.
+1. Additional public temporal periods for CAL-G-002.
+2. Improved geographic or rural holdout comparison performance.
+3. Improved subgroup-gradient comparison performance.
+4. Published numeric pre/post policy-shock comparison evidence for CAL-G-005.
 
 Only after those validation families have public source artefacts, verified checksums, processed outputs, and passing gates should the calibration status be considered for upgrade.
