@@ -58,9 +58,12 @@ Track 072 is complete with a deterministic extraction blocker:
 
 - `072-pho-services-agreement-table-extraction`: the registry-pinned public PHO Services Agreement URL was re-fetched and currently returns HTML under the expected PDF filename. The bounded transform records `extraction_blocked` in `data/public_processed/src_pho_services_agreement/pho_services_schedule.csv`; documentation is in `docs/model/pho-services-agreement-bounded-extraction-v1.md`. PHO Services Agreement evidence remains `reference_only`, and CAL-G-005 remains passed only through the capitation schedule numeric comparison lane.
 
-Tracks 073-074 are planned for the broader post-aggregate-validation programme:
+Track 073 is complete for independent validation-source candidate governance:
 
-- `073-independent-public-validation-expansion`: identify, register, and test additional independent public aggregate validation sources beyond current PHO access and capitation evidence.
+- `073-independent-public-validation-expansion`: added a typed public validation-source candidate registry outside the runtime source snapshot. Ministry planning/performance historical measures are registered as a retrieval-plan candidate for hospital-pressure and avoidable-admission validation families; HQSC Atlas PHO analyses remain candidate-pending-locator; NZHS regional release is rejected for independent-validation counting where the same survey family already supports a calibration target.
+
+Track 074 is planned for the broader post-aggregate-validation programme:
+
 - `074-aggregate-validation-claim-surface-review`: review app, report, model-card, README, and release wording so aggregate validation is visible without implying excluded claims.
 
 Next implementation frontier:
@@ -74,7 +77,7 @@ Next implementation frontier:
 - Public evidence acquisition execution is now governed by Track 070. Q3/Q4 public temporal, geographic, and subgroup-gradient evidence is source-ready, and CAL-G-002/CAL-G-003/CAL-G-004 pass. CAL-G-005 passes through the bounded capitation schedule policy-condition comparison.
 - Release site/report regeneration is source-complete for Track 071. Quarto render remains a local environment blocker until generated output locks and Quarto Sass spawn behavior are cleared.
 - PHO Services Agreement bounded table extraction is blocked by the current public URL returning HTML rather than PDF bytes. The blocker is now machine-readable and does not change CAL-G-005.
-- No upgrade beyond aggregate validation until claim-specific validation families have public source artefacts, verified checksums, processed outputs, and passing gates.
+- No upgrade beyond aggregate validation until claim-specific validation families have public source artefacts, verified checksums, processed outputs, and passing gates. Track 073 candidates are governance records only and are not runtime inputs.
 
 Parallel execution controls:
 
@@ -108,6 +111,7 @@ Current public gates:
 - `python scripts/check_calibration_target_readiness.py`
 - `python scripts/check_calibration_validation_gates.py`
 - `python scripts/check_public_policy_shock_plausibility.py`
+- `python scripts/check_public_validation_source_candidates.py`
 - `python scripts/check_posterior_predictive_checks.py`
 - `python scripts/run_public_aggregate_calibration.py --check-only`
 - `python scripts/run_voi.py --check-only`

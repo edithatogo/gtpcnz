@@ -1,0 +1,89 @@
+validation_source_candidates:
+  - candidate_id: val_moh_planning_performance_historical
+    source_id: src_moh_planning_performance_historical
+    label: Ministry of Health planning and performance historical measures
+    url_or_reference: https://www.health.govt.nz/monitoring-statistics/system-monitoring/planning-and-performance-data
+    public_access_status: public
+    licence_status: public_reference
+    candidate_status: registered_retrieval_plan
+    retrieval_path: landing_page_and_measure_links
+    expected_grain: district_or_health_region_by_measure_period_where_public_downloads_permit
+    claim_family: hospital_pressure_and_avoidable_admissions_validation
+    cal_gates:
+      - CAL-G-003
+      - CAL-G-004
+      - CAL-G-005
+    independence_assessment: independent_of_current_calibration_targets
+    current_runtime_use: not_loaded_public_runtime
+    expected_raw_dir: data/public_raw/src_moh_planning_performance_historical
+    expected_raw_artifact: planning-and-performance-data.html
+    fetch_script: scripts/fetch_moh_planning_performance.py
+    transform_script: scripts/transform_moh_planning_performance.py
+    expected_processed_artifact: data/public_processed/src_moh_planning_performance_historical/planning_performance_inventory.csv
+    rejection_reason: null
+    not_valid_for:
+      - precise fiscal savings
+      - ED reductions
+      - hospital-demand reductions
+      - workforce effects
+      - implementation impacts
+      - causal effects
+    claim_boundary: Public district/measure-level validation candidate only; not loaded by runtime and not a claim upgrade until raw downloads, checksums, transforms, schemas, and comparison gates pass.
+  - candidate_id: val_hqsc_atlas_pho_variation
+    source_id: src_hqsc_atlas_pho_variation
+    label: HQSC Atlas of Healthcare Variation PHO analyses
+    url_or_reference: https://www.hqsc.govt.nz/our-data/atlas-of-healthcare-variation/
+    public_access_status: public
+    licence_status: public_reference
+    candidate_status: candidate_pending_locator
+    retrieval_path: atlas_domain_pages_and_export_controls
+    expected_grain: pho_by_domain_metric_period_where_public_exports_permit
+    claim_family: pho_variation_and_equity_validation
+    cal_gates:
+      - CAL-G-003
+      - CAL-G-004
+    independence_assessment: independence_pending_review
+    current_runtime_use: not_loaded_public_runtime
+    expected_raw_dir: null
+    expected_raw_artifact: null
+    fetch_script: null
+    transform_script: null
+    expected_processed_artifact: null
+    rejection_reason: null
+    not_valid_for:
+      - precise fiscal savings
+      - ED reductions
+      - hospital-demand reductions
+      - workforce effects
+      - implementation impacts
+      - causal effects
+    claim_boundary: Public Atlas candidate only; requires domain-specific export locator, licence review, grain review, and independence review before retrieval-plan registration.
+  - candidate_id: val_nzhs_regional_release_independence_rejected
+    source_id: src_nzhs_regional_release
+    label: New Zealand Health Survey regional data release
+    url_or_reference: https://www.health.govt.nz/monitoring-statistics/surveys/new-zealand-health-survey
+    public_access_status: public
+    licence_status: public_reference
+    candidate_status: rejected_for_independence
+    retrieval_path: annual_data_explorer_and_regional_release
+    expected_grain: health_region_by_demographic_group_by_indicator
+    claim_family: regional_unmet_need_and_equity_validation
+    cal_gates:
+      - CAL-G-003
+      - CAL-G-004
+    independence_assessment: not_independent_of_current_calibration_targets
+    current_runtime_use: not_loaded_public_runtime
+    expected_raw_dir: null
+    expected_raw_artifact: null
+    fetch_script: null
+    transform_script: null
+    expected_processed_artifact: null
+    rejection_reason: Same survey family as src_nz_health_survey, which is already used as a calibration target source; it may support descriptive sensitivity checks but must not count as independent validation for that target family.
+    not_valid_for:
+      - precise fiscal savings
+      - ED reductions
+      - hospital-demand reductions
+      - workforce effects
+      - implementation impacts
+      - causal effects
+    claim_boundary: Public survey-derived candidate rejected for independent-validation counting where the current target already uses NZHS evidence.
