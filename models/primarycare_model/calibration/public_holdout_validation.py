@@ -171,18 +171,25 @@ def _training_prediction_for_holdout_row(
     return _weighted_rate(matching_rows)
 
 
-def _geographic_comparison_for_rows(
+def _period_persistence_comparison_for_rows(
     *,
+    gate_id: str,
+    validation_family: str,
+    predictor_id: str,
+    stratifier: str,
+    group: str,
     rows: tuple[dict[str, str], ...],
     max_error_tolerance: float,
+    passed_requirement: str,
+    interpretation_note: str,
 ) -> PublicHoldoutComparison:
     periods = tuple(sorted({row["period"] for row in rows if row.get("period")}))
     if len(periods) < 2:
         return _comparison_for_rows(
-            gate_id="CAL-G-003",
-            validation_family="geographic_holdout_validation",
-            stratifier="district",
-            group="total_coverage",
+            gate_id=gate_id,
+            validation_family=validation_family,
+            stratifier=stratifier,
+            group=group,
             rows=rows,
             max_error_tolerance=max_error_tolerance,
         )
@@ -198,10 +205,10 @@ def _geographic_comparison_for_rows(
         absolute_error = abs(_coverage_rate(row) - predicted)
         observations.append(
             PublicHoldoutObservation(
-            district=row["district"],
-            stratifier="district",
-            group="total_coverage",
-            observed_coverage_rate=round(_coverage_rate(row), 12),
+                district=row["district"],
+                stratifier=stratifier,
+                group=group,
+                observed_coverage_rate=round(_coverage_rate(row), 12),
                 predicted_coverage_rate=round(predicted, 12),
                 absolute_error=round(absolute_error, 12),
                 tolerance_gap=round(max(0.0, absolute_error - max_error_tolerance), 12),
@@ -217,11 +224,11 @@ def _geographic_comparison_for_rows(
     )
     status: HoldoutComparisonStatus = "passed" if max_error <= max_error_tolerance else "comparison_failed"
     return PublicHoldoutComparison(
-        gate_id="CAL-G-003",
-        validation_family="geographic_holdout_validation",
-        predictor_id="district_public_training_period_rate",
-        stratifier="district",
-        group="total_coverage",
+        gate_id=gate_id,
+        validation_family=validation_family,
+        predictor_id=predictor_id,
+        stratifier=stratifier,
+        group=group,
         observations=len(observations),
         mean_absolute_error=round(mean_error, 12),
         max_absolute_error=round(max_error, 12),
@@ -231,15 +238,11 @@ def _geographic_comparison_for_rows(
         failing_observations=failed_observations,
         status=status,
         claim_status="calibration_readiness_only",
-        interpretation_note=(
-            "Public aggregate geographic holdout comparison using district-level training-period "
-            "persistence with national fallback only when a district is absent; not a causal, fiscal, "
-            "or individual-care prediction validation."
-        ),
+        interpretation_note=interpretation_note,
         next_data_model_requirement=(
-            _next_data_model_requirement("CAL-G-003", "geographic_holdout_validation")
+            _next_data_model_requirement(gate_id, validation_family)
             if failed_observations
-            else "No district-level tolerance gap; gate remains readiness-only until all sibling comparisons pass."
+            else passed_requirement
         ),
     )
 
@@ -250,7 +253,25 @@ def build_public_holdout_comparisons() -> tuple[PublicHoldoutComparison, ...]:
 
     geographic_rows = tuple(row for row in rows if row["stratifier"] == "ethnicity" and row["group"] == "Total")
     if geographic_rows:
-        comparisons.append(_geographic_comparison_for_rows(rows=geographic_rows, max_error_tolerance=0.05))
+        comparisons.append(
+            _period_persistence_comparison_for_rows(
+                gate_id="CAL-G-003",
+                validation_family="geographic_holdout_validation",
+                predictor_id="district_public_training_period_rate",
+                stratifier="district",
+                group="total_coverage",
+                rows=geographic_rows,
+                max_error_tolerance=0.05,
+                passed_requirement=(
+                    "No district-level tolerance gap; gate remains readiness-only until all sibling comparisons pass."
+                ),
+                interpretation_note=(
+                    "Public aggregate geographic holdout comparison using district-level training-period "
+                    "persistence with national fallback only when a district is absent; not a causal, fiscal, "
+                    "or individual-care prediction validation."
+                ),
+            )
+        )
 
     subgroup_rows = tuple(
         row
@@ -260,13 +281,22 @@ def build_public_holdout_comparisons() -> tuple[PublicHoldoutComparison, ...]:
     for stratifier, group in sorted({(row["stratifier"], row["group"]) for row in subgroup_rows}):
         group_rows = tuple(row for row in subgroup_rows if row["stratifier"] == stratifier and row["group"] == group)
         comparisons.append(
-            _comparison_for_rows(
+            _period_persistence_comparison_for_rows(
                 gate_id="CAL-G-004",
                 validation_family="subgroup_gradient_validation",
+                predictor_id="district_subgroup_public_training_period_rate",
                 stratifier=stratifier,
                 group=group,
                 rows=group_rows,
                 max_error_tolerance=0.05,
+                passed_requirement=(
+                    "No district-subgroup tolerance gap; gate remains readiness-only until all sibling comparisons pass."
+                ),
+                interpretation_note=(
+                    "Public aggregate subgroup-gradient holdout comparison using district-subgroup "
+                    "training-period persistence with subgroup national fallback only when a district subgroup "
+                    "is absent; not a causal, fiscal, or individual-care prediction validation."
+                ),
             )
         )
     return tuple(comparisons)
