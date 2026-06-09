@@ -27,6 +27,8 @@ This report explains a public-data anchored benchmark for primary care funding i
 
 > This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
 
+Aggregate validation status: `public_aggregate_validated` for registered public aggregate gates only. The current release model card labels the aggregate lane `empirically_supported_if_gated`, while the not-valid-for warning still excludes precise fiscal savings, ED reductions, hospital-demand reductions, workforce effects, implementation impacts and causal effects.
+
 The central question is simple:
 
 > Do current funding rules allow lower-cost upstream care to expand safely before need becomes hospital demand?
@@ -164,7 +166,7 @@ It is not:
 - a prediction that any scenario will reduce hospital demand by a precise amount;
 - a claim that fee-for-service alone is better than capitation.
 
-The formal boundary is in the model card and claim-boundary documents on this site.
+The formal boundary is in the release model card and claim-boundary documents on this site.
 
 # 2. The current reform pathway is the comparator
 

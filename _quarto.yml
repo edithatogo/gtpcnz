@@ -18,6 +18,8 @@ project:
     - docs/public-site/public-wording-contract-v1.8.4.md
     - docs/public-site/visual-gallery-contract-v1.8.4.md
     - docs/public-site/site-map-and-release-manifest-v1.8.4.md
+    - docs/release/model-card-v1.8.1.md
+    - docs/release/track-071-release-regeneration-v1.md
     - docs/public-site/what-is-calculated-now.md
     - docs/design/repo-github-streamlit-design-v1.8.3.md
     - docs/design/concern-extraction-architecture-v1.8.3.md
@@ -40,7 +42,7 @@ website:
       - text: "Dashboard"
         href: docs/REPORTS-AND-DASHBOARD.md
       - text: "Model card"
-        href: docs/calibration/model-card-v1.7.2.md
+        href: docs/release/model-card-v1.8.1.md
       - text: "Claim boundaries"
         href: docs/launch/claim-boundaries-v1.7.2.md
       - text: "Evidence tracker"

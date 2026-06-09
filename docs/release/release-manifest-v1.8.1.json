@@ -1,6 +1,16 @@
 {
   "accessibility_status": "gate-present",
+  "calibration_status": "public_aggregate_validated",
+  "claim_level": "empirically_supported_if_gated",
   "model_hash": "b79e2dda08e7119166e0660b728feef36c38490452f9e892a33b944a0823edce",
+  "not_valid_for": [
+    "precise fiscal savings",
+    "ED reductions",
+    "hospital-demand reductions",
+    "workforce effects",
+    "implementation impacts",
+    "causal effects"
+  ],
   "output_hash": "f72ee1445434087580209adde3993d58fa6700e63aea3761c3a665233d0c092c",
   "parameter_hash": "fdb642505004dc8f52e60f3c9ce94e61e982f7a6ab00845e66cc3f2bf87bff8b",
   "source_snapshot_hash": "e2c31eadd51e56f3ba9f799470e2fe6d26cfba8939ed7c737395f216854e8b4b",

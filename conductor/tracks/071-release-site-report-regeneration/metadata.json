@@ -2,6 +2,6 @@
   "id": "071",
   "slug": "release-site-report-regeneration",
   "title": "Release site and report regeneration after aggregate validation",
-  "status": "planned",
+  "status": "complete_with_local_quarto_render_blocker",
   "claim_boundary": "public_aggregate_validated_not_precision_or_causal"
 }

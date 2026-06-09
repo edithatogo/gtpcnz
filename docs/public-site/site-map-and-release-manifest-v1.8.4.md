@@ -15,7 +15,10 @@ multiple companion docs.
 | Public report | `reports/primary_care_architecture.qmd` | Static Quarto report and argument map |
 | Dashboard guide | `docs/REPORTS-AND-DASHBOARD.md` | How the report and dashboard fit together |
 | Deployment guide | `docs/STREAMLIT-DEPLOYMENT.md` | Streamlit deployment and public boundary notes |
-| Model card | `docs/calibration/model-card-v1.7.2.md` | Model scope, evidence tiers, and claim boundaries |
+| Release model card | `docs/release/model-card-v1.8.1.md` | Generated release model card with aggregate validation status and claim boundaries |
+| Release manifest | `docs/release/release-manifest-v1.8.1.json` | Generated release hashes, validation status, and not-valid-for warnings |
+| Track 071 regeneration evidence | `docs/release/track-071-release-regeneration-v1.md` | Commands, outputs, hashes, Quarto render proof, and blockers |
+| Historical model card | `docs/calibration/model-card-v1.7.2.md` | Earlier model scope, evidence tiers, and claim boundaries |
 | Claim boundaries | `docs/launch/claim-boundaries-v1.7.2.md` | Public-data versus linked-data boundary |
 | Evidence tracker | `docs/public-site/evidence-tracker-public-v1.8.1.md` | OIA and calibration readiness tracker |
 | Calibration readiness | `docs/public-site/calibration-readiness-page-v1.8.1.md` | Data gaps and validation pathway |
@@ -31,12 +34,15 @@ multiple companion docs.
 1. `quarto render` must succeed before Pages deployment.
 2. `github-pages` deployment uses `.github/workflows/pages.yml`.
 3. `public/gtpcnz` is a mirror for deployment-critical root files, not the site source.
-4. Public wording must stay aligned with the benchmark boundary: public-data anchored by default, empirically supported where valid, and never a patient-level forecast.
+4. Public wording must stay aligned with the benchmark boundary: public-data anchored by default, empirically supported where aggregate gates pass, and never a patient-level forecast.
+5. Aggregate validation status is `public_aggregate_validated` only for registered public aggregate validation gates; it does not authorize precise fiscal, ED, hospital-demand, workforce, implementation-impact, or causal effects.
 
 ## Canonical checks
 
 - `python scripts/check_repo_health.py`
 - `python scripts/check_concern_boundaries.py`
 - `python scripts/check_no_patient_data.py`
+- `python scripts/generate_release_model_card.py --check-only`
+- `python scripts/generate_release_manifest.py --check-only`
 - `quarto render --to html`
 
