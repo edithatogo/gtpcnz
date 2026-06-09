@@ -60,7 +60,7 @@ def test_validation_gates_explain_why_calibration_is_not_upgraded() -> None:
     assert statuses["CAL-G-006"] == "passed"
     assert statuses["CAL-G-007"] == "passed"
     assert statuses["CAL-G-002"] == "passed"
-    assert statuses["CAL-G-003"] == "public_holdout_comparison_failed"
+    assert statuses["CAL-G-003"] == "passed"
     assert statuses["CAL-G-004"] == "public_holdout_comparison_failed"
     assert statuses["CAL-G-005"] == "public_validation_source_registered"
 

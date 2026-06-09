@@ -15,4 +15,4 @@
 - The registered temporal holdout comparison now passes within the `max_error_tolerance=0.05` threshold.
 - Strengthened the CAL-G-005 numeric policy-shock artifact contract without registering synthetic or non-public shock evidence.
 - Added readiness-mode CAL-G-002/CAL-G-005 checks to CI, repo health, Makefile release reproduction, and release-engineering tests.
-- CAL-G-002 now passes, but no calibration claim was upgraded because CAL-G-003, CAL-G-004, and CAL-G-005 remain not passed.
+- CAL-G-002 now passes, and CAL-G-003 passes using district-level public training-period persistence against the Q4 holdout, but no calibration claim was upgraded because CAL-G-004 and CAL-G-005 remain not passed.
