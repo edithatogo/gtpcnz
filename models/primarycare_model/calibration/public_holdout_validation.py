@@ -37,6 +37,7 @@ class PublicHoldoutObservation:
     observed_coverage_rate: float
     predicted_coverage_rate: float
     absolute_error: float
+    tolerance_gap: float
 
     def to_json_dict(self) -> dict[str, object]:
         return asdict(self)
@@ -53,9 +54,13 @@ class PublicHoldoutComparison:
     mean_absolute_error: float
     max_absolute_error: float
     max_error_tolerance: float
+    tolerance_gap: float
+    failing_groups: tuple[str, ...]
+    failing_observations: tuple[PublicHoldoutObservation, ...]
     status: HoldoutComparisonStatus
     claim_status: str
     interpretation_note: str
+    next_data_model_requirement: str
 
     def to_json_dict(self) -> dict[str, object]:
         return asdict(self)
@@ -78,6 +83,24 @@ def _weighted_rate(rows: tuple[dict[str, str], ...]) -> float:
     return enrolled / population
 
 
+def _next_data_model_requirement(gate_id: str, validation_family: str) -> str:
+    if gate_id == "CAL-G-003":
+        return (
+            "Add independent regional or rurality-grain public holdout targets and model predictions "
+            "that explain district variation beyond the weighted public baseline."
+        )
+    if gate_id == "CAL-G-004":
+        return (
+            "Add subgroup-gradient model predictions at the same ethnicity/deprivation grain as the "
+            "public extract and reduce each failed group within tolerance."
+        )
+    return f"Add public holdout data and model predictions for {validation_family} at matching grain."
+
+
+def _failure_label(observation: PublicHoldoutObservation) -> str:
+    return f"{observation.stratifier}/{observation.group}/{observation.district}"
+
+
 def _comparison_for_rows(
     *,
     gate_id: str,
@@ -96,11 +119,18 @@ def _comparison_for_rows(
             observed_coverage_rate=round(_coverage_rate(row), 12),
             predicted_coverage_rate=round(predicted, 12),
             absolute_error=round(abs(_coverage_rate(row) - predicted), 12),
+            tolerance_gap=round(max(0.0, abs(_coverage_rate(row) - predicted) - max_error_tolerance), 12),
         )
         for row in rows
     ]
     max_error = max(observation.absolute_error for observation in observations)
     mean_error = sum(observation.absolute_error for observation in observations) / len(observations)
+    failed_observations = tuple(
+        sorted(
+            (observation for observation in observations if observation.absolute_error > max_error_tolerance),
+            key=lambda observation: (-observation.absolute_error, observation.district),
+        )
+    )
     status: HoldoutComparisonStatus = "passed" if max_error <= max_error_tolerance else "comparison_failed"
     return PublicHoldoutComparison(
         gate_id=gate_id,
@@ -112,11 +142,19 @@ def _comparison_for_rows(
         mean_absolute_error=round(mean_error, 12),
         max_absolute_error=round(max_error, 12),
         max_error_tolerance=max_error_tolerance,
+        tolerance_gap=round(max(0.0, max_error - max_error_tolerance), 12),
+        failing_groups=tuple(_failure_label(observation) for observation in failed_observations),
+        failing_observations=failed_observations,
         status=status,
         claim_status="calibration_readiness_only",
         interpretation_note=(
             "Transparent weighted public baseline comparison only; not a causal, fiscal, "
             "or individual-care prediction validation."
+        ),
+        next_data_model_requirement=(
+            _next_data_model_requirement(gate_id, validation_family)
+            if failed_observations
+            else "No row-level tolerance gap; gate remains readiness-only until all sibling comparisons pass."
         ),
     )
 
@@ -173,15 +211,20 @@ def _ascii_safe(value: str) -> str:
 
 
 def holdout_gate_blockers(gate_id: str) -> tuple[str, ...]:
-    blockers = [
-        (
+    blockers = []
+    for comparison in build_public_holdout_comparisons():
+        if comparison.gate_id != gate_id or comparison.status == "passed":
+            continue
+        failed_groups = ", ".join(_ascii_safe(group) for group in comparison.failing_groups[:5])
+        if len(comparison.failing_groups) > 5:
+            failed_groups = f"{failed_groups}, +{len(comparison.failing_groups) - 5} more"
+        blockers.append(
             f"{comparison.gate_id}: {comparison.validation_family} "
             f"{_ascii_safe(comparison.stratifier)}/{_ascii_safe(comparison.group)} "
-            f"max_abs_error={comparison.max_absolute_error} exceeds tolerance={comparison.max_error_tolerance}"
+            f"max_abs_error={comparison.max_absolute_error} exceeds tolerance={comparison.max_error_tolerance}; "
+            f"tolerance_gap={comparison.tolerance_gap}; failing_groups={failed_groups}; "
+            f"next_data_model_requirement={comparison.next_data_model_requirement}"
         )
-        for comparison in build_public_holdout_comparisons()
-        if comparison.gate_id == gate_id and comparison.status != "passed"
-    ]
     return tuple(blockers)
 
 
@@ -207,7 +250,9 @@ def main(argv: list[str] | None = None) -> int:
             print(
                 f"{comparison.gate_id}: {_ascii_safe(comparison.stratifier)}/{_ascii_safe(comparison.group)}; "
                 f"status={comparison.status}; max_abs_error={comparison.max_absolute_error}; "
-                f"tolerance={comparison.max_error_tolerance}; claim={comparison.claim_status}"
+                f"tolerance={comparison.max_error_tolerance}; tolerance_gap={comparison.tolerance_gap}; "
+                f"failing_groups={len(comparison.failing_groups)}; "
+                f"next={comparison.next_data_model_requirement}; claim={comparison.claim_status}"
             )
 
     if args.require_pass and any(comparison.status != "passed" for comparison in comparisons):

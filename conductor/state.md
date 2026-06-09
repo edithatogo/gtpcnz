@@ -38,6 +38,14 @@ Track 067 is complete for public holdout comparison readiness:
 
 - `067-public-holdout-comparison-scaffold`: public benchmark comparisons now run against the PHO access numeric extract. CAL-G-003 and CAL-G-004 report `public_holdout_comparison_failed` because transparent weighted-rate comparisons exceed tolerance.
 
+Track 068 is complete for public temporal and policy-shock validation readiness:
+
+- `068-public-temporal-policy-validation-evidence`: CAL-G-002 and CAL-G-005 have public readiness lanes. CAL-G-002 is blocked by only one public period in the local extract. CAL-G-005 is blocked by no public numeric pre/post shock comparison.
+
+Track 069 is complete for public validation acquisition readiness and diagnostics:
+
+- `069-public-validation-acquisition-and-diagnostics`: machine-readable acquisition blockers now identify the missing CAL-G-002 temporal period and absent CAL-G-005 numeric pre/post shock artifacts. CAL-G-003/CAL-G-004 failed holdout comparisons now report tolerance gaps, failing groups, and next data/model requirements.
+
 Next implementation frontier:
 
 - Public source acquisition evidence is recorded in `docs/model/public-source-calibration-evidence-v1.md`.
