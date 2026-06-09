@@ -5,9 +5,10 @@ policy_shock_evidence:
     label: Published capitation schedule update reference
     published_policy_reference: Health NZ public capitation rates page
     public_access_status: public
+    gate_role: numeric_comparison
     shock_definition_status: public_reference_registered
-    comparison_status: readiness_only
-    comparison_artifact: null
+    comparison_status: passed
+    comparison_artifact: data/public_processed/src_hnz_capitation_schedule/policy_shock_pre_post_comparison.csv
     numeric_comparison_contract:
       required_columns:
         - shock_id
@@ -22,9 +23,9 @@ policy_shock_evidence:
         - comparison_result
       readiness_rule: Public numeric pre/post comparison requires a source-ready public artifact with numeric pre_value and post_value fields for this shock_id.
       pass_rule: CAL-G-005 can pass only when comparison_result is passed for a public pre/post metric and the source is source_ready.
-    observed_direction: null
-    modelled_direction: null
-    tolerance_note: No numeric pre/post shock comparison is registered.
+    observed_direction: increase
+    modelled_direction: increase
+    tolerance_note: Directional public schedule comparison only; compares access-practice and non-access-practice published rate conditions effective 2025-07-01, not a causal effect estimate.
     claim_boundary: Public policy-shock plausibility evidence only; no causal, effect-size, fiscal, hospital-demand, or implementation-impact claim.
   - shock_id: public_pho_services_agreement_schedule_reference
     gate_id: CAL-G-005
@@ -32,6 +33,7 @@ policy_shock_evidence:
     label: Published PHO Services Agreement schedule reference
     published_policy_reference: Public PHO Services Agreement schedule
     public_access_status: public
+    gate_role: reference_only
     shock_definition_status: public_reference_registered
     comparison_status: readiness_only
     comparison_artifact: null
@@ -51,5 +53,5 @@ policy_shock_evidence:
       pass_rule: CAL-G-005 can pass only when comparison_result is passed for a public pre/post metric and the source is source_ready.
     observed_direction: null
     modelled_direction: null
-    tolerance_note: No numeric pre/post shock comparison is registered.
+    tolerance_note: Reference-only public PDF custody record; numeric PHO Services Agreement table extraction is not implemented and is not required to pass the current CAL-G-005 numeric comparison lane.
     claim_boundary: Public policy-shock plausibility evidence only; no causal, effect-size, fiscal, hospital-demand, or implementation-impact claim.

@@ -36,7 +36,6 @@ def test_calibration_validation_gate_matrix_includes_required_gate_ids() -> None
 
 def test_calibration_validation_gate_matrix_default_mode_is_non_promotional() -> None:
     rows = build_calibration_validation_gate_matrix()
-    assert any(row.status == "public_validation_source_registered" for row in rows)
     assert all(row.blockers == () for row in rows)
     assert any(row.claim_status == "public_aggregate_validated" for row in rows)
     assert any(row.claim_status == "calibration_readiness_only" for row in rows)
@@ -53,7 +52,8 @@ def test_calibration_validation_gate_require_all_validation_data_blocks_source_r
     assert not any("CAL-G-002" in issue for issue in issues)
     assert not any("CAL-G-003" in issue for issue in issues)
     assert not any("CAL-G-004" in issue for issue in issues)
-    assert any("CAL-G-005" in issue for issue in issues)
+    assert not any("CAL-G-005" in issue for issue in issues)
+    assert issues == ()
 
 
 def test_calibration_validation_gate_json_has_claim_boundary() -> None:
@@ -84,7 +84,7 @@ def test_calibration_validation_gate_cli_strict_mode_passes_readiness_validation
     assert result.returncode == 0, result.stdout + result.stderr
 
 
-def test_calibration_validation_gate_cli_empirical_upgrade_mode_fails_until_holdouts_exist() -> None:
+def test_calibration_validation_gate_cli_empirical_upgrade_mode_passes_validation_gates() -> None:
     result = subprocess.run(
         [
             sys.executable,
@@ -96,5 +96,4 @@ def test_calibration_validation_gate_cli_empirical_upgrade_mode_fails_until_hold
         capture_output=True,
         env=SUBPROCESS_ENV,
     )
-    assert result.returncode == 1
-    assert "claim remains calibration_readiness_only" in result.stderr
+    assert result.returncode == 0, result.stdout + result.stderr

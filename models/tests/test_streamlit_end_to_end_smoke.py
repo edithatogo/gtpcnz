@@ -168,7 +168,11 @@ def test_policy_cockpit_payload_covers_every_section_chart_and_download_contract
     payload = build_policy_cockpit_payload()
 
     assert tuple(payload["sections"]) == REQUIRED_SECTIONS
-    assert payload["calibration"]["calibration_status"] in {"not_ready", "calibration_readiness_only"}
+    assert payload["calibration"]["calibration_status"] in {
+        "not_ready",
+        "calibration_readiness_only",
+        "public_aggregate_validated",
+    }
     assert payload["structural_uncertainty"]["structural_uncertainty_interval"]
     assert payload["voi"]["label"] in {
         "decision-uncertainty analysis; not a forecast",

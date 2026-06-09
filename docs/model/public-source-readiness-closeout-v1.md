@@ -14,8 +14,8 @@ Public source acquisition has moved from placeholder readiness into verified pub
 | Calibration target readiness | Passed for three public aggregate targets |
 | Baseline public aggregate reproduction | Passed |
 | Posterior predictive checks | Passed |
-| Calibration state | `calibration_readiness_only` |
-| Claim level | `public_benchmark` |
+| Calibration state | `public_aggregate_validated` |
+| Claim level | `empirically_supported_if_gated` |
 
 Detailed evidence is recorded in `docs/model/public-source-calibration-evidence-v1.md`.
 
@@ -23,7 +23,7 @@ Detailed evidence is recorded in `docs/model/public-source-calibration-evidence-
 
 The public runtime source path now has raw and processed evidence for:
 
-- Health NZ capitation rates public reference page.
+- Health NZ capitation rates public reference page, including the bounded CAL-G-005 directional comparison artifact derived from the checked-in public table extract.
 - Health NZ PHO Services Agreement public PDF.
 - Health NZ primary-care enrolment public data/statistics page.
 - Health NZ PHO access quarterly public workbook.
@@ -46,16 +46,16 @@ uv run --frozen --all-groups python scripts/check_posterior_predictive_checks.py
 uv run --frozen --all-groups python scripts/run_public_aggregate_calibration.py --check-only
 ```
 
-## Why Calibration Is Still Readiness-Only
+## Current Calibration Boundary
 
-The public aggregate calibration runner correctly keeps:
+The public aggregate calibration runner now reports:
 
 ```yaml
-calibration_status: calibration_readiness_only
-claim_level: public_benchmark
+calibration_status: public_aggregate_validated
+claim_level: empirically_supported_if_gated
 ```
 
-The remaining blocker is no longer source acquisition. CAL-G-002 now has Q3/Q4 public temporal evidence and passes its registered district-level temporal holdout comparison. CAL-G-003 also passes a district-level public geographic holdout using Q3 training-period persistence against the Q4 holdout. CAL-G-004 passes district-subgroup public subgroup-gradient holdouts at ethnicity/deprivation grain. CAL-G-005 has public readiness evidence but does not pass validation because it has no numeric pre/post shock comparison.
+Source acquisition is no longer the blocker for the registered public aggregate validation lane. CAL-G-002 now has Q3/Q4 public temporal evidence and passes its registered district-level temporal holdout comparison. CAL-G-003 also passes a district-level public geographic holdout using Q3 training-period persistence against the Q4 holdout. CAL-G-004 passes district-subgroup public subgroup-gradient holdouts at ethnicity/deprivation grain. CAL-G-005 passes a bounded directional public policy-condition comparison derived from the checked-in Health NZ capitation schedule extract.
 
 ## Claim Boundary
 
@@ -72,10 +72,10 @@ No private administrative data, patient-level data, confidential OIA responses, 
 
 ## Next Evidence Work
 
-The next substantive step is to locate and register public aggregate validation datasets for:
+The next substantive step is to harden release-facing claim governance around the validated aggregate lane:
 
-1. Published numeric pre/post policy-shock comparison evidence for CAL-G-005.
-2. Additional independent regional, rurality-grain, or subgroup-gradient public validation targets beyond the current PHO access holdouts, where public data permit.
-3. Release-gate review once CAL-G-005 has a registered public numeric comparison and all calibration validation gates pass together.
+1. Release-gate review now that all registered CAL-G validation gates pass together.
+2. Additional independent regional, rurality-grain, subgroup-gradient, or policy-shock public validation targets where public data permit.
+3. Bounded PHO Services Agreement table extraction if it is to move from `reference_only` to a numeric comparison lane.
 
-Only after those validation families have public source artefacts, verified checksums, processed outputs, and passing gates should the calibration status be considered for upgrade.
+Even after the aggregate validation upgrade, the model remains not valid for precise fiscal savings, ED reductions, hospital-demand reductions, workforce effects, implementation impacts, or causal effects unless separate claim-specific evidence gates pass.

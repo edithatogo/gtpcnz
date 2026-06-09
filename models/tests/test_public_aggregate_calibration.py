@@ -16,7 +16,7 @@ def test_public_aggregate_calibration_embeds_validation_gate_summary() -> None:
 
     assert {"CAL-G-001", "CAL-G-006", "CAL-G-007"}.issubset(gate_ids)
     assert any(row["claim_status"] == "calibration_readiness_only" for row in result["validation_gates"])
-    assert result["claim_level"] == "public_benchmark"
+    assert result["claim_level"] == "empirically_supported_if_gated"
 
 
 def test_public_aggregate_calibration_embeds_posterior_predictive_summary() -> None:
@@ -26,5 +26,5 @@ def test_public_aggregate_calibration_embeds_posterior_predictive_summary() -> N
     assert ppc["ppc_gate_id"] == "CAL-G-006"
     assert ppc["ppc_status"] == "passed"
     assert ppc["failed_targets"] == []
-    assert "posterior predictive checks remain readiness-only" in ppc["interpretation_note"]
-    assert "readiness-only" in result["interpretation_note"]
+    assert "posterior predictive checks passed" in ppc["interpretation_note"]
+    assert "not-valid-for warnings" in result["interpretation_note"]

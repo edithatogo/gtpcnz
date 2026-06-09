@@ -2,7 +2,7 @@
 
 ## Status
 
-GTPCNZ now has verified public source acquisition evidence for the public aggregate calibration scaffold. This does not upgrade the model to a fully empirically calibrated policy model.
+GTPCNZ now has verified public source acquisition evidence and passing public aggregate validation gates for the public aggregate calibration scaffold. This upgrades the aggregate calibration status while preserving explicit not-valid-for boundaries around precise causal, fiscal, hospital, workforce, and implementation claims.
 
 | Layer | Status |
 |---|---|
@@ -15,17 +15,17 @@ GTPCNZ now has verified public source acquisition evidence for the public aggreg
 | Baseline public aggregate reproduction | Passed |
 | Posterior predictive checks | Passed |
 | Temporal holdout validation | Q3/Q4 public periods available; registered district-level temporal holdout comparison passes |
-| Geographic/rural holdout validation | Public benchmark comparison run; tolerance not passed |
-| Subgroup gradient validation | Public benchmark comparisons run; tolerance not passed |
-| Public policy-shock plausibility | Public policy references registered; no numeric pre/post shock comparison has passed |
-| Calibration status | `calibration_readiness_only` |
-| Claim level | `public_benchmark` |
+| Geographic/rural holdout validation | Passed using district-level public training-period persistence against the Q4 holdout |
+| Subgroup gradient validation | Passed using district-subgroup public training-period persistence at ethnicity/deprivation grain |
+| Public policy-shock plausibility | Passed for the bounded capitation schedule directional policy-condition comparison; PHO Services Agreement remains reference-only |
+| Calibration status | `public_aggregate_validated` |
+| Claim level | `empirically_supported_if_gated` |
 
 ## Verified Source Evidence
 
 The public source registry records seven public/published aggregate source families:
 
-- `src_hnz_capitation_schedule`: Health NZ capitation rates public reference page.
+- `src_hnz_capitation_schedule`: Health NZ capitation rates public reference page. The processed capitation extract now also supplies the CAL-G-005 directional public policy-condition comparison artifact for selected access-practice versus non-access-practice published rates.
 - `src_pho_services_agreement`: Health NZ PHO Services Agreement public PDF.
 - `src_hnz_enrolment`: Health NZ primary-care public data/statistics page.
 - `src_hnz_pho_access_timeseries`: Health NZ quarterly PHO access workbook with public district, ethnicity, gender, age, and deprivation aggregate rows.
@@ -51,14 +51,14 @@ uv run --frozen --all-groups python scripts/run_public_aggregate_calibration.py 
 
 ## Calibration Interpretation
 
-The current calibration evidence supports source-ready public aggregate benchmark checks only. The calibration runner retains:
+The current calibration evidence supports a public aggregate validation claim only. The calibration runner now reports:
 
 ```yaml
-calibration_status: calibration_readiness_only
-claim_level: public_benchmark
+calibration_status: public_aggregate_validated
+claim_level: empirically_supported_if_gated
 ```
 
-This is deliberate. CAL-G-002 now passes its registered public temporal holdout comparison, CAL-G-003 passes a district-level public geographic holdout using Q3 training-period persistence against the Q4 holdout, and CAL-G-004 passes district-subgroup public subgroup-gradient holdouts at ethnicity/deprivation grain. CAL-G-005 has public readiness evidence but does not pass validation because it has no numeric pre/post shock comparison.
+This is deliberately narrower than a forecast or impact claim. CAL-G-002 passes its registered public temporal holdout comparison, CAL-G-003 passes a district-level public geographic holdout using Q3 training-period persistence against the Q4 holdout, CAL-G-004 passes district-subgroup public subgroup-gradient holdouts at ethnicity/deprivation grain, and CAL-G-005 passes a bounded directional public policy-condition comparison derived from the checked-in Health NZ capitation schedule extract.
 
 ## Not Valid For
 

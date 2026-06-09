@@ -15,4 +15,7 @@
 - The registered temporal holdout comparison now passes within the `max_error_tolerance=0.05` threshold.
 - Strengthened the CAL-G-005 numeric policy-shock artifact contract without registering synthetic or non-public shock evidence.
 - Added readiness-mode CAL-G-002/CAL-G-005 checks to CI, repo health, Makefile release reproduction, and release-engineering tests.
-- CAL-G-002 now passes, CAL-G-003 passes using district-level public training-period persistence against the Q4 holdout, and CAL-G-004 passes using district-subgroup public training-period persistence against the Q4 holdout, but no calibration claim was upgraded because CAL-G-005 remains not passed.
+- CAL-G-002 now passes, CAL-G-003 passes using district-level public training-period persistence against the Q4 holdout, and CAL-G-004 passes using district-subgroup public training-period persistence against the Q4 holdout.
+- Added `data/public_processed/src_hnz_capitation_schedule/policy_shock_pre_post_comparison.csv`, a bounded CAL-G-005 directional public policy-condition comparison derived from the checked-in Health NZ capitation schedule extract.
+- CAL-G-005 now passes for the `numeric_comparison` lane; the PHO Services Agreement PDF remains visible as `reference_only` until bounded table extraction is implemented.
+- The public aggregate calibration lane now reports `public_aggregate_validated` / `empirically_supported_if_gated` because all registered validation gates pass. Precise fiscal, ED, hospital-demand, workforce, implementation, and causal claims remain explicitly excluded.

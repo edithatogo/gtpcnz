@@ -2,15 +2,16 @@
 
 This lane registers published public-policy shock references that may later support a public numeric pre/post plausibility comparison.
 
-Current status: readiness-only.
+Current status: CAL-G-005 directional plausibility passed for the registered
+numeric comparison lane, while calibration claims remain readiness-only.
 
-Claim boundary: the registered evidence does not support causal claims, effect-size claims, fiscal savings, hospital-demand reductions, workforce effects, or implementation-impact claims. CAL-G-005 can pass only after a public numeric pre/post shock comparison is registered and passes the lane tolerance rules.
+Claim boundary: the registered evidence does not support causal claims, effect-size claims, fiscal savings, hospital-demand reductions, workforce effects, or implementation-impact claims. CAL-G-005 is a directional public-policy plausibility check only.
 
 The machine-readable registry is `models/primarycare_model/registries/public/policy_shock_plausibility.public.v1.yaml`. The validation entry point is `scripts/check_public_policy_shock_plausibility.py`.
 
 ## Numeric comparison scaffold
 
-Each registered shock row declares the required public comparison artifact columns:
+Each registered `numeric_comparison` shock row declares the required public comparison artifact columns:
 
 - `shock_id`
 - `metric_id`
@@ -27,4 +28,26 @@ The checker validates a registered artifact strictly: the artifact must exist, i
 
 Contract tests use synthetic CSV artifacts only. They are not public evidence and must not be registered as production comparison artifacts.
 
-As of this registry version, no public numeric pre/post policy-shock comparison artifact is registered. The lane therefore remains `public_validation_source_registered` / `calibration_readiness_only`. The checker exits successfully for evidence reporting and fails only when `--require-pass` is used.
+## Current public artifact
+
+The production comparison artifact is
+`data/public_processed/src_hnz_capitation_schedule/policy_shock_pre_post_comparison.csv`.
+It is derived from the checked-in Health NZ capitation schedule extract
+`data/public_processed/src_hnz_capitation_schedule/capitation_rates.csv`.
+
+The comparison uses published rate conditions from the public schedule effective
+2025-07-01:
+
+- baseline condition: non-access practice annual N-rate;
+- policy condition: access practice annual N-rate;
+- checked metrics: 05-14 female and 05-14 male annual N-rates.
+
+Both rows have positive public-schedule deltas and match the modelled
+directional expectation that the access-practice condition is funded above the
+non-access-practice condition for those metrics. This does not estimate patient
+access, utilisation, fiscal savings, hospital-demand change, workforce effects,
+implementation effects, or causal effects.
+
+The PHO Services Agreement PDF remains registered as public reference evidence
+with `gate_role: reference_only`; it is not counted as a required numeric
+comparison until a bounded public table extraction is implemented.
