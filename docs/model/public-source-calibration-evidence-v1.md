@@ -15,8 +15,8 @@ GTPCNZ now has verified public source acquisition evidence for the public aggreg
 | Baseline public aggregate reproduction | Passed |
 | Posterior predictive checks | Passed |
 | Temporal holdout validation | Public data unavailable |
-| Geographic/rural holdout validation | Public numeric validation extract ready; model-vs-holdout comparison not passed |
-| Subgroup gradient validation | Public numeric validation extract ready; model-vs-gradient comparison not passed |
+| Geographic/rural holdout validation | Public benchmark comparison run; tolerance not passed |
+| Subgroup gradient validation | Public benchmark comparisons run; tolerance not passed |
 | Public policy-shock plausibility | Public data unavailable |
 | Calibration status | `calibration_readiness_only` |
 | Claim level | `public_benchmark` |
@@ -58,7 +58,7 @@ calibration_status: calibration_readiness_only
 claim_level: public_benchmark
 ```
 
-This is deliberate. CAL-G-003 and CAL-G-004 now have a public numeric validation extract, but no model-vs-holdout or model-vs-gradient comparison has passed. CAL-G-002 and CAL-G-005 remain `public_data_unavailable`.
+This is deliberate. CAL-G-003 and CAL-G-004 now run transparent weighted public benchmark comparisons, but those comparisons exceed tolerance and remain failed. CAL-G-002 and CAL-G-005 remain `public_data_unavailable`.
 
 ## Not Valid For
 

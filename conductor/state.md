@@ -34,13 +34,17 @@ Track 066 is complete for public validation numeric readiness:
 
 - `066-public-validation-numeric-comparisons`: Health NZ PHO access workbook is parsed into public aggregate district/subgroup numeric rows. CAL-G-003 and CAL-G-004 report `public_validation_numeric_ready`, but claim status remains `calibration_readiness_only` until model-vs-holdout comparisons pass.
 
+Track 067 is complete for public holdout comparison readiness:
+
+- `067-public-holdout-comparison-scaffold`: public benchmark comparisons now run against the PHO access numeric extract. CAL-G-003 and CAL-G-004 report `public_holdout_comparison_failed` because transparent weighted-rate comparisons exceed tolerance.
+
 Next implementation frontier:
 
 - Public source acquisition evidence is recorded in `docs/model/public-source-calibration-evidence-v1.md`.
 - Cross-stage public source readiness matrix passes in strict mode after raw, checksum, licence/access, processed-artifact, and schema checks.
 - Calibration target readiness now reports source-ready public aggregate targets within tolerance.
 - Baseline public aggregate reproduction and posterior predictive checks pass.
-- Calibration validation remains readiness-only because temporal holdout and public policy-shock validation families still report public data unavailable, while geographic/rural and subgroup-gradient gates have numeric public aggregate evidence but no passed model-vs-holdout validation comparison.
+- Calibration validation remains readiness-only because temporal holdout and public policy-shock validation families still report public data unavailable, while geographic/rural and subgroup-gradient public benchmark comparisons run but fail tolerance.
 - Public aggregate calibration output embeds validation-gate and posterior-predictive summaries for report/model-card consumption; the output remains `public_benchmark` / `calibration_readiness_only`.
 - No upgrade from `public_benchmark` / `calibration_readiness_only` until the unavailable validation families have public source artefacts, verified checksums, processed outputs, and passing gates.
 

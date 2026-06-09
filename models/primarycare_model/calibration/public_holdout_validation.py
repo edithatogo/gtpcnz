@@ -1,0 +1,220 @@
+"""Public aggregate holdout comparison helpers.
+
+These comparisons are deliberately benchmark-only. They compare public PHO
+access workbook rows with transparent weighted-rate baselines and do not
+promote the model to empirically calibrated status.
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import json
+import sys
+import unicodedata
+from dataclasses import asdict, dataclass
+from pathlib import Path
+from typing import Literal
+
+from models.primarycare_model.data.public_source_snapshot import ROOT
+
+HoldoutComparisonStatus = Literal["passed", "comparison_failed"]
+
+PHO_ACCESS_NUMERIC = (
+    ROOT
+    / "data"
+    / "public_processed"
+    / "src_hnz_pho_access_timeseries"
+    / "pho_access_numeric_extract.csv"
+)
+
+
+@dataclass(frozen=True)
+class PublicHoldoutObservation:
+    district: str
+    stratifier: str
+    group: str
+    observed_coverage_rate: float
+    predicted_coverage_rate: float
+    absolute_error: float
+
+    def to_json_dict(self) -> dict[str, object]:
+        return asdict(self)
+
+
+@dataclass(frozen=True)
+class PublicHoldoutComparison:
+    gate_id: str
+    validation_family: str
+    predictor_id: str
+    stratifier: str
+    group: str
+    observations: int
+    mean_absolute_error: float
+    max_absolute_error: float
+    max_error_tolerance: float
+    status: HoldoutComparisonStatus
+    claim_status: str
+    interpretation_note: str
+
+    def to_json_dict(self) -> dict[str, object]:
+        return asdict(self)
+
+
+def load_pho_access_numeric_rows(path: Path = PHO_ACCESS_NUMERIC) -> tuple[dict[str, str], ...]:
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        return tuple(csv.DictReader(handle))
+
+
+def _coverage_rate(row: dict[str, str]) -> float:
+    return float(row["reported_coverage_rate"])
+
+
+def _weighted_rate(rows: tuple[dict[str, str], ...]) -> float:
+    enrolled = sum(float(row["enrolled_count"]) for row in rows)
+    population = sum(float(row["population_count"]) for row in rows)
+    if population <= 0:
+        raise ValueError("public holdout population denominator must be positive")
+    return enrolled / population
+
+
+def _comparison_for_rows(
+    *,
+    gate_id: str,
+    validation_family: str,
+    stratifier: str,
+    group: str,
+    rows: tuple[dict[str, str], ...],
+    max_error_tolerance: float,
+) -> PublicHoldoutComparison:
+    predicted = _weighted_rate(rows)
+    observations = [
+        PublicHoldoutObservation(
+            district=row["district"],
+            stratifier=stratifier,
+            group=group,
+            observed_coverage_rate=round(_coverage_rate(row), 12),
+            predicted_coverage_rate=round(predicted, 12),
+            absolute_error=round(abs(_coverage_rate(row) - predicted), 12),
+        )
+        for row in rows
+    ]
+    max_error = max(observation.absolute_error for observation in observations)
+    mean_error = sum(observation.absolute_error for observation in observations) / len(observations)
+    status: HoldoutComparisonStatus = "passed" if max_error <= max_error_tolerance else "comparison_failed"
+    return PublicHoldoutComparison(
+        gate_id=gate_id,
+        validation_family=validation_family,
+        predictor_id="weighted_public_baseline_rate",
+        stratifier=stratifier,
+        group=group,
+        observations=len(observations),
+        mean_absolute_error=round(mean_error, 12),
+        max_absolute_error=round(max_error, 12),
+        max_error_tolerance=max_error_tolerance,
+        status=status,
+        claim_status="calibration_readiness_only",
+        interpretation_note=(
+            "Transparent weighted public baseline comparison only; not a causal, fiscal, "
+            "or individual-care prediction validation."
+        ),
+    )
+
+
+def build_public_holdout_comparisons() -> tuple[PublicHoldoutComparison, ...]:
+    rows = load_pho_access_numeric_rows()
+    comparisons: list[PublicHoldoutComparison] = []
+
+    geographic_rows = tuple(row for row in rows if row["stratifier"] == "ethnicity" and row["group"] == "Total")
+    if geographic_rows:
+        comparisons.append(
+            _comparison_for_rows(
+                gate_id="CAL-G-003",
+                validation_family="geographic_holdout_validation",
+                stratifier="district",
+                group="total_coverage",
+                rows=geographic_rows,
+                max_error_tolerance=0.05,
+            )
+        )
+
+    subgroup_rows = tuple(
+        row
+        for row in rows
+        if row["stratifier"] in {"ethnicity", "deprivation"} and row["group"] != "Total"
+    )
+    for stratifier, group in sorted({(row["stratifier"], row["group"]) for row in subgroup_rows}):
+        group_rows = tuple(row for row in subgroup_rows if row["stratifier"] == stratifier and row["group"] == group)
+        comparisons.append(
+            _comparison_for_rows(
+                gate_id="CAL-G-004",
+                validation_family="subgroup_gradient_validation",
+                stratifier=stratifier,
+                group=group,
+                rows=group_rows,
+                max_error_tolerance=0.05,
+            )
+        )
+    return tuple(comparisons)
+
+
+def holdout_gate_status(gate_id: str) -> str:
+    comparisons = tuple(row for row in build_public_holdout_comparisons() if row.gate_id == gate_id)
+    if not comparisons:
+        return "public_validation_numeric_ready"
+    if all(row.status == "passed" for row in comparisons):
+        return "passed"
+    return "public_holdout_comparison_failed"
+
+
+def _ascii_safe(value: str) -> str:
+    normalized = unicodedata.normalize("NFKD", value)
+    return normalized.encode("ascii", errors="ignore").decode("ascii")
+
+
+def holdout_gate_blockers(gate_id: str) -> tuple[str, ...]:
+    blockers = [
+        (
+            f"{comparison.gate_id}: {comparison.validation_family} "
+            f"{_ascii_safe(comparison.stratifier)}/{_ascii_safe(comparison.group)} "
+            f"max_abs_error={comparison.max_absolute_error} exceeds tolerance={comparison.max_error_tolerance}"
+        )
+        for comparison in build_public_holdout_comparisons()
+        if comparison.gate_id == gate_id and comparison.status != "passed"
+    ]
+    return tuple(blockers)
+
+
+def public_holdout_comparisons_as_json() -> str:
+    payload = {
+        "claim_boundary": "benchmark comparison only; public_benchmark/calibration_readiness_only until holdout gates pass",
+        "rows": [row.to_json_dict() for row in build_public_holdout_comparisons()],
+    }
+    return json.dumps(payload, indent=2)
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Run public aggregate holdout benchmark comparisons.")
+    parser.add_argument("--json", action="store_true", help="Print comparison rows as JSON.")
+    parser.add_argument("--require-pass", action="store_true", help="Fail unless all public holdout comparisons pass.")
+    args = parser.parse_args(argv)
+
+    comparisons = build_public_holdout_comparisons()
+    if args.json:
+        print(public_holdout_comparisons_as_json())
+    else:
+        for comparison in comparisons:
+            print(
+                f"{comparison.gate_id}: {_ascii_safe(comparison.stratifier)}/{_ascii_safe(comparison.group)}; "
+                f"status={comparison.status}; max_abs_error={comparison.max_absolute_error}; "
+                f"tolerance={comparison.max_error_tolerance}; claim={comparison.claim_status}"
+            )
+
+    if args.require_pass and any(comparison.status != "passed" for comparison in comparisons):
+        print("\n".join(holdout_gate_blockers("CAL-G-003") + holdout_gate_blockers("CAL-G-004")), file=sys.stderr)
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main(sys.argv[1:]))

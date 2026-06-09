@@ -55,7 +55,7 @@ calibration_status: calibration_readiness_only
 claim_level: public_benchmark
 ```
 
-The remaining blocker is no longer source acquisition. CAL-G-003 and CAL-G-004 now have public numeric validation evidence, but no model-vs-holdout or model-vs-gradient comparison has passed. CAL-G-002 temporal holdout and CAL-G-005 published policy-shock validation still report `public_data_unavailable`.
+The remaining blocker is no longer source acquisition. CAL-G-003 and CAL-G-004 now run public benchmark comparisons, but those comparisons exceed tolerance and therefore do not pass. CAL-G-002 temporal holdout and CAL-G-005 published policy-shock validation still report `public_data_unavailable`.
 
 ## Claim Boundary
 

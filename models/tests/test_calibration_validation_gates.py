@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 
@@ -10,6 +11,14 @@ from models.primarycare_model.calibration.calibration_validation_gates import (
     validation_gate_issues,
     validation_gate_matrix_as_json,
 )
+
+SUBPROCESS_ENV = {
+    **os.environ,
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+}
 
 
 def test_calibration_validation_gate_matrix_includes_required_gate_ids() -> None:
@@ -28,7 +37,7 @@ def test_calibration_validation_gate_matrix_includes_required_gate_ids() -> None
 def test_calibration_validation_gate_matrix_default_mode_is_non_promotional() -> None:
     rows = build_calibration_validation_gate_matrix()
     assert any(row.status == "public_data_unavailable" for row in rows)
-    assert any(row.status == "public_validation_numeric_ready" for row in rows)
+    assert any(row.status == "public_holdout_comparison_failed" for row in rows)
     assert all(row.blockers == () for row in rows)
     assert any(row.claim_status == "public_aggregate_validated" for row in rows)
     assert any(row.claim_status == "calibration_readiness_only" for row in rows)
@@ -56,6 +65,7 @@ def test_calibration_validation_gate_cli_passes_in_readiness_mode() -> None:
         [sys.executable, "scripts/check_calibration_validation_gates.py"],
         text=True,
         capture_output=True,
+        env=SUBPROCESS_ENV,
     )
     assert result.returncode == 0, result.stdout + result.stderr
     assert "CAL-G-001" in result.stdout
@@ -67,6 +77,7 @@ def test_calibration_validation_gate_cli_strict_mode_passes_readiness_validation
         [sys.executable, "scripts/check_calibration_validation_gates.py", "--strict"],
         text=True,
         capture_output=True,
+        env=SUBPROCESS_ENV,
     )
     assert result.returncode == 0, result.stdout + result.stderr
 
@@ -81,6 +92,7 @@ def test_calibration_validation_gate_cli_empirical_upgrade_mode_fails_until_hold
         ],
         text=True,
         capture_output=True,
+        env=SUBPROCESS_ENV,
     )
     assert result.returncode == 1
     assert "claim remains calibration_readiness_only" in result.stderr
