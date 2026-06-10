@@ -9,7 +9,7 @@ format:
     toc: true
     number-sections: true
   docx: default
-bibliography: ../references.bib
+bibliography: ../references/gtpcnz-references-v1.8.5.json
 ---
 
 > **Submission status:** draft for Policy Quarterly editorial review. Final formatting should be checked against the journal's current author instructions before submission.
