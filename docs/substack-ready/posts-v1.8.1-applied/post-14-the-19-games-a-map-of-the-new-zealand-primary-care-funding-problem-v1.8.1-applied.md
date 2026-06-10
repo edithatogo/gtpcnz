@@ -8,7 +8,7 @@ That is why simple slogans fail.
 
 “More fee-for-service” does not solve everything.
 
-![Map of nineteen primary care funding games showing how incentives interact across patients, providers and funders.](../figures/fig-21-nineteen-game-map-v1.5.0.png)
+![Figure for The 19 games: a map of the New Zealand primary care funding problem](../figures/fig-21-nineteen-game-map-v1.5.0.png)
 
 “More telehealth” does not solve everything.
 
@@ -66,10 +66,10 @@ That is difficult.
 
 But it is more honest than pretending one funding model can solve the whole system.
 
-![Game-to-model stack diagram linking incentive diagnosis, modelling assumptions and multi-criteria decision analysis.](../figures/fig-12-game-to-model-mcda-stack-v1.4.0.png)
+![fig-12-game-to-model-mcda-stack-v1.4.0](../figures/fig-12-game-to-model-mcda-stack-v1.4.0.png)
 
 
-## How to read the map
+### How to read the map
 
 The map is not meant to be clever for the sake of it. It is meant to stop us arguing about only one piece of the system at a time.
 
@@ -80,7 +80,7 @@ Each game is a small strategic trap. The policy problem is that the traps intera
 That is why a hybrid model is needed. It is not a slogan. It is a way of admitting that no single lever is strong enough to solve the whole access problem.
 
 
-## Why nineteen games is not overcomplication
+### Why nineteen games is not overcomplication
 
 Nineteen sounds like a lot. But the health system is already playing these games. Naming them does not create complexity. It reveals it.
 
@@ -102,10 +102,6 @@ I would be less convinced if stakeholders scored most of these games as unreal, 
 
 ---
 
-## Public companion links
-
-- [Interactive Streamlit dashboard and model lab](https://gtpcnz.streamlit.app/)
-- [GitHub Pages report, reading map and release model card](https://edithatogo.github.io/gtpcnz/)
 ## v1.8.1 model update
 
 The current Streamlit model release is v1.8.1. Its public aggregate validation lane is `public_aggregate_validated`, and its claim level is `empirically_supported_if_gated` for registered gates only.

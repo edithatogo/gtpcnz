@@ -8,7 +8,7 @@ It should not simply copy Medicare.
 
 It should not create an uncontrolled fee-for-service system.
 
-![Recommendations stack diagram showing how primary care funding, governance and accountability can expand before hospital pressure rises.](../figures/fig-23-recommendations-stack-v1.5.0.png)
+![Figure for Recommendations: a primary care system that can grow before hospitals have to](../figures/fig-23-recommendations-stack-v1.5.0.png)
 
 It should not pretend telehealth replaces local care.
 
@@ -106,10 +106,10 @@ The next step is a hybrid model:
 
 That is the model I think New Zealand should test.
 
-![Hybrid primary care architecture diagram showing how access, supply, audit and equity safeguards can operate together.](../figures/fig-13-hybrid-architecture-v1.4.0.png)
+![fig-13-hybrid-architecture-v1.4.0](../figures/fig-13-hybrid-architecture-v1.4.0.png)
 
 
-## What I would do first
+### What I would do first
 
 I would not start with a national big-bang implementation. I would start with a tightly designed policy trial.
 
@@ -135,10 +135,6 @@ I would be less convinced if the current reform pathway, without uncapped schedu
 
 ---
 
-## Public companion links
-
-- [Interactive Streamlit dashboard and model lab](https://gtpcnz.streamlit.app/)
-- [GitHub Pages report, reading map and release model card](https://edithatogo.github.io/gtpcnz/)
 ## v1.8.1 model update
 
 The current Streamlit model release is v1.8.1. Its public aggregate validation lane is `public_aggregate_validated`, and its claim level is `empirically_supported_if_gated` for registered gates only.

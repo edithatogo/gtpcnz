@@ -1,13 +1,5 @@
 # The hospital salience game and the Health New Zealand allocation game
 
-When a hospital is full, everyone can see the problem.
-
-When a person cannot get a primary care appointment, the system often sees it much later.
-
-That difference matters.
-
-This post is about the visibility game: hospital pressure becomes urgent because it is counted, public and politically exposed. Primary care failure can be slower, quieter and scattered across thousands of missed appointments, delayed follow-ups, closed books and unaffordable co-payments.
-
 Game theory sounds more dramatic than it needs to be.
 
 For this series, a “game” just means a situation where different players respond to incentives, rules, constraints and each other’s behaviour.
@@ -24,11 +16,15 @@ So hospital demand is a visible crisis, while upstream unmet need is often invis
 
 That creates a repeated game.
 
-- Round one: primary care access is constrained.
-- Round two: some unmet need flows to urgent care, ambulance and emergency departments.
-- Round three: hospital pressure becomes visible.
-- Round four: funding and management attention go to the hospital pressure.
-- Round five: primary care remains constrained.
+Round one: primary care access is constrained.
+
+Round two: some unmet need flows to urgent care, ambulance and emergency departments.
+
+Round three: hospital pressure becomes visible.
+
+Round four: funding and management attention go to the hospital pressure.
+
+Round five: primary care remains constrained.
 
 Then the cycle repeats.
 
@@ -83,10 +79,10 @@ Hospitals need funding. Hospitals are essential.
 
 The goal is to stop using hospitals as the default growth pathway for needs that could have been met earlier, cheaper and closer to home.
 
-![Diagram showing constrained primary care access flowing into urgent care, ambulance and hospital pressure, then back into rescue funding and management attention.](../figures/fig-04-hospital-rescue-loop-v1.2.0.png)
+![fig-04-hospital-rescue-loop-v1.2.0](../figures/fig-04-hospital-rescue-loop-v1.2.0.png)
 
 
-## The subtle version of the hospital game
+### The subtle version of the hospital game
 
 It is tempting to describe this as hospitals stealing money from primary care. That is too crude. Hospitals are not the villain. Hospital managers are not sitting around trying to undermine general practice.
 
@@ -98,17 +94,9 @@ Those moments are real, but they are less visible. By the time they become visib
 
 That is the hospital game. It is not about bad intent. It is about what the system can see, what it is forced to rescue, and what it can postpone.
 
-## Why this belongs in the main post, not just the appendix
-
-The appendix keeps the longer game table, source list and modelling notes. The public argument is shorter: if upstream failure is less visible than hospital failure, the system will keep rescuing hospitals after the pressure has already arrived.
-
-That is why the next policy question is not only "how much money is in primary care?" It is also "what does the system see early enough to fund, manage and fix?"
-
 ## What would change my mind?
 
-I would be less convinced if Health New Zealand's internal incentives gave primary and community care the same operational salience as emergency departments, hospitals, waiting lists and deficits.
-
-I would also be less convinced if the primary care access target, National Primary Care Dataset, urgent-care expansion and ambulance performance measures made upstream access failure visible early enough to shift funding and operational decisions before hospital pressure rose.
+I would be less convinced if Health New Zealand’s internal incentives gave primary and community care the same operational salience as emergency departments, hospitals, waiting lists and deficits.
 
 ---
 
@@ -124,10 +112,6 @@ I would also be less convinced if the primary care access target, National Prima
 
 ---
 
-## Public companion links
-
-- [Interactive Streamlit dashboard and model lab](https://gtpcnz.streamlit.app/)
-- [GitHub Pages report, reading map and release model card](https://edithatogo.github.io/gtpcnz/)
 ## v1.8.1 model update
 
 The current Streamlit model release is v1.8.1. Its public aggregate validation lane is `public_aggregate_validated`, and its claim level is `empirically_supported_if_gated` for registered gates only.

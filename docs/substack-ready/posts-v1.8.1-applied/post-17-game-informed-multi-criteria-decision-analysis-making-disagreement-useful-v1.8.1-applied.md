@@ -82,10 +82,10 @@ The demonstrative model tests the logic.
 
 The MCDA helps decision-makers decide which traps matter most.
 
-![Multi-criteria decision analysis workshop flow showing how structured disagreement can be converted into policy comparison.](../figures/fig-06-mcda-workshop-flow-v1.2.0.png)
+![fig-06-mcda-workshop-flow-v1.2.0](../figures/fig-06-mcda-workshop-flow-v1.2.0.png)
 
 
-## What disagreement can teach us
+### What disagreement can teach us
 
 The most useful outcome of a Multi-Criteria Decision Analysis may not be agreement. It may be clearer disagreement.
 
@@ -98,7 +98,7 @@ The value of the method is that it makes those values visible. Instead of preten
 That is much better than hiding judgement inside a formula and calling it neutral.
 
 
-## Why MCDA belongs after the game map
+### Why MCDA belongs after the game map
 
 Multi-Criteria Decision Analysis works best when the decision problem has already been structured. The game map does that structuring. It says: these are the traps; these are the players; these are the incentives; these are the plausible failure modes.
 
@@ -106,7 +106,7 @@ The Multi-Criteria Decision Analysis then asks: which outcomes matter most, whic
 
 That ordering is important. Without the game map, the Multi-Criteria Decision Analysis can become a generic scoring exercise. With the game map, it becomes a way to test whether a policy shifts the system out of bad equilibria.
 
-## What I would ask stakeholders
+### What I would ask stakeholders
 
 I would ask them to score each game on five questions. Is it real? Is it harmful? Does it drive hospital pressure? Does it worsen equity? Is it tractable?
 
@@ -128,10 +128,6 @@ I would be less convinced if a decision process without Multi-Criteria Decision 
 
 ---
 
-## Public companion links
-
-- [Interactive Streamlit dashboard and model lab](https://gtpcnz.streamlit.app/)
-- [GitHub Pages report, reading map and release model card](https://edithatogo.github.io/gtpcnz/)
 ## v1.8.1 model update
 
 The current Streamlit model release is v1.8.1. Its public aggregate validation lane is `public_aggregate_validated`, and its claim level is `empirically_supported_if_gated` for registered gates only.

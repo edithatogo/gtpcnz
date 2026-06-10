@@ -8,7 +8,7 @@ It does not prove that a particular reform will reduce emergency department atte
 
 It does not prove a five-year fiscal saving.
 
-![Composite modelling stack diagram showing how demonstrative model outputs connect assumptions, scenarios and policy trade-offs.](../figures/fig-22-composite-model-stack-v1.5.0.png)
+![Figure for Composite modelling: what the demonstrative model adds, and what it does not](../figures/fig-22-composite-model-stack-v1.5.0.png)
 
 It does not claim that every parameter is known.
 
@@ -88,10 +88,10 @@ But it is not necessary before publishing the argument.
 
 The point now is to make the system game visible.
 
-![Game-informed modelling diagram linking incentive maps, demonstrative outputs and multi-criteria policy comparison.](../figures/fig-12-game-to-model-mcda-stack-v1.4.0.png)
+![fig-12-game-to-model-mcda-stack-v1.4.0](../figures/fig-12-game-to-model-mcda-stack-v1.4.0.png)
 
 
-## Why bother modelling if it is not predictive yet?
+### Why bother modelling if it is not predictive yet?
 
 A demonstrative model is useful for a different reason from a predictive model. It does not tell us exactly what will happen. It tells us whether the logic is coherent, where the assumptions are, and which assumptions matter most.
 
@@ -104,7 +104,7 @@ If someone thinks the capitation marginal-supply problem is overstated, that can
 The model is not a crystal ball. It is a disciplined argument. And disciplined arguments are easier to improve than loose ones.
 
 
-## What the composite model adds
+### What the composite model adds
 
 The composite model takes the individual games and asks how they behave together. That matters because a policy can look good in one game and bad in another.
 
@@ -128,10 +128,6 @@ I would be less convinced if the demonstrative and source-informed models failed
 
 ---
 
-## Public companion links
-
-- [Interactive Streamlit dashboard and model lab](https://gtpcnz.streamlit.app/)
-- [GitHub Pages report, reading map and release model card](https://edithatogo.github.io/gtpcnz/)
 ## v1.8.1 model update
 
 The current Streamlit model release is v1.8.1. Its public aggregate validation lane is `public_aggregate_validated`, and its claim level is `empirically_supported_if_gated` for registered gates only.

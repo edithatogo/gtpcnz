@@ -8,7 +8,7 @@ If the funding system only recognises general-practitioner-led activity, then th
 
 General practitioners are essential. This is not an argument against them. But they are not the only clinicians who can safely provide primary care activity.
 
-![Scope-enabled supply diagram showing how more primary care capacity can be generated when funding follows safe team roles.](../figures/fig-19-scope-enabled-supply-v1.5.0.png)
+![Figure for Who should be allowed to generate primary care supply?](../figures/fig-19-scope-enabled-supply-v1.5.0.png)
 
 Nurse practitioners can assess, diagnose, prescribe and manage many conditions. Pharmacists can support medicines optimisation, minor ailments, vaccination, prescribing in defined contexts and medication review. Physiotherapists can manage musculoskeletal problems. Paramedics can support urgent assessment, triage and alternative disposition. Nurses can provide a wide range of planned and acute services. Māori and Pacific providers can deliver care in ways that mainstream models often do not.
 
@@ -81,7 +81,7 @@ The recommendation is simple:
 > Let scope of practice and clinical governance determine what providers can do. Do not let the payment model artificially restrict who can generate safe primary care supply.
 
 
-## Funding should not freeze old professional boundaries
+### Funding should not freeze old professional boundaries
 
 Clinical safety absolutely matters. Prescribing rules, scope of practice, competence, supervision, escalation pathways and audit all matter.
 
@@ -111,10 +111,6 @@ I would be less convinced if provider scope expansion did not create safe additi
 
 ---
 
-## Public companion links
-
-- [Interactive Streamlit dashboard and model lab](https://gtpcnz.streamlit.app/)
-- [GitHub Pages report, reading map and release model card](https://edithatogo.github.io/gtpcnz/)
 ## v1.8.1 model update
 
 The current Streamlit model release is v1.8.1. Its public aggregate validation lane is `public_aggregate_validated`, and its claim level is `empirically_supported_if_gated` for registered gates only.

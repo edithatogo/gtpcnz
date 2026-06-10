@@ -92,7 +92,7 @@ The core question is:
 
 This series is an attempt to make that question visible.
 
-## Why I am starting here
+### Why I am starting here
 
 This is also why I am not starting with a technical formula. New Zealand has a long history of formula debates. A formula can be improved and still leave the main game unchanged. If the cheaper parts of the system are held inside tight activity limits, the unmet need does not disappear. It moves.
 
@@ -162,10 +162,6 @@ The most important empirical tests are:
 
 ---
 
-## Public companion links
-
-- [Interactive Streamlit dashboard and model lab](https://gtpcnz.streamlit.app/)
-- [GitHub Pages report, reading map and release model card](https://edithatogo.github.io/gtpcnz/)
 ## v1.8.1 model update
 
 The current Streamlit model release is v1.8.1. Its public aggregate validation lane is `public_aggregate_validated`, and its claim level is `empirically_supported_if_gated` for registered gates only.

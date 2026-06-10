@@ -105,7 +105,7 @@ That is not neoliberal. It is not a blank cheque. It is not an anti-public model
 
 It is a way of paying for the care we want to happen before the hospital becomes the only place left to go.
 
-## What would still be controlled?
+### What would still be controlled?
 
 This is the part people often miss. If eligible activity is uncapped, almost everything else still needs rules.
 
@@ -133,10 +133,6 @@ I would be less convinced if an uncapped scheduled stream could not be governed 
 
 ---
 
-## Public companion links
-
-- [Interactive Streamlit dashboard and model lab](https://gtpcnz.streamlit.app/)
-- [GitHub Pages report, reading map and release model card](https://edithatogo.github.io/gtpcnz/)
 ## v1.8.1 model update
 
 The current Streamlit model release is v1.8.1. Its public aggregate validation lane is `public_aggregate_validated`, and its claim level is `empirically_supported_if_gated` for registered gates only.

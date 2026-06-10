@@ -8,7 +8,7 @@ They can also be an equity failure.
 
 A demand signal means people face some cost when they use a service. In theory, this discourages low-value use and helps keep the system financially sustainable.
 
-![Co-payment trade-off diagram showing the tension between demand signalling, access barriers and equity protection.](../figures/fig-17-copayment-demand-equity-v1.5.0.png)
+![Figure for Co-payments: demand signal or equity failure?](../figures/fig-17-copayment-demand-equity-v1.5.0.png)
 
 But health care is not like buying a coffee.
 
@@ -28,7 +28,7 @@ In an uncapped eligible fee-for-service model, co-payments could help manage dem
 
 The diagram below shows the basic equity problem. More price-sensitive patients reduce use more sharply as co-payments rise. Those patients are often the very people the system should most protect.
 
-![Co-payment demand and equity diagram showing how price signals can suppress both low-value and necessary care.](../figures/fig-10-copayment-demand-equity-v1.4.0.png)
+![fig-10-copayment-demand-equity-v1.4.0](../figures/fig-10-copayment-demand-equity-v1.4.0.png)
 
 A sensible model might include:
 
@@ -60,7 +60,7 @@ Co-payments can remain in the model.
 But they should be designed as a calibrated signal, not a blunt rationing weapon.
 
 
-## The uncomfortable trade-off
+### The uncomfortable trade-off
 
 Co-payments are politically uncomfortable because they sit between two real concerns.
 
@@ -75,7 +75,7 @@ A co-payment for a low-risk convenience contact is not the same as a co-payment 
 If co-payments are used, they need to be calibrated. They should not become the main way the system rations care.
 
 
-## Why equity protections have to be designed up front
+### Why equity protections have to be designed up front
 
 Equity protections cannot be an afterthought. Once a funding model is running, providers and patients adapt to it. Fees become normal. Workflows become fixed. Business models emerge. Changing them later is hard.
 
@@ -101,10 +101,6 @@ I would be less convinced if co-payments could be used as a demand signal withou
 
 ---
 
-## Public companion links
-
-- [Interactive Streamlit dashboard and model lab](https://gtpcnz.streamlit.app/)
-- [GitHub Pages report, reading map and release model card](https://edithatogo.github.io/gtpcnz/)
 ## v1.8.1 model update
 
 The current Streamlit model release is v1.8.1. Its public aggregate validation lane is `public_aggregate_validated`, and its claim level is `empirically_supported_if_gated` for registered gates only.

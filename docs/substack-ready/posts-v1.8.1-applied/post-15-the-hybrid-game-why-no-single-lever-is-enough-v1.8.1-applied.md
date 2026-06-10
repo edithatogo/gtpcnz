@@ -79,10 +79,10 @@ That phrase is less catchy.
 
 It is also more accurate.
 
-![Hybrid architecture diagram showing capitation, scheduled activity funding, governance, audit and equity protections working together.](../figures/fig-13-hybrid-architecture-v1.4.0.png)
+![fig-13-hybrid-architecture-v1.4.0](../figures/fig-13-hybrid-architecture-v1.4.0.png)
 
 
-## What makes the hybrid model different
+### What makes the hybrid model different
 
 A weak hybrid model simply adds more little funding streams. That is not what I am proposing.
 
@@ -97,7 +97,7 @@ Uncapped activity without audit can become gaming. Fee-for-service without place
 That is why the model has to be designed as a system, not as a list of isolated reforms.
 
 
-## The hybrid model is also a governance model
+### The hybrid model is also a governance model
 
 The hybrid model is not only about money. It is about governance. It asks who is responsible for which problem.
 
@@ -114,7 +114,7 @@ Data and key performance indicators ask: who can see whether the system is worki
 Those are governance questions as much as funding questions. A hybrid model works only when the accountability is as blended as the funding.
 
 
-## The failure mode to avoid
+### The failure mode to avoid
 
 ## What would change my mind?
 
@@ -134,10 +134,6 @@ I would be less convinced if one reform lever repeatedly outperformed the hybrid
 
 ---
 
-## Public companion links
-
-- [Interactive Streamlit dashboard and model lab](https://gtpcnz.streamlit.app/)
-- [GitHub Pages report, reading map and release model card](https://edithatogo.github.io/gtpcnz/)
 ## v1.8.1 model update
 
 The current Streamlit model release is v1.8.1. Its public aggregate validation lane is `public_aggregate_validated`, and its claim level is `empirically_supported_if_gated` for registered gates only.

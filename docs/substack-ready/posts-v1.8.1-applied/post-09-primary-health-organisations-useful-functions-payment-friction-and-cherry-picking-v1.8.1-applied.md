@@ -65,7 +65,7 @@ It suggests a middle path:
 
 The diagram below shows the risk.
 
-![Place accountability diagram showing how provider selection incentives can create cherry-picking risk without population responsibility.](../figures/fig-11-place-accountability-cherrypicking-v1.4.0.png)
+![fig-11-place-accountability-cherrypicking-v1.4.0](../figures/fig-11-place-accountability-cherrypicking-v1.4.0.png)
 
 The policy challenge is not just to create more primary care contacts.
 
@@ -82,7 +82,7 @@ Place-based accountability can stop that growth becoming selective.
 Both are needed.
 
 
-## Why place-based accountability belongs in the model
+### Why place-based accountability belongs in the model
 
 A national fee-for-service stream can increase activity. That is the point. But if it is not paired with place-based accountability, it can also allow providers to select easier work.
 
@@ -95,7 +95,7 @@ The better answer is: make eligible primary medical activity claimable, but requ
 The funding stream should help generate care. The place-based layer should make sure the care reaches the people who are hardest to reach.
 
 
-## Why PHOs should not be treated as one thing
+### Why PHOs should not be treated as one thing
 
 ## What would change my mind?
 
@@ -115,10 +115,6 @@ I would be less convinced if PHO intermediation were transparent, low-cost, cons
 
 ---
 
-## Public companion links
-
-- [Interactive Streamlit dashboard and model lab](https://gtpcnz.streamlit.app/)
-- [GitHub Pages report, reading map and release model card](https://edithatogo.github.io/gtpcnz/)
 ## v1.8.1 model update
 
 The current Streamlit model release is v1.8.1. Its public aggregate validation lane is `public_aggregate_validated`, and its claim level is `empirically_supported_if_gated` for registered gates only.

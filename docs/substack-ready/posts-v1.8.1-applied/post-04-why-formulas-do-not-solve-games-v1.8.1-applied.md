@@ -97,7 +97,7 @@ A better formula may distribute scarcity more fairly.
 
 It may not remove the scarcity.
 
-## The trap in formula politics
+### The trap in formula politics
 
 Formula fights are seductive because they look technical. Everyone can point to a variable. Age. Deprivation. Rurality. Ethnicity. Multimorbidity. Workforce cost. Practice size. Travel time.
 
@@ -123,10 +123,6 @@ I would be less convinced if capitation reweighting alone materially improved ac
 
 ---
 
-## Public companion links
-
-- [Interactive Streamlit dashboard and model lab](https://gtpcnz.streamlit.app/)
-- [GitHub Pages report, reading map and release model card](https://edithatogo.github.io/gtpcnz/)
 ## v1.8.1 model update
 
 The current Streamlit model release is v1.8.1. Its public aggregate validation lane is `public_aggregate_validated`, and its claim level is `empirically_supported_if_gated` for registered gates only.
