@@ -72,7 +72,7 @@ from models.primarycare_model.ui.cockpit import build_policy_cockpit_payload
 
 APP_VERSION = "1.8.1"
 ROOT = Path(__file__).resolve().parents[2]
-RESULTS_PATH = ROOT / "outputs" / "full-parameterised-summary-results-v1.7.0.csv"
+RESULTS_PATH = ROOT / "outputs" / "full-parameterised-summary-results-v1.8.1.csv"
 FULL_PUBLIC_CAVEAT = (
     "This is a public-data anchored benchmark and educational explainer. "
     "It is not linked-data calibrated and not a patient-level forecast. "

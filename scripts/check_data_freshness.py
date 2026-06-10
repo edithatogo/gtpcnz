@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CHECK_PATHS = [
-    ROOT / "outputs" / "full-parameterised-summary-results-v1.7.0.csv",
+    ROOT / "outputs" / "full-parameterised-summary-results-v1.8.1.csv",
     ROOT / "models" / "primarycare_model" / "registries" / "parameters.v1.yaml",
     ROOT / "models" / "primarycare_model" / "registries" / "inputs.v1.yaml",
     ROOT / "models" / "primarycare_model" / "registries" / "educational_levers.v1.yaml",
