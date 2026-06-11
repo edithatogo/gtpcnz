@@ -8,7 +8,7 @@ But telehealth is not the whole answer.
 
 Some problems need touch.
 
-![Figure for Telehealth is an extender, not a replacement for local supply](../figures/fig-20-telehealth-extender-not-replacement-v1.5.0.png)
+![Telehealth access diagram showing digital care extending local supply while still depending on nearby clinical services.](../figures/fig-20-telehealth-extender-not-replacement-v1.5.0.png)
 
 A clinician may need to listen to a chest, examine an abdomen, look in an ear, check a rash, assess hydration, dress a wound, remove sutures, feel a pulse, test mobility, take bloods, give an injection or simply see how someone walks into the room.
 
@@ -57,7 +57,7 @@ Telehealth is a bridge.
 It should not become an excuse to remove the clinic, the nurse, the pharmacist, the paramedic, the visiting general practitioner or the rural hospital from the community.
 
 
-### The rural risk
+## The rural risk
 
 Telehealth can be wonderful for rural communities. It can reduce travel, improve follow-up, support medication reviews and give people faster advice when local appointments are scarce.
 
@@ -74,7 +74,7 @@ Second: does the model protect local in-person capacity when that capacity is cl
 The goal is not nostalgia for old models of care. The goal is a mixed access system where digital care, local clinics, outreach, ambulance alternatives and urgent care are all funded for the jobs they do best.
 
 
-### Telehealth can also change provider behaviour
+## Telehealth can also change provider behaviour
 
 Telehealth does not only change patient access. It changes the economics of supply. A digital provider can centralise clinicians, standardise workflows, reduce room costs and operate across geography. That can be good. It can also outcompete local in-person services for easier contacts.
 

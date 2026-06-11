@@ -105,7 +105,7 @@ That is not neoliberal. It is not a blank cheque. It is not an anti-public model
 
 It is a way of paying for the care we want to happen before the hospital becomes the only place left to go.
 
-### What would still be controlled?
+## What would still be controlled?
 
 This is the part people often miss. If eligible activity is uncapped, almost everything else still needs rules.
 

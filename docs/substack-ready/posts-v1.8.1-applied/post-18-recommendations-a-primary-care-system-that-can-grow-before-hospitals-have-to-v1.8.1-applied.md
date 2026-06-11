@@ -8,7 +8,7 @@ It should not simply copy Medicare.
 
 It should not create an uncontrolled fee-for-service system.
 
-![Figure for Recommendations: a primary care system that can grow before hospitals have to](../figures/fig-23-recommendations-stack-v1.5.0.png)
+![Recommendations stack diagram showing how primary care funding, governance and accountability can expand before hospital pressure rises.](../figures/fig-23-recommendations-stack-v1.5.0.png)
 
 It should not pretend telehealth replaces local care.
 
@@ -106,10 +106,10 @@ The next step is a hybrid model:
 
 That is the model I think New Zealand should test.
 
-![fig-13-hybrid-architecture-v1.4.0](../figures/fig-13-hybrid-architecture-v1.4.0.png)
+![Hybrid primary care architecture diagram showing how access, supply, audit and equity safeguards can operate together.](../figures/fig-13-hybrid-architecture-v1.4.0.png)
 
 
-### What I would do first
+## What I would do first
 
 I would not start with a national big-bang implementation. I would start with a tightly designed policy trial.
 

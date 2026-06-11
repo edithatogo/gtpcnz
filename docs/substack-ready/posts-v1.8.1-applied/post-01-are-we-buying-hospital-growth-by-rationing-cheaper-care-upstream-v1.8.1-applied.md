@@ -92,7 +92,7 @@ The core question is:
 
 This series is an attempt to make that question visible.
 
-### Why I am starting here
+## Why I am starting here
 
 This is also why I am not starting with a technical formula. New Zealand has a long history of formula debates. A formula can be improved and still leave the main game unchanged. If the cheaper parts of the system are held inside tight activity limits, the unmet need does not disappear. It moves.
 

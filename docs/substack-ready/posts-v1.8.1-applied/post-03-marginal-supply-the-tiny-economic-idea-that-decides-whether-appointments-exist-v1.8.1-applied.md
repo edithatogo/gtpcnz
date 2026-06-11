@@ -80,7 +80,7 @@ If the next clinically useful contact is unfunded, that contact will eventually 
 
 And if enough contacts disappear upstream, they reappear downstream as ambulance calls, urgent care demand and hospital pressure.
 
-### Why this matters for rural areas
+## Why this matters for rural areas
 
 Marginal supply is especially important in rural areas. A city practice may be able to absorb a bit more work by using a larger team, extending hours or shifting some care to telehealth. A rural service may have fewer staff, fewer rooms, longer travel times, fewer locums and less backup.
 

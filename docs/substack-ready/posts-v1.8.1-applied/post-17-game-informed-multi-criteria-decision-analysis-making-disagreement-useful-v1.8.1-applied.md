@@ -82,10 +82,10 @@ The demonstrative model tests the logic.
 
 The MCDA helps decision-makers decide which traps matter most.
 
-![fig-06-mcda-workshop-flow-v1.2.0](../figures/fig-06-mcda-workshop-flow-v1.2.0.png)
+![Multi-criteria decision analysis workshop flow showing how structured disagreement can be converted into policy comparison.](../figures/fig-06-mcda-workshop-flow-v1.2.0.png)
 
 
-### What disagreement can teach us
+## What disagreement can teach us
 
 The most useful outcome of a Multi-Criteria Decision Analysis may not be agreement. It may be clearer disagreement.
 
@@ -98,7 +98,7 @@ The value of the method is that it makes those values visible. Instead of preten
 That is much better than hiding judgement inside a formula and calling it neutral.
 
 
-### Why MCDA belongs after the game map
+## Why MCDA belongs after the game map
 
 Multi-Criteria Decision Analysis works best when the decision problem has already been structured. The game map does that structuring. It says: these are the traps; these are the players; these are the incentives; these are the plausible failure modes.
 
@@ -106,7 +106,7 @@ The Multi-Criteria Decision Analysis then asks: which outcomes matter most, whic
 
 That ordering is important. Without the game map, the Multi-Criteria Decision Analysis can become a generic scoring exercise. With the game map, it becomes a way to test whether a policy shifts the system out of bad equilibria.
 
-### What I would ask stakeholders
+## What I would ask stakeholders
 
 I would ask them to score each game on five questions. Is it real? Is it harmful? Does it drive hospital pressure? Does it worsen equity? Is it tractable?
 

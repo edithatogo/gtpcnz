@@ -104,7 +104,7 @@ The critique is:
 
 That is the game we need to test.
 
-### Why this matters for criticism
+## Why this matters for criticism
 
 If we ignore the current reform agenda, the critique becomes weak. It sounds like we are arguing against a system that no longer exists. That is why the current reform pathway should be the real comparator.
 

@@ -1,6 +1,12 @@
 # Accident Compensation Corporation, ambulance and urgent care: the hidden upstream system
 
-Primary care is not the only upstream part of the health system.
+When people cannot get timely primary care, they do not move neatly through a policy diagram.
+
+They wait, pay, delay, call an ambulance, try urgent care, use an Accident Compensation Corporation pathway if injury is involved, or end up at the emergency department.
+
+That is the point of this post.
+
+Primary care is not the only upstream part of the health system. Accident Compensation Corporation, ambulance and urgent care are not side topics. They are part of the same access architecture.
 
 Urgent care, ambulance and Accident Compensation Corporation-funded injury care all matter.
 
@@ -8,9 +14,9 @@ They are different systems, but they meet the same person.
 
 A person with a painful injury may see a general practitioner, nurse practitioner, physiotherapist, urgent care doctor, pharmacist, ambulance crew or emergency department.
 
-![Figure for Accident Compensation Corporation, ambulance and urgent care: the hidden upstream system](../figures/fig-18-upstream-access-map-v1.5.0.png)
+![Upstream access map showing how Accident Compensation Corporation, ambulance, urgent care and primary care pathways interact.](../figures/fig-18-upstream-access-map-v1.5.0.png)
 
-Which path they take is shaped by funding rules.
+Which path they take is shaped by funding rules, service availability, co-payments, hours, transport, workforce, eligibility and fear.
 
 Accident Compensation Corporation matters because it already funds activity in a way that looks more like fee-for-service. It pays or contributes to treatment under Cost of Treatment Regulations, contracts or purchase orders. It has rules about provider qualifications, clinical necessity, documentation, scope and pre-approval.
 
@@ -47,6 +53,8 @@ A patient might choose between:
 
 The patient does not experience these as separate appropriations. They experience them as a messy access system.
 
+## The cross-funder game
+
 This creates an Accident Compensation Corporation / Health New Zealand cross-funder game.
 
 If Accident Compensation Corporation tightens payments in isolation, some activity may move to Health New Zealand-funded services or to hospitals. If Health New Zealand underfunds primary medical access, some patients may prefer an Accident Compensation Corporation-funded pathway when injury is involved. If urgent care is easier to access than general practice, urgent care may absorb demand that might otherwise be handled by a regular care team.
@@ -55,7 +63,7 @@ None of this is inherently wrong.
 
 But it should be modelled as a whole system.
 
-That is why the recommendation is to treat primary care, urgent care and ambulance as a connected upstream access architecture.
+That is why the recommendation is to treat primary care, urgent care and ambulance as a connected upstream access architecture, not as three separate fixes.
 
 The architecture should include:
 
@@ -74,7 +82,7 @@ If those pieces are designed separately, the system will game itself.
 If they are designed together, they can reduce hospital growth by default.
 
 
-### The funding-source problem
+## The funding-source problem
 
 One of the strangest features of the New Zealand system is that two patients can enter the same clinic, see similar staff, use similar rooms, and trigger very different payment pathways depending on whether the problem is injury-related.
 
@@ -87,13 +95,21 @@ The risk is that each funder tries to optimise its own budget without seeing the
 That is why I think Accident Compensation Corporation, urgent care and ambulance must sit inside the same analysis as general practice funding. They are not side issues. They are part of the same access game.
 
 
-### Urgent care is the stress test
+## Urgent care is the stress test
 
 Urgent care is where the theory becomes very practical. A person has a problem now. They may not need a hospital, but they do need timely assessment. If that option does not exist, the emergency department becomes the default.
 
+The one-hour urgent-care target is therefore not just a convenience measure. It is a stress test of the whole upstream system. If urgent care is available but disconnected from general practice, ambulance, injury care and follow-up, it may improve one doorway while leaving the system game unchanged.
+
+The stronger test is whether urgent care can help the person get the right next step: treatment now, primary care follow-up, safe non-conveyance, diagnostics, injury care, or hospital escalation when hospital care is genuinely needed.
+
+That is why the appendix for this post keeps the longer game table and modelling notes separate. The main claim here is simpler: if these pathways are designed separately, they can shift pressure around. If they are designed together, they can turn urgent access into hospital avoidance.
+
 ## What would change my mind?
 
-I would be less convinced if Accident Compensation Corporation and ambulance payment settings had little effect on primary, urgent, allied health and emergency department flows.
+I would be less convinced if linked public data showed that Accident Compensation Corporation, urgent care and ambulance payment settings had little practical effect on primary, urgent, allied health and emergency department flows.
+
+I would also be less convinced if urgent-care expansion, ambulance non-conveyance pathways and current primary-care reforms materially reduced avoidable emergency department demand without any change to the broader primary-care funding architecture.
 
 ---
 
