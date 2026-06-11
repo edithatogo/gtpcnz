@@ -76,7 +76,7 @@ And transparent data so we can see whether the system is actually improving acce
 
 A useful caution: This is not a claim that fee-for-service is good and capitation is bad. Each model solves one problem and creates another. The practical question is the blend.
 
-### The useful way to think about all three
+## The useful way to think about all three
 
 A simple way to remember the three models is this:
 

@@ -97,7 +97,7 @@ A better formula may distribute scarcity more fairly.
 
 It may not remove the scarcity.
 
-### The trap in formula politics
+## The trap in formula politics
 
 Formula fights are seductive because they look technical. Everyone can point to a variable. Age. Deprivation. Rurality. Ethnicity. Multimorbidity. Workforce cost. Practice size. Travel time.
 

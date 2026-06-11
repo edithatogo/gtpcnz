@@ -104,8 +104,6 @@ def first_public_paragraph(markdown: str) -> str:
         text_block = block.strip()
         if not text_block or text_block.startswith(("#", "!", "---")):
             continue
-        if re.sub(r"[*_`]", "", text_block).lower().startswith("subtitle:"):
-            continue
         return re.sub(r"\s+", " ", text_block)
     return ""
 
@@ -168,7 +166,7 @@ def score_row(row: dict[str, object], live_draft: LiveDraft | None = None) -> Sc
         substack += 10
     else:
         failures.append(f"post {post_number}: heading rhythm should use public-facing H2 sections only")
-    if scheduled_at and "Australia/Sydney" in scheduled_at and str(row.get("publicationStatus", "")) == "ready":
+    if scheduled_at and "Australia/Sydney" in scheduled_at and "ready" == str(row.get("publicationStatus", "")):
         substack += 10
     else:
         failures.append(f"post {post_number}: schedule row must be ready and timezone-specific")
@@ -186,7 +184,7 @@ def score_row(row: dict[str, object], live_draft: LiveDraft | None = None) -> Sc
         images += 2
     else:
         failures.append(f"post {post_number}: image alt text should be descriptive")
-    if any("v1.7.2" in path.name or "pcf-v172" in path.name for path in [*found_images, local_post_path(hero_image)]):
+    if any("v1.7.2" in path.name or "pcf-v172" in path.name for path in found_images + [local_post_path(hero_image)]):
         images += 2
     else:
         failures.append(f"post {post_number}: image package should use the current visual set")
@@ -207,10 +205,10 @@ def score_row(row: dict[str, object], live_draft: LiveDraft | None = None) -> Sc
             live += 8
         else:
             failures.append(f"post {post_number}: live draft missing exact v1.8.1 model terms")
-        if "technical appendix" not in live_text[:800].lower():
+        if "appendices-v1.7.2" not in live_text and "technical appendix" not in live_text[:800].lower():
             live += 5
         else:
-            failures.append(f"post {post_number}: live draft still contains appendix-style lead text")
+            failures.append(f"post {post_number}: live draft still contains appendix-path or appendix-style lead text")
         if opening and opening[:80] in compact_live:
             live += 5
         else:

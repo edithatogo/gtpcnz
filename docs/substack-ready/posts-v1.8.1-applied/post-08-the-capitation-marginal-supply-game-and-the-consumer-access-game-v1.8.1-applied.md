@@ -8,7 +8,7 @@ But the patient’s need can change.
 
 They might become frail. They might develop diabetes. They might need mental health care. They might have a child with repeated infections. They might need forms, follow-up, prescriptions, referrals and coordination.
 
-![Figure for The capitation marginal-supply game and the consumer access game](../figures/fig-08-marginal-supply-capitation-vs-ffs-v1.4.0.png)
+![Diagram comparing capped capitation and fee-for-service incentives for marginal primary care appointments.](../figures/fig-08-marginal-supply-capitation-vs-ffs-v1.4.0.png)
 
 The workload rises.
 
@@ -62,7 +62,7 @@ The microeconomic point is straightforward.
 
 A fixed funding envelope can ration by waiting time.
 
-![fig-09-fixed-envelope-rationing-v1.4.0](../figures/fig-09-fixed-envelope-rationing-v1.4.0.png)
+![Fixed-envelope rationing diagram showing how capped funding can convert unmet need into delayed or displaced care.](../figures/fig-09-fixed-envelope-rationing-v1.4.0.png)
 
 If patient need rises faster than funded upstream capacity, something has to give.
 
@@ -87,7 +87,7 @@ The patient does not care what the funding model is called.
 They care whether care exists.
 
 
-### The patient game is not theoretical
+## The patient game is not theoretical
 
 Patients play the game too, although usually not by choice. They make decisions inside the rules the system gives them.
 

@@ -1,7 +1,17 @@
 {
-  "average_health.quality": 100.0,
+  "average_health.quality": 88.5,
   "posts": {
     "05": {
+      "series": 50,
+      "substack": 50,
+      "images": 10,
+      "live": 13,
+      "health.quality": 83,
+      "warnings": [
+        "post 05: live draft has no cached in-body image nodes"
+      ]
+    },
+    "07": {
       "series": 50,
       "substack": 50,
       "images": 10,
@@ -13,17 +23,21 @@
       "series": 50,
       "substack": 50,
       "images": 10,
-      "live": 30,
-      "health.quality": 100,
-      "warnings": []
+      "live": 28,
+      "health.quality": 98,
+      "warnings": [
+        "post 08: live draft has no cached in-body image nodes"
+      ]
     },
     "09": {
       "series": 50,
       "substack": 50,
       "images": 10,
-      "live": 30,
-      "health.quality": 100,
-      "warnings": []
+      "live": 0,
+      "health.quality": 70,
+      "warnings": [
+        "post 09: live draft cache unavailable; online freshness not verified"
+      ]
     },
     "10": {
       "series": 50,
@@ -37,65 +51,81 @@
       "series": 50,
       "substack": 50,
       "images": 10,
-      "live": 30,
-      "health.quality": 100,
-      "warnings": []
+      "live": 0,
+      "health.quality": 70,
+      "warnings": [
+        "post 11: live draft cache unavailable; online freshness not verified"
+      ]
     },
     "12": {
       "series": 50,
       "substack": 50,
       "images": 10,
-      "live": 30,
-      "health.quality": 100,
-      "warnings": []
+      "live": 0,
+      "health.quality": 70,
+      "warnings": [
+        "post 12: live draft cache unavailable; online freshness not verified"
+      ]
     },
     "13": {
       "series": 50,
       "substack": 50,
       "images": 10,
-      "live": 30,
-      "health.quality": 100,
-      "warnings": []
+      "live": 28,
+      "health.quality": 98,
+      "warnings": [
+        "post 13: live draft has no cached in-body image nodes"
+      ]
     },
     "14": {
       "series": 50,
       "substack": 50,
       "images": 10,
-      "live": 30,
-      "health.quality": 100,
-      "warnings": []
+      "live": 28,
+      "health.quality": 98,
+      "warnings": [
+        "post 14: live draft has no cached in-body image nodes"
+      ]
     },
     "15": {
       "series": 50,
       "substack": 50,
       "images": 10,
-      "live": 30,
-      "health.quality": 100,
-      "warnings": []
+      "live": 0,
+      "health.quality": 70,
+      "warnings": [
+        "post 15: live draft cache unavailable; online freshness not verified"
+      ]
     },
     "16": {
       "series": 50,
       "substack": 50,
       "images": 10,
-      "live": 30,
-      "health.quality": 100,
-      "warnings": []
+      "live": 28,
+      "health.quality": 98,
+      "warnings": [
+        "post 16: live draft has no cached in-body image nodes"
+      ]
     },
     "17": {
       "series": 50,
       "substack": 50,
       "images": 10,
-      "live": 30,
-      "health.quality": 100,
-      "warnings": []
+      "live": 28,
+      "health.quality": 98,
+      "warnings": [
+        "post 17: live draft has no cached in-body image nodes"
+      ]
     },
     "18": {
       "series": 50,
       "substack": 50,
       "images": 10,
-      "live": 30,
-      "health.quality": 100,
-      "warnings": []
+      "live": 28,
+      "health.quality": 98,
+      "warnings": [
+        "post 18: live draft has no cached in-body image nodes"
+      ]
     }
   }
 }

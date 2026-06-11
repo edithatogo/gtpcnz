@@ -8,7 +8,7 @@ If the funding system only recognises general-practitioner-led activity, then th
 
 General practitioners are essential. This is not an argument against them. But they are not the only clinicians who can safely provide primary care activity.
 
-![Figure for Who should be allowed to generate primary care supply?](../figures/fig-19-scope-enabled-supply-v1.5.0.png)
+![Scope-enabled supply diagram showing how more primary care capacity can be generated when funding follows safe team roles.](../figures/fig-19-scope-enabled-supply-v1.5.0.png)
 
 Nurse practitioners can assess, diagnose, prescribe and manage many conditions. Pharmacists can support medicines optimisation, minor ailments, vaccination, prescribing in defined contexts and medication review. Physiotherapists can manage musculoskeletal problems. Paramedics can support urgent assessment, triage and alternative disposition. Nurses can provide a wide range of planned and acute services. Māori and Pacific providers can deliver care in ways that mainstream models often do not.
 
@@ -81,7 +81,7 @@ The recommendation is simple:
 > Let scope of practice and clinical governance determine what providers can do. Do not let the payment model artificially restrict who can generate safe primary care supply.
 
 
-### Funding should not freeze old professional boundaries
+## Funding should not freeze old professional boundaries
 
 Clinical safety absolutely matters. Prescribing rules, scope of practice, competence, supervision, escalation pathways and audit all matter.
 

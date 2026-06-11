@@ -79,10 +79,10 @@ That phrase is less catchy.
 
 It is also more accurate.
 
-![fig-13-hybrid-architecture-v1.4.0](../figures/fig-13-hybrid-architecture-v1.4.0.png)
+![Hybrid architecture diagram showing capitation, scheduled activity funding, governance, audit and equity protections working together.](../figures/fig-13-hybrid-architecture-v1.4.0.png)
 
 
-### What makes the hybrid model different
+## What makes the hybrid model different
 
 A weak hybrid model simply adds more little funding streams. That is not what I am proposing.
 
@@ -97,7 +97,7 @@ Uncapped activity without audit can become gaming. Fee-for-service without place
 That is why the model has to be designed as a system, not as a list of isolated reforms.
 
 
-### The hybrid model is also a governance model
+## The hybrid model is also a governance model
 
 The hybrid model is not only about money. It is about governance. It asks who is responsible for which problem.
 
@@ -114,7 +114,7 @@ Data and key performance indicators ask: who can see whether the system is worki
 Those are governance questions as much as funding questions. A hybrid model works only when the accountability is as blended as the funding.
 
 
-### The failure mode to avoid
+## The failure mode to avoid
 
 ## What would change my mind?
 
