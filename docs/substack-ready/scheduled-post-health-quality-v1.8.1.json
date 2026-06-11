@@ -1,5 +1,5 @@
 {
-  "average_health.quality": 98.2,
+  "average_health.quality": 98.0,
   "posts": {
     "05": {
       "series": 50,
@@ -35,9 +35,11 @@
       "series": 50,
       "substack": 50,
       "images": 10,
-      "live": 30,
-      "health.quality": 100,
-      "warnings": []
+      "live": 28,
+      "health.quality": 98,
+      "warnings": [
+        "post 10: live draft has no cached in-body image nodes"
+      ]
     },
     "11": {
       "series": 50,
