@@ -100,6 +100,10 @@ I would be less convinced if telehealth demonstrably replaced local in-person ca
 
 ---
 
+## Public companion links
+
+- [Interactive Streamlit dashboard and model lab](https://gtpcnz.streamlit.app/)
+- [GitHub Pages report, reading map and release model card](https://edithatogo.github.io/gtpcnz/)
 ## v1.8.1 model update
 
 The current Streamlit model release is v1.8.1. Its public aggregate validation lane is `public_aggregate_validated`, and its claim level is `empirically_supported_if_gated` for registered gates only.

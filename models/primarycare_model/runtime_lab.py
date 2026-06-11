@@ -1448,6 +1448,7 @@ def create_animation_frames(
 
 
 GITHUB_PAGES_URL = "https://edithatogo.github.io/gtpcnz/"
+GITHUB_PAGES_URL = "https://edithatogo.github.io/gtpcnz/"
 STREAMLIT_URL = "https://gtpcnz.streamlit.app/"
 SUBSTACK_SERIES_URL = "https://rareinsights.substack.com"
 

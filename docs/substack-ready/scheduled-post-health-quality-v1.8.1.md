@@ -1,13 +1,13 @@
 # Primary care scheduled-post health.quality report
 
-Average health.quality: 98.2 / 100
+Average health.quality: 98.0 / 100
 
 | Post | health.quality | Series | Substack | Images | Live | Warnings |
 |---|---:|---:|---:|---:|---:|---|
 | 05 | 98 | 50 | 50 | 10 | 28 | post 05: live draft has no cached in-body image nodes |
 | 08 | 98 | 50 | 50 | 10 | 28 | post 08: live draft has no cached in-body image nodes |
 | 09 | 98 | 50 | 50 | 10 | 28 | post 09: live draft has no cached in-body image nodes |
-| 10 | 100 | 50 | 50 | 10 | 30 |  |
+| 10 | 98 | 50 | 50 | 10 | 28 | post 10: live draft has no cached in-body image nodes |
 | 11 | 98 | 50 | 50 | 10 | 28 | post 11: live draft has no cached in-body image nodes |
 | 12 | 98 | 50 | 50 | 10 | 28 | post 12: live draft has no cached in-body image nodes |
 | 13 | 98 | 50 | 50 | 10 | 28 | post 13: live draft has no cached in-body image nodes |
