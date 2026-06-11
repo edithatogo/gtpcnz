@@ -1,5 +1,5 @@
 {
-  "average_health.quality": 96.2,
+  "average_health.quality": 98.2,
   "posts": {
     "05": {
       "series": 50,
@@ -10,14 +10,6 @@
       "warnings": [
         "post 05: live draft has no cached in-body image nodes"
       ]
-    },
-    "07": {
-      "series": 50,
-      "substack": 50,
-      "images": 10,
-      "live": 30,
-      "health.quality": 100,
-      "warnings": []
     },
     "08": {
       "series": 50,
@@ -91,10 +83,10 @@
       "series": 50,
       "substack": 50,
       "images": 10,
-      "live": 0,
-      "health.quality": 70,
+      "live": 28,
+      "health.quality": 98,
       "warnings": [
-        "post 15: live draft cache unavailable; online freshness not verified"
+        "post 15: live draft has no cached in-body image nodes"
       ]
     },
     "16": {
