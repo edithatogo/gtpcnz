@@ -7,6 +7,8 @@ GTPCNZ is a public policy-research package about primary care funding in Aotearo
 
 Website: https://edithatogo.github.io/gtpcnz/
 
+Substack series: https://rareinsights.substack.com/
+
 ## What this is
 
 - A public-data anchored benchmark and educational explainer for exploring primary care funding architecture.
@@ -32,6 +34,7 @@ Short version:
 
 - Quarto website: https://edithatogo.github.io/gtpcnz/
 - Interactive explainer (Streamlit): https://gtpcnz.streamlit.app/
+- Substack series: https://rareinsights.substack.com/
 - Quarto source report: `reports/primary_care_architecture.qmd`
 - Streamlit dashboard entrypoint: `streamlit_app.py`
 - Dashboard implementation: `models/primarycare_model/app.py`

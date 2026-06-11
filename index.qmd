@@ -7,7 +7,11 @@ GTPCNZ is a public-facing reporting layer for the primary care funding architect
 
 Streamlit dashboard: https://gtpcnz.streamlit.app/
 
+Substack series: https://rareinsights.substack.com/
+
 This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
+
+Aggregate validation status: `public_aggregate_validated` for registered public aggregate validation gates only. This does not expand the model into precise fiscal, ED, hospital-demand, workforce, implementation-impact, or causal claims.
 
 ## Visual reading map
 
@@ -15,21 +19,49 @@ This is a public-data anchored benchmark and educational explainer. It is not li
 
 - [Read the public report](reports/primary_care_architecture.qmd)
 - [Open the dashboard](https://gtpcnz.streamlit.app/)
+- [Read the Substack series](https://rareinsights.substack.com/)
 - [Read the dashboard guide](docs/REPORTS-AND-DASHBOARD.md)
-- [Review the model card and tracker](docs/calibration/model-card-v1.7.2.md)
+- [Review the release model card and tracker](docs/release/model-card-v1.8.1.md)
+- [Open the site map and release manifest](docs/public-site/site-map-and-release-manifest-v1.8.4.md)
 
 <a href="reports/primary_care_architecture.qmd">Read the public report</a>
 
 <a href="https://gtpcnz.streamlit.app/">Open the dashboard</a>
+
+<a href="https://rareinsights.substack.com/">Read the Substack series</a>
 
 ## Public surfaces
 
 | Surface | Status | Purpose |
 |---|---|---|
 | Public report | Model-generated index | Argument map and thesis, Current reform pathway, Scenario rank chart |
-| Streamlit dashboard | Toy | Dynamic educational explainer and live model lab |
-| Model card and tracker | Evidence readiness | Evidence tracker and claim-boundary controls |
+| Streamlit dashboard | Educational explainer | Dynamic educational explainer and live model lab |
+| Model card and tracker | Public aggregate validation, claim-gated | Generated release model card, evidence tracker and claim-boundary controls |
 | Calibration readiness page | Calibration readiness | Data gaps and validation pathway |
+| Site map and release manifest | Canonical index | Public site inventory and release rules |
+
+## How the posts map to this report and dashboard
+
+| Post | Substack page | Dashboard / report companion |
+|---|---|---|
+| 01 | [Are we buying hospital growth by rationing cheaper care upstream?](https://rareinsights.substack.com/p/are-we-buying-hospital-growth-by) | Start here; current state; reference scenarios |
+| 02 | [Fee-for-service, capitation and blended funding](https://rareinsights.substack.com/p/fee-for-service-capitation-and-blended-funding-the-plain-english-version) | Funding model explainer; educational slider controls |
+| 03 | [Marginal supply](https://rareinsights.substack.com/p/marginal-supply-the-tiny-economic-idea-that-decides-whether-appointments-exist) | Microeconomics lab; marginal supply simulation |
+| 04 | [Why formulas do not solve games](https://rareinsights.substack.com/p/why-formulas-do-not-solve-games) | Game theory lab; gaming-risk frontier |
+| 05 | [Current reform pathway](https://rareinsights.substack.com/p/the-current-reform-pathway-stronger-than-a-straw-man-but-maybe-still-incomplete) | Current state; F0/current reform comparator |
+| 06 | [What I mean by uncapping primary care funding](https://rareinsights.substack.com/p/what-i-mean-by-uncapping-primary-care-funding) | Scheduled-payment controls; microeconomics lab |
+| 07 | [Hospital salience and allocation game](https://rareinsights.substack.com/p/the-hospital-salience-game-and-the-health-new-zealand-allocation-game) | Hospital pressure and allocation salience explanation |
+| 08 | [Capitation marginal-supply and consumer access game](https://rareinsights.substack.com/p/the-capitation-marginal-supply-game-and-the-consumer-access-game) | Marginal supply and access-pressure simulation |
+| 09 | [Primary Health Organisations, payment friction and cherry-picking](https://rareinsights.substack.com/p/primary-health-organisations-useful-functions-payment-friction-and-cherry-picking) | Place accountability and gaming-risk frontier |
+| 10 | [ACC, ambulance and urgent care](https://rareinsights.substack.com/p/accident-compensation-corporation-ambulance-and-urgent-care-the-hidden-upstream-system) | Boundary/pathway stress explanation |
+| 11 | [Who should generate primary care supply?](https://rareinsights.substack.com/p/who-should-be-allowed-to-generate-primary-care-supply) | Scope capacity and educational controls |
+| 12 | [Telehealth as extender](https://rareinsights.substack.com/p/telehealth-is-an-extender-not-a-replacement-for-local-supply) | Local supply and digital extender explanation |
+| 13 | [Co-payments](https://rareinsights.substack.com/p/co-payments-demand-signal-or-equity-failure) | Co-payment barrier and equity-protection module |
+| 14 | [The 19 games](https://rareinsights.substack.com/p/the-19-games-a-map-of-the-new-zealand-primary-care-funding-problem) | Game map navigator and model gap map |
+| 15 | [The hybrid game](https://rareinsights.substack.com/p/the-hybrid-game-why-no-single-lever-is-enough) | Scenario profile and hybrid viability decomposition |
+| 16 | [Composite modelling](https://rareinsights.substack.com/p/composite-modelling-what-the-demonstrative-model-adds-and-what-it-does-not) | Live model lab; uncertainty and model gap map |
+| 17 | [Game-informed MCDA](https://rareinsights.substack.com/p/game-informed-multi-criteria-decision-analysis-making-disagreement-useful) | Value of information and decision-support explanation |
+| 18 | [Recommendations](https://rareinsights.substack.com/p/recommendations-a-primary-care-system-that-can-grow-before-hospitals-have-to) | Recommendation stack and release model card |
 
 ## First six launch posts
 
@@ -47,17 +79,20 @@ This is a public-data anchored benchmark and educational explainer. It is not li
 - Scenario rank chart
 - Evidence tracker
 - Calibration readiness
+- Site map and release manifest
 - First six launch posts
 - Game-theory extension
 - Later game-theory modules
 
-Status labels used across the public surface: Conceptual, Toy, Model-generated index, Evidence readiness, Calibration readiness.
+Status labels used across the public surface: Conceptual, Educational explainer, Model-generated index, Evidence readiness, Calibration readiness, Public aggregate validation.
 
 Uncapped does not mean uncontrolled; it means scheduled, rules-based, audited, clinically governed and place-accountable.
 
 ## Current Status
 
 This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
+
+The current release model card reports `public_aggregate_validated` / `empirically_supported_if_gated` after CAL-G-001 through CAL-G-007 passed. The not-valid-for boundary remains unchanged for precise fiscal savings, ED reductions, hospital-demand reductions, workforce effects, implementation impacts, and causal effects.
 
 ## Local Commands
 
