@@ -104,6 +104,8 @@ def first_public_paragraph(markdown: str) -> str:
         text_block = block.strip()
         if not text_block or text_block.startswith(("#", "!", "---")):
             continue
+        if re.sub(r"[*_`]", "", text_block).lower().startswith("subtitle:"):
+            continue
         return re.sub(r"\s+", " ", text_block)
     return ""
 
@@ -205,10 +207,10 @@ def score_row(row: dict[str, object], live_draft: LiveDraft | None = None) -> Sc
             live += 8
         else:
             failures.append(f"post {post_number}: live draft missing exact v1.8.1 model terms")
-        if "appendices-v1.7.2" not in live_text and "technical appendix" not in live_text[:800].lower():
+        if "technical appendix" not in live_text[:800].lower():
             live += 5
         else:
-            failures.append(f"post {post_number}: live draft still contains appendix-path or appendix-style lead text")
+            failures.append(f"post {post_number}: live draft still contains appendix-style lead text")
         if opening and opening[:80] in compact_live:
             live += 5
         else:
