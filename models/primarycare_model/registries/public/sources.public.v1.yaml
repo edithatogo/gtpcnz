@@ -5,44 +5,53 @@ sources:
     retrieval_date: 2026-06-03
     licence_status: public_reference
     public_access_status: public
-    checksum: pending-download
-    transform_description: Manual public-reference registry entry pending reproducible download.
+    checksum: 619092f5e14247bd24428720789d12bac0ea9695864817db5d12828f54710170
+    transform_description: Public capitation rates page downloaded and transformed to a hashed public reference extract.
     claim_boundary: Public schedule reference; not private payment data.
   - source_id: src_pho_services_agreement
     label: PHO Services Agreement public schedule
     url_or_reference: https://www.tewhatuora.govt.nz/for-health-providers/primary-care-sector/primary-health-organisation-services-agreement
-    retrieval_date: 2026-06-03
+    retrieval_date: 2026-06-10
     licence_status: public_reference
     public_access_status: public
-    checksum: pending-download
-    transform_description: Public schedule reference used for benchmark parameter bounds.
-    claim_boundary: Public schedule reference only.
+    checksum: d96128558c1530061bebc421e790cc97c703abc2264eb05710f89be955848d23
+    transform_description: Public PHO Services Agreement URL downloaded; current response is HTML under the expected PDF filename, so bounded table extraction is recorded as a hashed blocker artifact.
+    claim_boundary: Public schedule reference only; no pass-through, transaction-cost, fiscal, workforce, hospital-demand, implementation-impact, or causal claim.
   - source_id: src_hnz_enrolment
     label: Primary care enrolment public data
     url_or_reference: https://www.tewhatuora.govt.nz/for-health-professionals/data-and-statistics/primary-care
     retrieval_date: 2026-06-03
     licence_status: public_reference
     public_access_status: public
-    checksum: pending-download
-    transform_description: Public aggregate enrolment denominator.
+    checksum: e771fdbc5c1e0721002a4dc8a9416d6a684cfc55389f9ffc3531934f5f1b25c1
+    transform_description: Public primary-care data page downloaded and transformed to a hashed public link/reference extract.
     claim_boundary: Aggregate denominator; no patient-level data.
+  - source_id: src_hnz_pho_access_timeseries
+    label: Health NZ PHO enrolment and access quarterly workbook
+    url_or_reference: https://www.healthnz.govt.nz/about-us/health-data/data-sets-and-collections/primary-care-data-and-statistics/enrolment-with-a-general-practice-and-primary-health-organisation
+    retrieval_date: 2026-06-09
+    licence_status: public_reference
+    public_access_status: public
+    checksum: d9ca5eeeaba1e85cc97a8e960642c3593dbcfc53c5c0812b99697d9586c274b9
+    transform_description: Public quarterly PHO access workbook downloaded and transformed to hashed validation-source metadata.
+    claim_boundary: Public aggregate validation evidence only; no patient-level or passed-holdout claim.
   - source_id: src_mcnz_workforce
     label: Medical Council workforce survey
     url_or_reference: https://www.mcnz.org.nz/about-us/publications/workforce-survey/
     retrieval_date: 2026-06-03
     licence_status: public_reference
     public_access_status: public
-    checksum: pending-download
-    transform_description: Published aggregate workforce prior.
+    checksum: debfb40a22761bc65695724d84534e926bbdd5bb9e6884d98bb3d5e4dbf17100
+    transform_description: Published MCNZ workforce survey PDF downloaded and transformed to a hashed public reference manifest.
     claim_boundary: Aggregate workforce source; no practitioner-level data.
   - source_id: src_nz_health_survey
     label: New Zealand Health Survey public data explorer
-    url_or_reference: https://minhealthnz.shinyapps.io/nz-health-survey-2023-24-annual-data-explorer/
+    url_or_reference: https://www.health.govt.nz/publications/annual-update-of-key-results-202324-new-zealand-health-survey
     retrieval_date: 2026-06-03
     licence_status: public_reference
     public_access_status: public
-    checksum: pending-download
-    transform_description: Published aggregate survey target for cost-barrier calibration.
+    checksum: ab4d66188ca40496f8235e654a72b6a5a9fc8bfba59860e3e597a9b635ea74db
+    transform_description: Public Ministry of Health NZ Health Survey annual update page downloaded and transformed to a hashed GP cost-barrier aggregate.
     claim_boundary: Public aggregate survey data only.
   - source_id: src_statsnz_population
     label: Stats NZ population estimates
@@ -50,6 +59,6 @@ sources:
     retrieval_date: 2026-06-03
     licence_status: public_reference
     public_access_status: public
-    checksum: pending-download
-    transform_description: Public aggregate population denominator.
+    checksum: c45ad3e41a0107f38174f386b1dc391c222fd4083c50d32f4872d5eaf098c092
+    transform_description: Public Stats NZ population indicator page downloaded and transformed to a hashed population denominator aggregate.
     claim_boundary: Aggregate denominator only.

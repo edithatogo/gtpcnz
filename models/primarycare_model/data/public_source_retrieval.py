@@ -58,19 +58,20 @@ def verify_public_source_retrieval_plan() -> tuple[str, ...]:
             issues.append(f"{source_id}: expected_raw_dir must be data/public_raw/{source_id}")
         if not plan.expected_processed_artifact.startswith(f"data/public_processed/{source_id}/"):
             issues.append(f"{source_id}: expected_processed_artifact must be under data/public_processed/{source_id}/")
-        for field_name in ("expected_raw_dir", "expected_processed_artifact", "transform_script"):
+        for field_name in ("expected_raw_dir", "expected_processed_artifact", "fetch_script", "transform_script"):
             value = getattr(plan, field_name)
             if not _is_repo_relative(value):
                 issues.append(f"{source_id}: {field_name} must be a repository-relative path")
+        if not plan.fetch_script.startswith("scripts/fetch_"):
+            issues.append(f"{source_id}: fetch_script must be an explicit source fetch script")
         if not plan.transform_script.startswith("scripts/transform_"):
             issues.append(f"{source_id}: transform_script must be an explicit source transform script")
-        if plan.retrieval_status != "reference_pinned_pending_download":
-            raw_path = ROOT / plan.expected_raw_dir
-            processed_path = ROOT / plan.expected_processed_artifact
-            if not raw_path.exists():
-                issues.append(f"{source_id}: retrieval status is advanced but raw directory is missing")
-            if not processed_path.exists():
-                issues.append(f"{source_id}: retrieval status is advanced but processed artifact is missing")
+        raw_path = ROOT / plan.expected_raw_dir
+        processed_path = ROOT / plan.expected_processed_artifact
+        if plan.retrieval_status in {"downloaded_pending_transform", "processed_ready"} and not raw_path.exists():
+            issues.append(f"{source_id}: retrieval status is advanced but raw directory is missing")
+        if plan.retrieval_status == "processed_ready" and not processed_path.exists():
+            issues.append(f"{source_id}: retrieval status is processed_ready but processed artifact is missing")
         if "patient-level" in plan.claim_boundary.lower() and "no patient-level" not in plan.claim_boundary.lower():
             issues.append(f"{source_id}: claim boundary may permit restricted person-level inputs")
     return tuple(issues)

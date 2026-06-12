@@ -1,0 +1,24 @@
+temporal_period_acquisition_plans:
+  - plan_id: cal_g_002_hnz_pho_access_temporal_periods
+    gate_id: CAL-G-002
+    source_id: src_hnz_pho_access_timeseries
+    target_id: pho_access_total_coverage_temporal_holdout
+    landing_page_url: https://www.healthnz.govt.nz/about-us/health-data/data-sets-and-collections/primary-care-data-and-statistics/enrolment-with-a-general-practice-and-primary-health-organisation
+    raw_dir: data/public_raw/src_hnz_pho_access_timeseries
+    processed_artifact: data/public_processed/src_hnz_pho_access_timeseries/pho_access_numeric_extract.csv
+    period_column: period
+    workbook_artifact_column: workbook_artifact
+    minimum_distinct_periods: 2
+    required_holdout_strategy: latest_public_period
+    acquired_public_periods:
+      - period: 2025-Q3
+        role: training
+        raw_artifact: access-to-primary-care-stats-2025-q3.xlsx
+        status: processed_ready
+      - period: 2025-Q4
+        role: current_holdout_candidate
+        raw_artifact: access-to-primary-care-stats-2025-q4.xlsx
+        status: processed_ready
+    missing_public_period_requirements: []
+    readiness_status: ready_for_temporal_holdout
+    claim_boundary: Machine-readable acquisition record only; CAL-G-002 remains calibration_readiness_only until the registered temporal holdout comparison passes.

@@ -1,0 +1,19 @@
+targets:
+  - target_id: pho_access_total_coverage_temporal_holdout
+    gate_id: CAL-G-002
+    validation_family: temporal_holdout_validation
+    label: PHO access total coverage temporal holdout
+    source_id: src_hnz_pho_access_timeseries
+    processed_artifact: data/public_processed/src_hnz_pho_access_timeseries/pho_access_numeric_extract.csv
+    period_column: period
+    geography_column: district
+    observed_value_column: reported_coverage_rate
+    numerator_column: enrolled_count
+    denominator_column: population_count
+    stratifier: ethnicity
+    group: Total
+    minimum_training_periods: 1
+    holdout_period_strategy: latest_public_period
+    max_error_tolerance: 0.05
+    public_access_status: public
+    claim_boundary: Public aggregate temporal validation evidence only; no empirical calibration claim unless the registered holdout comparison passes.
