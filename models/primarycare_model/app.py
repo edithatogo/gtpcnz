@@ -82,6 +82,14 @@ FULL_PUBLIC_CAVEAT = (
     "It should not be used to claim precise fiscal savings, hospital-demand reductions, "
     "workforce effects, or implementation impacts."
 )
+LEGACY_FIRST_SIX_POST_TITLES = (
+    "Are we buying hospital growth by rationing cheaper care upstream?",
+    "Fee-for-service, capitation and blended funding",
+    "Marginal supply",
+    "Why formulas do not solve games",
+    "Current reform pathway",
+    "What I mean by uncapping primary care funding",
+)
 OIA_TRACKER_CANDIDATES = [
     ROOT / "docs" / "audit" / "oia-request-tracker.csv",
     ROOT / "data" / "evidence" / "oia_request_tracker.csv",
@@ -397,9 +405,13 @@ def build_post_reading_map_table() -> pd.DataFrame:
                 "Post": post_id,
                 "Public title": post["title"],
                 "Substack URL": post["url"],
+                "Quarto / report destination": GITHUB_PAGES_URL,
                 "GitHub Pages": GITHUB_PAGES_URL,
+                "GitHub Pages card": GITHUB_PAGES_URL,
                 "Streamlit dashboard": STREAMLIT_URL,
                 "Streamlit module": "; ".join(post.get("models", [])),
+                "Static visual": GITHUB_PAGES_URL,
+                "Dynamic visual": STREAMLIT_URL,
                 "Status / caveat": "Public aggregate validation where gated; not linked-data calibrated or a patient-level forecast.",
             }
         )
