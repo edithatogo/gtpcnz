@@ -1,6 +1,8 @@
 from pathlib import Path
 
 CANONICAL_STREAMLIT_URL = "https://gtpcnz.streamlit.app/"
+CANONICAL_GITHUB_PAGES_URL = "https://edithatogo.github.io/gtpcnz/"
+CANONICAL_SUBSTACK_URL = "https://rareinsights.substack.com/"
 FULL_CAVEAT = (
     "This is a public-data anchored benchmark and educational explainer. "
     "It is not linked-data calibrated and not a patient-level forecast. "
@@ -80,6 +82,11 @@ def test_public_surfaces_include_canonical_streamlit_url_and_full_caveat():
     ]:
         text = path.read_text(encoding="utf-8")
         assert CANONICAL_STREAMLIT_URL in text
+
+    index_text = Path("index.qmd").read_text(encoding="utf-8")
+    assert CANONICAL_GITHUB_PAGES_URL in Path("README.md").read_text(encoding="utf-8")
+    assert CANONICAL_SUBSTACK_URL in index_text
+    assert "rareinsights.substack.com/p/" in index_text
 
     for path in [
         Path("README.md"),

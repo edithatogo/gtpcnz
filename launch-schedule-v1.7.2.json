@@ -37,7 +37,7 @@
       "health policy",
       "Rare Insights"
     ],
-    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.7.2-launch/post-01-are-we-buying-hospital-growth-by-rationing-cheaper-care-upstream-v1.7.2.md",
+    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.8.1-applied/post-01-are-we-buying-hospital-growth-by-rationing-cheaper-care-upstream-v1.8.1-applied.md",
     "heroImage": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/preview-v1.7.2/pcf-v172-01-preview.png",
     "diagram": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/pcf-v172-01-upstream-pressure-map.png",
     "publicationStatus": "ready",
@@ -59,7 +59,7 @@
       "health policy",
       "Rare Insights"
     ],
-    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.7.2-launch/post-02-fee-for-service-capitation-and-blended-funding-the-plain-english-version-v1.7.2.md",
+    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.8.1-applied/post-02-fee-for-service-capitation-and-blended-funding-the-plain-english-version-v1.8.1-applied.md",
     "heroImage": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/preview-v1.7.2/pcf-v172-02-preview.png",
     "diagram": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/pcf-v172-02-funding-models.png",
     "publicationStatus": "ready",
@@ -81,7 +81,7 @@
       "health policy",
       "Rare Insights"
     ],
-    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.7.2-launch/post-03-marginal-supply-the-tiny-economic-idea-that-decides-whether-appointments-exist-v1.7.2.md",
+    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.8.1-applied/post-03-marginal-supply-the-tiny-economic-idea-that-decides-whether-appointments-exist-v1.8.1-applied.md",
     "heroImage": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/preview-v1.7.2/pcf-v172-03-preview.png",
     "diagram": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/pcf-v172-03-marginal-supply.png",
     "publicationStatus": "ready",
@@ -103,7 +103,7 @@
       "health policy",
       "Rare Insights"
     ],
-    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.7.2-launch/post-04-why-formulas-do-not-solve-games-v1.7.2.md",
+    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.8.1-applied/post-04-why-formulas-do-not-solve-games-v1.8.1-applied.md",
     "heroImage": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/preview-v1.7.2/pcf-v172-04-preview.png",
     "diagram": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/pcf-v172-04-fixed-envelope.png",
     "publicationStatus": "ready",
@@ -125,7 +125,7 @@
       "health policy",
       "Rare Insights"
     ],
-    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.7.2-launch/post-05-the-current-reform-pathway-stronger-than-a-straw-man-but-maybe-still-incomplete-v1.7.2.md",
+    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.8.1-applied/post-05-the-current-reform-pathway-stronger-than-a-straw-man-but-maybe-still-incomplete-v1.8.1-applied.md",
     "heroImage": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/preview-v1.7.2/pcf-v172-05-preview.png",
     "diagram": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/pcf-v172-05-current-vs-hybrid.png",
     "publicationStatus": "ready",
@@ -147,7 +147,7 @@
       "health policy",
       "Rare Insights"
     ],
-    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.7.2-launch/post-06-what-i-mean-by-uncapping-primary-care-funding-v1.7.2.md",
+    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.8.1-applied/post-06-what-i-mean-by-uncapping-primary-care-funding-v1.8.1-applied.md",
     "heroImage": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/preview-v1.7.2/pcf-v172-06-preview.png",
     "diagram": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/pcf-v172-06-uncapped-controlled.png",
     "publicationStatus": "ready",
@@ -161,7 +161,7 @@
     "seriesOrder": 7,
     "postNumber": "07",
     "title": "The hospital salience game and the Health New Zealand allocation game",
-    "subtitle": "A technical appendix on visibility, allocation pressure, and why separate appropriations do not remove the game.",
+    "subtitle": "The upstream visibility question behind hospital pressure and allocation choices.",
     "slug": "the-hospital-salience-game-and-the-health-new-zealand-allocation-game",
     "tags": [
       "primary care",
@@ -169,11 +169,11 @@
       "health policy",
       "Rare Insights"
     ],
-    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/appendices-v1.7.2/appendix-07-the-hospital-salience-game-and-the-health-new-zealand-allocation-game-v1.7.2.md",
+    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.8.1-applied/post-07-the-hospital-salience-game-and-the-health-new-zealand-allocation-game-v1.8.1-applied.md",
     "heroImage": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/preview-v1.7.2/pcf-v172-07-preview.png",
-    "diagram": "",
+    "diagram": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/fig-04-hospital-rescue-loop-v1.2.0.png",
     "publicationStatus": "ready",
-    "scheduledAt": "2026-06-01 15:00 Australia/Sydney"
+    "scheduledAt": "2026-06-10 21:00 Australia/Sydney"
   },
   {
     "sequence": 9,
@@ -183,7 +183,7 @@
     "seriesOrder": 8,
     "postNumber": "08",
     "title": "The capitation marginal-supply game and the consumer access game",
-    "subtitle": "A technical appendix on capped payment, marginal revenue, and the patient routes created by constrained supply.",
+    "subtitle": "How capped payment can suppress marginal supply, and how access pressure moves through the system.",
     "slug": "the-capitation-marginal-supply-game-and-the-consumer-access-game",
     "tags": [
       "primary care",
@@ -191,7 +191,7 @@
       "health policy",
       "Rare Insights"
     ],
-    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/appendices-v1.7.2/appendix-08-the-capitation-marginal-supply-game-and-the-consumer-access-game-v1.7.2.md",
+    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.8.1-applied/post-08-the-capitation-marginal-supply-game-and-the-consumer-access-game-v1.8.1-applied.md",
     "heroImage": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/preview-v1.7.2/pcf-v172-08-preview.png",
     "diagram": "",
     "publicationStatus": "ready",
@@ -205,7 +205,7 @@
     "seriesOrder": 9,
     "postNumber": "09",
     "title": "Primary Health Organisations: useful functions, payment friction and cherry-picking",
-    "subtitle": "A technical appendix on PHO value, pass-through friction, place accountability, and cherry-picking risk.",
+    "subtitle": "What PHOs can usefully do, where payment friction matters, and why place accountability changes incentives.",
     "slug": "primary-health-organisations-useful-functions-payment-friction-and-cherry-picking",
     "tags": [
       "primary care",
@@ -213,7 +213,7 @@
       "health policy",
       "Rare Insights"
     ],
-    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/appendices-v1.7.2/appendix-09-primary-health-organisations-useful-functions-payment-friction-and-cherry-picking-v1.7.2.md",
+    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.8.1-applied/post-09-primary-health-organisations-useful-functions-payment-friction-and-cherry-picking-v1.8.1-applied.md",
     "heroImage": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/preview-v1.7.2/pcf-v172-09-preview.png",
     "diagram": "",
     "publicationStatus": "ready",
@@ -227,7 +227,7 @@
     "seriesOrder": 10,
     "postNumber": "10",
     "title": "Accident Compensation Corporation, ambulance and urgent care: the hidden upstream system",
-    "subtitle": "A technical appendix on cross-funder incentives, urgent alternatives, and emergency-department avoidance.",
+    "subtitle": "Why ACC, ambulance, urgent care and ED pressure need to be treated as one upstream system.",
     "slug": "accident-compensation-corporation-ambulance-and-urgent-care-the-hidden-upstream-system",
     "tags": [
       "primary care",
@@ -235,7 +235,7 @@
       "health policy",
       "Rare Insights"
     ],
-    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/appendices-v1.7.2/appendix-10-accident-compensation-corporation-ambulance-and-urgent-care-the-hidden-upstream-system-v1.7.2.md",
+    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.8.1-applied/post-10-accident-compensation-corporation-ambulance-and-urgent-care-the-hidden-upstream-system-v1.8.1-applied.md",
     "heroImage": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/preview-v1.7.2/pcf-v172-10-preview.png",
     "diagram": "",
     "publicationStatus": "ready",
@@ -249,7 +249,7 @@
     "seriesOrder": 11,
     "postNumber": "11",
     "title": "Who should be allowed to generate primary care supply?",
-    "subtitle": "A technical appendix on provider scope, claim eligibility, clinical governance, and safe supply expansion.",
+    "subtitle": "Why safe supply expansion depends on scope, governance and claim rules, not just workforce counts.",
     "slug": "who-should-be-allowed-to-generate-primary-care-supply",
     "tags": [
       "primary care",
@@ -257,7 +257,7 @@
       "health policy",
       "Rare Insights"
     ],
-    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/appendices-v1.7.2/appendix-11-who-should-be-allowed-to-generate-primary-care-supply-v1.7.2.md",
+    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.8.1-applied/post-11-who-should-be-allowed-to-generate-primary-care-supply-v1.8.1-applied.md",
     "heroImage": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/preview-v1.7.2/pcf-v172-11-preview.png",
     "diagram": "",
     "publicationStatus": "ready",
@@ -271,7 +271,7 @@
     "seriesOrder": 12,
     "postNumber": "12",
     "title": "Telehealth is an extender, not a replacement for local supply",
-    "subtitle": "A technical appendix on digital access, local resilience, and the risk of substituting away from in-person supply.",
+    "subtitle": "Why telehealth can extend local care but cannot replace local clinical supply.",
     "slug": "telehealth-is-an-extender-not-a-replacement-for-local-supply",
     "tags": [
       "primary care",
@@ -279,7 +279,7 @@
       "health policy",
       "Rare Insights"
     ],
-    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/appendices-v1.7.2/appendix-12-telehealth-is-an-extender-not-a-replacement-for-local-supply-v1.7.2.md",
+    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.8.1-applied/post-12-telehealth-is-an-extender-not-a-replacement-for-local-supply-v1.8.1-applied.md",
     "heroImage": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/preview-v1.7.2/pcf-v172-12-preview.png",
     "diagram": "",
     "publicationStatus": "ready",
@@ -293,7 +293,7 @@
     "seriesOrder": 13,
     "postNumber": "13",
     "title": "Co-payments: demand signal or equity failure?",
-    "subtitle": "A technical appendix on price signals, unmet need, equity protection, and demand-side gaming.",
+    "subtitle": "Why co-payments can signal demand and still create equity failure when access is constrained.",
     "slug": "co-payments-demand-signal-or-equity-failure",
     "tags": [
       "primary care",
@@ -301,7 +301,7 @@
       "health policy",
       "Rare Insights"
     ],
-    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/appendices-v1.7.2/appendix-13-co-payments-demand-signal-or-equity-failure-v1.7.2.md",
+    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.8.1-applied/post-13-co-payments-demand-signal-or-equity-failure-v1.8.1-applied.md",
     "heroImage": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/preview-v1.7.2/pcf-v172-13-preview.png",
     "diagram": "",
     "publicationStatus": "ready",
@@ -315,7 +315,7 @@
     "seriesOrder": 14,
     "postNumber": "14",
     "title": "The 19 games: a map of the New Zealand primary care funding problem",
-    "subtitle": "A technical appendix mapping the component games behind primary-care access, funding, and hospital pressure.",
+    "subtitle": "A map of the linked games behind primary-care access, funding and hospital pressure.",
     "slug": "the-19-games-a-map-of-the-new-zealand-primary-care-funding-problem",
     "tags": [
       "primary care",
@@ -323,7 +323,7 @@
       "health policy",
       "Rare Insights"
     ],
-    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/appendices-v1.7.2/appendix-14-the-19-games-a-map-of-the-new-zealand-primary-care-funding-problem-v1.7.2.md",
+    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.8.1-applied/post-14-the-19-games-a-map-of-the-new-zealand-primary-care-funding-problem-v1.8.1-applied.md",
     "heroImage": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/preview-v1.7.2/pcf-v172-14-preview.png",
     "diagram": "",
     "publicationStatus": "ready",
@@ -337,7 +337,7 @@
     "seriesOrder": 15,
     "postNumber": "15",
     "title": "The hybrid game: why no single lever is enough",
-    "subtitle": "A technical appendix on why the answer is an architecture, not a single payment lever.",
+    "subtitle": "Why the answer is an architecture rather than a single payment lever.",
     "slug": "the-hybrid-game-why-no-single-lever-is-enough",
     "tags": [
       "primary care",
@@ -345,7 +345,7 @@
       "health policy",
       "Rare Insights"
     ],
-    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/appendices-v1.7.2/appendix-15-the-hybrid-game-why-no-single-lever-is-enough-v1.7.2.md",
+    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.8.1-applied/post-15-the-hybrid-game-why-no-single-lever-is-enough-v1.8.1-applied.md",
     "heroImage": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/preview-v1.7.2/pcf-v172-15-preview.png",
     "diagram": "",
     "publicationStatus": "ready",
@@ -359,7 +359,7 @@
     "seriesOrder": 16,
     "postNumber": "16",
     "title": "Composite modelling: what the demonstrative model adds, and what it does not",
-    "subtitle": "A technical appendix on what the model demonstrates, where it is illustrative, and what calibration would require.",
+    "subtitle": "What the model now supports, what it still does not support, and why those boundaries matter.",
     "slug": "composite-modelling-what-the-demonstrative-model-adds-and-what-it-does-not",
     "tags": [
       "primary care",
@@ -367,7 +367,7 @@
       "health policy",
       "Rare Insights"
     ],
-    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/appendices-v1.7.2/appendix-16-composite-modelling-what-the-demonstrative-model-adds-and-what-it-does-not-v1.7.2.md",
+    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.8.1-applied/post-16-composite-modelling-what-the-demonstrative-model-adds-and-what-it-does-not-v1.8.1-applied.md",
     "heroImage": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/preview-v1.7.2/pcf-v172-16-preview.png",
     "diagram": "",
     "publicationStatus": "ready",
@@ -381,7 +381,7 @@
     "seriesOrder": 17,
     "postNumber": "17",
     "title": "Game-informed Multi-Criteria Decision Analysis: making disagreement useful",
-    "subtitle": "A technical appendix on turning policy disagreement into explicit criteria, weights, scores, and trade-offs.",
+    "subtitle": "How MCDA can make policy disagreement explicit, testable and useful.",
     "slug": "game-informed-multi-criteria-decision-analysis-making-disagreement-useful",
     "tags": [
       "primary care",
@@ -389,7 +389,7 @@
       "health policy",
       "Rare Insights"
     ],
-    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/appendices-v1.7.2/appendix-17-game-informed-multi-criteria-decision-analysis-making-disagreement-useful-v1.7.2.md",
+    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.8.1-applied/post-17-game-informed-multi-criteria-decision-analysis-making-disagreement-useful-v1.8.1-applied.md",
     "heroImage": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/preview-v1.7.2/pcf-v172-17-preview.png",
     "diagram": "",
     "publicationStatus": "ready",
@@ -403,7 +403,7 @@
     "seriesOrder": 18,
     "postNumber": "18",
     "title": "Recommendations: a primary care system that can grow before hospitals have to",
-    "subtitle": "A technical appendix translating the model and games into a staged policy architecture.",
+    "subtitle": "A staged policy architecture for growing primary care before hospitals have to absorb the failure.",
     "slug": "recommendations-a-primary-care-system-that-can-grow-before-hospitals-have-to",
     "tags": [
       "primary care",
@@ -411,7 +411,7 @@
       "health policy",
       "Rare Insights"
     ],
-    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/appendices-v1.7.2/appendix-18-recommendations-a-primary-care-system-that-can-grow-before-hospitals-have-to-v1.7.2.md",
+    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.8.1-applied/post-18-recommendations-a-primary-care-system-that-can-grow-before-hospitals-have-to-v1.8.1-applied.md",
     "heroImage": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/preview-v1.7.2/pcf-v172-18-preview.png",
     "diagram": "",
     "publicationStatus": "ready",

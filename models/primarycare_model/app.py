@@ -15,12 +15,15 @@ from models.primarycare_model.runtime_lab import (
     CANONICAL_DEFS,
     DEFAULT_ABM_POPULATION,
     DEFAULT_MONTE_CARLO_DRAWS,
+    GITHUB_PAGES_URL,
     MAX_ABM_POPULATION,
     MAX_MONTE_CARLO_DRAWS,
     MAX_MONTHS,
     SCENARIOS,
     SCORE_GUIDE_ENTRIES,
+    STREAMLIT_URL,
     SUBSTACK_POSTS,
+    SUBSTACK_SERIES_URL,
     build_evidence_table,
     build_waterfall_data,
     calculate_indices,
@@ -72,12 +75,20 @@ from models.primarycare_model.ui.cockpit import build_policy_cockpit_payload
 
 APP_VERSION = "1.8.1"
 ROOT = Path(__file__).resolve().parents[2]
-RESULTS_PATH = ROOT / "outputs" / "full-parameterised-summary-results-v1.7.0.csv"
+RESULTS_PATH = ROOT / "outputs" / "full-parameterised-summary-results-v1.8.1.csv"
 FULL_PUBLIC_CAVEAT = (
     "This is a public-data anchored benchmark and educational explainer. "
     "It is not linked-data calibrated and not a patient-level forecast. "
     "It should not be used to claim precise fiscal savings, hospital-demand reductions, "
     "workforce effects, or implementation impacts."
+)
+LEGACY_FIRST_SIX_POST_TITLES = (
+    "Are we buying hospital growth by rationing cheaper care upstream?",
+    "Fee-for-service, capitation and blended funding",
+    "Marginal supply",
+    "Why formulas do not solve games",
+    "Current reform pathway",
+    "What I mean by uncapping primary care funding",
 )
 OIA_TRACKER_CANDIDATES = [
     ROOT / "docs" / "audit" / "oia-request-tracker.csv",
@@ -387,80 +398,24 @@ def render_educational_explainer_context() -> None:
 
 
 def build_post_reading_map_table() -> pd.DataFrame:
-    return pd.DataFrame(
-        [
-            (
-                "01",
-                "Are we buying hospital growth by rationing cheaper care upstream?",
-                "Executive summary; hospital spillover pathway; scenario interpretation.",
-                "Start here; Current state; Reference scenarios.",
-                "Argument map and thesis; current reform comparator",
-                "Argument map and thesis; current reform comparator",
-                "Supply versus hospital-pressure plot; scenario rank chart",
-                "Model-generated index; not a patient-level forecast.",
-            ),
-            (
-                "02",
-                "Fee-for-service, capitation and blended funding",
-                "Funding model explainer; formula appendix.",
-                "Funding models module; educational explainer.",
-                "First-six launch post card; funding-model card",
-                "Funding comparison educational module; capitation and payment diagram",
-                "Educational funding comparison chart; blended-funding explainer",
-                "Educational explainer; not an implementation-impact claim.",
-            ),
-            (
-                "03",
-                "Marginal supply",
-                "Microeconomics section.",
-                "Microeconomics lab.",
-                "First-six launch post card; microeconomics card",
-                "Marginal revenue versus marginal cost diagram",
-                "Marginal supply simulation",
-                "Educational teaching simulation; not a workforce forecast.",
-            ),
-            (
-                "04",
-                "Why formulas do not solve games",
-                "Game theory section; controls section.",
-                "Game theory lab.",
-                "First-six launch post card; game-theory extension card",
-                "Payoff matrix; best-response or controls-stack diagram",
-                "Educational incentive game; best-response simulation; gaming-risk frontier",
-                "Educational teaching simulation; not observed provider behaviour.",
-            ),
-            (
-                "05",
-                "Current reform pathway",
-                "Current reform comparator section.",
-                "Current state; Reference scenarios.",
-                "First-six launch post card; current reform card",
-                "Current reform pathway map; F0/current reform comparator",
-                "F0/current reform comparator selector; scenario comparison chart",
-                "Comparator only; not a straw-man replacement claim.",
-            ),
-            (
-                "06",
-                "What I mean by uncapping primary care funding",
-                "Controlled scheduled payment section.",
-                "Educational explainer; Microeconomics lab.",
-                "First-six launch post card; controlled-payment card",
-                "Activity/payment/control simulation; uncapping explanation card",
-                "Educational explainer output; scheduled-payment control simulation",
-                "Educational explainer; no precise fiscal-savings claim.",
-            ),
-        ],
-        columns=[
-            "Post",
-            "Public title",
-            "Quarto / report destination",
-            "Streamlit module",
-            "GitHub Pages card",
-            "Static visual",
-            "Dynamic visual",
-            "Status / caveat",
-        ],
-    )
+    rows = []
+    for post_id, post in SUBSTACK_POSTS.items():
+        rows.append(
+            {
+                "Post": post_id,
+                "Public title": post["title"],
+                "Substack URL": post["url"],
+                "Quarto / report destination": GITHUB_PAGES_URL,
+                "GitHub Pages": GITHUB_PAGES_URL,
+                "GitHub Pages card": GITHUB_PAGES_URL,
+                "Streamlit dashboard": STREAMLIT_URL,
+                "Streamlit module": "; ".join(post.get("models", [])),
+                "Static visual": GITHUB_PAGES_URL,
+                "Dynamic visual": STREAMLIT_URL,
+                "Status / caveat": "Public aggregate validation where gated; not linked-data calibrated or a patient-level forecast.",
+            }
+        )
+    return pd.DataFrame(rows)
 
 
 def render_post_guide_and_reading_map() -> None:
@@ -470,9 +425,17 @@ def render_post_guide_and_reading_map() -> None:
         This page is the navigation layer for the post and the dashboard.
         It separates the comparator, the model-generated indices, and the
         educational teaching simulations so the reader does not mix them
-        together. The table
-        below maps posts 01-06 to the report destination, Streamlit module, and
-        public reading-map cards.
+        together. The table below maps the Substack post sequence to the
+        GitHub Pages site and Streamlit dashboard.
+        """
+    )
+    st.markdown(
+        f"""
+        **Public surfaces**
+
+        - [Substack series]({SUBSTACK_SERIES_URL})
+        - [GitHub Pages report and reading map]({GITHUB_PAGES_URL})
+        - [Streamlit dashboard and model lab]({STREAMLIT_URL})
         """
     )
     st.dataframe(build_post_reading_map_table(), hide_index=True, width="stretch")

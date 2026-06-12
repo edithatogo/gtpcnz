@@ -9,6 +9,8 @@ Repository: https://github.com/edithatogo/gtpcnz
 
 Website: https://edithatogo.github.io/gtpcnz/
 
+Substack series: https://rareinsights.substack.com/
+
 ## What This Is
 
 - A public-data anchored benchmark for exploring primary care funding architecture.
@@ -36,6 +38,7 @@ Short version:
 
 - Quarto website: https://edithatogo.github.io/gtpcnz/
 - Streamlit dashboard and modelling views: https://gtpcnz.streamlit.app/
+- Substack series: https://rareinsights.substack.com/
 - Quarto source report: [reports/primary_care_architecture.qmd](reports/primary_care_architecture.qmd)
 - Streamlit dashboard entrypoint: [streamlit_app.py](streamlit_app.py)
 - Dashboard implementation: [models/primarycare_model/app.py](models/primarycare_model/app.py)

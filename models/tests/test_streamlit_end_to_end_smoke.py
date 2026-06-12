@@ -145,8 +145,17 @@ def test_streamlit_app_builders_and_publication_artifacts_are_connected() -> Non
     for label, frame in app_frames.items():
         _assert_nonempty_frame(frame, label)
 
+    post_map = app_frames["post_map"]
+    assert len(post_map) >= 18
+    for column in ["Substack URL", "GitHub Pages", "Streamlit dashboard"]:
+        assert column in post_map.columns
+    assert post_map["Substack URL"].str.startswith("https://rareinsights.substack.com/p/").all()
+    assert set(post_map["GitHub Pages"]) == {"https://edithatogo.github.io/gtpcnz/"}
+    assert set(post_map["Streamlit dashboard"]) == {"https://gtpcnz.streamlit.app/"}
+
     for post_id, post in runtime_lab.SUBSTACK_POSTS.items():
         path = ROOT / str(post["file"])
+        assert post["url"].startswith("https://rareinsights.substack.com/p/")
         assert path.exists(), f"Substack post {post_id} is missing: {path}"
         assert path.stat().st_size > 1000, f"Substack post {post_id} is unexpectedly small"
 

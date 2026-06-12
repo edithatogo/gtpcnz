@@ -1,6 +1,7 @@
 from pathlib import Path
 
 CANONICAL_STREAMLIT_URL = "https://gtpcnz.streamlit.app/"
+CANONICAL_SUBSTACK_URL = "https://rareinsights.substack.com/"
 REPORT_LINK = "reports/primary_care_architecture.qmd"
 PUBLIC_INDEX = Path(__file__).resolve().parents[2] / "index.qmd"
 
@@ -76,8 +77,12 @@ def test_public_homepage_visual_contract_strings():
 
     assert REPORT_LINK in text
     assert CANONICAL_STREAMLIT_URL in text
+    assert CANONICAL_SUBSTACK_URL in text
     assert 'href="reports/primary_care_architecture.qmd"' in text
     assert 'href="https://gtpcnz.streamlit.app/"' in text
+    assert 'href="https://rareinsights.substack.com/"' in text
+    assert "How the posts map to this report and dashboard" in text
+    assert "https://rareinsights.substack.com/p/the-current-reform-pathway-stronger-than-a-straw-man-but-maybe-still-incomplete" in text
 
 
 def test_public_homepage_has_no_private_substack_or_local_paths():
