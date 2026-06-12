@@ -168,7 +168,7 @@ def score_row(row: dict[str, object], live_draft: LiveDraft | None = None) -> Sc
         substack += 10
     else:
         failures.append(f"post {post_number}: heading rhythm should use public-facing H2 sections only")
-    if scheduled_at and "Australia/Sydney" in scheduled_at and "ready" == str(row.get("publicationStatus", "")):
+    if scheduled_at and "Australia/Sydney" in scheduled_at and str(row.get("publicationStatus", "")) == "ready":
         substack += 10
     else:
         failures.append(f"post {post_number}: schedule row must be ready and timezone-specific")
@@ -186,7 +186,7 @@ def score_row(row: dict[str, object], live_draft: LiveDraft | None = None) -> Sc
         images += 2
     else:
         failures.append(f"post {post_number}: image alt text should be descriptive")
-    if any("v1.7.2" in path.name or "pcf-v172" in path.name for path in found_images + [local_post_path(hero_image)]):
+    if any("v1.7.2" in path.name or "pcf-v172" in path.name for path in [*found_images, local_post_path(hero_image)]):
         images += 2
     else:
         failures.append(f"post {post_number}: image package should use the current visual set")
