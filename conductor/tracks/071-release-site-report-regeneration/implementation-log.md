@@ -13,3 +13,9 @@
 - `quarto render --to html --no-clean --no-cache` was attempted from the OneDrive worktree and blocked by access-denied replacement of `_site/site_libs/quarto-diagram/mermaid-init.js`.
 - A render probe copy was created under `$env:TEMP\gtpcnz-track071-render`; Quarto there was blocked by internal Sass compilation failing to spawn `C:\WINDOWS\system32\cmd.exe` with `Invalid handle`.
 - Local render blockers are documented in `docs/release/track-071-release-regeneration-v1.md`; release source surfaces are verified by tests.
+
+## Follow-up after PR #72
+
+- PR #72 corrected the Policy Quarterly draft bibliography path to the existing repo CSL JSON reference file.
+- Local render probes subsequently passed for the Policy Quarterly HTML paper and revealjs briefing deck when Quarto `DENO_DIR`, `TMPDIR`, `TEMP`, and `TMP` were redirected to `C:\tmp`.
+- The remaining local render risk is operational rather than source-level: direct render attempts can fail if Windows/OneDrive cache paths are unwritable or disk space is insufficient.

@@ -18,6 +18,7 @@ This pack contains the additive publication materials for the public aggregate v
 
 - Deck source: `docs/presentations/primary-care-funding-architecture-policy-briefing-v1.8.1.qmd`
 - Notes: `docs/presentations/README.md`
+- Export/readiness checklist: `docs/presentations/deck-export-readiness-checklist-v1.8.1.md`
 - Status: claim-gated briefing deck for presenting the v1.8.1 modelling result.
 
 ## Public claim boundary
