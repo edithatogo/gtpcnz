@@ -64,7 +64,11 @@ def policy_s():
     return st.builds(
         PolicyParams,
         name=st.text(min_size=1, max_size=30),
-        parameters=st.dictionaries(st.text(min_size=1), st.floats(allow_nan=False), max_size=3),
+        parameters=st.dictionaries(
+            st.text(min_size=1),
+            st.floats(allow_nan=False, allow_infinity=False),
+            max_size=3,
+        ),
         start_month=st.integers(0, 60),
     )
 
