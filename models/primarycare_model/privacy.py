@@ -19,11 +19,11 @@ def add_laplace_noise(value, sensitivity, epsilon, rng=None):
 
 SENS = {"age": 120.0, "deprivation_index": 9.0, "total_patients": 1.0, "total_funding": 100000.0}
 EPS = 0.5
-PII = {"nhi", "patient_id", "name", "dob", "address", "phone", "email"}
+IDENTIFYING_FIELDS = {"nhi", "patient_id", "name", "dob", "address", "phone", "email"}
 
 
 def check_no_patient_data(data):
-    return [k for k in data if k.lower().replace(" ", "_") in PII]
+    return [k for k in data if k.lower().replace(" ", "_") in IDENTIFYING_FIELDS]
 
 
 def assert_aggregate_only(data):
@@ -33,7 +33,7 @@ def assert_aggregate_only(data):
 
 
 def strip_patient_data(records):
-    return [{k: v for k, v in r.items() if k.lower().replace(" ", "_") not in PII} for r in records]
+    return [{k: v for k, v in r.items() if k.lower().replace(" ", "_") not in IDENTIFYING_FIELDS} for r in records]
 
 
 def noisify_metric(name, value, epsilon=0.5, rng=None):
