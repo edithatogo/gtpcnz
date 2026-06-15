@@ -29,6 +29,7 @@ docs/figures/public-proof/browser-audit-*/
 /data/secure/
 /models/output/
 /output/
+/rust_core/target/
 
 /qa/
 
