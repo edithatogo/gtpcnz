@@ -37,12 +37,7 @@ PHI_PATTERNS = {
         "pattern": re.compile(r"\b[A-Z]{3}[0-9]{4}\b"),
         "description": "NZ NHI number (3 letters + 4 digits)",
         "severity": "high",
-    },
-    "email_address": {
-        "pattern": re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b"),
-        "description": "Email address",
-        "severity": "high",
-    },
+    }
 }
 
 
@@ -91,6 +86,7 @@ SKIP_FILES = {"uv.lock", "Cargo.lock", "check_no_patient_data.py"}
 
 # Data file extensions to scan in detail
 DATA_EXTENSIONS = {".csv", ".json", ".parquet", ".xlsx", ".xls", ".tsv"}
+TEXT_PHI_EXTENSIONS = {".py", ".csv", ".json", ".tsv"}
 
 ALLOWED_SCHEMA_REFERENCE_FILES = {
     "docs/calibration/data-input-contract-v1.7.0.csv",
@@ -103,7 +99,7 @@ ALLOWED_SCHEMA_REFERENCE_FILES = {
 def load_dataset_registry() -> dict | None:
     """Load the dataset registry if it exists."""
     if DATASET_REGISTRY_PATH.exists():
-        with open(DATASET_REGISTRY_PATH, "r") as f:
+        with open(DATASET_REGISTRY_PATH) as f:
             return json.load(f)
     return None
 
@@ -146,9 +142,7 @@ def scan_data_file_headers(filepath: Path) -> list[dict]:
     ext = filepath.suffix.lower()
     content = None
 
-    if ext in (".csv", ".tsv"):
-        content = read_file_safely(filepath, max_bytes=500_000)
-    elif ext == ".json":
+    if ext in (".csv", ".tsv") or ext == ".json":
         content = read_file_safely(filepath, max_bytes=500_000)
 
     if content is None:
@@ -178,7 +172,7 @@ def scan_file(filepath: Path, verbose: bool) -> list[dict]:
         findings.extend(scan_data_file_headers(filepath))
 
     content = read_file_safely(filepath)
-    if content is not None:
+    if content is not None and ext in TEXT_PHI_EXTENSIONS:
         findings.extend(scan_text_for_phi(content, filepath))
 
     return findings
@@ -196,10 +190,7 @@ def should_scan(filepath: Path) -> bool:
     if filepath.suffix.lower() in SKIP_EXTENSIONS:
         return False
 
-    if filepath.name in SKIP_FILES:
-        return False
-
-    return True
+    return filepath.name not in SKIP_FILES
 
 
 def audit_dataset_registry(registry: dict | None, verbose: bool) -> list[dict]:

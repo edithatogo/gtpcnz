@@ -6,9 +6,9 @@ repository remains importable in the default Streamlit/test environment.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
-from typing import Callable
+from collections.abc import Callable
+from dataclasses import dataclass
 
 import numpy as np
 
@@ -133,8 +133,8 @@ __all__ = [
     "GPState",
     "bayesian_optimization_step",
     "expected_improvement",
+    "gp_predict",
     "lower_confidence_bound",
     "probability_of_improvement",
     "run_bayesian_optimization",
-    "gp_predict",
 ]

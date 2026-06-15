@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Any, Callable, Optional
+from typing import Any
 
 import numpy as np
 import pyarrow as pa
@@ -19,7 +20,6 @@ except ImportError:  # pragma: no cover - optional analytical dependency
     shap = None
 
 from .data_layer import shap_records_to_table, shap_summary_to_table
-
 
 FEATURE_NAMES: list[str] = [
     "capitation_rate",
@@ -58,7 +58,7 @@ class JaxMCPredictor:
         trajectory_fn: Callable[[jnp.ndarray, int, Any], jnp.ndarray],
         n_steps: int,
         target_metric: str = "total_funding",
-        aggregate_fn: Optional[Callable[[np.ndarray], float]] = None,
+        aggregate_fn: Callable[[np.ndarray], float] | None = None,
     ) -> None:
         self._fn = trajectory_fn
         self._n_steps = n_steps
@@ -89,7 +89,7 @@ class SHAPAttribution:
     data: np.ndarray
     explainer_type: str
     target_metric: str = "total_funding"
-    batch_indices: Optional[np.ndarray] = None
+    batch_indices: np.ndarray | None = None
 
     def _feature_matrix(self) -> np.ndarray:
         values = np.asarray(self.shap_values)
@@ -160,9 +160,9 @@ class TreeSHAPExplainer:
 
     def __init__(self, model: Any) -> None:
         self._model = model
-        self._explainer: Optional[Any] = None
+        self._explainer: Any | None = None
 
-    def fit(self, background_data: Optional[np.ndarray] = None) -> None:
+    def fit(self, background_data: np.ndarray | None = None) -> None:
         """Initialise the TreeExplainer."""
         if shap is None:
             raise ImportError("Install shap to use TreeSHAPExplainer.")
@@ -177,14 +177,14 @@ class TreeSHAPExplainer:
         X: np.ndarray,
         scenario_name: str = "default",
         target_metric: str = "total_funding",
-        batch_indices: Optional[np.ndarray] = None,
+        batch_indices: np.ndarray | None = None,
     ) -> SHAPAttribution:
         """Compute TreeSHAP values for input samples."""
         if self._explainer is None:
             raise RuntimeError("TreeSHAPExplainer is not fitted.")
 
         shap_values = self._explainer.shap_values(X)
-        values = np.asarray(shap_values if not isinstance(shap_values, list) else shap_values)
+        values = np.asarray(shap_values)
         if values.ndim == 2:
             values = values[np.newaxis, ...]
 
@@ -205,7 +205,7 @@ class KernelSHAPExplainer:
 
     def __init__(self, predictor: JaxMCPredictor) -> None:
         self._predictor = predictor
-        self._explainer: Optional[Any] = None
+        self._explainer: Any | None = None
 
     def fit(self, background: np.ndarray) -> None:
         """Fit KernelExplainer on a background feature matrix."""
@@ -219,7 +219,7 @@ class KernelSHAPExplainer:
         scenario_name: str = "default",
         target_metric: str = "total_funding",
         n_samples: int = 128,
-        batch_indices: Optional[np.ndarray] = None,
+        batch_indices: np.ndarray | None = None,
         nsamples: int = 2000,
         **kwargs: Any,
     ) -> SHAPAttribution:
@@ -251,7 +251,7 @@ __all__ = [
     "FEATURE_SHORT_NAMES",
     "TARGET_METRICS",
     "JaxMCPredictor",
+    "KernelSHAPExplainer",
     "SHAPAttribution",
     "TreeSHAPExplainer",
-    "KernelSHAPExplainer",
 ]

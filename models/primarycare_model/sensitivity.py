@@ -122,10 +122,10 @@ def compute_sobol_indices(
 
 
 __all__ = [
-    "ParameterRange",
     "PARAMETER_RANGES",
+    "ParameterRange",
     "compute_sobol_indices",
     "param_ranges_to_table",
-    "sobol_sequence",
     "scale_samples_to_params",
+    "sobol_sequence",
 ]

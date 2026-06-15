@@ -3,15 +3,15 @@ Streamlit page: Nash Equilibrium Convergence Trace.
 Animated gradient path of clinical utility optimisation.
 """
 import time
+
 import numpy as np
-import pandas as pd
-import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 
 from models.primarycare_model.nash_opt import (
-    GAME_PRESETS, NashTrace, PayoffMatrix,
-    compute_payoff_landscape, nash_best_response_dynamics,
+    GAME_PRESETS,
+    compute_payoff_landscape,
+    nash_best_response_dynamics,
     run_nash_with_multiple_starts,
 )
 
@@ -132,7 +132,8 @@ def render_page() -> None:
                 bar.progress((si+1)/total_steps)
                 time.sleep(0.05)
 
-        if bar: bar.empty()
+        if bar:
+            bar.empty()
         nash_box.markdown(f"**Converged:** {trace.converged}  ")
         nash_box.markdown(f"**Iterations:** {trace.num_iterations}  ")
         if trace.final_strategies is not None:

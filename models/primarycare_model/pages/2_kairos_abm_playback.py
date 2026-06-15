@@ -3,16 +3,15 @@ Streamlit: kairos ABM Playback - Real-time practice status grid/network viz.
 Shows patient flow, provider queues, and funding model status transitions.
 """
 import time
+
 import matplotlib.pyplot as plt
 import networkx as nx
-import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 
 from models.primarycare_model.abm import ABMParameters, ABMSimulation
-from models.primarycare_model.schemas import FundingModel
 
 
 def render_page() -> None:
@@ -52,7 +51,8 @@ def render_page() -> None:
         st.session_state.abm_month = 0
         st.session_state.abm_running = False
 
-    if play: st.session_state.abm_running = True
+    if play:
+        st.session_state.abm_running = True
     if reset:
         st.session_state.abm_history = []
         st.session_state.abm_month = 0
@@ -67,7 +67,8 @@ def render_page() -> None:
         status_text = st.empty()
 
         for month_idx in range(num_months):
-            if month_idx >= len(monthly_df): break
+            if month_idx >= len(monthly_df):
+                break
             row = monthly_df.iloc[month_idx]
             st.session_state.abm_history.append(row.to_dict())
             st.session_state.abm_month = month_idx + 1
@@ -91,14 +92,21 @@ def render_page() -> None:
                 prov_chart.plotly_chart(fig2, use_container_width=True, key=f"p{month_idx}")
 
             G = nx.Graph()
-            for p in sim.providers[:10]: G.add_node(f"P{p.provider_id}", type="provider")
-            for pat in sim.patients[:30]: G.add_node(f"C{pat.patient_id}", type="patient")
+            for p in sim.providers[:10]:
+                G.add_node(f"P{p.provider_id}", type="provider")
+            for pat in sim.patients[:30]:
+                G.add_node(f"C{pat.patient_id}", type="patient")
             for i, pat in enumerate(sim.patients[:10]):
-                if sim.providers: G.add_edge(f"C{pat.patient_id}", f"P{sim.providers[i%len(sim.providers)].provider_id}")
+                if sim.providers:
+                    G.add_edge(
+                        f"C{pat.patient_id}",
+                        f"P{sim.providers[i % len(sim.providers)].provider_id}",
+                    )
             fig3, ax3 = plt.subplots(figsize=(4,3))
             colors = ["red" if n[0]=="P" else "lightblue" for n in G.nodes()]
             nx.draw(G, pos=nx.spring_layout(G, seed=42, k=0.5), ax=ax3, node_color=colors, node_size=50, with_labels=False)
-            net_placeholder.pyplot(fig3); plt.close(fig3)
+            net_placeholder.pyplot(fig3)
+            plt.close(fig3)
 
             td = pd.DataFrame({"Model":["Capitation","FFS","Hybrid"],"Status":[1.0 if funding_model=="capitation" else 0.3, 1.0 if funding_model=="ffs" else 0.3, 1.0 if funding_model=="hybrid" else 0.3]})
             fig4 = px.bar(td, x="Model", y="Status", range_y=[0,1.2], color="Model", title=f"Active: {funding_model.title()}")

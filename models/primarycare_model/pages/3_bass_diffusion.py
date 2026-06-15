@@ -3,14 +3,15 @@ Streamlit page: Bass Diffusion Adoption Animation.
 Animated choropleth/line charts of adoption trajectories over 10-15 years.
 """
 import time
-import numpy as np
-import pandas as pd
+
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 
 from models.primarycare_model.diffusion import (
-    BassDiffusionParams, SCENARIO_PRESETS, simulate_bass,
+    SCENARIO_PRESETS,
+    BassDiffusionParams,
+    simulate_bass,
 )
 
 
@@ -21,7 +22,7 @@ def render_page() -> None:
 
     with st.sidebar:
         st.header("Diffusion Parameters")
-        preset_name = st.selectbox("Scenario preset", ["Custom"] + list(SCENARIO_PRESETS.keys()))
+        preset_name = st.selectbox("Scenario preset", ["Custom", *list(SCENARIO_PRESETS.keys())])
         if preset_name != "Custom":
             preset = SCENARIO_PRESETS[preset_name]
             p = st.slider("Innovation (p)", 0.001, 0.100, preset.p, 0.001, format="%.3f")

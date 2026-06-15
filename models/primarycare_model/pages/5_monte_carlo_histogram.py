@@ -3,12 +3,10 @@ Streamlit page: Rolling Monte Carlo Histogram.
 Shows uncertainty limits narrowing dynamically as batched iterations run.
 """
 import time
+
 import numpy as np
-import pandas as pd
-import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
-import threading
 
 from models.primarycare_model.jax_mc import MCConfig, run_monte_carlo
 
@@ -54,7 +52,8 @@ def render_page() -> None:
 
         def cb(bi, ba):
             for m,v in ba.items():
-                if m in all_metrics: all_metrics[m].append(v)
+                if m in all_metrics:
+                    all_metrics[m].append(v)
 
         status.text(f"Running {num_iterations} iters in {num_batches} batches...")
         result = run_monte_carlo(config=config, progress_callback=cb)
@@ -97,7 +96,8 @@ def render_page() -> None:
             status.text(f"Batch {bi+1}/{num_batches}")
             time.sleep(0.1)
 
-        bar.empty(); status.text("Complete!")
+        bar.empty()
+        status.text("Complete!")
         st.success(f"Done: {num_iterations} iterations")
         st.balloons()
     else:

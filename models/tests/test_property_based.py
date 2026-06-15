@@ -7,14 +7,21 @@ from __future__ import annotations
 import pytest
 
 pytest.importorskip("hypothesis")
-from hypothesis import assume, given, settings, stateful, strategies as st
-from primarycare_model.schemas import (
-    Ethnicity, FundingModel, Gender, MonthlyMetrics, PatientProfile,
-    PolicyParams, ProviderProfile, ProviderType, ScenarioParams,
-    SimulationConfig, SimulationResult,
-)
+from hypothesis import assume, given, settings, stateful
+from hypothesis import strategies as st
 from primarycare_model.abm import ABMParameters, run_abm
 from primarycare_model.jax_mc import run_deterministic
+from primarycare_model.schemas import (
+    Ethnicity,
+    FundingModel,
+    Gender,
+    PatientProfile,
+    PolicyParams,
+    ProviderProfile,
+    ProviderType,
+    ScenarioParams,
+    SimulationConfig,
+)
 
 
 def gs(): return st.sampled_from(list(Gender))
@@ -201,7 +208,7 @@ class TestJaxMC:
         s = ScenarioParams(name=f"d{seed}", funding_model=FundingModel.CAPITATION,
                           capitation_rate=80.0)
         r1, r2 = run_deterministic(c, s), run_deterministic(c, s)
-        for a, b in zip(r1.monthly_metrics, r2.monthly_metrics):
+        for a, b in zip(r1.monthly_metrics, r2.monthly_metrics, strict=False):
             assert a.total_funding == b.total_funding
 
     @given(seed=st.integers(0, 1023), mo=st.integers(1, 6))
