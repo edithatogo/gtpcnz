@@ -132,6 +132,13 @@ I would be less convinced if the current reform pathway proves it can expand saf
 
 - [Interactive Streamlit dashboard and model lab](https://gtpcnz.streamlit.app/)
 - [GitHub Pages report, reading map and release model card](https://edithatogo.github.io/gtpcnz/)
+
+## Simulation plot
+
+![GTPCNZ comparison plot contrasting the current reform pathway with the full hybrid upstream architecture across model indices.](../figures/pcf-v172-sim-05-current-vs-hybrid-plot.png)
+
+This simulation plot keeps the current reform pathway as the comparator and shows how the full hybrid architecture scores across selected model indices.
+
 ## v1.8.1 model update
 
 The current Streamlit model release is v1.8.1. Its public aggregate validation lane is `public_aggregate_validated`, and its claim level is `empirically_supported_if_gated` for registered gates only.

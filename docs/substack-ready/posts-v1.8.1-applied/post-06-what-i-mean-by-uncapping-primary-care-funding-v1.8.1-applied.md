@@ -137,6 +137,13 @@ I would be less convinced if an uncapped scheduled stream could not be governed 
 
 - [Interactive Streamlit dashboard and model lab](https://gtpcnz.streamlit.app/)
 - [GitHub Pages report, reading map and release model card](https://edithatogo.github.io/gtpcnz/)
+
+## Simulation plot
+
+![GTPCNZ activity payment simulation plot showing gross scheduled payment, control adjustment and net incentive.](../figures/pcf-v172-sim-06-payment-control-plot.png)
+
+This simulation plot shows why demand-led eligible activity still needs rules and audit: gross scheduled payment and net incentive separate as activity rises.
+
 ## v1.8.1 model update
 
 The current Streamlit model release is v1.8.1. Its public aggregate validation lane is `public_aggregate_validated`, and its claim level is `empirically_supported_if_gated` for registered gates only.

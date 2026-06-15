@@ -1,12 +1,18 @@
-flowchart LR
+flowchart TB
   classDef title fill:#16324F,stroke:#16324F,stroke-width:0px,color:#FFFFFF,font-size:28px;
-  classDef step1 fill:#E8F3FF,stroke:#1E5A8A,stroke-width:3px,color:#102A43,font-size:24px;
-  classDef step2 fill:#FFF2D8,stroke:#A86400,stroke-width:3px,color:#3B2600,font-size:24px;
-  classDef step3 fill:#E9F8EF,stroke:#1F7A4D,stroke-width:3px,color:#123524,font-size:24px;
+  classDef base fill:#E8F3FF,stroke:#1E5A8A,stroke-width:3px,color:#102A43,font-size:21px;
+  classDef growth fill:#FFF2D8,stroke:#A86400,stroke-width:3px,color:#3B2600,font-size:21px;
+  classDef equity fill:#E9F8EF,stroke:#1F7A4D,stroke-width:3px,color:#123524,font-size:21px;
+  classDef control fill:#FDEBEC,stroke:#B42318,stroke-width:3px,color:#4A0D0D,font-size:21px;
+  classDef result fill:#16324F,stroke:#16324F,stroke-width:3px,color:#FFFFFF,font-size:24px;
   classDef footer fill:#F5F7FA,stroke:#CBD5E1,stroke-width:2px,color:#334155,font-size:18px;
 
-  T["Recommendations: a primary care system that can grow before hospi..."]:::title
-  A["Recommendations"]:::step1 --> B["Pilot architecture"]:::step2 --> C["Grow upstream"]:::step3
-  F["Post 18 · Primary Care Funding Architecture"]:::footer
+  T["Recommendations"]:::title
+  A["Capitation responsibility"]:::base --> F["Grow upstream before hospitals"]:::result
+  B["Eligible FFS supply"]:::growth --> F
+  C["Place accountability"]:::equity --> F
+  D["Audit and scope rules"]:::control --> F
+  E["Urgent and ambulance integration"]:::growth --> F
+  H["Post 18 · Primary Care Funding Architecture"]:::footer
   T --- A
-  C --- F
+  F --- H

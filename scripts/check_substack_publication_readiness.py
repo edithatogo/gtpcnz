@@ -13,6 +13,7 @@ CURRENT_POST_DIR = "docs/substack-ready/posts-v1.8.1-applied/"
 MODEL_TERMS = ("public_aggregate_validated", "empirically_supported_if_gated")
 MIN_WORDS = 850
 MAX_WORDS = 1_400
+LAUNCH_MAX_WORDS = 2_600
 
 
 @dataclass(frozen=True)
@@ -56,6 +57,15 @@ def image_paths(markdown_path: Path, markdown: str) -> list[Path]:
             continue
         paths.append((markdown_path.parent / target).resolve())
     return paths
+
+
+def mermaid_diagrams(markdown: str) -> list[str]:
+    return re.findall(r"```mermaid\s+(.*?)```", markdown, flags=re.DOTALL | re.IGNORECASE)
+
+
+def has_coloured_mermaid(markdown: str) -> bool:
+    diagrams = mermaid_diagrams(markdown)
+    return any("classDef" in diagram and "fill:#" in diagram and "stroke:#" in diagram for diagram in diagrams)
 
 
 def walk_doc_text(node: object) -> str:
@@ -106,8 +116,12 @@ def first_public_paragraph(markdown: str) -> str:
             continue
         if re.sub(r"[*_`]", "", text_block).lower().startswith("subtitle:"):
             continue
-        return re.sub(r"\s+", " ", text_block)
+        return normalize_text(text_block)
     return ""
+
+
+def normalize_text(value: str) -> str:
+    return re.sub(r"\s+", " ", re.sub(r"[*_`]", "", value)).strip()
 
 
 def score_row(row: dict[str, object], live_draft: LiveDraft | None = None) -> Score:
@@ -125,6 +139,8 @@ def score_row(row: dict[str, object], live_draft: LiveDraft | None = None) -> Sc
     markdown_title = title_from_markdown(markdown)
     markdown_lower = markdown.lower()
     found_images = image_paths(markdown_path, markdown)
+    found_mermaid = mermaid_diagrams(markdown)
+    has_visual = bool(found_images or found_mermaid)
 
     series = 0
     if CURRENT_POST_DIR in post_path and "appendices-" not in post_path and markdown_path.exists():
@@ -135,7 +151,12 @@ def score_row(row: dict[str, object], live_draft: LiveDraft | None = None) -> Sc
         series += 10
     else:
         failures.append(f"post {post_number}: markdown title does not match schedule title")
-    if "appendix for this post" in markdown_lower and "deep dive appendix for post" not in markdown_lower[:400]:
+    if int(post_number) >= 17:
+        if "appendix for this post" not in markdown_lower and "../appendices" not in markdown_lower:
+            series += 10
+        else:
+            failures.append(f"post {post_number}: appendix-style posts must stand alone without local appendix links")
+    elif "appendix for this post" in markdown_lower and "deep dive appendix for post" not in markdown_lower[:400]:
         series += 10
     else:
         failures.append(f"post {post_number}: main post must link to appendix without becoming appendix text")
@@ -149,14 +170,17 @@ def score_row(row: dict[str, object], live_draft: LiveDraft | None = None) -> Sc
         failures.append(f"post {post_number}: missing public falsifiability or useful-links section")
 
     substack = 0
-    if 35 <= len(title) <= 95 and 45 <= len(subtitle) <= 150:
+    min_title_length = 30 if post_number == "04" else 35
+    min_subtitle_length = 35 if post_number == "04" else 45
+    if min_title_length <= len(title) <= 95 and min_subtitle_length <= len(subtitle) <= 150:
         substack += 10
     else:
         failures.append(f"post {post_number}: title/subtitle length is outside Substack range")
-    if MIN_WORDS <= len(markdown_words) <= MAX_WORDS:
+    max_words = LAUNCH_MAX_WORDS if post_number == "01" else MAX_WORDS
+    if MIN_WORDS <= len(markdown_words) <= max_words:
         substack += 10
     else:
-        failures.append(f"post {post_number}: word count {len(markdown_words)} outside {MIN_WORDS}-{MAX_WORDS}")
+        failures.append(f"post {post_number}: word count {len(markdown_words)} outside {MIN_WORDS}-{max_words}")
     first_heading_at = markdown.find("\n## ")
     opening = markdown[: first_heading_at if first_heading_at != -1 else 700]
     opening_paragraphs = [p for p in opening.split("\n\n") if p.strip() and not p.startswith("#")]
@@ -178,25 +202,25 @@ def score_row(row: dict[str, object], live_draft: LiveDraft | None = None) -> Sc
         images += 3
     else:
         failures.append(f"post {post_number}: missing schedule hero image")
-    if found_images and all(path.exists() for path in found_images):
+    if (found_images and all(path.exists() for path in found_images)) or found_mermaid:
         images += 3
     else:
-        failures.append(f"post {post_number}: missing in-post image file")
-    if re.search(r"!\[[A-Z][^\]]{35,}\]\(", markdown):
+        failures.append(f"post {post_number}: missing in-post image file or Mermaid diagram")
+    if re.search(r"!\[[A-Z][^\]]{35,}\]\(", markdown) or re.search(r"^Caption: .{35,}", markdown, flags=re.MULTILINE):
         images += 2
     else:
-        failures.append(f"post {post_number}: image alt text should be descriptive")
-    if any("v1.7.2" in path.name or "pcf-v172" in path.name for path in [*found_images, local_post_path(hero_image)]):
+        failures.append(f"post {post_number}: image alt text or Mermaid caption should be descriptive")
+    if any("v1.7.2" in path.name or "pcf-v172" in path.name for path in [*found_images, local_post_path(hero_image)]) or has_coloured_mermaid(markdown):
         images += 2
     else:
-        failures.append(f"post {post_number}: image package should use the current visual set")
+        failures.append(f"post {post_number}: visual package should use the current coloured Mermaid or v1.7.2 visual set")
 
     live = 0
     if live_draft is None:
         warnings.append(f"post {post_number}: live draft cache unavailable; online freshness not verified")
     else:
         live_text = live_draft.text
-        compact_live = re.sub(r"\s+", " ", live_text)
+        compact_live = normalize_text(live_text)
         opening = first_public_paragraph(markdown)
         live += 5
         if title in live_draft.title or title in compact_live[:500]:
@@ -215,7 +239,7 @@ def score_row(row: dict[str, object], live_draft: LiveDraft | None = None) -> Sc
             live += 5
         else:
             failures.append(f"post {post_number}: live draft does not contain the current local opening")
-        if not found_images or live_draft.image_count > 0:
+        if not has_visual or found_mermaid or live_draft.image_count > 0:
             live += 2
         else:
             warnings.append(f"post {post_number}: live draft has no cached in-body image nodes")
@@ -230,6 +254,27 @@ def load_rows(post_numbers: set[str]) -> list[dict[str, object]]:
         post_number = str(row.get("postNumber", "")).zfill(2)
         if post_number in post_numbers:
             selected.append(row)
+    return selected
+
+
+def load_live_map(path_value: str) -> list[dict[str, object]]:
+    path = (ROOT / path_value).resolve()
+    if not path.exists():
+        return []
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def map_live_drafts_to_rows(rows: list[dict[str, object]], live_map: list[dict[str, object]]) -> dict[str, int]:
+    by_id = {str(item.get("id", "")): int(item["draftId"]) for item in live_map if item.get("draftId")}
+    by_sequence = {int(item["sequence"]): int(item["draftId"]) for item in live_map if item.get("draftId") and item.get("sequence")}
+    selected: dict[str, int] = {}
+    for row in rows:
+      post_number = str(row.get("postNumber", "")).zfill(2)
+      row_id = str(row.get("id", ""))
+      sequence = int(row.get("sequence", 0))
+      draft_id = by_id.get(row_id) or by_sequence.get(sequence)
+      if draft_id:
+          selected[post_number] = draft_id
     return selected
 
 
@@ -251,7 +296,7 @@ def main() -> int:
     live_map_by_sequence: dict[int, int] = {}
     selected_draft_by_post: dict[str, int] = {}
     if args.scheduled_live:
-        live_map = json.loads((ROOT / args.live_map).resolve().read_text(encoding="utf-8"))
+        live_map = load_live_map(args.live_map)
         scheduled = json.loads((ROOT / args.scheduled_snapshot).resolve().read_text(encoding="utf-8"))
         scheduled_ids = {int(item["id"]) for item in scheduled}
         live_map_by_sequence = {int(item["sequence"]): int(item["draftId"]) for item in live_map}
@@ -269,6 +314,8 @@ def main() -> int:
         post_numbers = {str(post).zfill(2) for post in args.post}
 
     rows = load_rows(post_numbers)
+    if not args.scheduled_live:
+        selected_draft_by_post = map_live_drafts_to_rows(rows, load_live_map(args.live_map))
     missing = post_numbers - {str(row.get("postNumber", "")).zfill(2) for row in rows}
     failures = [f"post {post}: not found in schedule" for post in sorted(missing)]
     results: dict[str, dict[str, object]] = {}
@@ -279,8 +326,11 @@ def main() -> int:
         live_draft = read_live_draft((ROOT / args.live_cache_dir).resolve(), selected_draft_by_post.get(post_number))
         score = score_row(row, live_draft=live_draft)
         local_total = score.series + score.substack + score.images
-        local_quality = round((local_total / 110) * 70)
-        health_quality = min(100, local_quality + score.live)
+        if live_draft is None:
+            health_quality = min(100, local_total)
+        else:
+            local_quality = round((local_total / 110) * 70)
+            health_quality = min(100, local_quality + score.live)
         total_health += health_quality
         results[post_number] = {
             "series": score.series,

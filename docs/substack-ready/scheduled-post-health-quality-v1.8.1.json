@@ -1,22 +1,6 @@
 {
   "average_health.quality": 100.0,
   "posts": {
-    "05": {
-      "series": 50,
-      "substack": 50,
-      "images": 10,
-      "live": 30,
-      "health.quality": 100,
-      "warnings": []
-    },
-    "08": {
-      "series": 50,
-      "substack": 50,
-      "images": 10,
-      "live": 30,
-      "health.quality": 100,
-      "warnings": []
-    },
     "09": {
       "series": 50,
       "substack": 50,

@@ -166,6 +166,13 @@ The most important empirical tests are:
 
 - [Interactive Streamlit dashboard and model lab](https://gtpcnz.streamlit.app/)
 - [GitHub Pages report, reading map and release model card](https://edithatogo.github.io/gtpcnz/)
+
+## Simulation plot
+
+![GTPCNZ simulation scatter plot comparing supply generation score with hospital pressure score across model scenarios.](../figures/pcf-v172-sim-01-supply-pressure-plot.png)
+
+This simulation plot shows the model-generated relationship between supply generation and hospital pressure across the v1.8.1 reference scenarios. It is an index-space teaching plot, not a forecast of hospital demand.
+
 ## v1.8.1 model update
 
 The current Streamlit model release is v1.8.1. Its public aggregate validation lane is `public_aggregate_validated`, and its claim level is `empirically_supported_if_gated` for registered gates only.
