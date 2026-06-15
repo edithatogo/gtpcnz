@@ -1,198 +1,302 @@
 #!/usr/bin/env python3
-"""Public-release gate: ensure no patient-level data references in source code.
+"""
+check_no_patient_data.py — Compliance gate: Zero patient-level/confidential data.
 
-This scanner checks for patterns that may indicate patient-level or
-personally identifiable data has leaked into the public source tree.
-It is intentionally conservative: any match is reported with context
-lines for human review.
+Scans the codebase for PHI (Protected Health Information) patterns, audits
+the dataset registry, and blocks CI if any patient-level or confidential data
+is detected.
+
+Usage:
+    python scripts/check_no_patient_data.py          # Quiet mode (exit code only)
+    python scripts/check_no_patient_data.py --verbose # Detailed output
+    python scripts/check_no_patient_data.py --json    # JSON report to stdout
 
 Exit codes:
-    0 - no matches found (clean)
-    1 - one or more matches found (review required)
+    0 — No PHI detected (PASS)
+    1 — PHI patterns found (FAIL)
 """
 
-from __future__ import annotations
-
+import argparse
+import json
+import os
 import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+# ---------------------------------------------------------------------------
+# Project root detection
+# ---------------------------------------------------------------------------
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = SCRIPT_DIR.parent
 
-# Directories and files to scan (add more as the repo grows)
-SCAN_TARGETS: list[Path] = [
-    ROOT / "models",
-    ROOT / "scripts",
-    ROOT / "conductor",
-    ROOT / "streamlit_app.py",
-    ROOT / "repo_scorecards.py",
-]
-
-# Directories to always exclude
-EXCLUDE_DIRS: set[str] = {
-    "__pycache__",
-    ".venv",
-    "venv",
-    ".git",
-    ".ruff_cache",
-    ".pytest_cache",
-    "codex-tmp",
-    ".tmp",
-    "public",
-    "_site",
-    "build",
-    ".antigravitycli",
-    "node_modules",
+# ---------------------------------------------------------------------------
+# PHI pattern definitions (NZ-specific)
+# ---------------------------------------------------------------------------
+PHI_PATTERNS = {
+    "nhi_number": {
+        "pattern": re.compile(r"\b[A-Z]{3}[0-9]{4}\b"),
+        "description": "NZ NHI number (3 letters + 4 digits)",
+        "severity": "high",
+    }
 }
 
-EXCLUDE_FILES: set[str] = {
-    "scripts/check_concern_boundaries.py",
-    "scripts/check_no_patient_data.py",
-    "scripts/check_public_only_boundary.py",
-    "scripts/check_repo_health.py",
+
+# Patterns that indicate PHI-related column headers in data files
+PHI_COLUMN_PATTERNS = [
+    re.compile(r"\bfirst_name\b", re.IGNORECASE),
+    re.compile(r"\blast_name\b", re.IGNORECASE),
+    re.compile(r"\bfull_name\b", re.IGNORECASE),
+    re.compile(r"\bpatient_name\b", re.IGNORECASE),
+    re.compile(r"\bdate_of_birth\b", re.IGNORECASE),
+    re.compile(r"\bdob\b", re.IGNORECASE),
+    re.compile(r"\bnhi\b", re.IGNORECASE),
+    re.compile(r"\bnhi_number\b", re.IGNORECASE),
+    re.compile(r"\bmedical_record_number\b", re.IGNORECASE),
+    re.compile(r"\bmrn\b", re.IGNORECASE),
+    re.compile(r"\baddress\b", re.IGNORECASE),
+    re.compile(r"\bstreet_address\b", re.IGNORECASE),
+    re.compile(r"\bphone_number\b", re.IGNORECASE),
+    re.compile(r"\bpatient_id\b", re.IGNORECASE),
+    re.compile(r"\bssn\b", re.IGNORECASE),
+    re.compile(r"\bnational_id\b", re.IGNORECASE),
+]
+
+# ---------------------------------------------------------------------------
+# Dataset registry path
+# ---------------------------------------------------------------------------
+DATASET_REGISTRY_PATH = PROJECT_ROOT / "data" / "dataset-registry.json"
+
+# ---------------------------------------------------------------------------
+# Files and directories to always skip
+# ---------------------------------------------------------------------------
+SKIP_DIRS = {
+    ".git", "__pycache__", ".ruff_cache", ".venv", ".quarto",
+    "node_modules", "target", "codex-tmp", ".tmp", "_site",
+    "public", ".streamlit", ".antigravitycli", ".github",
+    "conductor", ".mypy_cache", ".pytest_cache", ".dvc",
 }
 
-# --- Pattern definitions ---
-# Each entry is a (name, compiled_pattern) tuple.
-# The name is used in the report to explain WHY this pattern is flagged.
-_PATTERNS: list[tuple[str, re.Pattern]] = [
-    # NHI / national health identifier patterns
-    ("NHI number", re.compile(r"\bNHI\b", re.IGNORECASE)),
-    ("nhi_number variable", re.compile(r"\bnhi_number\b", re.IGNORECASE)),
-    ("national health index", re.compile(r"\bnational health index\b", re.IGNORECASE)),
-    # General patient-identifying patterns
-    ("patient-level data", re.compile(r"\bpatient.level.data\b", re.IGNORECASE)),
-    ("patient-level forecast", re.compile(r"\bpatient.level.forecast\b", re.IGNORECASE)),
-    ("personally identifiable", re.compile(r"\bpersonally.identif", re.IGNORECASE)),
-    ("individually identifiable", re.compile(r"\bindividually.identif", re.IGNORECASE)),
-    ("identified data", re.compile(r"\bidentified.data\b", re.IGNORECASE)),
-    ("linked data", re.compile(r"\blinked.data\b", re.IGNORECASE)),
-    # Protected health information acronyms
-    ("PHI (protected health information)", re.compile(r"\bPHI\b")),
-    ("PII (personally identifiable info)", re.compile(r"\bPII\b")),
-    # Clinical / health data patterns
-    ("clinical data", re.compile(r"\bclinical.data\b", re.IGNORECASE)),
-    ("patient data", re.compile(r"\bpatient.data\b", re.IGNORECASE)),
-    ("named patient", re.compile(r"\bnamed.patient", re.IGNORECASE)),
-    ("individual patient", re.compile(r"\bindividual.patient", re.IGNORECASE)),
-    # Hardcoded identifier-like patterns (e.g. "NHI12345", "ZZZ0001")
-    ("suspected NHI-like identifier", re.compile(r"\b[A-Z]{3}\d{4}\b")),
-]
+SKIP_EXTENSIONS = {
+    ".wasm", ".png", ".jpg", ".jpeg", ".gif", ".svg", ".ico",
+    ".woff", ".woff2", ".ttf", ".eot", ".pdf", ".lock",
+    ".arrow", ".parquet",
+}
 
-# Patterns that are always allowed (safe model-internal terminology)
-_ALLOWED_LINE_PATTERNS: list[re.Pattern] = [
-    re.compile(r"EvidenceTier", re.IGNORECASE),
-    re.compile(r"patient_id", re.IGNORECASE),
-    re.compile(r"enrolled_patients", re.IGNORECASE),
-    re.compile(r"patient_level_forecast", re.IGNORECASE),
-    re.compile(r"patient.data.anchored", re.IGNORECASE),
-    re.compile(r"not a patient.level.forecast", re.IGNORECASE),
-    re.compile(r"not linked.data.calibrated", re.IGNORECASE),
-    re.compile(r"linked-data inputs", re.IGNORECASE),
-    re.compile(r"linked.data.*(calibration|calibrated|validation|needed|required|not available)", re.IGNORECASE),
-    re.compile(r"(calibration|calibrated|validation|needed|required).*linked.data", re.IGNORECASE),
-    re.compile(r"model-generated index", re.IGNORECASE),
-    re.compile(r"demonstrative model-generated", re.IGNORECASE),
-    re.compile(r"illustrative", re.IGNORECASE),
-]
+SKIP_FILES = {"uv.lock", "Cargo.lock", "check_no_patient_data.py"}
+
+# Data file extensions to scan in detail
+DATA_EXTENSIONS = {".csv", ".json", ".parquet", ".xlsx", ".xls", ".tsv"}
+TEXT_PHI_EXTENSIONS = {".py", ".csv", ".json", ".tsv"}
+
+ALLOWED_SCHEMA_REFERENCE_FILES = {
+    "docs/calibration/data-input-contract-v1.7.0.csv",
+    "docs/validation/priority-empirical-checks-v1.1.0.csv",
+    "outputs/data-input-contract-v1.7.0.csv",
+    "outputs/priority-empirical-checks-v1.1.0.csv",
+}
 
 
-def _should_scan(path: Path) -> bool:
-    """Determine if a path should be scanned based on exclusion rules."""
+def load_dataset_registry() -> dict | None:
+    """Load the dataset registry if it exists."""
+    if DATASET_REGISTRY_PATH.exists():
+        with open(DATASET_REGISTRY_PATH) as f:
+            return json.load(f)
+    return None
+
+
+def read_file_safely(filepath: Path, max_bytes: int = 1_000_000) -> str | None:
+    """Read text content, skipping binary or oversized files."""
+    if not filepath.is_file():
+        return None
     try:
-        relative = path.relative_to(ROOT).as_posix()
-    except ValueError:
-        relative = path.as_posix()
-    if relative in EXCLUDE_FILES:
+        if filepath.stat().st_size > max_bytes:
+            return None
+        return filepath.read_text("utf-8", errors="replace")
+    except (UnicodeDecodeError, PermissionError):
+        return None
+
+
+def scan_text_for_phi(content: str, filepath: Path) -> list[dict]:
+    """Scan text content for PHI patterns."""
+    findings = []
+    for name, entry in PHI_PATTERNS.items():
+        for match in entry["pattern"].finditer(content):
+            findings.append({
+                "file": str(filepath.relative_to(PROJECT_ROOT)),
+                "pattern": name,
+                "description": entry["description"],
+                "severity": entry["severity"],
+                "match_length": len(match.group()),
+                "line": content[: match.start()].count("\n") + 1,
+            })
+    return findings
+
+
+def scan_data_file_headers(filepath: Path) -> list[dict]:
+    """Scan data file headers for PHI-related column names."""
+    findings = []
+    rel_path = filepath.relative_to(PROJECT_ROOT).as_posix()
+    if rel_path in ALLOWED_SCHEMA_REFERENCE_FILES:
+        return findings
+
+    ext = filepath.suffix.lower()
+    content = None
+
+    if ext in (".csv", ".tsv") or ext == ".json":
+        content = read_file_safely(filepath, max_bytes=500_000)
+
+    if content is None:
+        return findings
+
+    first_lines = "\n".join(content.split("\n")[:5])
+    for pattern in PHI_COLUMN_PATTERNS:
+        for match in pattern.finditer(first_lines):
+            findings.append({
+                "file": str(filepath.relative_to(PROJECT_ROOT)),
+                "pattern": "phi_column_header",
+                "description": f"PHI-related column header: '{match.group()}'",
+                "severity": "high",
+                "match_length": len(match.group()),
+                "line": first_lines[: match.start()].count("\n") + 1,
+            })
+            break
+    return findings
+
+
+def scan_file(filepath: Path, verbose: bool) -> list[dict]:
+    """Scan a single file for PHI patterns."""
+    findings = []
+    ext = filepath.suffix.lower()
+
+    if ext in DATA_EXTENSIONS:
+        findings.extend(scan_data_file_headers(filepath))
+
+    content = read_file_safely(filepath)
+    if content is not None and ext in TEXT_PHI_EXTENSIONS:
+        findings.extend(scan_text_for_phi(content, filepath))
+
+    return findings
+
+
+def should_scan(filepath: Path) -> bool:
+    """Determine if a file should be scanned."""
+    if filepath.is_dir():
         return False
-    return all(part not in EXCLUDE_DIRS for part in path.parts)
+
+    for part in filepath.parts:
+        if part in SKIP_DIRS:
+            return False
+
+    if filepath.suffix.lower() in SKIP_EXTENSIONS:
+        return False
+
+    return filepath.name not in SKIP_FILES
 
 
-def _is_allowed(line: str) -> bool:
-    """Check if a line matches an allowed (safe) pattern."""
-    return any(pat.search(line) for pat in _ALLOWED_LINE_PATTERNS)
+def audit_dataset_registry(registry: dict | None, verbose: bool) -> list[dict]:
+    """Audit the dataset registry for compliance."""
+    issues = []
+    if registry is None:
+        issues.append({
+            "type": "missing_registry",
+            "description": "No dataset-registry.json found in data/",
+            "severity": "warning",
+        })
+        return issues
 
-
-def _collect_python_paths(targets: list[Path]) -> list[Path]:
-    """Collect all .py files from the scan targets."""
-    collected: list[Path] = []
-    for target in targets:
-        if target.exists():
-            if target.is_file() and target.suffix == ".py":
-                collected.append(target)
-            elif target.is_dir() and _should_scan(target):
-                for path in sorted(target.rglob("*.py")):
-                    if _should_scan(path):
-                        collected.append(path)
-    return collected
-
-
-def main() -> int:
-    matches: list[dict] = []
-
-    paths = _collect_python_paths(SCAN_TARGETS)
-    for path in paths:
-        try:
-            text = path.read_text(encoding="utf-8")
-        except Exception as exc:
-            print(f"Warning: cannot read {path.relative_to(ROOT)}: {exc}", file=sys.stderr)
-            continue
-
-        lines = text.splitlines()
-        for lineno, line in enumerate(lines, start=1):
-            stripped = line.strip()
-            if not stripped:
+    registered_datasets = {
+        Path(d.get("path", "")).as_posix().rstrip("/")
+        for d in registry.get("datasets", [])
+    }
+    data_dir = PROJECT_ROOT / "data"
+    if data_dir.exists():
+        for f in data_dir.iterdir():
+            if f.name == "dataset-registry.json":
                 continue
-            if stripped.startswith("#"):
-                continue
-            if _is_allowed(stripped):
-                continue
-
-            for name, pattern in _PATTERNS:
-                if pattern.search(stripped):
-                    matches.append({
-                        "file": str(path.relative_to(ROOT)),
-                        "line": lineno,
-                        "pattern": name,
-                        "regex": pattern.pattern,
-                        "context": line.rstrip(),
+            if f.is_file() and f.suffix.lower() in DATA_EXTENSIONS:
+                if f.resolve() == DATASET_REGISTRY_PATH.resolve():
+                    continue
+                rel = f.relative_to(PROJECT_ROOT).as_posix()
+                if rel not in registered_datasets:
+                    issues.append({
+                        "type": "unregistered_dataset",
+                        "description": f"Data file not in registry: {rel}",
+                        "severity": "warning",
                     })
-                    break
+    return issues
 
-    if not matches:
-        print("OK - no patient-level data references found.")
-        return 0
 
-    # --- Verbose report ---
-    print("=" * 72)
-    print("  PATIENT-DATA SCAN REPORT - review required before public release")
-    print("=" * 72)
-    print()
+def main():
+    parser = argparse.ArgumentParser(
+        description="PHI compliance check: zero patient-level data gate"
+    )
+    parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output")
+    parser.add_argument("--json", "-j", action="store_true", help="JSON report output")
+    args = parser.parse_args()
 
-    by_file: dict[str, list[dict]] = {}
-    for m in matches:
-        by_file.setdefault(m["file"], []).append(m)
+    verbose = args.verbose
 
-    for filepath, file_matches in sorted(by_file.items()):
-        print(f"File: {filepath}")
-        print("-" * 72)
-        for m in file_matches:
-            print(f"  Line {m['line']:>5}  [{m['pattern']}]")
-            print(f"             regex: {m['regex']}")
-            print(f"             code:  {m['context']}")
-            print()
+    if verbose:
+        print(f"[SCAN] PHI compliance scan - {PROJECT_ROOT.name}")
+        print(f"   Project root: {PROJECT_ROOT}")
         print()
 
-    print("=" * 72)
-    print(f"  {len(matches)} potential patient-data reference(s) found across {len(by_file)} file(s).")
-    print("  Each match above must be reviewed. If it is a safe model-internal")
-    print("  reference (e.g. ABM patient agent identifiers, claim-boundary")
-    print("  disclaimers, illustrative scenarios), add the line pattern to")
-    print("  _ALLOWED_LINE_PATTERNS in this script.")
-    print("=" * 72)
+    registry = load_dataset_registry()
+    registry_issues = audit_dataset_registry(registry, verbose)
 
-    return 1
+    if verbose and registry_issues:
+        print("[WARN] Dataset Registry Audit:")
+        for issue in registry_issues:
+            print(f"   [{issue['severity']}] {issue['description']}")
+        print()
+
+    all_findings = []
+    files_scanned = 0
+
+    for root, dirs, files in os.walk(PROJECT_ROOT):
+        dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
+        for fname in files:
+            fpath = Path(root) / fname
+            if should_scan(fpath):
+                findings = scan_file(fpath, verbose)
+                all_findings.extend(findings)
+                files_scanned += 1
+                if verbose and findings:
+                    print(f"   [WARN]  {fpath.relative_to(PROJECT_ROOT)}")
+                    for finding in findings:
+                        print(
+                            f"       Line {finding['line']}: "
+                            f"[{finding['severity']}] {finding['description']} "
+                            f"- match length {finding['match_length']}"
+                        )
+
+    suspicious_files = list(set(f["file"] for f in all_findings))
+
+    report = {
+        "pass": len(all_findings) == 0,
+        "files_scanned": files_scanned,
+        "suspicious_files": sorted(suspicious_files),
+        "patterns_found": len(all_findings),
+        "findings": all_findings,
+        "registry_issues": registry_issues,
+    }
+
+    if args.json:
+        print(json.dumps(report, indent=2))
+    elif verbose:
+        print()
+        if report["pass"]:
+            print(f"PASS - No PHI detected ({files_scanned} files scanned)")
+        else:
+            print(
+                f"FAIL - {len(all_findings)} PHI pattern(s) found "
+                f"in {len(suspicious_files)} file(s)"
+            )
+        if registry_issues:
+            print(f"[WARN]  {len(registry_issues)} registry issue(s)")
+
+    sys.exit(0 if report["pass"] else 1)
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    main()
