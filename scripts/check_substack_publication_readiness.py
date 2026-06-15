@@ -269,12 +269,12 @@ def map_live_drafts_to_rows(rows: list[dict[str, object]], live_map: list[dict[s
     by_sequence = {int(item["sequence"]): int(item["draftId"]) for item in live_map if item.get("draftId") and item.get("sequence")}
     selected: dict[str, int] = {}
     for row in rows:
-      post_number = str(row.get("postNumber", "")).zfill(2)
-      row_id = str(row.get("id", ""))
-      sequence = int(row.get("sequence", 0))
-      draft_id = by_id.get(row_id) or by_sequence.get(sequence)
-      if draft_id:
-          selected[post_number] = draft_id
+        post_number = str(row.get("postNumber", "")).zfill(2)
+        row_id = str(row.get("id", ""))
+        sequence = int(row.get("sequence", 0))
+        draft_id = by_id.get(row_id) or by_sequence.get(sequence)
+        if draft_id:
+            selected[post_number] = draft_id
     return selected
 
 
