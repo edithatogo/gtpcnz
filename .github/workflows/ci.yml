@@ -98,6 +98,9 @@ jobs:
       - name: Check concern boundaries
         run: uv run python scripts/check_concern_boundaries.py
 
+      - name: PHI compliance gate
+        run: uv run python scripts/check_no_patient_data.py --verbose
+
       - name: Run tests
         run: uv run pytest -q
 
