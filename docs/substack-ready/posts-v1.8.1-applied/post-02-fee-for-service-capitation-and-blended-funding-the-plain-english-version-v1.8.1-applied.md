@@ -110,6 +110,13 @@ I would be less convinced if one payment model consistently delivered access, eq
 
 - [Interactive Streamlit dashboard and model lab](https://gtpcnz.streamlit.app/)
 - [GitHub Pages report, reading map and release model card](https://edithatogo.github.io/gtpcnz/)
+
+## Simulation plot
+
+![GTPCNZ grouped bar plot comparing access, supply generation, fiscal risk and gaming risk across funding design scenarios.](../figures/pcf-v172-sim-02-funding-comparison-plot.png)
+
+This simulation plot compares selected funding designs across access, supply, fiscal-risk and gaming-risk scores, making the trade-offs visible rather than treating payment design as a single lever.
+
 ## v1.8.1 model update
 
 The current Streamlit model release is v1.8.1. Its public aggregate validation lane is `public_aggregate_validated`, and its claim level is `empirically_supported_if_gated` for registered gates only.

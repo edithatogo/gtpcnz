@@ -21,6 +21,16 @@ def test_post_10_publication_readiness_scores_near_maximum() -> None:
     assert score.images >= 9, score.failures
 
 
+def test_last_two_posts_accept_standalone_mermaid_visual_contract() -> None:
+    rows = load_rows({"17", "18"})
+
+    for row in rows:
+        score = score_row(row)
+        assert score.series >= 45, score.failures
+        assert score.substack >= 45, score.failures
+        assert score.images >= 9, score.failures
+
+
 def test_live_score_reaches_full_points_for_current_cached_post() -> None:
     [row] = load_rows({"07"})
     live_draft = LiveDraft(

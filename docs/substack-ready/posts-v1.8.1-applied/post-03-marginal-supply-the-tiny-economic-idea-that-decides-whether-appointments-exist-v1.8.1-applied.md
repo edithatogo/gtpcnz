@@ -110,6 +110,13 @@ I would be less convinced if practices could reliably increase timely appointmen
 
 - [Interactive Streamlit dashboard and model lab](https://gtpcnz.streamlit.app/)
 - [GitHub Pages report, reading map and release model card](https://edithatogo.github.io/gtpcnz/)
+
+## Simulation plot
+
+![GTPCNZ marginal supply simulation plot showing marginal revenue, marginal cost and the viable activity band.](../figures/pcf-v172-sim-03-marginal-supply-plot.png)
+
+This simulation plot shows the toy marginal-supply logic: additional activity remains viable only while the next contact is funded above its marginal cost.
+
 ## v1.8.1 model update
 
 The current Streamlit model release is v1.8.1. Its public aggregate validation lane is `public_aggregate_validated`, and its claim level is `empirically_supported_if_gated` for registered gates only.

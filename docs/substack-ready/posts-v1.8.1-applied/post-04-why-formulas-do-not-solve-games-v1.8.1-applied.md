@@ -127,6 +127,13 @@ I would be less convinced if capitation reweighting alone materially improved ac
 
 - [Interactive Streamlit dashboard and model lab](https://gtpcnz.streamlit.app/)
 - [GitHub Pages report, reading map and release model card](https://edithatogo.github.io/gtpcnz/)
+
+## Simulation plot
+
+![GTPCNZ gaming-risk frontier plot showing access gain and residual gaming risk as control strength changes.](../figures/pcf-v172-sim-04-gaming-risk-frontier-plot.png)
+
+This simulation plot shows the teaching frontier between access gain and residual gaming risk as control strength changes. It is a behavioural-logic plot, not a measured provider-response estimate.
+
 ## v1.8.1 model update
 
 The current Streamlit model release is v1.8.1. Its public aggregate validation lane is `public_aggregate_validated`, and its claim level is `empirically_supported_if_gated` for registered gates only.
