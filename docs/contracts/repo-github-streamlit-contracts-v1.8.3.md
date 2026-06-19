@@ -14,6 +14,11 @@
 | CON-010 | REQ-031 | Claims | No linked-data calibration claim is introduced. |
 | CON-011 | REQ-032 | Claims | No patient-level forecast claim is introduced. |
 | CON-012 | REQ-040 | Public mirror | Backward-compatible aliases remain available for older public tests. |
+| CON-DASH-001 | REQ-DASH-001 | Public topology | GitHub Pages remains the canonical public front door, Hugging Face hosts the Dash interactive lab, and Streamlit remains a compatibility surface during migration. |
+| CON-DASH-002 | REQ-DASH-002 | Runtime | Dashboard service functions remain free of Streamlit and Dash imports. |
+| CON-DASH-003 | REQ-DASH-003 | User experience | Dash app exposes Start, Compare scenarios, Simulation lab, and Evidence and methods routes with caveat text, chart, table fallback and download controls. |
+| CON-PIXI-001 | REQ-PIXI-001 | Dependencies | Prefix.dev Pixi is the primary runner for the Dash/Hugging Face path while uv remains a local compatibility runner until Pixi parity gates pass. |
+| CON-PROF-001 | REQ-PROF-001 | Profiling | Simulation optimization must be justified by focused runtime tests or Scalene profiling, not by increasing public caps first. |
 
 ## Traceability Summary
 
@@ -30,3 +35,6 @@ REQ-001 through REQ-042 are governed by this public-surface contract, the MoSCoW
 - `CON-VIS-001` Chart claim grammar: every public chart includes claim, calibration, uncertainty, source, interpretation, warning, download and table fallback metadata. Gate: `models/tests/test_streamlit_cockpit_contracts.py`.
 - `CON-REL-001` Version consistency: VERSION, pyproject, app version, output manifests and model cards must agree. Gate: `python scripts/check_version_consistency.py`.
 - `CON-SELF-001` No automatic self-learning release: evidence monitoring creates review candidates only. Gate: `models/tests/test_public_evidence_monitor.py`.
+- `CON-DASH-001` Dash public surface: Dash imports, routes and required caveat text must be validated before Dash becomes primary. Gate: `python -m pytest -q models/tests/test_dashboard_service.py models/tests/test_dash_app.py`.
+- `CON-PIXI-001` Pixi runtime: Hugging Face Space bundle runs through Prefix.dev Pixi. Gate: `.github/workflows/huggingface-space.yml`.
+- `CON-PROF-001` Profiling path: simulation optimization work uses `scripts/run_scalene_profile.py`; `pytest-goblin` is not added unless a real package/source is verified.

@@ -4,6 +4,16 @@
 
 The Streamlit dashboard must be readable by a general audience and safe for policy, research and public communication. It is an explainer for a public-data anchored benchmark, not a calibrated simulator.
 
+## Migration note
+
+This v1.8.1 contract remains binding for the Streamlit compatibility surface while the future interactive dashboard moves to a Plotly Dash app on Hugging Face Spaces. The same claim boundary, wording constraints, required visuals, table fallbacks and public-data limitations apply to the Dash surface unless a later Dash-specific contract supersedes this document.
+
+The canonical public topology is:
+
+- GitHub Pages: public front door, narrative report, static documentation and release links.
+- Hugging Face Space: future interactive Dash simulation lab.
+- Streamlit: compatibility/reference surface during migration.
+
 ## Audience
 
 The primary audience is an interested public reader, journalist, policy stakeholder, clinician, public servant or reviewer who has not read the full project.
@@ -113,12 +123,16 @@ The dashboard must not:
 
 ## Deployment contract
 
-The dashboard must be deployable from Streamlit Community Cloud using:
+The Streamlit compatibility dashboard must remain deployable from Streamlit Community Cloud using:
 
 - repository: `edithatogo/gtpcnz`;
 - branch: `main`;
 - entrypoint: `streamlit_app.py`.
 
-The public URL is:
+The Streamlit compatibility URL is:
 
 <https://gtpcnz.streamlit.app/>
+
+The future interactive Dash lab is:
+
+<https://edithatogo-gtpcnz-dashboard.hf.space/>

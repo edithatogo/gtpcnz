@@ -1,6 +1,7 @@
 from pathlib import Path
 
 CANONICAL_STREAMLIT_URL = "https://gtpcnz.streamlit.app/"
+CANONICAL_HUGGINGFACE_URL = "https://edithatogo-gtpcnz-dashboard.hf.space/"
 CANONICAL_GITHUB_PAGES_URL = "https://edithatogo.github.io/gtpcnz/"
 CANONICAL_SUBSTACK_URL = "https://rareinsights.substack.com/"
 FULL_CAVEAT = (
@@ -83,6 +84,16 @@ def test_public_surfaces_include_canonical_streamlit_url_and_full_caveat():
         text = path.read_text(encoding="utf-8")
         assert CANONICAL_STREAMLIT_URL in text
 
+    for path in [
+        Path("README.md"),
+        Path("index.qmd"),
+        Path("docs/REPORTS-AND-DASHBOARD.md"),
+        Path("docs/DASH-HUGGINGFACE-DEPLOYMENT.md"),
+        Path("docs/public-site/streamlit-dashboard-contract-v1.8.1.md"),
+    ]:
+        text = path.read_text(encoding="utf-8")
+        assert CANONICAL_HUGGINGFACE_URL in text
+
     index_text = Path("index.qmd").read_text(encoding="utf-8")
     assert CANONICAL_GITHUB_PAGES_URL in Path("README.md").read_text(encoding="utf-8")
     assert CANONICAL_SUBSTACK_URL in index_text
@@ -136,6 +147,7 @@ def test_quarto_renders_model_card_and_claim_boundaries():
     assert "docs/public-site/evidence-tracker-public-v1.8.1.md" in text
     assert "docs/public-site/calibration-readiness-page-v1.8.1.md" in text
     assert "docs/public-site/site-map-and-release-manifest-v1.8.4.md" in text
+    assert "docs/DASH-HUGGINGFACE-DEPLOYMENT.md" in text
 
 
 def test_streamlit_page_does_not_render_repo_only_document_paths():

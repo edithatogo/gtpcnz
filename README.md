@@ -15,7 +15,7 @@ Substack series: https://rareinsights.substack.com/
 
 - A public-data anchored benchmark for exploring primary care funding architecture.
 - A Quarto website and reproducible report.
-- A Streamlit dashboard for the modelling and dashboard views, with links to the Substack posts.
+- A Plotly Dash interactive model lab for Hugging Face Spaces, with Streamlit retained as a compatibility surface during migration.
 - A public audit trail of assumptions, caveats, and launch materials.
 
 ## What This Is Not
@@ -37,11 +37,14 @@ Short version:
 ## Public Surfaces
 
 - Quarto website: https://edithatogo.github.io/gtpcnz/
-- Streamlit dashboard and modelling views: https://gtpcnz.streamlit.app/
+- Hugging Face interactive model lab: https://edithatogo-gtpcnz-dashboard.hf.space/
+- Streamlit compatibility dashboard and modelling views: https://gtpcnz.streamlit.app/
 - Substack series: https://rareinsights.substack.com/
 - Quarto source report: [reports/primary_care_architecture.qmd](reports/primary_care_architecture.qmd)
+- Dash app entrypoint: [dash_app/app.py](dash_app/app.py)
 - Streamlit dashboard entrypoint: [streamlit_app.py](streamlit_app.py)
 - Dashboard implementation: [models/primarycare_model/app.py](models/primarycare_model/app.py)
+- Framework-neutral dashboard service: [models/primarycare_model/dashboard_service.py](models/primarycare_model/dashboard_service.py)
 - Current release model card: [docs/release/model-card-v1.8.1.md](docs/release/model-card-v1.8.1.md)
 - Historical v1.7.2 model card: [docs/calibration/model-card-v1.7.2.md](docs/calibration/model-card-v1.7.2.md)
 - Claim boundaries: [docs/launch/claim-boundaries-v1.7.2.md](docs/launch/claim-boundaries-v1.7.2.md)
@@ -89,9 +92,27 @@ Run the Streamlit dashboard:
 uv run streamlit run streamlit_app.py
 ```
 
+Run the Dash model lab:
+
+```bash
+pixi run dash
+```
+
+If the local `pixi` executable is not Prefix.dev Pixi, use the existing uv environment for local checks until the correct Pixi binary is installed:
+
+```bash
+uv run python -m dash_app.app
+```
+
 ## Deploy
 
-GitHub Pages is deployed from `.github/workflows/pages.yml`.
+GitHub Pages is deployed from `.github/workflows/pages.yml` and remains the public front door.
+
+The Hugging Face Dash Space is deployed from `.github/workflows/huggingface-space.yml` to:
+
+- Space: `edithatogo/gtpcnz-dashboard`
+- URL: https://edithatogo-gtpcnz-dashboard.hf.space/
+- Runtime: Prefix.dev Pixi via Docker
 
 Streamlit Community Cloud can deploy this app with:
 

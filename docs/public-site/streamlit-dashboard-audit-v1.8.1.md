@@ -6,6 +6,8 @@ Status: pass.
 
 The Streamlit dashboard satisfies the v1.8.1 content and presentation contract after the current-state, diagram, table and explanation updates.
 
+Migration status: pass for Streamlit compatibility. The future interactive surface is being implemented as a Plotly Dash app on Hugging Face Spaces; this audit remains the compatibility/reference baseline until the Dash parity gates replace it.
+
 ## Evidence matrix
 
 | Contract requirement | Implementation evidence | Status |
@@ -36,6 +38,7 @@ The Streamlit dashboard satisfies the v1.8.1 content and presentation contract a
 | Outputs are described as model-generated indices, not observed outcomes | Reference chart captions and glossary | Pass |
 | No deprecated Streamlit `use_container_width` usage in app | Regression test asserts absence | Pass |
 | Public Streamlit URL is documented | README, index, dashboard docs and deployment docs | Pass |
+| Dash/Hugging Face migration is documented without deleting Streamlit compatibility | README, index, dashboard docs and Dash deployment guide | Pass |
 
 ## Validation evidence
 
@@ -51,3 +54,8 @@ Remote validation after push:
 - Publish Quarto site: success.
 - GitHub Pages: HTTP 200.
 - Streamlit app URL: HTTP 200.
+
+Dash migration validation after implementation:
+
+- Focused Dash app and service-layer tests must pass before Dash becomes the primary interactive URL.
+- Hugging Face Space build success is required before Streamlit is deprecated.

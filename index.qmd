@@ -3,9 +3,11 @@ title: "GTPCNZ"
 subtitle: "Model, dashboard, and Substack reading path"
 ---
 
-GTPCNZ is a public-facing reporting layer for the primary care funding architecture model. It translates the model into a readable website, reproducible Quarto report, and Streamlit surface that focuses on the modelling and dashboard views, then links to the Substack posts.
+GTPCNZ is a public-facing reporting layer for the primary care funding architecture model. It translates the model into a readable website, reproducible Quarto report, Hugging Face Dash model lab, and Streamlit compatibility surface that focuses on the modelling and dashboard views, then links to the Substack posts.
 
-Streamlit dashboard: https://gtpcnz.streamlit.app/
+Hugging Face interactive lab: https://edithatogo-gtpcnz-dashboard.hf.space/
+
+Streamlit compatibility dashboard: https://gtpcnz.streamlit.app/
 
 Substack series: https://rareinsights.substack.com/
 
@@ -18,7 +20,8 @@ Aggregate validation status: `public_aggregate_validated` for registered public 
 ### GTPCNZ visual gallery
 
 - [Read the public report](reports/primary_care_architecture.qmd)
-- [Open the dashboard](https://gtpcnz.streamlit.app/)
+- [Open the dashboard](https://edithatogo-gtpcnz-dashboard.hf.space/) on the Hugging Face model lab
+- [Open the Streamlit compatibility dashboard](https://gtpcnz.streamlit.app/)
 - [Read the Substack series](https://rareinsights.substack.com/)
 - [Read the dashboard guide](docs/REPORTS-AND-DASHBOARD.md)
 - [Review the release model card and tracker](docs/release/model-card-v1.8.1.md)
@@ -26,7 +29,9 @@ Aggregate validation status: `public_aggregate_validated` for registered public 
 
 <a href="reports/primary_care_architecture.qmd">Read the public report</a>
 
-<a href="https://gtpcnz.streamlit.app/">Open the dashboard</a>
+<a href="https://edithatogo-gtpcnz-dashboard.hf.space/">Open the Hugging Face model lab</a>
+
+<a href="https://gtpcnz.streamlit.app/">Open the Streamlit compatibility dashboard</a>
 
 <a href="https://rareinsights.substack.com/">Read the Substack series</a>
 
@@ -35,7 +40,8 @@ Aggregate validation status: `public_aggregate_validated` for registered public 
 | Surface | Status | Purpose |
 |---|---|---|
 | Public report | Model-generated index | Argument map and thesis, Current reform pathway, Scenario rank chart |
-| Streamlit dashboard | Educational explainer | Dynamic educational explainer and live model lab |
+| Hugging Face Dash lab | Educational explainer | Dynamic educational explainer and live model lab |
+| Streamlit dashboard | Compatibility surface | Legacy dynamic educational explainer and live model lab during migration |
 | Model card and tracker | Public aggregate validation, claim-gated | Generated release model card, evidence tracker and claim-boundary controls |
 | Calibration readiness page | Calibration readiness | Data gaps and validation pathway |
 | Site map and release manifest | Canonical index | Public site inventory and release rules |
@@ -102,7 +108,13 @@ Render the website:
 quarto render
 ```
 
-Run the dashboard:
+Run the Dash model lab:
+
+```bash
+pixi run dash
+```
+
+Run the Streamlit compatibility dashboard:
 
 ```bash
 streamlit run models/primarycare_model/app.py

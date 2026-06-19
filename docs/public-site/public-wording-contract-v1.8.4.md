@@ -33,3 +33,9 @@ Uncapped does not mean uncontrolled. It means scheduled, rules-based, audited, c
 - Start with F0 as the baseline.
 - Treat scenario tables as model-generated indices.
 - Treat the labs as educational teaching simulations only.
+
+## 6. Public Surfaces
+
+- GitHub Pages is the canonical public front door.
+- Hugging Face Spaces hosts the future interactive Dash model lab.
+- Streamlit is retained as a compatibility surface during the Dash migration.
