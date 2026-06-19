@@ -66,6 +66,12 @@ Track 074 is complete for aggregate validation claim-surface review:
 
 - `074-aggregate-validation-claim-surface-review`: UI/report-card defaults, README, model-card pointers, calibration docs, and release-surface tests now expose `public_aggregate_validated` / `empirically_supported_if_gated` for the registered aggregate lane while preserving not-valid-for warnings for precise fiscal, ED, hospital-demand, workforce, implementation-impact, and causal claims.
 
+Tracks 075-077 are open for the public dashboard migration:
+
+- `075-dash-huggingface-public-surface`: in progress. Adds a framework-neutral dashboard service layer and Plotly Dash app for a Hugging Face Space while keeping GitHub Pages as the public front door and Streamlit as a compatibility surface.
+- `076-simulation-optimization-profiling`: in progress. Profiles and optimizes Streamlit-free runtime calculations with Scalene-backed evidence and deterministic test gates before any cap changes. Baseline runtime exerciser has been run locally.
+- `077-pixi-reproducible-dashboard-runtime`: in progress. Adds Prefix.dev Pixi workspace/tasks and makes the new Dash/Hugging Face path Pixi-first. Local `pixi` currently resolves to a Pixiv downloader, but `pixi.lock` has been generated with a verified Prefix.dev Pixi 0.66.0 binary invoked by absolute path.
+
 Next implementation frontier:
 
 - Public source acquisition evidence is recorded in `docs/model/public-source-calibration-evidence-v1.md`.

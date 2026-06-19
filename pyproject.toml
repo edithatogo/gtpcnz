@@ -15,7 +15,10 @@ dependencies = [
     "scikit-learn",
     "jupyter",
     "pyyaml",
-    "pydantic>=2,<3"
+    "pydantic>=2,<3",
+    "dash>=3,<4",
+    "gunicorn>=23,<24",
+    "orjson>=3,<4",
 ]
 
 [project.optional-dependencies]
@@ -57,6 +60,27 @@ edge = [
 
 [tool.uv]
 package = false
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["linux-64", "win-64"]
+
+[tool.pixi.environments]
+default = { features = [], solve-group = "default" }
+dev = { features = ["dev"], solve-group = "default" }
+edge = { features = ["edge"], solve-group = "default" }
+
+[tool.pixi.dependencies]
+python = ">=3.11,<3.12"
+
+[tool.pixi.tasks]
+dash = "python -m dash_app.app"
+dash-prod = "gunicorn dash_app.app:server --bind 0.0.0.0:7860 --workers 2 --threads 4 --timeout 120"
+test-dash = "python -m pytest -q models/tests/test_dashboard_service.py models/tests/test_dash_app.py"
+test-runtime = "python -m pytest -q models/tests/test_runtime_lab.py models/tests/test_scenario_service.py models/tests/test_dashboard_claims.py"
+test-public-gates = "python scripts/check_public_only_boundary.py && python scripts/check_concern_boundaries.py && python scripts/run_accessibility_audit.py --check-only"
+profile-scalene = "python scripts/run_scalene_profile.py"
+profile-dashboard = "python scripts/run_scalene_profile.py && python -m pytest -q models/tests/test_dashboard_service.py models/tests/test_dash_app.py"
 
 [tool.pytest.ini_options]
 pythonpath = ["models"]

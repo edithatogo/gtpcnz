@@ -84,6 +84,9 @@
 | 072 | PHO Services Agreement bounded table extraction | Complete with extraction blocker | Re-fetched the public URL, detected HTML content under the expected PDF filename, wrote a deterministic extraction-blocker artifact, and kept PHO Services Agreement evidence reference-only. |
 | 073 | Independent public validation source expansion | Complete for candidate registry | Added a typed public validation-source candidate registry, registered the Ministry planning/performance source as a retrieval-plan candidate, kept HQSC Atlas pending locator review, and rejected NZHS regional release for independent-validation counting where it overlaps existing NZHS calibration evidence. |
 | 074 | Aggregate validation claim-surface review | Complete for claim-surface review | Updated UI/report-card defaults, README, model-card pointers, calibration docs, and tests so aggregate validation is visible while precision and causal warnings remain in force. |
+| 075 | Dash Hugging Face public surface | In progress | New Plotly Dash interactive lab for Hugging Face Spaces while GitHub Pages remains the public front door and Streamlit remains a compatibility surface. |
+| 076 | Simulation optimization and profiling | In progress | Profile and optimize Streamlit-free runtime calculations with Scalene-backed evidence while preserving deterministic seeds, public caps, and claim boundaries. |
+| 077 | Pixi reproducible dashboard runtime | In progress | Add Prefix.dev Pixi tasks and deployment posture for the Dash/Hugging Face path while keeping existing uv compatibility until Pixi parity gates pass. |
 
 ## Current priority
 

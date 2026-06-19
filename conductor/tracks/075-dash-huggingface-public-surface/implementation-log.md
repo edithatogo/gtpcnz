@@ -1,0 +1,21 @@
+# Implementation Log
+
+- Track opened for the GitHub Pages plus Hugging Face dashboard migration.
+- Added `models/primarycare_model/dashboard_service.py` as the framework-neutral public payload layer.
+- Added `dash_app/app.py` and `dash_app/assets/styles.css` with Start, Compare scenarios, Simulation lab, and Evidence and methods routes.
+- Added Hugging Face Space files under `dash_app/`.
+- Added focused tests in `models/tests/test_dashboard_service.py` and `models/tests/test_dash_app.py`.
+- Fixed Hugging Face Space README metadata to use valid color values and an actual emoji.
+- Created the public Docker Space `edithatogo/gtpcnz-dashboard` on free `cpu-basic`.
+- Uploaded the minimal Dash/HF bundle to Hugging Face; initial live commit `938a4107d56041ded0a4331028ca5fb9505d12f2`.
+- Re-uploaded the Space bundle after making the Docker build lockfile-aware; final live commit `14789d30e9fa58338a7d8acc37a67bd6f036bcc9`.
+- Verified the live Space at `https://edithatogo-gtpcnz-dashboard.hf.space/` returns `200 OK` through `gunicorn`.
+- Verified the Hugging Face Space API reports `runtime.stage = RUNNING`, `hardware.current = cpu-basic`, and runtime SHA `14789d30e9fa58338a7d8acc37a67bd6f036bcc9`.
+- Ran a remote browser smoke against Start, Compare scenarios, and Simulation lab; caveat text, table fallback, run control, and CSV controls were visible.
+- Re-ran the remote browser smoke against final runtime SHA `14789d30e9fa58338a7d8acc37a67bd6f036bcc9`; all checks passed.
+- Tightened the Space bundle workflow to validate with focused tests and then remove validation-only tests, Python caches, and Streamlit-only compatibility entrypoints before deployment.
+- Pushed a git-backed Hugging Face Space cleanup commit `a3df917fa4480ca410db1f6de19a4fb749c804c4` after the upload helper left stale tracked files; remote Space siblings no longer include `models/tests`, `__pycache__`, `models/primarycare_model/app.py`, or `models/primarycare_model/pages`.
+- Verified the trimmed Space runtime reports `RUNNING` on SHA `a3df917fa4480ca410db1f6de19a4fb749c804c4`, returns `200 OK` through `gunicorn`, and passes the live browser smoke for Start, Compare scenarios, Simulation lab, table fallbacks, and CSV controls.
+- Streamlit remains a compatibility surface until Dash parity and deployment gates pass.
+- Configured the `HF_TOKEN` GitHub Actions secret for `edithatogo/gtpcnz`; `gh secret list --repo edithatogo/gtpcnz` reports `HF_TOKEN` updated on 2026-06-19T03:40:54Z.
+- Automatic GitHub-to-Hugging-Face deployment is ready once `.github/workflows/huggingface-space.yml` is merged to `main`.

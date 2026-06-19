@@ -5,6 +5,7 @@ project:
     - index.qmd
     - reports/primary_care_architecture.qmd
     - docs/REPORTS-AND-DASHBOARD.md
+    - docs/DASH-HUGGINGFACE-DEPLOYMENT.md
     - docs/STREAMLIT-DEPLOYMENT.md
     - docs/public-site/model-dashboard-hardening-spec-v1.8.1.md
     - docs/public-site/streamlit-dashboard-contract-v1.8.1.md
@@ -41,6 +42,8 @@ website:
         href: reports/primary_care_architecture.qmd
       - text: "Dashboard"
         href: docs/REPORTS-AND-DASHBOARD.md
+      - text: "Dash/HF deploy"
+        href: docs/DASH-HUGGINGFACE-DEPLOYMENT.md
       - text: "Model card"
         href: docs/release/model-card-v1.8.1.md
       - text: "Claim boundaries"

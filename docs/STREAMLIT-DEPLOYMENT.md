@@ -4,7 +4,7 @@ Canonical Streamlit URL: https://gtpcnz.streamlit.app/
 
 This is a public-data anchored benchmark and educational explainer. It is not linked-data calibrated and not a patient-level forecast. The dashboard surfaces the modelling views and links out to the Substack post sequence. It should not be used to claim precise fiscal savings, hospital-demand reductions, workforce effects, or implementation impacts.
 
-GTPCNZ is prepared for Streamlit Community Cloud.
+GTPCNZ remains prepared for Streamlit Community Cloud as a compatibility surface. The future interactive dashboard target is the Dash Hugging Face Space documented in `docs/DASH-HUGGINGFACE-DEPLOYMENT.md`.
 
 ## Entrypoint
 
