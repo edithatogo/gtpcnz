@@ -98,18 +98,17 @@ jobs:
             clone_delay=$((clone_delay * 2))
           done
 
-          rsync -a --delete hf-space/ hf-remote/
-          cd hf-remote
-          git add .
-          if git diff --cached --quiet; then
+          rsync -a --delete --exclude ".git" hf-space/ hf-remote/
+          git -C hf-remote add -A
+          if git -C hf-remote diff --cached --quiet; then
             echo "No Hugging Face Space changes to deploy."
             exit 0
           fi
-          git commit -m "Deploy GTPCNZ Dash Space from ${GITHUB_SHA}"
+          git -C hf-remote commit -m "Deploy GTPCNZ Dash Space from ${GITHUB_SHA}"
 
           push_delay=30
           for attempt in 1 2 3 4 5; do
-            if git push; then
+            if git -C hf-remote push; then
               exit 0
             fi
             if [ "${attempt}" -eq 5 ]; then
@@ -117,7 +116,7 @@ jobs:
               exit 128
             fi
             echo "Hugging Face Space push failed on attempt ${attempt}; retrying in ${push_delay}s."
-            git pull --rebase || true
+            git -C hf-remote pull --rebase || true
             sleep "${push_delay}"
             push_delay=$((push_delay * 2))
           done
