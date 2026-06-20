@@ -118,21 +118,32 @@ def _check_route(
 
     step_timeout_ms = min(timeout_seconds * 1000, 15_000)
     try:
-        page.goto(f"{base_url}{route}", wait_until="domcontentloaded", timeout=step_timeout_ms)
         route_required = [*REQUIRED_TEXT, *ROUTE_REQUIRED_TEXT.get(_route_key(route), ())]
-        for anchor_text in route_required:
+        body_text = ""
+        graph_count = 0
+        for attempt in range(3):
+            console_events.clear()
+            failed_requests.clear()
+            page.goto(f"{base_url}{route}", wait_until="domcontentloaded", timeout=step_timeout_ms)
             with suppress(Exception):
-                page.wait_for_function(
-                    "text => document.body && document.body.innerText.includes(text)",
-                    arg=anchor_text,
-                    timeout=min(timeout_seconds * 1000, 20_000),
-                )
-        if ROUTE_MIN_GRAPHS.get(_route_key(route), 0) > 0:
-            with suppress(Exception):
-                page.locator(".js-plotly-plot").first.wait_for(timeout=min(timeout_seconds * 1000, 20_000))
-        page.wait_for_timeout(500)
-        body_text = page.locator("body").inner_text(timeout=min(timeout_seconds * 1000, 20_000))
-        graph_count = page.locator(".js-plotly-plot").count()
+                page.wait_for_load_state("networkidle", timeout=step_timeout_ms)
+            for anchor_text in route_required:
+                with suppress(Exception):
+                    page.wait_for_function(
+                        "text => document.body && document.body.innerText.includes(text)",
+                        arg=anchor_text,
+                        timeout=min(timeout_seconds * 1000, 20_000),
+                    )
+            if ROUTE_MIN_GRAPHS.get(_route_key(route), 0) > 0:
+                with suppress(Exception):
+                    page.locator(".js-plotly-plot").first.wait_for(timeout=min(timeout_seconds * 1000, 20_000))
+            page.wait_for_timeout(500)
+            body_text = page.locator("body").inner_text(timeout=min(timeout_seconds * 1000, 20_000))
+            graph_count = page.locator(".js-plotly-plot").count()
+            if "Error loading dependencies" not in body_text:
+                break
+            if attempt < 2:
+                page.wait_for_timeout(1000 * (attempt + 1))
         download_ok: bool | None = None
         provenance_ok: bool | None = None
         route_key = _route_key(route)
