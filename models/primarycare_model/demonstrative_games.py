@@ -28,6 +28,19 @@ def sigmoid(value: float) -> float:
     return 1.0 / (1.0 + math.exp(-value))
 
 
+def response_curve(value: float, threshold: float = 0.5, steepness: float = 6.0) -> float:
+    """Bounded strategic response with a threshold/tipping-point shape."""
+
+    return sigmoid(steepness * (value - threshold))
+
+
+def diminishing_return(value: float, rate: float = 2.4) -> float:
+    """Return a 0..1 saturating response for bounded policy levers."""
+
+    bounded = clip(value, 0.0, 1.0)
+    return (1.0 - math.exp(-rate * bounded)) / (1.0 - math.exp(-rate))
+
+
 @dataclass(frozen=True)
 class Scenario:
     """Normalised scenario inputs for demonstrative game models."""
@@ -277,26 +290,33 @@ def _outcome(
 
 
 def model_g1_hospital_salience(s: Scenario) -> GameOutcome:
-    upstream_salience = 0.45 * s.primary_kpi_salience + 0.25 * s.ambulance_kpi_salience + 0.30 * s.data_observability
-    rescue_bias = s.hospital_political_penalty * (1 - 0.65 * upstream_salience)
-    access = 22 + 30 * s.marginal_contact_benefit + 18 * s.primary_kpi_salience + 10 * s.ambulance_kpi_salience
-    viability = 35 + 30 * s.marginal_contact_benefit - 15 * s.budget_tightness + 10 * upstream_salience
-    equity = 35 + 25 * s.equity_program_strength + 20 * s.copayment_protections + 10 * upstream_salience
-    fiscal = 82 - 30 * s.marginal_contact_benefit - 10 * (1 - s.gaming_controls) + 12 * s.data_observability
-    hospital = 35 + 45 * rescue_bias + 15 * (1 - upstream_salience) - 25 * s.marginal_contact_benefit
-    gaming = 12 + 25 * s.marginal_contact_benefit * (1 - s.gaming_controls) + 10 * (1 - s.data_observability)
+    upstream_salience = response_curve(
+        0.45 * s.primary_kpi_salience + 0.25 * s.ambulance_kpi_salience + 0.30 * s.data_observability,
+        0.48,
+        7.0,
+    )
+    marginal_supply = diminishing_return(s.marginal_contact_benefit)
+    rescue_bias = s.hospital_political_penalty * (1 - 0.70 * upstream_salience) ** 1.25
+    access = 22 + 30 * marginal_supply + 18 * upstream_salience + 10 * response_curve(s.ambulance_kpi_salience, 0.50, 5.0)
+    viability = 35 + 30 * marginal_supply - 15 * s.budget_tightness**1.2 + 10 * upstream_salience
+    equity = 35 + 25 * diminishing_return(s.equity_program_strength) + 20 * diminishing_return(s.copayment_protections) + 10 * upstream_salience
+    fiscal = 82 - 30 * marginal_supply - 10 * (1 - s.gaming_controls) ** 1.2 + 12 * diminishing_return(s.data_observability)
+    hospital = 35 + 45 * rescue_bias + 15 * (1 - upstream_salience) ** 1.2 - 25 * marginal_supply
+    gaming = 12 + 25 * marginal_supply * (1 - s.gaming_controls) ** 1.3 + 10 * (1 - s.data_observability) ** 1.2
     label = "hospital-rescue equilibrium" if rescue_bias > 0.55 else "upstream-salience equilibrium"
     return _outcome("G1", "Hospital-salience budget game", s, access, viability, equity, fiscal, hospital, gaming, label, "Hospital rescue bias falls only when upstream access becomes visible, funded and politically salient.")
 
 
 def model_g2_hnz_allocation(s: Scenario) -> GameOutcome:
-    upstream_attention = clip(100 * (0.18 + 0.28 * s.primary_kpi_salience + 0.20 * s.ambulance_kpi_salience + 0.22 * s.data_observability - 0.18 * s.hospital_political_penalty), 0, 100) / 100
-    access = 20 + 50 * upstream_attention + 18 * s.marginal_contact_benefit
-    viability = 30 + 35 * s.marginal_contact_benefit + 15 * s.direct_claiming - 20 * s.budget_tightness
-    equity = 32 + 30 * s.equity_program_strength + 18 * upstream_attention
-    fiscal = 75 - 20 * s.marginal_contact_benefit + 12 * s.data_observability + 10 * s.gaming_controls
-    hospital = 80 - 38 * upstream_attention - 18 * s.marginal_contact_benefit - 10 * s.ambulance_alternative_funding
-    gaming = 20 + 12 * (1 - s.data_observability) + 18 * s.primary_kpi_salience * (1 - s.gaming_controls)
+    attention_signal = 0.18 + 0.28 * s.primary_kpi_salience + 0.20 * s.ambulance_kpi_salience + 0.22 * s.data_observability - 0.18 * s.hospital_political_penalty
+    upstream_attention = response_curve(attention_signal, 0.38, 7.5)
+    marginal_supply = diminishing_return(s.marginal_contact_benefit)
+    access = 20 + 50 * upstream_attention + 18 * marginal_supply
+    viability = 30 + 35 * marginal_supply + 15 * diminishing_return(s.direct_claiming) - 20 * s.budget_tightness**1.2
+    equity = 32 + 30 * diminishing_return(s.equity_program_strength) + 18 * upstream_attention
+    fiscal = 75 - 20 * marginal_supply + 12 * diminishing_return(s.data_observability) + 10 * diminishing_return(s.gaming_controls)
+    hospital = 80 - 38 * upstream_attention - 18 * marginal_supply - 10 * diminishing_return(s.ambulance_alternative_funding)
+    gaming = 20 + 12 * (1 - s.data_observability) ** 1.2 + 18 * response_curve(s.primary_kpi_salience * (1 - s.gaming_controls), 0.22, 8.0)
     label = "hospital-operations dominance" if upstream_attention < 0.45 else "balanced internal accountability"
     return _outcome("G2", "Health NZ internal allocation game", s, access, viability, equity, fiscal, hospital, gaming, label, "Management attention shifts upstream when primary and ambulance outcomes have hospital-equivalent salience.")
 
