@@ -1,0 +1,131 @@
+{
+  "createdAt": "2026-06-16T12:36:35.502275+00:00",
+  "backupDir": ".tmp\\sim-plot-backup-20260616T123630Z",
+  "scoringMethod": "100 minus penalties for text-like dark pixel density, low whitespace, small canvas/aspect, and excessive connected components. This is a publication-readability heuristic, not an OCR model.",
+  "threshold": 95,
+  "before": [
+    {
+      "filename": "pcf-v172-sim-01-supply-pressure-plot.png",
+      "width": 2045,
+      "height": 1257,
+      "score": 100.0,
+      "text_density_penalty": 0.0,
+      "whitespace_penalty": 0.0,
+      "aspect_penalty": 0.0,
+      "component_penalty": 0.0
+    },
+    {
+      "filename": "pcf-v172-sim-02-funding-comparison-plot.png",
+      "width": 2086,
+      "height": 1362,
+      "score": 100.0,
+      "text_density_penalty": 0.0,
+      "whitespace_penalty": 0.0,
+      "aspect_penalty": 0.0,
+      "component_penalty": 0.0
+    },
+    {
+      "filename": "pcf-v172-sim-03-marginal-supply-plot.png",
+      "width": 2115,
+      "height": 1362,
+      "score": 100.0,
+      "text_density_penalty": 0.0,
+      "whitespace_penalty": 0.0,
+      "aspect_penalty": 0.0,
+      "component_penalty": 0.0
+    },
+    {
+      "filename": "pcf-v172-sim-04-gaming-risk-frontier-plot.png",
+      "width": 2159,
+      "height": 1287,
+      "score": 100.0,
+      "text_density_penalty": 0.0,
+      "whitespace_penalty": 0.0,
+      "aspect_penalty": 0.0,
+      "component_penalty": 0.0
+    },
+    {
+      "filename": "pcf-v172-sim-05-current-vs-hybrid-plot.png",
+      "width": 2219,
+      "height": 1362,
+      "score": 100.0,
+      "text_density_penalty": 0.0,
+      "whitespace_penalty": 0.0,
+      "aspect_penalty": 0.0,
+      "component_penalty": 0.0
+    },
+    {
+      "filename": "pcf-v172-sim-06-payment-control-plot.png",
+      "width": 2115,
+      "height": 1362,
+      "score": 100.0,
+      "text_density_penalty": 0.0,
+      "whitespace_penalty": 0.0,
+      "aspect_penalty": 0.0,
+      "component_penalty": 0.0
+    }
+  ],
+  "after": [
+    {
+      "filename": "pcf-v172-sim-01-supply-pressure-plot.png",
+      "width": 2045,
+      "height": 1256,
+      "score": 100.0,
+      "text_density_penalty": 0.0,
+      "whitespace_penalty": 0.0,
+      "aspect_penalty": 0.0,
+      "component_penalty": 0.0
+    },
+    {
+      "filename": "pcf-v172-sim-02-funding-comparison-plot.png",
+      "width": 2086,
+      "height": 1362,
+      "score": 100.0,
+      "text_density_penalty": 0.0,
+      "whitespace_penalty": 0.0,
+      "aspect_penalty": 0.0,
+      "component_penalty": 0.0
+    },
+    {
+      "filename": "pcf-v172-sim-03-marginal-supply-plot.png",
+      "width": 2115,
+      "height": 1362,
+      "score": 100.0,
+      "text_density_penalty": 0.0,
+      "whitespace_penalty": 0.0,
+      "aspect_penalty": 0.0,
+      "component_penalty": 0.0
+    },
+    {
+      "filename": "pcf-v172-sim-04-gaming-risk-frontier-plot.png",
+      "width": 2159,
+      "height": 1286,
+      "score": 100.0,
+      "text_density_penalty": 0.0,
+      "whitespace_penalty": 0.0,
+      "aspect_penalty": 0.0,
+      "component_penalty": 0.0
+    },
+    {
+      "filename": "pcf-v172-sim-05-current-vs-hybrid-plot.png",
+      "width": 2219,
+      "height": 1362,
+      "score": 100.0,
+      "text_density_penalty": 0.0,
+      "whitespace_penalty": 0.0,
+      "aspect_penalty": 0.0,
+      "component_penalty": 0.0
+    },
+    {
+      "filename": "pcf-v172-sim-06-payment-control-plot.png",
+      "width": 2115,
+      "height": 1362,
+      "score": 100.0,
+      "text_density_penalty": 0.0,
+      "whitespace_penalty": 0.0,
+      "aspect_penalty": 0.0,
+      "component_penalty": 0.0
+    }
+  ],
+  "passed": true
+}
