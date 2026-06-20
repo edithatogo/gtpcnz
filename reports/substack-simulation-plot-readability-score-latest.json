@@ -1,0 +1,167 @@
+{
+  "createdAt": "2026-06-20T10:24:51.071426+00:00",
+  "scale": "0-100; target is >=95",
+  "method": "Publication readability heuristic. It penalises small canvases, long/tall layouts, dense title/footer bands, edge-heavy text-like regions, and busy connected components. It is deliberately stricter than the generation guard and should be read alongside visual inspection.",
+  "backupDir": ".tmp\\sim-plot-backup-20260616T122722Z",
+  "before": [
+    {
+      "filename": "pcf-v172-sim-01-supply-pressure-plot.png",
+      "width": 1633,
+      "height": 941,
+      "score": 61.7,
+      "penalties": {
+        "canvas": 15.6,
+        "textDensity": 4.2,
+        "titleFooterBands": 16.1,
+        "busyComponents": 2.4,
+        "aspect": 0.0
+      }
+    },
+    {
+      "filename": "pcf-v172-sim-02-funding-comparison-plot.png",
+      "width": 1619,
+      "height": 941,
+      "score": 60.8,
+      "penalties": {
+        "canvas": 16.0,
+        "textDensity": 7.9,
+        "titleFooterBands": 15.3,
+        "busyComponents": 0.0,
+        "aspect": 0.0
+      }
+    },
+    {
+      "filename": "pcf-v172-sim-03-marginal-supply-plot.png",
+      "width": 1602,
+      "height": 941,
+      "score": 54.8,
+      "penalties": {
+        "canvas": 16.5,
+        "textDensity": 9.5,
+        "titleFooterBands": 16.2,
+        "busyComponents": 3.0,
+        "aspect": 0.0
+      }
+    },
+    {
+      "filename": "pcf-v172-sim-04-gaming-risk-frontier-plot.png",
+      "width": 1533,
+      "height": 941,
+      "score": 54.6,
+      "penalties": {
+        "canvas": 18.5,
+        "textDensity": 9.0,
+        "titleFooterBands": 13.9,
+        "busyComponents": 4.0,
+        "aspect": 0.0
+      }
+    },
+    {
+      "filename": "pcf-v172-sim-05-current-vs-hybrid-plot.png",
+      "width": 1636,
+      "height": 941,
+      "score": 52.7,
+      "penalties": {
+        "canvas": 15.5,
+        "textDensity": 8.1,
+        "titleFooterBands": 21.6,
+        "busyComponents": 2.2,
+        "aspect": 0.0
+      }
+    },
+    {
+      "filename": "pcf-v172-sim-06-payment-control-plot.png",
+      "width": 1637,
+      "height": 941,
+      "score": 60.6,
+      "penalties": {
+        "canvas": 15.5,
+        "textDensity": 6.8,
+        "titleFooterBands": 16.1,
+        "busyComponents": 1.1,
+        "aspect": 0.0
+      }
+    }
+  ],
+  "after": [
+    {
+      "filename": "pcf-v172-sim-01-supply-pressure-plot.png",
+      "width": 2045,
+      "height": 1256,
+      "score": 100.0,
+      "penalties": {
+        "canvas": 0.0,
+        "textDensity": 0.0,
+        "titleFooterBands": 0.0,
+        "busyComponents": 0.0,
+        "aspect": 0.0
+      }
+    },
+    {
+      "filename": "pcf-v172-sim-02-funding-comparison-plot.png",
+      "width": 2086,
+      "height": 1362,
+      "score": 98.5,
+      "penalties": {
+        "canvas": 0.0,
+        "textDensity": 0.0,
+        "titleFooterBands": 1.5,
+        "busyComponents": 0.0,
+        "aspect": 0.0
+      }
+    },
+    {
+      "filename": "pcf-v172-sim-03-marginal-supply-plot.png",
+      "width": 2115,
+      "height": 1362,
+      "score": 96.9,
+      "penalties": {
+        "canvas": 0.0,
+        "textDensity": 0.0,
+        "titleFooterBands": 2.1,
+        "busyComponents": 1.0,
+        "aspect": 0.0
+      }
+    },
+    {
+      "filename": "pcf-v172-sim-04-gaming-risk-frontier-plot.png",
+      "width": 2159,
+      "height": 1286,
+      "score": 96.0,
+      "penalties": {
+        "canvas": 0.0,
+        "textDensity": 0.0,
+        "titleFooterBands": 0.0,
+        "busyComponents": 4.0,
+        "aspect": 0.0
+      }
+    },
+    {
+      "filename": "pcf-v172-sim-05-current-vs-hybrid-plot.png",
+      "width": 2219,
+      "height": 1362,
+      "score": 100.0,
+      "penalties": {
+        "canvas": 0.0,
+        "textDensity": 0.0,
+        "titleFooterBands": 0.0,
+        "busyComponents": 0.0,
+        "aspect": 0.0
+      }
+    },
+    {
+      "filename": "pcf-v172-sim-06-payment-control-plot.png",
+      "width": 2115,
+      "height": 1362,
+      "score": 98.2,
+      "penalties": {
+        "canvas": 0.0,
+        "textDensity": 0.0,
+        "titleFooterBands": 1.7,
+        "busyComponents": 0.2,
+        "aspect": 0.0
+      }
+    }
+  ],
+  "passed": true
+}

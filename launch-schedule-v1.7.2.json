@@ -416,5 +416,93 @@
     "diagram": "",
     "publicationStatus": "ready",
     "scheduledAt": "2026-07-09 15:00 Australia/Sydney"
+  },
+  {
+    "sequence": 20,
+    "id": "primary-care-funding-architecture-19",
+    "series": "primary-care-funding-architecture",
+    "seriesName": "Primary Care Funding Architecture",
+    "seriesOrder": 19,
+    "postNumber": "19",
+    "title": "GTPCNZ model results: start with the architecture",
+    "subtitle": "The model is not a forecast. It is a way of making the primary care funding architecture visible.",
+    "slug": "gtpcnz-model-results-start-here",
+    "tags": [
+      "primary care",
+      "funding",
+      "health policy",
+      "Rare Insights"
+    ],
+    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.8.1-applied/post-19-gtpcnz-model-results-start-here-v1.8.1-applied.md",
+    "heroImage": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/pcf-v172-sim-01-supply-pressure-plot.png",
+    "diagram": "",
+    "publicationStatus": "ready",
+    "scheduledAt": "2026-07-13 15:00 Australia/Sydney"
+  },
+  {
+    "sequence": 21,
+    "id": "primary-care-funding-architecture-20",
+    "series": "primary-care-funding-architecture",
+    "seriesName": "Primary Care Funding Architecture",
+    "seriesOrder": 20,
+    "postNumber": "20",
+    "title": "GTPCNZ model results: supply, pressure and the next appointment",
+    "subtitle": "The model shows why downstream pressure is tied to whether the next unit of upstream care is viable.",
+    "slug": "gtpcnz-supply-pressure-and-marginal-care",
+    "tags": [
+      "primary care",
+      "funding",
+      "health policy",
+      "Rare Insights"
+    ],
+    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.8.1-applied/post-20-gtpcnz-supply-pressure-and-marginal-care-v1.8.1-applied.md",
+    "heroImage": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/pcf-v172-sim-03-marginal-supply-plot.png",
+    "diagram": "",
+    "publicationStatus": "ready",
+    "scheduledAt": "2026-07-16 15:00 Australia/Sydney"
+  },
+  {
+    "sequence": 22,
+    "id": "primary-care-funding-architecture-21",
+    "series": "primary-care-funding-architecture",
+    "seriesName": "Primary Care Funding Architecture",
+    "seriesOrder": 21,
+    "postNumber": "21",
+    "title": "GTPCNZ model results: funding design is not one lever",
+    "subtitle": "Access, supply, fiscal risk and gaming risk move differently, so the model keeps them separate.",
+    "slug": "gtpcnz-funding-design-is-not-one-lever",
+    "tags": [
+      "primary care",
+      "funding",
+      "health policy",
+      "Rare Insights"
+    ],
+    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.8.1-applied/post-21-gtpcnz-funding-design-is-not-one-lever-v1.8.1-applied.md",
+    "heroImage": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/pcf-v172-sim-02-funding-comparison-plot.png",
+    "diagram": "",
+    "publicationStatus": "ready",
+    "scheduledAt": "2026-07-20 15:00 Australia/Sydney"
+  },
+  {
+    "sequence": 23,
+    "id": "primary-care-funding-architecture-22",
+    "series": "primary-care-funding-architecture",
+    "seriesName": "Primary Care Funding Architecture",
+    "seriesOrder": 22,
+    "postNumber": "22",
+    "title": "GTPCNZ model results: controls, games and model boundaries",
+    "subtitle": "The model shows why an uncapped benefit needs governance, and why the results should be read as directional.",
+    "slug": "gtpcnz-controls-games-and-model-boundaries",
+    "tags": [
+      "primary care",
+      "funding",
+      "health policy",
+      "Rare Insights"
+    ],
+    "postPath": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/posts-v1.8.1-applied/post-22-gtpcnz-controls-games-and-model-boundaries-v1.8.1-applied.md",
+    "heroImage": "rareinsights/primary-care-funding-architecture-v1.7.2/docs/substack-ready/figures/pcf-v172-sim-04-gaming-risk-frontier-plot.png",
+    "diagram": "",
+    "publicationStatus": "ready",
+    "scheduledAt": "2026-07-23 15:00 Australia/Sydney"
   }
 ]
