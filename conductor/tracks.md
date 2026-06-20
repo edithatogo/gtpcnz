@@ -87,6 +87,12 @@
 | 075 | Dash Hugging Face public surface | In progress | New Plotly Dash interactive lab for Hugging Face Spaces while GitHub Pages remains the public front door and Streamlit remains a compatibility surface. |
 | 076 | Simulation optimization and profiling | In progress | Profile and optimize Streamlit-free runtime calculations with Scalene-backed evidence while preserving deterministic seeds, public caps, and claim boundaries. |
 | 077 | Pixi reproducible dashboard runtime | In progress | Add Prefix.dev Pixi tasks and deployment posture for the Dash/Hugging Face path while keeping existing uv compatibility until Pixi parity gates pass. |
+| 078 | Dash model surface expansion | In progress | Make the Dash/Hugging Face surface use more of the existing modelling engines, including ABM, diffusion, Nash, Monte Carlo/JAX, MPC, system dynamics and sensitivity, with explicit public-safe model coverage status. |
+| 079 | Public calibration diagnostics dashboard | In progress | Surface public aggregate calibration, PPC, holdout, temporal, policy-shock, readiness, source-freshness and missing-evidence diagnostics without upgrading precision or causal claims. |
+| 080 | Advanced public visualisation lane | In progress | Add high-value visuals such as VOI evidence priority, structural uncertainty, scenario morph, equity-complexity heatmaps, causal architecture, policy shocks, 19-games navigator and bounded 3D/animated views. |
+| 081 | Dash shareable guided scenario experience | In progress | Add shareable scenario URLs, guided reader mode, bounded custom scenario builder and JSON/CSV exports while preserving educational/model-index claim boundaries. |
+| 082 | Dashboard provenance runtime health and Pixi guard | In progress | Add chart provenance panels, deployment/runtime health metadata and a guard that detects the wrong Pixi executable without exposing secrets or changing model claims. |
+| 083 | Dash browser visual regression and download QA | In progress | Add desktop/mobile browser smoke, visual regression, nonblank chart checks and CSV/download QA for the Dash/Hugging Face public surface. |
 
 ## Current priority
 
@@ -97,6 +103,8 @@
 5. Do not broaden public claim wording beyond the aggregate validation lane; Track 073 candidate sources still require later raw acquisition, checksums, transforms, and comparison gates before runtime use.
 6. Use the generated v1.8.1 release model card, claim-boundary note, parameter tiering and identifiability map when explaining the model.
 7. Freeze precision/causal claim expansion until claim-specific public evidence gates pass.
+8. Treat tracks 078-080 as the next model-surface expansion lanes after Dash parity: first expose model coverage, then calibration diagnostics, then advanced visuals.
+9. Treat tracks 081-083 as the follow-on UX and operational hardening lanes: shareable/guided scenarios, provenance/runtime health/Pixi guard, and browser/download QA.
 
 ## Notes
 

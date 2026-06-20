@@ -1,0 +1,7 @@
+{
+  "id": "079",
+  "slug": "public-calibration-diagnostics-dashboard",
+  "title": "Public calibration diagnostics dashboard",
+  "status": "in_progress",
+  "claim_boundary": "calibration_readiness_and_public_aggregate_validation_without_precision_or_causal_claims"
+}

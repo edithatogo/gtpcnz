@@ -40,7 +40,7 @@ a:hover {
   top: 0;
   z-index: 10;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 20px;
   padding: 14px clamp(18px, 4vw, 48px);
@@ -73,6 +73,7 @@ a:hover {
   flex-wrap: wrap;
   gap: 8px;
   justify-content: flex-end;
+  max-width: 980px;
 }
 
 .nav-link {
@@ -85,6 +86,8 @@ a:hover {
   color: var(--ink);
   font-size: 14px;
   font-weight: 650;
+  line-height: 1.15;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -216,17 +219,19 @@ h2 {
 
 .surface-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 10px;
 }
 
 .surface-link {
+  display: block;
   min-height: 46px;
   padding: 12px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #fbfcfd;
   font-weight: 700;
+  overflow-wrap: anywhere;
 }
 
 .control-label {
@@ -310,11 +315,40 @@ h2 {
   line-height: 1.45;
 }
 
+.provenance-panel {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fbfcfd;
+}
+
+.provenance-panel summary {
+  cursor: pointer;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.shareable-link {
+  margin-top: 14px;
+}
+
+.shareable-link .surface-link {
+  margin-top: 6px;
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: 12px;
+  font-weight: 650;
+}
+
 .method-list {
   margin: 0;
   padding-left: 20px;
   color: var(--muted);
   line-height: 1.55;
+}
+
+.method-list + .surface-grid {
+  margin-top: 16px;
 }
 
 .footer {
@@ -342,6 +376,10 @@ h2 {
   .nav {
     justify-content: flex-start;
     margin-top: 12px;
+  }
+
+  .nav-link {
+    white-space: normal;
   }
 
   .metric-grid {

@@ -1,0 +1,7 @@
+{
+  "id": "083",
+  "slug": "dash-browser-visual-regression-and-download-qa",
+  "title": "Dash browser visual regression and download QA",
+  "status": "in_progress",
+  "claim_boundary": "ui_quality_gate_without_model_claim_expansion"
+}
