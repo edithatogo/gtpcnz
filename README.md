@@ -15,7 +15,7 @@ Substack series: https://rareinsights.substack.com/
 
 - A public-data anchored benchmark for exploring primary care funding architecture.
 - A Quarto website and reproducible report.
-- A Plotly Dash interactive model lab for Hugging Face Spaces, with Streamlit retained as a compatibility surface during migration.
+- A Plotly Dash interactive model lab for Hugging Face Spaces, with Streamlit retained only as a legacy compatibility surface during migration.
 - A public audit trail of assumptions, caveats, and launch materials.
 
 ## What This Is Not
@@ -38,11 +38,11 @@ Short version:
 
 - Quarto website: https://edithatogo.github.io/gtpcnz/
 - Hugging Face interactive model lab: https://edithatogo-gtpcnz-dashboard.hf.space/
-- Streamlit compatibility dashboard and modelling views: https://gtpcnz.streamlit.app/
+- Legacy Streamlit compatibility dashboard: https://gtpcnz.streamlit.app/
 - Substack series: https://rareinsights.substack.com/
 - Quarto source report: [reports/primary_care_architecture.qmd](reports/primary_care_architecture.qmd)
 - Dash app entrypoint: [dash_app/app.py](dash_app/app.py)
-- Streamlit dashboard entrypoint: [streamlit_app.py](streamlit_app.py)
+- Legacy Streamlit dashboard entrypoint: [streamlit_app.py](streamlit_app.py)
 - Dashboard implementation: [models/primarycare_model/app.py](models/primarycare_model/app.py)
 - Framework-neutral dashboard service: [models/primarycare_model/dashboard_service.py](models/primarycare_model/dashboard_service.py)
 - Current release model card: [docs/release/model-card-v1.8.1.md](docs/release/model-card-v1.8.1.md)
@@ -62,22 +62,22 @@ Short version:
 
 ## Run Locally
 
-Install dependencies:
+Install the repo-local Prefix.dev Pixi runtime:
 
 ```bash
-uv sync --frozen --all-groups
+python scripts/bootstrap_prefix_pixi.py
 ```
 
 Run tests:
 
 ```bash
-uv run pytest -q
+python scripts/run_pixi.py run -e dev pytest -q
 ```
 
 Check the auditable repo-health score:
 
 ```bash
-uv run python scripts/check_repo_health.py
+python scripts/run_pixi.py run -e dev python scripts/check_repo_health.py
 ```
 
 Render the Quarto website:
@@ -86,22 +86,24 @@ Render the Quarto website:
 quarto render --to html
 ```
 
-Run the Streamlit dashboard:
-
-```bash
-uv run streamlit run streamlit_app.py
-```
-
 Run the Dash model lab:
 
 ```bash
-pixi run dash
+python scripts/run_pixi.py run dash
 ```
 
-If the local `pixi` executable is not Prefix.dev Pixi, use the existing uv environment for local checks until the correct Pixi binary is installed:
+Run the Dash migration and runtime gates:
 
 ```bash
-uv run python -m dash_app.app
+python scripts/run_pixi.py run -e dev test-dash
+python scripts/run_pixi.py run -e dev test-runtime
+python scripts/run_pixi.py run -e dev test-public-gates
+```
+
+Run the legacy Streamlit compatibility surface only when checking migration parity:
+
+```bash
+python scripts/run_pixi.py run -e dev streamlit run streamlit_app.py
 ```
 
 ## Deploy
@@ -114,7 +116,7 @@ The Hugging Face Dash Space is deployed from `.github/workflows/huggingface-spac
 - URL: https://edithatogo-gtpcnz-dashboard.hf.space/
 - Runtime: Prefix.dev Pixi via Docker
 
-Streamlit Community Cloud can deploy this app with:
+Streamlit Community Cloud is no longer the canonical interactive target. The legacy compatibility deployment remains:
 
 - Repository: `edithatogo/gtpcnz`
 - Branch: `main`

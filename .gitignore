@@ -19,6 +19,7 @@ codex-tmp/
 docs/figures/public-proof/browser-audit-*/
 .venv/
 /.venv-*/
+/.tools/
 .env
 .streamlit/secrets.toml
 .serena/

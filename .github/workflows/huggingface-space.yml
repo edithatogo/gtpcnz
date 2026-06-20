@@ -57,7 +57,7 @@ jobs:
       - name: Validate Space app imports with Pixi
         working-directory: hf-space
         shell: bash
-        run: pixi run -e dev test-dash
+        run: pixi run -e dev python -m pytest -q models/tests/test_dashboard_service.py models/tests/test_dash_app.py
 
       - name: Trim validation-only and compatibility files
         shell: bash
