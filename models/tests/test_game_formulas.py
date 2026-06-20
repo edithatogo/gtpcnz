@@ -7,6 +7,11 @@ import re
 
 import numpy as np
 
+from models.primarycare_model.demonstrative_games import (
+    SCENARIOS,
+    model_g1_hospital_salience,
+    model_g2_hnz_allocation,
+)
 from models.primarycare_model.runtime_lab import clamp, diminishing_return, strategic_response
 
 
@@ -123,6 +128,26 @@ class TestSharedHelpersUsed:
         source = inspect.getsource(app.render_claims_audit_game_lab)
         assert re.search(r"strategic_response\(", source)
         assert re.search(r"diminishing_return\(", source)
+
+    def test_demonstrative_salience_games_use_nonlinear_helpers(self):
+        from models.primarycare_model import demonstrative_games
+
+        g1_source = inspect.getsource(demonstrative_games.model_g1_hospital_salience)
+        g2_source = inspect.getsource(demonstrative_games.model_g2_hnz_allocation)
+        assert re.search(r"response_curve\(", g1_source)
+        assert re.search(r"diminishing_return\(", g1_source)
+        assert re.search(r"response_curve\(", g2_source)
+        assert re.search(r"diminishing_return\(", g2_source)
+
+    def test_demonstrative_salience_games_stay_bounded(self):
+        for scenario in SCENARIOS:
+            for outcome in (model_g1_hospital_salience(scenario), model_g2_hnz_allocation(scenario)):
+                assert 0 <= outcome.access_score <= 100
+                assert 0 <= outcome.provider_viability <= 100
+                assert 0 <= outcome.equity_score <= 100
+                assert 0 <= outcome.fiscal_control <= 100
+                assert 0 <= outcome.hospital_pressure <= 100
+                assert 0 <= outcome.gaming_risk <= 100
 
     def test_coordination_uses_helpers(self):
         from models.primarycare_model import app

@@ -144,14 +144,71 @@ def calculate_indices(scenario: RuntimeScenario) -> dict[str, float]:
     hospital_salience = _as_fraction(scenario.hospital_salience)
     complexity = _as_fraction(scenario.complexity)
 
-    supply = clamp(100 * (0.34 * activity + 0.18 * capitation + 0.24 * scope + 0.12 * urgent + 0.12 * place - 0.12 * budget))
-    access = clamp(100 * (0.42 * supply / 100 + 0.18 * urgent + 0.15 * equity + 0.12 * place + 0.10 * data - 0.16 * copay))
-    equity_legitimacy = clamp(100 * (0.34 * equity + 0.24 * place + 0.16 * capitation + 0.14 * data - 0.16 * copay))
-    governance_resilience = clamp(100 * (0.44 * governance + 0.20 * data + 0.18 * place + 0.10 * equity + 0.08 * capitation))
-    hospital_deflection = clamp(100 * (0.32 * access / 100 + 0.22 * urgent + 0.16 * supply / 100 + 0.16 * data + 0.14 * place - 0.10 * complexity))
-    gaming_risk = clamp(100 * (0.35 * activity + 0.18 * scope + 0.18 * complexity - 0.30 * governance - 0.18 * data - 0.16 * place))
-    fiscal_risk = clamp(100 * (0.22 * activity + 0.18 * gaming_risk / 100 + 0.16 * complexity + 0.14 * (1 - budget) - 0.18 * governance - 0.14 * hospital_deflection / 100))
-    hospital_pressure = clamp(100 * (0.34 * hospital_salience + 0.26 * (1 - hospital_deflection / 100) + 0.16 * complexity + 0.14 * budget - 0.18 * access / 100 - 0.12 * urgent))
+    marginal_capacity = strategic_response(
+        0.42 * activity + 0.22 * scope + 0.16 * urgent + 0.14 * place + 0.06 * capitation - 0.12 * budget,
+        threshold=0.42,
+        steepness=7.0,
+    )
+    continuity_base = diminishing_return(0.58 * capitation + 0.42 * place)
+    supply = clamp(100 * (0.64 * marginal_capacity + 0.24 * continuity_base + 0.12 * diminishing_return(urgent)))
+
+    access_signal = (
+        0.42 * supply / 100
+        + 0.18 * diminishing_return(urgent)
+        + 0.15 * diminishing_return(equity)
+        + 0.12 * diminishing_return(place)
+        + 0.10 * diminishing_return(data)
+        - 0.18 * copay**1.35
+    )
+    access = clamp(100 * strategic_response(access_signal, threshold=0.43, steepness=6.5))
+    equity_legitimacy = clamp(
+        100
+        * strategic_response(
+            0.34 * equity + 0.24 * place + 0.16 * capitation + 0.14 * data - 0.18 * copay**1.3,
+            threshold=0.46,
+            steepness=6.0,
+        )
+    )
+    governance_resilience = clamp(
+        100
+        * strategic_response(
+            0.44 * governance + 0.20 * data + 0.18 * place + 0.10 * equity + 0.08 * capitation,
+            threshold=0.50,
+            steepness=6.0,
+        )
+    )
+    hospital_deflection = clamp(
+        100
+        * strategic_response(
+            0.32 * access / 100 + 0.22 * urgent + 0.16 * supply / 100 + 0.16 * data + 0.14 * place - 0.12 * complexity,
+            threshold=0.48,
+            steepness=6.5,
+        )
+    )
+    gaming_risk = clamp(
+        100
+        * strategic_response(
+            0.36 * activity + 0.18 * scope + 0.18 * complexity - 0.30 * governance - 0.18 * data - 0.16 * place,
+            threshold=0.18,
+            steepness=7.0,
+        )
+    )
+    fiscal_risk = clamp(
+        100
+        * strategic_response(
+            0.24 * activity + 0.20 * gaming_risk / 100 + 0.16 * complexity + 0.12 * (1 - budget) - 0.18 * governance - 0.16 * hospital_deflection / 100,
+            threshold=0.20,
+            steepness=6.0,
+        )
+    )
+    hospital_pressure = clamp(
+        100
+        * strategic_response(
+            0.34 * hospital_salience + 0.26 * (1 - hospital_deflection / 100) + 0.16 * complexity + 0.14 * budget - 0.20 * access / 100 - 0.12 * urgent,
+            threshold=0.42,
+            steepness=6.0,
+        )
+    )
     hybrid = clamp(
         0.24 * supply
         + 0.18 * access
@@ -208,11 +265,11 @@ def calculation_trace(scenario_id: str) -> pd.DataFrame:
     scenario = get_runtime_scenario(scenario_id)
     idx = calculate_indices(scenario)
     rows = [
-        ("Supply generation", "activity + capitation + scope + urgent alternatives + place - budget tightness", idx["supply_generation_score"]),
-        ("Access", "supply + urgent alternatives + equity + place + data - co-payment burden", idx["access_score"]),
-        ("Hospital deflection", "access + urgent alternatives + supply + data + place - complexity", idx["hospital_deflection_score"]),
-        ("Gaming risk", "activity + scope + complexity - governance - data - place", idx["gaming_risk_score"]),
-        ("Fiscal risk", "activity + gaming + complexity + uncapped exposure - governance - deflection", idx["fiscal_risk_score"]),
+        ("Supply generation", "threshold(activity + scope + urgent + place - budget) plus saturating capitation/place base", idx["supply_generation_score"]),
+        ("Access", "threshold(supply + urgent + equity + place + data - nonlinear co-payment burden)", idx["access_score"]),
+        ("Hospital deflection", "threshold(access + urgent + supply + data + place - complexity)", idx["hospital_deflection_score"]),
+        ("Gaming risk", "threshold(activity + scope + complexity - governance - data - place)", idx["gaming_risk_score"]),
+        ("Fiscal risk", "threshold(activity + gaming + complexity + exposure - governance - deflection)", idx["fiscal_risk_score"]),
         ("Hybrid viability", "weighted supply, access, equity, governance, deflection and inverted risks", idx["hybrid_viability_score"]),
     ]
     return pd.DataFrame(rows, columns=["calculation", "formula_sketch", "index_value"])
@@ -392,27 +449,27 @@ def get_calculation_details(
     details: list[dict[str, str]] = [
         {
             "label": "Supply generation",
-            "formula": "0.34×activity + 0.18×capitation + 0.24×scope + 0.12×urgent + 0.12×place − 0.12×budget_tightness",
+            "formula": "threshold(0.42×activity + 0.22×scope + 0.16×urgent + 0.14×place + 0.06×capitation − 0.12×budget) plus saturating capitation/place continuity",
             "mode": "deterministic",
         },
         {
             "label": "Access",
-            "formula": "0.42×supply + 0.18×urgent + 0.15×equity + 0.12×place + 0.10×data − 0.16×copay",
+            "formula": "threshold(0.42×supply + 0.18×urgent + 0.15×equity + 0.12×place + 0.10×data − nonlinear co-payment burden)",
             "mode": "deterministic",
         },
         {
             "label": "Hospital deflection",
-            "formula": "0.32×access + 0.22×urgent + 0.16×supply + 0.16×data + 0.14×place − 0.10×complexity",
+            "formula": "threshold(0.32×access + 0.22×urgent + 0.16×supply + 0.16×data + 0.14×place − 0.12×complexity)",
             "mode": "deterministic",
         },
         {
             "label": "Gaming risk",
-            "formula": "0.35×activity + 0.18×scope + 0.18×complexity − 0.30×governance − 0.18×data − 0.16×place",
+            "formula": "threshold(0.36×activity + 0.18×scope + 0.18×complexity − 0.30×governance − 0.18×data − 0.16×place)",
             "mode": "deterministic",
         },
         {
             "label": "Fiscal risk",
-            "formula": "0.22×activity + 0.18×gaming_risk + 0.16×complexity + 0.14×(1−budget) − 0.18×governance − 0.14×deflection",
+            "formula": "threshold(0.24×activity + 0.20×gaming_risk + 0.16×complexity + 0.12×exposure − 0.18×governance − 0.16×deflection)",
             "mode": "deterministic",
         },
         {
@@ -1081,8 +1138,8 @@ SCORE_GUIDE_ENTRIES = [
     ("access_score", "Access Index", "0\u2013100",
      "Timely primary care access given supply, equity, data and copay barriers.",
      "Better", {"<30": "Poor", "30\u201355": "Adequate", "55\u201375": "Good", ">75": "Strong"},
-     "0.42(S/100) + 0.18U + 0.15E + 0.12P + 0.10D - 0.16C",
-     "S=Supply, U=Urgent, E=Equity, P=Place, D=Data, C=Copay"),
+     "threshold(0.42S + 0.18U + 0.15E + 0.12P + 0.10D - nonlinear C)",
+     "S=Supply, U=Urgent, E=Equity, P=Place, D=Data, C=Copay burden"),
 ]
 
 
@@ -1317,31 +1374,31 @@ CANONICAL_DEFS = {
         "label": "Access Index", "short": "Access", "range": "0-100",
         "meaning": "Timely primary care access given supply, equity, data and copay barriers.",
         "higher_is": "Better",
-        "formula": "0.42*(Supply/100) + 0.18*Urgent + 0.15*Equity + 0.12*Place + 0.10*Data - 0.16*Copay",
+        "formula": "threshold(0.42*(Supply/100) + 0.18*Urgent + 0.15*Equity + 0.12*Place + 0.10*Data - nonlinear Copay)",
         "used_in": ["Reference scatter", "Heatmap", "Radar", "Cohort comparison"]},
     "supply_generation_score": {
         "label": "Supply Generation Index", "short": "Supply", "range": "0-100",
         "meaning": "Ability to generate primary care supply under the payment architecture.",
         "higher_is": "Better",
-        "formula": "0.34*Activity + 0.18*Capitation + 0.24*Scope + 0.12*Urgent + 0.12*Place - 0.12*Budget",
+        "formula": "threshold(Activity + Scope + Urgent + Place + Capitation - Budget) plus saturating continuity",
         "used_in": ["Reference scatter", "Heatmap", "Radar"]},
     "equity_legitimacy_score": {
         "label": "Equity Legitimacy Index", "short": "Equity", "range": "0-100",
         "meaning": "Fairness of access and funding distribution across population groups.",
         "higher_is": "Better",
-        "formula": "0.34*Equity + 0.24*Place + 0.16*Capitation + 0.14*Data - 0.16*Copay",
+        "formula": "threshold(0.34*Equity + 0.24*Place + 0.16*Capitation + 0.14*Data - nonlinear Copay)",
         "used_in": ["Heatmap", "Radar", "Cohort comparison"]},
     "hospital_pressure_score": {
         "label": "Hospital Pressure Index", "short": "Hospital pressure", "range": "0-100",
         "meaning": "Residual hospital demand pressure after upstream deflection.",
         "higher_is": "Worse when higher",
-        "formula": "0.34*HospSal + 0.26*(1-Defl/100) + 0.16*Complexity + 0.14*Budget - 0.18*(Access/100) - 0.12*Urgent",
+        "formula": "threshold(0.34*HospSal + 0.26*(1-Defl/100) + 0.16*Complexity + 0.14*Budget - 0.20*(Access/100) - 0.12*Urgent)",
         "used_in": ["Reference scatter", "Heatmap", "Radar", "Stress tests", "Policy shock"]},
     "gaming_risk_score": {
         "label": "Gaming Risk Index", "short": "Gaming risk", "range": "0-100",
         "meaning": "Risk of claim inflation, low-value care or fiscal leakage.",
         "higher_is": "Worse when higher",
-        "formula": "0.35*Activity + 0.18*Scope + 0.18*Complexity - 0.30*Governance - 0.18*Data - 0.16*Place",
+        "formula": "threshold(0.36*Activity + 0.18*Scope + 0.18*Complexity - 0.30*Governance - 0.18*Data - 0.16*Place)",
         "used_in": ["Heatmap", "Radar", "Stress tests", "Gaming-risk frontier"]},
 }
 

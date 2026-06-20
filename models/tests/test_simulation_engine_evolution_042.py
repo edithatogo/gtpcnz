@@ -60,7 +60,10 @@ def test_bass_diffusion_and_nash_outputs_are_chart_ready():
         "M",
     ]
     assert diffusion.region_time_series is not None
+    assert diffusion.time_series.loc[0, "new_adopters"] == 0.0
     assert diffusion.time_series["adoption_rate"].between(0, 1).all()
+    regional_market_sizes = diffusion.region_time_series.groupby("region")["M"].first()
+    assert regional_market_sizes.nunique() > 1
 
     trace = nash_best_response_dynamics(PayoffMatrix.clinical_utility(), max_iterations=25)
     frame = trace.to_dataframe()

@@ -64,7 +64,7 @@ def simulate_bass(params: BassDiffusionParams) -> BassDiffusionResult:
     A = float(params.initial_adopters)
     years = list(range(T + 1))
     adopters = [A]
-    new_adopters_list = [A]
+    new_adopters_list = [0.0]
     adoption_rate = [A / M]
 
     for t in range(1, T + 1):
@@ -102,10 +102,11 @@ def simulate_bass(params: BassDiffusionParams) -> BassDiffusionResult:
     region_dfs = []
     if params.num_regions > 1:
         rng = np.random.default_rng(42)
+        connectivity_boost = 0.7 + 0.6 * params.region_connectivity
         for r in range(params.num_regions):
-            r_p = p * (0.5 + rng.random())
-            r_q = q * (0.6 + rng.random() * 0.8)
-            r_M = max(1, M // params.num_regions * (1 + int(rng.random() * 0.5)))
+            r_p = p * (0.65 + rng.random() * 0.70)
+            r_q = q * connectivity_boost * (0.70 + rng.random() * 0.60)
+            r_M = max(1, int((M / params.num_regions) * (0.75 + rng.random() * 0.50)))
             r_params = BassDiffusionParams(
                 p=r_p, q=r_q, M=r_M, T=T,
                 initial_adopters=max(1, int(params.initial_adopters / params.num_regions)),

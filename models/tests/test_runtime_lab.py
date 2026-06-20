@@ -1,6 +1,12 @@
+from dataclasses import replace
+
+import numpy as np
+
 from models.primarycare_model.runtime_lab import (
     MAX_ABM_POPULATION,
     MAX_MONTE_CARLO_DRAWS,
+    SCENARIO_BY_ID,
+    calculate_indices,
     calculation_trace,
     model_gap_map,
     run_agent_lens,
@@ -33,6 +39,18 @@ def test_calculation_trace_exposes_formula_sketches():
     assert {"calculation", "formula_sketch", "index_value"}.issubset(trace.columns)
     assert "Hybrid viability" in set(trace["calculation"])
     assert trace["index_value"].between(0, 100).all()
+    assert "threshold" in " ".join(trace["formula_sketch"]).lower()
+
+
+def test_runtime_supply_response_is_nonlinear_in_activity_signal():
+    base = SCENARIO_BY_ID["F4"]
+    values = [
+        calculate_indices(replace(base, activity_signal=activity))["supply_generation_score"]
+        for activity in range(10, 91, 10)
+    ]
+
+    second_diff = np.diff(values, n=2)
+    assert np.max(np.abs(second_diff)) > 0.5
 
 
 def test_stochastic_uncertainty_is_seeded_and_capped():

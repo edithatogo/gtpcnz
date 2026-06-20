@@ -37,7 +37,8 @@ def patient_s():
         deprivation_index=st.integers(1, 10),
         comorbidities=st.lists(
             st.sampled_from(["diabetes","asthma","copd","hypertension","cancer"]),
-            max_size=5),
+            max_size=5,
+            unique=True),
         enrollment_status=st.sampled_from(
             ["enrolled","casual","pending","declined"]))
 
@@ -234,8 +235,8 @@ class ProviderAssignmentMachine(stateful.RuleBasedStateMachine):
 
     @stateful.rule(pid=st.text(min_size=1), cap=st.integers(1, 100))
     def add_provider(self, pid, cap):
-        self.providers[pid] = cap
-        self.initial_capacity[pid] = cap
+        self.providers[pid] = self.providers.get(pid, 0) + cap
+        self.initial_capacity[pid] = self.initial_capacity.get(pid, 0) + cap
         self.assignments.setdefault(pid, [])
 
     @stateful.rule(pid=st.text(min_size=1), pat=st.text(min_size=1))
