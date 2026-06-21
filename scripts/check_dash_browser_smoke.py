@@ -116,7 +116,7 @@ def _check_route(
     page.on("pageerror", lambda err: console_events.append(f"pageerror: {str(err)[:500]}"))
     page.on("requestfailed", lambda req: failed_requests.append(f"{req.method} {req.url} {req.failure}"))
 
-    step_timeout_ms = min(timeout_seconds * 1000, 15_000)
+    step_timeout_ms = max(timeout_seconds * 1000, 15_000)
     try:
         route_required = [*REQUIRED_TEXT, *ROUTE_REQUIRED_TEXT.get(_route_key(route), ())]
         body_text = ""
