@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import functools
 import math
 import sys
 from dataclasses import dataclass
@@ -50,11 +51,13 @@ def _lists_to_tuples(obj: Any) -> Any:
     return obj
 
 
+@functools.lru_cache(maxsize=None)
 def load_public_input_datasets(registry_root: Path = PUBLIC_REGISTRY) -> tuple[InputDataset, ...]:
     payload = yaml.safe_load((registry_root / "inputs.public.v1.yaml").read_text(encoding="utf-8"))
     return TypeAdapter(tuple[InputDataset, ...]).validate_python(_lists_to_tuples(payload["datasets"]))
 
 
+@functools.lru_cache(maxsize=None)
 def _load_retrieval_artifacts(registry_root: Path) -> dict[str, str]:
     payload = yaml.safe_load((registry_root / "source_retrieval.public.v1.yaml").read_text(encoding="utf-8"))
     artifacts: dict[str, str] = {}
@@ -63,6 +66,7 @@ def _load_retrieval_artifacts(registry_root: Path) -> dict[str, str]:
     return artifacts
 
 
+@functools.lru_cache(maxsize=None)
 def processed_dataset_expectations(
     *,
     registry_root: Path = PUBLIC_REGISTRY,
