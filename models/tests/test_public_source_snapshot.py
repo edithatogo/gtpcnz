@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 from pathlib import Path
 
 from models.primarycare_model.data.public_source_snapshot import (
@@ -32,3 +33,23 @@ def test_public_source_multi_file_checksum_is_deterministic() -> None:
 
     assert sha256_many((first, second)) == sha256_many((first, second))
     assert sha256_many((first, second)) != sha256_many((second, first))
+
+
+def test_sha256_many_handles_paths_outside_root(tmp_path: Path) -> None:
+    """Verify sha256_many correctly falls back to using the path.s name
+    when the path is outside the project root directory, avoiding a ValueError."""
+    test_file = tmp_path / "outside_root.txt"
+    test_file.write_bytes(b"hello world")
+
+    # Calculate the expected hash for a path outside ROOT
+    # When relative_to(ROOT) fails with ValueError, it falls back to path.name
+    expected_digest = hashlib.sha256()
+    expected_digest.update(test_file.name.encode("utf-8"))
+    expected_digest.update(b"\0")
+    expected_digest.update(b"hello world")
+    expected_digest.update(b"\0")
+    expected = expected_digest.hexdigest()
+
+    actual = sha256_many((test_file,))
+
+    assert actual == expected
