@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import functools
 import hashlib
 from datetime import UTC, date, datetime
 from pathlib import Path
@@ -43,6 +44,7 @@ def _lists_to_tuples(obj: Any) -> Any:
     return obj
 
 
+@functools.lru_cache(maxsize=1)
 def load_public_sources() -> tuple[PublicSource, ...]:
     payload = yaml.safe_load((PUBLIC_REGISTRY / "sources.public.v1.yaml").read_text(encoding="utf-8"))
     return TypeAdapter(tuple[PublicSource, ...]).validate_python(_lists_to_tuples(payload["sources"]))
