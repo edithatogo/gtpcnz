@@ -52,6 +52,7 @@ class MPCOutput(EngineOutput):
     optimised_levers: dict[str, float]
     total_cost: float
 
+
 class ModelPredictiveControlAdapter:
     """Typed adapter for model-predictive control simulation.
 
@@ -69,7 +70,8 @@ class ModelPredictiveControlAdapter:
     def _as_fraction(value: float) -> float:
         return float(max(0.0, min(100.0, value))) / 100.0
 
-    def _calculate_indices(self,
+    def _calculate_indices(
+        self,
         activity: float,
         capitation: float,
         place: float,
@@ -86,18 +88,39 @@ class ModelPredictiveControlAdapter:
         def f(v: float) -> float:
             return float(max(0.0, min(100.0, v))) / 100.0
 
-        a, c, p, s, u, d, g, e, cp, b, _hs, cx = [f(v) for v in (activity, capitation, place, scope, urgent, data, governance, equity, copay, budget, hosp_sal, compl)]
+        a, c, p, s, u, d, g, e, cp, b, _hs, cx = [
+            f(v)
+            for v in (
+                activity,
+                capitation,
+                place,
+                scope,
+                urgent,
+                data,
+                governance,
+                equity,
+                copay,
+                budget,
+                hosp_sal,
+                compl,
+            )
+        ]
 
         supply = self._clamp(100 * (0.34 * a + 0.18 * c + 0.24 * s + 0.12 * u + 0.12 * p - 0.12 * b))
         access = self._clamp(100 * (0.42 * supply / 100 + 0.18 * u + 0.15 * e + 0.12 * p + 0.10 * d - 0.16 * cp))
         gaming = self._clamp(100 * (0.35 * a + 0.18 * s + 0.18 * cx - 0.30 * g - 0.18 * d - 0.16 * p))
         fiscal = self._clamp(100 * (0.22 * a + 0.18 * gaming / 100 + 0.16 * cx + 0.14 * (1 - b) - 0.18 * g))
         hybrid = self._clamp(
-            0.24 * supply + 0.18 * access
+            0.24 * supply
+            + 0.18 * access
             + 0.18 * self._clamp(100 * (0.34 * e + 0.24 * p + 0.16 * c + 0.14 * d - 0.16 * cp))
             + 0.16 * self._clamp(100 * (0.44 * g + 0.20 * d + 0.18 * p + 0.10 * e + 0.08 * c))
-            + 0.14 * self._clamp(100 * (0.32 * access / 100 + 0.22 * u + 0.16 * supply / 100 + 0.16 * d + 0.14 * p - 0.10 * cx))
-            + 0.06 * (100 - fiscal) + 0.04 * (100 - gaming)
+            + 0.14
+            * self._clamp(
+                100 * (0.32 * access / 100 + 0.22 * u + 0.16 * supply / 100 + 0.16 * d + 0.14 * p - 0.10 * cx)
+            )
+            + 0.06 * (100 - fiscal)
+            + 0.04 * (100 - gaming)
         )
 
         return {"hybrid": hybrid, "access": access, "supply": supply, "gaming": gaming, "fiscal": fiscal}
@@ -107,13 +130,35 @@ class ModelPredictiveControlAdapter:
         seed = inp.seed if inp.seed is not None else 20260526
         np.random.default_rng(seed)
 
-        base = [inp.activity_signal, inp.capitation, inp.place_accountability, inp.scope_capacity,
-                inp.urgent_ambulance, inp.data_visibility, inp.governance, inp.equity_protection,
-                inp.copayment_burden, inp.budget_tightness, inp.hospital_salience, inp.complexity]
+        base = [
+            inp.activity_signal,
+            inp.capitation,
+            inp.place_accountability,
+            inp.scope_capacity,
+            inp.urgent_ambulance,
+            inp.data_visibility,
+            inp.governance,
+            inp.equity_protection,
+            inp.copayment_burden,
+            inp.budget_tightness,
+            inp.hospital_salience,
+            inp.complexity,
+        ]
 
-        lever_names = ["activity_signal", "capitation", "place_accountability", "scope_capacity",
-                       "urgent_ambulance", "data_visibility", "governance", "equity_protection",
-                       "copayment_burden", "budget_tightness", "hospital_salience", "complexity"]
+        lever_names = [
+            "activity_signal",
+            "capitation",
+            "place_accountability",
+            "scope_capacity",
+            "urgent_ambulance",
+            "data_visibility",
+            "governance",
+            "equity_protection",
+            "copayment_burden",
+            "budget_tightness",
+            "hospital_salience",
+            "complexity",
+        ]
 
         # Optimise by grid search over control steps
         step_size = 5.0
@@ -128,7 +173,9 @@ class ModelPredictiveControlAdapter:
                     trial = list(candidate)
                     trial[i] = self._clamp(trial[i] + delta)
                     idx = self._calculate_indices(*trial)
-                    cost = float(inp.w_hybrid * idx["hybrid"] + inp.w_fiscal * idx["fiscal"] + inp.w_gaming * idx["gaming"])
+                    cost = float(
+                        inp.w_hybrid * idx["hybrid"] + inp.w_fiscal * idx["fiscal"] + inp.w_gaming * idx["gaming"]
+                    )
                     if cost < best_cost:
                         best_cost = cost
                         best_levers = list(trial)
@@ -147,13 +194,15 @@ class ModelPredictiveControlAdapter:
             blend = step / horizon
             blended = [self._clamp(current[i] + blend * (best_levers[i] - current[i])) for i in range(12)]
             idx = self._calculate_indices(*blended)
-            trajectory.append({
-                "step": step,
-                "hybrid_viability": round(idx["hybrid"], 2),
-                "access_score": round(idx["access"], 2),
-                "fiscal_risk_score": round(idx["fiscal"], 2),
-                "gaming_risk_score": round(idx["gaming"], 2),
-            })
+            trajectory.append(
+                {
+                    "step": step,
+                    "hybrid_viability": round(idx["hybrid"], 2),
+                    "access_score": round(idx["access"], 2),
+                    "fiscal_risk_score": round(idx["fiscal"], 2),
+                    "gaming_risk_score": round(idx["gaming"], 2),
+                }
+            )
             current = blended
 
         final_idx = self._calculate_indices(*best_levers)

@@ -158,10 +158,7 @@ def load_inputs_registry() -> tuple[InputDataset, ...]:
 
 def input_dataset_defaults() -> dict[str, dict[str, Any]]:
     """Return a dictionary of dataset_id -> {field_name: required} summary."""
-    return {
-        ds.dataset_id: {field.field_name: field.required for field in ds.fields}
-        for ds in load_inputs_registry()
-    }
+    return {ds.dataset_id: {field.field_name: field.required for field in ds.fields} for ds in load_inputs_registry()}
 
 
 # ── Provenance registry ────────────────────────────────────────────────
@@ -255,7 +252,16 @@ def build_oia_component_dataframe() -> list[dict[str, str]]:
     entries = load_oia_component_map_registry()
     result = []
     for e in sorted(entries, key=lambda x: x.oia_id):
-        result.append({"oia_id": e.oia_id, "topic": e.topic, "component_type": e.component_type, "component_path": e.component_path, "chart_or_table": e.chart_or_table, "impact_description": e.impact_description})
+        result.append(
+            {
+                "oia_id": e.oia_id,
+                "topic": e.topic,
+                "component_type": e.component_type,
+                "component_path": e.component_path,
+                "chart_or_table": e.chart_or_table,
+                "impact_description": e.impact_description,
+            }
+        )
     return result
 
 

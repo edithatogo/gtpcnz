@@ -61,6 +61,7 @@ def _diminishing_return(value: float, rate: float = 2.4) -> float:
     bounded = _clamp(value, 0.0, 1.0)
     return (1.0 - math.exp(-rate * bounded)) / (1.0 - math.exp(-rate))
 
+
 SCENARIO_INTERPRETATION = {
     "F0": "Current reform comparator",
     "F1": "Allocation reform only",
@@ -235,7 +236,10 @@ def score_educational_settings(settings: EducationalSettings) -> dict[str, float
         steepness=7.0,
     )
     hospital_pressure = 100 * _strategic_response(
-        0.50 * (1 - supply / 100) + 0.22 * (1 - governance / 100) + 0.16 * (1 - _diminishing_return(local)) + 0.12 * (1 - equity_score / 100),
+        0.50 * (1 - supply / 100)
+        + 0.22 * (1 - governance / 100)
+        + 0.16 * (1 - _diminishing_return(local))
+        + 0.12 * (1 - equity_score / 100),
         threshold=0.45,
         steepness=6.0,
     )
@@ -261,10 +265,7 @@ def _score_legacy_settings(settings: EducationalSettings) -> dict[str, float]:
     """Backward-compatible alias for older public tests and docs."""
     scores = score_educational_settings(settings)
     prefix = "to" + "y_"
-    return {
-        key.replace("educational_", prefix): value
-        for key, value in scores.items()
-    }
+    return {key.replace("educational_", prefix): value for key, value in scores.items()}
 
 
 globals()["score_" + "to" + "y_settings"] = _score_legacy_settings
@@ -282,14 +283,49 @@ def load_first_existing(paths: Iterable[str | Path]) -> pd.DataFrame:
 def build_calibration_readiness_table() -> pd.DataFrame:
     """Return a public-runtime readiness table without reading non-public inputs."""
     rows: tuple[tuple[str, str, str, str], ...] = (
-        ("Primary care appointments", "Published aggregate utilisation/access series", "Needed", "Access and waiting-time calibration"),
-        ("Capitation and payment rules", "Published rate tables and programme funding summaries", "Needed", "Practice revenue and marginal-supply calibration"),
+        (
+            "Primary care appointments",
+            "Published aggregate utilisation/access series",
+            "Needed",
+            "Access and waiting-time calibration",
+        ),
+        (
+            "Capitation and payment rules",
+            "Published rate tables and programme funding summaries",
+            "Needed",
+            "Practice revenue and marginal-supply calibration",
+        ),
         ("Co-payments", "Published fee and out-of-pocket cost summaries", "Needed", "Demand/equity response"),
-        ("Ambulance pathways", "Published conveyance and alternative pathway aggregates", "Needed", "Hospital-deflection calibration"),
-        ("ACC treatment payments", "Published Cost of Treatment Regulations, contracts, and aggregate claims", "Needed", "Cross-funder and supply-stabilisation effects"),
-        ("ED and inpatient pressure", "Published hospital/ED aggregate series", "Needed", "Downstream hospital-pressure validation"),
-        ("Workforce and scope", "Published workforce, FTE, location, prescribing, and scope summaries", "Needed", "Scope-enabled supply calibration"),
-        ("Normative decision weights", "Editable public model assumptions only", "Needed", "Decision support; not stakeholder preferences"),
+        (
+            "Ambulance pathways",
+            "Published conveyance and alternative pathway aggregates",
+            "Needed",
+            "Hospital-deflection calibration",
+        ),
+        (
+            "ACC treatment payments",
+            "Published Cost of Treatment Regulations, contracts, and aggregate claims",
+            "Needed",
+            "Cross-funder and supply-stabilisation effects",
+        ),
+        (
+            "ED and inpatient pressure",
+            "Published hospital/ED aggregate series",
+            "Needed",
+            "Downstream hospital-pressure validation",
+        ),
+        (
+            "Workforce and scope",
+            "Published workforce, FTE, location, prescribing, and scope summaries",
+            "Needed",
+            "Scope-enabled supply calibration",
+        ),
+        (
+            "Normative decision weights",
+            "Editable public model assumptions only",
+            "Needed",
+            "Decision support; not stakeholder preferences",
+        ),
     )
     return pd.DataFrame(rows, columns=["domain", "input", "status", "why_it_matters"])
 

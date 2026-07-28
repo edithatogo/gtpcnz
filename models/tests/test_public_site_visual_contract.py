@@ -82,7 +82,10 @@ def test_public_homepage_visual_contract_strings():
     assert 'href="https://gtpcnz.streamlit.app/"' in text
     assert 'href="https://rareinsights.substack.com/"' in text
     assert "How the posts map to this report and dashboard" in text
-    assert "https://rareinsights.substack.com/p/the-current-reform-pathway-stronger-than-a-straw-man-but-maybe-still-incomplete" in text
+    assert (
+        "https://rareinsights.substack.com/p/the-current-reform-pathway-stronger-than-a-straw-man-but-maybe-still-incomplete"
+        in text
+    )
 
 
 def test_public_homepage_has_no_private_substack_or_local_paths():

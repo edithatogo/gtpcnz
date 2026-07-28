@@ -79,7 +79,9 @@ def _has_pho_access_numeric_validation_extract(*validation_uses: str) -> bool:
     )
 
 
-def _strict_holdout_blockers(gate_id: str, status: ValidationGateStatus, optional_holdout_blocker: str) -> tuple[str, ...]:
+def _strict_holdout_blockers(
+    gate_id: str, status: ValidationGateStatus, optional_holdout_blocker: str
+) -> tuple[str, ...]:
     if status == "public_holdout_comparison_failed":
         return holdout_gate_blockers(gate_id)
     if status == "public_data_unavailable":
@@ -136,7 +138,9 @@ def build_calibration_validation_gate_matrix(*, strict: bool = False) -> tuple[C
             public_data_requirement="Public regional or rurality aggregate extracts with held-out areas.",
             status=geographic_status,
             claim_status="calibration_readiness_only",
-            blockers=_strict_holdout_blockers("CAL-G-003", geographic_status, optional_holdout_blocker) if strict else (),
+            blockers=_strict_holdout_blockers("CAL-G-003", geographic_status, optional_holdout_blocker)
+            if strict
+            else (),
         ),
         CalibrationValidationGateRow(
             gate_id="CAL-G-004",
@@ -188,12 +192,16 @@ def strict_validation_gate_issues() -> tuple[str, ...]:
 def validation_gate_issues(*, require_all_validation_data: bool) -> tuple[str, ...]:
     issues: list[str] = []
     for row in build_calibration_validation_gate_matrix(strict=True):
-        if row.status in {
-            "public_data_unavailable",
-            "public_validation_source_registered",
-            "public_validation_numeric_ready",
-            "public_holdout_comparison_failed",
-        } and not require_all_validation_data:
+        if (
+            row.status
+            in {
+                "public_data_unavailable",
+                "public_validation_source_registered",
+                "public_validation_numeric_ready",
+                "public_holdout_comparison_failed",
+            }
+            and not require_all_validation_data
+        ):
             continue
         if row.status != "passed" and row.gate_id != "CAL-G-007":
             issues.append(f"{row.gate_id}: {row.label} is not passed; claim remains calibration_readiness_only")
@@ -224,10 +232,7 @@ def main(argv: list[str] | None = None) -> int:
         print(validation_gate_matrix_as_json(strict=args.strict))
     else:
         for row in build_calibration_validation_gate_matrix(strict=args.strict):
-            print(
-                f"{row.gate_id}: family={row.gate_family}; status={row.status}; "
-                f"claim={row.claim_status}"
-            )
+            print(f"{row.gate_id}: family={row.gate_family}; status={row.status}; claim={row.claim_status}")
 
     if args.strict:
         issues = validation_gate_issues(require_all_validation_data=args.require_all_validation_data)

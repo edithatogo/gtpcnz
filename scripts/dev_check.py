@@ -17,11 +17,29 @@ class Check:
 CHECKS = [
     Check([sys.executable, "-m", "ruff", "check", "."]),
     Check([sys.executable, "-m", "basedpyright", "--pythonpath", sys.executable]),
-    Check([sys.executable, "-m", "mypy", "models/primarycare_model/contracts", "models/primarycare_model/validation/pandera_schemas.py"]),
+    Check(
+        [
+            sys.executable,
+            "-m",
+            "mypy",
+            "models/primarycare_model/contracts",
+            "models/primarycare_model/validation/pandera_schemas.py",
+        ]
+    ),
     Check([sys.executable, "scripts/check_repo_health.py"]),
     Check([sys.executable, "scripts/check_concern_boundaries.py"]),
     Check([sys.executable, "scripts/check_no_patient_data.py"]),
-    Check([sys.executable, "-m", "pytest", "-q", "--cov=models.primarycare_model", "--cov-report=term-missing", "--cov-fail-under=90"]),
+    Check(
+        [
+            sys.executable,
+            "-m",
+            "pytest",
+            "-q",
+            "--cov=models.primarycare_model",
+            "--cov-report=term-missing",
+            "--cov-fail-under=90",
+        ]
+    ),
     Check([sys.executable, "-m", "pip_audit"]),
     Check([sys.executable, "-m", "py_compile", "streamlit_app.py", "models/primarycare_model/app.py"]),
     Check([sys.executable, "-m", "ty", "check", "models/primarycare_model"], required=False),

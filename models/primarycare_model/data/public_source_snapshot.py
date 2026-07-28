@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import functools
 import hashlib
 from datetime import UTC, date, datetime
 from pathlib import Path
@@ -43,6 +44,7 @@ def _lists_to_tuples(obj: Any) -> Any:
     return obj
 
 
+@functools.cache
 def load_public_sources() -> tuple[PublicSource, ...]:
     payload = yaml.safe_load((PUBLIC_REGISTRY / "sources.public.v1.yaml").read_text(encoding="utf-8"))
     return TypeAdapter(tuple[PublicSource, ...]).validate_python(_lists_to_tuples(payload["sources"]))
@@ -115,7 +117,9 @@ def verify_public_source_readiness(
         if verify_licences and source.licence_status not in ALLOWED_LICENCE_STATUSES:
             issues.append(f"{source.source_id}: licence_status {source.licence_status!r} is not allowed")
         if verify_files and not raw_files:
-            issues.append(f"{source.source_id}: no raw public source files under {source_raw_dir(source.source_id).relative_to(ROOT)}")
+            issues.append(
+                f"{source.source_id}: no raw public source files under {source_raw_dir(source.source_id).relative_to(ROOT)}"
+            )
         if verify_checksums:
             if source.checksum == "pending-download":
                 issues.append(f"{source.source_id}: checksum is pending-download")

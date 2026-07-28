@@ -283,7 +283,9 @@ def _transform_html_tables(plan: PublicSourceRetrievalPlan, raw_artifact: Path, 
     return TransformOutput(plan.source_id, output_path, len(rows), "processed_reference_extract")
 
 
-def _transform_link_inventory(plan: PublicSourceRetrievalPlan, raw_artifact: Path, output_path: Path) -> TransformOutput:
+def _transform_link_inventory(
+    plan: PublicSourceRetrievalPlan, raw_artifact: Path, output_path: Path
+) -> TransformOutput:
     parser = _parse_html(raw_artifact)
     raw_hash = _sha256(raw_artifact)
     rows = [
@@ -330,7 +332,9 @@ def _transform_artifact_manifest(
             "transform_note": "raw public PDF manifest only; table extraction not implemented in this bounded transform",
         }
     ]
-    _write_csv(output_path, rows, ["source_id", "artifact_name", "artifact_sha256", "artifact_size_bytes", "transform_note"])
+    _write_csv(
+        output_path, rows, ["source_id", "artifact_name", "artifact_sha256", "artifact_size_bytes", "transform_note"]
+    )
     _write_metadata(
         output_path,
         source_id=plan.source_id,
@@ -494,10 +498,7 @@ def _worksheet_rows(
 def _xlsx_sheet_metadata(raw_artifact: Path, *, period: str | None = None) -> list[dict[str, object]]:
     with zipfile.ZipFile(raw_artifact) as archive:
         workbook = ElementTree.fromstring(archive.read("xl/workbook.xml"))
-        sheet_names = [
-            str(sheet.attrib["name"])
-            for sheet in workbook.findall("main:sheets/main:sheet", XLSX_NS)
-        ]
+        sheet_names = [str(sheet.attrib["name"]) for sheet in workbook.findall("main:sheets/main:sheet", XLSX_NS)]
         rows: list[dict[str, object]] = []
         for index, sheet_name in enumerate(sheet_names, start=1):
             worksheet_path = f"xl/worksheets/sheet{index}.xml"
@@ -761,7 +762,9 @@ def check_source_transform_readiness(source_id: str, *, require_raw: bool = Fals
         )
 
     issues: list[str] = []
-    script_issues = tuple(issue for issue in verify_public_source_transform_scripts() if issue.startswith(f"{source_id}:"))
+    script_issues = tuple(
+        issue for issue in verify_public_source_transform_scripts() if issue.startswith(f"{source_id}:")
+    )
     issues.extend(script_issues)
 
     raw_dir = ROOT / plan.expected_raw_dir
@@ -805,7 +808,9 @@ def run_transform_cli(source_id: str, argv: list[str] | None = None) -> int:
         except (FileNotFoundError, ValueError) as exc:
             print(str(exc))
             return 1
-        print(f"{source_id} transform wrote {_relative(output.artifact)} rows={output.rows_written} status={output.status}")
+        print(
+            f"{source_id} transform wrote {_relative(output.artifact)} rows={output.rows_written} status={output.status}"
+        )
         return 0
     print(f"{source_id} transform readiness: {result.status}")
     return 0

@@ -35,7 +35,9 @@ def _claims(audit_levels, governance=62, admin_cost=58, quality=72, place=64):
         admin_norm = admin_cost / 100.0
         honest_base = strategic_response(0.42 * quality_norm + 0.34 * place_norm + 0.24 * audit, 0.48, 7.0)
         deterrence = strategic_response(0.55 * audit + 0.25 * admin_norm + 0.20 * place_norm, 0.46, 7.0)
-        gaming_base = strategic_response(0.62 * governance_norm + 0.22 * (1 - quality_norm) + 0.16 * (1 - place_norm), 0.42, 7.0)
+        gaming_base = strategic_response(
+            0.62 * governance_norm + 0.22 * (1 - quality_norm) + 0.16 * (1 - place_norm), 0.42, 7.0
+        )
         honest.append(round(48 + 34 * honest_base + 14 * diminishing_return(governance_norm) - 8 * audit, 1))
         gaming.append(round(48 + 42 * gaming_base - 36 * deterrence - 8 * audit**1.2, 1))
     return honest, gaming
@@ -46,8 +48,12 @@ def _coop(place_levels, cooperation_gain=55, cherry_pick_gain=48, equity=64, sco
     cherry_pick = []
     for place_level in place_levels:
         place_norm = place_level / 100.0
-        cooperation_signal = 0.38 * cooperation_gain / 100 + 0.25 * equity / 100 + 0.20 * scope / 100 + 0.24 * place_norm
-        cherry_pick_signal = 0.56 * cherry_pick_gain / 100 + 0.12 * (1 - equity / 100) + 0.10 * (1 - scope / 100) - 0.34 * place_norm
+        cooperation_signal = (
+            0.38 * cooperation_gain / 100 + 0.25 * equity / 100 + 0.20 * scope / 100 + 0.24 * place_norm
+        )
+        cherry_pick_signal = (
+            0.56 * cherry_pick_gain / 100 + 0.12 * (1 - equity / 100) + 0.10 * (1 - scope / 100) - 0.34 * place_norm
+        )
         cooperate.append(round(46 + 48 * strategic_response(cooperation_signal, 0.48, 7.0), 1))
         cherry_pick.append(round(46 + 48 * strategic_response(cherry_pick_signal, 0.32, 7.0), 1))
     return cooperate, cherry_pick
@@ -102,7 +108,9 @@ class TestCurveCrossing:
         crossing = next(
             (
                 audit_level
-                for audit_level, (honest_value, gaming_value) in zip(audit_levels, zip(honest, gaming, strict=False), strict=False)
+                for audit_level, (honest_value, gaming_value) in zip(
+                    audit_levels, zip(honest, gaming, strict=False), strict=False
+                )
                 if honest_value >= gaming_value
             ),
             None,
@@ -114,7 +122,11 @@ class TestCurveCrossing:
         place_levels = list(range(0, 101, 5))
         cooperate, cherry_pick = _coop(place_levels)
         crossing = next(
-            (place_levels[i] for i, (cooperate_value, cherry_value) in enumerate(zip(cooperate, cherry_pick, strict=False)) if cooperate_value >= cherry_value),
+            (
+                place_levels[i]
+                for i, (cooperate_value, cherry_value) in enumerate(zip(cooperate, cherry_pick, strict=False))
+                if cooperate_value >= cherry_value
+            ),
             None,
         )
         assert crossing is not None, "No crossing between cooperate and cherry-pick"
@@ -172,12 +184,20 @@ class TestMicroeconomicsSaturation:
         curve_values = []
         for level in lever_levels:
             saturation = level / (level + 18 + admin_friction * 0.45) if level else 0.0
-            value = max(0, min(300, base_cost + (recurrent_rate + 18) * saturation * (0.55 + base_cost / 520) - admin_friction * 0.35))
+            value = max(
+                0,
+                min(
+                    300,
+                    base_cost + (recurrent_rate + 18) * saturation * (0.55 + base_cost / 520) - admin_friction * 0.35,
+                ),
+            )
             curve_values.append(round(value, 1))
         second_diff = np.diff(np.diff(curve_values))
         assert np.any(second_diff < -0.01), "No diminishing returns"
         midpoint = len(curve_values) // 2
-        assert curve_values[-1] - curve_values[midpoint] < curve_values[midpoint] - curve_values[0] + 0.5, "Upper half not flatter"
+        assert curve_values[-1] - curve_values[midpoint] < curve_values[midpoint] - curve_values[0] + 0.5, (
+            "Upper half not flatter"
+        )
 
     def test_capitation_budget_headroom_erodes(self):
         levels = list(range(0, 101, 10))

@@ -35,12 +35,14 @@ def run_structural_ensemble(base_score: float = 60.0) -> dict[str, object]:
     rows = []
     for idx, model in enumerate(load_structural_models(), start=1):
         shift = (idx - 4.5) * 1.75
-        rows.append({
-            "structural_model_id": model.structural_model_id,
-            "score": round(base_score + shift, 3),
-            "plausibility_weight": model.plausibility_weight,
-            "claim_boundary": model.claim_boundary,
-        })
+        rows.append(
+            {
+                "structural_model_id": model.structural_model_id,
+                "score": round(base_score + shift, 3),
+                "plausibility_weight": model.plausibility_weight,
+                "claim_boundary": model.claim_boundary,
+            }
+        )
     scores = [row["score"] for row in rows]
     return {
         "uncertainty_status": "parameter_and_structural_uncertainty_reported",

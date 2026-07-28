@@ -179,7 +179,11 @@ def _check_route(
     interaction_failures = (download_ok is False) or (provenance_ok is False)
     graph_failure = graph_count < ROUTE_MIN_GRAPHS.get(_route_key(route), 0)
     return BrowserSmokeResult(
-        ok=not missing_text and not serious_console and not failed_requests and not interaction_failures and not graph_failure,
+        ok=not missing_text
+        and not serious_console
+        and not failed_requests
+        and not interaction_failures
+        and not graph_failure,
         route=route,
         viewport=viewport_name,
         missing_text=missing_text,
@@ -215,7 +219,9 @@ def run_browser_smoke(
                     try:
                         print(f"checking {viewport_name} {route}", flush=True)
                         results.append(
-                            _check_route(page, base_url, route, viewport_name, viewport, timeout_seconds, screenshot_dir)
+                            _check_route(
+                                page, base_url, route, viewport_name, viewport, timeout_seconds, screenshot_dir
+                            )
                         )
                     finally:
                         page.close()

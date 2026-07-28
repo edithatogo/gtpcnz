@@ -2,6 +2,7 @@
 Streamlit page: Bass Diffusion Adoption Animation.
 Animated choropleth/line charts of adoption trajectories over 10-15 years.
 """
+
 import time
 
 import plotly.express as px
@@ -39,7 +40,6 @@ def render_page() -> None:
         play = st.button(":arrow_forward: Animate", type="primary")
         reset = st.button(":stop_button: Reset")
 
-
     params = BassDiffusionParams(p=p, q=q, M=M, T=T, num_regions=num_regions)
     result = simulate_bass(params)
     df = result.time_series
@@ -63,37 +63,57 @@ def render_page() -> None:
     if play or "diff_playing" in st.session_state:
         st.session_state.diff_playing = True
         bar = st.progress(0)
-        for year in range(1, T+1):
+        for year in range(1, T + 1):
             sub = df[df["year"] <= year]
             fig1 = go.Figure()
-            fig1.add_trace(go.Scatter(x=sub["year"], y=sub["adoption_rate"],
-                mode="lines+markers", name="Adoption Rate",
-                line=dict(width=3, color="#147a4f")))
-            fig1.add_trace(go.Scatter(x=sub["year"], y=sub["adopters"],
-                mode="lines+markers", name="Cumulative",
-                line=dict(width=2, color="#2E86AB"), yaxis="y2"))
-            fig1.update_layout(height=350, xaxis=dict(range=[0,T]),
-                yaxis=dict(range=[0,1.05], title="Rate", tickformat=".0%"),
-                yaxis2=dict(range=[0,M*1.05], title="Adopters", overlaying="y", side="right"))
+            fig1.add_trace(
+                go.Scatter(
+                    x=sub["year"],
+                    y=sub["adoption_rate"],
+                    mode="lines+markers",
+                    name="Adoption Rate",
+                    line=dict(width=3, color="#147a4f"),
+                )
+            )
+            fig1.add_trace(
+                go.Scatter(
+                    x=sub["year"],
+                    y=sub["adopters"],
+                    mode="lines+markers",
+                    name="Cumulative",
+                    line=dict(width=2, color="#2E86AB"),
+                    yaxis="y2",
+                )
+            )
+            fig1.update_layout(
+                height=350,
+                xaxis=dict(range=[0, T]),
+                yaxis=dict(range=[0, 1.05], title="Rate", tickformat=".0%"),
+                yaxis2=dict(range=[0, M * 1.05], title="Adopters", overlaying="y", side="right"),
+            )
             main_chart.plotly_chart(fig1, use_container_width=True, key=f"m{year}")
 
-            fig2 = px.bar(sub, x="year", y="new_adopters",
-                color_discrete_sequence=["#147a4f"])
+            fig2 = px.bar(sub, x="year", y="new_adopters", color_discrete_sequence=["#147a4f"])
             fig2.update_layout(height=250)
             new_chart.plotly_chart(fig2, use_container_width=True, key=f"n{year}")
 
             if result.region_time_series is not None:
-                rs = result.region_time_series[result.region_time_series["year"]==year]
+                rs = result.region_time_series[result.region_time_series["year"] == year]
                 if not rs.empty:
-                    fig3 = px.bar(rs.sort_values("adoption_rate"),
-                        x="region", y="adoption_rate", color="adoption_rate",
-                        color_continuous_scale="Greens", range_color=[0,1],
-                        title=f"Year {year}")
+                    fig3 = px.bar(
+                        rs.sort_values("adoption_rate"),
+                        x="region",
+                        y="adoption_rate",
+                        color="adoption_rate",
+                        color_continuous_scale="Greens",
+                        range_color=[0, 1],
+                        title=f"Year {year}",
+                    )
                     fig3.update_layout(height=350, xaxis_tickangle=-45)
                     region_chart.plotly_chart(fig3, use_container_width=True, key=f"r{year}")
 
-            bar.progress(year/T)
-            time.sleep(speed*0.3)
+            bar.progress(year / T)
+            time.sleep(speed * 0.3)
         st.session_state.diff_playing = False
         bar.empty()
         st.success("Complete!")
@@ -101,6 +121,7 @@ def render_page() -> None:
     if reset:
         st.session_state.diff_playing = False
         st.rerun()
+
 
 if __name__ == "__main__":
     render_page()
