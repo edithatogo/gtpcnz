@@ -75,9 +75,5 @@ class OIAComponentEntry(StrictContract):
     )
     impact_description: str = Field(
         min_length=1,
-        description=(
-            "Plain-English description of what having this data would "
-            "unlock or improve in the model"
-        ),
+        description=("Plain-English description of what having this data would unlock or improve in the model"),
     )
-

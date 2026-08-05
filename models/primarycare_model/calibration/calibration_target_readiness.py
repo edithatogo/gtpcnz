@@ -77,9 +77,7 @@ def build_calibration_target_readiness_matrix(*, strict: bool = False) -> tuple[
                 blockers.append(f"{target.target_id}: source {target.source_id} is not source_ready")
             blockers.extend(f"{target.target_id}: {issue}" for issue in source_row.issues)
         if relative_error > target.tolerance:
-            blockers.append(
-                f"{target.target_id}: relative_error {relative_error} exceeds tolerance {target.tolerance}"
-            )
+            blockers.append(f"{target.target_id}: relative_error {relative_error} exceeds tolerance {target.tolerance}")
 
         calibration_gate_ready = source_ready and relative_error <= target.tolerance
         claim_status = "public_aggregate_target_ready" if calibration_gate_ready else "calibration_readiness_only"
@@ -122,7 +120,11 @@ def readiness_matrix_as_json(*, strict: bool = False) -> str:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Report public aggregate calibration target readiness.")
-    parser.add_argument("--strict", action="store_true", help="Fail until every calibration target is source-ready and within tolerance.")
+    parser.add_argument(
+        "--strict",
+        action="store_true",
+        help="Fail until every calibration target is source-ready and within tolerance.",
+    )
     parser.add_argument("--json", action="store_true", help="Print the calibration target readiness matrix as JSON.")
     args = parser.parse_args(argv)
 

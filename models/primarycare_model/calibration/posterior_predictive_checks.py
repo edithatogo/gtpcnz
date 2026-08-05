@@ -110,8 +110,12 @@ def posterior_predictive_checks_as_json(*, strict: bool = False) -> str:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Report posterior predictive check readiness for public aggregate calibration.")
-    parser.add_argument("--strict", action="store_true", help="Fail until posterior predictive checks are source-ready and passed.")
+    parser = argparse.ArgumentParser(
+        description="Report posterior predictive check readiness for public aggregate calibration."
+    )
+    parser.add_argument(
+        "--strict", action="store_true", help="Fail until posterior predictive checks are source-ready and passed."
+    )
     parser.add_argument("--json", action="store_true", help="Print the PPC readiness payload as JSON.")
     args = parser.parse_args(argv)
 

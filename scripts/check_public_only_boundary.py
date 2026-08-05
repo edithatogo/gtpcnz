@@ -8,8 +8,15 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_ROOT = ROOT / "models" / "primarycare_model" / "registries" / "public"
 FORBIDDEN = {
-        "sensitive", "confidential", "private_admin", "patient" + "_level", "linked_data",
-    "stakeholder", "unpublished_expert_elicitation", "calibrated_from_private", "calibrated",
+    "sensitive",
+    "confidential",
+    "private_admin",
+    "patient" + "_level",
+    "linked_data",
+    "stakeholder",
+    "unpublished_expert_elicitation",
+    "calibrated_from_private",
+    "calibrated",
 }
 
 

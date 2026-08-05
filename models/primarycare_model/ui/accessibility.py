@@ -3,9 +3,16 @@
 from __future__ import annotations
 
 REQUIRED_CHART_FIELDS = {
-    "title", "unit", "claim_level", "calibration_status", "uncertainty_type",
-    "source_snapshot_id", "interpretation_note", "not_valid_for_warning",
-    "downloadable_data", "table_fallback",
+    "title",
+    "unit",
+    "claim_level",
+    "calibration_status",
+    "uncertainty_type",
+    "source_snapshot_id",
+    "interpretation_note",
+    "not_valid_for_warning",
+    "downloadable_data",
+    "table_fallback",
 }
 
 

@@ -1,4 +1,5 @@
 """Validate Substack launch schedules against public-post contracts."""
+
 from __future__ import annotations
 
 import json

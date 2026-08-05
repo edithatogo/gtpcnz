@@ -48,7 +48,9 @@ def original_backup_dir() -> Path:
     backup_root = ROOT / ".tmp"
     candidates = sorted(path for path in backup_root.glob("sim-plot-backup-*") if path.is_dir())
     if not candidates:
-        latest_polish = json.loads((REPORTS / "substack-simulation-plot-polish-latest.json").read_text(encoding="utf-8"))
+        latest_polish = json.loads(
+            (REPORTS / "substack-simulation-plot-polish-latest.json").read_text(encoding="utf-8")
+        )
         return ROOT / latest_polish["backupDir"]
     return candidates[0]
 

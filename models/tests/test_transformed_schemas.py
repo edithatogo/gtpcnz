@@ -88,7 +88,12 @@ def test_processed_schema_accepts_valid_public_aggregate_csv() -> None:
         (access_dir / "_metadata.yaml").write_text("source_id: src_nz_health_survey\n", encoding="utf-8")
         _write_valid_pho_access_metadata(processed_root)
 
-        assert validate_processed_input_schemas(registry_root=REGISTRY, processed_root=processed_root, require_processed=True) == ()
+        assert (
+            validate_processed_input_schemas(
+                registry_root=REGISTRY, processed_root=processed_root, require_processed=True
+            )
+            == ()
+        )
 
 
 def test_processed_schema_rejects_person_level_columns() -> None:
@@ -108,5 +113,7 @@ def test_processed_schema_rejects_person_level_columns() -> None:
         )
         (access_dir / "_metadata.yaml").write_text("source_id: src_nz_health_survey\n", encoding="utf-8")
 
-        issues = validate_processed_input_schemas(registry_root=REGISTRY, processed_root=processed_root, require_processed=True)
+        issues = validate_processed_input_schemas(
+            registry_root=REGISTRY, processed_root=processed_root, require_processed=True
+        )
     assert any("forbidden person-level columns" in issue for issue in issues)

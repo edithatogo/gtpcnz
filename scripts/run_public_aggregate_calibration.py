@@ -20,7 +20,10 @@ def main() -> int:
     args = parser.parse_args()
     result = run_public_aggregate_calibration()
     print(json.dumps(result, indent=2, sort_keys=True))
-    if args.check_only and result["calibration_status"] not in {"public_aggregate_validated", "calibration_readiness_only"}:
+    if args.check_only and result["calibration_status"] not in {
+        "public_aggregate_validated",
+        "calibration_readiness_only",
+    }:
         return 1
     return 0
 

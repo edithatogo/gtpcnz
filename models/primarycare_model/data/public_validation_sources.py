@@ -54,7 +54,9 @@ def verify_public_validation_source_candidates() -> tuple[str, ...]:
     candidates = load_public_validation_source_candidates()
 
     candidate_ids = [candidate.candidate_id for candidate in candidates]
-    duplicate_candidate_ids = sorted({candidate_id for candidate_id in candidate_ids if candidate_ids.count(candidate_id) > 1})
+    duplicate_candidate_ids = sorted(
+        {candidate_id for candidate_id in candidate_ids if candidate_ids.count(candidate_id) > 1}
+    )
     issues.extend(f"{candidate_id}: duplicate candidate_id" for candidate_id in duplicate_candidate_ids)
 
     registered = [candidate for candidate in candidates if candidate.candidate_status == "registered_retrieval_plan"]
@@ -97,5 +99,7 @@ def verify_public_validation_source_candidates() -> tuple[str, ...]:
             if not candidate.transform_script.startswith("scripts/transform_"):
                 issues.append(f"{candidate.candidate_id}: transform_script must be an explicit transform script")
             if candidate.independence_assessment != "independent_of_current_calibration_targets":
-                issues.append(f"{candidate.candidate_id}: registered retrieval candidate must be independently assessed")
+                issues.append(
+                    f"{candidate.candidate_id}: registered retrieval candidate must be independently assessed"
+                )
     return tuple(issues)

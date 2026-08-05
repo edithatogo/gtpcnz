@@ -87,7 +87,9 @@ class NashOptimisationAdapter:
         return float(max(lower, min(upper, value)))
 
     @staticmethod
-    def _funder_payoff(audit: float, effort: float, budget: float, complexity: float, activity: float, place: float) -> float:
+    def _funder_payoff(
+        audit: float, effort: float, budget: float, complexity: float, activity: float, place: float
+    ) -> float:
         compliance_benefit = 30.0 * (effort / 100.0)
         gaming_penalty = -20.0 * (activity / 100.0) * (1.0 - audit / 100.0)
         audit_cost = -15.0 * (audit / 100.0)
@@ -139,9 +141,17 @@ class NashOptimisationAdapter:
             # Funders choose an audit level to maximise their payoff
             # given the current provider effort.
             audit_candidates = np.linspace(max(0, audit - 20), min(100, audit + 20), 11)
-            funder_payoffs = [self._funder_payoff(
-                a, effort, inp.budget_tightness, inp.complexity, inp.activity_signal, inp.funder_place_accountability
-            ) for a in audit_candidates]
+            funder_payoffs = [
+                self._funder_payoff(
+                    a,
+                    effort,
+                    inp.budget_tightness,
+                    inp.complexity,
+                    inp.activity_signal,
+                    inp.funder_place_accountability,
+                )
+                for a in audit_candidates
+            ]
             best_audit_idx = int(np.argmax(funder_payoffs))
             target_audit = float(audit_candidates[best_audit_idx])
 
@@ -149,9 +159,12 @@ class NashOptimisationAdapter:
             # Providers choose an effort level to maximise their payoff
             # given the current funder audit.
             effort_candidates = np.linspace(max(0, effort - 20), min(100, effort + 20), 11)
-            provider_payoffs = [self._provider_payoff(
-                e, audit, inp.provider_scope_utilisation, inp.complexity, inp.funder_place_accountability
-            ) for e in effort_candidates]
+            provider_payoffs = [
+                self._provider_payoff(
+                    e, audit, inp.provider_scope_utilisation, inp.complexity, inp.funder_place_accountability
+                )
+                for e in effort_candidates
+            ]
             best_effort_idx = int(np.argmax(provider_payoffs))
             target_effort = float(effort_candidates[best_effort_idx])
 
@@ -161,13 +174,15 @@ class NashOptimisationAdapter:
             new_audit = self._clamp(audit + lr * (target_audit - audit))
             new_effort = self._clamp(effort + lr * (target_effort - effort))
 
-            trajectory.append({
-                "iteration": iteration,
-                "funder_audit": round(new_audit, 2),
-                "provider_effort": round(new_effort, 2),
-                "funder_payoff": round(float(funder_payoffs[best_audit_idx]), 2),
-                "provider_payoff": round(float(provider_payoffs[best_effort_idx]), 2),
-            })
+            trajectory.append(
+                {
+                    "iteration": iteration,
+                    "funder_audit": round(new_audit, 2),
+                    "provider_effort": round(new_effort, 2),
+                    "funder_payoff": round(float(funder_payoffs[best_audit_idx]), 2),
+                    "provider_payoff": round(float(provider_payoffs[best_effort_idx]), 2),
+                }
+            )
 
             # ── Convergence check ──
             # Both strategies must change by less than 0.01 for the
@@ -182,8 +197,16 @@ class NashOptimisationAdapter:
             audit, effort = new_audit, new_effort
             final_iter = iteration
 
-        hybrid = self._clamp(30.0 + 0.30 * audit + 0.25 * effort + 0.15 * inp.funder_place_accountability - 0.10 * inp.complexity)
-        access = self._clamp(30.0 + 0.20 * effort + 0.20 * inp.funder_place_accountability + 0.15 * inp.activity_signal - 0.15 * inp.budget_tightness)
+        hybrid = self._clamp(
+            30.0 + 0.30 * audit + 0.25 * effort + 0.15 * inp.funder_place_accountability - 0.10 * inp.complexity
+        )
+        access = self._clamp(
+            30.0
+            + 0.20 * effort
+            + 0.20 * inp.funder_place_accountability
+            + 0.15 * inp.activity_signal
+            - 0.15 * inp.budget_tightness
+        )
         supply = self._clamp(25.0 + 0.25 * inp.activity_signal + 0.20 * inp.provider_scope_utilisation + 0.15 * effort)
         hosp_pressure = self._clamp(100 - 0.25 * access - 0.15 * audit)
         gaming = self._clamp(40.0 + 0.30 * inp.activity_signal - 0.35 * audit - 0.15 * effort)

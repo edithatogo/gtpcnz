@@ -187,7 +187,9 @@ class MCSweepResult:
                     }
                 )
 
-        arrays = [pa.array([row[field.name] for row in rows], type=field.type) for field in MONTHLY_METRICS_ARROW_SCHEMA]
+        arrays = [
+            pa.array([row[field.name] for row in rows], type=field.type) for field in MONTHLY_METRICS_ARROW_SCHEMA
+        ]
         return pa.Table.from_arrays(arrays, schema=MONTHLY_METRICS_ARROW_SCHEMA)
 
     def to_monthly_metrics_list(self, batch_idx: int = 0) -> list[MonthlyMetrics]:
@@ -344,7 +346,9 @@ def run_mc_sweep(
 
     params_batch, seeds = generate_sweep_params(config, scenario, batch_size)
     start = time.perf_counter()
-    trajectories = np.stack([_numpy_trajectory(params_batch[idx], n_steps, int(seeds[idx])) for idx in range(batch_size)])
+    trajectories = np.stack(
+        [_numpy_trajectory(params_batch[idx], n_steps, int(seeds[idx])) for idx in range(batch_size)]
+    )
     wall_time_s = time.perf_counter() - start
     return MCSweepResult(
         trajectories=trajectories,

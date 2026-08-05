@@ -30,7 +30,9 @@ def test_public_source_fetch_check_is_readiness_compatible() -> None:
 
 
 def test_public_source_fetch_strict_mode_reports_missing_raw_files() -> None:
-    results = [check_source_fetch_readiness(plan.source_id, require_raw=True) for plan in load_public_source_retrieval_plans()]
+    results = [
+        check_source_fetch_readiness(plan.source_id, require_raw=True) for plan in load_public_source_retrieval_plans()
+    ]
     missing_raw_issues = [
         issue
         for result in results

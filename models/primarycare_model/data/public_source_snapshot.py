@@ -115,7 +115,9 @@ def verify_public_source_readiness(
         if verify_licences and source.licence_status not in ALLOWED_LICENCE_STATUSES:
             issues.append(f"{source.source_id}: licence_status {source.licence_status!r} is not allowed")
         if verify_files and not raw_files:
-            issues.append(f"{source.source_id}: no raw public source files under {source_raw_dir(source.source_id).relative_to(ROOT)}")
+            issues.append(
+                f"{source.source_id}: no raw public source files under {source_raw_dir(source.source_id).relative_to(ROOT)}"
+            )
         if verify_checksums:
             if source.checksum == "pending-download":
                 issues.append(f"{source.source_id}: checksum is pending-download")

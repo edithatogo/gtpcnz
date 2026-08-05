@@ -224,10 +224,20 @@ def parse_dashboard_state(pathname: str | None = None, search: str | None = None
         scenarios=scenarios or ("F0", "F4"),
         simulation_kind=kind,  # type: ignore[arg-type]
         scenario_id=scenario_id,
-        draws=_clamp_int(_first_query_value(query, "draws", str(DEFAULT_MONTE_CARLO_DRAWS)), DEFAULT_MONTE_CARLO_DRAWS, 10, MAX_MONTE_CARLO_DRAWS),
+        draws=_clamp_int(
+            _first_query_value(query, "draws", str(DEFAULT_MONTE_CARLO_DRAWS)),
+            DEFAULT_MONTE_CARLO_DRAWS,
+            10,
+            MAX_MONTE_CARLO_DRAWS,
+        ),
         seed=_clamp_int(_first_query_value(query, "seed", "20260526"), 20260526, 1, 999999),
         months=_clamp_int(_first_query_value(query, "months", "36"), 36, 6, MAX_MONTHS),
-        population_size=_clamp_int(_first_query_value(query, "population", str(DEFAULT_ABM_POPULATION)), DEFAULT_ABM_POPULATION, 50, MAX_ABM_POPULATION),
+        population_size=_clamp_int(
+            _first_query_value(query, "population", str(DEFAULT_ABM_POPULATION)),
+            DEFAULT_ABM_POPULATION,
+            50,
+            MAX_ABM_POPULATION,
+        ),
         educational_settings=tuple(sorted(settings.items())),
     )
 
@@ -597,44 +607,138 @@ def post_reading_map_table() -> pd.DataFrame:
 
 def current_reform_table() -> pd.DataFrame:
     rows = [
-        ("Capitation reweighting", "Changing how baseline enrolled-population funding is allocated.", "May improve fairness of distribution, but does not by itself create a strong payment signal for the next clinically necessary appointment."),
-        ("Primary care access target", "A public target for getting people timely primary care access.", "Useful as a signal, but targets need workforce, funding and data support to change behaviour."),
-        ("National Primary Care Dataset", "A data programme intended to improve visibility of primary care activity and access.", "Important for future calibration; not yet enough on its own to prove the model's assumptions."),
-        ("Digital access and telehealth", "Online and remote access routes for some care needs.", "Can help access, but cannot replace local in-person care for every patient, place or condition."),
-        ("Urgent and after-hours care work", "Policy attention to alternatives before emergency department presentation.", "May matter, but needs funding architecture and workforce support to shift demand safely."),
-        ("PHO accountability and commissioning", "Use of organisations and contracts to manage enrolled-population responsibility.", "Central to place accountability, but pass-through, transaction costs and incentives need verification."),
+        (
+            "Capitation reweighting",
+            "Changing how baseline enrolled-population funding is allocated.",
+            "May improve fairness of distribution, but does not by itself create a strong payment signal for the next clinically necessary appointment.",
+        ),
+        (
+            "Primary care access target",
+            "A public target for getting people timely primary care access.",
+            "Useful as a signal, but targets need workforce, funding and data support to change behaviour.",
+        ),
+        (
+            "National Primary Care Dataset",
+            "A data programme intended to improve visibility of primary care activity and access.",
+            "Important for future calibration; not yet enough on its own to prove the model's assumptions.",
+        ),
+        (
+            "Digital access and telehealth",
+            "Online and remote access routes for some care needs.",
+            "Can help access, but cannot replace local in-person care for every patient, place or condition.",
+        ),
+        (
+            "Urgent and after-hours care work",
+            "Policy attention to alternatives before emergency department presentation.",
+            "May matter, but needs funding architecture and workforce support to shift demand safely.",
+        ),
+        (
+            "PHO accountability and commissioning",
+            "Use of organisations and contracts to manage enrolled-population responsibility.",
+            "Central to place accountability, but pass-through, transaction costs and incentives need verification.",
+        ),
     ]
-    return pd.DataFrame(rows, columns=["Current pathway component", "Plain-English meaning", "Why it matters for this model"])
+    return pd.DataFrame(
+        rows, columns=["Current pathway component", "Plain-English meaning", "Why it matters for this model"]
+    )
 
 
 def public_status_table() -> pd.DataFrame:
     rows = [
         ("Model status", "Public-data anchored benchmark", "Ready for explanation; not ready for forecasting."),
-        ("Dashboard status", "Dash on Hugging Face plus Streamlit compatibility", "Dash is the migration target; Streamlit remains the parity baseline until retired."),
+        (
+            "Dashboard status",
+            "Dash on Hugging Face plus Streamlit compatibility",
+            "Dash is the migration target; Streamlit remains the parity baseline until retired.",
+        ),
         ("Evidence status", "Evidence readiness", "OIA/data requests still need submission or update."),
         ("Calibration status", "Readiness mapped", "Real linked data and validation tests still required."),
         ("Claim status", "Bounded", "No precise fiscal, hospital-demand, workforce or implementation-impact claims."),
-        ("Deployment status", "GitHub Pages and Hugging Face", "GitHub is source/front door; Hugging Face hosts the interactive lab."),
+        (
+            "Deployment status",
+            "GitHub Pages and Hugging Face",
+            "GitHub is source/front door; Hugging Face hosts the interactive lab.",
+        ),
     ]
     return pd.DataFrame(rows, columns=["Area", "Current state", "What this means"])
 
 
 def model_surface_status_table() -> pd.DataFrame:
     rows = [
-        ("Reference scenarios", "surfaced", "/reference-scenarios", "Precomputed public scenario indices with comparison, scatter, heatmap, profile and budget-impact views."),
-        ("Microeconomics labs", "surfaced", "/microeconomics", "Marginal supply, capitation budget, scheduled payment and access route mix."),
+        (
+            "Reference scenarios",
+            "surfaced",
+            "/reference-scenarios",
+            "Precomputed public scenario indices with comparison, scatter, heatmap, profile and budget-impact views.",
+        ),
+        (
+            "Microeconomics labs",
+            "surfaced",
+            "/microeconomics",
+            "Marginal supply, capitation budget, scheduled payment and access route mix.",
+        ),
         ("Game theory labs", "surfaced", "/game-theory", "Claims audit, coordination and gaming-risk frontier views."),
-        ("Monte Carlo uncertainty", "surfaced", "/live-model", "Seeded bounded uncertainty run; demonstrative intervals only."),
+        (
+            "Monte Carlo uncertainty",
+            "surfaced",
+            "/live-model",
+            "Seeded bounded uncertainty run; demonstrative intervals only.",
+        ),
         ("Stock-flow dynamics", "surfaced", "/live-model", "Bounded monthly teaching trace; not a forecast."),
-        ("ABM agent lens", "surfaced", "/live-model", "Capped synthetic-agent allocation lens; not patient-level evidence."),
-        ("Sensitivity / decomposition", "surfaced", "/live-model", "Tornado, waterfall, variance and phase portrait diagnostics."),
-        ("Outcome clustering", "surfaced", "/methodology", "Internal model-structure grouping over benchmark scenarios."),
-        ("Budget impact / diffusion", "surfaced", "/reference-scenarios", "Illustrative Bass diffusion budget view, not a fiscal forecast."),
-        ("VOI / evidence priority", "surfaced", "/advanced-visuals", "Seeded EVPI/EVPPI teaching view for evidence-priority ranking."),
-        ("Structural uncertainty", "surfaced", "/advanced-visuals", "Public structural-model registry interval and weights."),
-        ("Policy shocks", "surfaced", "/advanced-visuals", "Abrupt-change teaching sequence for hospital and fiscal pressure."),
-        ("Linked-data calibration", "deferred_public_boundary", "/calibration-diagnostics", "Readiness-only until source-ready public/linked validation gates pass."),
-        ("Patient-level forecasting", "retired", "/runtime-health", "Out of public scope; claim boundary prohibits patient-level forecasts."),
+        (
+            "ABM agent lens",
+            "surfaced",
+            "/live-model",
+            "Capped synthetic-agent allocation lens; not patient-level evidence.",
+        ),
+        (
+            "Sensitivity / decomposition",
+            "surfaced",
+            "/live-model",
+            "Tornado, waterfall, variance and phase portrait diagnostics.",
+        ),
+        (
+            "Outcome clustering",
+            "surfaced",
+            "/methodology",
+            "Internal model-structure grouping over benchmark scenarios.",
+        ),
+        (
+            "Budget impact / diffusion",
+            "surfaced",
+            "/reference-scenarios",
+            "Illustrative Bass diffusion budget view, not a fiscal forecast.",
+        ),
+        (
+            "VOI / evidence priority",
+            "surfaced",
+            "/advanced-visuals",
+            "Seeded EVPI/EVPPI teaching view for evidence-priority ranking.",
+        ),
+        (
+            "Structural uncertainty",
+            "surfaced",
+            "/advanced-visuals",
+            "Public structural-model registry interval and weights.",
+        ),
+        (
+            "Policy shocks",
+            "surfaced",
+            "/advanced-visuals",
+            "Abrupt-change teaching sequence for hospital and fiscal pressure.",
+        ),
+        (
+            "Linked-data calibration",
+            "deferred_public_boundary",
+            "/calibration-diagnostics",
+            "Readiness-only until source-ready public/linked validation gates pass.",
+        ),
+        (
+            "Patient-level forecasting",
+            "retired",
+            "/runtime-health",
+            "Out of public scope; claim boundary prohibits patient-level forecasts.",
+        ),
     ]
     return pd.DataFrame(rows, columns=["Model surface", "Status", "Dash route", "Boundary / implementation note"])
 
@@ -692,17 +796,72 @@ def readiness_chart_bundle() -> ChartBundle:
 def figure_inventory_table() -> pd.DataFrame:
     rows = [
         ("Static table", "Current reform pathway", "Current state", "Explains the real comparator in plain English."),
-        ("Static table", "Post reading map", "Post guide", "Maps posts to report sections, dashboard modules, visuals and caveats."),
-        ("Dynamic bar chart", "Reference scenario viability", "Reference scenarios", "Compares model-generated viability indices."),
-        ("Dynamic scatter plot", "Supply generation versus hospital pressure", "Reference scenarios", "Shows the internal supply-pressure tradeoff."),
-        ("Dynamic heatmap", "Scenario score matrix", "Reference scenarios", "Shows multiple indices across scenarios at once."),
-        ("Dynamic radar chart", "Selected scenario profile", "Reference scenarios", "Shows one selected scenario across dimensions."),
-        ("Dynamic line/bar/stacked charts", "Microeconomics labs", "Microeconomics", "Shows marginal supply, capitation constraint, scheduled payment and access mix."),
-        ("Dynamic payoff charts", "Game theory labs", "Game theory", "Shows audit, coordination and gaming-risk incentives."),
-        ("Dynamic stochastic charts", "Uncertainty, stock-flow, agent lens", "Live model", "Shows bounded seeded teaching simulations."),
-        ("Dynamic sensitivity charts", "Tornado, waterfall, variance, phase portrait", "Live model", "Shows live model diagnostics from runtime helpers."),
-        ("Static/dynamic tables", "Evidence, OIA, calibration readiness", "Evidence/OIA and Calibration", "Shows sources and what is still needed before calibration."),
-        ("Contract panel", "Public cockpit", "Public cockpit", "Shows cockpit sections, required visuals, provenance, VOI and downloads."),
+        (
+            "Static table",
+            "Post reading map",
+            "Post guide",
+            "Maps posts to report sections, dashboard modules, visuals and caveats.",
+        ),
+        (
+            "Dynamic bar chart",
+            "Reference scenario viability",
+            "Reference scenarios",
+            "Compares model-generated viability indices.",
+        ),
+        (
+            "Dynamic scatter plot",
+            "Supply generation versus hospital pressure",
+            "Reference scenarios",
+            "Shows the internal supply-pressure tradeoff.",
+        ),
+        (
+            "Dynamic heatmap",
+            "Scenario score matrix",
+            "Reference scenarios",
+            "Shows multiple indices across scenarios at once.",
+        ),
+        (
+            "Dynamic radar chart",
+            "Selected scenario profile",
+            "Reference scenarios",
+            "Shows one selected scenario across dimensions.",
+        ),
+        (
+            "Dynamic line/bar/stacked charts",
+            "Microeconomics labs",
+            "Microeconomics",
+            "Shows marginal supply, capitation constraint, scheduled payment and access mix.",
+        ),
+        (
+            "Dynamic payoff charts",
+            "Game theory labs",
+            "Game theory",
+            "Shows audit, coordination and gaming-risk incentives.",
+        ),
+        (
+            "Dynamic stochastic charts",
+            "Uncertainty, stock-flow, agent lens",
+            "Live model",
+            "Shows bounded seeded teaching simulations.",
+        ),
+        (
+            "Dynamic sensitivity charts",
+            "Tornado, waterfall, variance, phase portrait",
+            "Live model",
+            "Shows live model diagnostics from runtime helpers.",
+        ),
+        (
+            "Static/dynamic tables",
+            "Evidence, OIA, calibration readiness",
+            "Evidence/OIA and Calibration",
+            "Shows sources and what is still needed before calibration.",
+        ),
+        (
+            "Contract panel",
+            "Public cockpit",
+            "Public cockpit",
+            "Shows cockpit sections, required visuals, provenance, VOI and downloads.",
+        ),
     ]
     return pd.DataFrame(rows, columns=["Type", "Figure or table", "Dash route", "Purpose"])
 
@@ -940,10 +1099,34 @@ def microeconomics_bundles() -> tuple[ChartBundle, ...]:
     access_fig.update_layout(height=380, margin=dict(l=20, r=20, t=56, b=20))
 
     return (
-        ChartBundle("Marginal supply response", payment_fig, payment_df, "Shows the Streamlit marginal-supply lab as a bounded deterministic curve.", csv_filename="gtpcnz-micro-marginal-supply.csv"),
-        ChartBundle("Capitation budget constraint", budget_fig, budget_df, "Shows capitation as a finite envelope against illustrative need pressure.", csv_filename="gtpcnz-micro-capitation-budget.csv"),
-        ChartBundle("Scheduled activity payment", scheduled_fig, scheduled_df, "Shows gross scheduled payment, control cost and net signal.", csv_filename="gtpcnz-micro-scheduled-payment.csv"),
-        ChartBundle("Access route mix", access_fig, access_df, "Shows local, digital and deferred shares across access-barrier bands.", csv_filename="gtpcnz-micro-access-mix.csv"),
+        ChartBundle(
+            "Marginal supply response",
+            payment_fig,
+            payment_df,
+            "Shows the Streamlit marginal-supply lab as a bounded deterministic curve.",
+            csv_filename="gtpcnz-micro-marginal-supply.csv",
+        ),
+        ChartBundle(
+            "Capitation budget constraint",
+            budget_fig,
+            budget_df,
+            "Shows capitation as a finite envelope against illustrative need pressure.",
+            csv_filename="gtpcnz-micro-capitation-budget.csv",
+        ),
+        ChartBundle(
+            "Scheduled activity payment",
+            scheduled_fig,
+            scheduled_df,
+            "Shows gross scheduled payment, control cost and net signal.",
+            csv_filename="gtpcnz-micro-scheduled-payment.csv",
+        ),
+        ChartBundle(
+            "Access route mix",
+            access_fig,
+            access_df,
+            "Shows local, digital and deferred shares across access-barrier bands.",
+            csv_filename="gtpcnz-micro-access-mix.csv",
+        ),
     )
 
 
@@ -960,8 +1143,20 @@ def game_theory_bundles() -> tuple[ChartBundle, ...]:
         gaming_attraction = strategic_response(0.62 * gain + 0.22 * (1 - quality) + 0.16 * (1 - place), 0.42, 7.0)
         audit_rows.extend(
             [
-                {"audit_strength": audit_level, "strategy": "Honest payoff", "payoff": round(48 + 34 * honest_bonus + 14 * diminishing_return(gain) - 8 * diminishing_return(audit, 2.0), 1)},
-                {"audit_strength": audit_level, "strategy": "Gaming payoff", "payoff": round(48 + 42 * gaming_attraction - 36 * detection_risk - 8 * diminishing_return(audit, 1.8), 1)},
+                {
+                    "audit_strength": audit_level,
+                    "strategy": "Honest payoff",
+                    "payoff": round(
+                        48 + 34 * honest_bonus + 14 * diminishing_return(gain) - 8 * diminishing_return(audit, 2.0), 1
+                    ),
+                },
+                {
+                    "audit_strength": audit_level,
+                    "strategy": "Gaming payoff",
+                    "payoff": round(
+                        48 + 42 * gaming_attraction - 36 * detection_risk - 8 * diminishing_return(audit, 1.8), 1
+                    ),
+                },
             ]
         )
     audit_df = pd.DataFrame(audit_rows)
@@ -982,8 +1177,16 @@ def game_theory_bundles() -> tuple[ChartBundle, ...]:
         cherry_signal = 0.52 * (1 - place_frac) + 0.28 * gain + 0.20 * (1 - quality)
         coordination_rows.extend(
             [
-                {"place_accountability": place_level, "strategy": "Cooperate", "payoff": round(46 + 48 * strategic_response(coop_signal, 0.48, 7.0), 1)},
-                {"place_accountability": place_level, "strategy": "Cherry-pick", "payoff": round(46 + 48 * strategic_response(cherry_signal, 0.32, 7.0), 1)},
+                {
+                    "place_accountability": place_level,
+                    "strategy": "Cooperate",
+                    "payoff": round(46 + 48 * strategic_response(coop_signal, 0.48, 7.0), 1),
+                },
+                {
+                    "place_accountability": place_level,
+                    "strategy": "Cherry-pick",
+                    "payoff": round(46 + 48 * strategic_response(cherry_signal, 0.32, 7.0), 1),
+                },
             ]
         )
     coordination_df = pd.DataFrame(coordination_rows)
@@ -993,7 +1196,11 @@ def game_theory_bundles() -> tuple[ChartBundle, ...]:
         y="payoff",
         color="strategy",
         title="Game theory lab 2: payoff and best response",
-        labels={"place_accountability": "Place accountability", "payoff": "Illustrative payoff", "strategy": "Strategy"},
+        labels={
+            "place_accountability": "Place accountability",
+            "payoff": "Illustrative payoff",
+            "strategy": "Strategy",
+        },
     )
     coordination_fig.update_layout(height=380, margin=dict(l=20, r=20, t=56, b=20))
 
@@ -1021,9 +1228,27 @@ def game_theory_bundles() -> tuple[ChartBundle, ...]:
     frontier_fig.update_layout(height=380, margin=dict(l=20, r=20, t=56, b=20))
 
     return (
-        ChartBundle("Claims audit game", audit_fig, audit_df, "Shows honest versus gaming payoffs as audit strength rises.", csv_filename="gtpcnz-game-audit-payoffs.csv"),
-        ChartBundle("Coordination game", coordination_fig, coordination_df, "Shows how place accountability shifts cooperate versus cherry-pick incentives.", csv_filename="gtpcnz-game-coordination-payoffs.csv"),
-        ChartBundle("Gaming-risk frontier", frontier_fig, frontier_df, "Shows access gain and gaming risk as controls change.", csv_filename="gtpcnz-game-risk-frontier.csv"),
+        ChartBundle(
+            "Claims audit game",
+            audit_fig,
+            audit_df,
+            "Shows honest versus gaming payoffs as audit strength rises.",
+            csv_filename="gtpcnz-game-audit-payoffs.csv",
+        ),
+        ChartBundle(
+            "Coordination game",
+            coordination_fig,
+            coordination_df,
+            "Shows how place accountability shifts cooperate versus cherry-pick incentives.",
+            csv_filename="gtpcnz-game-coordination-payoffs.csv",
+        ),
+        ChartBundle(
+            "Gaming-risk frontier",
+            frontier_fig,
+            frontier_df,
+            "Shows access gain and gaming risk as controls change.",
+            csv_filename="gtpcnz-game-risk-frontier.csv",
+        ),
     )
 
 
@@ -1049,8 +1274,12 @@ def simulation_bundle(
 def live_model_diagnostic_bundles(scenario_id: str = "F4") -> tuple[ChartBundle, ...]:
     tornado_df = run_tornado_sensitivity(scenario_id, delta_step=10.0)
     tornado_fig = go.Figure()
-    tornado_fig.add_trace(go.Bar(y=tornado_df["lever"], x=tornado_df["low_delta_viability"], name="Low delta", orientation="h"))
-    tornado_fig.add_trace(go.Bar(y=tornado_df["lever"], x=tornado_df["high_delta_viability"], name="High delta", orientation="h"))
+    tornado_fig.add_trace(
+        go.Bar(y=tornado_df["lever"], x=tornado_df["low_delta_viability"], name="Low delta", orientation="h")
+    )
+    tornado_fig.add_trace(
+        go.Bar(y=tornado_df["lever"], x=tornado_df["high_delta_viability"], name="High delta", orientation="h")
+    )
     tornado_fig.update_layout(
         barmode="relative",
         height=430,
@@ -1105,14 +1334,40 @@ def live_model_diagnostic_bundles(scenario_id: str = "F4") -> tuple[ChartBundle,
     phase_fig.update_layout(height=430, margin=dict(l=20, r=20, t=56, b=20))
 
     return (
-        ChartBundle("Tornado sensitivity", tornado_fig, tornado_df, "One-at-a-time sensitivity preview, not a full causal attribution.", csv_filename=f"gtpcnz-{scenario_id}-tornado.csv"),
-        ChartBundle("Hybrid viability decomposition", waterfall_fig, waterfall_df, "Shows the additive weighted structure behind hybrid viability.", csv_filename=f"gtpcnz-{scenario_id}-waterfall.csv"),
-        ChartBundle("Variance decomposition", variance_fig, variance_df, "Separates structural, subgroup and stochastic variance components in a bounded preview.", csv_filename=f"gtpcnz-{scenario_id}-variance.csv"),
-        ChartBundle("Phase portrait", phase_fig, phase_df, "Shows local directional gradients in two-dimensional parameter space.", csv_filename=f"gtpcnz-{scenario_id}-phase-portrait.csv"),
+        ChartBundle(
+            "Tornado sensitivity",
+            tornado_fig,
+            tornado_df,
+            "One-at-a-time sensitivity preview, not a full causal attribution.",
+            csv_filename=f"gtpcnz-{scenario_id}-tornado.csv",
+        ),
+        ChartBundle(
+            "Hybrid viability decomposition",
+            waterfall_fig,
+            waterfall_df,
+            "Shows the additive weighted structure behind hybrid viability.",
+            csv_filename=f"gtpcnz-{scenario_id}-waterfall.csv",
+        ),
+        ChartBundle(
+            "Variance decomposition",
+            variance_fig,
+            variance_df,
+            "Separates structural, subgroup and stochastic variance components in a bounded preview.",
+            csv_filename=f"gtpcnz-{scenario_id}-variance.csv",
+        ),
+        ChartBundle(
+            "Phase portrait",
+            phase_fig,
+            phase_df,
+            "Shows local directional gradients in two-dimensional parameter space.",
+            csv_filename=f"gtpcnz-{scenario_id}-phase-portrait.csv",
+        ),
     )
 
 
-def budget_impact_bundle(scenario_ids: tuple[str, ...] = ("F0", "F4"), enrolled_population: int = 4_500_000) -> ChartBundle:
+def budget_impact_bundle(
+    scenario_ids: tuple[str, ...] = ("F0", "F4"), enrolled_population: int = 4_500_000
+) -> ChartBundle:
     table = run_budget_impact(scenario_ids, enrolled_population=enrolled_population)
     chart_df = table[table["year"] != "Total"].astype({"year": int})
     fig = px.line(
@@ -1156,13 +1411,30 @@ def methodology_bundles() -> tuple[ChartBundle, ...]:
         color="hybrid_viability_score",
         size="gaming_risk_score",
         title="Composite sweep across all benchmark levers",
-        labels={"access_score": "Access index", "hospital_pressure_score": "Hospital pressure index", "hybrid_viability_score": "Viability", "gaming_risk_score": "Gaming risk"},
+        labels={
+            "access_score": "Access index",
+            "hospital_pressure_score": "Hospital pressure index",
+            "hybrid_viability_score": "Viability",
+            "gaming_risk_score": "Gaming risk",
+        },
     )
     meta_fig.update_layout(height=390, margin=dict(l=20, r=20, t=56, b=20))
 
     return (
-        ChartBundle("Outcome clustering", cluster_fig, cluster_df, "Groups benchmark scenarios by outcome pattern.", csv_filename="gtpcnz-outcome-clustering.csv"),
-        ChartBundle("Composite meta-analysis", meta_fig, meta_df, "Samples benchmark levers to show broad internal model structure.", csv_filename="gtpcnz-composite-meta-analysis.csv"),
+        ChartBundle(
+            "Outcome clustering",
+            cluster_fig,
+            cluster_df,
+            "Groups benchmark scenarios by outcome pattern.",
+            csv_filename="gtpcnz-outcome-clustering.csv",
+        ),
+        ChartBundle(
+            "Composite meta-analysis",
+            meta_fig,
+            meta_df,
+            "Samples benchmark levers to show broad internal model structure.",
+            csv_filename="gtpcnz-composite-meta-analysis.csv",
+        ),
     )
 
 
@@ -1267,7 +1539,11 @@ def structural_uncertainty_bundle() -> ChartBundle:
         y="score",
         color="plausibility_weight",
         title="Structural uncertainty registry: model variants and plausibility weights",
-        labels={"structural_model_id": "Structural model", "score": "Illustrative score", "plausibility_weight": "Plausibility weight"},
+        labels={
+            "structural_model_id": "Structural model",
+            "score": "Illustrative score",
+            "plausibility_weight": "Plausibility weight",
+        },
     )
     fig.update_layout(height=390, margin=dict(l=20, r=20, t=56, b=110))
     return ChartBundle(
@@ -1334,10 +1610,32 @@ def policy_shock_bundle(scenario_id: str = "F4") -> ChartBundle:
         post_shock_months=24,
     )
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=table["month"], y=table["baseline_hospital_pressure"], mode="lines", name="Baseline hospital pressure"))
-    fig.add_trace(go.Scatter(x=table["month"], y=table["shock_hospital_pressure"], mode="lines", name="Shock hospital pressure"))
-    fig.add_trace(go.Scatter(x=table["month"], y=table["baseline_fiscal_pressure"], mode="lines", name="Baseline fiscal pressure", line=dict(dash="dot")))
-    fig.add_trace(go.Scatter(x=table["month"], y=table["shock_fiscal_pressure"], mode="lines", name="Shock fiscal pressure", line=dict(dash="dot")))
+    fig.add_trace(
+        go.Scatter(
+            x=table["month"], y=table["baseline_hospital_pressure"], mode="lines", name="Baseline hospital pressure"
+        )
+    )
+    fig.add_trace(
+        go.Scatter(x=table["month"], y=table["shock_hospital_pressure"], mode="lines", name="Shock hospital pressure")
+    )
+    fig.add_trace(
+        go.Scatter(
+            x=table["month"],
+            y=table["baseline_fiscal_pressure"],
+            mode="lines",
+            name="Baseline fiscal pressure",
+            line=dict(dash="dot"),
+        )
+    )
+    fig.add_trace(
+        go.Scatter(
+            x=table["month"],
+            y=table["shock_fiscal_pressure"],
+            mode="lines",
+            name="Shock fiscal pressure",
+            line=dict(dash="dot"),
+        )
+    )
     fig.update_layout(
         title=f"Policy shock sequence for {scenario_id}: governance -20",
         xaxis_title="Month",
@@ -1426,7 +1724,12 @@ def regime_sweep_bundle(scenario_id: str = "F4") -> ChartBundle:
         hover_data=["hospital_pressure_score"],
         color_continuous_scale="Viridis",
         title=f"Regime sweep for {scenario_id}: activity signal by governance",
-        labels={"activity_signal": "Activity signal", "governance": "Governance", "hybrid_viability_score": "Hybrid viability", "gaming_risk_score": "Gaming risk"},
+        labels={
+            "activity_signal": "Activity signal",
+            "governance": "Governance",
+            "hybrid_viability_score": "Hybrid viability",
+            "gaming_risk_score": "Gaming risk",
+        },
     )
     fig.update_layout(height=430, margin=dict(l=20, r=20, t=56, b=20))
     return ChartBundle(
