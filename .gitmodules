@@ -2,3 +2,9 @@
 	path = public/gtpcnz
 	url = https://github.com/edithatogo/gtpcnz.git
 	ignore = dirty
+
+[submodule ".agents/plugins/conductor"]
+	path = .agents/plugins/conductor
+	url = https://github.com/gemini-cli-extensions/conductor.git
+	branch = main
+
