@@ -91,7 +91,15 @@ class _IndexCalculator:
             )
         )
         gaming_risk = self._clamp(
-            100 * (0.35 * activity + 0.18 * scope + 0.18 * self._as_fraction(inp.complexity) - 0.30 * governance - 0.18 * data - 0.16 * place)
+            100
+            * (
+                0.35 * activity
+                + 0.18 * scope
+                + 0.18 * self._as_fraction(inp.complexity)
+                - 0.30 * governance
+                - 0.18 * data
+                - 0.16 * place
+            )
         )
 
         return {

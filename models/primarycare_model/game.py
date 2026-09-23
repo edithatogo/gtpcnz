@@ -80,11 +80,11 @@ def calculate_payoff(params: PolicyParameters) -> Payoff:
 
     funder = (
         -params.upstream_public_cost
-        -params.hospital_cost
-        -params.hospital_political_penalty * params.hospital_pressure
-        -params.copayment_penalty * params.copayment_burden
-        -params.equity_penalty * params.equity_gap
-        -params.safety_penalty * params.safety_failure
+        - params.hospital_cost
+        - params.hospital_political_penalty * params.hospital_pressure
+        - params.copayment_penalty * params.copayment_burden
+        - params.equity_penalty * params.equity_gap
+        - params.safety_penalty * params.safety_failure
         + params.avoidance_benefit
     )
     provider = (

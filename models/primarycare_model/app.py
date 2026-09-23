@@ -265,10 +265,7 @@ def _render_calculation_expander(
         if result_validation:
             st.markdown(f"**Result validation**: {result_validation}")
 
-        st.markdown(
-            "*This is a demonstrative calculation. It uses model-generated indices, "
-            "not calibrated forecasts.*"
-        )
+        st.markdown("*This is a demonstrative calculation. It uses model-generated indices, not calibrated forecasts.*")
 
 
 def _render_seed_control(key_suffix: str = "") -> int:
@@ -285,9 +282,6 @@ def _render_seed_control(key_suffix: str = "") -> int:
 
 
 # ── End Phase 5 helpers ─────────────────────────────────────────────────
-
-
-
 
 
 def render_reader_guide() -> None:
@@ -349,7 +343,7 @@ def render_big_words_expander() -> None:
             - **Model-generated index** means the number comes from the benchmark logic, not from observed New Zealand outcomes.
             - **Educational explainer** means the slider result is a teaching aid, not a calibrated forecast.
         """
-    )
+        )
 
 
 def render_reference_scenario_explainer() -> None:
@@ -466,7 +460,7 @@ def _render_substack_badges(post_ids: tuple[str, ...]) -> None:
         badge_parts.append(
             f'<a href="{escape(href)}" style="display:inline-block;margin:0 6px 6px 0;padding:3px 8px;'
             f'border-radius:10px;background:#edf4f2;color:#173f37;font-size:0.78rem;text-decoration:none;">'
-            f'Post {escape(post_id)}: {escape(title)}</a>'
+            f"Post {escape(post_id)}: {escape(title)}</a>"
         )
     if badge_parts:
         st.markdown("".join(badge_parts), unsafe_allow_html=True)
@@ -494,8 +488,12 @@ def _render_download_exports(evidence_df: pd.DataFrame) -> None:
         title = str(row.get("Title", ""))
         publisher = str(row.get("Publisher", ""))
         url = str(row.get("URL", ""))
-        ris_lines.extend(["TY  - GEN", f"ID  - {ref_id}", f"TI  - {title}", f"PB  - {publisher}", f"UR  - {url}", "ER  - ", ""])
-        bib_lines.append(f"@misc{{{ref_id or 'reference'},\n  title = {{{title.replace('{', '').replace('}', '')}}},\n  publisher = {{{publisher.replace('{', '').replace('}', '')}}},\n  url = {{{url.replace('{', '').replace('}', '')}}}\n}}\n")
+        ris_lines.extend(
+            ["TY  - GEN", f"ID  - {ref_id}", f"TI  - {title}", f"PB  - {publisher}", f"UR  - {url}", "ER  - ", ""]
+        )
+        bib_lines.append(
+            f"@misc{{{ref_id or 'reference'},\n  title = {{{title.replace('{', '').replace('}', '')}}},\n  publisher = {{{publisher.replace('{', '').replace('}', '')}}},\n  url = {{{url.replace('{', '').replace('}', '')}}}\n}}\n"
+        )
         xml_lines.append(
             f'  <reference id="{escape(ref_id, quote=True)}"><title>{escape(title)}</title><url>{escape(url)}</url></reference>'
         )
@@ -559,9 +557,11 @@ def render_methodology_and_evidence() -> None:
         ref_filter = st.text_input("Filter references", "", key="methodology_reference_filter")
         filtered = evidence_df
         if ref_filter:
-            mask = evidence_df.astype(str).apply(
-                lambda col: col.str.contains(ref_filter, case=False, regex=False)
-            ).any(axis=1)
+            mask = (
+                evidence_df.astype(str)
+                .apply(lambda col: col.str.contains(ref_filter, case=False, regex=False))
+                .any(axis=1)
+            )
             filtered = evidence_df[mask]
         st.dataframe(
             filtered,
@@ -1024,24 +1024,30 @@ def render_microeconomics_access_mix_lab() -> None:
     st.markdown("### Microeconomics lab 4: co-payment / access barrier")
     with st.expander("How this works - inputs, assumptions, calculation, output"):
         st.markdown("#### Inputs")
-        st.markdown("- **Co-payment (0-100):** out-of-pocket cost burden."
+        st.markdown(
+            "- **Co-payment (0-100):** out-of-pocket cost burden."
             "\\n- **Local in-person capacity (0-100):** face-to-face availability."
             "\\n- **Digital access reach (0-100):** telehealth and online access."
             "\\n- **Equity protection (0-100):** safeguards against access barriers."
-            "\\n- **Travel friction (0-100):** distance and transport barriers.")
+            "\\n- **Travel friction (0-100):** distance and transport barriers."
+        )
         st.markdown("#### Assumptions")
-        st.markdown("1. Barriers reduce effective access via nonlinear (diminishing_return) functions."
+        st.markdown(
+            "1. Barriers reduce effective access via nonlinear (diminishing_return) functions."
             "\\n2. Digital can partly substitute for in-person care for suitable needs."
             "\\n3. Equity protection offsets the effect of co-payment and travel barriers."
-            "\\n4. Deferred share is the residual - need not met through any access route.")
+            "\\n4. Deferred share is the residual - need not met through any access route."
+        )
         st.markdown("#### Calculation")
         st.latex(r"local_share = f(capacity, copay, travel)")
         st.latex(r"digital_share = f(access, equity)")
         st.latex(r"deferred = 100 - local_share - digital_share - equity_offset")
         st.markdown("#### Output")
-        st.markdown("- **Stacked bar chart:** share of need met through local, digital, or deferred."
+        st.markdown(
+            "- **Stacked bar chart:** share of need met through local, digital, or deferred."
             "\\n- **Access coverage metric:** composite score."
-            "\\n- **Interpretation:** higher deferred share = access failure.")
+            "\\n- **Interpretation:** higher deferred share = access failure."
+        )
     st.markdown(
         """
         **What this shows:** how co-payment pressure, local in-person capacity,
@@ -1127,7 +1133,9 @@ def render_microeconomics_access_mix_lab() -> None:
         equity_boost = diminishing_return(equity_frac, 2.5) * 0.35
         digital_share_value = digital_access * complex_penalty * (0.50 + equity_boost)
         # Deferred share is the residual after nonlinear interaction
-        deferred_share = max(0.0, 100 - local_share - digital_share_value - equity_protection * 0.15 + barrier_pressure * 0.18)
+        deferred_share = max(
+            0.0, 100 - local_share - digital_share_value - equity_protection * 0.15 + barrier_pressure * 0.18
+        )
         total = local_share + digital_share_value + deferred_share
         if total <= 0:
             total = 1.0
@@ -1206,14 +1214,15 @@ def render_microeconomics_lab() -> None:
         if st.button("Run combined analysis", key="combined_micro_btn"):
             with st.spinner("Computing combined microeconomics..."):
                 base = get_runtime_scenario("F4")
-                modified = replace(base, copayment_burden=float(co_payment_all),
-                                   equity_protection=float(equity_all))
+                modified = replace(base, copayment_burden=float(co_payment_all), equity_protection=float(equity_all))
                 idx = calculate_indices(modified)
                 cols = st.columns(3)
                 cols[0].metric("Viability", f"{idx['hybrid_viability_score']:.1f}")
                 cols[1].metric("Access", f"{idx['access_score']:.1f}")
                 cols[2].metric("Equity", f"{idx['equity_legitimacy_score']:.1f}")
-                st.caption("Combined effect of co-payment and equity on benchmark indices. Higher access + equity = better.")
+                st.caption(
+                    "Combined effect of co-payment and equity on benchmark indices. Higher access + equity = better."
+                )
                 # Cluster outcome
                 cl_df = run_outcome_clustering(n_clusters=3)
                 render_outcome_cluster_visual(
@@ -1229,21 +1238,27 @@ def render_claims_audit_game_lab() -> None:
     st.markdown("### Game theory lab 1: formulas do not solve games")
     with st.expander("How this works - inputs, assumptions, calculation, output"):
         st.markdown("#### Inputs")
-        st.markdown("- **Marginal gain (0-100):** incentive to inflate claims."
+        st.markdown(
+            "- **Marginal gain (0-100):** incentive to inflate claims."
             "\\n- **Audit cost/penalty (0-100):** deterrence from audit."
             "\\n- **Claim rule clarity (0-100):** rule transparency."
-            "\\n- **Place accountability (0-100):** population responsibility.")
+            "\\n- **Place accountability (0-100):** population responsibility."
+        )
         st.markdown("#### Assumptions")
-        st.markdown("1. Honest and gaming payoffs are sigmoid functions of input signals."
+        st.markdown(
+            "1. Honest and gaming payoffs are sigmoid functions of input signals."
             "\\n2. Detection risk rises with audit via strategic_response."
-            "\\n3. The flip threshold shows where honest overtakes gaming.")
+            "\\n3. The flip threshold shows where honest overtakes gaming."
+        )
         st.markdown("#### Calculation")
         st.latex(r"honest = f(quality, place, audit)")
         st.latex(r"gaming = f(gain, detection, audit)")
         st.markdown("#### Output")
-        st.markdown("- **Two payoff lines:** honest vs gaming as audit changes."
+        st.markdown(
+            "- **Two payoff lines:** honest vs gaming as audit changes."
             "\\n- **Flip threshold:** audit level where honest wins."
-            "\\n- **Interpretation:** formulas alone do not solve gaming.")
+            "\\n- **Interpretation:** formulas alone do not solve gaming."
+        )
     st.markdown(
         """
         **What this shows:** an illustrative strategic-behaviour game in which the payoff
@@ -1303,15 +1318,23 @@ def render_claims_audit_game_lab() -> None:
         honest_bonus = strategic_response(0.42 * quality + 0.34 * place + 0.24 * audit, 0.48, 7.0)
         detection_risk = strategic_response(0.55 * audit + 0.25 * penalty + 0.20 * place, 0.46, 7.0)
         gaming_attraction = strategic_response(0.62 * gain + 0.22 * (1 - quality) + 0.16 * (1 - place), 0.42, 7.0)
-        honest_payoff = 48 + 34 * honest_bonus + 14 * diminishing_return(gain) - 8 * diminishing_return(audit, 2.0)  # nonlinear audit penalty
-        gaming_payoff = 48 + 42 * gaming_attraction - 36 * detection_risk - 8 * diminishing_return(audit, 1.8)  # nonlinear audit penalty
+        honest_payoff = (
+            48 + 34 * honest_bonus + 14 * diminishing_return(gain) - 8 * diminishing_return(audit, 2.0)
+        )  # nonlinear audit penalty
+        gaming_payoff = (
+            48 + 42 * gaming_attraction - 36 * detection_risk - 8 * diminishing_return(audit, 1.8)
+        )  # nonlinear audit penalty
         honest.append(round(honest_payoff, 1))
         gaming.append(round(gaming_payoff, 1))
     selected_audit = audit_cost - audit_cost % 5
     selected_index = audit_levels.index(selected_audit)
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=audit_levels, y=honest, mode="lines", name="Honest claiming", line=dict(color="#2f6f67", width=3)))
-    fig.add_trace(go.Scatter(x=audit_levels, y=gaming, mode="lines", name="Claim inflation", line=dict(color="#c47a2c", width=3)))
+    fig.add_trace(
+        go.Scatter(x=audit_levels, y=honest, mode="lines", name="Honest claiming", line=dict(color="#2f6f67", width=3))
+    )
+    fig.add_trace(
+        go.Scatter(x=audit_levels, y=gaming, mode="lines", name="Claim inflation", line=dict(color="#c47a2c", width=3))
+    )
     fig.add_trace(
         go.Scatter(
             x=[selected_audit],
@@ -1330,11 +1353,16 @@ def render_claims_audit_game_lab() -> None:
     )
     with chart:
         st.plotly_chart(fig, width="stretch")
-        threshold = next((audit_levels[i] for i, value in enumerate(zip(honest, gaming, strict=False)) if value[0] >= value[1]), None)
+        threshold = next(
+            (audit_levels[i] for i, value in enumerate(zip(honest, gaming, strict=False)) if value[0] >= value[1]), None
+        )
         metric_cols = st.columns(3)
         metric_cols[0].metric("Honest payoff now", f"{honest[selected_index]:.1f}")
         metric_cols[1].metric("Gaming payoff now", f"{gaming[selected_index]:.1f}")
-        metric_cols[2].metric("Flip threshold", "Above current" if threshold is not None and threshold <= selected_audit else "Not reached")
+        metric_cols[2].metric(
+            "Flip threshold",
+            "Above current" if threshold is not None and threshold <= selected_audit else "Not reached",
+        )
         st.caption(
             "This is an illustrative game-theory simulation. It illustrates incentive direction and threshold logic, not observed compliance rates."
         )
@@ -1344,21 +1372,27 @@ def render_coordination_game_lab() -> None:
     st.markdown("### Game theory lab 2: payoff and best-response")
     with st.expander("How this works - inputs, assumptions, calculation, output"):
         st.markdown("#### Inputs")
-        st.markdown("- **Cooperation gain (0-100):** benefit of coordination."
+        st.markdown(
+            "- **Cooperation gain (0-100):** benefit of coordination."
             "\\n- **Cherry-pick gain (0-100):** benefit of selective activity."
             "\\n- **Equity protection (0-100):** cost of leaving patients behind."
             "\\n- **Scope flexibility (0-100):** workforce breadth."
-            "\\n- **Place accountability (0-100):** population responsibility.")
+            "\\n- **Place accountability (0-100):** population responsibility."
+        )
         st.markdown("#### Assumptions")
-        st.markdown("1. Cooperate and cherry-pick payoffs are sigmoid functions."
+        st.markdown(
+            "1. Cooperate and cherry-pick payoffs are sigmoid functions."
             "\\n2. Stronger place accountability shifts advantage to cooperation."
-            "\\n3. All values are illustrative.")
+            "\\n3. All values are illustrative."
+        )
         st.markdown("#### Calculation")
         st.latex(r"cooperate = f(cooperation, equity, scope, place)")
         st.latex(r"cherry\_pick = f(cherry, equity, scope, place)")
         st.markdown("#### Output")
-        st.markdown("- **Two payoff lines:** cooperate vs cherry-pick as place rises."
-            "\\n- **Coordination threshold:** place level where cooperation wins.")
+        st.markdown(
+            "- **Two payoff lines:** cooperate vs cherry-pick as place rises."
+            "\\n- **Coordination threshold:** place level where cooperation wins."
+        )
     st.markdown(
         """
         **What this shows:** a coordination game in which the value of
@@ -1420,8 +1454,18 @@ def render_coordination_game_lab() -> None:
     cherry_pick = []
     for place_level in place_levels:
         place = place_level / 100
-        coop_signal = 0.38 * cooperation_gain / 100 + 0.25 * equity_protection / 100 + 0.20 * scope_flexibility / 100 + 0.24 * place
-        cherry_signal = 0.56 * cherry_pick_gain / 100 + 0.12 * (1 - equity_protection / 100) + 0.10 * (1 - scope_flexibility / 100) - 0.34 * place
+        coop_signal = (
+            0.38 * cooperation_gain / 100
+            + 0.25 * equity_protection / 100
+            + 0.20 * scope_flexibility / 100
+            + 0.24 * place
+        )
+        cherry_signal = (
+            0.56 * cherry_pick_gain / 100
+            + 0.12 * (1 - equity_protection / 100)
+            + 0.10 * (1 - scope_flexibility / 100)
+            - 0.34 * place
+        )
         coop_payoff = 46 + 48 * strategic_response(coop_signal, 0.48, 7.0)
         cherry_payoff = 46 + 48 * strategic_response(cherry_signal, 0.32, 7.0)
         cooperate.append(round(coop_payoff, 1))
@@ -1429,8 +1473,12 @@ def render_coordination_game_lab() -> None:
     selected_place = place_accountability - place_accountability % 5
     selected_index = place_levels.index(selected_place) if selected_place in place_levels else 0
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=place_levels, y=cooperate, mode="lines", name="Cooperate", line=dict(color="#2f6f67", width=3)))
-    fig.add_trace(go.Scatter(x=place_levels, y=cherry_pick, mode="lines", name="Cherry-pick", line=dict(color="#c47a2c", width=3)))
+    fig.add_trace(
+        go.Scatter(x=place_levels, y=cooperate, mode="lines", name="Cooperate", line=dict(color="#2f6f67", width=3))
+    )
+    fig.add_trace(
+        go.Scatter(x=place_levels, y=cherry_pick, mode="lines", name="Cherry-pick", line=dict(color="#c47a2c", width=3))
+    )
     fig.add_trace(
         go.Scatter(
             x=[selected_place],
@@ -1449,7 +1497,14 @@ def render_coordination_game_lab() -> None:
     )
     with chart:
         st.plotly_chart(fig, width="stretch")
-        threshold = next((place_levels[i] for i, value in enumerate(zip(cooperate, cherry_pick, strict=False)) if value[0] >= value[1]), None)
+        threshold = next(
+            (
+                place_levels[i]
+                for i, value in enumerate(zip(cooperate, cherry_pick, strict=False))
+                if value[0] >= value[1]
+            ),
+            None,
+        )
         metric_cols = st.columns(3)
         metric_cols[0].metric("Cooperate payoff now", f"{cooperate[selected_index]:.1f}")
         metric_cols[1].metric("Cherry-pick payoff now", f"{cherry_pick[selected_index]:.1f}")
@@ -1463,20 +1518,26 @@ def render_gaming_risk_frontier_lab() -> None:
     st.markdown("### Game theory lab 3: controls and gaming-risk frontier")
     with st.expander("How this works - inputs, assumptions, calculation, output"):
         st.markdown("#### Inputs")
-        st.markdown("- **Access gain (0-100):** policy emphasis on improving access."
+        st.markdown(
+            "- **Access gain (0-100):** policy emphasis on improving access."
             "\\n- **Control strength (0-100):** rules and monitoring intensity."
             "\\n- **Monitoring cost (0-100):** admin cost of controls."
-            "\\n- **Place accountability (0-100):** population responsibility.")
+            "\\n- **Place accountability (0-100):** population responsibility."
+        )
         st.markdown("#### Assumptions")
-        st.markdown("1. Gaming risk rises with access pressure, falls with controls."
+        st.markdown(
+            "1. Gaming risk rises with access pressure, falls with controls."
             "\\n2. Access gain is a trade-off with gaming risk."
-            "\\n3. The frontier shows the policy trade-off space.")
+            "\\n3. The frontier shows the policy trade-off space."
+        )
         st.markdown("#### Calculation")
         st.latex(r"gaming\_risk = f(access, control, place, monitoring)")
         st.latex(r"access\_gain = f(access, control, place, monitoring)")
         st.markdown("#### Output")
-        st.markdown("- **Gaming risk and access gain lines** as controls change."
-            "\\n- **Interpretation:** the frontier shows the trade-off.")
+        st.markdown(
+            "- **Gaming risk and access gain lines** as controls change."
+            "\\n- **Interpretation:** the frontier shows the trade-off."
+        )
     st.markdown(
         """
         **What this shows:** an illustrative frontier that shows how access gains can be
@@ -1533,7 +1594,12 @@ def render_gaming_risk_frontier_lab() -> None:
         monitoring = monitoring_cost / 100
         place = place_accountability / 100
         risk_signal = 0.54 * access_pressure - 0.42 * control - 0.16 * place + 0.14 * monitoring
-        access_signal = 0.48 * access_pressure + 0.18 * diminishing_return(control) + 0.16 * place - 0.10 * diminishing_return(monitoring, 2.0)  # nonlinear monitoring cost
+        access_signal = (
+            0.48 * access_pressure
+            + 0.18 * diminishing_return(control)
+            + 0.16 * place
+            - 0.10 * diminishing_return(monitoring, 2.0)
+        )  # nonlinear monitoring cost
         risk_value = 100 * strategic_response(risk_signal, 0.10, 7.0)
         access_value = 100 * strategic_response(access_signal, 0.35, 6.5)
         gaming_risk.append(round(clamp(risk_value), 1))
@@ -1615,14 +1681,15 @@ def render_game_theory_lab() -> None:
         if st.button("Run combined game analysis", key="combined_game_btn"):
             with st.spinner("Computing combined game theory..."):
                 base = get_runtime_scenario("F4")
-                modified = replace(base, governance=float(audit_combined),
-                                   place_accountability=float(place_combined))
+                modified = replace(base, governance=float(audit_combined), place_accountability=float(place_combined))
                 idx = calculate_indices(modified)
                 cols = st.columns(3)
                 cols[0].metric("Gaming risk", f"{idx['gaming_risk_score']:.1f}")
                 cols[1].metric("Governance", f"{idx['governance_resilience_score']:.1f}")
                 cols[2].metric("Viability", f"{idx['hybrid_viability_score']:.1f}")
-                st.caption("Combined effect of audit and place accountability. Higher governance + lower gaming risk = better.")
+                st.caption(
+                    "Combined effect of audit and place accountability. Higher governance + lower gaming risk = better."
+                )
                 cl_df = run_outcome_clustering(n_clusters=3)
                 render_outcome_cluster_visual(
                     cl_df,
@@ -1693,10 +1760,18 @@ def build_public_status_table() -> pd.DataFrame:
     return pd.DataFrame(
         [
             ("Model status", "Public-data anchored benchmark", "Ready for explanation; not ready for forecasting."),
-            ("Dashboard status", "Educational explainer", "Shows reference indices and educational mechanisms separately."),
+            (
+                "Dashboard status",
+                "Educational explainer",
+                "Shows reference indices and educational mechanisms separately.",
+            ),
             ("Evidence status", "Evidence readiness", "OIA/data requests still need submission or update."),
             ("Calibration status", "Readiness mapped", "Real linked data and validation tests still required."),
-            ("Claim status", "Bounded", "No precise fiscal, hospital-demand, workforce or implementation-impact claims."),
+            (
+                "Claim status",
+                "Bounded",
+                "No precise fiscal, hospital-demand, workforce or implementation-impact claims.",
+            ),
             ("Deployment status", "Public GitHub Pages and Streamlit URLs", "Public surfaces are live and tested."),
         ],
         columns=["Area", "Current state", "What this means"],
@@ -1706,42 +1781,217 @@ def build_public_status_table() -> pd.DataFrame:
 def build_figure_inventory_table() -> pd.DataFrame:
     return pd.DataFrame(
         [
-            ("Static table", "Current reform pathway", "Current state tab", "Explains the real comparator in plain English."),
-            ("Static table", "Public project status", "Current state tab", "Shows what is mature and what is still early."),
-            ("Static diagram", "Public explainer architecture", "Current state tab", "Shows how reform, the benchmark, the educational explainer, evidence and calibration fit together."),
-            ("Static table", "Post reading map", "Post guide tab", "Maps posts to report sections, dashboard modules, public cards, visuals and caveats."),
-            ("Dynamic bar chart", "Reference scenario viability", "Reference scenarios tab", "Compares model-generated viability indices."),
-            ("Dynamic scatter plot", "Supply generation versus hospital pressure", "Reference scenarios tab", "Shows the trade-off between access/supply and hospital-pressure index."),
-            ("Dynamic heatmap", "Scenario score matrix", "Reference scenarios tab", "Shows multiple indices across scenarios at once."),
-            ("Dynamic radar chart", "Selected scenario profile", "Reference scenarios tab", "Shows one selected scenario across several dimensions."),
-            ("Dynamic bar chart", "Educational explainer output", "Educational explainer tab", "Shows simplified teaching outputs from educational slider settings."),
-            ("Dynamic bar chart", "Project readiness", "Current state tab", "Shows maturity of explanation, evidence, validation and calibration work."),
-            ("Dynamic line chart", "Marginal supply response", "Microeconomics lab tab", "Shows supply curve response as the payment signal changes."),
-            ("Dynamic bar chart", "Capitation budget constraint", "Microeconomics lab tab", "Shows illustrative budget versus cost pressure."),
-            ("Dynamic bar chart", "Scheduled activity payment", "Microeconomics lab tab", "Shows gross and net payment with controls."),
-            ("Dynamic stacked bar chart", "Co-payment/access barrier mix", "Microeconomics lab tab", "Shows service mix across need and access-barrier bands."),
-            ("Dynamic line chart", "Claims audit game", "Game theory lab tab", "Shows honest versus gaming payoffs as audit strength changes."),
-            ("Dynamic line chart", "Coordination game", "Game theory lab tab", "Shows cooperate versus cherry-pick incentives as place accountability changes."),
-            ("Dynamic line chart", "Gaming-risk frontier", "Game theory lab tab", "Shows gaming risk versus access gain as controls change."),
-            ("Dynamic tornado chart", "Tornado sensitivity", "Live model lab tab", "Shows OAT sensitivity of hybrid viability to each parameter lever."),
-            ("Dynamic waterfall chart", "Hybrid viability decomposition", "Live model lab tab", "Shows weighted component contributions to hybrid viability."),
-            ("Dynamic bar chart", "Ensemble Monte Carlo", "Live model lab tab", "Shows seeded stochastic uncertainty across all reference scenarios."),
-            ("Dynamic grouped bar chart", "Cohort-stratified comparison", "Live model lab tab", "Compares index scores under low vs high subgroup parameter settings."),
-            ("Dynamic bar chart", "Variance decomposition", "Live model lab tab", "Separates structural, subgroup, and stochastic variance contributions."),
-            ("Dynamic heatmap", "Scenario × subgroup heatmap", "Live model lab tab", "Shows hybrid viability across equity × complexity levels."),
-            ("Dynamic line chart", "Policy shock sequences", "Live model lab tab", "Models abrupt policy changes via stock-flow dynamics."),
-            ("Dynamic line chart", "Uncertainty ribbon (stock-flow)", "Live model lab tab", "Shows seeded stochastic spread around hospital pressure path."),
-            ("Dynamic violin chart", "Subgroup-stratified violin", "Live model lab tab", "Distribution of viability across equity subgroups."),
-            ("Dynamic bar chart", "Stress-test scenarios", "Live model lab tab", "Extreme-but-plausible input scenarios vs baseline."),
-            ("Dynamic heatmap", "Interaction scan", "Live model lab tab", "Detects equity × complexity interaction effects."),
+            (
+                "Static table",
+                "Current reform pathway",
+                "Current state tab",
+                "Explains the real comparator in plain English.",
+            ),
+            (
+                "Static table",
+                "Public project status",
+                "Current state tab",
+                "Shows what is mature and what is still early.",
+            ),
+            (
+                "Static diagram",
+                "Public explainer architecture",
+                "Current state tab",
+                "Shows how reform, the benchmark, the educational explainer, evidence and calibration fit together.",
+            ),
+            (
+                "Static table",
+                "Post reading map",
+                "Post guide tab",
+                "Maps posts to report sections, dashboard modules, public cards, visuals and caveats.",
+            ),
+            (
+                "Dynamic bar chart",
+                "Reference scenario viability",
+                "Reference scenarios tab",
+                "Compares model-generated viability indices.",
+            ),
+            (
+                "Dynamic scatter plot",
+                "Supply generation versus hospital pressure",
+                "Reference scenarios tab",
+                "Shows the trade-off between access/supply and hospital-pressure index.",
+            ),
+            (
+                "Dynamic heatmap",
+                "Scenario score matrix",
+                "Reference scenarios tab",
+                "Shows multiple indices across scenarios at once.",
+            ),
+            (
+                "Dynamic radar chart",
+                "Selected scenario profile",
+                "Reference scenarios tab",
+                "Shows one selected scenario across several dimensions.",
+            ),
+            (
+                "Dynamic bar chart",
+                "Educational explainer output",
+                "Educational explainer tab",
+                "Shows simplified teaching outputs from educational slider settings.",
+            ),
+            (
+                "Dynamic bar chart",
+                "Project readiness",
+                "Current state tab",
+                "Shows maturity of explanation, evidence, validation and calibration work.",
+            ),
+            (
+                "Dynamic line chart",
+                "Marginal supply response",
+                "Microeconomics lab tab",
+                "Shows supply curve response as the payment signal changes.",
+            ),
+            (
+                "Dynamic bar chart",
+                "Capitation budget constraint",
+                "Microeconomics lab tab",
+                "Shows illustrative budget versus cost pressure.",
+            ),
+            (
+                "Dynamic bar chart",
+                "Scheduled activity payment",
+                "Microeconomics lab tab",
+                "Shows gross and net payment with controls.",
+            ),
+            (
+                "Dynamic stacked bar chart",
+                "Co-payment/access barrier mix",
+                "Microeconomics lab tab",
+                "Shows service mix across need and access-barrier bands.",
+            ),
+            (
+                "Dynamic line chart",
+                "Claims audit game",
+                "Game theory lab tab",
+                "Shows honest versus gaming payoffs as audit strength changes.",
+            ),
+            (
+                "Dynamic line chart",
+                "Coordination game",
+                "Game theory lab tab",
+                "Shows cooperate versus cherry-pick incentives as place accountability changes.",
+            ),
+            (
+                "Dynamic line chart",
+                "Gaming-risk frontier",
+                "Game theory lab tab",
+                "Shows gaming risk versus access gain as controls change.",
+            ),
+            (
+                "Dynamic tornado chart",
+                "Tornado sensitivity",
+                "Live model lab tab",
+                "Shows OAT sensitivity of hybrid viability to each parameter lever.",
+            ),
+            (
+                "Dynamic waterfall chart",
+                "Hybrid viability decomposition",
+                "Live model lab tab",
+                "Shows weighted component contributions to hybrid viability.",
+            ),
+            (
+                "Dynamic bar chart",
+                "Ensemble Monte Carlo",
+                "Live model lab tab",
+                "Shows seeded stochastic uncertainty across all reference scenarios.",
+            ),
+            (
+                "Dynamic grouped bar chart",
+                "Cohort-stratified comparison",
+                "Live model lab tab",
+                "Compares index scores under low vs high subgroup parameter settings.",
+            ),
+            (
+                "Dynamic bar chart",
+                "Variance decomposition",
+                "Live model lab tab",
+                "Separates structural, subgroup, and stochastic variance contributions.",
+            ),
+            (
+                "Dynamic heatmap",
+                "Scenario × subgroup heatmap",
+                "Live model lab tab",
+                "Shows hybrid viability across equity × complexity levels.",
+            ),
+            (
+                "Dynamic line chart",
+                "Policy shock sequences",
+                "Live model lab tab",
+                "Models abrupt policy changes via stock-flow dynamics.",
+            ),
+            (
+                "Dynamic line chart",
+                "Uncertainty ribbon (stock-flow)",
+                "Live model lab tab",
+                "Shows seeded stochastic spread around hospital pressure path.",
+            ),
+            (
+                "Dynamic violin chart",
+                "Subgroup-stratified violin",
+                "Live model lab tab",
+                "Distribution of viability across equity subgroups.",
+            ),
+            (
+                "Dynamic bar chart",
+                "Stress-test scenarios",
+                "Live model lab tab",
+                "Extreme-but-plausible input scenarios vs baseline.",
+            ),
+            (
+                "Dynamic heatmap",
+                "Interaction scan",
+                "Live model lab tab",
+                "Detects equity × complexity interaction effects.",
+            ),
             ("Dynamic heatmap", "Regime sweep (2D)", "Live model lab tab", "Maps viability across 2D parameter space."),
-            ("Dynamic grouped bar chart", "Agent-based subgroup replay", "Live model lab tab", "Agent-level access patterns under different copayment settings."),
-            ("Dynamic scatter chart", "Phase portrait / vector field", "Live model lab tab", "Gradient direction of hybrid viability in 2D parameter space."),
-            ("Dynamic 3D surface", "3D payoff surface", "Live model lab tab", "3D surface of hybrid viability across two parameters."),
-            ("Static table", "Model gap map", "Live model lab tab", "Maps current, comprehensive, SOTA and bleeding-edge model assets and gaps."),
-            ("Animated scatter plot", "Animated parameter sweep", "Methodology and evidence tab", "Animates activity signal and governance over bounded sweep frames."),
-            ("Animated bar chart", "Scenario morph", "Live model lab tab", "Animates the transition from F0/current reform to the selected reference scenario."),
-            ("Animated scatter plot", "Animated regime sweep", "Live model lab tab", "Animates a 2D parameter sweep for the selected live scenario."),
+            (
+                "Dynamic grouped bar chart",
+                "Agent-based subgroup replay",
+                "Live model lab tab",
+                "Agent-level access patterns under different copayment settings.",
+            ),
+            (
+                "Dynamic scatter chart",
+                "Phase portrait / vector field",
+                "Live model lab tab",
+                "Gradient direction of hybrid viability in 2D parameter space.",
+            ),
+            (
+                "Dynamic 3D surface",
+                "3D payoff surface",
+                "Live model lab tab",
+                "3D surface of hybrid viability across two parameters.",
+            ),
+            (
+                "Static table",
+                "Model gap map",
+                "Live model lab tab",
+                "Maps current, comprehensive, SOTA and bleeding-edge model assets and gaps.",
+            ),
+            (
+                "Animated scatter plot",
+                "Animated parameter sweep",
+                "Methodology and evidence tab",
+                "Animates activity signal and governance over bounded sweep frames.",
+            ),
+            (
+                "Animated bar chart",
+                "Scenario morph",
+                "Live model lab tab",
+                "Animates the transition from F0/current reform to the selected reference scenario.",
+            ),
+            (
+                "Animated scatter plot",
+                "Animated regime sweep",
+                "Live model lab tab",
+                "Animates a 2D parameter sweep for the selected live scenario.",
+            ),
         ],
         columns=["Type", "Figure or table", "Location", "Purpose"],
     )
@@ -1813,9 +2063,7 @@ def render_readiness_chart(status_df: pd.DataFrame) -> None:
     )
     fig.update_layout(height=360, margin=dict(l=10, r=10, t=45, b=10))
     st.plotly_chart(fig, width="stretch")
-    st.caption(
-        "This readiness chart is a project-status visual, not an empirical performance result."
-    )
+    st.caption("This readiness chart is a project-status visual, not an empirical performance result.")
 
 
 def render_figure_inventory() -> None:
@@ -1878,7 +2126,9 @@ def cached_stock_flow(scenario_id: str, months: int) -> pd.DataFrame:
 
 
 @st.cache_data(show_spinner=False)
-def cached_agent_lens(scenario_id: str, population_size: int, months: int, seed: int) -> tuple[pd.DataFrame, pd.DataFrame]:
+def cached_agent_lens(
+    scenario_id: str, population_size: int, months: int, seed: int
+) -> tuple[pd.DataFrame, pd.DataFrame]:
     return run_agent_lens(scenario_id=scenario_id, population_size=population_size, months=months, seed=seed)
 
 
@@ -1972,8 +2222,7 @@ def render_scenario_profile_radar(df: pd.DataFrame) -> None:
         return
 
     scenario_options = {
-        f"{row.scenario_id} - {row.scenario_name}": row
-        for row in df.sort_values("scenario_id").itertuples(index=False)
+        f"{row.scenario_id} - {row.scenario_name}": row for row in df.sort_values("scenario_id").itertuples(index=False)
     }
     selected_label = st.selectbox("Choose a reference scenario profile", list(scenario_options))
     selected = scenario_options[selected_label]
@@ -2044,9 +2293,7 @@ def render_educational_chart(scores: dict[str, float]) -> None:
 def render_educational_parameter_dictionary() -> None:
     st.markdown("### Educational parameter dictionary")
     st.dataframe(build_educational_parameter_dictionary(), hide_index=True, width="stretch")
-    st.caption(
-        "These are policy-strength levers, not estimated parameters. They make the causal logic visible."
-    )
+    st.caption("These are policy-strength levers, not estimated parameters. They make the causal logic visible.")
 
 
 def render_model_status() -> None:
@@ -2178,7 +2425,11 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
 
     st.markdown("### Calculation trace")
     scenario_options = list(live_df["scenario_id"])
-    selected_scenario = st.selectbox("Scenario for calculation trace", scenario_options, index=scenario_options.index("F4") if "F4" in scenario_options else 0)
+    selected_scenario = st.selectbox(
+        "Scenario for calculation trace",
+        scenario_options,
+        index=scenario_options.index("F4") if "F4" in scenario_options else 0,
+    )
     trace = calculation_trace(selected_scenario)
     st.dataframe(trace, hide_index=True, width="stretch")
     trace_fig = px.bar(
@@ -2221,7 +2472,9 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
     seed = col_b.number_input("Seed", min_value=1, max_value=999999, value=260526, step=1)
     sd = col_c.slider("Perturbation width (± fraction)", 0.01, 0.20, 0.08, 0.01)
     draw_frame, uncertainty_summary = cached_stochastic(selected_scenario, draws, int(seed), float(sd))
-    st.caption("Calculation source: cached stochastic demo; demonstrative uncertainty only; not an empirical probability.")
+    st.caption(
+        "Calculation source: cached stochastic demo; demonstrative uncertainty only; not an empirical probability."
+    )
     st.dataframe(uncertainty_summary, hide_index=True, width="stretch")
     uncertainty_fig = px.violin(
         draw_frame,
@@ -2244,15 +2497,30 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
     _render_result_manifest_badge("seeded_stochastic", selected_scenario)
     replay_cols = st.columns(3)
     replay_draws = replay_cols[0].slider(
-        "Replay draws (count)", 10, MAX_MONTE_CARLO_DRAWS, 50, 10, key="replay_draws",
+        "Replay draws (count)",
+        10,
+        MAX_MONTE_CARLO_DRAWS,
+        50,
+        10,
+        key="replay_draws",
         help="Number of draws for each replay arm.",
     )
     replay_fixed_seed = replay_cols[1].number_input(
-        "Fixed seed", min_value=1, max_value=999999, value=260526, step=1, key="replay_fixed_seed",
+        "Fixed seed",
+        min_value=1,
+        max_value=999999,
+        value=260526,
+        step=1,
+        key="replay_fixed_seed",
         help="Fixed seed for reproducible replay.",
     )
     replay_sd = replay_cols[2].slider(
-        "Perturbation width (± fraction)", 0.01, 0.20, 0.08, 0.01, key="replay_sd",
+        "Perturbation width (± fraction)",
+        0.01,
+        0.20,
+        0.08,
+        0.01,
+        key="replay_sd",
         help="Width of the Gaussian perturbation applied to scenario parameters.",
     )
     replay_results = run_stochastic_replay(
@@ -2321,7 +2589,11 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
         "Levers ranked by total absolute impact (most influential at top)."
     )
     tornado_step = st.slider(
-        "Perturbation step (±)", 1, 50, 10, 1,
+        "Perturbation step (±)",
+        1,
+        50,
+        10,
+        1,
         key="tornado_step",
         help="How much each lever is shifted up/down from its baseline.",
     )
@@ -2331,20 +2603,24 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
         st.dataframe(tornado_df, hide_index=True, width="stretch")
     tornado_fig = go.Figure()
     levers_sorted = tornado_df["lever"].tolist()
-    tornado_fig.add_trace(go.Bar(
-        y=levers_sorted,
-        x=tornado_df["low_delta_viability"],
-        orientation="h",
-        name="Low perturbation",
-        marker_color="#c47a2c",
-    ))
-    tornado_fig.add_trace(go.Bar(
-        y=levers_sorted,
-        x=tornado_df["high_delta_viability"],
-        orientation="h",
-        name="High perturbation",
-        marker_color="#2f6f67",
-    ))
+    tornado_fig.add_trace(
+        go.Bar(
+            y=levers_sorted,
+            x=tornado_df["low_delta_viability"],
+            orientation="h",
+            name="Low perturbation",
+            marker_color="#c47a2c",
+        )
+    )
+    tornado_fig.add_trace(
+        go.Bar(
+            y=levers_sorted,
+            x=tornado_df["high_delta_viability"],
+            orientation="h",
+            name="High perturbation",
+            marker_color="#2f6f67",
+        )
+    )
     tornado_fig.update_layout(
         title=f"Tornado: hybrid viability sensitivity ({selected_scenario})",
         xaxis_title="Delta vs baseline index score",
@@ -2362,34 +2638,32 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
     # ── Wave 1: Waterfall / decomposition chart ─────────────────────────
     st.markdown("### Waterfall: hybrid viability decomposition")
     _render_result_manifest_badge("live_deterministic", selected_scenario)
-    st.markdown(
-        "**What this shows:** how seven component indices combine to produce "
-        "the hybrid viability score."
-    )
+    st.markdown("**What this shows:** how seven component indices combine to produce the hybrid viability score.")
     wf_df = build_waterfall_data(selected_scenario)
     components = wf_df[~wf_df["is_total"]]["component"].tolist()
     contributions = wf_df[~wf_df["is_total"]]["contribution"].tolist()
     total_val = wf_df[wf_df["is_total"]]["contribution"].values[0]
-    waterfall_fig = go.Figure(go.Waterfall(
-        name="Contribution", orientation="v",
-        measure=["relative"] * len(components) + ["total"],
-        x=[*components, "Hybrid viability"],
-        y=[*contributions, total_val],
-        decreasing={"marker": {"color": "#c47a2c"}},
-        increasing={"marker": {"color": "#2f6f67"}},
-        totals={"marker": {"color": "#4f7eb6"}},
-    ))
+    waterfall_fig = go.Figure(
+        go.Waterfall(
+            name="Contribution",
+            orientation="v",
+            measure=["relative"] * len(components) + ["total"],
+            x=[*components, "Hybrid viability"],
+            y=[*contributions, total_val],
+            decreasing={"marker": {"color": "#c47a2c"}},
+            increasing={"marker": {"color": "#2f6f67"}},
+            totals={"marker": {"color": "#4f7eb6"}},
+        )
+    )
     waterfall_fig.update_layout(
         title=f"Hybrid viability decomposition ({selected_scenario})",
-        height=440, margin=dict(l=10, r=10, t=45, b=10),
+        height=440,
+        margin=dict(l=10, r=10, t=45, b=10),
     )
     st.plotly_chart(waterfall_fig, width="stretch")
     with st.expander("Waterfall decomposition data", expanded=False):
         st.dataframe(wf_df, hide_index=True, width="stretch")
-    st.caption(
-        "The waterfall shows the additive weighted structure of the "
-        "hybrid viability formula."
-    )
+    st.caption("The waterfall shows the additive weighted structure of the hybrid viability formula.")
 
     st.markdown("### Agent lens")
     col_d, col_e, col_f = st.columns(3)
@@ -2423,17 +2697,29 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
         "random seed for reproducibility."
     )
     ens_draws = st.slider(
-        "Ensemble draws per scenario", 10, MAX_MONTE_CARLO_DRAWS, 50, 10,
+        "Ensemble draws per scenario",
+        10,
+        MAX_MONTE_CARLO_DRAWS,
+        50,
+        10,
         key="ens_draws",
         help="Number of Monte Carlo draws per scenario.",
     )
     ens_seed = st.number_input(
-        "Ensemble seed", min_value=1, max_value=999999, value=260526, step=1,
+        "Ensemble seed",
+        min_value=1,
+        max_value=999999,
+        value=260526,
+        step=1,
         key="ens_seed",
         help="Fixed seed for reproducible ensemble runs.",
     )
     ens_sd = st.slider(
-        "Ensemble perturbation (± fraction)", 0.01, 0.20, 0.08, 0.01,
+        "Ensemble perturbation (± fraction)",
+        0.01,
+        0.20,
+        0.08,
+        0.01,
         key="ens_sd",
     )
     with st.spinner(f"Running {ens_draws} draws across all scenarios..."):
@@ -2442,25 +2728,29 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
         st.dataframe(ens_df, hide_index=True, width="stretch")
     ens_fig = go.Figure()
     scenarios_ordered = sorted(ens_df["scenario_id"].tolist())
-    ens_fig.add_trace(go.Bar(
-        x=scenarios_ordered,
-        y=ens_df.set_index("scenario_id").loc[scenarios_ordered, "mean"],
-        name="Mean hybrid viability",
-        marker_color="#2f6f67",
-        error_y=dict(
-            type="data", symmetric=False,
-            array=ens_df.set_index("scenario_id").loc[scenarios_ordered, "p95"].values
-                  - ens_df.set_index("scenario_id").loc[scenarios_ordered, "mean"].values,
-            arrayminus=ens_df.set_index("scenario_id").loc[scenarios_ordered, "mean"].values
-                      - ens_df.set_index("scenario_id").loc[scenarios_ordered, "p05"].values,
-            color="#4f7eb6",
-        ),
-    ))
+    ens_fig.add_trace(
+        go.Bar(
+            x=scenarios_ordered,
+            y=ens_df.set_index("scenario_id").loc[scenarios_ordered, "mean"],
+            name="Mean hybrid viability",
+            marker_color="#2f6f67",
+            error_y=dict(
+                type="data",
+                symmetric=False,
+                array=ens_df.set_index("scenario_id").loc[scenarios_ordered, "p95"].values
+                - ens_df.set_index("scenario_id").loc[scenarios_ordered, "mean"].values,
+                arrayminus=ens_df.set_index("scenario_id").loc[scenarios_ordered, "mean"].values
+                - ens_df.set_index("scenario_id").loc[scenarios_ordered, "p05"].values,
+                color="#4f7eb6",
+            ),
+        )
+    )
     ens_fig.update_layout(
         title="Ensemble uncertainty: hybrid viability across scenarios",
         xaxis_title="Scenario",
         yaxis_title="Hybrid viability index (p05/p50/p95)",
-        height=440, margin=dict(l=10, r=10, t=45, b=10),
+        height=440,
+        margin=dict(l=10, r=10, t=45, b=10),
     )
     st.plotly_chart(ens_fig, width="stretch")
     st.caption(
@@ -2486,24 +2776,40 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
     label_low = st.text_input("Label for low group", "Low value", key="cohort_label_low")
     label_high = st.text_input("Label for high group", "High value", key="cohort_label_high")
     cs_df = run_cohort_stratified(
-        selected_scenario, subgroup_field=cohort_field_name,
-        low_value=float(low_val), high_value=float(high_val),
-        label_low=label_low, label_high=label_high,
+        selected_scenario,
+        subgroup_field=cohort_field_name,
+        low_value=float(low_val),
+        high_value=float(high_val),
+        label_low=label_low,
+        label_high=label_high,
     )
     with st.expander("Cohort comparison data", expanded=False):
         st.dataframe(cs_df, hide_index=True, width="stretch")
     cs_fig = go.Figure()
     metrics_list = cs_df["metric"].tolist()
-    cs_fig.add_trace(go.Bar(
-        x=metrics_list, y=cs_df[label_low], name=label_low, marker_color="#c47a2c",
-    ))
-    cs_fig.add_trace(go.Bar(
-        x=metrics_list, y=cs_df[label_high], name=label_high, marker_color="#2f6f67",
-    ))
+    cs_fig.add_trace(
+        go.Bar(
+            x=metrics_list,
+            y=cs_df[label_low],
+            name=label_low,
+            marker_color="#c47a2c",
+        )
+    )
+    cs_fig.add_trace(
+        go.Bar(
+            x=metrics_list,
+            y=cs_df[label_high],
+            name=label_high,
+            marker_color="#2f6f67",
+        )
+    )
     cs_fig.update_layout(
         title=f"Cohort comparison: {cohort_field_name} ({selected_scenario})",
-        yaxis_title="Index score (0-100)", xaxis_title="",
-        barmode="group", height=440, margin=dict(l=10, r=10, t=45, b=150),
+        yaxis_title="Index score (0-100)",
+        xaxis_title="",
+        barmode="group",
+        height=440,
+        margin=dict(l=10, r=10, t=45, b=150),
     )
     st.plotly_chart(cs_fig, width="stretch")
     st.caption(
@@ -2529,14 +2835,26 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
     # ── Wave 2: Variance decomposition ─────────────────────────────────
     st.markdown("### Variance decomposition")
     _render_result_manifest_badge("seeded_stochastic", selected_scenario)
-    st.markdown("**What this shows:** separates total hybrid-viability variance into structural (parameter), subgroup (equity), and stochastic (residual) components.")
+    st.markdown(
+        "**What this shows:** separates total hybrid-viability variance into structural (parameter), subgroup (equity), and stochastic (residual) components."
+    )
     with st.spinner("Running variance decomposition preview..."):
         vd_df = run_variance_decomposition(selected_scenario, draws=80, seed=260526)
     with st.expander("Variance decomposition data", expanded=False):
         st.dataframe(vd_df, hide_index=True, width="stretch")
-    vd_fig = px.bar(vd_df, x="source", y="variance", color="source", text="proportion",
-                    title="Variance decomposition: what drives hybrid viability?",
-                    color_discrete_map={"Structural (parameter)": "#2f6f67", "Subgroup (equity)": "#4f7eb6", "Stochastic (residual)": "#c47a2c"})
+    vd_fig = px.bar(
+        vd_df,
+        x="source",
+        y="variance",
+        color="source",
+        text="proportion",
+        title="Variance decomposition: what drives hybrid viability?",
+        color_discrete_map={
+            "Structural (parameter)": "#2f6f67",
+            "Subgroup (equity)": "#4f7eb6",
+            "Stochastic (residual)": "#c47a2c",
+        },
+    )
     vd_fig.update_traces(texttemplate="%{text:.1%}", textposition="outside")
     vd_fig.update_layout(height=400, margin=dict(l=10, r=10, t=45, b=10), showlegend=False)
     st.plotly_chart(vd_fig, width="stretch")
@@ -2548,10 +2866,14 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
     st.markdown("**What this shows:** hybrid viability across equity protection and complexity levels.")
     hm_df = run_heatmap_matrix(selected_scenario)
     cols = [c for c in hm_df.columns if c != "equity_level"]
-    hm_fig = px.imshow(hm_df.set_index("equity_level")[cols], aspect="auto", text_auto=True,
-                       color_continuous_scale="Viridis",
-                       labels={"x": "Complexity level", "y": "Equity level", "color": "Viability"},
-                       title=f"Scenario × subgroup heatmap ({selected_scenario})")
+    hm_fig = px.imshow(
+        hm_df.set_index("equity_level")[cols],
+        aspect="auto",
+        text_auto=True,
+        color_continuous_scale="Viridis",
+        labels={"x": "Complexity level", "y": "Equity level", "color": "Viability"},
+        title=f"Scenario × subgroup heatmap ({selected_scenario})",
+    )
     hm_fig.update_layout(height=400, margin=dict(l=10, r=10, t=45, b=10))
     st.plotly_chart(hm_fig, width="stretch")
     with st.expander("Scenario × subgroup matrix data", expanded=False):
@@ -2562,20 +2884,75 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
     st.markdown("### Policy shock sequences")
     _render_result_manifest_badge("live_deterministic", selected_scenario)
     st.markdown("**What this shows:** how an abrupt policy change affects hospital and fiscal pressure over time.")
-    shock_field = st.selectbox("Shock parameter", ["activity_signal", "governance", "capitation", "equity_protection", "copayment_burden"], key="shock_field")
+    shock_field = st.selectbox(
+        "Shock parameter",
+        ["activity_signal", "governance", "capitation", "equity_protection", "copayment_burden"],
+        key="shock_field",
+    )
     shock_delta = st.slider("Shock change (±)", -50, 50, -20, 5, key="shock_delta")
     shock_months = st.slider("Post-shock months", 12, 48, 24, 6, key="shock_months")
     with st.spinner("Simulating shock..."):
-        shock_df = run_policy_shock_sequence(selected_scenario, shock_field=shock_field, shock_delta=float(shock_delta), post_shock_months=int(shock_months))
+        shock_df = run_policy_shock_sequence(
+            selected_scenario,
+            shock_field=shock_field,
+            shock_delta=float(shock_delta),
+            post_shock_months=int(shock_months),
+        )
     shock_fig = go.Figure()
-    shock_fig.add_trace(go.Scatter(x=shock_df["month"], y=shock_df["baseline_hospital_pressure"], mode="lines", name="Baseline", line=dict(color="#4f7eb6", width=2, dash="dash")))
-    shock_fig.add_trace(go.Scatter(x=shock_df["month"], y=shock_df["shock_hospital_pressure"], mode="lines", name="Shock", line=dict(color="#c47a2c", width=3)))
-    shock_fig.update_layout(title="Policy shock: hospital pressure", xaxis_title="Month", yaxis_title="Hospital pressure", height=380, margin=dict(l=10, r=10, t=45, b=10), hovermode="x unified")
+    shock_fig.add_trace(
+        go.Scatter(
+            x=shock_df["month"],
+            y=shock_df["baseline_hospital_pressure"],
+            mode="lines",
+            name="Baseline",
+            line=dict(color="#4f7eb6", width=2, dash="dash"),
+        )
+    )
+    shock_fig.add_trace(
+        go.Scatter(
+            x=shock_df["month"],
+            y=shock_df["shock_hospital_pressure"],
+            mode="lines",
+            name="Shock",
+            line=dict(color="#c47a2c", width=3),
+        )
+    )
+    shock_fig.update_layout(
+        title="Policy shock: hospital pressure",
+        xaxis_title="Month",
+        yaxis_title="Hospital pressure",
+        height=380,
+        margin=dict(l=10, r=10, t=45, b=10),
+        hovermode="x unified",
+    )
     st.plotly_chart(shock_fig, width="stretch")
     shock_fig2 = go.Figure()
-    shock_fig2.add_trace(go.Scatter(x=shock_df["month"], y=shock_df["baseline_fiscal_pressure"], mode="lines", name="Baseline", line=dict(color="#4f7eb6", width=2, dash="dash")))
-    shock_fig2.add_trace(go.Scatter(x=shock_df["month"], y=shock_df["shock_fiscal_pressure"], mode="lines", name="Shock", line=dict(color="#c47a2c", width=3)))
-    shock_fig2.update_layout(title="Fiscal pressure response", xaxis_title="Month", yaxis_title="Fiscal pressure", height=340, margin=dict(l=10, r=10, t=45, b=10), hovermode="x unified")
+    shock_fig2.add_trace(
+        go.Scatter(
+            x=shock_df["month"],
+            y=shock_df["baseline_fiscal_pressure"],
+            mode="lines",
+            name="Baseline",
+            line=dict(color="#4f7eb6", width=2, dash="dash"),
+        )
+    )
+    shock_fig2.add_trace(
+        go.Scatter(
+            x=shock_df["month"],
+            y=shock_df["shock_fiscal_pressure"],
+            mode="lines",
+            name="Shock",
+            line=dict(color="#c47a2c", width=3),
+        )
+    )
+    shock_fig2.update_layout(
+        title="Fiscal pressure response",
+        xaxis_title="Month",
+        yaxis_title="Fiscal pressure",
+        height=340,
+        margin=dict(l=10, r=10, t=45, b=10),
+        hovermode="x unified",
+    )
     st.plotly_chart(shock_fig2, width="stretch")
     with st.expander("Policy shock sequence data", expanded=False):
         st.dataframe(shock_df, hide_index=True, width="stretch")
@@ -2707,7 +3084,9 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
     with st.expander("Agent subgroup replay data", expanded=False):
         st.dataframe(subgroup_summary, hide_index=True, width="stretch")
     subgroup_focus = subgroup_summary[
-        subgroup_summary["metric"].isin(["mean_access_probability", "served_contacts", "unmet_attempts", "high_barrier_share"])
+        subgroup_summary["metric"].isin(
+            ["mean_access_probability", "served_contacts", "unmet_attempts", "high_barrier_share"]
+        )
     ].copy()
     subgroup_focus["value"] = subgroup_focus["value"].astype(float)
     subgroup_fig = px.bar(
@@ -2758,10 +3137,45 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
     with st.expander("Uncertainty ribbon data", expanded=False):
         st.dataframe(ribbon_df, hide_index=True, width="stretch")
     ribbon_fig = go.Figure()
-    ribbon_fig.add_trace(go.Scatter(x=ribbon_df["month"], y=ribbon_df["hp_p95"], mode="lines", line=dict(width=0), showlegend=False, name="HP p95"))
-    ribbon_fig.add_trace(go.Scatter(x=ribbon_df["month"], y=ribbon_df["hp_p05"], mode="lines", fill="tonexty", fillcolor="rgba(79,126,182,0.22)", line=dict(width=0), name="Hospital pressure p05-p95"))
-    ribbon_fig.add_trace(go.Scatter(x=ribbon_df["month"], y=ribbon_df["hp_p50"], mode="lines", line=dict(color="#4f7eb6", width=3), name="Hospital pressure p50"))
-    ribbon_fig.add_trace(go.Scatter(x=ribbon_df["month"], y=ribbon_df["fp_p50"], mode="lines", line=dict(color="#c47a2c", width=3), name="Fiscal pressure p50"))
+    ribbon_fig.add_trace(
+        go.Scatter(
+            x=ribbon_df["month"],
+            y=ribbon_df["hp_p95"],
+            mode="lines",
+            line=dict(width=0),
+            showlegend=False,
+            name="HP p95",
+        )
+    )
+    ribbon_fig.add_trace(
+        go.Scatter(
+            x=ribbon_df["month"],
+            y=ribbon_df["hp_p05"],
+            mode="lines",
+            fill="tonexty",
+            fillcolor="rgba(79,126,182,0.22)",
+            line=dict(width=0),
+            name="Hospital pressure p05-p95",
+        )
+    )
+    ribbon_fig.add_trace(
+        go.Scatter(
+            x=ribbon_df["month"],
+            y=ribbon_df["hp_p50"],
+            mode="lines",
+            line=dict(color="#4f7eb6", width=3),
+            name="Hospital pressure p50",
+        )
+    )
+    ribbon_fig.add_trace(
+        go.Scatter(
+            x=ribbon_df["month"],
+            y=ribbon_df["fp_p50"],
+            mode="lines",
+            line=dict(color="#c47a2c", width=3),
+            name="Fiscal pressure p50",
+        )
+    )
     ribbon_fig.update_layout(
         title=f"Uncertainty ribbon: stock-flow pressure paths ({selected_scenario})",
         xaxis_title="Month",
@@ -2771,7 +3185,9 @@ def render_live_model_lab(precomputed_df: pd.DataFrame) -> None:
         hovermode="x unified",
     )
     st.plotly_chart(ribbon_fig, width="stretch")
-    st.caption("Ribbon shows seeded p05-p95 hospital-pressure spread; medians are demonstrative, not empirical intervals.")
+    st.caption(
+        "Ribbon shows seeded p05-p95 hospital-pressure spread; medians are demonstrative, not empirical intervals."
+    )
 
     st.markdown("### Value of information")
     _render_result_manifest_badge("seeded_stochastic")
@@ -2814,9 +3230,7 @@ def render_app() -> None:
 
     slider_definitions = {definition.field_name: definition for definition in EDUCATIONAL_LEVER_DEFINITIONS}
     with st.sidebar.expander("Educational explainer controls", expanded=False):
-        st.caption(
-            "Teaching controls only: educational sliders do not rerun the full parameterised model."
-        )
+        st.caption("Teaching controls only: educational sliders do not rerun the full parameterised model.")
         st.caption(
             "0 means absent/weak; 100 means strong/reliably implemented. These are qualitative teaching levers, not estimated structural parameters."
         )
@@ -2981,26 +3395,30 @@ def render_app() -> None:
                 for sc in SCENARIOS:
                     idx = calculate_indices(sc)
                     cal = calibrate_distribution(idx)
-                    dist_rows.append({
-                        "scenario_id": sc.scenario_id,
-                        "GP visits/1000": f"{cal['dist_gp_visits_per_1000']['mean']:.0f} [{cal['dist_gp_visits_per_1000']['p05']:.0f}\u2013{cal['dist_gp_visits_per_1000']['p95']:.0f}]",
-                        "ED/100k": f"{cal['dist_ed_per_100k']['mean']:.0f} [{cal['dist_ed_per_100k']['p05']:.0f}\u2013{cal['dist_ed_per_100k']['p95']:.0f}]",
-                        "Admissions/100k": f"{cal['dist_admissions_per_100k']['mean']:.0f} [{cal['dist_admissions_per_100k']['p05']:.0f}\u2013{cal['dist_admissions_per_100k']['p95']:.0f}]",
-                        "Spend/capita NZD": f"${cal['dist_spend_per_capita_nzd']['mean']:.0f} [${cal['dist_spend_per_capita_nzd']['p05']:.0f}\u2013${cal['dist_spend_per_capita_nzd']['p95']:.0f}]",
-                    })
+                    dist_rows.append(
+                        {
+                            "scenario_id": sc.scenario_id,
+                            "GP visits/1000": f"{cal['dist_gp_visits_per_1000']['mean']:.0f} [{cal['dist_gp_visits_per_1000']['p05']:.0f}\u2013{cal['dist_gp_visits_per_1000']['p95']:.0f}]",
+                            "ED/100k": f"{cal['dist_ed_per_100k']['mean']:.0f} [{cal['dist_ed_per_100k']['p05']:.0f}\u2013{cal['dist_ed_per_100k']['p95']:.0f}]",
+                            "Admissions/100k": f"{cal['dist_admissions_per_100k']['mean']:.0f} [{cal['dist_admissions_per_100k']['p05']:.0f}\u2013{cal['dist_admissions_per_100k']['p95']:.0f}]",
+                            "Spend/capita NZD": f"${cal['dist_spend_per_capita_nzd']['mean']:.0f} [${cal['dist_spend_per_capita_nzd']['p05']:.0f}\u2013${cal['dist_spend_per_capita_nzd']['p95']:.0f}]",
+                        }
+                    )
                     for source_key, label in [
                         ("dist_gp_visits_per_1000", "GP visits/1000"),
                         ("dist_ed_per_100k", "ED/100k"),
                         ("dist_admissions_per_100k", "Admissions/100k"),
                         ("dist_spend_per_capita_nzd", "Spend/capita NZD"),
                     ]:
-                        dist_plot_rows.append({
-                            "scenario_id": sc.scenario_id,
-                            "metric": label,
-                            "mean": cal[source_key]["mean"],
-                            "p05": cal[source_key]["p05"],
-                            "p95": cal[source_key]["p95"],
-                        })
+                        dist_plot_rows.append(
+                            {
+                                "scenario_id": sc.scenario_id,
+                                "metric": label,
+                                "mean": cal[source_key]["mean"],
+                                "p05": cal[source_key]["p05"],
+                                "p95": cal[source_key]["p95"],
+                            }
+                        )
             dist_df = pd.DataFrame(dist_rows)
             dist_plot_df = pd.DataFrame(dist_plot_rows)
             st.dataframe(dist_df, hide_index=True, width="stretch")
@@ -3026,14 +3444,22 @@ def render_app() -> None:
                 "combined with a Bass diffusion curve (p=0.15 innovation, q=0.40 imitation) "
                 "to model gradual policy adoption over 5 years."
             )
-            bi_scenarios = st.multiselect("Scenarios for budget impact", ["F0","F3","F4","F8"], default=["F0","F4"], key="bi_scenarios")
-            bi_pop = st.number_input("Enrolled population", min_value=100000, max_value=10000000, value=4500000, step=100000, key="bi_pop")
+            bi_scenarios = st.multiselect(
+                "Scenarios for budget impact", ["F0", "F3", "F4", "F8"], default=["F0", "F4"], key="bi_scenarios"
+            )
+            bi_pop = st.number_input(
+                "Enrolled population", min_value=100000, max_value=10000000, value=4500000, step=100000, key="bi_pop"
+            )
             with st.spinner("Computing budget impact with diffusion..."):
                 bi_df = run_budget_impact(tuple(bi_scenarios), enrolled_population=int(bi_pop))
-            st.dataframe(bi_df[~bi_df["year"].astype(str).str.isdigit()].reset_index(drop=True), hide_index=True, width="stretch")
+            st.dataframe(
+                bi_df[~bi_df["year"].astype(str).str.isdigit()].reset_index(drop=True), hide_index=True, width="stretch"
+            )
             bi_fig = px.line(
                 bi_df[bi_df["year"] != "Total"].astype({"year": int}),
-                x="year", y="discounted_budget_nzd", color="scenario_id",
+                x="year",
+                y="discounted_budget_nzd",
+                color="scenario_id",
                 markers=True,
                 title="Discounted budget impact by scenario (with Bass diffusion)",
                 labels={"year": "Year", "discounted_budget_nzd": "Discounted budget (NZD)", "scenario_id": "Scenario"},

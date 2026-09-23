@@ -42,7 +42,9 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     if sys.platform != "win32":
-        print("Repo-local Pixi bootstrap currently supports Windows x64 only; use the official installer on this platform.")
+        print(
+            "Repo-local Pixi bootstrap currently supports Windows x64 only; use the official installer on this platform."
+        )
         return 2
 
     pixi_exe = _install_windows_x64(args.version, repo_pixi_path(args.version).parent, args.force)

@@ -10,6 +10,7 @@ import numpy as np
 try:  # pragma: no cover - optional accelerator dependency
     import jax
     import jax.numpy as jnp
+
     HAS_JAX = True
 except ModuleNotFoundError:  # pragma: no cover - lean runtime fallback
     jax = None
@@ -73,9 +74,7 @@ class ReferralGraph:
     ) -> ReferralGraph:
         """Construct a synthetic referral graph from simulation settings."""
         if not HAS_JAX:
-            raise ModuleNotFoundError(
-                "Install jax to construct a synthetic referral graph from simulation settings."
-            )
+            raise ModuleNotFoundError("Install jax to construct a synthetic referral graph from simulation settings.")
         del config
         key_practice, key_cohort, key_edges, key_weights = jax.random.split(rng_key, 4)
         practice_features = jax.random.uniform(key_practice, (n_practices, 5))

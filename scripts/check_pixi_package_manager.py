@@ -45,7 +45,11 @@ def classify_pixi_help(help_text: str) -> tuple[bool, str]:
     lowered = help_text.lower()
     if "pixiv" in lowered or "bookmarks" in lowered or "illust" in lowered:
         return False, "The pixi executable appears to be a Pixiv downloader, not Prefix.dev Pixi."
-    if "task" in lowered and ("run" in lowered or "shell" in lowered) and ("environment" in lowered or "workspace" in lowered):
+    if (
+        "task" in lowered
+        and ("run" in lowered or "shell" in lowered)
+        and ("environment" in lowered or "workspace" in lowered)
+    ):
         return True, "Prefix.dev Pixi command shape detected."
     if "prefix.dev" in lowered or "pixi is a package management" in lowered:
         return True, "Prefix.dev Pixi help text detected."

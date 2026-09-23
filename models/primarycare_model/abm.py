@@ -280,9 +280,13 @@ def build_providers(params: ABMParameters) -> list[ProviderAgent]:
                     capacity=capacity_base[provider_type],
                     benefit_eligible=True,
                     scope=PROVIDER_SCOPES[provider_type],
-                    place_accountability=clamp(params.place_based_accountability_strength + provider_bias[provider_type]),
+                    place_accountability=clamp(
+                        params.place_based_accountability_strength + provider_bias[provider_type]
+                    ),
                     audit_strength=clamp(params.audit_intensity + 0.05 * params.item_rules_strength),
-                    direct_claiming=clamp(params.direct_claiming_strength + 0.04 * params.scheduled_medical_benefit_strength),
+                    direct_claiming=clamp(
+                        params.direct_claiming_strength + 0.04 * params.scheduled_medical_benefit_strength
+                    ),
                 )
             )
             provider_id += 1
@@ -324,17 +328,30 @@ class ABMSimulation:
             + 0.08 * self.params.equity_program_strength
         )
         trust = 0.14 * patient.trust
-        access = 0.25 + supply_support + trust - 0.42 * price_penalty - 0.18 * rural_penalty - 0.10 * self.params.global_cap_constraint - 0.08 * need_pressure
+        access = (
+            0.25
+            + supply_support
+            + trust
+            - 0.42 * price_penalty
+            - 0.18 * rural_penalty
+            - 0.10 * self.params.global_cap_constraint
+            - 0.08 * need_pressure
+        )
         return clamp(access)
 
     def _contact_weights(self, patient: PatientAgent) -> dict[str, float]:
         return {
             "routine": CONTACT_TYPE_WEIGHTS["routine"] + 0.05 * (1 - patient.multimorbidity),
-            "urgent": CONTACT_TYPE_WEIGHTS["urgent"] + 0.10 * patient.multimorbidity + 0.06 * self.params.urgent_care_effectiveness,
+            "urgent": CONTACT_TYPE_WEIGHTS["urgent"]
+            + 0.10 * patient.multimorbidity
+            + 0.06 * self.params.urgent_care_effectiveness,
             "chronic": CONTACT_TYPE_WEIGHTS["chronic"] + 0.10 * patient.multimorbidity,
             "medicines_review": CONTACT_TYPE_WEIGHTS["medicines_review"] + 0.06 * self.params.scope_substitution_rate,
-            "care_coordination": CONTACT_TYPE_WEIGHTS["care_coordination"] + 0.05 * self.params.place_based_accountability_strength,
-            "telehealth": CONTACT_TYPE_WEIGHTS["telehealth"] + 0.08 * self.params.telehealth_acceptability + (0.04 if patient.rural else 0.0),
+            "care_coordination": CONTACT_TYPE_WEIGHTS["care_coordination"]
+            + 0.05 * self.params.place_based_accountability_strength,
+            "telehealth": CONTACT_TYPE_WEIGHTS["telehealth"]
+            + 0.08 * self.params.telehealth_acceptability
+            + (0.04 if patient.rural else 0.0),
         }
 
     def _available_providers(self, contact_type: str, capacities: dict[int, int]) -> list[ProviderAgent]:
@@ -366,7 +383,9 @@ class ABMSimulation:
                 base += 0.06
             elif provider.provider_type == "paramedic":
                 base += 0.05
-            base += 0.10 * provider.place_accountability + 0.08 * provider.audit_strength + 0.06 * provider.direct_claiming
+            base += (
+                0.10 * provider.place_accountability + 0.08 * provider.audit_strength + 0.06 * provider.direct_claiming
+            )
             if contact_type in {"urgent", "care_coordination"} and provider.provider_type in {"gp", "paramedic"}:
                 base += 0.12
             if contact_type == "medicines_review" and provider.provider_type == "pharmacist":
@@ -385,7 +404,12 @@ class ABMSimulation:
             - 0.10 * self.params.market_entry_response
             - 0.08 * self.params.rural_loading_response
         )
-        capacity_scale = clamp(1.0 + 0.18 * self.params.capitation_base_strength + 0.14 * self.params.scheduled_medical_benefit_strength - 0.16 * stress)
+        capacity_scale = clamp(
+            1.0
+            + 0.18 * self.params.capitation_base_strength
+            + 0.14 * self.params.scheduled_medical_benefit_strength
+            - 0.16 * stress
+        )
         scheduled = {}
         for provider in self.providers:
             base = self._provider_base_capacity[provider.provider_id]
@@ -511,7 +535,10 @@ class ABMSimulation:
 
                     if contact_type == "urgent":
                         ambulance_events += 0.18
-                    if contact_type in {"urgent", "care_coordination"} and provider.provider_type in {"gp", "paramedic"}:
+                    if contact_type in {"urgent", "care_coordination"} and provider.provider_type in {
+                        "gp",
+                        "paramedic",
+                    }:
                         ambulance_events += 0.07
 
             access_rate = resolved / total_demand if total_demand else 0.0
@@ -547,7 +574,7 @@ class ABMSimulation:
                 + 0.012 * ambulance_events
                 + 0.020 * admissions
                 - 0.030 * access_rate
-                - 0.020 * self.params.ambulance_deflection_rate
+                - 0.020 * self.params.ambulance_deflection_rate,
             )
             fiscal_risk_index = clamp(
                 0.18

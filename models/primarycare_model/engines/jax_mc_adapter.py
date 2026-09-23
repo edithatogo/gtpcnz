@@ -45,6 +45,7 @@ class MCOutput(EngineOutput):
     draw_data: tuple[dict[str, float | int | str], ...]
     uncertainty_summaries: tuple[UncertaintySummary, ...]
 
+
 class MonteCarloAdapter:
     """Typed adapter for Monte Carlo simulation.
 
@@ -76,15 +77,54 @@ class MonteCarloAdapter:
         compl = self._as_fraction(inp.complexity)
         hosp_sal = self._as_fraction(inp.hospital_salience)
 
-        supply = self._clamp(100 * (0.34 * activity + 0.18 * capitation + 0.24 * scope + 0.12 * urgent + 0.12 * place - 0.12 * budget))
-        access = self._clamp(100 * (0.42 * supply / 100 + 0.18 * urgent + 0.15 * equity + 0.12 * place + 0.10 * data - 0.16 * copay))
+        supply = self._clamp(
+            100 * (0.34 * activity + 0.18 * capitation + 0.24 * scope + 0.12 * urgent + 0.12 * place - 0.12 * budget)
+        )
+        access = self._clamp(
+            100 * (0.42 * supply / 100 + 0.18 * urgent + 0.15 * equity + 0.12 * place + 0.10 * data - 0.16 * copay)
+        )
         equity_leg = self._clamp(100 * (0.34 * equity + 0.24 * place + 0.16 * capitation + 0.14 * data - 0.16 * copay))
-        gov_res = self._clamp(100 * (0.44 * governance + 0.20 * data + 0.18 * place + 0.10 * equity + 0.08 * capitation))
-        hosp_def = self._clamp(100 * (0.32 * access / 100 + 0.22 * urgent + 0.16 * supply / 100 + 0.16 * data + 0.14 * place - 0.10 * compl))
-        gaming = self._clamp(100 * (0.35 * activity + 0.18 * scope + 0.18 * compl - 0.30 * governance - 0.18 * data - 0.16 * place))
-        fiscal = self._clamp(100 * (0.22 * activity + 0.18 * gaming / 100 + 0.16 * compl + 0.14 * (1 - budget) - 0.18 * governance - 0.14 * hosp_def / 100))
-        hosp_pressure = self._clamp(100 * (0.34 * hosp_sal + 0.26 * (1 - hosp_def / 100) + 0.16 * compl + 0.14 * budget - 0.18 * access / 100 - 0.12 * urgent))
-        hybrid = self._clamp(0.24 * supply + 0.18 * access + 0.18 * equity_leg + 0.16 * gov_res + 0.14 * hosp_def + 0.06 * (100 - fiscal) + 0.04 * (100 - gaming))
+        gov_res = self._clamp(
+            100 * (0.44 * governance + 0.20 * data + 0.18 * place + 0.10 * equity + 0.08 * capitation)
+        )
+        hosp_def = self._clamp(
+            100
+            * (0.32 * access / 100 + 0.22 * urgent + 0.16 * supply / 100 + 0.16 * data + 0.14 * place - 0.10 * compl)
+        )
+        gaming = self._clamp(
+            100 * (0.35 * activity + 0.18 * scope + 0.18 * compl - 0.30 * governance - 0.18 * data - 0.16 * place)
+        )
+        fiscal = self._clamp(
+            100
+            * (
+                0.22 * activity
+                + 0.18 * gaming / 100
+                + 0.16 * compl
+                + 0.14 * (1 - budget)
+                - 0.18 * governance
+                - 0.14 * hosp_def / 100
+            )
+        )
+        hosp_pressure = self._clamp(
+            100
+            * (
+                0.34 * hosp_sal
+                + 0.26 * (1 - hosp_def / 100)
+                + 0.16 * compl
+                + 0.14 * budget
+                - 0.18 * access / 100
+                - 0.12 * urgent
+            )
+        )
+        hybrid = self._clamp(
+            0.24 * supply
+            + 0.18 * access
+            + 0.18 * equity_leg
+            + 0.16 * gov_res
+            + 0.14 * hosp_def
+            + 0.06 * (100 - fiscal)
+            + 0.04 * (100 - gaming)
+        )
 
         return {
             "hybrid_viability_score": round(hybrid, 2),
@@ -109,7 +149,13 @@ class MonteCarloAdapter:
         ref = self._calculate_indices(inp)
 
         # Stochastic draws
-        keys = ["hybrid_viability_score", "access_score", "hospital_pressure_score", "gaming_risk_score", "fiscal_risk_score"]
+        keys = [
+            "hybrid_viability_score",
+            "access_score",
+            "hospital_pressure_score",
+            "gaming_risk_score",
+            "fiscal_risk_score",
+        ]
         draw_metrics: dict[str, list[float]] = {k: [] for k in keys}
         draw_rows: list[dict[str, float | int | str]] = []
 
@@ -181,4 +227,3 @@ class MonteCarloAdapter:
             draw_data=tuple(draw_rows),
             uncertainty_summaries=tuple(summaries),
         )
-
