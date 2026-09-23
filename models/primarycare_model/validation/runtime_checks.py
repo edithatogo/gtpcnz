@@ -134,6 +134,7 @@ _REQUIRED_TEXT_COLUMNS = {
     "description",
 }
 
+
 def check_result_frame_bounds(df: pd.DataFrame) -> list[str]:
     """Lightweight bounds check on a reference result DataFrame.
 
@@ -174,10 +175,7 @@ def check_result_frame_bounds(df: pd.DataFrame) -> list[str]:
             if out_of_range.any():
                 bad_indices = out_of_range[out_of_range].index.tolist()
                 bad_values = df.loc[bad_indices, column].tolist()
-                issues.append(
-                    f"{column}: {len(bad_indices)} value(s) outside "
-                    f"[{lo}, {hi}]: {bad_values[:5]}"
-                )
+                issues.append(f"{column}: {len(bad_indices)} value(s) outside [{lo}, {hi}]: {bad_values[:5]}")
 
     # Check that scenario_id is not empty
     if "scenario_id" in df.columns:
@@ -223,4 +221,3 @@ def format_validation_issues(issues: list[str]) -> str:
         lines.append(f"- {issue}")
 
     return "\n".join(lines)
-

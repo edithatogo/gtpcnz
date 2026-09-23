@@ -15,7 +15,7 @@ GENERIC_ERROR_TEXT = (
     "Oh no.",
     "Error running app",
     "Error installing requirements",
-    "Click \"Manage App\"",
+    'Click "Manage App"',
 )
 
 

@@ -31,7 +31,11 @@ FINITE_FLOATS = st.floats(
 )
 
 
-@given(value=FINITE_FLOATS, lower=st.floats(min_value=-1000, max_value=0, allow_nan=False), upper=st.floats(min_value=1, max_value=1000, allow_nan=False))
+@given(
+    value=FINITE_FLOATS,
+    lower=st.floats(min_value=-1000, max_value=0, allow_nan=False),
+    upper=st.floats(min_value=1, max_value=1000, allow_nan=False),
+)
 def test_clamp_respects_bounds(value: float, lower: float, upper: float) -> None:
     bounded = clamp(value, lower, upper)
     assert lower <= bounded <= upper

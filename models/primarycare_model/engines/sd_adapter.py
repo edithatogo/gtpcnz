@@ -96,10 +96,25 @@ class SystemDynamicsAdapter:
             )
         )
         gaming_risk = self._clamp(
-            100 * (0.35 * activity + 0.18 * scope + 0.18 * f(inp.complexity) - 0.30 * governance - 0.18 * data - 0.16 * place)
+            100
+            * (
+                0.35 * activity
+                + 0.18 * scope
+                + 0.18 * f(inp.complexity)
+                - 0.30 * governance
+                - 0.18 * data
+                - 0.16 * place
+            )
         )
         fiscal_risk = self._clamp(
-            100 * (0.22 * activity + 0.18 * gaming_risk / 100 + 0.16 * f(inp.complexity) + 0.14 * (1 - budget) - 0.18 * governance)
+            100
+            * (
+                0.22 * activity
+                + 0.18 * gaming_risk / 100
+                + 0.16 * f(inp.complexity)
+                + 0.14 * (1 - budget)
+                - 0.18 * governance
+            )
         )
 
         # --- stock-flow dynamics ---
@@ -110,11 +125,15 @@ class SystemDynamicsAdapter:
         for month in range(1, months + 1):
             seasonal = 1.0 + 0.05 * np.sin(2 * np.pi * month / 12.0)
             need = 55.0 * seasonal + 0.18 * unmet + 0.15 * inp.complexity
-            capacity = max(1.0, capacity + 0.06 * supply + 0.04 * inp.place_accountability - 0.05 * inp.budget_tightness)
+            capacity = max(
+                1.0, capacity + 0.06 * supply + 0.04 * inp.place_accountability - 0.05 * inp.budget_tightness
+            )
             served = min(need + 0.20 * unmet, capacity * (0.72 + access / 250.0))
             ambulance_resolved = min(need * (0.08 + inp.urgent_ambulance / 400.0), 12.0 + capacity / 10.0)
             unmet = max(0.0, 0.70 * unmet + need - served - ambulance_resolved)
-            hospital_pressure = self._clamp(35.0 + 0.42 * unmet + 0.28 * inp.hospital_salience - 0.32 * hospital_pressure_idx)
+            hospital_pressure = self._clamp(
+                35.0 + 0.42 * unmet + 0.28 * inp.hospital_salience - 0.32 * hospital_pressure_idx
+            )
             fiscal_pressure = self._clamp(20.0 + 0.28 * fiscal_risk + 0.12 * unmet + 0.08 * served)
 
             trace.append(
@@ -131,9 +150,23 @@ class SystemDynamicsAdapter:
                 }
             )
 
-        equity_legitimacy = self._clamp(100 * (0.34 * equity + 0.24 * place + 0.16 * capitation + 0.14 * data - 0.16 * copay))
-        governance_resilience = self._clamp(100 * (0.44 * governance + 0.20 * data + 0.18 * place + 0.10 * equity + 0.08 * capitation))
-        hospital_deflection = self._clamp(100 * (0.32 * access / 100 + 0.22 * urgent + 0.16 * supply / 100 + 0.16 * data + 0.14 * place - 0.10 * f(inp.complexity)))
+        equity_legitimacy = self._clamp(
+            100 * (0.34 * equity + 0.24 * place + 0.16 * capitation + 0.14 * data - 0.16 * copay)
+        )
+        governance_resilience = self._clamp(
+            100 * (0.44 * governance + 0.20 * data + 0.18 * place + 0.10 * equity + 0.08 * capitation)
+        )
+        hospital_deflection = self._clamp(
+            100
+            * (
+                0.32 * access / 100
+                + 0.22 * urgent
+                + 0.16 * supply / 100
+                + 0.16 * data
+                + 0.14 * place
+                - 0.10 * f(inp.complexity)
+            )
+        )
         hybrid = self._clamp(
             0.24 * supply
             + 0.18 * access

@@ -157,9 +157,7 @@ def interaction_penalty(scenario: Scenario, metrics: Mapping[str, float]) -> flo
     # Telehealth substitution risk appears when telehealth scale is not integrated with local in-person support.
     telehealth_gap = max(
         0.0,
-        scenario.telehealth_scale
-        - 0.55 * scenario.telehealth_integration
-        - 0.45 * scenario.local_inperson_loading,
+        scenario.telehealth_scale - 0.55 * scenario.telehealth_integration - 0.45 * scenario.local_inperson_loading,
     )
 
     # Hospital rescue persists when hospital pressure is visible but upstream KPIs/data are not.
@@ -252,7 +250,9 @@ def hybrid_outcome(scenario: Scenario) -> HybridOutcome:
     elif scenario.scenario_id == "S2":
         interpretation = "Materially improves supply and hospital-pressure logic, but still needs stronger ambulance, equity, data and governance architecture."
     elif scenario.scenario_id == "S4":
-        interpretation = "Shows why benefits cannot be loose: access rises, but fiscal/gaming/equity risks weaken viability."
+        interpretation = (
+            "Shows why benefits cannot be loose: access rises, but fiscal/gaming/equity risks weaken viability."
+        )
     elif scenario.scenario_id == "S1":
         interpretation = "Improves allocation inside capitation but leaves the marginal supply and hospital-rescue games largely intact."
     else:
@@ -338,7 +338,9 @@ def summarise_hybrid_uncertainty(draws: pd.DataFrame) -> pd.DataFrame:
     summary = grouped.agg(["mean", "std", lambda s: s.quantile(0.05), lambda s: s.quantile(0.95)])
     summary.columns = [f"{metric}_{stat if isinstance(stat, str) else 'p'}" for metric, stat in summary.columns]
     # Rename lambda-generated fields cleanly.
-    summary = summary.rename(columns={col: col.replace("_<lambda_0>", "_p05").replace("_<lambda_1>", "_p95") for col in summary.columns})
+    summary = summary.rename(
+        columns={col: col.replace("_<lambda_0>", "_p05").replace("_<lambda_1>", "_p95") for col in summary.columns}
+    )
     return summary.reset_index()
 
 

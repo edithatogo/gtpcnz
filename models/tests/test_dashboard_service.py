@@ -11,15 +11,8 @@ from models.primarycare_model import dashboard_service as service
 def test_dashboard_service_is_framework_neutral_and_exposes_public_links() -> None:
     source = Path("models/primarycare_model/dashboard_service.py").read_text(encoding="utf-8")
     tree = ast.parse(source)
-    imported_modules = {
-        alias.name
-        for node in tree.body
-        if isinstance(node, ast.Import)
-        for alias in node.names
-    } | {
-        node.module or ""
-        for node in tree.body
-        if isinstance(node, ast.ImportFrom)
+    imported_modules = {alias.name for node in tree.body if isinstance(node, ast.Import) for alias in node.names} | {
+        node.module or "" for node in tree.body if isinstance(node, ast.ImportFrom)
     }
 
     assert "streamlit" not in imported_modules

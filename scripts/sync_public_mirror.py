@@ -1,4 +1,5 @@
 """Sync root source files to public/gtpcnz mirror."""
+
 from __future__ import annotations
 
 import filecmp
@@ -13,8 +14,14 @@ COPY_MAP = [
     (ROOT / "pyproject.toml", MIRROR / "pyproject.toml"),
     (ROOT / "uv.lock", MIRROR / "uv.lock"),
     (ROOT / "models" / "primarycare_model" / "app.py", MIRROR / "models" / "primarycare_model" / "app.py"),
-    (ROOT / "models" / "primarycare_model" / "runtime_lab.py", MIRROR / "models" / "primarycare_model" / "runtime_lab.py"),
-    (ROOT / "models" / "primarycare_model" / "scenario_service.py", MIRROR / "models" / "primarycare_model" / "scenario_service.py"),
+    (
+        ROOT / "models" / "primarycare_model" / "runtime_lab.py",
+        MIRROR / "models" / "primarycare_model" / "runtime_lab.py",
+    ),
+    (
+        ROOT / "models" / "primarycare_model" / "scenario_service.py",
+        MIRROR / "models" / "primarycare_model" / "scenario_service.py",
+    ),
     (ROOT / "models" / "primarycare_model" / "__init__.py", MIRROR / "models" / "primarycare_model" / "__init__.py"),
 ]
 for sub in [
@@ -34,6 +41,8 @@ for sub in [
         for pattern in ["**/*.py", "**/*.yaml"]:
             for f in src_dir.glob(pattern):
                 COPY_MAP.append((f, dst_dir / f.relative_to(src_dir)))
+
+
 def main() -> int:
     check_only = "--check" in sys.argv
     failures = 0
@@ -63,5 +72,7 @@ def main() -> int:
         print("")
         print(f"Sync complete. {failures} errors.")
     return 1 if failures else 0
+
+
 if __name__ == "__main__":
     sys.exit(main())

@@ -42,15 +42,15 @@ RUNTIME_LAB_PATHS = [
 # ("patient-level forecast", "linked-data", "clinical data") which are
 # legitimate model terminology checked separately by check_no_patient_data.py.
 _PATIENT_DATA_PATTERNS: list[re.Pattern] = [
-    re.compile(r"\bNHI\b"),                                    # National Health Index
-    re.compile(r"\bnhi_number\b", re.IGNORECASE),              # variable containing NHI
-    re.compile(r"\bnational health index\b", re.IGNORECASE),   # full name
-    re.compile(r"\bpersonally.identif", re.IGNORECASE),        # PII variants
-    re.compile(r"\bindividually.identif", re.IGNORECASE),      # II variants
-    re.compile(r"\bPHI\b"),                                    # Protected Health Info
-    re.compile(r"\bPII\b"),                                    # Personally Identifiable Info
-    re.compile(r"\bpatient_level\b", re.IGNORECASE),           # actual data-level refs
-    re.compile(r"\breal patient\b", re.IGNORECASE),            # raw patient data
+    re.compile(r"\bNHI\b"),  # National Health Index
+    re.compile(r"\bnhi_number\b", re.IGNORECASE),  # variable containing NHI
+    re.compile(r"\bnational health index\b", re.IGNORECASE),  # full name
+    re.compile(r"\bpersonally.identif", re.IGNORECASE),  # PII variants
+    re.compile(r"\bindividually.identif", re.IGNORECASE),  # II variants
+    re.compile(r"\bPHI\b"),  # Protected Health Info
+    re.compile(r"\bPII\b"),  # Personally Identifiable Info
+    re.compile(r"\bpatient_level\b", re.IGNORECASE),  # actual data-level refs
+    re.compile(r"\breal patient\b", re.IGNORECASE),  # raw patient data
 ]
 
 
@@ -72,8 +72,10 @@ def _imports_streamlit(path: Path) -> bool:
             alias.name == "streamlit" or alias.name.startswith("streamlit.") for alias in node.names
         ):
             return True
-        if isinstance(node, ast.ImportFrom) and node.module and (
-            node.module == "streamlit" or node.module.startswith("streamlit.")
+        if (
+            isinstance(node, ast.ImportFrom)
+            and node.module
+            and (node.module == "streamlit" or node.module.startswith("streamlit."))
         ):
             return True
     return False
@@ -166,9 +168,7 @@ def _check_patient_data_references() -> list[str]:
                     continue
                 for pattern in _PATIENT_DATA_PATTERNS:
                     if pattern.search(stripped):
-                        issues.append(
-                            f"{path.relative_to(ROOT)}:{lineno}: matches {pattern.pattern!r}"
-                        )
+                        issues.append(f"{path.relative_to(ROOT)}:{lineno}: matches {pattern.pattern!r}")
                         break
     return issues
 
@@ -187,9 +187,7 @@ def main() -> int:
         for path in _python_files(scan_path):
             if _imports_streamlit(path):
                 streamlit_issues.append(f"{path.relative_to(ROOT)} imports Streamlit")
-    results.append(
-        _check_boundary("no-streamlit-in-strict-layers", not streamlit_issues, streamlit_issues)
-    )
+    results.append(_check_boundary("no-streamlit-in-strict-layers", not streamlit_issues, streamlit_issues))
     if streamlit_issues:
         any_failure = True
 
@@ -197,12 +195,8 @@ def main() -> int:
     runtime_issues: list[str] = []
     for runtime_lab in RUNTIME_LAB_PATHS:
         if runtime_lab.exists() and _runtime_has_inline_scenario_tuple(runtime_lab):
-            runtime_issues.append(
-                f"{runtime_lab.relative_to(ROOT)} still owns inline runtime scenario defaults"
-            )
-    results.append(
-        _check_boundary("no-inline-scenario-defaults", not runtime_issues, runtime_issues)
-    )
+            runtime_issues.append(f"{runtime_lab.relative_to(ROOT)} still owns inline runtime scenario defaults")
+    results.append(_check_boundary("no-inline-scenario-defaults", not runtime_issues, runtime_issues))
     if runtime_issues:
         any_failure = True
 
@@ -212,9 +206,7 @@ def main() -> int:
         for path in _python_files(scan_path):
             if _imports_streamlit(path):
                 engine_streamlit_issues.append(f"{path.relative_to(ROOT)} imports Streamlit")
-    results.append(
-        _check_boundary("no-streamlit-in-engines", not engine_streamlit_issues, engine_streamlit_issues)
-    )
+    results.append(_check_boundary("no-streamlit-in-engines", not engine_streamlit_issues, engine_streamlit_issues))
     if engine_streamlit_issues:
         any_failure = True
 
@@ -227,17 +219,13 @@ def main() -> int:
                     f"{path.relative_to(ROOT)} contains inline production parameter defaults "
                     "(should be loaded from versioned registry)"
                 )
-    results.append(
-        _check_boundary("no-inline-production-defaults-in-engines", not defaults_issues, defaults_issues)
-    )
+    results.append(_check_boundary("no-inline-production-defaults-in-engines", not defaults_issues, defaults_issues))
     if defaults_issues:
         any_failure = True
 
     # --- Boundary 5: No patient-level data references ---
     patient_issues = _check_patient_data_references()
-    results.append(
-        _check_boundary("no-patient-level-data-references", not patient_issues, patient_issues)
-    )
+    results.append(_check_boundary("no-patient-level-data-references", not patient_issues, patient_issues))
     if patient_issues:
         any_failure = True
 

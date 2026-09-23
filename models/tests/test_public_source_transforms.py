@@ -28,8 +28,14 @@ def test_public_source_transform_check_is_readiness_compatible() -> None:
 
 
 def test_public_source_transform_strict_mode_is_registry_driven() -> None:
-    results = [check_source_transform_readiness(plan.source_id, require_raw=True) for plan in load_public_source_retrieval_plans()]
-    assert all(result.status in {"blocked", "processed_ready", "raw_available_pending_source_specific_parser"} for result in results)
+    results = [
+        check_source_transform_readiness(plan.source_id, require_raw=True)
+        for plan in load_public_source_retrieval_plans()
+    ]
+    assert all(
+        result.status in {"blocked", "processed_ready", "raw_available_pending_source_specific_parser"}
+        for result in results
+    )
 
 
 def test_public_source_transform_script_cli_passes_in_readiness_mode() -> None:

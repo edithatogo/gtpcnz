@@ -26,17 +26,19 @@ def run_public_aggregate_calibration() -> dict[str, object]:
         source_row = source_rows.get(target.source_id)
         source_ready = source_row is not None and source_row.source_ready
         passed = relative_error <= target.tolerance and source_ready
-        checks.append({
-            "target_id": target.target_id,
-            "target_family": target.target_family,
-            "observed_value": target.observed_value,
-            "predicted_value": predicted,
-            "relative_error": round(relative_error, 6),
-            "tolerance": target.tolerance,
-            "source_ready": source_ready,
-            "passed": passed,
-            "claim_boundary": target.claim_boundary,
-        })
+        checks.append(
+            {
+                "target_id": target.target_id,
+                "target_family": target.target_family,
+                "observed_value": target.observed_value,
+                "predicted_value": predicted,
+                "relative_error": round(relative_error, 6),
+                "tolerance": target.tolerance,
+                "source_ready": source_ready,
+                "passed": passed,
+                "claim_boundary": target.claim_boundary,
+            }
+        )
     all_targets_passed = all(item["passed"] for item in checks)
     validation_gates = [row.to_json_dict() for row in build_calibration_validation_gate_matrix(strict=False)]
     all_validation_gates_passed = all(row["status"] == "passed" for row in validation_gates)

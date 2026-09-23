@@ -163,7 +163,9 @@ def _numeric_comparison_contract(row: dict[str, object]) -> NumericComparisonCon
                 "pre/post metric and the source is source_ready."
             ),
         )
-    required_columns = tuple(str(column) for column in raw_contract.get("required_columns", REQUIRED_NUMERIC_COMPARISON_COLUMNS))
+    required_columns = tuple(
+        str(column) for column in raw_contract.get("required_columns", REQUIRED_NUMERIC_COMPARISON_COLUMNS)
+    )
     return NumericComparisonContract(
         required_columns=required_columns,
         readiness_rule=str(raw_contract["readiness_rule"]),
@@ -242,20 +244,16 @@ def _numeric_comparison_readiness(
         if pre_value is not None and post_value is not None and observed_delta is not None:
             expected_delta = post_value - pre_value
             if abs(observed_delta - expected_delta) > OBSERVED_DELTA_TOLERANCE:
-                issues.append(
-                    f"Row {index}: observed_delta must equal post_value - pre_value "
-                    f"({expected_delta:g})."
-                )
+                issues.append(f"Row {index}: observed_delta must equal post_value - pre_value ({expected_delta:g}).")
             expected_direction = _direction_from_delta(observed_delta)
             if observed_direction in ALLOWED_DIRECTIONS and observed_direction != expected_direction:
-                issues.append(
-                    f"Row {index}: observed_direction must match observed_delta "
-                    f"({expected_direction})."
-                )
+                issues.append(f"Row {index}: observed_direction must match observed_delta ({expected_direction}).")
         if result not in ALLOWED_COMPARISON_RESULTS:
             issues.append(f"Row {index}: comparison_result must be one of {sorted(ALLOWED_COMPARISON_RESULTS)}.")
         if result == "passed" and observed_direction != modelled_direction:
-            issues.append(f"Row {index}: comparison_result=passed requires observed_direction to match modelled_direction.")
+            issues.append(
+                f"Row {index}: comparison_result=passed requires observed_direction to match modelled_direction."
+            )
         passed = passed or result == "passed"
         failed = failed or result == "comparison_failed"
 
@@ -331,8 +329,7 @@ def policy_shock_gate_status() -> PolicyShockGateStatus:
     ):
         return "passed"
     if any(
-        row.comparison_status == "numeric_ready"
-        or row.numeric_comparison_readiness.status == "numeric_pre_post_ready"
+        row.comparison_status == "numeric_ready" or row.numeric_comparison_readiness.status == "numeric_pre_post_ready"
         for row in gate_rows
     ):
         return "public_validation_numeric_ready"
@@ -348,7 +345,8 @@ def policy_shock_gate_blockers() -> tuple[str, ...]:
             f"CAL-G-005: {row.shock_id} comparison failed; claim remains calibration_readiness_only"
             for row in build_public_policy_shock_evidence()
             if row.gate_role == "numeric_comparison"
-            if row.comparison_status == "comparison_failed" or row.numeric_comparison_readiness.status == "comparison_failed"
+            if row.comparison_status == "comparison_failed"
+            or row.numeric_comparison_readiness.status == "comparison_failed"
         )
     artifact_issues = tuple(
         f"CAL-G-005: {row.shock_id}: {issue}"
