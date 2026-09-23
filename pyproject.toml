@@ -19,6 +19,7 @@ dependencies = [
     "dash>=3,<4",
     "gunicorn>=23,<24",
     "orjson>=3,<4",
+    "defusedxml>=0.7.1",
 ]
 
 [project.optional-dependencies]

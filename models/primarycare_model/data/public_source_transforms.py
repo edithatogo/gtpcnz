@@ -11,7 +11,7 @@ import zipfile
 from dataclasses import dataclass
 from html.parser import HTMLParser
 from pathlib import Path
-from xml.etree import ElementTree
+from defusedxml import ElementTree
 
 from models.primarycare_model.contracts.public_sources import PublicSourceRetrievalPlan
 from models.primarycare_model.data.public_source_retrieval import load_public_source_retrieval_plans
