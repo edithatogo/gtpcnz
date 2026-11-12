@@ -25,6 +25,6 @@ def test_mocked_entrypoint_accepts_numeric_updates_and_runs() -> None:
 
 
 def test_deployment_entrypoint_renders_without_exceptions() -> None:
-    at = AppTest.from_file("streamlit_app.py", default_timeout=90)
+    at = AppTest.from_file(str(ROOT / "streamlit_app.py"), default_timeout=90)
     at.run()
     assert not at.exception

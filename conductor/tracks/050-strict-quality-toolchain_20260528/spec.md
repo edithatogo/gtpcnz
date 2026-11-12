@@ -1,12 +1,21 @@
 # Strict Quality Toolchain
 
-**Status:** Complete
+**Status:** Baseline complete; dependency-security maintenance in progress.
+
+## Maintenance acceptance — 13 November 2026
+
+- Resolve the currently reported dependency vulnerabilities in the frozen Python 3.11 environment without audit ignores.
+- Preserve application behaviour and test assertions while making AppTest file paths independent of caller-relative resolution.
+- Pass the complete existing test suite and preserve the static, coverage, privacy and Conductor checks.
+- Require successful hosted checks before merging; record branch cleanup separately from local verification.
+
+Implementation evidence is in `maintenance-2026-11-13.md`. The original baseline audit and design below are retained for traceability.
 
 ## Problem
 
 The repo has useful checks, but the current quality posture is not yet fully strict. The type-checker configuration exists, but the strict type gate is not enforced in CI. Dependency automation exists through Dependabot, but Renovate is not configured. Coverage, mutation testing, property-based testing, edge-case fuzzing, and profiling are not yet standard release gates.
 
-## Current Status
+## Original Baseline Audit
 
 | Area | Current status | Verdict |
 |---|---|---|

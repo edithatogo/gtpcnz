@@ -15,4 +15,4 @@
 - [Track Directories](./tracks/) — per-track specs, plans, and metadata.
 - [Conductor State and Track Registry Reconciliation](./tracks/037-conductor-state-and-track-registry-reconciliation_20260514/) — administrative cleanup (complete).
 
-**Active track:** 042 (Simulation Engine Evolution). Tracks 043-052 are complete. See [tracks.md](./tracks.md) for details.
+**Maintenance update, 13 November 2026:** [Strict quality toolchain](./tracks/050-strict-quality-toolchain_20260528/index.md) is reopened for dependency-security remediation and Streamlit test-path compatibility. Hosted verification and merge remain pending. Historical modelling-track states are recorded in [tracks.md](./tracks.md) and [state.md](./state.md).

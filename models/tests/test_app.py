@@ -1,7 +1,10 @@
+from pathlib import Path
+
 from streamlit.testing.v1 import AppTest
 
-APP_PATH = "models/primarycare_model/app.py"
-DEPLOYMENT_ENTRYPOINT = "streamlit_app.py"
+ROOT = Path(__file__).resolve().parents[2]
+APP_PATH = str(ROOT / "models" / "primarycare_model" / "app.py")
+DEPLOYMENT_ENTRYPOINT = str(ROOT / "streamlit_app.py")
 
 def test_app_smoke():
     """Basic smoke test to ensure the app can be initialized."""
