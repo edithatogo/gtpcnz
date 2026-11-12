@@ -11,3 +11,10 @@
 - [x] Turn on or document GitHub security settings: Dependabot security updates, secret scanning where available, code scanning, branch rulesets, and required checks.
 - [x] Update `scripts/dev_check.py` so local checks match the blocking CI gates.
 - [x] Re-run full local gates and record the resulting quality score in Conductor state.
+
+## Dependency-security maintenance — 13 November 2026
+
+- [x] Reproduce the Python 3.11 dependency-audit failure and update the locked vulnerable packages without suppressing advisories.
+- [x] Resolve Streamlit AppTest entrypoints from the repository root so the upgraded runtime locates both applications correctly.
+- [x] Verify the frozen Python 3.11 environment, full test suite, static checks and dependency audit; record evidence in `maintenance-2026-11-13.md` (346 tests passed; dependency audit reported no known vulnerabilities).
+- [ ] Observe passing required GitHub checks, merge the remediation PR and verify its feature branch is pruned.

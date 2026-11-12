@@ -1,5 +1,9 @@
 # Conductor State
 
+## Dependency-security maintenance — 13 November 2026
+
+Track `050-strict-quality-toolchain_20260528` is reopened for the failing Python dependency audit. The coordinated lockfile update removes the audit's reported vulnerable versions and repairs Streamlit AppTest entrypoint resolution. Local verification evidence is recorded in that track's `maintenance-2026-11-13.md`; required hosted checks, merge and branch cleanup remain pending. The historical modelling and public-evidence outcomes below are unchanged.
+
 GTPCNZ is a public-data anchored benchmark and educational explainer. It is not a patient-level forecast.
 It is not linked-data calibrated in the public runtime path. Do not claim precise fiscal savings,
 ED reductions, hospital-demand reductions, workforce effects, implementation impacts, or causal effects
