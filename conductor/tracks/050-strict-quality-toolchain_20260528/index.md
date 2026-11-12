@@ -7,6 +7,7 @@ This track captures the repo-quality upgrades that sit below the modelling work:
 - `spec.md` - current-state audit, target toolchain, and acceptance criteria.
 - `plan.md` - implementation steps.
 - `metadata.json` - track status and output contract.
+- `maintenance-2026-11-13.md` - dependency-security remediation and verification evidence.
 
 ## Boundary
 
