@@ -8,6 +8,7 @@ from models.primarycare_model.data.public_source_retrieval import load_public_so
 from models.primarycare_model.data.public_source_transforms import (
     check_source_transform_readiness,
     transform_public_source,
+    _safe_float,
     verify_public_source_transform_scripts,
 )
 
@@ -72,3 +73,14 @@ def test_statsnz_transform_writes_schema_valid_public_aggregate() -> None:
     with output.artifact.open(encoding="utf-8", newline="") as handle:
         rows = list(csv.DictReader(handle))
     assert rows == [{"jurisdiction": "NZ", "year": "2026", "population_count": "5361300"}]
+
+
+def test_safe_float() -> None:
+    assert _safe_float("123.45") == 123.45
+    assert _safe_float("0.0") == 0.0
+    assert _safe_float("-1.5") == -1.5
+
+    # Error paths (should return None)
+    assert _safe_float("abc") is None
+    assert _safe_float("") is None
+    assert _safe_float(None) is None
