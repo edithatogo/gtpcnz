@@ -34,7 +34,7 @@ dev = [
     "pytest-cov>=7,<8",
     "pytest-mock",
     "playwright>=1.57,<2",
-    "ruff>=0.15.17,<0.16",
+    "ruff>=0.17.5,<0.18",
     "scalene>=2.3,<3; platform_system != 'Windows'",
     "ty>=0.0.49,<0.1",
 ]
@@ -52,7 +52,7 @@ dev = [
     "pytest-cov>=7,<8",
     "pytest-mock",
     "playwright>=1.57,<2",
-    "ruff>=0.15.17,<0.16",
+    "ruff>=0.17.5,<0.18",
     "scalene>=2.3,<3; platform_system != 'Windows'",
     "ty>=0.0.49,<0.1",
 ]
