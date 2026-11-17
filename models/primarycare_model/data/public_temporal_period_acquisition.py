@@ -9,6 +9,7 @@ import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
+import functools
 
 import yaml
 
@@ -94,6 +95,7 @@ def _require_repo_relative(path: str, *, field_name: str, plan_id: str) -> None:
         raise ValueError(f"{plan_id}: {field_name} must be a repository-relative path")
 
 
+@functools.cache
 def load_temporal_period_acquisition_plans(
     path: Path = TEMPORAL_PERIOD_ACQUISITION_PLAN,
 ) -> tuple[TemporalPeriodAcquisitionPlan, ...]:
