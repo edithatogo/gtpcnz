@@ -8,8 +8,17 @@ from models.primarycare_model.uncertainty.structural_ensemble import run_structu
 from models.primarycare_model.voi.full_voi import run_full_voi
 
 REQUIRED_SECTIONS = (
-    "cockpit", "scenario_frontier", "causal_graph", "policy_manifold", "calibration",
-    "uncertainty", "voi", "equity", "sources", "release", "downloads",
+    "cockpit",
+    "scenario_frontier",
+    "causal_graph",
+    "policy_manifold",
+    "calibration",
+    "uncertainty",
+    "voi",
+    "equity",
+    "sources",
+    "release",
+    "downloads",
 )
 
 REQUIRED_VISUALS = (

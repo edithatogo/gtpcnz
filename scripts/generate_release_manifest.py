@@ -26,8 +26,12 @@ def build_manifest() -> dict[str, object]:
         "claim_level": str(calibration["claim_level"]),
         "calibration_status": str(calibration["calibration_status"]),
         "not_valid_for": list(calibration["not_valid_for"]),
-        "source_snapshot_hash": sha(ROOT / "models" / "primarycare_model" / "registries" / "public" / "sources.public.v1.yaml"),
-        "parameter_hash": sha(ROOT / "models" / "primarycare_model" / "registries" / "public" / "parameters.public.v1.yaml"),
+        "source_snapshot_hash": sha(
+            ROOT / "models" / "primarycare_model" / "registries" / "public" / "sources.public.v1.yaml"
+        ),
+        "parameter_hash": sha(
+            ROOT / "models" / "primarycare_model" / "registries" / "public" / "parameters.public.v1.yaml"
+        ),
         "model_hash": sha(ROOT / "models" / "primarycare_model" / "ui" / "cockpit.py"),
         "output_hash": sha(ROOT / "data" / "snapshots" / "public-source-snapshot-v1.json"),
         "test_status": "not-run-by-manifest-generator",

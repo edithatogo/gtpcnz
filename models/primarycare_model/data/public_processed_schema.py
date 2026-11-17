@@ -170,7 +170,9 @@ def main(argv: list[str] | None = None) -> int:
     import argparse
 
     parser = argparse.ArgumentParser(description="Validate processed public input schemas.")
-    parser.add_argument("--require-processed", action="store_true", help="Fail if expected processed artifacts are absent.")
+    parser.add_argument(
+        "--require-processed", action="store_true", help="Fail if expected processed artifacts are absent."
+    )
     args = parser.parse_args(argv)
     issues = validate_processed_input_schemas(require_processed=args.require_processed)
     if issues:

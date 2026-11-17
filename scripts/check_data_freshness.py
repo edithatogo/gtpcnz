@@ -1,4 +1,5 @@
 """Check freshness of public input data files."""
+
 from __future__ import annotations
 
 import sys
@@ -17,6 +18,8 @@ CHECK_PATHS = [
     ROOT / "uv.lock",
 ]
 MAX_AGE_DAYS = 90
+
+
 def main() -> int:
     now = datetime.now(UTC)
     failures = 0
@@ -41,5 +44,7 @@ def main() -> int:
     print("")
     print(f"Result: {outcome} ({failures} issues)")
     return 1 if failures else 0
+
+
 if __name__ == "__main__":
     sys.exit(main())

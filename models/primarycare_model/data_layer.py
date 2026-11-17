@@ -31,106 +31,124 @@ from .schemas import (
 # Arrow schema definitions mirroring the pydantic models
 # ---------------------------------------------------------------------------
 
-PATIENT_ARROW_SCHEMA = pa.schema([
-    pa.field("age", pa.int32(), nullable=False),
-    pa.field("gender", pa.utf8(), nullable=False),
-    pa.field("ethnicity", pa.utf8(), nullable=False),
-    pa.field("deprivation_index", pa.int32(), nullable=False),
-    pa.field("comorbidities", pa.list_(pa.utf8()), nullable=True),
-    pa.field("enrollment_status", pa.utf8(), nullable=False),
-])
+PATIENT_ARROW_SCHEMA = pa.schema(
+    [
+        pa.field("age", pa.int32(), nullable=False),
+        pa.field("gender", pa.utf8(), nullable=False),
+        pa.field("ethnicity", pa.utf8(), nullable=False),
+        pa.field("deprivation_index", pa.int32(), nullable=False),
+        pa.field("comorbidities", pa.list_(pa.utf8()), nullable=True),
+        pa.field("enrollment_status", pa.utf8(), nullable=False),
+    ]
+)
 
-PROVIDER_ARROW_SCHEMA = pa.schema([
-    pa.field("id", pa.utf8(), nullable=False),
-    pa.field("type", pa.utf8(), nullable=False),
-    pa.field("region", pa.utf8(), nullable=False),
-    pa.field("patient_list", pa.list_(pa.utf8()), nullable=True),
-    pa.field("capacity", pa.int32(), nullable=False),
-    pa.field("capitation_panel_size", pa.int32(), nullable=False),
-])
+PROVIDER_ARROW_SCHEMA = pa.schema(
+    [
+        pa.field("id", pa.utf8(), nullable=False),
+        pa.field("type", pa.utf8(), nullable=False),
+        pa.field("region", pa.utf8(), nullable=False),
+        pa.field("patient_list", pa.list_(pa.utf8()), nullable=True),
+        pa.field("capacity", pa.int32(), nullable=False),
+        pa.field("capitation_panel_size", pa.int32(), nullable=False),
+    ]
+)
 
-CONFIG_ARROW_SCHEMA = pa.schema([
-    pa.field("seed", pa.int32(), nullable=False),
-    pa.field("num_patients", pa.int32(), nullable=False),
-    pa.field("num_providers", pa.int32(), nullable=False),
-    pa.field("time_horizon_months", pa.int32(), nullable=False),
-    pa.field("tick_interval_days", pa.int32(), nullable=False),
-])
+CONFIG_ARROW_SCHEMA = pa.schema(
+    [
+        pa.field("seed", pa.int32(), nullable=False),
+        pa.field("num_patients", pa.int32(), nullable=False),
+        pa.field("num_providers", pa.int32(), nullable=False),
+        pa.field("time_horizon_months", pa.int32(), nullable=False),
+        pa.field("tick_interval_days", pa.int32(), nullable=False),
+    ]
+)
 
-SCENARIO_ARROW_SCHEMA = pa.schema([
-    pa.field("name", pa.utf8(), nullable=False),
-    pa.field("description", pa.utf8(), nullable=True),
-    pa.field("funding_model", pa.utf8(), nullable=False),
-    pa.field("capitation_rate", pa.float64(), nullable=True),
-    pa.field("ffs_fee_schedule", pa.map_(pa.utf8(), pa.float64()), nullable=True),
-])
+SCENARIO_ARROW_SCHEMA = pa.schema(
+    [
+        pa.field("name", pa.utf8(), nullable=False),
+        pa.field("description", pa.utf8(), nullable=True),
+        pa.field("funding_model", pa.utf8(), nullable=False),
+        pa.field("capitation_rate", pa.float64(), nullable=True),
+        pa.field("ffs_fee_schedule", pa.map_(pa.utf8(), pa.float64()), nullable=True),
+    ]
+)
 
-POLICY_ARROW_SCHEMA = pa.schema([
-    pa.field("name", pa.utf8(), nullable=False),
-    pa.field("description", pa.utf8(), nullable=True),
-    pa.field("target_population", pa.utf8(), nullable=True),
-    pa.field("start_month", pa.int32(), nullable=False),
-    pa.field("end_month", pa.int32(), nullable=True),
-])
+POLICY_ARROW_SCHEMA = pa.schema(
+    [
+        pa.field("name", pa.utf8(), nullable=False),
+        pa.field("description", pa.utf8(), nullable=True),
+        pa.field("target_population", pa.utf8(), nullable=True),
+        pa.field("start_month", pa.int32(), nullable=False),
+        pa.field("end_month", pa.int32(), nullable=True),
+    ]
+)
 
-MONTHLY_METRICS_ARROW_SCHEMA = pa.schema([
-    pa.field("month", pa.int32(), nullable=False),
-    pa.field("total_patients", pa.int32(), nullable=False),
-    pa.field("total_providers", pa.int32(), nullable=False),
-    pa.field("total_visits", pa.int32(), nullable=False),
-    pa.field("total_capitation_payments", pa.float64(), nullable=False),
-    pa.field("total_ffs_payments", pa.float64(), nullable=False),
-    pa.field("total_funding", pa.float64(), nullable=False),
-    pa.field("avg_wait_time_days", pa.float64(), nullable=True),
-    pa.field("unmet_demand", pa.int32(), nullable=False),
-])
+MONTHLY_METRICS_ARROW_SCHEMA = pa.schema(
+    [
+        pa.field("month", pa.int32(), nullable=False),
+        pa.field("total_patients", pa.int32(), nullable=False),
+        pa.field("total_providers", pa.int32(), nullable=False),
+        pa.field("total_visits", pa.int32(), nullable=False),
+        pa.field("total_capitation_payments", pa.float64(), nullable=False),
+        pa.field("total_ffs_payments", pa.float64(), nullable=False),
+        pa.field("total_funding", pa.float64(), nullable=False),
+        pa.field("avg_wait_time_days", pa.float64(), nullable=True),
+        pa.field("unmet_demand", pa.int32(), nullable=False),
+    ]
+)
 
 # ---------------------------------------------------------------------------
 # SHAP attribution schema — feature-level SHAP values per simulation tick
 # ---------------------------------------------------------------------------
 
-SHAP_ARROW_SCHEMA = pa.schema([
-    pa.field("scenario_name", pa.utf8(), nullable=False),
-    pa.field("month", pa.int32(), nullable=False),
-    pa.field("batch_idx", pa.int32(), nullable=False),
-    pa.field("feature_name", pa.utf8(), nullable=False),
-    pa.field("shap_value", pa.float64(), nullable=False),
-    pa.field("feature_value", pa.float64(), nullable=True),
-    pa.field("base_value", pa.float64(), nullable=False),
-    pa.field("explainer_type", pa.utf8(), nullable=False),
-])
+SHAP_ARROW_SCHEMA = pa.schema(
+    [
+        pa.field("scenario_name", pa.utf8(), nullable=False),
+        pa.field("month", pa.int32(), nullable=False),
+        pa.field("batch_idx", pa.int32(), nullable=False),
+        pa.field("feature_name", pa.utf8(), nullable=False),
+        pa.field("shap_value", pa.float64(), nullable=False),
+        pa.field("feature_value", pa.float64(), nullable=True),
+        pa.field("base_value", pa.float64(), nullable=False),
+        pa.field("explainer_type", pa.utf8(), nullable=False),
+    ]
+)
 
-SHAP_SUMMARY_ARROW_SCHEMA = pa.schema([
-    pa.field("scenario_name", pa.utf8(), nullable=False),
-    pa.field("feature_name", pa.utf8(), nullable=False),
-    pa.field("mean_abs_shap", pa.float64(), nullable=False),
-    pa.field("std_shap", pa.float64(), nullable=False),
-    pa.field("mean_feature_value", pa.float64(), nullable=True),
-    pa.field("importance_rank", pa.int32(), nullable=False),
-])
+SHAP_SUMMARY_ARROW_SCHEMA = pa.schema(
+    [
+        pa.field("scenario_name", pa.utf8(), nullable=False),
+        pa.field("feature_name", pa.utf8(), nullable=False),
+        pa.field("mean_abs_shap", pa.float64(), nullable=False),
+        pa.field("std_shap", pa.float64(), nullable=False),
+        pa.field("mean_feature_value", pa.float64(), nullable=True),
+        pa.field("importance_rank", pa.int32(), nullable=False),
+    ]
+)
 
 
 # ---------------------------------------------------------------------------
 # Telemetry schema for simulation run logs
 # ---------------------------------------------------------------------------
 
-TELEMETRY_ARROW_SCHEMA = pa.schema([
-    pa.field("timestamp", pa.timestamp("us"), nullable=False),
-    pa.field("run_id", pa.utf8(), nullable=False),
-    pa.field("scenario_name", pa.utf8(), nullable=False),
-    pa.field("tick", pa.int32(), nullable=False),
-    pa.field("month", pa.int32(), nullable=False),
-    pa.field("patient_count", pa.int32(), nullable=False),
-    pa.field("provider_count", pa.int32(), nullable=False),
-    pa.field("total_visits", pa.int32(), nullable=False),
-    pa.field("capitation_flow", pa.float64(), nullable=False),
-    pa.field("ffs_flow", pa.float64(), nullable=False),
-    pa.field("total_funding_flow", pa.float64(), nullable=False),
-    pa.field("avg_wait_days", pa.float64(), nullable=True),
-    pa.field("unmet_demand", pa.int32(), nullable=False),
-    pa.field("cpu_usage_pct", pa.float64(), nullable=True),
-    pa.field("memory_mb", pa.float64(), nullable=True),
-])
+TELEMETRY_ARROW_SCHEMA = pa.schema(
+    [
+        pa.field("timestamp", pa.timestamp("us"), nullable=False),
+        pa.field("run_id", pa.utf8(), nullable=False),
+        pa.field("scenario_name", pa.utf8(), nullable=False),
+        pa.field("tick", pa.int32(), nullable=False),
+        pa.field("month", pa.int32(), nullable=False),
+        pa.field("patient_count", pa.int32(), nullable=False),
+        pa.field("provider_count", pa.int32(), nullable=False),
+        pa.field("total_visits", pa.int32(), nullable=False),
+        pa.field("capitation_flow", pa.float64(), nullable=False),
+        pa.field("ffs_flow", pa.float64(), nullable=False),
+        pa.field("total_funding_flow", pa.float64(), nullable=False),
+        pa.field("avg_wait_days", pa.float64(), nullable=True),
+        pa.field("unmet_demand", pa.int32(), nullable=False),
+        pa.field("cpu_usage_pct", pa.float64(), nullable=True),
+        pa.field("memory_mb", pa.float64(), nullable=True),
+    ]
+)
 
 
 # ---------------------------------------------------------------------------
@@ -190,6 +208,7 @@ def metrics_to_table(metrics: list[MonthlyMetrics]) -> pa.Table:
         pa.array([m.unmet_demand for m in metrics], type=pa.int32()),
     ]
     return pa.Table.from_arrays(arrays, schema=MONTHLY_METRICS_ARROW_SCHEMA)
+
 
 # ---------------------------------------------------------------------------
 # Zero-copy: Arrow Table -> Polars DataFrame
@@ -354,14 +373,15 @@ def aggregate_by_ethnicity(metrics_df: pl.DataFrame, patients_df: pl.DataFrame) 
     """
     polars = _require_polars()
     return (
-        patients_df
-        .group_by("ethnicity")
-        .agg([
-            polars.count().alias("patient_count"),
-            polars.col("age").mean().alias("avg_age"),
-            polars.col("deprivation_index").mean().alias("avg_deprivation"),
-            polars.col("comorbidities").list.len().mean().alias("avg_comorbidities"),
-        ])
+        patients_df.group_by("ethnicity")
+        .agg(
+            [
+                polars.count().alias("patient_count"),
+                polars.col("age").mean().alias("avg_age"),
+                polars.col("deprivation_index").mean().alias("avg_deprivation"),
+                polars.col("comorbidities").list.len().mean().alias("avg_comorbidities"),
+            ]
+        )
         .sort("ethnicity")
     )
 
@@ -383,13 +403,14 @@ def aggregate_by_region(metrics_df: pl.DataFrame, providers_df: pl.DataFrame) ->
     """
     polars = _require_polars()
     return (
-        providers_df
-        .group_by("region")
-        .agg([
-            polars.count().alias("provider_count"),
-            polars.col("capacity").sum().alias("total_capacity"),
-            polars.col("capitation_panel_size").sum().alias("total_capitation_panel"),
-        ])
+        providers_df.group_by("region")
+        .agg(
+            [
+                polars.count().alias("provider_count"),
+                polars.col("capacity").sum().alias("total_capacity"),
+                polars.col("capitation_panel_size").sum().alias("total_capitation_panel"),
+            ]
+        )
         .sort("region")
     )
 
@@ -410,18 +431,19 @@ def aggregate_by_month(metrics_df: pl.DataFrame) -> pl.DataFrame:
     """
     polars = _require_polars()
     return (
-        metrics_df
-        .group_by("month")
-        .agg([
-            polars.col("total_patients").first().alias("patients"),
-            polars.col("total_providers").first().alias("providers"),
-            polars.col("total_visits").sum().alias("total_visits"),
-            polars.col("total_funding").sum().alias("total_funding"),
-            polars.col("total_capitation_payments").sum().alias("total_capitation"),
-            polars.col("total_ffs_payments").sum().alias("total_ffs"),
-            polars.col("unmet_demand").sum().alias("total_unmet_demand"),
-            polars.col("avg_wait_time_days").mean().alias("mean_wait_days"),
-        ])
+        metrics_df.group_by("month")
+        .agg(
+            [
+                polars.col("total_patients").first().alias("patients"),
+                polars.col("total_providers").first().alias("providers"),
+                polars.col("total_visits").sum().alias("total_visits"),
+                polars.col("total_funding").sum().alias("total_funding"),
+                polars.col("total_capitation_payments").sum().alias("total_capitation"),
+                polars.col("total_ffs_payments").sum().alias("total_ffs"),
+                polars.col("unmet_demand").sum().alias("total_unmet_demand"),
+                polars.col("avg_wait_time_days").mean().alias("mean_wait_days"),
+            ]
+        )
         .sort("month")
     )
 
@@ -440,17 +462,17 @@ def funding_flow_summary(metrics_df: pl.DataFrame) -> pl.DataFrame:
         Single-row summary of capitation vs FFS proportions.
     """
     polars = _require_polars()
-    return (
-        metrics_df
-        .select([
+    return metrics_df.select(
+        [
             polars.col("total_capitation_payments").sum().alias("total_capitation"),
             polars.col("total_ffs_payments").sum().alias("total_ffs"),
             polars.col("total_funding").sum().alias("total_funding"),
-        ])
-        .with_columns([
+        ]
+    ).with_columns(
+        [
             (polars.col("total_capitation") / polars.col("total_funding") * 100).alias("capitation_pct"),
             (polars.col("total_ffs") / polars.col("total_funding") * 100).alias("ffs_pct"),
-        ])
+        ]
     )
 
 

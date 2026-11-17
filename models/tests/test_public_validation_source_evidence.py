@@ -16,18 +16,10 @@ from models.primarycare_model.data.public_source_readiness_matrix import (
 
 ROOT = Path(__file__).resolve().parents[2]
 PHO_ACCESS_METADATA = (
-    ROOT
-    / "data"
-    / "public_processed"
-    / "src_hnz_pho_access_timeseries"
-    / "pho_access_workbook_metadata.csv"
+    ROOT / "data" / "public_processed" / "src_hnz_pho_access_timeseries" / "pho_access_workbook_metadata.csv"
 )
 PHO_ACCESS_NUMERIC = (
-    ROOT
-    / "data"
-    / "public_processed"
-    / "src_hnz_pho_access_timeseries"
-    / "pho_access_numeric_extract.csv"
+    ROOT / "data" / "public_processed" / "src_hnz_pho_access_timeseries" / "pho_access_numeric_extract.csv"
 )
 
 
@@ -106,7 +98,9 @@ def test_pho_access_numeric_extract_covers_district_and_subgroup_rows() -> None:
 def test_pho_access_transform_accepts_multiple_public_workbook_periods(monkeypatch) -> None:
     temp_root = Path("fixture-root")
     raw_dir = temp_root / "data" / "public_raw" / "src_hnz_pho_access_timeseries"
-    processed = temp_root / "data" / "public_processed" / "src_hnz_pho_access_timeseries" / "pho_access_numeric_extract.csv"
+    processed = (
+        temp_root / "data" / "public_processed" / "src_hnz_pho_access_timeseries" / "pho_access_numeric_extract.csv"
+    )
     current = raw_dir / "access-to-primary-care-stats-2025-q4.xlsx"
     additional = raw_dir / "access-to-primary-care-stats-2025-q3.xlsx"
     written: dict[str, list[dict[str, object]]] = {}

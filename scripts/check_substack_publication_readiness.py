@@ -1,4 +1,5 @@
 """Score Substack-ready posts against series, Substack, and image contracts."""
+
 from __future__ import annotations
 
 import argparse
@@ -210,10 +211,14 @@ def score_row(row: dict[str, object], live_draft: LiveDraft | None = None) -> Sc
         images += 2
     else:
         failures.append(f"post {post_number}: image alt text or Mermaid caption should be descriptive")
-    if any("v1.7.2" in path.name or "pcf-v172" in path.name for path in [*found_images, local_post_path(hero_image)]) or has_coloured_mermaid(markdown):
+    if any(
+        "v1.7.2" in path.name or "pcf-v172" in path.name for path in [*found_images, local_post_path(hero_image)]
+    ) or has_coloured_mermaid(markdown):
         images += 2
     else:
-        failures.append(f"post {post_number}: visual package should use the current coloured Mermaid or v1.7.2 visual set")
+        failures.append(
+            f"post {post_number}: visual package should use the current coloured Mermaid or v1.7.2 visual set"
+        )
 
     live = 0
     if live_draft is None:
@@ -244,7 +249,9 @@ def score_row(row: dict[str, object], live_draft: LiveDraft | None = None) -> Sc
         else:
             warnings.append(f"post {post_number}: live draft has no cached in-body image nodes")
 
-    return Score(series=series, substack=substack, images=images, live=live, failures=tuple(failures), warnings=tuple(warnings))
+    return Score(
+        series=series, substack=substack, images=images, live=live, failures=tuple(failures), warnings=tuple(warnings)
+    )
 
 
 def load_rows(post_numbers: set[str]) -> list[dict[str, object]]:
@@ -266,7 +273,9 @@ def load_live_map(path_value: str) -> list[dict[str, object]]:
 
 def map_live_drafts_to_rows(rows: list[dict[str, object]], live_map: list[dict[str, object]]) -> dict[str, int]:
     by_id = {str(item.get("id", "")): int(item["draftId"]) for item in live_map if item.get("draftId")}
-    by_sequence = {int(item["sequence"]): int(item["draftId"]) for item in live_map if item.get("draftId") and item.get("sequence")}
+    by_sequence = {
+        int(item["sequence"]): int(item["draftId"]) for item in live_map if item.get("draftId") and item.get("sequence")
+    }
     selected: dict[str, int] = {}
     for row in rows:
         post_number = str(row.get("postNumber", "")).zfill(2)
@@ -348,7 +357,9 @@ def main() -> int:
         if score.images < args.min_images:
             failures.append(f"post {post_number}: image score {score.images}/10 below {args.min_images}/10")
         if health_quality < args.min_health_quality:
-            failures.append(f"post {post_number}: health.quality {health_quality}/100 below {args.min_health_quality}/100")
+            failures.append(
+                f"post {post_number}: health.quality {health_quality}/100 below {args.min_health_quality}/100"
+            )
 
     average = round(total_health / len(rows), 1) if rows else 0
     payload = {"average_health.quality": average, "posts": results}

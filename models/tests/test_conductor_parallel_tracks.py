@@ -7,7 +7,9 @@ from pathlib import Path
 
 
 def test_conductor_parallel_track_gate_passes() -> None:
-    result = subprocess.run([sys.executable, "scripts/check_conductor_parallel_tracks.py"], text=True, capture_output=True)
+    result = subprocess.run(
+        [sys.executable, "scripts/check_conductor_parallel_tracks.py"], text=True, capture_output=True
+    )
     assert result.returncode == 0, result.stdout + result.stderr
 
 

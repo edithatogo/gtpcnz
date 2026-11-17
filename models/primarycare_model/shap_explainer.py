@@ -101,25 +101,23 @@ class SHAPAttribution:
         """Flatten SHAP values into one row per sample-feature pair."""
         records: list[dict[str, Any]] = []
         values = self._feature_matrix()
-        base_value = (
-            float(self.base_values)
-            if np.ndim(self.base_values) == 0
-            else float(np.mean(self.base_values))
-        )
+        base_value = float(self.base_values) if np.ndim(self.base_values) == 0 else float(np.mean(self.base_values))
 
         for row_idx in range(values.shape[0]):
             batch_idx = int(self.batch_indices[row_idx]) if self.batch_indices is not None else row_idx
             for feature_idx, feature_name in enumerate(self.feature_names):
-                records.append({
-                    "scenario_name": self.scenario_name,
-                    "month": 0,
-                    "batch_idx": batch_idx,
-                    "feature_name": feature_name,
-                    "shap_value": float(values[row_idx, feature_idx]),
-                    "feature_value": float(self.data[row_idx, feature_idx]) if self.data is not None else None,
-                    "base_value": base_value,
-                    "explainer_type": self.explainer_type,
-                })
+                records.append(
+                    {
+                        "scenario_name": self.scenario_name,
+                        "month": 0,
+                        "batch_idx": batch_idx,
+                        "feature_name": feature_name,
+                        "shap_value": float(values[row_idx, feature_idx]),
+                        "feature_value": float(self.data[row_idx, feature_idx]) if self.data is not None else None,
+                        "base_value": base_value,
+                        "explainer_type": self.explainer_type,
+                    }
+                )
         return records
 
     def to_arrow_table(self) -> pa.Table:
@@ -131,23 +129,21 @@ class SHAPAttribution:
         values = self._feature_matrix()
         mean_abs = np.mean(np.abs(values), axis=0)
         std_values = np.std(values, axis=0)
-        mean_features = (
-            np.mean(self.data, axis=0)
-            if self.data is not None
-            else np.full(values.shape[1], np.nan)
-        )
+        mean_features = np.mean(self.data, axis=0) if self.data is not None else np.full(values.shape[1], np.nan)
 
         records: list[dict[str, Any]] = []
         for rank, feature_idx in enumerate(np.argsort(-mean_abs), start=1):
             mean_feature = mean_features[feature_idx]
-            records.append({
-                "scenario_name": self.scenario_name,
-                "feature_name": self.feature_names[feature_idx],
-                "mean_abs_shap": float(mean_abs[feature_idx]),
-                "std_shap": float(std_values[feature_idx]),
-                "mean_feature_value": float(mean_feature) if not np.isnan(mean_feature) else None,
-                "importance_rank": rank,
-            })
+            records.append(
+                {
+                    "scenario_name": self.scenario_name,
+                    "feature_name": self.feature_names[feature_idx],
+                    "mean_abs_shap": float(mean_abs[feature_idx]),
+                    "std_shap": float(std_values[feature_idx]),
+                    "mean_feature_value": float(mean_feature) if not np.isnan(mean_feature) else None,
+                    "importance_rank": rank,
+                }
+            )
         return records
 
     def to_summary_table(self) -> pa.Table:

@@ -70,16 +70,42 @@ DATASET_REGISTRY_PATH = PROJECT_ROOT / "data" / "dataset-registry.json"
 # Files and directories to always skip
 # ---------------------------------------------------------------------------
 SKIP_DIRS = {
-    ".git", "__pycache__", ".ruff_cache", ".venv", ".quarto",
-    "node_modules", "target", "codex-tmp", ".tmp", "_site",
-    "public", ".streamlit", ".antigravitycli", ".github",
-    "conductor", ".mypy_cache", ".pytest_cache", ".dvc",
+    ".git",
+    "__pycache__",
+    ".ruff_cache",
+    ".venv",
+    ".quarto",
+    "node_modules",
+    "target",
+    "codex-tmp",
+    ".tmp",
+    "_site",
+    "public",
+    ".streamlit",
+    ".antigravitycli",
+    ".github",
+    "conductor",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".dvc",
 }
 
 SKIP_EXTENSIONS = {
-    ".wasm", ".png", ".jpg", ".jpeg", ".gif", ".svg", ".ico",
-    ".woff", ".woff2", ".ttf", ".eot", ".pdf", ".lock",
-    ".arrow", ".parquet",
+    ".wasm",
+    ".png",
+    ".jpg",
+    ".jpeg",
+    ".gif",
+    ".svg",
+    ".ico",
+    ".woff",
+    ".woff2",
+    ".ttf",
+    ".eot",
+    ".pdf",
+    ".lock",
+    ".arrow",
+    ".parquet",
 }
 
 SKIP_FILES = {"uv.lock", "Cargo.lock", "check_no_patient_data.py"}
@@ -121,14 +147,16 @@ def scan_text_for_phi(content: str, filepath: Path) -> list[dict]:
     findings = []
     for name, entry in PHI_PATTERNS.items():
         for match in entry["pattern"].finditer(content):
-            findings.append({
-                "file": str(filepath.relative_to(PROJECT_ROOT)),
-                "pattern": name,
-                "description": entry["description"],
-                "severity": entry["severity"],
-                "match_length": len(match.group()),
-                "line": content[: match.start()].count("\n") + 1,
-            })
+            findings.append(
+                {
+                    "file": str(filepath.relative_to(PROJECT_ROOT)),
+                    "pattern": name,
+                    "description": entry["description"],
+                    "severity": entry["severity"],
+                    "match_length": len(match.group()),
+                    "line": content[: match.start()].count("\n") + 1,
+                }
+            )
     return findings
 
 
@@ -151,14 +179,16 @@ def scan_data_file_headers(filepath: Path) -> list[dict]:
     first_lines = "\n".join(content.split("\n")[:5])
     for pattern in PHI_COLUMN_PATTERNS:
         for match in pattern.finditer(first_lines):
-            findings.append({
-                "file": str(filepath.relative_to(PROJECT_ROOT)),
-                "pattern": "phi_column_header",
-                "description": f"PHI-related column header: '{match.group()}'",
-                "severity": "high",
-                "match_length": len(match.group()),
-                "line": first_lines[: match.start()].count("\n") + 1,
-            })
+            findings.append(
+                {
+                    "file": str(filepath.relative_to(PROJECT_ROOT)),
+                    "pattern": "phi_column_header",
+                    "description": f"PHI-related column header: '{match.group()}'",
+                    "severity": "high",
+                    "match_length": len(match.group()),
+                    "line": first_lines[: match.start()].count("\n") + 1,
+                }
+            )
             break
     return findings
 
@@ -197,17 +227,16 @@ def audit_dataset_registry(registry: dict | None, verbose: bool) -> list[dict]:
     """Audit the dataset registry for compliance."""
     issues = []
     if registry is None:
-        issues.append({
-            "type": "missing_registry",
-            "description": "No dataset-registry.json found in data/",
-            "severity": "warning",
-        })
+        issues.append(
+            {
+                "type": "missing_registry",
+                "description": "No dataset-registry.json found in data/",
+                "severity": "warning",
+            }
+        )
         return issues
 
-    registered_datasets = {
-        Path(d.get("path", "")).as_posix().rstrip("/")
-        for d in registry.get("datasets", [])
-    }
+    registered_datasets = {Path(d.get("path", "")).as_posix().rstrip("/") for d in registry.get("datasets", [])}
     data_dir = PROJECT_ROOT / "data"
     if data_dir.exists():
         for f in data_dir.iterdir():
@@ -218,18 +247,18 @@ def audit_dataset_registry(registry: dict | None, verbose: bool) -> list[dict]:
                     continue
                 rel = f.relative_to(PROJECT_ROOT).as_posix()
                 if rel not in registered_datasets:
-                    issues.append({
-                        "type": "unregistered_dataset",
-                        "description": f"Data file not in registry: {rel}",
-                        "severity": "warning",
-                    })
+                    issues.append(
+                        {
+                            "type": "unregistered_dataset",
+                            "description": f"Data file not in registry: {rel}",
+                            "severity": "warning",
+                        }
+                    )
     return issues
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="PHI compliance check: zero patient-level data gate"
-    )
+    parser = argparse.ArgumentParser(description="PHI compliance check: zero patient-level data gate")
     parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output")
     parser.add_argument("--json", "-j", action="store_true", help="JSON report output")
     args = parser.parse_args()
@@ -288,10 +317,7 @@ def main():
         if report["pass"]:
             print(f"PASS - No PHI detected ({files_scanned} files scanned)")
         else:
-            print(
-                f"FAIL - {len(all_findings)} PHI pattern(s) found "
-                f"in {len(suspicious_files)} file(s)"
-            )
+            print(f"FAIL - {len(all_findings)} PHI pattern(s) found in {len(suspicious_files)} file(s)")
         if registry_issues:
             print(f"[WARN]  {len(registry_issues)} registry issue(s)")
 

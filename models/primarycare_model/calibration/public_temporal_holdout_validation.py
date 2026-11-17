@@ -20,12 +20,7 @@ import yaml
 from models.primarycare_model.data.public_source_snapshot import ROOT
 
 TEMPORAL_HOLDOUT_TARGETS = (
-    ROOT
-    / "models"
-    / "primarycare_model"
-    / "registries"
-    / "public"
-    / "temporal_holdout_targets.public.v1.yaml"
+    ROOT / "models" / "primarycare_model" / "registries" / "public" / "temporal_holdout_targets.public.v1.yaml"
 )
 
 TemporalHoldoutStatus = Literal[
@@ -195,7 +190,7 @@ def _comparison_for_target(
         )
 
     holdout_period = periods[-1]
-    training_periods = periods[: -1]
+    training_periods = periods[:-1]
     training_rows = tuple(row for row in filtered_rows if row[target.period_column] in training_periods)
     holdout_rows = tuple(row for row in filtered_rows if row[target.period_column] == holdout_period)
     fallback_rate = _weighted_rate(training_rows, target)

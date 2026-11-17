@@ -25,11 +25,7 @@ def _markdown_text(at: AppTest) -> str:
 
 
 def _source_text() -> str:
-    return (
-        APP_SOURCE_PATH.read_text(encoding="utf-8")
-        + "\n"
-        + LEVER_REGISTRY_PATH.read_text(encoding="utf-8")
-    )
+    return APP_SOURCE_PATH.read_text(encoding="utf-8") + "\n" + LEVER_REGISTRY_PATH.read_text(encoding="utf-8")
 
 
 def _compact(text: str) -> str:
@@ -166,7 +162,9 @@ def test_streamlit_dashboard_contract_first_screen_and_wording():
         "government endorsement",
     ]
     for forbidden in forbidden_claims:
-        allowed_negated = source.replace("not a patient-level forecast", "").replace("not observed New Zealand outcomes", "")
+        allowed_negated = source.replace("not a patient-level forecast", "").replace(
+            "not observed New Zealand outcomes", ""
+        )
         assert forbidden not in allowed_negated
 
 

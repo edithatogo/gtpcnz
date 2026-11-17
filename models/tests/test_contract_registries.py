@@ -129,13 +129,9 @@ def test_parameters_registry_all_defaults_within_bounds():
         if param.value_type in ("integer", "number"):
             dv = float(param.default_value)
             if param.lower_bound is not None:
-                assert dv >= param.lower_bound, (
-                    f"{param.parameter_id}: default {dv} < lower_bound {param.lower_bound}"
-                )
+                assert dv >= param.lower_bound, f"{param.parameter_id}: default {dv} < lower_bound {param.lower_bound}"
             if param.upper_bound is not None:
-                assert dv <= param.upper_bound, (
-                    f"{param.parameter_id}: default {dv} > upper_bound {param.upper_bound}"
-                )
+                assert dv <= param.upper_bound, f"{param.parameter_id}: default {dv} > upper_bound {param.upper_bound}"
         if param.value_type == "categorical":
             assert param.default_value in param.category_values
 
@@ -188,7 +184,6 @@ def test_input_dataset_defaults_summary():
         assert any(required for required in fields.values())
 
 
-
 # ── Duplicate detection ─────────────────────────────────────────────
 
 
@@ -198,16 +193,26 @@ def test_registry_duplicate_field_name_rejected():
 
     levers = (
         EducationalLeverDefinition(
-            field_name="dup_field", public_label="A",
-            health_economics_meaning="x", high_value_meaning="x",
-            educational_output_effect="x", slider_help="x",
-            default_value=50, source="test", claim_boundary="test",
+            field_name="dup_field",
+            public_label="A",
+            health_economics_meaning="x",
+            high_value_meaning="x",
+            educational_output_effect="x",
+            slider_help="x",
+            default_value=50,
+            source="test",
+            claim_boundary="test",
         ),
         EducationalLeverDefinition(
-            field_name="dup_field", public_label="B",
-            health_economics_meaning="x", high_value_meaning="x",
-            educational_output_effect="x", slider_help="x",
-            default_value=60, source="test", claim_boundary="test",
+            field_name="dup_field",
+            public_label="B",
+            health_economics_meaning="x",
+            high_value_meaning="x",
+            educational_output_effect="x",
+            slider_help="x",
+            default_value=60,
+            source="test",
+            claim_boundary="test",
         ),
     )
     with pytest.raises(ValueError, match="Duplicate field_name"):
@@ -220,28 +225,47 @@ def test_scenario_duplicate_id_rejected():
 
     scenarios = (
         RuntimeScenarioDefinition(
-            scenario_id="F99", scenario_name="A", description="x",
-            activity_signal=50.0, capitation=50.0,
-            place_accountability=50.0, scope_capacity=50.0,
-            urgent_ambulance=50.0, data_visibility=50.0,
-            governance=50.0, equity_protection=50.0,
-            copayment_burden=50.0, budget_tightness=50.0,
-            hospital_salience=50.0, complexity=50.0,
-            source="test", claim_boundary="test",
+            scenario_id="F99",
+            scenario_name="A",
+            description="x",
+            activity_signal=50.0,
+            capitation=50.0,
+            place_accountability=50.0,
+            scope_capacity=50.0,
+            urgent_ambulance=50.0,
+            data_visibility=50.0,
+            governance=50.0,
+            equity_protection=50.0,
+            copayment_burden=50.0,
+            budget_tightness=50.0,
+            hospital_salience=50.0,
+            complexity=50.0,
+            source="test",
+            claim_boundary="test",
         ),
         RuntimeScenarioDefinition(
-            scenario_id="F99", scenario_name="B", description="x",
-            activity_signal=50.0, capitation=50.0,
-            place_accountability=50.0, scope_capacity=50.0,
-            urgent_ambulance=50.0, data_visibility=50.0,
-            governance=50.0, equity_protection=50.0,
-            copayment_burden=50.0, budget_tightness=50.0,
-            hospital_salience=50.0, complexity=50.0,
-            source="test", claim_boundary="test",
+            scenario_id="F99",
+            scenario_name="B",
+            description="x",
+            activity_signal=50.0,
+            capitation=50.0,
+            place_accountability=50.0,
+            scope_capacity=50.0,
+            urgent_ambulance=50.0,
+            data_visibility=50.0,
+            governance=50.0,
+            equity_protection=50.0,
+            copayment_burden=50.0,
+            budget_tightness=50.0,
+            hospital_salience=50.0,
+            complexity=50.0,
+            source="test",
+            claim_boundary="test",
         ),
     )
     with pytest.raises(ValueError, match="Duplicate scenario_id"):
         _check_unique(scenarios, "scenario_id", "runtime scenario")
+
 
 # ── Contract boundary validation ────────────────────────────────────
 
@@ -249,73 +273,119 @@ def test_scenario_duplicate_id_rejected():
 def test_contracts_reject_unknown_fields_and_out_of_range_values():
     with pytest.raises(ValidationError):
         EducationalLeverDefinition(
-            field_name="bad", public_label="Bad",
-            health_economics_meaning="Bad", high_value_meaning="Bad",
-            educational_output_effect="Bad", slider_help="Bad",
-            default_value=101, source="test", claim_boundary="test",
+            field_name="bad",
+            public_label="Bad",
+            health_economics_meaning="Bad",
+            high_value_meaning="Bad",
+            educational_output_effect="Bad",
+            slider_help="Bad",
+            default_value=101,
+            source="test",
+            claim_boundary="test",
         )
 
     with pytest.raises(ValidationError):
         RuntimeScenarioDefinition(
-            scenario_id="BAD", scenario_name="Bad", description="Bad",
-            activity_signal=120.0, capitation=50.0,
-            place_accountability=50.0, scope_capacity=50.0,
-            urgent_ambulance=50.0, data_visibility=50.0,
-            governance=50.0, equity_protection=50.0,
-            copayment_burden=50.0, budget_tightness=50.0,
-            hospital_salience=50.0, complexity=50.0,
-            source="test", claim_boundary="test",
+            scenario_id="BAD",
+            scenario_name="Bad",
+            description="Bad",
+            activity_signal=120.0,
+            capitation=50.0,
+            place_accountability=50.0,
+            scope_capacity=50.0,
+            urgent_ambulance=50.0,
+            data_visibility=50.0,
+            governance=50.0,
+            equity_protection=50.0,
+            copayment_burden=50.0,
+            budget_tightness=50.0,
+            hospital_salience=50.0,
+            complexity=50.0,
+            source="test",
+            claim_boundary="test",
         )
 
 
 def test_educational_lever_rejects_lower_bound_exceeding_upper():
     with pytest.raises(ValidationError, match="lower_bound cannot exceed"):
         EducationalLeverDefinition(
-            field_name="bad_bounds", public_label="Bad bounds",
-            health_economics_meaning="x", high_value_meaning="x",
-            educational_output_effect="x", slider_help="x",
-            default_value=50, lower_bound=80, upper_bound=20,
-            source="test", claim_boundary="test",
+            field_name="bad_bounds",
+            public_label="Bad bounds",
+            health_economics_meaning="x",
+            high_value_meaning="x",
+            educational_output_effect="x",
+            slider_help="x",
+            default_value=50,
+            lower_bound=80,
+            upper_bound=20,
+            source="test",
+            claim_boundary="test",
         )
 
 
 def test_educational_lever_rejects_default_outside_bounds():
     # Use bounds wide enough to pass field-level checks but trigger model validator
-    with pytest.raises(ValidationError, match=r"default_value must sit within|less than or equal|greater than or equal"):
+    with pytest.raises(
+        ValidationError, match=r"default_value must sit within|less than or equal|greater than or equal"
+    ):
         EducationalLeverDefinition(
-            field_name="bad_default", public_label="Bad default",
-            health_economics_meaning="x", high_value_meaning="x",
-            educational_output_effect="x", slider_help="x",
-            default_value=120, lower_bound=0, upper_bound=200,
-            source="test", claim_boundary="test",
+            field_name="bad_default",
+            public_label="Bad default",
+            health_economics_meaning="x",
+            high_value_meaning="x",
+            educational_output_effect="x",
+            slider_help="x",
+            default_value=120,
+            lower_bound=0,
+            upper_bound=200,
+            source="test",
+            claim_boundary="test",
         )
 
 
 def test_runtime_scenario_rejects_negative_activity_signal():
     with pytest.raises(ValidationError):
         RuntimeScenarioDefinition(
-            scenario_id="F99", scenario_name="Test", description="Test",
-            activity_signal=-1.0, capitation=50.0,
-            place_accountability=50.0, scope_capacity=50.0,
-            urgent_ambulance=50.0, data_visibility=50.0,
-            governance=50.0, equity_protection=50.0,
-            copayment_burden=50.0, budget_tightness=50.0,
-            hospital_salience=50.0, complexity=50.0,
-            source="test", claim_boundary="test",
+            scenario_id="F99",
+            scenario_name="Test",
+            description="Test",
+            activity_signal=-1.0,
+            capitation=50.0,
+            place_accountability=50.0,
+            scope_capacity=50.0,
+            urgent_ambulance=50.0,
+            data_visibility=50.0,
+            governance=50.0,
+            equity_protection=50.0,
+            copayment_burden=50.0,
+            budget_tightness=50.0,
+            hospital_salience=50.0,
+            complexity=50.0,
+            source="test",
+            claim_boundary="test",
         )
 
 
 def test_runtime_scenario_rejects_empty_scenario_id():
     with pytest.raises(ValidationError):
         RuntimeScenarioDefinition(
-            scenario_id="", scenario_name="Test", description="Test",
-            activity_signal=50.0, capitation=50.0,
-            place_accountability=50.0, scope_capacity=50.0,
-            urgent_ambulance=50.0, data_visibility=50.0,
-            governance=50.0, equity_protection=50.0,
-            copayment_burden=50.0, budget_tightness=50.0,
-            hospital_salience=50.0, complexity=50.0,
-            source="test", claim_boundary="test",
+            scenario_id="",
+            scenario_name="Test",
+            description="Test",
+            activity_signal=50.0,
+            capitation=50.0,
+            place_accountability=50.0,
+            scope_capacity=50.0,
+            urgent_ambulance=50.0,
+            data_visibility=50.0,
+            governance=50.0,
+            equity_protection=50.0,
+            copayment_burden=50.0,
+            budget_tightness=50.0,
+            hospital_salience=50.0,
+            complexity=50.0,
+            source="test",
+            claim_boundary="test",
         )
 
 
@@ -338,6 +408,7 @@ def test_export_all_registry_json_schemas_includes_all():
     assert "runtime_scenario" in schemas
     assert "parameter" in schemas
     assert "input_dataset" in schemas
+
 
 # ── Reference result validation ─────────────────────────────────────
 
@@ -394,19 +465,28 @@ def test_strict_contract_rejects_extra_fields():
         TestContract(name="ok", unexpected_field="bad")
 
 
-
 def test_parameters_duplicate_id_rejected():
     """Parameter registry should reject duplicate parameter_id values."""
     from models.primarycare_model.validation.registry_loader import _check_unique
 
     params = (
         ParameterDefinition(
-            parameter_id="dup_param", label="A", value_type="number",
-            unit="x", default_value=1.0, description="d", source="s",
+            parameter_id="dup_param",
+            label="A",
+            value_type="number",
+            unit="x",
+            default_value=1.0,
+            description="d",
+            source="s",
         ),
         ParameterDefinition(
-            parameter_id="dup_param", label="B", value_type="number",
-            unit="x", default_value=2.0, description="d", source="s",
+            parameter_id="dup_param",
+            label="B",
+            value_type="number",
+            unit="x",
+            default_value=2.0,
+            description="d",
+            source="s",
         ),
     )
     with pytest.raises(ValueError, match="Duplicate parameter_id"):

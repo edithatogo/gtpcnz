@@ -14,20 +14,8 @@ from models.primarycare_model.data.public_source_transforms import (
 )
 
 ROOT = Path(__file__).resolve().parents[2]
-RAW_ARTIFACT = (
-    ROOT
-    / "data"
-    / "public_raw"
-    / "src_pho_services_agreement"
-    / "master-pho-services-agreement.pdf"
-)
-PROCESSED_ARTIFACT = (
-    ROOT
-    / "data"
-    / "public_processed"
-    / "src_pho_services_agreement"
-    / "pho_services_schedule.csv"
-)
+RAW_ARTIFACT = ROOT / "data" / "public_raw" / "src_pho_services_agreement" / "master-pho-services-agreement.pdf"
+PROCESSED_ARTIFACT = ROOT / "data" / "public_processed" / "src_pho_services_agreement" / "pho_services_schedule.csv"
 
 
 def _read_csv(path: Path) -> list[dict[str, str]]:

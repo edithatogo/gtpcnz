@@ -17,8 +17,7 @@ def build_card() -> str:
     version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
     calibration = run_public_aggregate_calibration()
     validation_gates = "\n".join(
-        f"- {row['gate_id']}: {row['status']} ({row['gate_family']})"
-        for row in calibration["validation_gates"]
+        f"- {row['gate_id']}: {row['status']} ({row['gate_family']})" for row in calibration["validation_gates"]
     )
     not_valid_for = ", ".join(str(item) for item in calibration["not_valid_for"])
     return f"""# GTPCNZ public model card v{version}
