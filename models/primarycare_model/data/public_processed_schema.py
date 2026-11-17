@@ -6,6 +6,7 @@ import csv
 import math
 import sys
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -99,6 +100,12 @@ def _coerce_value(value: str, data_type: str) -> bool:
         except ValueError:
             return False
         return math.isfinite(parsed)
+    if data_type == "date":
+        try:
+            datetime.strptime(value.strip(), "%Y-%m-%d").date()
+            return True
+        except ValueError as e:
+            raise ValueError(f"Invalid ISO date format: {value}") from e
     return False
 
 
@@ -170,7 +177,9 @@ def main(argv: list[str] | None = None) -> int:
     import argparse
 
     parser = argparse.ArgumentParser(description="Validate processed public input schemas.")
-    parser.add_argument("--require-processed", action="store_true", help="Fail if expected processed artifacts are absent.")
+    parser.add_argument(
+        "--require-processed", action="store_true", help="Fail if expected processed artifacts are absent."
+    )
     args = parser.parse_args(argv)
     issues = validate_processed_input_schemas(require_processed=args.require_processed)
     if issues:
