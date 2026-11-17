@@ -48,7 +48,9 @@ class ProviderType(StrEnum):
     NURSE = "nurse"
     PRACTICE = "practice"
 
+
 # placeholder
+
 
 class SimulationConfig(BaseModel):
     """Top-level configuration for a simulation run."""
@@ -90,6 +92,7 @@ class PolicyParams(BaseModel):
             raise ValueError(f"end_month ({self.end_month}) must be > start_month ({self.start_month})")
         return self
 
+
 class ScenarioParams(BaseModel):
     """A named simulation scenario bundling policy parameters with a funding model."""
 
@@ -98,13 +101,17 @@ class ScenarioParams(BaseModel):
     policy_params: list[PolicyParams] = Field(default_factory=list, description="Active policies in this scenario")
     funding_model: FundingModel = Field(..., description="Funding model type (capitation / ffs / hybrid)")
     capitation_rate: float | None = Field(None, ge=0.0, description="Per-patient-per-month capitation rate (NZD)")
-    ffs_fee_schedule: dict[str, float] | None = Field(None, description="FFS schedule mapping visit type codes to NZD amounts")
+    ffs_fee_schedule: dict[str, float] | None = Field(
+        None, description="FFS schedule mapping visit type codes to NZD amounts"
+    )
 
     @model_validator(mode="after")
     def validate_funding_params(self) -> ScenarioParams:
         if self.funding_model == FundingModel.CAPITATION and self.capitation_rate is None:
             raise ValueError("capitation_rate required when funding_model='capitation'")
-        if self.funding_model == FundingModel.FFS and (self.ffs_fee_schedule is None or len(self.ffs_fee_schedule) == 0):
+        if self.funding_model == FundingModel.FFS and (
+            self.ffs_fee_schedule is None or len(self.ffs_fee_schedule) == 0
+        ):
             raise ValueError("ffs_fee_schedule required when funding_model='ffs'")
         if self.funding_model == FundingModel.HYBRID:
             if self.capitation_rate is None:
@@ -121,8 +128,12 @@ class PatientProfile(BaseModel):
     gender: Gender = Field(..., description="Patient gender")
     ethnicity: Ethnicity = Field(..., description="Patient ethnicity group")
     deprivation_index: int = Field(..., ge=1, le=10, description="NZDep2018 deprivation decile (1=least, 10=most)")
-    comorbidities: list[str] = Field(default_factory=list, description="Chronic condition codes e.g. ['diabetes','asthma']")
-    enrollment_status: EnrollmentStatus = Field(default=EnrollmentStatus.ENROLLED, description="Current enrollment status")
+    comorbidities: list[str] = Field(
+        default_factory=list, description="Chronic condition codes e.g. ['diabetes','asthma']"
+    )
+    enrollment_status: EnrollmentStatus = Field(
+        default=EnrollmentStatus.ENROLLED, description="Current enrollment status"
+    )
 
     @field_validator("comorbidities")
     @classmethod

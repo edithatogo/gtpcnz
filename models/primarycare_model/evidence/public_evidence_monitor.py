@@ -10,23 +10,27 @@ def detect_public_evidence_candidates() -> tuple[EvidenceCandidate, ...]:
     candidates = []
     for source in load_public_sources():
         if source.checksum == "pending-download":
-            candidates.append(EvidenceCandidate(
-                candidate_id=f"candidate-{source.source_id}",
-                source=source.source_id,
-                relevance=0.75,
-                quality="public-source-metadata-needs-download-checksum",
-                transferability=0.7,
-                contradiction_signal="none_detected",
-                affected_parameters=(),
-            ))
+            candidates.append(
+                EvidenceCandidate(
+                    candidate_id=f"candidate-{source.source_id}",
+                    source=source.source_id,
+                    relevance=0.75,
+                    quality="public-source-metadata-needs-download-checksum",
+                    transferability=0.7,
+                    contradiction_signal="none_detected",
+                    affected_parameters=(),
+                )
+            )
         else:
-            candidates.append(EvidenceCandidate(
-                candidate_id=f"freshness-review-{source.source_id}",
-                source=source.source_id,
-                relevance=0.5,
-                quality="public-source-freshness-review-after-verified-snapshot",
-                transferability=0.7,
-                contradiction_signal="none_detected",
-                affected_parameters=(),
-            ))
+            candidates.append(
+                EvidenceCandidate(
+                    candidate_id=f"freshness-review-{source.source_id}",
+                    source=source.source_id,
+                    relevance=0.5,
+                    quality="public-source-freshness-review-after-verified-snapshot",
+                    transferability=0.7,
+                    contradiction_signal="none_detected",
+                    affected_parameters=(),
+                )
+            )
     return tuple(candidates)

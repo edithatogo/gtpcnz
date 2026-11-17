@@ -2,6 +2,7 @@
 Property-based tests using Hypothesis for the PCA simulation.
 Fuzzes entity generation rules, tests invariants under random inputs.
 """
+
 from __future__ import annotations
 
 import pytest
@@ -24,41 +25,61 @@ from primarycare_model.schemas import (
 )
 
 
-def gs(): return st.sampled_from(list(Gender))
-def es(): return st.sampled_from(list(Ethnicity))
-def ens(): return st.sampled_from(list(Ethnicity))
-def pts(): return st.sampled_from(list(ProviderType))
-def fms(): return st.sampled_from(list(FundingModel))
+def gs():
+    return st.sampled_from(list(Gender))
+
+
+def es():
+    return st.sampled_from(list(Ethnicity))
+
+
+def ens():
+    return st.sampled_from(list(Ethnicity))
+
+
+def pts():
+    return st.sampled_from(list(ProviderType))
+
+
+def fms():
+    return st.sampled_from(list(FundingModel))
 
 
 def patient_s():
-    return st.builds(PatientProfile,
-        age=st.integers(0, 120), gender=gs(), ethnicity=es(),
+    return st.builds(
+        PatientProfile,
+        age=st.integers(0, 120),
+        gender=gs(),
+        ethnicity=es(),
         deprivation_index=st.integers(1, 10),
         comorbidities=st.lists(
-            st.sampled_from(["diabetes","asthma","copd","hypertension","cancer"]),
-            max_size=5,
-            unique=True),
-        enrollment_status=st.sampled_from(
-            ["enrolled","casual","pending","declined"]))
+            st.sampled_from(["diabetes", "asthma", "copd", "hypertension", "cancer"]), max_size=5, unique=True
+        ),
+        enrollment_status=st.sampled_from(["enrolled", "casual", "pending", "declined"]),
+    )
 
 
 def provider_s():
-    return st.builds(ProviderProfile,
-        id=st.text(min_size=1, max_size=20), type=pts(),
-        region=st.sampled_from(["Auckland","Canterbury","Waikato"]),
+    return st.builds(
+        ProviderProfile,
+        id=st.text(min_size=1, max_size=20),
+        type=pts(),
+        region=st.sampled_from(["Auckland", "Canterbury", "Waikato"]),
         patient_list=st.lists(st.text(min_size=1), max_size=50),
         capacity=st.integers(0, 5000),
-        capitation_panel_size=st.integers(0, 5000))
+        capitation_panel_size=st.integers(0, 5000),
+    )
 
 
 def config_s():
-    return st.builds(SimulationConfig,
-        seed=st.integers(0, 2**31-1),
+    return st.builds(
+        SimulationConfig,
+        seed=st.integers(0, 2**31 - 1),
         num_patients=st.integers(1, 100000),
         num_providers=st.integers(1, 500),
         time_horizon_months=st.integers(1, 120),
-        tick_interval_days=st.sampled_from([1,2,3,5,6,10,15,30]))
+        tick_interval_days=st.sampled_from([1, 2, 3, 5, 6, 10, 15, 30]),
+    )
 
 
 def policy_s():
@@ -114,8 +135,8 @@ def scenario_s():
         ),
     )
 
-# Property-based tests placeholder
 
+# Property-based tests placeholder
 
 
 class TestPatientFuzzing:
@@ -194,10 +215,8 @@ class TestJaxMC:
     @given(seed=st.integers(0, 1023), mo=st.integers(1, 12))
     @settings(max_examples=10)
     def test_non_negative(self, seed, mo):
-        c = SimulationConfig(seed=seed, time_horizon_months=mo,
-                             num_patients=1000, num_providers=50)
-        s = ScenarioParams(name=f"t{seed}", funding_model=FundingModel.CAPITATION,
-                          capitation_rate=80.0)
+        c = SimulationConfig(seed=seed, time_horizon_months=mo, num_patients=1000, num_providers=50)
+        s = ScenarioParams(name=f"t{seed}", funding_model=FundingModel.CAPITATION, capitation_rate=80.0)
         r = run_deterministic(c, s)
         for m in r.monthly_metrics:
             assert m.total_patients >= 0
@@ -208,10 +227,8 @@ class TestJaxMC:
     @given(seed=st.integers(0, 1023), mo=st.integers(1, 12))
     @settings(max_examples=10)
     def test_determinism(self, seed, mo):
-        c = SimulationConfig(seed=seed, time_horizon_months=mo,
-                             num_patients=1000, num_providers=50)
-        s = ScenarioParams(name=f"d{seed}", funding_model=FundingModel.CAPITATION,
-                          capitation_rate=80.0)
+        c = SimulationConfig(seed=seed, time_horizon_months=mo, num_patients=1000, num_providers=50)
+        s = ScenarioParams(name=f"d{seed}", funding_model=FundingModel.CAPITATION, capitation_rate=80.0)
         r1, r2 = run_deterministic(c, s), run_deterministic(c, s)
         for a, b in zip(r1.monthly_metrics, r2.monthly_metrics, strict=False):
             assert a.total_funding == b.total_funding
@@ -219,10 +236,8 @@ class TestJaxMC:
     @given(seed=st.integers(0, 1023), mo=st.integers(1, 6))
     @settings(max_examples=10)
     def test_shape(self, seed, mo):
-        c = SimulationConfig(seed=seed, time_horizon_months=mo,
-                             num_patients=1000, num_providers=50)
-        s = ScenarioParams(name=f"s{seed}", funding_model=FundingModel.CAPITATION,
-                          capitation_rate=80.0)
+        c = SimulationConfig(seed=seed, time_horizon_months=mo, num_patients=1000, num_providers=50)
+        s = ScenarioParams(name=f"s{seed}", funding_model=FundingModel.CAPITATION, capitation_rate=80.0)
         assert len(run_deterministic(c, s).monthly_metrics) == mo
 
 

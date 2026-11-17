@@ -246,19 +246,33 @@ def _validate_shocks(
         shock_inputs = DEFAULT_BASELINE
         if "copayment" in shock_type:
             shock_inputs = DEFAULT_BASELINE.__class__(
-                **{**asdict(DEFAULT_BASELINE), "copayment_level": max(0.01, min(0.95, DEFAULT_BASELINE.copayment_level + delta))}
+                **{
+                    **asdict(DEFAULT_BASELINE),
+                    "copayment_level": max(0.01, min(0.95, DEFAULT_BASELINE.copayment_level + delta)),
+                }
             )
         elif "scope" in shock_type:
             shock_inputs = DEFAULT_BASELINE.__class__(
-                **{**asdict(DEFAULT_BASELINE), "scope_flexibility": max(0.01, min(0.95, DEFAULT_BASELINE.scope_flexibility + delta))}
+                **{
+                    **asdict(DEFAULT_BASELINE),
+                    "scope_flexibility": max(0.01, min(0.95, DEFAULT_BASELINE.scope_flexibility + delta)),
+                }
             )
         elif "acc" in shock_type:
             shock_inputs = DEFAULT_BASELINE.__class__(
-                **{**asdict(DEFAULT_BASELINE), "acc_activity_strength": max(0.01, min(0.95, DEFAULT_BASELINE.acc_activity_strength + delta))}
+                **{
+                    **asdict(DEFAULT_BASELINE),
+                    "acc_activity_strength": max(0.01, min(0.95, DEFAULT_BASELINE.acc_activity_strength + delta)),
+                }
             )
         elif "ambulance" in shock_type:
             shock_inputs = DEFAULT_BASELINE.__class__(
-                **{**asdict(DEFAULT_BASELINE), "ambulance_alternative_strength": max(0.01, min(0.95, DEFAULT_BASELINE.ambulance_alternative_strength + delta))}
+                **{
+                    **asdict(DEFAULT_BASELINE),
+                    "ambulance_alternative_strength": max(
+                        0.01, min(0.95, DEFAULT_BASELINE.ambulance_alternative_strength + delta)
+                    ),
+                }
             )
 
         shocked = simulate_months(params, shock_inputs, months=len(observations))
@@ -286,10 +300,14 @@ def _validate_shocks(
     }
 
 
-def _validate_equity(observations: pd.DataFrame, params: CalibrationParameters, equity_df: pd.DataFrame) -> dict[str, Any]:
+def _validate_equity(
+    observations: pd.DataFrame, params: CalibrationParameters, equity_df: pd.DataFrame
+) -> dict[str, Any]:
     if equity_df.empty:
         return {"status": False, "passed": False, "message": "equity file missing"}
-    group_col = "equity_group" if "equity_group" in equity_df.columns else ("group" if "group" in equity_df.columns else None)
+    group_col = (
+        "equity_group" if "equity_group" in equity_df.columns else ("group" if "group" in equity_df.columns else None)
+    )
     if group_col is None:
         return {"status": False, "passed": False, "message": "equity file missing group column"}
 
@@ -315,7 +333,11 @@ def _validate_equity(observations: pd.DataFrame, params: CalibrationParameters, 
 
     corr = observed.corr(predicted)
     if pd.isna(corr):
-        return {"status": False, "passed": False, "message": "equity check failed (insufficient variation in predicted signal)"}
+        return {
+            "status": False,
+            "passed": False,
+            "message": "equity check failed (insufficient variation in predicted signal)",
+        }
 
     return {
         "status": True,
@@ -332,7 +354,9 @@ def _validate_geographic(
     if geographic_df.empty:
         return {"status": False, "passed": False, "message": "geographic file missing"}
 
-    locality_col = "locality" if "locality" in geographic_df.columns else ("region" if "region" in geographic_df.columns else None)
+    locality_col = (
+        "locality" if "locality" in geographic_df.columns else ("region" if "region" in geographic_df.columns else None)
+    )
     if locality_col is None:
         return {"status": False, "passed": False, "message": "geographic file missing locality column"}
 
@@ -367,7 +391,12 @@ def _validate_temporal_holdout(observations: pd.DataFrame) -> dict[str, Any]:
     train_fit = _fit_parameters(train)
     pred = _simulate_baseline(len(test), train_fit)
     score = _safe_score(pred, test, TARGET_METRICS)
-    return {"status": True, "passed": score <= 0.45, "metric": float(score), "message": f"temporal holdout score={score:.3f}"}
+    return {
+        "status": True,
+        "passed": score <= 0.45,
+        "metric": float(score),
+        "message": f"temporal holdout score={score:.3f}",
+    }
 
 
 @dataclass(frozen=True)
@@ -406,16 +435,24 @@ def load_linked_inputs(
     shock_path = _find_first_existing(base_dir, SHOCK_DATA_FILES)
 
     monthly = _coerce_required_frame(monthly_path, list(TARGET_METRICS)) if monthly_path else pd.DataFrame()
-    geographic = _coerce_required_frame(
-        geographic_path,
-        ["primary_contacts"],
-        keep=("locality", "unmet_need_index", "ed_presentations", "ambulance_conveyances", "public_cost"),
-    ) if geographic_path else pd.DataFrame()
-    equity = _coerce_required_frame(
-        equity_path,
-        ["primary_contacts"],
-        keep=("equity_group", "unmet_need_index", "ed_presentations", "ambulance_conveyances", "public_cost"),
-    ) if equity_path else pd.DataFrame()
+    geographic = (
+        _coerce_required_frame(
+            geographic_path,
+            ["primary_contacts"],
+            keep=("locality", "unmet_need_index", "ed_presentations", "ambulance_conveyances", "public_cost"),
+        )
+        if geographic_path
+        else pd.DataFrame()
+    )
+    equity = (
+        _coerce_required_frame(
+            equity_path,
+            ["primary_contacts"],
+            keep=("equity_group", "unmet_need_index", "ed_presentations", "ambulance_conveyances", "public_cost"),
+        )
+        if equity_path
+        else pd.DataFrame()
+    )
     shock = _load_grouped_shocks(shock_path)
     return monthly, geographic, equity, shock
 
@@ -513,7 +550,11 @@ def run_empirical_calibration_pipeline(
         supported_where_valid=passed_all and in_sample <= tolerance_temporal_score,
         in_sample_score=float(in_sample),
         holdout_score=temporal.get("metric") if temporal.get("metric") is not None else None,
-        parameter_estimates={k: float(v) for k, v in asdict(fitted).items() if k not in {"base_primary_contacts", "base_ed_presentations", "base_public_cost"}},
+        parameter_estimates={
+            k: float(v)
+            for k, v in asdict(fitted).items()
+            if k not in {"base_primary_contacts", "base_ed_presentations", "base_public_cost"}
+        },
         parameter_bounds=bounds,
         validation=validation,
         source_monthly="linked-nz-monthly-observations.csv" if not monthly_df.empty else None,
@@ -558,7 +599,11 @@ def calibration_ready_rows(summary: LinkedCalibrationSummary) -> tuple[tuple[str
         (
             "ED and inpatient data",
             "ED presentations, admissions, diagnosis and disposition",
-            "Ready for calibration" if summary.available and summary.supported_where_valid else "In progress" if summary.available else "Needed",
+            "Ready for calibration"
+            if summary.available and summary.supported_where_valid
+            else "In progress"
+            if summary.available
+            else "Needed",
             "Downstream hospital-pressure validation",
         ),
         (

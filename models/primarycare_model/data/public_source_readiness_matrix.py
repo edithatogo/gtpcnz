@@ -52,9 +52,13 @@ def _raw_artifact_status(source_id: str, expected_raw_artifact: str) -> tuple[st
     if expected_path.exists():
         return "expected_raw_artifact_present", ()
     if raw_files:
-        issues.append(f"{source_id}: raw files exist but expected artifact {expected_path.relative_to(ROOT).as_posix()} is missing")
+        issues.append(
+            f"{source_id}: raw files exist but expected artifact {expected_path.relative_to(ROOT).as_posix()} is missing"
+        )
         return "raw_files_present_expected_artifact_missing", tuple(issues)
-    return "pending_download", (f"{source_id}: no raw public source files under {raw_dir.relative_to(ROOT).as_posix()}",)
+    return "pending_download", (
+        f"{source_id}: no raw public source files under {raw_dir.relative_to(ROOT).as_posix()}",
+    )
 
 
 def _checksum_status(source_id: str, registry_checksum: str) -> tuple[str, tuple[str, ...]]:
@@ -82,7 +86,9 @@ def _processed_artifact_status(source_id: str, expected_processed_artifact: str)
             f"{expected_path.relative_to(ROOT).as_posix()} is missing"
         )
         return "processed_files_present_expected_artifact_missing", tuple(issues)
-    return "pending_transform", (f"{source_id}: no processed public source files under {processed_dir.relative_to(ROOT).as_posix()}",)
+    return "pending_transform", (
+        f"{source_id}: no processed public source files under {processed_dir.relative_to(ROOT).as_posix()}",
+    )
 
 
 def build_public_source_readiness_matrix(*, strict: bool = False) -> tuple[PublicSourceReadinessRow, ...]:
@@ -96,7 +102,9 @@ def build_public_source_readiness_matrix(*, strict: bool = False) -> tuple[Publi
         transform = check_source_transform_readiness(plan.source_id, require_raw=strict)
         raw_status, raw_issues = _raw_artifact_status(plan.source_id, plan.expected_raw_artifact)
         checksum_status, checksum_issues = _checksum_status(plan.source_id, source.checksum)
-        processed_status, processed_issues = _processed_artifact_status(plan.source_id, plan.expected_processed_artifact)
+        processed_status, processed_issues = _processed_artifact_status(
+            plan.source_id, plan.expected_processed_artifact
+        )
 
         readiness_issues: list[str] = []
         if strict:
@@ -149,8 +157,12 @@ def readiness_matrix_as_json(*, strict: bool = False) -> str:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Report public-source readiness across retrieval, fetch, transform, and processed outputs.")
-    parser.add_argument("--strict", action="store_true", help="Fail until every source has raw, checksum, and processed artifacts.")
+    parser = argparse.ArgumentParser(
+        description="Report public-source readiness across retrieval, fetch, transform, and processed outputs."
+    )
+    parser.add_argument(
+        "--strict", action="store_true", help="Fail until every source has raw, checksum, and processed artifacts."
+    )
     parser.add_argument("--json", action="store_true", help="Print the readiness matrix as JSON.")
     args = parser.parse_args(argv)
 

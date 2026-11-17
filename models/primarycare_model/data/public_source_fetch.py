@@ -49,7 +49,9 @@ def expected_raw_artifact_path(source_id: str) -> Path:
 
 
 def expected_fetch_metadata_path(source_id: str) -> Path:
-    return expected_raw_artifact_path(source_id).with_suffix(expected_raw_artifact_path(source_id).suffix + ".fetch.json")
+    return expected_raw_artifact_path(source_id).with_suffix(
+        expected_raw_artifact_path(source_id).suffix + ".fetch.json"
+    )
 
 
 def verify_public_source_fetch_scripts() -> tuple[str, ...]:
@@ -182,15 +184,21 @@ def download_public_source(source_id: str) -> Path:
         "claim_boundary": plan.claim_boundary,
         "not_valid_for": "private administrative, confidential, patient-level, stakeholder, or calibration-claim use",
     }
-    expected_fetch_metadata_path(source_id).write_text(json.dumps(metadata, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    expected_fetch_metadata_path(source_id).write_text(
+        json.dumps(metadata, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
     return output_path
 
 
 def run_fetch_cli(source_id: str, argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=f"Fetch or check public source readiness for {source_id}.")
-    parser.add_argument("--check-only", action="store_true", help="Check fetch readiness without network access or writes.")
+    parser.add_argument(
+        "--check-only", action="store_true", help="Check fetch readiness without network access or writes."
+    )
     parser.add_argument("--require-raw", action="store_true", help="Fail until the expected raw public file exists.")
-    parser.add_argument("--download", action="store_true", help="Download the registry-pinned public URL into data/public_raw.")
+    parser.add_argument(
+        "--download", action="store_true", help="Download the registry-pinned public URL into data/public_raw."
+    )
     args = parser.parse_args(argv)
 
     if args.download:

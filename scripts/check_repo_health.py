@@ -100,7 +100,12 @@ def check_contract_registries() -> tuple[bool, str]:
 
 
 def check_streamlit_boundary() -> tuple[bool, str]:
-    required = ["streamlit_app.py", "models/primarycare_model/app.py", ".streamlit/config.toml", ".streamlit/secrets.toml.example"]
+    required = [
+        "streamlit_app.py",
+        "models/primarycare_model/app.py",
+        ".streamlit/config.toml",
+        ".streamlit/secrets.toml.example",
+    ]
     missing = [path for path in required if not exists(path)]
     if missing:
         return False, f"Streamlit surface missing: {missing}"
@@ -204,7 +209,12 @@ def check_no_stub_modules() -> tuple[bool, str]:
 
 
 def check_claim_boundaries() -> tuple[bool, str]:
-    required_paths = ["README.md", "docs/calibration/model-card-v1.7.2.md", "docs/launch/claim-boundaries-v1.7.2.md", "conductor/state.md"]
+    required_paths = [
+        "README.md",
+        "docs/calibration/model-card-v1.7.2.md",
+        "docs/launch/claim-boundaries-v1.7.2.md",
+        "conductor/state.md",
+    ]
     missing = [path for path in required_paths if not exists(path)]
     if missing:
         return False, f"claim-boundary evidence missing: {missing}"

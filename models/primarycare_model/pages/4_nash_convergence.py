@@ -2,6 +2,7 @@
 Streamlit page: Nash Equilibrium Convergence Trace.
 Animated gradient path of clinical utility optimisation.
 """
+
 import time
 
 import numpy as np
@@ -34,7 +35,6 @@ def render_page() -> None:
         play = st.button(":arrow_forward: Run Dynamics", type="primary")
         step_once = st.button(":footprints: Step Single")
         reset = st.button(":stop_button: Reset")
-
 
     init_strat = np.array([init_cap_p0, init_cap_p1])
 
@@ -88,33 +88,57 @@ def render_page() -> None:
             st.session_state.nash_step = total_steps
 
         for si in range(steps_to_show):
-            sub = trace_df.iloc[:si+1]
+            sub = trace_df.iloc[: si + 1]
 
             # Contour + path
             fig1 = go.Figure()
-            z_pivot = landscape_df.pivot_table(
-                index="p1_capitation", columns="p0_capitation", values="total_welfare"
+            z_pivot = landscape_df.pivot_table(index="p1_capitation", columns="p0_capitation", values="total_welfare")
+            fig1.add_trace(
+                go.Contour(
+                    z=z_pivot.values,
+                    x=z_pivot.columns,
+                    y=z_pivot.index,
+                    colorscale="Viridis",
+                    name="Welfare",
+                    contours=dict(showlabels=True),
+                    hovertemplate="P0: %{x:.2f}<br>P1: %{y:.2f}<br>Welfare: %{z:.2f}<extra></extra>",
+                )
             )
-            fig1.add_trace(go.Contour(
-                z=z_pivot.values, x=z_pivot.columns, y=z_pivot.index,
-                colorscale="Viridis", name="Welfare", contours=dict(showlabels=True),
-                hovertemplate="P0: %{x:.2f}<br>P1: %{y:.2f}<br>Welfare: %{z:.2f}<extra></extra>"
-            ))
-            fig1.add_trace(go.Scatter(x=sub["p0_strategy_capitation"], y=sub["p1_strategy_capitation"],
-                mode="lines+markers", name="Dynamics Path",
-                line=dict(color="red", width=2), marker=dict(size=5)))
-            fig1.add_trace(go.Scatter(x=[sub["p0_strategy_capitation"].iloc[-1]], y=[sub["p1_strategy_capitation"].iloc[-1]],
-                mode="markers", name="Current", marker=dict(color="red", size=12, symbol="star")))
-            fig1.update_layout(height=400, xaxis=dict(range=[0,1], title="P0: Capitation Weight"),
-                yaxis=dict(range=[0,1], title="P1: Capitation Weight"))
+            fig1.add_trace(
+                go.Scatter(
+                    x=sub["p0_strategy_capitation"],
+                    y=sub["p1_strategy_capitation"],
+                    mode="lines+markers",
+                    name="Dynamics Path",
+                    line=dict(color="red", width=2),
+                    marker=dict(size=5),
+                )
+            )
+            fig1.add_trace(
+                go.Scatter(
+                    x=[sub["p0_strategy_capitation"].iloc[-1]],
+                    y=[sub["p1_strategy_capitation"].iloc[-1]],
+                    mode="markers",
+                    name="Current",
+                    marker=dict(color="red", size=12, symbol="star"),
+                )
+            )
+            fig1.update_layout(
+                height=400,
+                xaxis=dict(range=[0, 1], title="P0: Capitation Weight"),
+                yaxis=dict(range=[0, 1], title="P1: Capitation Weight"),
+            )
             path_chart.plotly_chart(fig1, use_container_width=True, key=f"path_{si}")
 
             # Convergence trace
             fig2 = go.Figure()
             for col in ["p0_payoff", "p1_payoff", "total_welfare"]:
                 if col in sub.columns:
-                    fig2.add_trace(go.Scatter(x=sub["iteration"], y=sub[col],
-                        mode="lines+markers", name=col.replace("_"," ").title()))
+                    fig2.add_trace(
+                        go.Scatter(
+                            x=sub["iteration"], y=sub[col], mode="lines+markers", name=col.replace("_", " ").title()
+                        )
+                    )
             fig2.update_layout(height=300, xaxis_title="Iteration", yaxis_title="Payoff")
             trace_chart.plotly_chart(fig2, use_container_width=True, key=f"trace_{si}")
 
@@ -123,13 +147,12 @@ def render_page() -> None:
             for col in ["p0_strategy_capitation", "p1_strategy_capitation"]:
                 if col in sub.columns:
                     label = "P0 Capitation" if "p0" in col else "P1 Capitation"
-                    fig3.add_trace(go.Scatter(x=sub["iteration"], y=sub[col],
-                        mode="lines+markers", name=label))
+                    fig3.add_trace(go.Scatter(x=sub["iteration"], y=sub[col], mode="lines+markers", name=label))
             fig3.update_layout(height=300, xaxis_title="Iteration", yaxis_title="Strategy Weight")
             strat_chart.plotly_chart(fig3, use_container_width=True, key=f"strat_{si}")
 
             if bar:
-                bar.progress((si+1)/total_steps)
+                bar.progress((si + 1) / total_steps)
                 time.sleep(0.05)
 
         if bar:
@@ -137,13 +160,16 @@ def render_page() -> None:
         nash_box.markdown(f"**Converged:** {trace.converged}  ")
         nash_box.markdown(f"**Iterations:** {trace.num_iterations}  ")
         if trace.final_strategies is not None:
-            nash_box.markdown(f"**Equilibrium:** P0={trace.final_strategies[0]:.3f}, P1={trace.final_strategies[1]:.3f}  ")
+            nash_box.markdown(
+                f"**Equilibrium:** P0={trace.final_strategies[0]:.3f}, P1={trace.final_strategies[1]:.3f}  "
+            )
 
     if reset:
         st.session_state.pop("nash_trace", None)
         st.session_state.pop("nash_traces", None)
         st.session_state.pop("nash_step", None)
         st.rerun()
+
 
 if __name__ == "__main__":
     render_page()

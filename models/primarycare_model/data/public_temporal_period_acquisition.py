@@ -102,8 +102,7 @@ def load_temporal_period_acquisition_plans(
     for item in _lists_to_tuples(payload["temporal_period_acquisition_plans"]):
         acquired = tuple(AcquiredPublicPeriod(**period) for period in item["acquired_public_periods"])
         missing = tuple(
-            MissingPublicPeriodRequirement(**requirement)
-            for requirement in item["missing_public_period_requirements"]
+            MissingPublicPeriodRequirement(**requirement) for requirement in item["missing_public_period_requirements"]
         )
         plan = TemporalPeriodAcquisitionPlan(
             plan_id=str(item["plan_id"]),
@@ -191,7 +190,9 @@ def temporal_period_acquisition_issues(*, require_ready: bool = False) -> tuple[
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Check public temporal-period acquisition readiness.")
     parser.add_argument("--json", action="store_true", help="Print the temporal-period acquisition matrix as JSON.")
-    parser.add_argument("--require-ready", action="store_true", help="Fail until all required public periods are present.")
+    parser.add_argument(
+        "--require-ready", action="store_true", help="Fail until all required public periods are present."
+    )
     args = parser.parse_args(argv)
 
     rows = build_temporal_period_readiness()

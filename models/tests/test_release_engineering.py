@@ -127,12 +127,8 @@ def test_release_manifest_records_claim_metadata() -> None:
 
 def test_release_site_sources_expose_aggregate_validation_boundary() -> None:
     index = (ROOT / "index.qmd").read_text(encoding="utf-8")
-    report = (ROOT / "reports" / "primary_care_architecture.qmd").read_text(
-        encoding="utf-8"
-    )
-    site_map = (
-        ROOT / "docs" / "public-site" / "site-map-and-release-manifest-v1.8.4.md"
-    ).read_text(encoding="utf-8")
+    report = (ROOT / "reports" / "primary_care_architecture.qmd").read_text(encoding="utf-8")
+    site_map = (ROOT / "docs" / "public-site" / "site-map-and-release-manifest-v1.8.4.md").read_text(encoding="utf-8")
     quarto = (ROOT / "_quarto.yml").read_text(encoding="utf-8")
 
     assert "docs/release/model-card-v1.8.1.md" in quarto

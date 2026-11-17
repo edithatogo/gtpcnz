@@ -73,7 +73,12 @@ def main() -> None:
     latest_path = REPORTS / "substack-simulation-plot-polish-latest.json"
     report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     latest_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps({"report": str(report_path.relative_to(ROOT)), "passed": report["passed"], "after": report["after"]}, indent=2))
+    print(
+        json.dumps(
+            {"report": str(report_path.relative_to(ROOT)), "passed": report["passed"], "after": report["after"]},
+            indent=2,
+        )
+    )
     if not report["passed"]:
         raise SystemExit("One or more polished plots scored below 95.")
 
@@ -120,7 +125,9 @@ def set_style() -> None:
     )
 
 
-def finish(fig: plt.Figure, ax: plt.Axes | None, path: Path, footer: str = "Illustrative indices; not a forecast.") -> None:
+def finish(
+    fig: plt.Figure, ax: plt.Axes | None, path: Path, footer: str = "Illustrative indices; not a forecast."
+) -> None:
     if ax is not None:
         ax.grid(axis="y", color=COLORS["grid"], linewidth=0.8)
         ax.spines["top"].set_visible(False)
@@ -136,8 +143,17 @@ def render_supply_pressure(path: Path) -> None:
     fig, ax = plt.subplots(figsize=(12.8, 7.2))
     ax.scatter(x, y, s=95, color=COLORS["slate"], alpha=0.95, edgecolor="white", linewidth=1.3)
     ax.scatter([55.5], [61.8], s=210, color=COLORS["green"], edgecolor=COLORS["ink"], linewidth=1.3, zorder=3)
-    ax.annotate("Full hybrid", xy=(55.5, 61.8), xytext=(-88, -14), textcoords="offset points", fontsize=13, weight="bold")
-    ax.annotate("Current cluster", xy=(14.2, 78.4), xytext=(16.8, 76.0), fontsize=12, color=COLORS["muted"], arrowprops={"arrowstyle": "-", "color": COLORS["muted"]})
+    ax.annotate(
+        "Full hybrid", xy=(55.5, 61.8), xytext=(-88, -14), textcoords="offset points", fontsize=13, weight="bold"
+    )
+    ax.annotate(
+        "Current cluster",
+        xy=(14.2, 78.4),
+        xytext=(16.8, 76.0),
+        fontsize=12,
+        color=COLORS["muted"],
+        arrowprops={"arrowstyle": "-", "color": COLORS["muted"]},
+    )
     ax.set_title("Supply generation vs hospital pressure", loc="left", pad=14, weight="bold")
     ax.set_xlabel("Supply generation index")
     ax.set_ylabel("Hospital pressure index (lower is better)")
@@ -196,8 +212,8 @@ def render_marginal_supply(path: Path) -> None:
 
 def render_gaming_frontier(path: Path) -> None:
     control = np.linspace(0, 1, 44)
-    access_gain = 20 + 55 * (control ** 0.88)
-    residual_risk = 84 - 72 * (control ** 0.82)
+    access_gain = 20 + 55 * (control**0.88)
+    residual_risk = 84 - 72 * (control**0.82)
     fig, ax = plt.subplots(figsize=(13.2, 7.4))
     scatter = ax.scatter(access_gain, residual_risk, c=control, cmap="viridis", s=72, edgecolor="white", linewidth=0.45)
     ax.set_title("Gaming-risk frontier", loc="left", pad=14, weight="bold")
@@ -205,8 +221,22 @@ def render_gaming_frontier(path: Path) -> None:
     ax.set_ylabel("Residual gaming-risk index (lower is better)")
     ax.set_xlim(17, 78)
     ax.set_ylim(90, 5)
-    ax.annotate("Weak controls", xy=(22, 82), xytext=(28, 72), fontsize=12, color=COLORS["muted"], arrowprops={"arrowstyle": "-", "color": COLORS["muted"]})
-    ax.annotate("Strong controls", xy=(73, 14), xytext=(59, 20), fontsize=12, color=COLORS["muted"], arrowprops={"arrowstyle": "-", "color": COLORS["muted"]})
+    ax.annotate(
+        "Weak controls",
+        xy=(22, 82),
+        xytext=(28, 72),
+        fontsize=12,
+        color=COLORS["muted"],
+        arrowprops={"arrowstyle": "-", "color": COLORS["muted"]},
+    )
+    ax.annotate(
+        "Strong controls",
+        xy=(73, 14),
+        xytext=(59, 20),
+        fontsize=12,
+        color=COLORS["muted"],
+        arrowprops={"arrowstyle": "-", "color": COLORS["muted"]},
+    )
     colorbar = fig.colorbar(scatter, ax=ax, pad=0.018, fraction=0.045)
     colorbar.set_label("Control strength", fontsize=12)
     finish(fig, ax, path)

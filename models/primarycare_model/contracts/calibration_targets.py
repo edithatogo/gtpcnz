@@ -9,9 +9,15 @@ from pydantic import Field
 from models.primarycare_model.contracts.parameters import StrictContract
 
 TargetFamily = Literal[
-    "population_denominators", "primary_care_access", "unmet_need_cost_barriers",
-    "workforce_supply", "hospital_ed_pressure", "avoidable_admissions",
-    "equity_gradients", "rurality_gradients", "fiscal_aggregates"
+    "population_denominators",
+    "primary_care_access",
+    "unmet_need_cost_barriers",
+    "workforce_supply",
+    "hospital_ed_pressure",
+    "avoidable_admissions",
+    "equity_gradients",
+    "rurality_gradients",
+    "fiscal_aggregates",
 ]
 
 

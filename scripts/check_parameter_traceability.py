@@ -10,9 +10,17 @@ if str(ROOT) not in sys.path:
 from models.primarycare_model.validation.public_parameter_loader import load_public_parameters  # noqa: E402
 
 REQUIRED = {
-    "source_id", "unit", "distribution_type", "distribution_parameters", "bounds",
-    "evidence_quality", "transferability_score", "sensitivity_priority",
-    "calibration_role", "update_cadence", "claim_boundary",
+    "source_id",
+    "unit",
+    "distribution_type",
+    "distribution_parameters",
+    "bounds",
+    "evidence_quality",
+    "transferability_score",
+    "sensitivity_priority",
+    "calibration_role",
+    "update_cadence",
+    "claim_boundary",
 }
 
 
