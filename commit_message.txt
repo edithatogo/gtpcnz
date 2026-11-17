@@ -1,0 +1,6 @@
+🧹 Code Health: Refactor `render_gaming_risk_frontier_lab` to improve readability
+
+- 🎯 **What:** Extracted the logic inside `render_gaming_risk_frontier_lab` into smaller, focused helper functions (`_render_gaming_risk_frontier_intro`, `_render_gaming_risk_frontier_controls`, `_calculate_gaming_risk_frontier_data`, `_render_gaming_risk_frontier_chart`).
+- 💡 **Why:** The original function was over 100 lines long and handled markdown rendering, input controls, data calculation, and chart rendering. Breaking it up into smaller functions improves readability, reusability, and makes testing/modifying individual components easier.
+- ✅ **Verification:** The code was verified via `pytest` (no failures) and manual tests with `streamlit`. No change in application behavior.
+- ✨ **Result:** Cleaner and more modular code that adheres better to Single Responsibility Principle.
