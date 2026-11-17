@@ -122,7 +122,10 @@ def _metric_card(metric: MetricCard) -> html.Div:
 
 def _nav() -> html.Nav:
     return html.Nav(
-        [dcc.Link(label, href=href, className="nav-link") for label, href in (*STREAMLIT_PUBLIC_TABS, *DASH_EXTRA_PUBLIC_ROUTES)],
+        [
+            dcc.Link(label, href=href, className="nav-link")
+            for label, href in (*STREAMLIT_PUBLIC_TABS, *DASH_EXTRA_PUBLIC_ROUTES)
+        ],
         className="nav",
     )
 
@@ -195,7 +198,11 @@ def start_page() -> html.Main:
                         [
                             html.A("GitHub Pages front door", href=links["github_pages"], className="surface-link"),
                             html.A("Hugging Face Space", href=links["huggingface_space"], className="surface-link"),
-                            html.A("Streamlit compatibility", href=links["streamlit_compatibility"], className="surface-link"),
+                            html.A(
+                                "Streamlit compatibility",
+                                href=links["streamlit_compatibility"],
+                                className="surface-link",
+                            ),
                             html.A("Substack series", href=links["substack_series"], className="surface-link"),
                         ],
                         className="surface-grid",
@@ -245,7 +252,10 @@ def post_guide_page() -> html.Main:
                 ],
                 className="section-band",
             ),
-            html.Section([html.H2("Reading map table"), _data_table(post_reading_map_table(), "post-guide-table", page_size=18)], className="section-band"),
+            html.Section(
+                [html.H2("Reading map table"), _data_table(post_reading_map_table(), "post-guide-table", page_size=18)],
+                className="section-band",
+            ),
         ]
     )
 
@@ -265,10 +275,28 @@ def current_state_page() -> html.Main:
                 ],
                 className="section-band",
             ),
-            html.Section([html.H2("Current New Zealand reform pathway"), _data_table(current_reform_table(), "current-reform-table", page_size=8)], className="section-band"),
-            html.Section([html.H2("Public project status"), _data_table(public_status_table(), "public-status-table", page_size=8)], className="section-band"),
+            html.Section(
+                [
+                    html.H2("Current New Zealand reform pathway"),
+                    _data_table(current_reform_table(), "current-reform-table", page_size=8),
+                ],
+                className="section-band",
+            ),
+            html.Section(
+                [
+                    html.H2("Public project status"),
+                    _data_table(public_status_table(), "public-status-table", page_size=8),
+                ],
+                className="section-band",
+            ),
             _bundle_section(readiness, "readiness-chart"),
-            html.Section([html.H2("Figure and table inventory"), _data_table(figure_inventory_table(), "figure-inventory-table", page_size=12)], className="section-band"),
+            html.Section(
+                [
+                    html.H2("Figure and table inventory"),
+                    _data_table(figure_inventory_table(), "figure-inventory-table", page_size=12),
+                ],
+                className="section-band",
+            ),
         ]
     )
 
@@ -307,7 +335,9 @@ def compare_page(search: str | None = None) -> html.Main:
                 ],
                 className="two-column",
             ),
-            html.Section([html.H2("Share this view"), _shareable_link("/reference-scenarios", search)], className="section-band"),
+            html.Section(
+                [html.H2("Share this view"), _shareable_link("/reference-scenarios", search)], className="section-band"
+            ),
             html.Section(
                 [
                     dcc.Graph(id="compare-bar-chart", config={"displayModeBar": False}),
@@ -320,7 +350,13 @@ def compare_page(search: str | None = None) -> html.Main:
             ),
             _bundle_section(scenario_heatmap_bundle(), "reference-heatmap", page_size=10),
             _bundle_section(scenario_profile_bundle("F4"), "reference-profile", page_size=10),
-            html.Section([html.H2("Score interpretation guide"), _data_table(score_guide_table(), "score-guide-table", page_size=8)], className="section-band"),
+            html.Section(
+                [
+                    html.H2("Score interpretation guide"),
+                    _data_table(score_guide_table(), "score-guide-table", page_size=8),
+                ],
+                className="section-band",
+            ),
             _bundle_section(budget_impact_bundle(), "budget-impact", page_size=12),
         ]
     )
@@ -340,7 +376,10 @@ def microeconomics_page() -> html.Main:
                 ],
                 className="section-band",
             ),
-            *[_bundle_section(bundle, f"micro-{index}", page_size=12) for index, bundle in enumerate(microeconomics_bundles(), start=1)],
+            *[
+                _bundle_section(bundle, f"micro-{index}", page_size=12)
+                for index, bundle in enumerate(microeconomics_bundles(), start=1)
+            ],
         ]
     )
 
@@ -359,7 +398,10 @@ def game_theory_page() -> html.Main:
                 ],
                 className="section-band",
             ),
-            *[_bundle_section(bundle, f"game-{index}", page_size=12) for index, bundle in enumerate(game_theory_bundles(), start=1)],
+            *[
+                _bundle_section(bundle, f"game-{index}", page_size=12)
+                for index, bundle in enumerate(game_theory_bundles(), start=1)
+            ],
         ]
     )
 
@@ -371,7 +413,9 @@ def _educational_sliders(defaults: dict[str, int] | None = None) -> list[html.Di
         sliders.append(
             html.Div(
                 [
-                    html.Label(definition.public_label, htmlFor=f"edu-{definition.field_name}", className="control-label"),
+                    html.Label(
+                        definition.public_label, htmlFor=f"edu-{definition.field_name}", className="control-label"
+                    ),
                     dcc.Slider(
                         id=f"edu-{definition.field_name}",
                         min=definition.lower_bound,
@@ -433,15 +477,23 @@ def simulation_page(search: str | None = None) -> html.Main:
                             dcc.Slider(id="simulation-draws", min=10, max=500, step=10, value=state.draws),
                             html.Label("Months", htmlFor="simulation-months", className="control-label"),
                             dcc.Slider(id="simulation-months", min=12, max=60, step=6, value=state.months),
-                            html.Label("Synthetic population", htmlFor="simulation-population", className="control-label"),
-                            dcc.Slider(id="simulation-population", min=50, max=500, step=10, value=state.population_size),
+                            html.Label(
+                                "Synthetic population", htmlFor="simulation-population", className="control-label"
+                            ),
+                            dcc.Slider(
+                                id="simulation-population", min=50, max=500, step=10, value=state.population_size
+                            ),
                             html.Label("Seed", htmlFor="simulation-seed", className="control-label"),
                             dcc.Input(id="simulation-seed", type="number", min=1, max=999999, step=1, value=state.seed),
                             html.Div(_educational_sliders(educational_values), className="educational-grid"),
                             html.Div(
                                 [
-                                    html.Button("Run simulation", id="simulation-run-button", className="command-button primary"),
-                                    html.Button("Download CSV", id="simulation-download-button", className="command-button"),
+                                    html.Button(
+                                        "Run simulation", id="simulation-run-button", className="command-button primary"
+                                    ),
+                                    html.Button(
+                                        "Download CSV", id="simulation-download-button", className="command-button"
+                                    ),
                                 ],
                                 className="command-row",
                             ),
@@ -452,7 +504,10 @@ def simulation_page(search: str | None = None) -> html.Main:
                 ],
                 className="two-column",
             ),
-            html.Section([html.H2("Share this live model state"), _shareable_link("/live-model", search)], className="section-band"),
+            html.Section(
+                [html.H2("Share this live model state"), _shareable_link("/live-model", search)],
+                className="section-band",
+            ),
             html.Section(
                 [
                     dcc.Store(id="simulation-summary-store"),
@@ -463,7 +518,10 @@ def simulation_page(search: str | None = None) -> html.Main:
                 ],
                 className="chart-stack",
             ),
-            *[_bundle_section(bundle, f"live-diagnostic-{index}", page_size=12) for index, bundle in enumerate(live_model_diagnostic_bundles("F4"), start=1)],
+            *[
+                _bundle_section(bundle, f"live-diagnostic-{index}", page_size=12)
+                for index, bundle in enumerate(live_model_diagnostic_bundles("F4"), start=1)
+            ],
         ]
     )
 
@@ -488,7 +546,10 @@ def evidence_page() -> html.Main:
                 ],
                 className="section-band",
             ),
-            *[_bundle_section(bundle, f"methodology-{index}", page_size=12) for index, bundle in enumerate(methods, start=1)],
+            *[
+                _bundle_section(bundle, f"methodology-{index}", page_size=12)
+                for index, bundle in enumerate(methods, start=1)
+            ],
             html.Section(
                 [
                     html.H2("Evidence and references"),
@@ -511,7 +572,9 @@ def evidence_page() -> html.Main:
                             html.Li("GitHub remains the source of truth."),
                             html.Li("GitHub Pages remains the public narrative front door."),
                             html.Li("Hugging Face Spaces hosts the zero-cost interactive Dash lab."),
-                            html.Li("Streamlit remains a compatibility surface until the Dash lab passes release gates."),
+                            html.Li(
+                                "Streamlit remains a compatibility surface until the Dash lab passes release gates."
+                            ),
                         ],
                         className="method-list",
                     ),
@@ -541,7 +604,13 @@ def explainer_page() -> html.Main:
                 ],
                 className="section-band",
             ),
-            html.Section([html.H2("Educational parameter dictionary"), _data_table(educational_parameter_dictionary(), "educational-dictionary-table", page_size=8)], className="section-band"),
+            html.Section(
+                [
+                    html.H2("Educational parameter dictionary"),
+                    _data_table(educational_parameter_dictionary(), "educational-dictionary-table", page_size=8),
+                ],
+                className="section-band",
+            ),
             _bundle_section(default_bundle, "explainer-educational", page_size=8),
         ]
     )
@@ -561,8 +630,14 @@ def evidence_oia_page() -> html.Main:
                 ],
                 className="section-band",
             ),
-            html.Section([html.H2("Evidence table"), _data_table(evidence_table(), "evidence-oia-evidence-table", page_size=10)], className="section-band"),
-            html.Section([html.H2("OIA tracker"), _data_table(oia_tracker_table(), "oia-tracker-table", page_size=10)], className="section-band"),
+            html.Section(
+                [html.H2("Evidence table"), _data_table(evidence_table(), "evidence-oia-evidence-table", page_size=10)],
+                className="section-band",
+            ),
+            html.Section(
+                [html.H2("OIA tracker"), _data_table(oia_tracker_table(), "oia-tracker-table", page_size=10)],
+                className="section-band",
+            ),
         ]
     )
 
@@ -581,8 +656,20 @@ def calibration_page() -> html.Main:
                 ],
                 className="section-band",
             ),
-            html.Section([html.H2("Calibration benchmark mapping"), _data_table(calibration_benchmark_table(), "calibration-benchmark-table", page_size=10)], className="section-band"),
-            html.Section([html.H2("Calibration readiness"), _data_table(calibration_readiness(), "calibration-readiness-table", page_size=10)], className="section-band"),
+            html.Section(
+                [
+                    html.H2("Calibration benchmark mapping"),
+                    _data_table(calibration_benchmark_table(), "calibration-benchmark-table", page_size=10),
+                ],
+                className="section-band",
+            ),
+            html.Section(
+                [
+                    html.H2("Calibration readiness"),
+                    _data_table(calibration_readiness(), "calibration-readiness-table", page_size=10),
+                ],
+                className="section-band",
+            ),
         ]
     )
 
@@ -599,8 +686,17 @@ def public_cockpit_page() -> html.Main:
                 ],
                 className="section-band",
             ),
-            html.Section([html.H2("Required cockpit sections"), _data_table(sections, "cockpit-sections-table", page_size=12)], className="section-band"),
-            html.Section([html.H2("Required visuals, provenance and caveats"), _data_table(charts, "cockpit-charts-table", page_size=14)], className="section-band"),
+            html.Section(
+                [html.H2("Required cockpit sections"), _data_table(sections, "cockpit-sections-table", page_size=12)],
+                className="section-band",
+            ),
+            html.Section(
+                [
+                    html.H2("Required visuals, provenance and caveats"),
+                    _data_table(charts, "cockpit-charts-table", page_size=14),
+                ],
+                className="section-band",
+            ),
         ]
     )
 
@@ -612,11 +708,17 @@ def glossary_page() -> html.Main:
             ("Fee-for-service", "Payment for a specific eligible service."),
             ("Uncapped", "No fixed global ceiling on eligible activity."),
             ("Controlled", "Item rules, clinical governance, documentation, audit and accountability still apply."),
-            ("Place-based accountability", "Responsibility for a whole local population, including hard-to-reach people."),
+            (
+                "Place-based accountability",
+                "Responsibility for a whole local population, including hard-to-reach people.",
+            ),
             ("Benchmark", "A transparent model structure that still needs real calibration data."),
             ("Reference scenario", "A model-generated scenario already stored in the project outputs."),
             ("Educational explainer", "A simplified interactive teaching tool, not the model forecast."),
-            ("Model-generated index", "A 0-100 unitless score from benchmark logic, not an observed New Zealand outcome."),
+            (
+                "Model-generated index",
+                "A 0-100 unitless score from benchmark logic, not an observed New Zealand outcome.",
+            ),
         ],
         columns=["Term", "Plain-English definition"],
     )
@@ -633,7 +735,9 @@ def glossary_page() -> html.Main:
                 ],
                 className="section-band",
             ),
-            html.Section([html.H2("Terms"), _data_table(glossary_rows, "glossary-table", page_size=12)], className="section-band"),
+            html.Section(
+                [html.H2("Terms"), _data_table(glossary_rows, "glossary-table", page_size=12)], className="section-band"
+            ),
         ]
     )
 
@@ -662,7 +766,11 @@ def guided_page() -> html.Main:
             ),
             _bundle_section(comparison_bundle(("F0", "F4", "F8")), "guided-scenario-comparison", page_size=8),
             _bundle_section(microeconomics_bundles()[0], "guided-marginal-supply", page_size=8),
-            _bundle_section(simulation_bundle("uncertainty", scenario_id="F4", draws=50, seed=20260526), "guided-uncertainty", page_size=8),
+            _bundle_section(
+                simulation_bundle("uncertainty", scenario_id="F4", draws=50, seed=20260526),
+                "guided-uncertainty",
+                page_size=8,
+            ),
             html.Section(
                 [
                     html.H2("5. Evidence gaps"),
@@ -697,7 +805,11 @@ def scenario_builder_page(search: str | None = None) -> html.Main:
             html.Section(
                 [
                     html.H2("Current scenario inputs"),
-                    _data_table(pd.DataFrame(sorted(settings.items()), columns=["Lever", "Value"]), "scenario-builder-inputs", page_size=8),
+                    _data_table(
+                        pd.DataFrame(sorted(settings.items()), columns=["Lever", "Value"]),
+                        "scenario-builder-inputs",
+                        page_size=8,
+                    ),
                 ],
                 className="section-band",
             ),
@@ -727,7 +839,13 @@ def model_surface_page() -> html.Main:
                 ],
                 className="section-band",
             ),
-            html.Section([html.H2("Surface coverage status"), _data_table(model_surface_status_table(), "model-surface-status-table", page_size=16)], className="section-band"),
+            html.Section(
+                [
+                    html.H2("Surface coverage status"),
+                    _data_table(model_surface_status_table(), "model-surface-status-table", page_size=16),
+                ],
+                className="section-band",
+            ),
             _bundle_section(model_gap_bundle(), "model-gap-map", page_size=12),
         ]
     )
@@ -749,9 +867,21 @@ def calibration_diagnostics_page() -> html.Main:
                 className="section-band",
             ),
             _bundle_section(calibration_error_bundle(), "calibration-error-diagnostic", page_size=10),
-            html.Section([html.H2("Validation gates"), _data_table(gates, "calibration-validation-gates-table", page_size=10)], className="section-band"),
-            html.Section([html.H2("Posterior predictive checks"), _data_table(ppc, "calibration-ppc-table", page_size=10)], className="section-band"),
-            html.Section([html.H2("Registered target checks"), _data_table(checks, "calibration-target-checks-table", page_size=10)], className="section-band"),
+            html.Section(
+                [html.H2("Validation gates"), _data_table(gates, "calibration-validation-gates-table", page_size=10)],
+                className="section-band",
+            ),
+            html.Section(
+                [html.H2("Posterior predictive checks"), _data_table(ppc, "calibration-ppc-table", page_size=10)],
+                className="section-band",
+            ),
+            html.Section(
+                [
+                    html.H2("Registered target checks"),
+                    _data_table(checks, "calibration-target-checks-table", page_size=10),
+                ],
+                className="section-band",
+            ),
         ]
     )
 
@@ -770,7 +900,10 @@ def advanced_visuals_page() -> html.Main:
                 ],
                 className="section-band",
             ),
-            *[_bundle_section(bundle, f"advanced-visual-{index}", page_size=10) for index, bundle in enumerate(advanced_visual_bundles(), start=1)],
+            *[
+                _bundle_section(bundle, f"advanced-visual-{index}", page_size=10)
+                for index, bundle in enumerate(advanced_visual_bundles(), start=1)
+            ],
         ]
     )
 
@@ -1042,4 +1175,4 @@ def download_simulation(
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", "7860")), debug=False)
+    app.run(host="127.0.0.1", port=int(os.environ.get("PORT", "7860")), debug=False)
