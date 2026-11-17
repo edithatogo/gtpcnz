@@ -8,6 +8,7 @@ from models.primarycare_model.runtime_lab import (
     SCENARIO_BY_ID,
     calculate_indices,
     calculation_trace,
+    clamp,
     model_gap_map,
     run_agent_lens,
     run_reference_calculation,
@@ -86,3 +87,19 @@ def test_model_gap_map_covers_current_comprehensive_sota_and_bleeding_edge():
 
     assert {"Current", "Comprehensive", "SOTA", "Bleeding edge"}.issubset(set(gap_map["tier"]))
     assert "calculation audit overlay" in " ".join(gap_map["asset_or_gap"].str.lower())
+
+
+def test_clamp_bounds_and_values():
+    # Default bounds (0.0 to 100.0)
+    assert clamp(50.0) == 50.0
+    assert clamp(-10.0) == 0.0
+    assert clamp(110.0) == 100.0
+    assert clamp(0.0) == 0.0
+    assert clamp(100.0) == 100.0
+
+    # Custom bounds
+    assert clamp(15.0, lower=10.0, upper=20.0) == 15.0
+    assert clamp(5.0, lower=10.0, upper=20.0) == 10.0
+    assert clamp(25.0, lower=10.0, upper=20.0) == 20.0
+    assert clamp(10.0, lower=10.0, upper=20.0) == 10.0
+    assert clamp(20.0, lower=10.0, upper=20.0) == 20.0
