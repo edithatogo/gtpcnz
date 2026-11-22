@@ -132,3 +132,14 @@ See `LICENSE` for the mixed code/content licensing terms and `CITATION.cff` for 
 ## Public calibrated-model programme
 
 The current public runtime remains a public-data anchored benchmark and educational explainer. The public aggregate lane now reports `public_aggregate_validated` / `empirically_supported_if_gated` for registered aggregate gates only. The programme separates public registries, source snapshots, calibration targets, structural uncertainty, VOI, cockpit, and release gates from future/private templates. Unsupported precision and causal claims remain out of bounds: precise fiscal savings, ED reductions, hospital-demand reductions, workforce effects, implementation impacts, and causal effects.
+
+## Development
+
+Use the [local commands](#run-locally) and the
+[contribution guide](CONTRIBUTING.md) for focused checks and pull requests.
+Preserve the benchmark's documented model and evidence limits.
+
+## Security
+
+Follow the [security policy](SECURITY.md) to report vulnerabilities
+privately. Keep credentials and sensitive data out of public issues and pull requests.
