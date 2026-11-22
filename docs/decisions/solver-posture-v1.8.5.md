@@ -133,3 +133,28 @@ rg -n "NashOptimisationAdapter|best-response|Lemke|support enumeration|JAX|XLA|j
 ---
 
 *This decision is recorded in `conductor/tracks/048-equilibrium-solver-exploration_20260528/` and `docs/decisions/solver-posture-v1.8.5.md`.*
+
+## 7. Provider-choice clarification — 22 November 2026
+
+The decision to retain the pedagogical best-response model remains in force.
+This clarification supersedes the provider choices in sections 3–4 that allow
+new reusable solvers to be developed locally or supplied as another production
+solver package: UOGTO is the authoritative ontology and Paignia is the reusable
+game and solver provider. It does not create an analytical lane or alter the
+existing model.
+
+Any newly identified or changed game must record UOGTO's `reuse_existing`,
+`extension_required`, `unsupported` or `mapping_review_pending` separately from
+Paignia's `reuse_existing`, `extension_required`, `unsupported`, `domain_only`
+or `assessment_pending`, following the
+[contributor intake rule](../../CONTRIBUTING.md#game-capability-intake).
+An advanced-mode, calibration or performance trigger first prompts an upstream
+capability assessment. Generic additions belong in Paignia with UOGTO mappings
+and independent synthetic conformance fixtures. Funding payoff formulas,
+evidence, calibration and public interpretation remain in GTPCNZ.
+
+Existing educational examples may remain explicitly labelled while a migration
+is assessed. Any later provider adoption needs exact accepted revisions and
+focused consumer tests; the best-response stopping criterion still does not
+certify a Nash equilibrium. No solver migration or numerical validation is
+claimed by this policy clarification.
