@@ -73,12 +73,26 @@ class NashTrace:
 
 
 def best_response(payoff: np.ndarray, opponent_strategy: np.ndarray) -> np.ndarray:
-    """Compute best response for a player given opponent strategy (softmax)."""
+    """Compute a softmax response to the opponent's mixture."""
     expected_payoffs = payoff @ opponent_strategy
     max_p = np.max(expected_payoffs)
     shifted = expected_payoffs - max_p
     exp_p = np.exp(shifted * 5.0)
     return exp_p / exp_p.sum()
+
+
+def unilateral_deviation_gains(
+    payoff_matrix: PayoffMatrix, capitation_weights: np.ndarray
+) -> tuple[float, float]:
+    """Return each player's maximum unilateral payoff gain in the two-action lesson."""
+    p0, p1 = capitation_weights
+    row_strategy = np.array([p0, 1.0 - p0])
+    column_strategy = np.array([p1, 1.0 - p1])
+    row_payoffs = payoff_matrix.player0 @ column_strategy
+    column_payoffs = payoff_matrix.player1 @ row_strategy
+    row_gain = float(row_payoffs.max() - row_strategy @ row_payoffs)
+    column_gain = float(column_payoffs.max() - column_strategy @ column_payoffs)
+    return max(0.0, row_gain), max(0.0, column_gain)
 
 
 def nash_best_response_dynamics(
@@ -88,7 +102,7 @@ def nash_best_response_dynamics(
     tol: float = 1e-4,
     learning_rate: float = 0.5,
 ) -> NashTrace:
-    """Compute Nash equilibrium via best-response dynamics."""
+    """Trace smoothed responses until the strategy step meets the tolerance."""
     if initial_strategies is None:
         initial_strategies = np.array([0.5, 0.5])
 

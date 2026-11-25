@@ -1,6 +1,5 @@
 """
-Streamlit page: Nash Equilibrium Convergence Trace.
-Animated gradient path of clinical utility optimisation.
+Streamlit page for the teaching game's smoothed response trace.
 """
 import time
 
@@ -13,13 +12,14 @@ from models.primarycare_model.nash_opt import (
     compute_payoff_landscape,
     nash_best_response_dynamics,
     run_nash_with_multiple_starts,
+    unilateral_deviation_gains,
 )
 
 
 def render_page() -> None:
-    st.set_page_config(page_title="Nash Convergence", page_icon=":game_die:", layout="wide")
-    st.title("Nash Equilibrium Convergence Trace")
-    st.caption("Step-by-step gradient path of best-response dynamics for funding model games")
+    st.set_page_config(page_title="Strategy Adjustment", page_icon=":game_die:", layout="wide")
+    st.title("Strategy Adjustment Trace")
+    st.caption("Smoothed responses to the opponent's current strategy in a teaching game")
 
     with st.sidebar:
         st.header("Game Configuration")
@@ -52,14 +52,16 @@ def render_page() -> None:
         strat_chart = st.empty()
         st.subheader("Game Info")
         info_box = st.empty()
-        st.subheader("Nash Equilibrium")
+        st.subheader("Final strategy and deviation gains")
         nash_box = st.empty()
 
     info_box.markdown(f"**{payoff_matrix.row_label}** vs **{payoff_matrix.col_label}**  ")
     info_box.markdown(f"Strategies: {payoff_matrix.strategy_labels[0]} / {payoff_matrix.strategy_labels[1]}  ")
 
     # Run dynamics
-    existing_trace = st.session_state.get("nash_trace")
+    existing_trace = None
+    if st.session_state.get("nash_game") == game_name:
+        existing_trace = st.session_state.get("nash_trace")
     if play or existing_trace is not None:
         if play or existing_trace is None:
             if multiple_starts:
@@ -70,6 +72,7 @@ def render_page() -> None:
                 trace = nash_best_response_dynamics(payoff_matrix, init_strat, max_iter, learning_rate=lr)
                 st.session_state.nash_traces = [trace]
             st.session_state.nash_trace = trace
+            st.session_state.nash_game = game_name
             st.session_state.nash_step = 0
 
         trace = st.session_state.nash_trace
@@ -134,13 +137,22 @@ def render_page() -> None:
 
         if bar:
             bar.empty()
-        nash_box.markdown(f"**Converged:** {trace.converged}  ")
-        nash_box.markdown(f"**Iterations:** {trace.num_iterations}  ")
-        if trace.final_strategies is not None:
-            nash_box.markdown(f"**Equilibrium:** P0={trace.final_strategies[0]:.3f}, P1={trace.final_strategies[1]:.3f}  ")
+        lines = [
+            f"**Step tolerance met:** {trace.converged}",
+            f"**Iterations:** {trace.num_iterations}",
+        ]
+        final_strategies = trace.final_strategies
+        if final_strategies is not None:
+            row_gain, column_gain = unilateral_deviation_gains(payoff_matrix, final_strategies)
+            lines.extend([
+                f"**Final capitation weights:** P0={final_strategies[0]:.3f}, P1={final_strategies[1]:.3f}",
+                f"**Unilateral payoff gains:** P0={row_gain:.6g}, P1={column_gain:.6g}",
+            ])
+        nash_box.markdown("  \n".join(lines))
 
     if reset:
         st.session_state.pop("nash_trace", None)
+        st.session_state.pop("nash_game", None)
         st.session_state.pop("nash_traces", None)
         st.session_state.pop("nash_step", None)
         st.rerun()
