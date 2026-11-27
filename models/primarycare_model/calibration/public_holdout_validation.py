@@ -21,11 +21,7 @@ from models.primarycare_model.data.public_source_snapshot import ROOT
 HoldoutComparisonStatus = Literal["passed", "comparison_failed"]
 
 PHO_ACCESS_NUMERIC = (
-    ROOT
-    / "data"
-    / "public_processed"
-    / "src_hnz_pho_access_timeseries"
-    / "pho_access_numeric_extract.csv"
+    ROOT / "data" / "public_processed" / "src_hnz_pho_access_timeseries" / "pho_access_numeric_extract.csv"
 )
 
 
@@ -240,9 +236,7 @@ def _period_persistence_comparison_for_rows(
         claim_status="calibration_readiness_only",
         interpretation_note=interpretation_note,
         next_data_model_requirement=(
-            _next_data_model_requirement(gate_id, validation_family)
-            if failed_observations
-            else passed_requirement
+            _next_data_model_requirement(gate_id, validation_family) if failed_observations else passed_requirement
         ),
     )
 
@@ -274,9 +268,7 @@ def build_public_holdout_comparisons() -> tuple[PublicHoldoutComparison, ...]:
         )
 
     subgroup_rows = tuple(
-        row
-        for row in rows
-        if row["stratifier"] in {"ethnicity", "deprivation"} and row["group"] != "Total"
+        row for row in rows if row["stratifier"] in {"ethnicity", "deprivation"} and row["group"] != "Total"
     )
     for stratifier, group in sorted({(row["stratifier"], row["group"]) for row in subgroup_rows}):
         group_rows = tuple(row for row in subgroup_rows if row["stratifier"] == stratifier and row["group"] == group)

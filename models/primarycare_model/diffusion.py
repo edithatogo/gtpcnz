@@ -2,6 +2,7 @@
 Bass diffusion model for provider innovation adoption trajectories.
 Implements: dA/dt = (p + q*A/M)*(M - A)  with discrete-time simulation.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -23,6 +24,7 @@ class BassDiffusionParams:
         num_regions: Number of geographic regions for spatial spread
         region_connectivity: How connected regions are (0-1), affects spatial diffusion
     """
+
     p: float = 0.03
     q: float = 0.40
     M: int = 1000
@@ -35,6 +37,7 @@ class BassDiffusionParams:
 @dataclass
 class BassDiffusionResult:
     """Output from a Bass diffusion simulation."""
+
     time_series: pd.DataFrame
     region_time_series: pd.DataFrame | None = None
     summary: dict[str, float] = field(default_factory=dict)
@@ -42,14 +45,16 @@ class BassDiffusionResult:
     @property
     def takeoff_year(self) -> int | None:
         """Year when adoption rate >= 10% of M."""
-        if self.time_series.empty: return None
+        if self.time_series.empty:
+            return None
         idx = self.time_series[self.time_series["adopters"] >= 0.1 * self.time_series["M"].iloc[0]].index
         return int(self.time_series.loc[idx[0], "year"]) if len(idx) > 0 else None
 
     @property
     def saturation_year(self) -> int | None:
         """Year when adoption rate >= 90% of M."""
-        if self.time_series.empty: return None
+        if self.time_series.empty:
+            return None
         idx = self.time_series[self.time_series["adopters"] >= 0.9 * self.time_series["M"].iloc[0]].index
         return int(self.time_series.loc[idx[0], "year"]) if len(idx) > 0 else None
 
@@ -77,21 +82,25 @@ def simulate_bass(params: BassDiffusionParams) -> BassDiffusionResult:
         new_adopters_list.append(new_this_year)
         adoption_rate.append(A / M)
 
-    df = pd.DataFrame({
-        "year": years,
-        "adopters": adopters,
-        "new_adopters": new_adopters_list,
-        "adoption_rate": adoption_rate,
-        "remaining": [M - a for a in adopters],
-        "p": p,
-        "q": q,
-        "M": M,
-    })
+    df = pd.DataFrame(
+        {
+            "year": years,
+            "adopters": adopters,
+            "new_adopters": new_adopters_list,
+            "adoption_rate": adoption_rate,
+            "remaining": [M - a for a in adopters],
+            "p": p,
+            "q": q,
+            "M": M,
+        }
+    )
 
     takeoff = BassDiffusionResult(time_series=df).takeoff_year
     saturation = BassDiffusionResult(time_series=df).saturation_year
     summary = {
-        "p": p, "q": q, "M": M,
+        "p": p,
+        "q": q,
+        "M": M,
         "final_adopters": adopters[-1],
         "final_rate": adoption_rate[-1],
         "takeoff_year": takeoff or 0,
@@ -108,7 +117,10 @@ def simulate_bass(params: BassDiffusionParams) -> BassDiffusionResult:
             r_q = q * connectivity_boost * (0.70 + rng.random() * 0.60)
             r_M = max(1, int((M / params.num_regions) * (0.75 + rng.random() * 0.50)))
             r_params = BassDiffusionParams(
-                p=r_p, q=r_q, M=r_M, T=T,
+                p=r_p,
+                q=r_q,
+                M=r_M,
+                T=T,
                 initial_adopters=max(1, int(params.initial_adopters / params.num_regions)),
                 num_regions=1,
             )

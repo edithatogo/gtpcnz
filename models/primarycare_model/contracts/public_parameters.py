@@ -11,7 +11,9 @@ from models.primarycare_model.contracts.parameters import ParameterDefinition, S
 DistributionType = Literal["fixed", "normal", "triangular", "beta", "uniform"]
 EvidenceQuality = Literal["low", "medium", "high"]
 SensitivityPriority = Literal["low", "medium", "high"]
-CalibrationRole = Literal["baseline", "denominator", "scaling", "calibration_target", "validation_target", "scenario_modifier"]
+CalibrationRole = Literal[
+    "baseline", "denominator", "scaling", "calibration_target", "validation_target", "scenario_modifier"
+]
 ClaimBoundary = Literal["public_benchmark", "calibration_readiness", "empirically_supported_if_gated"]
 
 

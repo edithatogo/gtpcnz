@@ -1,4 +1,5 @@
 """Verify concern-boundary rules: no Streamlit imports in strict layers."""
+
 from __future__ import annotations
 
 import ast
@@ -38,8 +39,10 @@ def _imports_streamlit(path):
             a.name == "streamlit" or a.name.startswith("streamlit.") for a in node.names
         ):
             return True
-        if isinstance(node, ast.ImportFrom) and node.module and (
-            node.module == "streamlit" or node.module.startswith("streamlit.")
+        if (
+            isinstance(node, ast.ImportFrom)
+            and node.module
+            and (node.module == "streamlit" or node.module.startswith("streamlit."))
         ):
             return True
     return False

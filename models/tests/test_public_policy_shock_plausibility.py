@@ -93,11 +93,7 @@ def test_public_policy_shock_main_fails_only_when_pass_is_required() -> None:
 def test_public_policy_shock_artifact_matches_checked_in_capitation_extract() -> None:
     source_path = ROOT / "data" / "public_processed" / "src_hnz_capitation_schedule" / "capitation_rates.csv"
     artifact_path = (
-        ROOT
-        / "data"
-        / "public_processed"
-        / "src_hnz_capitation_schedule"
-        / "policy_shock_pre_post_comparison.csv"
+        ROOT / "data" / "public_processed" / "src_hnz_capitation_schedule" / "policy_shock_pre_post_comparison.csv"
     )
     source_rows = _read_csv(source_path)
     artifact_rows = _read_csv(artifact_path)
@@ -210,4 +206,7 @@ def test_passed_numeric_comparison_requires_direction_agreement() -> None:
 
     assert readiness.status == "artifact_invalid"
     assert readiness.rows_checked == 1
-    assert any("comparison_result=passed requires observed_direction to match modelled_direction" in issue for issue in readiness.issues)
+    assert any(
+        "comparison_result=passed requires observed_direction to match modelled_direction" in issue
+        for issue in readiness.issues
+    )

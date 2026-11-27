@@ -89,12 +89,14 @@ class BassDiffusionAdapter:
                 peak_adoption = new_adopters
                 peak_month = month
 
-            trace.append({
-                "month": month,
-                "new_adopters": round(new_adopters, 2),
-                "cumulative_adopters": round(adopters, 2),
-                "penetration_rate": round(adopters / m * 100, 2),
-            })
+            trace.append(
+                {
+                    "month": month,
+                    "new_adopters": round(new_adopters, 2),
+                    "cumulative_adopters": round(adopters, 2),
+                    "penetration_rate": round(adopters / m * 100, 2),
+                }
+            )
 
         scenario_result = ScenarioResult(
             scenario_id=inp.scenario_id,

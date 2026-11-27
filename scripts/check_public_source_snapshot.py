@@ -17,8 +17,12 @@ from models.primarycare_model.data.public_source_snapshot import (  # noqa: E402
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Validate public-source snapshot readiness.")
     parser.add_argument("--verify-files", action="store_true", help="Require raw public source files for every source.")
-    parser.add_argument("--verify-checksums", action="store_true", help="Require non-pending raw file checksums to match.")
-    parser.add_argument("--verify-licences", action="store_true", help="Require licences to be in the allowed public set.")
+    parser.add_argument(
+        "--verify-checksums", action="store_true", help="Require non-pending raw file checksums to match."
+    )
+    parser.add_argument(
+        "--verify-licences", action="store_true", help="Require licences to be in the allowed public set."
+    )
     parser.add_argument("--verify-processed", action="store_true", help="Require processed files and companion hashes.")
     return parser.parse_args()
 
